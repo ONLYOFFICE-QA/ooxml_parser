@@ -72,12 +72,3 @@ Style/FirstParameterIndentation:
 Style/ParallelAssignment:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/colors/theme_colors.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
-  Exclude:
-    - 'Gemfile'
-    - 'lib/ooxml_parser/version.rb'
-    - 'ooxml_parser.gemspec'
