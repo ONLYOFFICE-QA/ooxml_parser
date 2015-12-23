@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Pavel Lobashov', 'Roman Zagudaev']
   s.summary     = 'OoxmlParser Gem'
   s.description = 'Parse OOXML files (docx, xlsx, pptx)'
-  s.email       = ['shockwavenn@gmail.com', 'roman.zagudaev@gmail.com']
+  s.email       = ['shockwavenn@gmail.com', 'rzagudaev@gmail.com']
   s.files = `git ls-files`.split($RS).reject do |file|
     file =~ %r{^(?:
     spec/.*
