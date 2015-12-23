@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('xml-simple', '~> 1.1')
   s.homepage    =
       'http://rubygems.org/gems/ooxml_parser'
+  s.license = 'AGPL'
 end
