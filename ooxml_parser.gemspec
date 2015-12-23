@@ -22,6 +22,9 @@ Gem::Specification.new do |s|
     |.*\.eps
     )$}x
   end
+  s.add_runtime_dependency('nokogiri', '~> 1.6')
+  s.add_runtime_dependency('rubyzip', '~> 1.1')
+  s.add_runtime_dependency('xml-simple', '~> 1.1')
   s.homepage    =
       'http://rubygems.org/gems/ooxml_parser'
 end
