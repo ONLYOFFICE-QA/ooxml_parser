@@ -14,7 +14,7 @@ describe 'My behaviour' do
   end
 
   it 'Check theme name Стандартная' do
-    pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/ThemeСтандартная.pptx')
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/theme_standart.pptx')
     expect(pptx.theme.name).to eq('Стандартная')
   end
 
@@ -261,18 +261,18 @@ describe 'My behaviour' do
   end
 
   describe 'Copy style in table' do
-    it 'Copy style in table with bold.pptx' do
-      pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/table/Copy style in table with bold.pptx')
+    it 'copy_style_in_table_with_bold.pptx' do
+      pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/table/copy_style_in_table_with_bold.pptx')
       expect(pptx.slides[0].elements.last.graphic_data.first.rows.first.cells.first.text_body.paragraphs.first.runs.first.properties.font_style.bold).to be_truthy
     end
 
-    it 'Copy style in table without bold.pptx' do
-      pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/table/Copy style in table without bold.pptx')
+    it 'copy_style_in_table_without_bold.pptx' do
+      pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/table/copy_style_in_table_without_bold.pptx')
       expect(pptx.slides[0].elements.last.graphic_data.first.rows.first.cells.first.text_body.paragraphs.first.runs.first.properties.font_style.bold).to be_falsey
     end
 
-    it 'Copy style in table with bold - 2 cell with bold text too.pptx' do
-      pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/table/Copy style in table with bold - 2 cell with bold text too.pptx')
+    it 'copy_style_in_table_with_bold_2_cell_with_bold_text_too.pptx' do
+      pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/table/copy_style_in_table_with_bold_2_cell_with_bold_text_too.pptx')
       expect(pptx.slides[0].elements.last.graphic_data.first.rows.first.cells.first.text_body.paragraphs.first.runs.first.properties.font_style.bold).to be_truthy
       expect(pptx.slides[0].elements.last.graphic_data.first.rows[1].cells.first.text_body.paragraphs.first.runs.first.properties.font_style.bold).to be_truthy
     end
