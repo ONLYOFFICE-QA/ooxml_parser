@@ -1,0 +1,50 @@
+# Class for describing Alignment type
+module OoxmlParser
+  class Alignment
+    # Parse TransitionDirection
+    # @param [Nokogiri::XML:Element] node with Alignment
+    # @return [Symbol] value of Alignment
+    def self.parse(node)
+      case node.value
+      when 'l'
+        :left
+      when 'ctr'
+        :center
+      when 'r'
+        :right
+      when 'just'
+        :justify
+      when 'b'
+        :bottom
+      when 't'
+        :top
+      when 'tr'
+        :top_right
+      when 'tl'
+        :top_left
+      when 'br'
+        :bottom_right
+      when 'bl'
+        :bottom_left
+      when 'dist'
+        :distributed
+      when 'inset'
+        :in
+      when 'lu'
+        :left_up
+      when 'ru'
+        :right_up
+      when 'ld'
+        :left_down
+      when 'rd'
+        :right_down
+      when 'd'
+        :down
+      when 'u'
+        :up
+      else
+        node.value.to_sym
+      end
+    end
+  end
+end
