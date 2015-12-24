@@ -10,6 +10,7 @@ module OoxmlParser
 
     def self.parse(file)
       OOXMLDocumentObject.theme = PresentationTheme.new
+      return unless File.exist?(file)
       OOXMLDocumentObject.add_to_xmls_stack(file)
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       doc.xpath('a:theme').each do |theme_node|
