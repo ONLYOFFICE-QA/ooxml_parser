@@ -1,3 +1,4 @@
+require_relative 'document_grid'
 require_relative 'size'
 require_relative 'page_margins'
 require_relative 'columns'
@@ -71,11 +72,8 @@ module OoxmlParser
       sect_pr.xpath('w:textDirection').each do |text_direction|
         page_properties.text_direction = text_direction.attribute('val').value
       end
-      sect_pr.xpath('w:docGrid').each do |text_direction|
-        page_properties.document_grid = DocumentGrid.new
-        page_properties.document_grid.char_space = text_direction.attribute('charSpace').value
-        page_properties.document_grid.line_pitch = text_direction.attribute('linePitch').value
-        page_properties.document_grid.type = text_direction.attribute('type').value
+      sect_pr.xpath('w:docGrid').each do |doc_grid|
+        page_properties.document_grid = DocumentGrid.parse(doc_grid)
       end
       sect_pr.xpath('w:cols').each do |columns|
         columns_count = 1
