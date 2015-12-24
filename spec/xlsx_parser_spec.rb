@@ -364,6 +364,15 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'editor_specific_documents' do
+    describe 'libreoffice' do
+      it 'simple_text' do
+        xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/editor_specific_documents/libreoffice/simple_text.xlsx')
+        expect(xlsx.worksheets[0].rows[0].cells[0].text).to eq('This is a test')
+      end
+    end
+  end
+
   describe 'formulas' do
     it 't_formula' do
       xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/formulas/t_formula.xlsx')
