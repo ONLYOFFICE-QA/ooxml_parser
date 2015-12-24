@@ -318,6 +318,24 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'editor_specific_documents' do
+    describe 'libreoffice' do
+      it 'simple_text' do
+        pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/editor_specific_documents/libreoffice/simple_text.pptx')
+        drawing = pptx.slides[0].elements.last
+        expect(drawing.text_body.paragraphs.first.runs.first.text).to eq('This is a test')
+      end
+    end
+
+    describe 'ms_office_2013' do
+      it 'simple_text' do
+        pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/editor_specific_documents/ms_office_2013/simple_text.pptx')
+        drawing = pptx.slides[0].elements.last
+        expect(drawing.text_body.paragraphs.first.runs.first.text).to eq('This is a test')
+      end
+    end
+  end
+
   it 'FontStyleUnderlineNone.pptx' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/FontStyleUnderlineNone.pptx')
     expect(pptx.slides[0].elements.last.text_body.paragraphs.first.characters.first.properties.font_style).to eq(OoxmlParser::FontStyle.new)
