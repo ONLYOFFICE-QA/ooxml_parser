@@ -651,6 +651,13 @@ describe 'My behaviour' do
         expect(docx.elements.first.character_style_array.first.text).to eq('This is a test')
       end
     end
+
+    describe 'ms_office_2013' do
+      it 'simple_text' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/editor_specific_documents/ms_office_2013/simple_text.docx')
+        expect(docx.elements.first.character_style_array.first.text).to eq('This is a test')
+      end
+    end
   end
 
   describe 'document properties' do
