@@ -71,7 +71,7 @@ module OoxmlParser
       sect_pr.xpath('w:textDirection').each do |text_direction|
         page_properties.text_direction = text_direction.attribute('val').value
       end
-      sect_pr.xpath('w:textDirection').each do |text_direction|
+      sect_pr.xpath('w:docGrid').each do |text_direction|
         page_properties.document_grid = DocumentGrid.new
         page_properties.document_grid.char_space = text_direction.attribute('charSpace').value
         page_properties.document_grid.line_pitch = text_direction.attribute('linePitch').value
