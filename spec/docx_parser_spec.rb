@@ -644,6 +644,15 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'editor_specific_documents' do
+    describe 'libreoffice' do
+      it 'simple_text' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/editor_specific_documents/libreoffice/simple_text.docx')
+        expect(docx.elements.first.character_style_array.first.text).to eq('This is a test')
+      end
+    end
+  end
+
   describe 'document properties' do
     it 'Page Count' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/document_properties/page_count.docx')
