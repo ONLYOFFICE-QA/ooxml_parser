@@ -7,9 +7,9 @@ module OoxmlParser
       slide_size_node.attributes.each do |key, value|
         case key
         when 'cx'
-          slide_size.width = (value.value.to_f / 359_999.97).round(2)
+          slide_size.width = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
         when 'cy'
-          slide_size.height = (value.value.to_f / 359_999.97).round(2)
+          slide_size.height = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
         when 'type'
           slide_size.type = value.value.to_sym
         end
