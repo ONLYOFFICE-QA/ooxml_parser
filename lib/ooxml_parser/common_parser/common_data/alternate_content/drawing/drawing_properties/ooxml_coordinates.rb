@@ -25,7 +25,7 @@ module OoxmlParser
     # @param y_attr [String] name of y attribute
     # @param delimiter [Float] delimiter to devise values
     # @return [OOXMLCoordinates] result of parsing
-    def self.parse(position_node, x_attr: 'x', y_attr: 'y', delimiter: 360_000.0)
+    def self.parse(position_node, x_attr: 'x', y_attr: 'y', delimiter: OoxmlParser.configuration.units_delimiter)
       OOXMLCoordinates.new((position_node.attribute(x_attr).value.to_f / delimiter).round(3), (position_node.attribute(y_attr).value.to_f / delimiter).round(3))
     end
   end
