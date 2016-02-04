@@ -64,7 +64,7 @@ module OoxmlParser
         page_properties.margins.top = (pg_mar.attribute('top').value.to_f / 566.9).round(2)
       end
       sect_pr.xpath('w:pgNumType').each do |pg_num_type|
-        page_properties.num_type = pg_num_type.attribute('fmt').value
+        page_properties.num_type = pg_num_type.attribute('fmt').value unless pg_num_type.attribute('fmt').nil?
       end
       sect_pr.xpath('w:formProt').each do |form_prot|
         page_properties.form_prot = form_prot.attribute('val').value
