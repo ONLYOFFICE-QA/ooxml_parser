@@ -622,6 +622,15 @@ describe 'My behaviour' do
   end
 
   describe 'document style' do
+    describe 'page_properties' do
+      describe 'page_numbering' do
+        it 'page_num_type_empty_format' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/document_style/page_properties/page_numbering/page_num_type_empty_format.docx')
+          expect(docx.page_properties.num_type).to be_nil
+        end
+      end
+    end
+
     it 'New Paragraph Document Style' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/document_style/NewParagraphStyles.docx')
       expect(docx.document_styles.last.name).to eq('NewParagraphStyle')
