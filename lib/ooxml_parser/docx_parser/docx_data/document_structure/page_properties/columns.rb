@@ -6,7 +6,7 @@ module OoxmlParser
 
     def initialize(columns_count)
       @count = columns_count
-      @columns = Array.new(@count)
+      @columns = []
     end
 
     # Parse Columns data
@@ -17,14 +17,10 @@ module OoxmlParser
       columns_count = columns_grid.attribute('num').value.to_i unless columns_grid.attribute('num').nil?
       columns = Columns.new(columns_count)
       columns.separator = columns_grid.attribute('sep').value unless columns_grid.attribute('sep').nil?
-      i = 0
       columns_grid.xpath('w:col').each do |col|
-        width = col.attribute('w').value
-        width = StringHelper.round(width.to_f / 566.9, 2) unless width.nil?
-        space = col.attribute('space').value
-        space = StringHelper.round(space.to_f / 566.9, 2) unless space.nil?
-        columns.columns[i] = Column.new(width, space)
-        i += 1
+        width = (col.attribute('w').value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
+        space = (col.attribute('space').value.to_f / OoxmlParser.configuration.units_delimiter).round(2) unless col.attribute('space').nil?
+        columns.columns << Column.new(width, space)
       end
       columns
     end
