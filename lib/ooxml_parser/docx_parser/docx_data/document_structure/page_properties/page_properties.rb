@@ -75,20 +75,8 @@ module OoxmlParser
       sect_pr.xpath('w:docGrid').each do |doc_grid|
         page_properties.document_grid = DocumentGrid.parse(doc_grid)
       end
-      sect_pr.xpath('w:cols').each do |columns|
-        columns_count = 1
-        columns_count = columns.attribute('num').value.to_i unless columns.attribute('num').nil?
-        page_properties.columns = Columns.new(columns_count)
-        page_properties.columns.separator = columns.attribute('sep').value unless columns.attribute('sep').nil?
-        i = 0
-        columns.xpath('w:col').each do |col|
-          width = col.attribute('w').value
-          width = StringHelper.round(width.to_f / 566.9, 2) unless width.nil?
-          space = col.attribute('space').value
-          space = StringHelper.round(space.to_f / 566.9, 2) unless space.nil?
-          page_properties.columns.columns[i] = Column.new(width, space)
-          i += 1
-        end
+      sect_pr.xpath('w:cols').each do |columns_grid|
+        page_properties.columns = Columns.parse(columns_grid)
       end
       sect_pr.xpath('w:headerReference').each do |header_reference|
         target = OOXMLDocumentObject.get_link_from_rels(header_reference.attribute('id').value)
