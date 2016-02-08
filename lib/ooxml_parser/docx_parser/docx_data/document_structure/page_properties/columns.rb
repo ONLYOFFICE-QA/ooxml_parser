@@ -1,7 +1,8 @@
 require_relative 'columns/column'
 module OoxmlParser
-  class Columns
+  class Columns < Array
     attr_accessor :columns, :separator
+    attr_accessor :separator
     attr_accessor :count
 
     def initialize(columns_count)
@@ -20,7 +21,7 @@ module OoxmlParser
       columns_grid.xpath('w:col').each do |col|
         width = (col.attribute('w').value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
         space = (col.attribute('space').value.to_f / OoxmlParser.configuration.units_delimiter).round(2) unless col.attribute('space').nil?
-        columns.columns << Column.new(width, space)
+        columns << Column.new(width, space)
       end
       columns
     end

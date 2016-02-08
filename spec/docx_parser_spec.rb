@@ -882,12 +882,12 @@ describe 'My behaviour' do
 
       it 'left_column' do
         docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/left_column.docx')
-        expect(docx.page_properties.columns.columns[0].width).to eq(0.01)
+        expect(docx.page_properties.columns[0].width).to eq(0.01)
       end
 
       it 'right_column' do
         docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/right_column.docx')
-        expect(docx.page_properties.columns.columns[0].width).to eq(0.02)
+        expect(docx.page_properties.columns[0].width).to eq(0.02)
       end
     end
   end
