@@ -868,6 +868,19 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'page_properties' do
+    describe 'columns' do
+      it 'two_columns' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/two_columns.docx')
+        expect(docx.page_properties.columns.count).to eq(2)
+      end
+
+      it 'ten_columns' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/ten_columns.docx')
+        expect(docx.page_properties.columns.count).to eq(10)
+      end
+    end
+  end
   describe 'shape' do
     describe 'lines' do
       it 'ShapeLineEnding' do
