@@ -879,6 +879,16 @@ describe 'My behaviour' do
         docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/ten_columns.docx')
         expect(docx.page_properties.columns.count).to eq(10)
       end
+
+      it 'left_column' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/left_column.docx')
+        expect(docx.page_properties.columns.columns[0].width).to eq(0.01)
+      end
+
+      it 'right_column' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/right_column.docx')
+        expect(docx.page_properties.columns.columns[0].width).to eq(0.02)
+      end
     end
   end
   describe 'shape' do
