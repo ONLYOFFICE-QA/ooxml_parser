@@ -1,13 +1,11 @@
 require_relative 'columns/column'
 module OoxmlParser
   class Columns < Array
-    attr_accessor :columns, :separator
     attr_accessor :separator
     attr_accessor :count
 
     def initialize(columns_count)
       @count = columns_count
-      @columns = []
     end
 
     # Parse Columns data
