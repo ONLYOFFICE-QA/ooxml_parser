@@ -868,6 +868,35 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'page_properties' do
+    describe 'columns' do
+      it 'two_columns' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/two_columns.docx')
+        expect(docx.page_properties.columns.count).to eq(2)
+      end
+
+      it 'ten_columns' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/ten_columns.docx')
+        expect(docx.page_properties.columns.count).to eq(10)
+      end
+
+      it 'left_column' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/left_column.docx')
+        expect(docx.page_properties.columns[0].width).to eq(0.01)
+      end
+
+      it 'right_column' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/right_column.docx')
+        expect(docx.page_properties.columns[0].width).to eq(0.02)
+      end
+
+      it 'several_types_of_columns' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/several_types_of_columns.docx')
+        expect(docx.elements[2].sector_properties.columns.count).to eq(2)
+        expect(docx.elements[5].sector_properties.columns.count).to eq(3)
+      end
+    end
+  end
   describe 'shape' do
     describe 'lines' do
       it 'ShapeLineEnding' do
