@@ -59,5 +59,16 @@ module OoxmlParser
       end
       is_same
     end
+
+    # Parse BordersProperties
+    # @param [Nokogiri::XML:Element] node with Size
+    # @return [Size] value of Size
+    def self.parse(node)
+      size = Size.new
+      size.orientation = node.attribute('orient').value.to_sym unless node.attribute('orient').nil?
+      size.height = node.attribute('h').value.to_i
+      size.width = node.attribute('w').value.to_i
+      size
+    end
   end
 end
