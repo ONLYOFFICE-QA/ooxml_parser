@@ -60,6 +60,12 @@ module OoxmlParser
       is_same
     end
 
+    # @return [True, False] compare dimensions of size, ignoring orientation
+    def same_dimensions?(other)
+      (@height == other.height) && (@width == other.width) ||
+          (@height == other.width) && (@width == other.height)
+    end
+
     # Parse BordersProperties
     # @param [Nokogiri::XML:Element] node with Size
     # @return [Size] value of Size
