@@ -66,8 +66,9 @@ module OoxmlParser
     def self.parse(node)
       size = Size.new
       size.orientation = node.attribute('orient').value.to_sym unless node.attribute('orient').nil?
-      size.height = node.attribute('h').value.to_i
-      size.width = node.attribute('w').value.to_i
+      # TODO: implement and understand, why 566.929, but not `unit_delimeter`
+      size.height = (node.attribute('h').value.to_f / 566.929).round(2)
+      size.width = (node.attribute('w').value.to_f / 566.929).round(2)
       size
     end
   end
