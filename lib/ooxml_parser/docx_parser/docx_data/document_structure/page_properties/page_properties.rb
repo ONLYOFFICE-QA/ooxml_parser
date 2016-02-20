@@ -23,10 +23,7 @@ module OoxmlParser
     def self.parse(sect_pr, default_paragraph, default_character)
       page_properties = PageProperties.new
       sect_pr.xpath('w:pgSz').each do |pg_sz|
-        page_properties.size = Size.new
-        page_properties.size.orientation = pg_sz.attribute('orient').value.to_sym unless pg_sz.attribute('orient').nil?
-        page_properties.size.height = pg_sz.attribute('h').value
-        page_properties.size.width = pg_sz.attribute('w').value
+        page_properties.size = Size.parse(pg_sz)
       end
       sect_pr.xpath('w:pgBorders').each do |pg_borders|
         page_borders = Borders.new
