@@ -66,6 +66,24 @@ module OoxmlParser
           (@height == other.width) && (@width == other.height)
     end
 
+    # @return [String] get human format name
+    def name
+      return 'US Letter' if same_dimensions?(Size.new(27.94, 21.59))
+      return 'US Legal' if same_dimensions?(Size.new(35.56, 21.59))
+      return 'A4' if same_dimensions?(Size.new(29.7, 21.0))
+      return 'A5' if same_dimensions?(Size.new(20.99, 14.81))
+      return 'B5' if same_dimensions?(Size.new(25.01, 17.6))
+      return 'Envelope #10' if same_dimensions?(Size.new(24.13, 10.48))
+      return 'Envelope DL' if same_dimensions?(Size.new(22.01, 11.01))
+      return 'Tabloid' if same_dimensions?(Size.new(43.17, 27.94))
+      return 'A3' if same_dimensions?(Size.new(42.01, 29.7))
+      return 'Tabloid Oversize' if same_dimensions?(Size.new(45.71, 30.48))
+      return 'ROC 16K' if same_dimensions?(Size.new(27.3, 19.68))
+      return 'Envelope Choukei 3' if same_dimensions?(Size.new(23.49, 11.99))
+      return 'Super B/A3' if same_dimensions?(Size.new(48.25, 33.02))
+      "Unknown page size: Height #{@height} Width #{@width}"
+    end
+
     # Parse BordersProperties
     # @param [Nokogiri::XML:Element] node with Size
     # @return [Size] value of Size
