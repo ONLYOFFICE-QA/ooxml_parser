@@ -2,7 +2,7 @@ module OoxmlParser
   class Size
     attr_accessor :height, :width, :orientation
 
-    def initialize(height = nil, width = nil, orientation = 'portrait')
+    def initialize(height = nil, width = nil, orientation = :portrait)
       @height = height
       @width = width
       @orientation = orientation
