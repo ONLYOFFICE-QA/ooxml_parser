@@ -71,4 +71,9 @@ describe 'Page Size Names' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/page_size/super_b_a3.docx')
     expect(docx.page_properties.size.name).to eq('Super B/A3')
   end
+
+  it 'Unrecognized Page Size' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/page_size/unrecognized_page_size.docx')
+    expect(docx.page_properties.size.name).to eq('Unknown page size: Height 5.0 Width 5.0')
+  end
 end
