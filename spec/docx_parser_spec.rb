@@ -896,6 +896,12 @@ describe 'My behaviour' do
         expect(docx.elements[5].sector_properties.columns.count).to eq(3)
       end
     end
+
+    it 'page_size.docx' do
+      docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/page_size.docx')
+      expect(docx.page_properties.size.width).to eq(5)
+      expect(docx.page_properties.size.height).to eq(29.7)
+    end
   end
   describe 'shape' do
     describe 'lines' do
