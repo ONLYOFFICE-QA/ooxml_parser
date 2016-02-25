@@ -51,14 +51,7 @@ module OoxmlParser
         page_properties.type = type.attribute('val').value
       end
       sect_pr.xpath('w:pgMar').each do |pg_mar|
-        page_properties.margins = PageMargins.new
-        page_properties.margins.footer = (pg_mar.attribute('footer').value.to_f / 566.9).round(2) unless pg_mar.attribute('footer').nil?
-        page_properties.margins.gutter = (pg_mar.attribute('gutter').value.to_f / 566.9).round(2)
-        page_properties.margins.header = (pg_mar.attribute('header').value.to_f / 566.9).round(2) unless pg_mar.attribute('header').nil?
-        page_properties.margins.bottom = (pg_mar.attribute('bottom').value.to_f / 566.9).round(2)
-        page_properties.margins.left = (pg_mar.attribute('left').value.to_f / 566.9).round(2)
-        page_properties.margins.right = (pg_mar.attribute('right').value.to_f / 566.9).round(2)
-        page_properties.margins.top = (pg_mar.attribute('top').value.to_f / 566.9).round(2)
+        page_properties.margins = PageMargins.parse(pg_mar)
       end
       sect_pr.xpath('w:pgNumType').each do |pg_num_type|
         page_properties.num_type = pg_num_type.attribute('fmt').value unless pg_num_type.attribute('fmt').nil?
