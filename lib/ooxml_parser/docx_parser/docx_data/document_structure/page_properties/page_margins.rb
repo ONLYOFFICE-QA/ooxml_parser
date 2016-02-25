@@ -2,14 +2,14 @@ module OoxmlParser
   class PageMargins
     attr_accessor :top, :bottom, :left, :right, :footer, :gutter, :header
 
-    def initialize
-      @top = nil
-      @bottom = nil
-      @left = nil
-      @right = nil
-      @header = 1.25
-      @footer = 1.25
-      @gutter = nil
+    def initialize(top: nil, bottom: nil, left: nil, right: nil, header: nil, footer: nil, gutter: nil)
+      @top = top
+      @bottom = bottom
+      @left = left
+      @right = right
+      @header = header
+      @footer = footer
+      @gutter = gutter
     end
 
     def ==(other)
