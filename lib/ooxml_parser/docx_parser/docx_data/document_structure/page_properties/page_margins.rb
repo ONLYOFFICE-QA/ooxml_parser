@@ -22,5 +22,21 @@ module OoxmlParser
         @header == other.header &&
         @gutter == other.gutter
     end
+
+    # Parse BordersProperties
+    # @param [Nokogiri::XML:Element] node with PageMargins
+    # @return [PageMargins] value of PageMargins
+    def self.parse(node)
+      margins = PageMargins.new
+      # TODO: implement and understand, why 566.929, but not `unit_delimiter`
+      margins.top = (node.attribute('top').value.to_f / 566.929).round(2)
+      margins.left = (node.attribute('left').value.to_f / 566.929).round(2)
+      margins.right = (node.attribute('right').value.to_f / 566.929).round(2)
+      margins.bottom = (node.attribute('bottom').value.to_f / 566.929).round(2)
+      margins.header = (node.attribute('header').value.to_f / 566.929).round(2) unless node.attribute('header').nil?
+      margins.footer = (node.attribute('footer').value.to_f / 566.929).round(2) unless node.attribute('footer').nil?
+      margins.gutter = (node.attribute('gutter').value.to_f / 566.929).round(2)
+      margins
+    end
   end
 end
