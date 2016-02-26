@@ -723,6 +723,13 @@ describe 'My behaviour' do
         expect(docx.element_by_description.first.character_style_array[1].text).to eq('1')
         expect(docx.element_by_description.first.character_style_array[1].page_number).to eq(true)
       end
+
+      describe 'page_margins' do
+        it 'page margins parsing' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/page_margins/page_margins.docx')
+          expect(docx.page_properties.margins).to eq(OoxmlParser::PageMargins.new(top: 2, left: 3, bottom: 2, right: 1.5, gutter: 0, header: 1.25, footer: 1.25))
+        end
+      end
     end
 
     describe 'indents' do
