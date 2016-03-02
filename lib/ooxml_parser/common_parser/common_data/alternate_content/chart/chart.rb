@@ -93,6 +93,9 @@ module OoxmlParser
                 when 'line3DChart'
                   chart.type = :line_3d
                   chart.parse_properties(plot_area_node_child)
+                when 'bar3DChart'
+                  chart.type = :bar_3d
+                  chart.parse_properties(plot_area_node_child)
                 end
               end
               chart_node_child.xpath('*').each do |plot_area_node_child|
