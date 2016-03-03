@@ -13,11 +13,11 @@ module OoxmlParser
     end
 
     def nonempty_elements
-      @elements.select { |cur_shape| (!cur_shape.text_body.paragraphs.first.characters.empty?) }
+      @elements.select { |cur_shape| !cur_shape.text_body.paragraphs.first.characters.empty? }
     end
 
     def graphic_frames
-      @elements.select { |cur_element| (cur_element.is_a?(GraphicFrame)) }
+      @elements.select { |cur_element| cur_element.is_a?(GraphicFrame) }
     end
 
     def content_horizontal_align(object, slide_size)

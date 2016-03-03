@@ -73,7 +73,7 @@ module OoxmlParser
       # This method check is argument contains coordinate
       # @param [String] string
       def coordinates?(string)
-        !(/^([A-Z]+)(\d+)$/.match(string).nil?)
+        !/^([A-Z]+)(\d+)$/.match(string).nil?
       end
 
       # @param [String or Fixnum] number to convert

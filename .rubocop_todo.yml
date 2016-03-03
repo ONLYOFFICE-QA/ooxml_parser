@@ -112,10 +112,3 @@ Style/MutableConstant:
 # Cop supports --auto-correct.
 Style/NumericLiterals:
   MinDigits: 11
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/RedundantParentheses:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/coordinates.rb'
-    - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide.rb'
