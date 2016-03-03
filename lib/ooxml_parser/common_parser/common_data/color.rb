@@ -78,7 +78,7 @@ module OoxmlParser
           333333
           n/a
           n/a
-        )
+        ).freeze
 
     # @return [Integer] Value of Red Part
     attr_accessor :red

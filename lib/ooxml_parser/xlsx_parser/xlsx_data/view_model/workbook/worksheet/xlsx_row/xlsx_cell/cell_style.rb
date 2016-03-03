@@ -44,7 +44,7 @@ module OoxmlParser
                           General
                           mm:ss.0
                           ##0.0E+0
-                          @|
+                          @|.freeze
 
     attr_accessor :font, :borders, :fill_color, :numerical_format, :alignment
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string

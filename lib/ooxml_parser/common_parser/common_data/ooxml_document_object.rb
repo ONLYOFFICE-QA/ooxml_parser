@@ -5,7 +5,7 @@ require 'zip'
 
 module OoxmlParser
   class OOXMLDocumentObject
-    DEFAULT_DIRECTORY_FOR_MEDIA = '/tmp'
+    DEFAULT_DIRECTORY_FOR_MEDIA = '/tmp'.freeze
 
     class << self
       attr_accessor :namespace_prefix

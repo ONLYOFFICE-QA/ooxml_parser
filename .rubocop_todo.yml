@@ -98,12 +98,3 @@ Style/IndentAssignment:
 # SupportedStyles: aligned, indented
 Style/MultilineOperationIndentation:
   Enabled: false
-
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/MutableConstant:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/ooxml_document_object.rb'
-    - 'lib/ooxml_parser/version.rb'
-    - 'lib/ooxml_parser/xlsx_parser/xlsx_data/view_model/workbook/worksheet/xlsx_row/xlsx_cell/cell_style.rb'
