@@ -19,7 +19,7 @@ module OoxmlParser
     # Used to determine if current style is visible in style list in editors
     # According to http://www.wordarticles.com/Articles/WordStyles/LatentStyles.php
     attr_accessor :q_format
-    alias_method :visible?, :q_format
+    alias visible? q_format
 
     def initialize
       @q_format = false

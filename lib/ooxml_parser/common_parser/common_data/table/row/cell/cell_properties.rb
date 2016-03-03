@@ -11,8 +11,8 @@ module OoxmlParser
       @merge = false
     end
 
-    alias_method :table_cell_margin, :margins
-    alias_method :table_cell_margin=, :margins=
+    alias table_cell_margin margins
+    alias table_cell_margin= margins=
 
     def self.parse(cell_properties_node)
       cell_properties = CellProperties.new(Borders.parse(cell_properties_node), PresentationFill.parse(cell_properties_node))

@@ -14,35 +14,20 @@ module OoxmlParser
         height = width
         width = swap_value
       end
-      if height == '15840' && width == '12240'
-        return 'US Letter'
-      elsif height == '20160' && width == '12240'
-        return 'US Legal'
-      elsif height == '16838' && width == '11906'
-        return 'A4'
-      elsif height == '11900' && width == '8396'
-        return 'A5'
-      elsif height == '14179' && width == '9978'
-        return 'B5'
-      elsif height == '13680' && width == '5941'
-        return 'Envelope #10'
-      elsif height == '12478' && width == '6242'
-        return 'Envelope DL'
-      elsif height == '24474' && width == '15840'
-        return 'Tabloid'
-      elsif height == '23817' && width == '16838'
-        return 'A3'
-      elsif height == '25914' && width == '17280'
-        return 'Tabloid Oversize'
-      elsif height == '15477' && width == '11157'
-        return 'ROC 16K'
-      elsif height == '13317' && width == '6797'
-        return 'Envelope Choukei 3'
-      elsif height == '27354' && width == '18720'
-        return 'Super B/A3'
-      else
-        return 'Unknown page size: Height ' + height.to_s + ' Width ' + width.to_s
-      end
+      return 'US Letter' if height == '15840' && width == '12240'
+      return 'US Legal' if height == '20160' && width == '12240'
+      return 'A4' if height == '16838' && width == '11906'
+      return 'A5' if height == '11900' && width == '8396'
+      return 'B5' if height == '14179' && width == '9978'
+      return 'Envelope #10' if height == '13680' && width == '5941'
+      return 'Envelope DL' if height == '12478' && width == '6242'
+      return 'Tabloid' if height == '24474' && width == '15840'
+      return 'A3' if height == '23817' && width == '16838'
+      return 'Tabloid Oversize' if height == '25914' && width == '17280'
+      return 'ROC 16K' if height == '15477' && width == '11157'
+      return 'Envelope Choukei 3' if height == '13317' && width == '6797'
+      return 'Super B/A3' if height == '27354' && width == '18720'
+      'Unknown page size: Height ' + height.to_s + ' Width ' + width.to_s
     end
 
     def to_s
@@ -63,7 +48,7 @@ module OoxmlParser
     # @return [True, False] compare dimensions of size, ignoring orientation
     def same_dimensions?(other)
       (@height == other.height) && (@width == other.width) ||
-          (@height == other.width) && (@width == other.height)
+        (@height == other.width) && (@width == other.height)
     end
 
     # @return [String] get human format name

@@ -36,7 +36,7 @@ module OoxmlParser
         when :shape
           elements[0].nonempty_runs.first.alternate_content.office2007_content.data.text_box
         else
-          fail 'Wrong location(Need One of ":table", ":paragraph", ":shape")'
+          raise 'Wrong location(Need One of ":table", ":paragraph", ":shape")'
         end
       when :footer
         case type
@@ -47,7 +47,7 @@ module OoxmlParser
         when :shape
           note_by_description(:footer1).elements[0].nonempty_runs.first.alternate_content.office2007_content.data.text_box
         else
-          fail 'Wrong location(Need One of ":table", ":simple", ":shape")'
+          raise 'Wrong location(Need One of ":table", ":simple", ":shape")'
         end
       when :header
         case type
@@ -58,12 +58,12 @@ module OoxmlParser
         when :shape
           note_by_description(:header1).elements[0].nonempty_runs.first.alternate_content.office2007_content.data.text_box
         else
-          fail 'Wrong location(Need One of ":table", ":simple", ":shape")'
+          raise 'Wrong location(Need One of ":table", ":simple", ":shape")'
         end
       when :comment
         comments[0].paragraphs
       else
-        fail 'Wrong global location(Need One of ":canvas", ":footer", ":header", ":comment")'
+        raise 'Wrong global location(Need One of ":canvas", ":footer", ":header", ":comment")'
       end
     end
 
@@ -71,7 +71,7 @@ module OoxmlParser
       notes.each do |note|
         return note if note.type.to_sym == type
       end
-      fail 'There isn\'t this type of the note'
+      raise 'There isn\'t this type of the note'
     end
 
     def recognize_numbering(location: :canvas, type: :simple, paragraph_number: 0)

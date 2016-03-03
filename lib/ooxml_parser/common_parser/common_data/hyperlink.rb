@@ -8,10 +8,10 @@ module OoxmlParser
       @coordinates = coordinates
     end
 
-    alias_method :link, :url
-    alias_method :link_to, :url
-    alias_method :link=, :url=
-    alias_method :link_to=, :url=
+    alias link url
+    alias link_to url
+    alias link= url=
+    alias link_to= url=
 
     def self.parse(on_click_hyperlink_node)
       hyperlink = Hyperlink.new

@@ -31,16 +31,16 @@ module OoxmlParser
       unless max == min
         hls_color.s = delta / (255.0 - (255.0 - max - min).abs)
 
-        case
-        when max == red && green >= blue
-          hls_color.h = 60.0 * (green - blue) / delta
-        when max == red && green < blue
-          hls_color.h = 60.0 * (green - blue) / delta + 360.0
-        when max == green
-          hls_color.h = 60.0 * (blue - red) / delta + 120.0
-        else
-          hls_color.h = 60.0 * (red - green) / delta + 240.0
-        end
+        hls_color.h = case
+                      when max == red && green >= blue
+                        60.0 * (green - blue) / delta
+                      when max == red && green < blue
+                        60.0 * (green - blue) / delta + 360.0
+                      when max == green
+                        60.0 * (blue - red) / delta + 120.0
+                      else
+                        60.0 * (red - green) / delta + 240.0
+                      end
       end
 
       hls_color
@@ -99,20 +99,20 @@ module OoxmlParser
       # for hsl color which have h == 0 need another values of lumOff lumMod - 0.04(+-0.005)
       if lum_mod
         if hls_color.h == 0
-          case lum_mod
-          when 0.2
-            hls_color.l *= 0.169
-          when 0.4
-            hls_color.l *= 0.369
-          when 0.6
-            hls_color.l *= 0.55
-          when 0.75
-            hls_color.l *= 0.705
-          when 0.5
-            hls_color.l *= 0.469
-          else
-            hls_color.l *= lum_mod
-          end
+          hls_color.l *= case lum_mod
+                         when 0.2
+                           0.169
+                         when 0.4
+                           0.369
+                         when 0.6
+                           0.55
+                         when 0.75
+                           0.705
+                         when 0.5
+                           0.469
+                         else
+                           lum_mod
+                         end
         else
           hls_color.l *= lum_mod
         end
@@ -124,16 +124,16 @@ module OoxmlParser
         hls_color = HSLColor.rgb_to_hsl(current_rgb)
         # for hsl color which have h == 0 need another values of lumOff - 0.04(+-0.01)
         if hls_color.h == 0
-          case lum_off
-          when 0.8
-            hls_color.l += 0.76
-          when 0.6
-            hls_color.l += 0.55
-          when 0.4
-            hls_color.l += 0.36
-          else
-            hls_color.l += lum_off
-          end
+          hls_color.l += case lum_off
+                         when 0.8
+                           0.76
+                         when 0.6
+                           0.55
+                         when 0.4
+                           0.36
+                         else
+                           lum_off
+                         end
         else
           hls_color.l += lum_off
         end

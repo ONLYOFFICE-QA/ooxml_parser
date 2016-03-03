@@ -276,21 +276,21 @@ module OoxmlParser
           paragraph_style.spacing.line_rule = spacing.attribute('lineRule').value.sub('atLeast', 'at_least').to_sym
         end
         unless spacing.attribute('line').nil?
-          paragraph_style.spacing.line_rule == :auto ? paragraph_style.spacing.line = (spacing.attribute('line').value.to_f / 240.0).round(2) : paragraph_style.spacing.line = (spacing.attribute('line').value.to_f / 566.9).round(2)
+          paragraph_style.spacing.line = (paragraph_style.spacing.line_rule == :auto ? (spacing.attribute('line').value.to_f / 240.0).round(2) : (spacing.attribute('line').value.to_f / 566.9).round(2))
         end
       end
       paragraph_pr_tag.xpath('w:sectPr').each do |sect_pr|
         paragraph_style.sector_properties = PageProperties.parse(sect_pr, paragraph_style, default_char_style)
-        case paragraph_style.sector_properties.type
-        when 'oddPage'
-          paragraph_style.section_break = 'Odd page'
-        when 'evenPage'
-          paragraph_style.section_break = 'Even page'
-        when 'continuous'
-          paragraph_style.section_break = 'Current Page'
-        else
-          paragraph_style.section_break = 'Next Page'
-        end
+        paragraph_style.section_break = case paragraph_style.sector_properties.type
+                                        when 'oddPage'
+                                          'Odd page'
+                                        when 'evenPage'
+                                          'Even page'
+                                        when 'continuous'
+                                          'Current Page'
+                                        else
+                                          'Next Page'
+                                        end
       end
       paragraph_style
     end

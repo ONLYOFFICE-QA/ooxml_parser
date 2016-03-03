@@ -30,11 +30,8 @@ module OoxmlParser
 
     def self.parse_file(file_name, path_to_folder)
       path_to_comments_xml = ''
-      if File.exist?(path_to_folder + "xl/worksheets/_rels/#{file_name}.rels")
-        relationships = XmlSimple.xml_in(File.open(path_to_folder + "xl/worksheets/_rels/#{file_name}.rels"))
-      else
-        return nil
-      end
+      return nil unless File.exist?(path_to_folder + "xl/worksheets/_rels/#{file_name}.rels")
+      relationships = XmlSimple.xml_in(File.open(path_to_folder + "xl/worksheets/_rels/#{file_name}.rels"))
       if relationships['Relationship']
         relationships['Relationship'].each do |relationship|
           path_to_comments_xml = path_to_folder + 'xl/' + relationship['Target'].gsub('..', '') if File.basename(relationship['Target']).include?('comment')

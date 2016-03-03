@@ -8,7 +8,7 @@ module OoxmlParser
     attr_accessor :jc, :table_width, :shd, :table_borders, :table_properties, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
                   :column_banding_size, :table_look, :grid_column, :right_to_left, :style
 
-    alias_method :table_properties, :table_positon
+    alias table_properties table_positon
 
     def initialize
       @table_indent = nil

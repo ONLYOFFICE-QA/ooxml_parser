@@ -44,7 +44,7 @@ module OoxmlParser
                           General
                           mm:ss.0
                           ##0.0E+0
-                          @|
+                          @|.freeze
 
     attr_accessor :font, :borders, :fill_color, :numerical_format, :alignment
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string
@@ -62,11 +62,11 @@ module OoxmlParser
       current_cell_style = XLSXWorkbook.styles_node.xpath('//xmlns:cellXfs/xmlns:xf')[style_number.to_i]
       cell_style = CellStyle.new
       cell_style.alignment = XlsxAlignment.new
-      if current_cell_style.attribute('applyFont').nil? || current_cell_style.attribute('applyFont').value == '0'
-        cell_style.font = OOXMLFont.parse(0)
-      else
-        cell_style.font = OOXMLFont.parse(current_cell_style.attribute('fontId').value.to_i)
-      end
+      cell_style.font = if current_cell_style.attribute('applyFont').nil? || current_cell_style.attribute('applyFont').value == '0'
+                          OOXMLFont.parse(0)
+                        else
+                          OOXMLFont.parse(current_cell_style.attribute('fontId').value.to_i)
+                        end
       unless current_cell_style.attribute('applyBorder').nil? || current_cell_style.attribute('applyBorder').value == '0'
         cell_style.borders = Borders.parse_from_style(current_cell_style.attribute('borderId').value.to_i)
       end

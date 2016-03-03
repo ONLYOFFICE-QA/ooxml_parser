@@ -10,10 +10,10 @@ module OoxmlParser
       @runs = []
     end
 
-    alias_method :characters, :runs
-    alias_method :character_style_array, :runs
-    alias_method :characters=, :runs=
-    alias_method :character_style_array=, :runs=
+    alias characters runs
+    alias character_style_array runs
+    alias characters= runs=
+    alias character_style_array= runs=
 
     def self.parse(paragraph_node)
       paragraph = Paragraph.new

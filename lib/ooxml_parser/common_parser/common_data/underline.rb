@@ -20,7 +20,7 @@ module OoxmlParser
 
     def to_s
       if @color.nil?
-        "#{@style}"
+        @style.to_s
       else
         "#{@style} #{@color}"
       end

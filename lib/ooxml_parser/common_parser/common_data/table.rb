@@ -11,7 +11,7 @@ module OoxmlParser
       @rows = rows
     end
 
-    alias_method :table_properties, :properties
+    alias table_properties properties
 
     def self.parse(table_node, number = 0, default_table_properties = TableProperties.new, default_paragraph = DocxParagraph.new, default_run = DocxParagraphRun.new)
       table_properties = default_table_properties.copy

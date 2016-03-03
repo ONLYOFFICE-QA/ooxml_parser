@@ -5,7 +5,7 @@ module OoxmlParser
   class ImageFill < OOXMLDocumentObject
     attr_accessor :path, :stretch, :tile, :properties
 
-    alias_method :path_to_media_file, :path
+    alias path_to_media_file path
 
     def initialize(path = '')
       @path = path

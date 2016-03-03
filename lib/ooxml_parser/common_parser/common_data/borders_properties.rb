@@ -33,7 +33,7 @@ module OoxmlParser
     end
 
     def visible?
-      return false if self.nil?
+      return false if nil?
       !(val == 'none')
     end
 

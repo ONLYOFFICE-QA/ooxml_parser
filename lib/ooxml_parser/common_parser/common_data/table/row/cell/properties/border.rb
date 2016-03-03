@@ -10,9 +10,9 @@ module OoxmlParser
     end
 
     def ==(other)
-      return true if self.nil? && other.nil?
-      return false if self.nil? && !other.nil?
-      return false if !self.nil? && other.nil?
+      return true if nil? && other.nil?
+      return false if nil? && !other.nil?
+      return false if !nil? && other.nil?
       return false if style != other.style
       return false if color != other.color
       true

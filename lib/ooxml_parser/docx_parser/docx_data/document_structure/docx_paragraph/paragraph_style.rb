@@ -35,7 +35,7 @@ module OoxmlParser
         found_style = style.clone if style.name == style_name
       end
 
-      fail "Cannot find this style name - #{style_name}" if found_style.nil?
+      raise "Cannot find this style name - #{style_name}" if found_style.nil?
 
       case object
       when :table

@@ -9,7 +9,7 @@ module OoxmlParser
       @elements = []
     end
 
-    alias_method :cell_properties, :properties
+    alias cell_properties properties
 
     def self.parse(cell_node)
       cell = TableCell.new

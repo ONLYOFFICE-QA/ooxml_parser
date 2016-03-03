@@ -5,7 +5,7 @@ require 'zip'
 
 module OoxmlParser
   class OOXMLDocumentObject
-    DEFAULT_DIRECTORY_FOR_MEDIA = '/tmp'
+    DEFAULT_DIRECTORY_FOR_MEDIA = '/tmp'.freeze
 
     class << self
       attr_accessor :namespace_prefix
@@ -21,7 +21,7 @@ module OoxmlParser
         FileUtils.rm_rf(tmp_folder) if File.directory?(tmp_folder)
         FileUtils.mkdir_p(tmp_folder)
         path = "#{Dir.pwd}/#{path}" unless path[0] == '/'
-        fail "Cannot find file by path #{path}" unless File.exist?(path)
+        raise "Cannot find file by path #{path}" unless File.exist?(path)
         FileUtils.cp path, tmp_folder
         file_path
       end
@@ -29,7 +29,7 @@ module OoxmlParser
       def unzip_file(path_to_file, destination)
         Zip.warn_invalid_date = false
         Zip::File.open(path_to_file) do |zip_file|
-          fail LoadError, "There is no files in zip #{path_to_file}" if zip_file.entries.length == 0
+          raise LoadError, "There is no files in zip #{path_to_file}" if zip_file.entries.empty?
           zip_file.each do |file|
             file_path = File.join(destination, file.name)
             FileUtils.mkdir_p(File.dirname(file_path))
@@ -47,16 +47,16 @@ module OoxmlParser
       end
 
       def add_to_xmls_stack(path)
-        if path.include?('..')
-          OOXMLDocumentObject.xmls_stack << "#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/#{path}"
-        else
-          OOXMLDocumentObject.xmls_stack << path
-        end
+        OOXMLDocumentObject.xmls_stack << if path.include?('..')
+                                            "#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/#{path}"
+                                          else
+                                            path
+                                          end
       end
 
       def get_link_from_rels(id)
         rels_path = dir + "_rels/#{File.basename(OOXMLDocumentObject.xmls_stack.last)}.rels"
-        fail LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)
+        raise LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)
         relationships = XmlSimple.xml_in(File.open(rels_path))
         relationships['Relationship'].each { |relationship| return relationship['Target'] if id == relationship['Id'] }
       end

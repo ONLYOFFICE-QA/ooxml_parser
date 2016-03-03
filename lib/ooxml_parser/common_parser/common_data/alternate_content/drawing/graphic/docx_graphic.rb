@@ -6,7 +6,7 @@ module OoxmlParser
   class DocxGraphic < OOXMLDocumentObject
     attr_accessor :type, :data
 
-    alias_method :chart, :data
+    alias chart data
 
     def self.parse(graphic_node)
       graphic = DocxGraphic.new

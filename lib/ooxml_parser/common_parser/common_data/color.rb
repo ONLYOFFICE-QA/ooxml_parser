@@ -11,74 +11,74 @@ module OoxmlParser
     # List of color duplicated from `OpenXML Sdk IndexedColors` class
     # See https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.indexedcolors.aspx
     COLOR_INDEXED =
-        %w(
-          000000
-          FFFFFF
-          FF0000
-          00FF00
-          0000FF
-          FFFF00
-          FF00FF
-          00FFFF
-          000000
-          FFFFFF
-          FF0000
-          00FF00
-          0000FF
-          FFFF00
-          FF00FF
-          00FFFF
-          800000
-          008000
-          000080
-          808000
-          800080
-          008080
-          C0C0C0
-          808080
-          9999FF
-          993366
-          FFFFCC
-          CCFFFF
-          660066
-          FF8080
-          0066CC
-          CCCCFF
-          000080
-          FF00FF
-          FFFF00
-          00FFFF
-          800080
-          800000
-          008080
-          0000FF
-          00CCFF
-          CCFFFF
-          CCFFCC
-          FFFF99
-          99CCFF
-          FF99CC
-          CC99FF
-          FFCC99
-          3366FF
-          33CCCC
-          99CC00
-          FFCC00
-          FF9900
-          FF6600
-          666699
-          969696
-          003366
-          339966
-          003300
-          333300
-          993300
-          993366
-          333399
-          333333
-          n/a
-          n/a
-        )
+      %w(
+        000000
+        FFFFFF
+        FF0000
+        00FF00
+        0000FF
+        FFFF00
+        FF00FF
+        00FFFF
+        000000
+        FFFFFF
+        FF0000
+        00FF00
+        0000FF
+        FFFF00
+        FF00FF
+        00FFFF
+        800000
+        008000
+        000080
+        808000
+        800080
+        008080
+        C0C0C0
+        808080
+        9999FF
+        993366
+        FFFFCC
+        CCFFFF
+        660066
+        FF8080
+        0066CC
+        CCCCFF
+        000080
+        FF00FF
+        FFFF00
+        00FFFF
+        800080
+        800000
+        008080
+        0000FF
+        00CCFF
+        CCFFFF
+        CCFFCC
+        FFFF99
+        99CCFF
+        FF99CC
+        CC99FF
+        FFCC99
+        3366FF
+        33CCCC
+        99CC00
+        FFCC00
+        FF9900
+        FF6600
+        666699
+        969696
+        003366
+        339966
+        003300
+        333300
+        993300
+        993366
+        333399
+        333333
+        n/a
+        n/a
+      ).freeze
 
     # @return [Integer] Value of Red Part
     attr_accessor :red
@@ -88,11 +88,11 @@ module OoxmlParser
     attr_accessor :blue
     # @return [String] Value of Color Style
     attr_accessor :style
-    alias_method :set_style, :style=
+    alias set_style style=
 
     # @return [Integer] Value of alpha-channel
     attr_accessor :alpha_channel
-    alias_method :set_alpha_channel, :alpha_channel=
+    alias set_alpha_channel alpha_channel=
 
     attr_accessor :position
     attr_accessor :properties
@@ -118,7 +118,7 @@ module OoxmlParser
       (@red.to_s(16).rjust(2, '0') + @green.to_s(16).rjust(2, '0') + @blue.to_s(16).rjust(2, '0')).upcase
     end
 
-    alias_method :to_int16, :to_hex
+    alias to_int16 to_hex
 
     def none?
       (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR)
@@ -134,16 +134,14 @@ module OoxmlParser
 
     def ==(other)
       if other.is_a?(Color)
-        if self.nil?
+        if nil?
           false
+        elsif (@red == other.red) && (@green == other.green) && (@blue == other.blue)
+          true
+        elsif (none? && other.white?) || (white? && other.none?)
+          true
         else
-          if (@red == other.red) && (@green == other.green) && (@blue == other.blue)
-            true
-          elsif (self.none? && other.white?) || (self.white? && other.none?)
-            true
-          else
-            false
-          end
+          false
         end
       else
         false
@@ -160,8 +158,8 @@ module OoxmlParser
       color_to_check = Color.parse(color_to_check) if color_to_check.is_a?(String)
       color_to_check = Color.parse(color_to_check.to_s) if color_to_check.is_a?(Symbol)
       color_to_check = Color.parse(color_to_check.value) if color_to_check.is_a?(DocxColor)
-      return false if self.none? && !color_to_check.none?
-      return false if !self.none? && color_to_check.none?
+      return false if none? && !color_to_check.none?
+      return false if !none? && color_to_check.none?
       return true if self == color_to_check
       red = color_to_check.red
       green = color_to_check.green
@@ -210,11 +208,11 @@ module OoxmlParser
       hls_color.l = dmax / 2.0
 
       if delta != 0
-        if hls_color.l < 0.5
-          hls_color.s = ddelta / dmax
-        else
-          hls_color.s = ddelta / (2.0 - dmax)
-        end
+        hls_color.s = if hls_color.l < 0.5
+                        ddelta / dmax
+                      else
+                        ddelta / (2.0 - dmax)
+                      end
         ddelta *= 1_530.0
         d_r = (max - @red) / ddelta
         d_g = (max - @green) / ddelta
@@ -260,7 +258,7 @@ module OoxmlParser
         Color.new(rand(256), rand(256), rand(256))
       end
 
-      alias_method :random, :generate_random_color
+      alias random generate_random_color
 
       def from_int16(color)
         return nil unless color
@@ -307,13 +305,13 @@ module OoxmlParser
                 elsif str.include?('RGB ') || str.include?('rgb')
                   str.gsub(/RGB |rgb/, '').split(', ')
                 else
-                  fail "Incorrect data for color to parse: '#{str}'"
+                  raise "Incorrect data for color to parse: '#{str}'"
                 end
 
         Color.new(split[0].to_i, split[1].to_i, split[2].to_i)
       end
 
-      alias_method :parse, :parse_string
+      alias parse parse_string
 
       def parse_int16_string(color)
         return nil if color.nil?
@@ -327,40 +325,38 @@ module OoxmlParser
 
       def srgb_to_scrgb(color)
         lineal_value = color.to_f / 255.0
-        if lineal_value < 0
-          result_color = 0
-        elsif lineal_value <= 0.04045
-          result_color = lineal_value / 12.92
-        elsif lineal_value <= 1
-          result_color = ((lineal_value + 0.055) / 1.055)**2.4
-        else
-          result_color = 1
-        end
+        result_color = if lineal_value < 0
+                         0
+                       elsif lineal_value <= 0.04045
+                         lineal_value / 12.92
+                       elsif lineal_value <= 1
+                         ((lineal_value + 0.055) / 1.055)**2.4
+                       else
+                         1
+                       end
         result_color
       end
 
       def scrgb_to_srgb(color)
-        if color < 0
-          result_color = 0
-        elsif color <= 0.0031308
-          result_color = color * 12.92
-        elsif color < 1
-          result_color = 1.055 * (color**(1.0 / 2.4)) - 0.055
-        else
-          result_color = 1
-        end
+        result_color = if color < 0
+                         0
+                       elsif color <= 0.0031308
+                         color * 12.92
+                       elsif color < 1
+                         1.055 * (color**(1.0 / 2.4)) - 0.055
+                       else
+                         1
+                       end
         (result_color * 255.0).to_i
       end
 
       def shade_for_component(color_component, shade_value)
         if color_component * shade_value < 0
           0
+        elsif color_component * shade_value > 1
+          1
         else
-          if color_component * shade_value > 1
-            1
-          else
-            color_component * shade_value
-          end
+          color_component * shade_value
         end
       end
 

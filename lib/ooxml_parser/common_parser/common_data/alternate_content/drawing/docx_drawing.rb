@@ -5,7 +5,7 @@ module OoxmlParser
   class DocxDrawing
     attr_accessor :type, :properties, :graphic
 
-    alias_method :picture, :graphic
+    alias picture graphic
 
     def initialize(properties = DocxDrawingProperties.new)
       @properties = properties
