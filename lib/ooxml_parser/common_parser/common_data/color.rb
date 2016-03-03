@@ -134,12 +134,12 @@ module OoxmlParser
 
     def ==(other)
       if other.is_a?(Color)
-        if self.nil?
+        if nil?
           false
         else
           if (@red == other.red) && (@green == other.green) && (@blue == other.blue)
             true
-          elsif (self.none? && other.white?) || (self.white? && other.none?)
+          elsif (none? && other.white?) || (white? && other.none?)
             true
           else
             false
@@ -160,8 +160,8 @@ module OoxmlParser
       color_to_check = Color.parse(color_to_check) if color_to_check.is_a?(String)
       color_to_check = Color.parse(color_to_check.to_s) if color_to_check.is_a?(Symbol)
       color_to_check = Color.parse(color_to_check.value) if color_to_check.is_a?(DocxColor)
-      return false if self.none? && !color_to_check.none?
-      return false if !self.none? && color_to_check.none?
+      return false if none? && !color_to_check.none?
+      return false if !none? && color_to_check.none?
       return true if self == color_to_check
       red = color_to_check.red
       green = color_to_check.green

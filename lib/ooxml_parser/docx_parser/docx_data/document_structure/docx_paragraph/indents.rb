@@ -23,12 +23,12 @@ module OoxmlParser
           false
         end
       else
-        self.is_a?(NilClass) && other.is_a?(NilClass)
+        is_a?(NilClass) && other.is_a?(NilClass)
       end
     end
 
     def equal_with_round(other, delta = 0.02)
-      if self.is_a?(NilClass) && other.is_a?(NilClass)
+      if is_a?(NilClass) && other.is_a?(NilClass)
         true
       else
         @first_line_indent.to_f.round(2) == other.first_line_indent.to_f.round(2) &&
