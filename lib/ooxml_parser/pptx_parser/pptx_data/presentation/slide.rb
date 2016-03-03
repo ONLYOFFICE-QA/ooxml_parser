@@ -32,7 +32,7 @@ module OoxmlParser
       when :shape
         transform = elements.find { |e| !e.shape_properties.preset.nil? }.shape_properties.transform
       else
-        fail "Dont know this type object - #{object}"
+        raise "Dont know this type object - #{object}"
       end
       return :left if transform.offset.x == 0
       return :center if ((slide_size.width / 2) - (transform.extents.x / 2)).round(1) == transform.offset.x.round(1)
@@ -52,7 +52,7 @@ module OoxmlParser
       when :shape
         transform = elements.find { |e| !e.shape_properties.preset.nil? }.shape_properties.transform
       else
-        fail "Dont know this type object - #{object}"
+        raise "Dont know this type object - #{object}"
       end
       return :top if transform.offset.y == 0
       return :middle if ((slide_size.height / 2) - (transform.extents.y / 2)).round(1) == transform.offset.y.round(1)

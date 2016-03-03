@@ -26,7 +26,7 @@ module OoxmlParser
         end
         return nil
       end
-      fail "Error. Wrong sheet value: #{sheet}"
+      raise "Error. Wrong sheet value: #{sheet}"
     end
 
     def difference(other)

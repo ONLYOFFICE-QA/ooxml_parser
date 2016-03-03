@@ -307,7 +307,7 @@ module OoxmlParser
                 elsif str.include?('RGB ') || str.include?('rgb')
                   str.gsub(/RGB |rgb/, '').split(', ')
                 else
-                  fail "Incorrect data for color to parse: '#{str}'"
+                  raise "Incorrect data for color to parse: '#{str}'"
                 end
 
         Color.new(split[0].to_i, split[1].to_i, split[2].to_i)

@@ -18,7 +18,7 @@ module OoxmlParser
       elsif type.include?('header')
         xpath_note = '//w:hdr'
       else
-        fail "Cannot parse unknown Note type: #{type}"
+        raise "Cannot parse unknown Note type: #{type}"
       end
       doc.search(xpath_note).each do |ftr|
         number = 0
