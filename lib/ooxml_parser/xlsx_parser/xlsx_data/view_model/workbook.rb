@@ -71,9 +71,7 @@ module OoxmlParser
       OOXMLDocumentObject.add_to_xmls_stack('xl/workbook.xml')
       doc = Nokogiri::XML.parse(File.open(OOXMLDocumentObject.current_xml))
       XLSXWorkbook.styles_node = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml"))
-      if get_link_to_theme_xml
-        PresentationTheme.parse("xl/#{get_link_to_theme_xml}")
-      end
+      PresentationTheme.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
       doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
         workbook.worksheets << Worksheet.parse('xl/' + OOXMLDocumentObject.get_link_from_rels(sheet.attribute('id').value))
         workbook.worksheets.last.name = sheet.attribute('name').value
@@ -96,7 +94,7 @@ module OoxmlParser
         @shared_strings
       end
 
-      def get_link_to_theme_xml
+      def link_to_theme_xml
         doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'xl/_rels/workbook.xml.rels'))
         doc.xpath('xmlns:Relationships/xmlns:Relationship').each do |relationship_node|
           if relationship_node.attribute('Target').value.include?('theme')

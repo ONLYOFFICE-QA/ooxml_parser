@@ -43,11 +43,10 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 49
 
-# Offense count: 2
+# Offense count: 1
 Style/AccessorMethodName:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/coordinates.rb'
-    - 'lib/ooxml_parser/xlsx_parser/xlsx_data/view_model/workbook.rb'
 
 # Offense count: 210
 Style/Documentation:
