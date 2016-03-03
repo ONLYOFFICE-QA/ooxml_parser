@@ -84,10 +84,3 @@ Style/GuardClause:
 Style/IfInsideElse:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: IndentationWidth.
-Style/IndentAssignment:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
