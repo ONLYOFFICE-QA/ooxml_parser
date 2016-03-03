@@ -56,17 +56,6 @@ Style/AccessorMethodName:
 Style/Alias:
   Enabled: false
 
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: SingleLineConditionsOnly.
-Style/ConditionalAssignment:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/picture/shape/old_docx_shape_fill.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/colors/hsl_color.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/docx_paragraph_run.rb'
-
 # Offense count: 210
 Style/Documentation:
   Enabled: false

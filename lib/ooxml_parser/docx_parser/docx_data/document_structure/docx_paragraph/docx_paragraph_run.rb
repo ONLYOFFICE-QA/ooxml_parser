@@ -190,40 +190,40 @@ module OoxmlParser
         end
       end
       character_pr_tag.xpath('w:bCs').each do |b|
-        if b.attribute('val').nil? || b.attribute('val').value != 'false'
-          character_style.font_style.bold = true
-        else
-          character_style.font_style.bold = false
-        end
+        character_style.font_style.bold = if b.attribute('val').nil? || b.attribute('val').value != 'false'
+                                            true
+                                          else
+                                            false
+                                          end
       end
       character_pr_tag.xpath('w:b').each do |b|
-        if b.attribute('val').nil? || b.attribute('val').value != 'false'
-          character_style.font_style.bold = true
-        else
-          character_style.font_style.bold = false
-        end
+        character_style.font_style.bold = if b.attribute('val').nil? || b.attribute('val').value != 'false'
+                                            true
+                                          else
+                                            false
+                                          end
       end
       character_pr_tag.xpath('w:iCs').each do |i|
         next if i.attribute('val').nil?
-        if i.attribute('val').value != 'false'
-          character_style.font_style.italic = true
-        else
-          character_style.font_style.italic = false
-        end
+        character_style.font_style.italic = if i.attribute('val').value != 'false'
+                                              true
+                                            else
+                                              false
+                                            end
       end
       character_pr_tag.xpath('w:i').each do |i|
-        if i.attribute('val').nil? || i.attribute('val').value != 'false'
-          character_style.font_style.italic = true
-        else
-          character_style.font_style.italic = false
-        end
+        character_style.font_style.italic = if i.attribute('val').nil? || i.attribute('val').value != 'false'
+                                              true
+                                            else
+                                              false
+                                            end
       end
       character_pr_tag.xpath('w:strike').each do |strike|
-        if strike.attribute('val').nil? || strike.attribute('val').value != 'false' && strike.attribute('val').value != '0'
-          character_style.font_style.strike = :single
-        else
-          character_style.font_style.strike = :none
-        end
+        character_style.font_style.strike = if strike.attribute('val').nil? || strike.attribute('val').value != 'false' && strike.attribute('val').value != '0'
+                                              :single
+                                            else
+                                              :none
+                                            end
       end
       character_pr_tag.xpath('w:dstrike').each do |dstrike|
         if dstrike.attribute('val').nil?

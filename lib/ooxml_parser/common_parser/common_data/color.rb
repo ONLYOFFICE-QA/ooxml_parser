@@ -208,11 +208,11 @@ module OoxmlParser
       hls_color.l = dmax / 2.0
 
       if delta != 0
-        if hls_color.l < 0.5
-          hls_color.s = ddelta / dmax
-        else
-          hls_color.s = ddelta / (2.0 - dmax)
-        end
+        hls_color.s = if hls_color.l < 0.5
+                        ddelta / dmax
+                      else
+                        ddelta / (2.0 - dmax)
+                      end
         ddelta *= 1_530.0
         d_r = (max - @red) / ddelta
         d_g = (max - @green) / ddelta
@@ -325,28 +325,28 @@ module OoxmlParser
 
       def srgb_to_scrgb(color)
         lineal_value = color.to_f / 255.0
-        if lineal_value < 0
-          result_color = 0
-        elsif lineal_value <= 0.04045
-          result_color = lineal_value / 12.92
-        elsif lineal_value <= 1
-          result_color = ((lineal_value + 0.055) / 1.055)**2.4
-        else
-          result_color = 1
-        end
+        result_color = if lineal_value < 0
+                         0
+                       elsif lineal_value <= 0.04045
+                         lineal_value / 12.92
+                       elsif lineal_value <= 1
+                         ((lineal_value + 0.055) / 1.055)**2.4
+                       else
+                         1
+                       end
         result_color
       end
 
       def scrgb_to_srgb(color)
-        if color < 0
-          result_color = 0
-        elsif color <= 0.0031308
-          result_color = color * 12.92
-        elsif color < 1
-          result_color = 1.055 * (color**(1.0 / 2.4)) - 0.055
-        else
-          result_color = 1
-        end
+        result_color = if color < 0
+                         0
+                       elsif color <= 0.0031308
+                         color * 12.92
+                       elsif color < 1
+                         1.055 * (color**(1.0 / 2.4)) - 0.055
+                       else
+                         1
+                       end
         (result_color * 255.0).to_i
       end
 

@@ -10,12 +10,12 @@ module OoxmlParser
         when 'id'
           fill.path_to_image = OOXMLDocumentObject.copy_media_file(OOXMLDocumentObject.root_subfolder + get_link_from_rels(value.value))
         when 'type'
-          case value.value
-          when 'frame'
-            fill.stretching_type = :stretch
-          else
-            fill.stretching_type = value.value.to_sym
-          end
+          fill.stretching_type = case value.value
+                                 when 'frame'
+                                   :stretch
+                                 else
+                                   value.value.to_sym
+                                 end
         when 'title'
           fill.title = value.value.to_s
         end
