@@ -63,7 +63,7 @@ module OoxmlParser
     # @return [True, False] compare dimensions of size, ignoring orientation
     def same_dimensions?(other)
       (@height == other.height) && (@width == other.width) ||
-          (@height == other.width) && (@width == other.height)
+        (@height == other.width) && (@width == other.height)
     end
 
     # @return [String] get human format name

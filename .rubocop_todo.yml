@@ -91,10 +91,3 @@ Style/IfInsideElse:
 Style/IndentAssignment:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, IndentationWidth.
-# SupportedStyles: aligned, indented
-Style/MultilineOperationIndentation:
-  Enabled: false
