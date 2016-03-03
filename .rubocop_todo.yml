@@ -144,9 +144,3 @@ Style/SignalException:
     - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/page_properties/note.rb'
     - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide.rb'
     - 'lib/ooxml_parser/xlsx_parser/xlsx_data/view_model/workbook.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/UnneededInterpolation:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/underline.rb'
