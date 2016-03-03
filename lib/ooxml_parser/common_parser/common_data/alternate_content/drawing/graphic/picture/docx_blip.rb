@@ -3,7 +3,7 @@ module OoxmlParser
   class DocxBlip < OOXMLDocumentObject
     attr_accessor :path_to_media_file, :alpha_channel
 
-    alias_method :path, :path_to_media_file
+    alias path path_to_media_file
 
     def to_str
       path_to_media_file

@@ -4,8 +4,8 @@ module OoxmlParser
   class DocxPicture
     attr_accessor :path_to_image, :properties, :nonvisual_properties, :chart
 
-    alias_method :image, :path_to_image
-    alias_method :shape_properties, :properties
+    alias image path_to_image
+    alias shape_properties properties
 
     def self.parse(picture_node)
       picture = DocxPicture.new

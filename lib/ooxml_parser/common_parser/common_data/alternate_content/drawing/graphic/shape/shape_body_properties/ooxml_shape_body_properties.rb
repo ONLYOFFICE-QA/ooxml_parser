@@ -5,7 +5,7 @@ module OoxmlParser
   class OOXMLShapeBodyProperties < OOXMLDocumentObject
     attr_accessor :margins, :anchor, :wrap, :preset_text_warp
 
-    alias_method :vertical_align, :anchor
+    alias vertical_align anchor
 
     def self.parse(body_pr_node)
       body_properties = OOXMLShapeBodyProperties.new

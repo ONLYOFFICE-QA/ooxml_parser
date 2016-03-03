@@ -8,9 +8,9 @@ module OoxmlParser
   class DocxShapeProperties < OOXMLDocumentObject
     attr_accessor :shape_size, :preset_geometry, :fill_color, :text_box, :line, :custom_geometry
 
-    alias_method :transform, :shape_size
-    alias_method :fill, :fill_color
-    alias_method :preset, :preset_geometry
+    alias transform shape_size
+    alias fill fill_color
+    alias preset preset_geometry
 
     def initialize
       @line = DocxShapeLine.new

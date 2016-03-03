@@ -88,11 +88,11 @@ module OoxmlParser
     attr_accessor :blue
     # @return [String] Value of Color Style
     attr_accessor :style
-    alias_method :set_style, :style=
+    alias set_style style=
 
     # @return [Integer] Value of alpha-channel
     attr_accessor :alpha_channel
-    alias_method :set_alpha_channel, :alpha_channel=
+    alias set_alpha_channel alpha_channel=
 
     attr_accessor :position
     attr_accessor :properties
@@ -118,7 +118,7 @@ module OoxmlParser
       (@red.to_s(16).rjust(2, '0') + @green.to_s(16).rjust(2, '0') + @blue.to_s(16).rjust(2, '0')).upcase
     end
 
-    alias_method :to_int16, :to_hex
+    alias to_int16 to_hex
 
     def none?
       (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR)
@@ -258,7 +258,7 @@ module OoxmlParser
         Color.new(rand(256), rand(256), rand(256))
       end
 
-      alias_method :random, :generate_random_color
+      alias random generate_random_color
 
       def from_int16(color)
         return nil unless color
@@ -311,7 +311,7 @@ module OoxmlParser
         Color.new(split[0].to_i, split[1].to_i, split[2].to_i)
       end
 
-      alias_method :parse, :parse_string
+      alias parse parse_string
 
       def parse_int16_string(color)
         return nil if color.nil?

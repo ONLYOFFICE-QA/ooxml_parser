@@ -4,7 +4,7 @@ module OoxmlParser
   class TableElement
     attr_accessor :cell_style
 
-    alias_method :cell_properties, :cell_style
+    alias cell_properties cell_style
 
     def self.parse(whole_table_node)
       table_element = TableElement.new

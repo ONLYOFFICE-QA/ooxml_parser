@@ -5,7 +5,7 @@ module OoxmlParser
   class DocxShapeLine
     attr_accessor :width, :color_scheme, :cap, :head_end, :tail_end, :fill
 
-    alias_method :color, :color_scheme
+    alias color color_scheme
 
     def initialize
       @width = 0

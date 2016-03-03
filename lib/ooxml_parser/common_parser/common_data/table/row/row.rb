@@ -7,7 +7,7 @@ module OoxmlParser
       @cells = cells
     end
 
-    alias_method :table_row_height, :height
+    alias table_row_height height
 
     def self.parse(row_node)
       row = TableRow.new

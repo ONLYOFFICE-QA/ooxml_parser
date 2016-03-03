@@ -3,7 +3,7 @@ module OoxmlParser
   class DocxShapeSize
     attr_accessor :rotation, :flip_horizontal, :flip_vertical, :offset, :extent
 
-    alias_method :extents, :extent
+    alias extents extent
 
     def self.parse(xfrm_node)
       shape_size = DocxShapeSize.new

@@ -49,13 +49,6 @@ Style/AccessorMethodName:
     - 'lib/ooxml_parser/common_parser/common_data/coordinates.rb'
     - 'lib/ooxml_parser/xlsx_parser/xlsx_data/view_model/workbook.rb'
 
-# Offense count: 33
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: prefer_alias, prefer_alias_method
-Style/Alias:
-  Enabled: false
-
 # Offense count: 210
 Style/Documentation:
   Enabled: false
