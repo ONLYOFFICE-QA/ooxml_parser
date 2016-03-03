@@ -47,11 +47,11 @@ module OoxmlParser
       end
 
       def add_to_xmls_stack(path)
-        if path.include?('..')
-          OOXMLDocumentObject.xmls_stack << "#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/#{path}"
-        else
-          OOXMLDocumentObject.xmls_stack << path
-        end
+        OOXMLDocumentObject.xmls_stack << if path.include?('..')
+                                            "#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/#{path}"
+                                          else
+                                            path
+                                          end
       end
 
       def get_link_from_rels(id)
