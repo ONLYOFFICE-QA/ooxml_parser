@@ -107,8 +107,3 @@ Style/MutableConstant:
     - 'lib/ooxml_parser/common_parser/common_data/ooxml_document_object.rb'
     - 'lib/ooxml_parser/version.rb'
     - 'lib/ooxml_parser/xlsx_parser/xlsx_data/view_model/workbook/worksheet/xlsx_row/xlsx_cell/cell_style.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/NumericLiterals:
-  MinDigits: 11

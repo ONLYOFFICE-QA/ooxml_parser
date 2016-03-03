@@ -20,7 +20,7 @@ describe '#configure' do
       config.units = :dxa
     end
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/settings/measurement.pptx')
-    expect(pptx.slides[0].elements.last.properties.transform.extents.x).to eq(5940000)
+    expect(pptx.slides[0].elements.last.properties.transform.extents.x).to eq(5_940_000)
   end
 
   it 'Set unit of measurement as inches' do
@@ -36,7 +36,7 @@ describe '#configure' do
       config.units = :emu
     end
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/settings/measurement.pptx')
-    expect(pptx.slides[0].elements.last.properties.transform.extents.x).to eq(3771900000)
+    expect(pptx.slides[0].elements.last.properties.transform.extents.x).to eq(3_771_900_000)
   end
 
   after do
