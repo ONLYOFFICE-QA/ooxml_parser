@@ -14,11 +14,8 @@ module OoxmlParser
         if @first_line_indent.to_f == other.first_line_indent.to_f &&
            @left_indent.to_f.round(2) == other.left_indent.to_f.round(2) &&
            @right_indent.to_f.round(1) == other.right_indent.to_f.round(1)
-          if @hanging_indent.nil? || other.hanging_indent.nil?
-            return true
-          else
-            @hanging_indent.to_f == other.hanging_indent.to_f
-          end
+          return true if @hanging_indent.nil? || other.hanging_indent.nil?
+          @hanging_indent.to_f == other.hanging_indent.to_f
         else
           false
         end

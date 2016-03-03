@@ -70,12 +70,3 @@ Style/ConditionalAssignment:
 # Offense count: 210
 Style/Documentation:
   Enabled: false
-
-# Offense count: 4
-# Configuration parameters: MinBodyLength.
-Style/GuardClause:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/paragraph/paragrpah_properties/spacing.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/indents.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/page_properties/size.rb'
-    - 'lib/ooxml_parser/xlsx_parser/xlsx_data/view_model/workbook.rb'

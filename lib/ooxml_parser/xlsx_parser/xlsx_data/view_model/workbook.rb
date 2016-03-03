@@ -13,11 +13,8 @@ module OoxmlParser
 
       if StringHelper.numeric?(sheet.to_s)
         row = @worksheets[sheet].rows[row.to_i - 1]
-        if row.nil?
-          return nil
-        else
-          return row.cells[column.to_i - 1]
-        end
+        return nil if row.nil?
+        return row.cells[column.to_i - 1]
       elsif sheet.is_a?(String)
         @worksheets.each do |worksheet|
           if worksheet.name == sheet
