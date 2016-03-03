@@ -190,7 +190,7 @@ module OoxmlParser
           formula.elements << limit
         end
       end
-      return nil if formula.elements.length == 0
+      return nil if formula.elements.empty?
       formula
     end
 

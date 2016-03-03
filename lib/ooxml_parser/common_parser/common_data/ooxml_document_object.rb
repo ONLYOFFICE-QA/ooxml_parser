@@ -29,7 +29,7 @@ module OoxmlParser
       def unzip_file(path_to_file, destination)
         Zip.warn_invalid_date = false
         Zip::File.open(path_to_file) do |zip_file|
-          fail LoadError, "There is no files in zip #{path_to_file}" if zip_file.entries.length == 0
+          fail LoadError, "There is no files in zip #{path_to_file}" if zip_file.entries.empty?
           zip_file.each do |file|
             file_path = File.join(destination, file.name)
             FileUtils.mkdir_p(File.dirname(file_path))

@@ -150,9 +150,3 @@ Style/SignalException:
 Style/UnneededInterpolation:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/underline.rb'
-
-# Offense count: 2
-Style/ZeroLengthPredicate:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/ooxml_document_object.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/docx_formula.rb'
