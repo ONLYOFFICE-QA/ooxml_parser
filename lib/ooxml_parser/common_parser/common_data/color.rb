@@ -136,14 +136,12 @@ module OoxmlParser
       if other.is_a?(Color)
         if nil?
           false
+        elsif (@red == other.red) && (@green == other.green) && (@blue == other.blue)
+          true
+        elsif (none? && other.white?) || (white? && other.none?)
+          true
         else
-          if (@red == other.red) && (@green == other.green) && (@blue == other.blue)
-            true
-          elsif (none? && other.white?) || (white? && other.none?)
-            true
-          else
-            false
-          end
+          false
         end
       else
         false
@@ -355,12 +353,10 @@ module OoxmlParser
       def shade_for_component(color_component, shade_value)
         if color_component * shade_value < 0
           0
+        elsif color_component * shade_value > 1
+          1
         else
-          if color_component * shade_value > 1
-            1
-          else
-            color_component * shade_value
-          end
+          color_component * shade_value
         end
       end
 

@@ -79,8 +79,3 @@ Style/GuardClause:
     - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/indents.rb'
     - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/page_properties/size.rb'
     - 'lib/ooxml_parser/xlsx_parser/xlsx_data/view_model/workbook.rb'
-
-# Offense count: 2
-Style/IfInsideElse:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
