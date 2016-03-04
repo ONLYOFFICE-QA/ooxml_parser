@@ -902,6 +902,23 @@ describe 'My behaviour' do
         expect(docx.elements[2].sector_properties.columns.count).to eq(2)
         expect(docx.elements[5].sector_properties.columns.count).to eq(3)
       end
+
+      describe 'equal_columns' do
+        it 'equal_columns' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/equal_columns/equal_columns_undefined.docx')
+          expect(docx.page_properties.columns.equal_width).to be_nil
+        end
+
+        it 'non_equal_columns' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/equal_columns/non_equal_columns.docx')
+          expect(docx.page_properties.columns).not_to be_equal_width
+        end
+
+        it 'equal_columns_undefined' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/columns/equal_columns/equal_columns.docx')
+          expect(docx.page_properties.columns).to be_equal_width
+        end
+      end
     end
 
     it 'page_size.docx' do
