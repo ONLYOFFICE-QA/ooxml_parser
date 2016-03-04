@@ -6,6 +6,7 @@
 * Add support of `line_3d`, `bar3DChart`, `pie3DChart` charts
 * Refactor parsing page size of document
 * Refactor parsing page margins of docx
+* Refactor parsing columns data of docx
 * Some minor RuboCop refactor
 
 ## 0.1.0
