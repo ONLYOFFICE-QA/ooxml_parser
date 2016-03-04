@@ -3,6 +3,8 @@ module OoxmlParser
   class Columns < OOXMLDocumentObject
     attr_accessor :separator
     attr_accessor :count
+    attr_accessor :equal_width
+    alias equal_width? equal_width
     attr_accessor :column_array
 
     def initialize(columns_count)
@@ -23,6 +25,7 @@ module OoxmlParser
       columns_count = columns_grid.attribute('num').value.to_i unless columns_grid.attribute('num').nil?
       columns = Columns.new(columns_count)
       columns.separator = columns_grid.attribute('sep').value unless columns_grid.attribute('sep').nil?
+      columns.equal_width = option_enabled?(columns_grid, 'equalWidth') unless columns_grid.attribute('equalWidth').nil?
       columns_grid.xpath('w:col').each do |col|
         width = (col.attribute('w').value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
         space = (col.attribute('space').value.to_f / OoxmlParser.configuration.units_delimiter).round(2) unless col.attribute('space').nil?
