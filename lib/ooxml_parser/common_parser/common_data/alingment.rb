@@ -28,6 +28,12 @@ module OoxmlParser
         :bottom_left
       when 'dist'
         :distributed
+      when 'tb'
+        :horizontal
+      when 'rl'
+        :rotate_on_90
+      when 'lr'
+        :rotate_on_270
       when 'inset'
         :in
       when 'lu'
