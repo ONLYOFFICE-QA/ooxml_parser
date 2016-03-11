@@ -701,6 +701,25 @@ describe 'My behaviour' do
           expect(docx.element_by_description[0].borders.bottom).to be_nil
         end
       end
+
+      describe 'cell' do
+        describe 'properties' do
+          it 'table_cell_text_no_rotation' do
+            docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/properties/table_cell_text_no_rotation.docx')
+            expect(docx.elements[1].rows.first.cells.first.properties.text_direction).to eq(:horizontal)
+          end
+
+          it 'table_cell_text_rotated_90' do
+            docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/properties/table_cell_text_rotated_90.docx')
+            expect(docx.elements[1].rows.first.cells.first.properties.text_direction).to eq(:rotate_on_90)
+          end
+
+          it 'table_cell_text_rotated_270' do
+            docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/properties/table_cell_text_rotated_270.docx')
+            expect(docx.elements[1].rows.first.cells.first.properties.text_direction).to eq(:rotate_on_270)
+          end
+        end
+      end
     end
   end
 
