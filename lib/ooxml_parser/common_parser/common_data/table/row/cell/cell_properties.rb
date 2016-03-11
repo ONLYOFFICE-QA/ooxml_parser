@@ -53,6 +53,9 @@ module OoxmlParser
         cell_properties_node.xpath('w:tcMar').each do |cell_margins_node|
           cell_properties.table_cell_margin = TableMargins.parse(cell_margins_node)
         end
+        cell_properties_node.xpath('w:textDirection').each do |text_direction|
+          cell_properties.text_direction = Alignment.parse(text_direction.attribute('val'))
+        end
         cell_properties_node.xpath('w:tcBorders').each do |tc_boders|
           tc_boders.xpath('w:top').each do |top|
             top_border = BordersProperties.new
