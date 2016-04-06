@@ -159,9 +159,20 @@ module OoxmlParser
           end
           p_element.xpath('w:r').each do |r_tag|
             character_style = DocxParagraphRun.parse_character(r_tag, character_style, char_number)
+            character_styles_array << character_style.copy
+            char_number += 1
           end
-          character_styles_array << character_style.copy
-          char_number += 1
+          p_element.xpath('w:fldSimple').each do |simple_field|
+            instruction = simple_field.attribute('instr').to_s
+            paragraph_style.page_numbering = true if instruction.include?('PAGE')
+            simple_field.xpath('w:r').each do |r_tag|
+              character_style = DocxParagraphRun.parse_character(r_tag, character_style.copy, char_number)
+              character_style.page_number = paragraph_style.page_numbering
+              character_style.instruction = instruction
+              character_styles_array << character_style.copy
+              char_number += 1
+            end
+          end
         elsif p_element.name == 'oMathPara'
           p_element.xpath('m:oMath').each do |o_math|
             character_styles_array << DocxFormula.parse(o_math)

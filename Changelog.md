@@ -9,6 +9,7 @@
 * Refactor parsing page margins of docx
 * Refactor parsing columns data of docx
 * Some minor RuboCop refactor
+* Add parsing `fldSimple` inside hyperlinks
 
 ## 0.1.0
 * Initial release of `ooxml_parser` gem

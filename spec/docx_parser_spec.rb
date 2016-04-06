@@ -731,6 +731,11 @@ describe 'My behaviour' do
         expect(docx.element_by_description.first.page_numbering).to eq(false)
       end
 
+      it 'field_inside_hyperlink' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/fields/field_inside_hyperlink.docx')
+        expect(docx.elements.first.nonempty_runs.first.link.url).to eq('https://www.yandex.ru/')
+      end
+
       it 'text_inside_filed' do
         docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/fields/text_inside_field.docx')
         expect(docx.elements.first.nonempty_runs.first.text).to eq('www.ya.ru')
