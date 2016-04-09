@@ -10,6 +10,7 @@
 * Refactor parsing columns data of docx
 * Some minor RuboCop refactor
 * Add parsing `fldSimple` inside hyperlinks
+* Add support of `wp14:pctPosHOffset` and `wp14:pctPosVOffset`
 
 ## 0.1.0
 * Initial release of `ooxml_parser` gem
