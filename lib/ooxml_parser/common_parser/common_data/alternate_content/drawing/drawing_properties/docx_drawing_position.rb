@@ -23,7 +23,7 @@ module OoxmlParser
                                end
       drawing_position_node.xpath('*').each do |position_node_child|
         case position_node_child.name
-        when 'posOffset'
+        when 'posOffset', 'pctPosHOffset', 'pctPosVOffset'
           position.offset = (position_node_child.text.to_f / 360_000.0).round(3)
         when 'align'
           position.align = position_node_child.text.to_sym

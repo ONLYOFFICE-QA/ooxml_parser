@@ -723,6 +723,19 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'chart' do
+    describe 'chart' do
+      describe 'offset' do
+        it 'chart_offset_w14' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/chart/offset/chart_offset_w14.docx')
+          elements = docx.element_by_description(location: :canvas, type: :paragraph)
+          expect(elements.first.nonempty_runs.first.drawing.properties.horizontal_position.offset).to be_zero
+          expect(elements.first.nonempty_runs.first.drawing.properties.vertical_position.offset).to be_zero
+        end
+      end
+    end
+  end
+
   describe 'paragraph' do
     describe 'fields' do
       it 'instruction_type' do
