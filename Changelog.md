@@ -12,5 +12,8 @@
 * Add parsing `fldSimple` inside hyperlinks
 * Add support of `wp14:pctPosHOffset` and `wp14:pctPosVOffset`
 
+### Fixes
+* Fix parsing shape in paragraph run
+
 ## 0.1.0
 * Initial release of `ooxml_parser` gem
