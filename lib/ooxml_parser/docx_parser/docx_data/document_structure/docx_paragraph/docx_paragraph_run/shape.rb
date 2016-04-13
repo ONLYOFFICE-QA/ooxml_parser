@@ -1,3 +1,4 @@
+require_relative 'shape/shape_properties'
 module OoxmlParser
   class Shape < OOXMLDocumentObject
     attr_accessor :type, :properties, :elements
