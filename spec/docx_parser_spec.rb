@@ -737,6 +737,15 @@ describe 'My behaviour' do
   end
 
   describe 'paragraph' do
+    describe 'character' do
+      describe 'pict' do
+        it 'pict_in_character_run' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/pict/pict_in_character_run.docx')
+          expect(docx.elements.first.character_style_array[5].shape).not_to be_nil
+        end
+      end
+    end
+
     describe 'fields' do
       it 'instruction_type' do
         docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/fields/instruction_type.docx')

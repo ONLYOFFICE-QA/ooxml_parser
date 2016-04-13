@@ -1,3 +1,6 @@
+require_relative 'shape_properties/shape_margins'
+require_relative 'shape_properties/shape_size'
+require_relative 'shape_properties/stroke'
 module OoxmlParser
   class ShapeProperties
     attr_accessor :fill_color, :anchor_x, :anchor_y, :shadow, :margins, :size, :opacity, :position, :z_index, :stroke
