@@ -312,6 +312,8 @@ module OoxmlParser
           character_style.fld_char = r_node_child.attribute('fldCharType').value.to_sym
         when 't'
           character_style.text += r_node_child.text
+        when 'noBreakHyphen'
+          character_style.text += '–'
         when 'drawing'
           character_style.drawings << DocxDrawing.parse(r_node_child)
         when 'AlternateContent'

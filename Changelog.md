@@ -11,6 +11,7 @@
 * Some minor RuboCop refactor
 * Add parsing `fldSimple` inside hyperlinks
 * Add support of `wp14:pctPosHOffset` and `wp14:pctPosVOffset`
+* Add support of parsing `w:noBreakHyphen` in PargraphRun
 
 ### Fixes
 * Fix parsing shape in paragraph run

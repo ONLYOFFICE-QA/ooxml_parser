@@ -744,6 +744,13 @@ describe 'My behaviour' do
           expect(docx.elements.first.character_style_array[5].shape).not_to be_nil
         end
       end
+
+      describe 'text' do
+        it 'nonbreaking_hyphen' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/text/nonbreaking_hyphen.docx')
+          expect(docx.elements.first.character_style_array.first.text).to eq('Test–Text')
+        end
+      end
     end
 
     describe 'fields' do
