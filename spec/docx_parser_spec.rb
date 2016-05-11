@@ -720,6 +720,13 @@ describe 'My behaviour' do
           end
         end
       end
+
+      describe 'row' do
+        it 'table_row_height' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/row/table_row_height.docx')
+          expect(docx.elements[1].rows[1].table_row_properties.height).to eq(1000)
+        end
+      end
     end
   end
 
