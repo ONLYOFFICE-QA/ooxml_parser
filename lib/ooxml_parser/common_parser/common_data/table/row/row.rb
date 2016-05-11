@@ -1,7 +1,8 @@
 require_relative 'cell/cell'
+require_relative 'row/table_row_properties'
 module OoxmlParser
   class TableRow < OOXMLDocumentObject
-    attr_accessor :height, :cells, :cells_spacing
+    attr_accessor :height, :cells, :cells_spacing, :table_row_properties
 
     def initialize(cells = [])
       @cells = cells
@@ -12,6 +13,9 @@ module OoxmlParser
     def self.parse(row_node)
       row = TableRow.new
       row.height = (row_node.attribute('h').value.to_f / 360_000.0).round(2) unless row_node.attribute('h').nil?
+      row_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:trPr").each do |table_prop_node|
+        row.table_row_properties = TableRowProperties.parse(table_prop_node)
+      end
       row_node.xpath('*').each do |row_node_child|
         row_node_child.xpath('*').each do |row_properties|
           case row_properties.name
