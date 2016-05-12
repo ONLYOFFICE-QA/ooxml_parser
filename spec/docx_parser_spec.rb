@@ -757,6 +757,11 @@ describe 'My behaviour' do
           docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/text/nonbreaking_hyphen.docx')
           expect(docx.elements.first.character_style_array.first.text).to eq('Test–Text')
         end
+
+        it 'tab_inside_run' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/text/tab_inside_run.docx')
+          expect(docx.elements[1].character_style_array.first.text).to eq("Run\t\StopRun")
+        end
       end
     end
 
