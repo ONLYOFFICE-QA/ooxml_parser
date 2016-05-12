@@ -11,7 +11,7 @@
 * Some minor RuboCop refactor
 * Add parsing `fldSimple` inside hyperlinks
 * Add support of `wp14:pctPosHOffset` and `wp14:pctPosVOffset`
-* Add support of parsing `w:noBreakHyphen` in PargraphRun
+* Add support of parsing `w:noBreakHyphen`, `w:tab` in PargraphRun
 * Add support of Table Row Properties - Height
 
 ### Fixes

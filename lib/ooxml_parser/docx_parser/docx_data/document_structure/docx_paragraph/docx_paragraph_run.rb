@@ -314,6 +314,8 @@ module OoxmlParser
           character_style.text += r_node_child.text
         when 'noBreakHyphen'
           character_style.text += '–'
+        when 'tab'
+          character_style.text += "\t"
         when 'drawing'
           character_style.drawings << DocxDrawing.parse(r_node_child)
         when 'AlternateContent'
