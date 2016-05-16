@@ -13,6 +13,7 @@
 * Add support of `wp14:pctPosHOffset` and `wp14:pctPosVOffset`
 * Add support of parsing `w:noBreakHyphen`, `w:tab` in PargraphRun
 * Add support of Table Row Properties - Height
+* Add variable to store original file path in all parsers
 
 ### Fixes
 * Fix parsing shape in paragraph run

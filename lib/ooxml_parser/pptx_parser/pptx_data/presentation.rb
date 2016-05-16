@@ -3,7 +3,7 @@ require_relative 'presentation/presentation_theme'
 require_relative 'presentation/slide'
 require_relative 'presentation/slide_size'
 module OoxmlParser
-  class Presentation < OOXMLDocumentObject
+  class Presentation < CommonDocumentStructure
     attr_accessor :slides, :theme, :slide_size, :comments
 
     def initialize(slides = [], theme = nil, comments = [])
