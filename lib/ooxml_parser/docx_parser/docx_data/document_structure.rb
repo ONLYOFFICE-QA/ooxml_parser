@@ -5,7 +5,7 @@ require_relative 'document_structure/document_properties'
 require_relative 'document_structure/document_style'
 require_relative 'document_structure/page_properties/page_properties'
 module OoxmlParser
-  class DocumentStructure < OOXMLDocumentObject
+  class DocumentStructure < CommonDocumentStructure
     attr_accessor :elements, :page_properties, :notes, :background, :document_properties, :comments
 
     # @return [Array, DocumentStyle] array of document styles in current document

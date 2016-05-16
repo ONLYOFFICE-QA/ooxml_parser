@@ -1,7 +1,7 @@
 require_relative 'workbook/worksheet'
 # Class for storing XLSX Workbook
 module OoxmlParser
-  class XLSXWorkbook < OOXMLDocumentObject
+  class XLSXWorkbook < CommonDocumentStructure
     attr_accessor :worksheets
 
     def initialize(worksheets = [])

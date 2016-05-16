@@ -7,6 +7,7 @@ module OoxmlParser
       OOXMLDocumentObject.unzip_file(path_to_zip_file, path_to_zip_file.sub(File.basename(path_to_zip_file), ''))
       OOXMLDocumentObject.path_to_folder = path_to_zip_file.sub(File.basename(path_to_zip_file), '')
       pptx_model = Presentation.parse(OOXMLDocumentObject.path_to_folder)
+      pptx_model.file_path = path_to_file
       FileUtils.remove_dir(OOXMLDocumentObject.path_to_folder)
       pptx_model
     end
