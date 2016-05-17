@@ -1,6 +1,9 @@
 # Change log
 
 ## master (unreleased)
+
+## 0.1.1 (2016-05-17)
+
 ### New features
 * Add ability to configure units of measurements
 * Add support of `line_3d`, `bar3DChart`, `pie3DChart` charts
