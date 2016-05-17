@@ -4,7 +4,7 @@ _ooxml_parser_ is a Ooxml files (docx, xlsx, pptx) parser written in Ruby.
 
 ## Installation
 
-    $ gem install parser
+    $ gem install ooxml_parser
     
 ## Usage
 
