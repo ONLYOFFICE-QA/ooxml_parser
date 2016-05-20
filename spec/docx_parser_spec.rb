@@ -669,6 +669,14 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'compare' do
+    it 'Compare two similar docx' do
+      docx1 = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/compare/first_file_compare.docx')
+      docx2 = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/compare/second_file_compare.docx')
+      expect(docx1).to eq(docx2)
+    end
+  end
+
   describe 'document properties' do
     it 'Page Count' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/document_properties/page_count.docx')

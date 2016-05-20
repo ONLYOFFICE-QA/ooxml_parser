@@ -21,6 +21,15 @@ module OoxmlParser
       @document_styles = []
     end
 
+    def ==(other)
+      @elements == other.elements &&
+        @page_properties == other.page_properties &&
+        @notes == other.notes &&
+        @background == other.background &&
+        @document_properties == other.document_properties &&
+        @comments == other.comments
+    end
+
     def difference(other)
       Hash.object_to_hash(self).diff(Hash.object_to_hash(other))
     end

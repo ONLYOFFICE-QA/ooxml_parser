@@ -1,6 +1,8 @@
 # Change log
 
 ## master (unreleased)
+### New features
+* Correct `==` method for DocxStructure.
 
 ## 0.1.1 (2016-05-17)
 

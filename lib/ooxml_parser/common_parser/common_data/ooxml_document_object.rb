@@ -7,6 +7,15 @@ module OoxmlParser
   class OOXMLDocumentObject
     DEFAULT_DIRECTORY_FOR_MEDIA = '/tmp'.freeze
 
+    def ==(other)
+      instance_variables.each do |current_attribute|
+        unless instance_variable_get(current_attribute) == other.instance_variable_get(current_attribute)
+          return false
+        end
+      end
+      true
+    end
+
     class << self
       attr_accessor :namespace_prefix
       attr_accessor :root_subfolder

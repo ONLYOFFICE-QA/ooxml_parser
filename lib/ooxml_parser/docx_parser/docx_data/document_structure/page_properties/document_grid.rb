@@ -1,5 +1,5 @@
 module OoxmlParser
-  class DocumentGrid
+  class DocumentGrid < OOXMLDocumentObject
     attr_accessor :type, :line_pitch, :char_space
 
     def initialize(type = nil, line_pitch = nil, char_space = nil)
