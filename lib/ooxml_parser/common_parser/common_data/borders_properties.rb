@@ -44,7 +44,7 @@ module OoxmlParser
       border_properties = BordersProperties.new
       border_properties.val = node.attribute('val').value.to_sym
       border_properties.sz = node.attribute('sz').value.to_f / 8.0
-      border_properties.space = (node.attribute('space').value.to_f / 28.34).round(3)
+      border_properties.space = (node.attribute('space').value.to_f / 28.34).round(3) unless node.attribute('space').nil?
       border_properties.color = node.attribute('color').value
       unless node.attribute('shadow').nil?
         border_properties.shadow = node.attribute('shadow').value
