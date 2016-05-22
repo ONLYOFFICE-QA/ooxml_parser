@@ -58,6 +58,7 @@ module OoxmlParser
         end
         cell_properties_node.xpath('w:tcBorders').each do |tc_boders|
           tc_boders.xpath('w:top').each do |top|
+            next if top.attribute('val').value == 'nil'
             top_border = BordersProperties.new
             top_border.color = top.attribute('color').value
             if !top.attribute('color').nil? && top.attribute('color').value != 'auto'
@@ -69,6 +70,7 @@ module OoxmlParser
             cell_borders.top = top_border
           end
           tc_boders.xpath('w:right').each do |right|
+            next if right.attribute('val').value == 'nil'
             right_border = BordersProperties.new
             right_border.color = right.attribute('color').value
             if !right.attribute('color').nil? && right.attribute('color').value != 'auto'
@@ -80,6 +82,7 @@ module OoxmlParser
             cell_borders.right = right_border
           end
           tc_boders.xpath('w:left').each do |left|
+            next if left.attribute('val').value == 'nil'
             left_border = BordersProperties.new
             left_border.color = left.attribute('color').value
             if !left.attribute('color').nil? && left.attribute('color').value != 'auto'
@@ -91,6 +94,7 @@ module OoxmlParser
             cell_borders.left = left_border
           end
           tc_boders.xpath('w:bottom').each do |bottom|
+            next if bottom.attribute('val').value == 'nil'
             bottom_border = BordersProperties.new
             bottom_border.color = bottom.attribute('color').value
             if !bottom.attribute('color').nil? && bottom.attribute('color').value != 'auto'

@@ -6,6 +6,7 @@
 
 ### Fixes
 * Fix crash while parsing `page_borders`
+* Fix parsing nil borders
 
 ## 0.1.1 (2016-05-17)
 
