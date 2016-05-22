@@ -105,6 +105,7 @@ module OoxmlParser
             cell_borders.bottom = bottom_border
           end
           tc_boders.xpath('w:tl2br').each do |tl2br|
+            next if tl2br.attribute('val').value == 'nil'
             top_left_to_bottom_right = BordersProperties.new
             top_left_to_bottom_right.color = tl2br.attribute('color').value
             if !tl2br.attribute('color').nil? && tl2br.attribute('color').value != 'auto'
@@ -116,6 +117,7 @@ module OoxmlParser
             cell_borders.top_left_to_bottom_right = top_left_to_bottom_right
           end
           tc_boders.xpath('w:tr2bl').each do |tr2bl|
+            next if tr2bl.attribute('val').value == 'nil'
             top_right_to_bottom_left = BordersProperties.new
             top_right_to_bottom_left.color = tr2bl.attribute('color').value
             if !tr2bl.attribute('color').nil? && tr2bl.attribute('color').value != 'auto'
