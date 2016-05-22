@@ -8,6 +8,7 @@
 * Fix crash while parsing `page_borders`
 * Fix parsing nil borders
 * Fix parsing document background
+* Fix parsing TextBox lists in Shape
 
 ## 0.1.1 (2016-05-17)
 
