@@ -7,7 +7,7 @@
 ### Fixes
 * Fix crash while parsing `page_borders`
 * Fix parsing nil borders
-* Fix parsing document background
+* Fix parsing document background and background image
 * Fix parsing TextBox lists in Shape
 * Fix parsing OldDocxShape image path
 * Fix parsing table merge data

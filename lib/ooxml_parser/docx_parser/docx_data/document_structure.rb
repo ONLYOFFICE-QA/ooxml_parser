@@ -160,13 +160,9 @@ module OoxmlParser
                 doc_structure.background.color2 = Color.from_int16(fill.attribute('color2').value.split(' ').first.delete('#'))
                 doc_structure.background.type = fill.attribute('type').value
               elsif !fill.attribute('id').nil?
-                path_to_image = path + 'word/' + ParserDocxHelper.get_link_from_rels(fill.attribute('id').value, path)
-                image_name = File.basename(path_to_image)
-                doc_structure.background.image = path + File.basename(path) + '/' + image_name
-                unless File.exist?(doc_structure.background.image.sub(File.basename(doc_structure.background.image), ''))
-                  FileUtils.mkdir(doc_structure.background.image.sub(File.basename(doc_structure.background.image), ''))
-                end
-                FileUtils.cp path_to_image, doc_structure.background.image
+                path_to_media_file = OOXMLDocumentObject.get_link_from_rels(fill.attribute('id').value)
+                path_to_image = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{path_to_media_file.gsub('..', '')}")
+                doc_structure.background.image = path_to_image
                 doc_structure.background.type = 'image'
               end
             end
