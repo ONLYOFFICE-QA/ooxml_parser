@@ -695,9 +695,16 @@ describe 'My behaviour' do
       expect(docx.document_properties.pages).to eq(2)
     end
 
-    it 'Page Count' do
+    it 'Word Count' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/document_properties/word_count.docx')
       expect(docx.document_properties.words).to eq(1)
+    end
+
+    it 'no_app_xml_file' do
+      expect do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/document_properties/no_app_xml_file.docx')
+        expect(docx.document_properties.pages).to be_nil
+      end.to output(%r{no 'docProps\/app.xml'}).to_stderr
     end
   end
 
