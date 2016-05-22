@@ -4,6 +4,9 @@
 ### New features
 * Correct `==` method for DocxStructure.
 
+### Fixes
+* Fix crash while parsing `page_borders`
+
 ## 0.1.1 (2016-05-17)
 
 ### New features

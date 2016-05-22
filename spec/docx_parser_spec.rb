@@ -797,6 +797,13 @@ describe 'My behaviour' do
         expect(docx.element_by_description.first.character_style_array[1].page_number).to eq(true)
       end
 
+      describe 'page_borders' do
+        it 'page borders offset' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/page_borders/page_border_offset.docx')
+          expect(docx.page_properties.page_borders.offset_from).to eq(:page)
+        end
+      end
+
       describe 'page_margins' do
         it 'page margins parsing' do
           docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/page_properties/page_margins/page_margins.docx')

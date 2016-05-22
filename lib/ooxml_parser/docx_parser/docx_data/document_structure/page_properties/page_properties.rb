@@ -28,10 +28,10 @@ module OoxmlParser
       sect_pr.xpath('w:pgBorders').each do |pg_borders|
         page_borders = Borders.new
         unless pg_borders.attribute('display').nil?
-          page_borders.display = pg_borders.attribute('display').value
+          page_borders.display = pg_borders.attribute('display').value.to_sym
         end
         unless pg_borders.attribute('offsetFrom').nil?
-          page_borders.offset_from = pg_borders.attribute('offsetFrom').value
+          page_borders.offset_from = pg_borders.attribute('offsetFrom').value.to_sym
         end
         pg_borders.xpath('w:bottom').each do |bottom|
           page_borders.bottom = BordersProperties.parse(bottom)
@@ -45,7 +45,7 @@ module OoxmlParser
         pg_borders.xpath('w:right').each do |right|
           page_borders.bottom = BordersProperties.parse(right)
         end
-        page_properties.page_border = page_borders
+        page_properties.page_borders = page_borders
       end
       sect_pr.xpath('w:type').each do |type|
         page_properties.type = type.attribute('val').value
