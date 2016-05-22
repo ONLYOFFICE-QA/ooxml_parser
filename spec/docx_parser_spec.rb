@@ -719,6 +719,11 @@ describe 'My behaviour' do
 
       describe 'cell' do
         describe 'properties' do
+          it 'cell_properties_merge_restart' do
+            docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/properties/cell_properties_merge_restart.docx')
+            expect(docx.elements[556].rows.first.cells.first.properties.merge.value).to eq(:restart)
+          end
+
           it 'table_cell_text_no_rotation' do
             docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/properties/table_cell_text_no_rotation.docx')
             expect(docx.elements[1].rows.first.cells.first.properties.text_direction).to eq(:horizontal)

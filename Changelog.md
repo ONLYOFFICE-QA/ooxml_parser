@@ -10,6 +10,7 @@
 * Fix parsing document background
 * Fix parsing TextBox lists in Shape
 * Fix parsing OldDocxShape image path
+* Fix parsing table merge data
 
 ## 0.1.1 (2016-05-17)
 

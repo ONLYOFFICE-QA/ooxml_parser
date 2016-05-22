@@ -38,8 +38,7 @@ module OoxmlParser
       end
       if parse_w_namespace
         cell_properties_node.xpath('w:vMerge').each do |v_merge|
-          merge = v_merge.attribute('count_rows_in_span').nil? ? nil : v_merge.attribute('count_rows_in_span').value
-          cell_properties.merge = CellMerge.new('vertical', v_merge.attribute('val').value, merge)
+          cell_properties.merge = CellMerge.parse(v_merge)
         end
         cell_properties_node.xpath('w:vAlign').each do |valign_node|
           cell_properties.vertical_align = valign_node.attribute('val').value.to_sym
