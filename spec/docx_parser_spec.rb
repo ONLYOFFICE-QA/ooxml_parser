@@ -871,6 +871,13 @@ describe 'My behaviour' do
       end
     end
 
+    describe 'frame_properties' do
+      it 'anchor_lock' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/frame_properties/anchor_lock.docx')
+        expect(docx.document_styles[17].paragraph_properties.frame_properties.anchor_lock).to be_truthy
+      end
+    end
+
     describe 'indents' do
       it 'indents_round' do
         docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/indents/indents_round.docx')
