@@ -775,6 +775,12 @@ describe 'My behaviour' do
     describe 'character' do
       describe 'pict' do
         describe 'group' do
+          it 'old_docx_group_wrap_nil' do
+            docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/pict/group/old_docx_group_wrap_nil.docx')
+            expect(docx.elements.first.rows.first.cells.first.elements.first.character_style_array[2]
+                       .alternate_content.office2007_content.data.properties.wrap).to be_nil
+          end
+
           it 'old_docx_shape' do
             docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/pict/group/old_docx_shape.docx')
             expect(docx.elements[29].character_style_array.first.alternate_content.office2007_content.data.elements

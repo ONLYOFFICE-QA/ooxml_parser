@@ -19,7 +19,7 @@ module OoxmlParser
           element.object = OldDocxShape.parse(group_node_child)
           group.elements << element
         when 'wrap'
-          group.properties.wrap = group_node_child.attribute('type').value.to_sym if group_node_child.attribute('type').value
+          group.properties.wrap = group_node_child.attribute('type').value.to_sym unless group_node_child.attribute('type').nil?
         when 'group'
           element = parse(group_node_child)
           group.elements << element
