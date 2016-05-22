@@ -9,6 +9,7 @@
 * Fix parsing nil borders
 * Fix parsing document background
 * Fix parsing TextBox lists in Shape
+* Fix parsing OldDocxShape image path
 
 ## 0.1.1 (2016-05-17)
 
