@@ -20,7 +20,7 @@ module OoxmlParser
           blip.alpha_channel = (blip_node_child.attribute('amt').value.to_f / 1_000.0).round(0).to_f
         end
       end
-      blip.path_to_media_file = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{path_to_media_file.gsub('..', '')}")
+      blip.path_to_media_file = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{path_to_media_file.gsub('..', '')}") unless path_to_media_file == 'NULL'
       blip
     end
   end

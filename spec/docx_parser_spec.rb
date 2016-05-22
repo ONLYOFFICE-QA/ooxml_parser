@@ -807,6 +807,11 @@ describe 'My behaviour' do
           docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/pict/pict_in_character_run.docx')
           expect(docx.elements.first.character_style_array[5].shape).not_to be_nil
         end
+
+        it 'picture_target_null' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/pict/picture_target_null.docx')
+          expect(docx.elements[9].rows.first.cells.first.elements.first.character_style_array[1].drawings.first.graphic.data.path_to_image.path).to be_nil
+        end
       end
 
       describe 'text' do
