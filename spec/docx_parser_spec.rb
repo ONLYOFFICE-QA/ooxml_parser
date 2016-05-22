@@ -677,6 +677,13 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'document' do
+    it 'document_background' do
+      docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/document/document_background.docx')
+      expect(docx.background.color1).to eq(OoxmlParser::Color.new(255, 255, 255))
+    end
+  end
+
   describe 'document properties' do
     it 'Page Count' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/document_properties/page_count.docx')
