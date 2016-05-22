@@ -29,7 +29,7 @@ module OoxmlParser
         when 'yAlign'
           frame_properties.vertical_align = value.value.to_sym
         when 'anchorLock'
-          frame_properties.anchor_lock = OOXMLDocumentObject.option_enabled?(frame_pr_node, anchorLock)
+          frame_properties.anchor_lock = OOXMLDocumentObject.option_enabled?(frame_pr_node, 'anchorLock')
         when 'vSpace'
           frame_properties.vertical_space = (value.value.to_f / 566.9).round(2)
         when 'hSpace'
