@@ -780,6 +780,13 @@ describe 'My behaviour' do
   end
 
   describe 'paragraph' do
+    describe 'borders' do
+      it 'borders_space_nil' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/borders/borders_space_nil.docx')
+        expect(docx.document_styles[25].paragraph_properties.borders.bar.space).to eq(0)
+      end
+    end
+
     describe 'character' do
       describe 'pict' do
         describe 'group' do

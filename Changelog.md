@@ -13,6 +13,7 @@
 * Fix parsing table merge data
 * Fix parsing ParagraphRun footnote-endnote
 * Fix parsing `OldDocxGroup` `wrap` nil value
+* Fix parsing BorderProperties space is nil
 
 ## 0.1.1 (2016-05-17)
 
