@@ -12,6 +12,7 @@ module OoxmlParser
     def self.parse(blip_fill_node)
       blip = DocxBlip.new
       blip_node = blip_fill_node.xpath('a:blip', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main').first
+      return blip if blip_node.nil?
       path_to_media_file = OOXMLDocumentObject.get_link_from_rels(blip_node.attribute('embed').value)
       raise LoadError, "Cant find path to media file by id: #{blip_node.attribute('embed').value}" if path_to_media_file.empty?
       blip_node.xpath('*').each do |blip_node_child|
