@@ -3,6 +3,7 @@
 ## master (unreleased)
 ### New features
 * Correct `==` method for DocxStructure.
+* Correctly handle and warn if docx file do not contain `docProps/app.xml`
 
 ### Fixes
 * Fix crash while parsing `page_borders`
