@@ -734,6 +734,14 @@ describe 'My behaviour' do
           docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/row/table_row_height.docx')
           expect(docx.elements[1].rows[1].table_row_properties.height).to eq(1000)
         end
+
+        it 'border_color_nil' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/row/border_color_nil.docx')
+          expect(docx.elements.first.properties.table_borders.left).to be_nil
+          expect(docx.elements.first.properties.table_borders.right).to be_nil
+          expect(docx.elements.first.properties.table_borders.top).to be_nil
+          expect(docx.elements.first.properties.table_borders.bottom).to be_nil
+        end
       end
     end
   end
