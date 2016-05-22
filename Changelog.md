@@ -14,6 +14,7 @@
 * Fix parsing ParagraphRun footnote-endnote
 * Fix parsing `OldDocxGroup` `wrap` nil value
 * Fix parsing BorderProperties space is nil
+* Fix parsing relation target NULL
 
 ## 0.1.1 (2016-05-17)
 
