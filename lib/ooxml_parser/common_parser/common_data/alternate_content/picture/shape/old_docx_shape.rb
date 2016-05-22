@@ -12,7 +12,7 @@ module OoxmlParser
         when 'textbox'
           shape.text_box = TextBox.parse_list(shape_node_child)
         when 'imagedata'
-          path_to_image = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{get_link_from_rels(shape_node_child.attribute('id').value, OOXMLDocumentObject.path_to_folder)}")
+          path_to_image = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{get_link_from_rels(shape_node_child.attribute('id').value)}")
           shape.image = path_to_image
         when 'fill'
           shape.fill = OldDocxShapeFill.parse(shape_node_child)
