@@ -8,10 +8,14 @@ module OoxmlParser
       @value = value
     end
 
-    def self.parse_merge_hash(hash)
+    # Parse Merge data
+    # @param [Nokogiri::XML:Element] node with Merge data
+    # @return [CellMerge] value of CellMerge
+    def self.parse(node)
       merge = CellMerge.new
-      merge.type = hash['type']
-      merge.count_of_merged_cells = hash['count_of_merged_cells']
+      merge.count_of_merged_cells = node.attribute('count_rows_in_span').nil? ? nil : node.attribute('count_rows_in_span').value
+      merge.value = node.attribute('val').nil? ? nil : node.attribute('val').value.to_sym
+      merge.type = node.attribute('type').nil? ? nil : node.attribute('type').value.to_sym
       merge
     end
   end
