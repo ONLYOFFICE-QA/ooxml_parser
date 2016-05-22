@@ -968,6 +968,15 @@ describe 'My behaviour' do
         expect(docx.elements.first.character_style_array[0].link.tooltip).to eq('go to www.yandex.ru')
       end
     end
+
+    describe 'shape' do
+      describe 'text_box' do
+        it 'text_box_list' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/shape/text_box/text_box_list.docx')
+          expect(docx.elements[160].character_style_array.first.shape.elements.first.character_style_array.first.text).to include('Guidelines')
+        end
+      end
+    end
   end
 
   describe 'page_properties' do

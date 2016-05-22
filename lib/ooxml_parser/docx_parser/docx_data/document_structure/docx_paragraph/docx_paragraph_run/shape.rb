@@ -33,7 +33,7 @@ module OoxmlParser
       shape.properties.fill_color = Color.from_int16(shape_node.attribute('fillcolor').value.to_s.sub('#', '').split(' ').first) unless shape_node.attribute('fillcolor').nil?
       shape.properties.stroke.weight = shape_node.attribute('strokeweight').value unless shape_node.attribute('strokeweight').nil?
       shape.properties.stroke.color = Color.from_int16(shape_node.attribute('strokecolor').value.to_s.sub('#', '').split(' ').first) unless shape_node.attribute('strokecolor').nil?
-      shape.elements = TextBox.parse_list(shape_node.xpath('v:textbox').first, path) unless shape_node.xpath('v:textbox').first.nil?
+      shape.elements = TextBox.parse_list(shape_node.xpath('v:textbox').first) unless shape_node.xpath('v:textbox').first.nil?
       shape
     end
   end
