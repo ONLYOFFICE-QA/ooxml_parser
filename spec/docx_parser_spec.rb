@@ -824,6 +824,11 @@ describe 'My behaviour' do
           docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/pict/picture_target_null.docx')
           expect(docx.elements[9].rows.first.cells.first.elements.first.character_style_array[1].drawings.first.graphic.data.path_to_image.path).to be_nil
         end
+
+        it 'picture_target_no_blip_internals' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/character/pict/picture_target_no_blip_internals.docx')
+          expect(docx.elements[13].character_style_array[1].alternate_content.office2010_content.graphic.data.elements[1].object.path_to_image.path).to be_nil
+        end
       end
 
       describe 'text' do
