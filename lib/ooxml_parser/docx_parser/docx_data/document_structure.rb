@@ -1,6 +1,7 @@
 # noinspection RubyInstanceMethodNamingConvention
 require_relative 'document_structure/comment'
 require_relative 'document_structure/docx_paragraph'
+require_relative 'document_structure/document_background'
 require_relative 'document_structure/document_properties'
 require_relative 'document_structure/document_style'
 require_relative 'document_structure/page_properties/page_properties'
