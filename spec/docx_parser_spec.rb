@@ -745,6 +745,11 @@ describe 'My behaviour' do
             expect(docx.elements[556].rows.first.cells.first.properties.merge.value).to eq(:restart)
           end
 
+          it 'shade_nil' do
+            docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/properties/shade_nil.docx')
+            expect(docx.elements.first.rows.first.cells.first.properties.shd).to eq(:none)
+          end
+
           it 'table_cell_text_no_rotation' do
             docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/properties/table_cell_text_no_rotation.docx')
             expect(docx.elements[1].rows.first.cells.first.properties.text_direction).to eq(:horizontal)
