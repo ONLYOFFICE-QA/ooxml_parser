@@ -15,6 +15,7 @@
 * Fix parsing ParagraphRun footnote-endnote
 * Fix parsing `OldDocxGroup` `wrap` nil value
 * Fix parsing BorderProperties space is nil
+* Fix parsing default cell properties - space, color and shade
 * Fix parsing relation target NULL
 * Fix parsing `anchor_lock` in frame properties
 * Fix parsing DocxBlip without properties
