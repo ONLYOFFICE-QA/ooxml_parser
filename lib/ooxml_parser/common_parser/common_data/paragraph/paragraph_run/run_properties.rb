@@ -55,7 +55,7 @@ module OoxmlParser
         when 'i'
           character_properties.font_style.italic = OOXMLDocumentObject.option_enabled?(properties_element, 'i')
         when 'u'
-          character_properties.font_style.underlined = Underline.parse(properties_element.attribute('val').value)
+          character_properties.font_style.underlined = Underline.new(:single)
         when 'vertAlign'
           character_properties.vertical_align = properties_element.attribute('val').value.to_sym
         when 'rFont'
