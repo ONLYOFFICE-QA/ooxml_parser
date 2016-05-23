@@ -328,6 +328,19 @@ describe 'My behaviour' do
     expect(xlsx.worksheets[0].drawings.first.shape.text_body.properties.preset_text_warp.preset).to eq(:textCircle)
   end
 
+  describe 'drawing' do
+    describe 'shape' do
+      describe 'text_body' do
+        describe 'paragraph' do
+          it 'text_field.xlsx' do
+            xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/drawing/shape/text_body/paragarph/text_field.xlsx')
+            expect(xlsx.worksheets[0].drawings.first.grouping.shapes.first.text_body.paragraphs.first.text_field).to be_a(OoxmlParser::TextField)
+          end
+        end
+      end
+    end
+  end
+
   describe 'CellStyle' do
     it 'CellTextNotStartWithQuote' do
       xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/CellStyle/CellTextNotStartWithQuote.xlsx')

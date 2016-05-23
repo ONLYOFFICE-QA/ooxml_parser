@@ -1,5 +1,6 @@
 require_relative 'paragraph/paragraph_properties'
 require_relative 'paragraph/paragraph_run'
+require_relative 'paragraph/text_field'
 module OoxmlParser
   class Paragraph
     attr_accessor :properties, :runs, :text_field, :formulas

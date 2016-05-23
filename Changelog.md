@@ -24,6 +24,7 @@
 
 #### `XlsxPareser`
 * Fix parsing default underline style for cell
+* Fix parsing TextField in Paragraph
 
 ## 0.1.1 (2016-05-17)
 
