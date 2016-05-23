@@ -332,6 +332,17 @@ describe 'My behaviour' do
     describe 'shape' do
       describe 'text_body' do
         describe 'paragraph' do
+          describe 'run' do
+            describe 'properties' do
+              describe 'color' do
+                it 'linear_gradient_no_scaled' do
+                  xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/drawing/shape/text_body/paragarph/run/properties/color/linear_gradient_no_scaled.xlsx')
+                  expect(xlsx.worksheets[1].drawings[34].shape.text_body.paragraphs.first.runs.first.properties.font_color.color.path.scaled).to be_nil
+                end
+              end
+            end
+          end
+
           it 'text_field.xlsx' do
             xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/drawing/shape/text_body/paragarph/text_field.xlsx')
             expect(xlsx.worksheets[0].drawings.first.grouping.shapes.first.text_body.paragraphs.first.text_field).to be_a(OoxmlParser::TextField)

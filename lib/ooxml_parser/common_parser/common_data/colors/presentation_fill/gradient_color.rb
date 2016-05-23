@@ -25,8 +25,7 @@ module OoxmlParser
         when 'path'
           gradient_color.path = gradient_fill_node_child.attribute('path').value.to_sym
         when 'lin'
-          gradient_color.path = LinearGradient.new(gradient_fill_node_child.attribute('ang').value.to_f / 100_000.0,
-                                                   gradient_fill_node_child.attribute('scaled').value.to_i)
+          gradient_color.path = LinearGradient.parse(gradient_fill_node_child)
         end
       end
       gradient_color
