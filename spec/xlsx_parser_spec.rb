@@ -341,6 +341,11 @@ describe 'My behaviour' do
       expect(xlsx.worksheets[0].rows[0].cells[0].raw_text).to eq('abc')
     end
 
+    it 'underline_single' do
+      xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/CellStyle/underline_single.xlsx')
+      expect(xlsx.worksheets[0].rows[1].cells[31].style.font.font_style.underlined).to eq(OoxmlParser::Underline.new(:single))
+    end
+
     describe 'fill' do
       it 'cell_style_fill_color_0.5' do
         xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/CellStyle/fill/cell_style_fill_color_tint_0.5.xlsx')

@@ -6,6 +6,7 @@
 * Correctly handle and warn if docx file do not contain `docProps/app.xml`
 
 ### Fixes
+#### `DocxParser`
 * Fix crash while parsing `page_borders`
 * Fix parsing nil borders
 * Fix parsing document background and background image
@@ -20,6 +21,9 @@
 * Fix parsing `anchor_lock` in frame properties
 * Fix parsing DocxBlip without properties
 * Fix parsing Default Styles for Table
+
+#### `XlsxPareser`
+* Fix parsing default underline style for cell
 
 ## 0.1.1 (2016-05-17)
 

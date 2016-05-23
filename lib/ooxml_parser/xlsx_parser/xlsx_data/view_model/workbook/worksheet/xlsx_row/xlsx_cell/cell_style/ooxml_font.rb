@@ -25,9 +25,7 @@ module OoxmlParser
         when 'strike'
           font.font_style.strike = :single
         when 'u'
-          unless font_style_node_child.attribute('val').value == 'none' && font_style_node_child
-            font.font_style.underlined = Underline.new((font_style_node_child.attribute('val').value || :single).to_sym)
-          end
+          font.font_style.underlined = Underline.new(:single)
         when 'color'
           font.color = Color.parse_color_tag(font_style_node_child)
         end
