@@ -222,10 +222,10 @@ module OoxmlParser
           @default_table_properties = TableProperties.parse(table_pr_tag)
         end
         style.xpath('w:pPr').each do |table_paragraph_pr_tag|
-          DocxParagraph.parse_paragraph_style(table_paragraph_pr_tag, @default_table_paragraph, @default_table_character)
+          DocxParagraph.parse_paragraph_style(table_paragraph_pr_tag, DocumentStructure.default_table_paragraph_style, DocumentStructure.default_table_run_style)
         end
         style.xpath('w:rPr').each do |table_character_pr_tag|
-          DocxParagraphRun.parse(table_character_pr_tag, @default_table_character, @default_character)
+          DocxParagraphRun.parse(table_character_pr_tag, DocumentStructure.default_table_run_style, @default_character)
         end
       end
     end

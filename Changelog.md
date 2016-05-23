@@ -18,6 +18,7 @@
 * Fix parsing relation target NULL
 * Fix parsing `anchor_lock` in frame properties
 * Fix parsing DocxBlip without properties
+* Fix parsing Default Styles for Table
 
 ## 0.1.1 (2016-05-17)
 

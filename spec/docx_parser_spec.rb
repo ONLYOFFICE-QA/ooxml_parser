@@ -730,6 +730,15 @@ describe 'My behaviour' do
       end
 
       describe 'cell' do
+        describe 'paragraph' do
+          describe 'run' do
+            it 'table_with_default_table_run_style' do
+              docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/paragraph/run/table_with_default_table_run_style.docx')
+              expect(docx.elements.first.rows.first.cells.first.elements.first).not_to be_nil
+            end
+          end
+        end
+
         describe 'properties' do
           it 'cell_properties_merge_restart' do
             docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/cell/properties/cell_properties_merge_restart.docx')
