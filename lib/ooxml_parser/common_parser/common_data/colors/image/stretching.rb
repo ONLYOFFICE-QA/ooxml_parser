@@ -1,3 +1,4 @@
+require_relative 'stretching/fill_rectangle'
 module OoxmlParser
   class Stretching
     attr_accessor :fill_rectangle

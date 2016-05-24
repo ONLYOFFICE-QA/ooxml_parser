@@ -451,6 +451,19 @@ describe 'My behaviour' do
   end
 
   describe 'slide' do
+    describe 'background' do
+      describe 'fill' do
+        describe 'image' do
+          describe 'stretching' do
+            it 'fill_rectangle_strectching' do
+              pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/slide/background/fill/image/stretching/fill_rectangle_strectching.pptx')
+              expect(pptx.slides.first.background.fill.image.stretch.fill_rectangle).to be_a(OoxmlParser::FillRectangle)
+            end
+          end
+        end
+      end
+    end
+
     describe 'timing' do
       describe 'time_node' do
         describe 'condition' do
