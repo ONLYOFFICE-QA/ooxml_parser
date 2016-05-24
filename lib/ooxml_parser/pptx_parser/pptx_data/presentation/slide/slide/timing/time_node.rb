@@ -1,4 +1,6 @@
 require_relative 'time_node/common_timing'
+require_relative 'animation_effect/animation_effect'
+require_relative 'set_time_node/set_time_node'
 module OoxmlParser
   class TimeNode
     attr_accessor :type, :common_time_node, :previous_conditions_list, :next_conditions_list
