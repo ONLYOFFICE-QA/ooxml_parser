@@ -66,6 +66,14 @@ describe 'My behaviour' do
         drawing = xlsx.worksheets[0].drawings[0]
         expect(drawing.picture.chart.legend.position_with_overlay).to eq(:right)
       end
+
+      describe 'properties' do
+        it 'empty_num_ref' do
+          xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/Chart/properties/empty_num_ref.xlsx')
+          drawing = xlsx.worksheets[0].drawings[0]
+          expect(drawing.picture.chart.data.first.points.length).to eq(10)
+        end
+      end
     end
 
     describe 'Labels' do
