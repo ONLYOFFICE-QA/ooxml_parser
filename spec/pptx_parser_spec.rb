@@ -413,6 +413,11 @@ describe 'My behaviour' do
             pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/properties/transition_direction_nil_2.pptx')
             expect(pptx.slides[1].transition.properties.direction).to be_nil
           end
+
+          it 'transition_no_orientation' do
+            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/properties/transition_no_orientation.pptx')
+            expect(pptx.slides.first.transition.properties.orientation).to be_nil
+          end
         end
 
         describe 'run' do

@@ -31,7 +31,7 @@
 
 #### `PptxParser`
 * Fix parsing Condition event and delay nil values
-* Fix parsing Transition Direction nil
+* Fix parsing Transition Direction, Orientation nil
 * Fix parsing Sound transaction
 
 ## 0.1.1 (2016-05-17)
