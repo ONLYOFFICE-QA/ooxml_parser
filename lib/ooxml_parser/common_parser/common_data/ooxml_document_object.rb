@@ -23,6 +23,20 @@ module OoxmlParser
       attr_accessor :xmls_stack
       attr_accessor :path_to_folder
 
+      # @param path_to_file [String] file
+      # @return [True, False] Check if file is protected by password on open
+      def encrypted_file?(path_to_file)
+        file_result = `file #{path_to_file}`
+        # Support of Encrtypted status in `file` util was introduced in file v5.20
+        # but LTS version of ubuntu before 16.04 uses older `file` and it return `Composite Document`
+        # https://github.com/file/file/blob/master/ChangeLog#L217
+        if file_result.include?('Encrypted') || file_result.include?('Composite Document File V2 Document, No summary info')
+          warn("File #{path_to_file} is encrypted. Can't parse it")
+          return true
+        end
+        false
+      end
+
       def copy_file_and_rename_to_zip(path)
         file_name = File.basename(path)
         tmp_folder = "/tmp/office_open_xml_parser_#{SecureRandom.uuid}"
