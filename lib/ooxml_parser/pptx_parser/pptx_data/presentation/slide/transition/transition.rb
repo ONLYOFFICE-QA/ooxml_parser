@@ -19,7 +19,7 @@ module OoxmlParser
           transition.properties.through_black = OOXMLDocumentObject.option_enabled?(transition_node_child, 'thruBlk')
         when 'split'
           transition.properties.direction = Alignment.parse(transition_node_child.attribute('dir')) if transition_node_child.attribute('dir')
-          transition.properties.orientation = transition_node_child.attribute('orient').value.to_sym if transition_node_child.attribute('orient').value
+          transition.properties.orientation = transition_node_child.attribute('orient').value.to_sym if transition_node_child.attribute('orient')
         when 'wheel', 'wheelReverse'
           transition.properties.spokes = OOXMLDocumentObject.option_enabled?(transition_node_child, 'spokes')
         when 'sndAc'
