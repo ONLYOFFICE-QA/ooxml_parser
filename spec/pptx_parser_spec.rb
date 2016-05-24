@@ -399,6 +399,11 @@ describe 'My behaviour' do
     describe 'text' do
       describe 'paragraph' do
         describe 'properties' do
+          it 'tranistion_sound_action' do
+            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/properties/tranistion_sound_action.pptx')
+            expect(File.exist?(pptx.slides.first.transition.sound_action.start_sound.path)).to be_truthy
+          end
+
           it 'transition_direction_nil_1' do
             pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/properties/transition_direction_nil_1.pptx')
             expect(pptx.slides.first.transition.properties.direction).to be_nil

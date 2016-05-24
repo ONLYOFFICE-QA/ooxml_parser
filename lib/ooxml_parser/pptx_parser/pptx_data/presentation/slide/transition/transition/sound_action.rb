@@ -1,3 +1,4 @@
+require_relative 'sound_action/sound'
 module OoxmlParser
   class SoundAction
     attr_accessor :start_sound, :end_sound
