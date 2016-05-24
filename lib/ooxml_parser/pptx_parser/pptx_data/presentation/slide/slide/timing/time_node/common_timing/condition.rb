@@ -10,8 +10,8 @@ module OoxmlParser
 
     def self.parse(condition_node)
       condition = Condition.new
-      condition.event = condition_node.attribute('evt').value
-      condition.delay = condition_node.attribute('delay').value
+      condition.event = condition_node.attribute('evt').value if condition_node.attribute('evt')
+      condition.delay = condition_node.attribute('delay').value if condition_node.attribute('delay')
       condition
     end
 

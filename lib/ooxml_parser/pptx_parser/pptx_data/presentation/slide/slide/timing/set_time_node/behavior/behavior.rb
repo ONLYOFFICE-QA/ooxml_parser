@@ -1,3 +1,4 @@
+require_relative 'target_element'
 module OoxmlParser
   class Behavior
     attr_accessor :common_time_node, :attribute_name_list, :target

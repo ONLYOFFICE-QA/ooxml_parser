@@ -1,3 +1,5 @@
+require_relative 'behavior/behavior'
+
 module OoxmlParser
   class SetTimeNode
     attr_accessor :behavior, :to

@@ -427,4 +427,18 @@ describe 'My behaviour' do
       end
     end
   end
+
+  describe 'slide' do
+    describe 'timing' do
+      describe 'time_node' do
+        describe 'condition' do
+          it 'condition_no_event' do
+            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/slide/timing/time_node/condition/condition_no_event.pptx')
+            expect(pptx.slides[1].timing.time_node_list.first.common_time_node.children.first
+                       .common_time_node.children.first.common_time_node.children.first.common_time_node.start_conditions.first.event).to be_nil
+          end
+        end
+      end
+    end
+  end
 end

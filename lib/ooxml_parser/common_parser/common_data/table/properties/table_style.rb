@@ -27,6 +27,7 @@ module OoxmlParser
       table_style = TableStyle.new
       if !style_id.nil?
         nodes = get_style_node(style_id)
+        return nil if nodes.nil?
         xpath = '*'
         attributes = 'style_node_child.name'
       elsif !table_style_node.nil?

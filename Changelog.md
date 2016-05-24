@@ -24,10 +24,13 @@
 * Fix parsing DocxBlip without properties
 * Fix parsing Default Styles for Table
 
-#### `XlsxPareser`
+#### `XlsxParser`
 * Fix parsing default underline style for cell
 * Fix parsing TextField in Paragraph
 * Fix parsing Chart data if there is no `numRef`
+
+#### `PptxParser`
+* Fix parsing Condition event and delay nil values
 
 ## 0.1.1 (2016-05-17)
 
