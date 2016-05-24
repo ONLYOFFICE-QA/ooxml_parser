@@ -37,7 +37,7 @@ module OoxmlParser
           paragraph_properties.numbering.symbol = properties_element.attribute('char').value
         when 'buAutoNum'
           paragraph_properties.numbering.type = properties_element.attribute('type').value.to_sym
-          paragraph_properties.numbering.start_at = properties_element.attribute('startAt').value
+          paragraph_properties.numbering.start_at = properties_element.attribute('startAt').value if properties_element.attribute('startAt')
         when 'tabLst'
           paragraph_properties.tabs = ParagraphTab.parse(properties_element)
         end
