@@ -31,9 +31,10 @@ module OoxmlParser
           when :point, :bubble
             val = chart_props_node_child.xpath('c:yVal')[0]
           else
-            val = nil
+            next
           end
-          @data << ChartCellsRange.parse(val.xpath('c:numRef').first).dup unless val.nil?
+          next if val.xpath('c:numRef').empty?
+          @data << ChartCellsRange.parse(val.xpath('c:numRef').first).dup
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.parse(chart_props_node_child)
         end

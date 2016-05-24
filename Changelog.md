@@ -26,6 +26,7 @@
 #### `XlsxPareser`
 * Fix parsing default underline style for cell
 * Fix parsing TextField in Paragraph
+* Fix parsing Chart data if there is no `numRef`
 
 ## 0.1.1 (2016-05-17)
 
