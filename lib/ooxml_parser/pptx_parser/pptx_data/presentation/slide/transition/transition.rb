@@ -13,7 +13,7 @@ module OoxmlParser
         transition.properties.type = transition_node_child.name.to_sym
         case transition_node_child.name
         when 'blinds', 'checker', 'comb', 'cover', 'pull', 'push', 'randomBar', 'strips', 'wipe', 'zoom', 'warp'
-          transition.properties.direction = Alignment.parse(transition_node_child.attribute('dir'))
+          transition.properties.direction = Alignment.parse(transition_node_child.attribute('dir')) if transition_node_child.attribute('dir')
         when 'cut', 'fade'
           transition.properties.through_black = OOXMLDocumentObject.option_enabled?(transition_node_child, 'thruBlk')
         when 'split'

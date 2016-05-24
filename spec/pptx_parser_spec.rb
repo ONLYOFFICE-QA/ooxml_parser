@@ -398,6 +398,13 @@ describe 'My behaviour' do
   describe 'shape' do
     describe 'text' do
       describe 'paragraph' do
+        describe 'properties' do
+          it 'transition_direction_nil' do
+            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/properties/transition_direction_nil.pptx')
+            expect(pptx.slides.first.transition.properties.direction).to be_nil
+          end
+        end
+
         describe 'run' do
           it 'strikeout.pptx' do
             pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/run/strikeout.pptx')
