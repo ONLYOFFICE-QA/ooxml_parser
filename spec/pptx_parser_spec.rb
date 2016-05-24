@@ -399,9 +399,14 @@ describe 'My behaviour' do
     describe 'text' do
       describe 'paragraph' do
         describe 'properties' do
-          it 'transition_direction_nil' do
-            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/properties/transition_direction_nil.pptx')
+          it 'transition_direction_nil_1' do
+            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/properties/transition_direction_nil_1.pptx')
             expect(pptx.slides.first.transition.properties.direction).to be_nil
+          end
+
+          it 'transition_direction_nil_2' do
+            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/text/paragraph/properties/transition_direction_nil_2.pptx')
+            expect(pptx.slides[1].transition.properties.direction).to be_nil
           end
         end
 
