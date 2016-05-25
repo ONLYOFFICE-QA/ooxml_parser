@@ -10,7 +10,7 @@ module OoxmlParser
 
     def self.parse(row_node)
       row = XlsxRow.new
-      row.height = row_node.attribute('ht').value if OOXMLDocumentObject.option_enabled?(row_node, 'customHeight')
+      row.height = row_node.attribute('ht').value if OOXMLDocumentObject.option_enabled?(row_node, 'customHeight') && row_node.attribute('ht')
       row.hidden = OOXMLDocumentObject.option_enabled?(row_node, 'hidden')
       row_node.xpath('xmlns:c').each { |cell_node| row.cells[Coordinates.parse_coordinates_from_string(cell_node.attribute('r').value.to_s).get_column_number.to_i - 1] = XlsxCell.parse(cell_node) }
       row
