@@ -440,4 +440,15 @@ describe 'My behaviour' do
       expect(xlsx.theme.name).to be_empty
     end
   end
+
+  describe 'worksheet' do
+    describe 'workbook' do
+      describe 'row' do
+        it 'row_height_nil' do
+          xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/worksheet/workbook/row/row_height_nil.xlsx')
+          expect(xlsx.worksheets.first.rows.first.height).to be_nil
+        end
+      end
+    end
+  end
 end

@@ -31,6 +31,7 @@
 * Fix parsing Chart data if there is no `numRef`
 * Fix parsing non-defined font name in style
 * Fix parsing document theme without name
+* Fix parsing nil height of row
 
 #### `PptxParser`
 * Fix parsing Condition event and delay nil values
