@@ -474,6 +474,15 @@ describe 'My behaviour' do
 
     describe 'timing' do
       describe 'time_node' do
+        describe 'animation' do
+          it 'animation_no_transition' do
+            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/slide/timing/time_node/animation/animation_no_transition.pptx')
+            expect(pptx.slides[10].timing.time_node_list.first.common_time_node.children.first
+                       .common_time_node.children.first.common_time_node.children.first.common_time_node
+                       .children.first.common_time_node.children[1].transition).to be_nil
+          end
+        end
+
         describe 'condition' do
           it 'condition_no_event' do
             pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/slide/timing/time_node/condition/condition_no_event.pptx')

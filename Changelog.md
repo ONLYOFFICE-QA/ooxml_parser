@@ -35,6 +35,7 @@
 * Fix parsing Transition Direction, Orientation nil
 * Fix parsing Sound transaction
 * Fix parsing slide background fill rectangle stretching
+* Fix parsing animation effect without transition
 
 ## 0.1.1 (2016-05-17)
 
