@@ -26,7 +26,7 @@ module OoxmlParser
       # @param path_to_file [String] file
       # @return [True, False] Check if file is protected by password on open
       def encrypted_file?(path_to_file)
-        file_result = `file #{path_to_file}`
+        file_result = `file "#{path_to_file}"`
         # Support of Encrtypted status in `file` util was introduced in file v5.20
         # but LTS version of ubuntu before 16.04 uses older `file` and it return `Composite Document`
         # https://github.com/file/file/blob/master/ChangeLog#L217
