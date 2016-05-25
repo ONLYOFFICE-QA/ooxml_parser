@@ -3,6 +3,8 @@ require_relative 'workbook/worksheet'
 module OoxmlParser
   class XLSXWorkbook < CommonDocumentStructure
     attr_accessor :worksheets
+    # @return [PresentationTheme] theme of Workbook
+    attr_accessor :theme
 
     def initialize(worksheets = [])
       @worksheets = worksheets
@@ -71,7 +73,7 @@ module OoxmlParser
       OOXMLDocumentObject.add_to_xmls_stack('xl/workbook.xml')
       doc = Nokogiri::XML.parse(File.open(OOXMLDocumentObject.current_xml))
       XLSXWorkbook.styles_node = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml"))
-      PresentationTheme.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
+      workbook.theme = PresentationTheme.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
       doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
         workbook.worksheets << Worksheet.parse('xl/' + OOXMLDocumentObject.get_link_from_rels(sheet.attribute('id').value))
         workbook.worksheets.last.name = sheet.attribute('name').value

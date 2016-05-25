@@ -433,4 +433,11 @@ describe 'My behaviour' do
       expect(xlsx.all_formula_values.length).to eq(12)
     end
   end
+
+  describe 'theme' do
+    it 'theme_without_name' do
+      xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/theme/theme_without_name.xlsx')
+      expect(xlsx.theme.name).to be_empty
+    end
+  end
 end
