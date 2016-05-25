@@ -40,6 +40,7 @@
 * Fix parsing Sound transaction
 * Fix parsing slide background fill rectangle stretching
 * Fix parsing animation effect without transition
+* Fix parsing click highlight in links
 
 ## 0.1.1 (2016-05-17)
 

@@ -46,7 +46,12 @@ module OoxmlParser
           hyperlink.link_to = OOXMLDocumentObject.get_link_from_rels(on_click_hyperlink_node.attribute('id').value)
         end
       end
-      hyperlink.highlight_click = StringHelper.to_bool(on_click_hyperlink_node.attribute('highlightClick').value) unless on_click_hyperlink_node.attribute('highlightClick').nil?
+      return hyperlink unless on_click_hyperlink_node.attribute('highlightClick')
+      hyperlink.highlight_click = if on_click_hyperlink_node.attribute('highlightClick').value == '1'
+                                    true
+                                  else
+                                    false
+                                  end
       hyperlink
     end
   end
