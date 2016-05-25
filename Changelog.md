@@ -32,6 +32,7 @@
 * Fix parsing non-defined font name in style
 * Fix parsing document theme without name
 * Fix parsing nil height of row
+* Fix parsing fill color nil
 
 #### `PptxParser`
 * Fix parsing Condition event and delay nil values
