@@ -101,8 +101,13 @@ module OoxmlParser
       def copy_media_file(path_to_file)
         folder_to_save_media = '/tmp/media_from_' + File.basename(OOXMLDocumentObject.path_to_folder)
         path_to_copied_file = folder_to_save_media + '/' + File.basename(path_to_file)
+        full_path_to_file = OOXMLDocumentObject.path_to_folder + path_to_file
+        unless File.exist?(full_path_to_file)
+          warn "Couldn't find #{full_path_to_file} file on filesystem. Possible problem in original document"
+          return nil
+        end
         FileUtils.mkdir(folder_to_save_media) unless File.exist?(folder_to_save_media)
-        FileUtils.copy_file(OOXMLDocumentObject.path_to_folder + path_to_file, path_to_copied_file)
+        FileUtils.copy_file(full_path_to_file, path_to_copied_file)
         path_to_copied_file
       end
     end

@@ -6,6 +6,7 @@
 * Correctly handle and warn if docx file do not contain `docProps/app.xml`
 * Extract GradientColor parsing to Class
 * Correct warn if document is password protected
+* Correct warn if document links to lost image
 
 ### Fixes
 #### `DocxParser`
