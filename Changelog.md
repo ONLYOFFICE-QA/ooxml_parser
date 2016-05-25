@@ -30,6 +30,7 @@
 * Fix parsing TextField in Paragraph
 * Fix parsing Chart data if there is no `numRef`
 * Fix parsing non-defined font name in style
+* Fix parsing document theme without name
 
 #### `PptxParser`
 * Fix parsing Condition event and delay nil values
