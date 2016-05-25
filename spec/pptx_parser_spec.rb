@@ -396,6 +396,15 @@ describe 'My behaviour' do
   end
 
   describe 'shape' do
+    describe 'properties' do
+      describe 'hyperlink' do
+        it 'highlight_click' do
+          pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/shape/properties/hyperlink/highlight_click.pptx')
+          expect(pptx.slides[17].elements[3].non_visual_properties.common_properties.on_click_hyperlink.highlight_click).to be_truthy
+        end
+      end
+    end
+
     describe 'text' do
       describe 'paragraph' do
         describe 'properties' do
