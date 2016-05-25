@@ -13,7 +13,7 @@ module OoxmlParser
     def self.parse(style_number)
       font = OOXMLFont.new
       font_style_node = XLSXWorkbook.styles_node.xpath('//xmlns:font')[style_number.to_i]
-      font.name = font_style_node.xpath('xmlns:name').first.attribute('val').value
+      font.name = font_style_node.xpath('xmlns:name').first.attribute('val').value if font_style_node.xpath('xmlns:name').first
       font.size = font_style_node.xpath('xmlns:sz').first.attribute('val').value.to_i if font_style_node.xpath('xmlns:sz').first
       font.font_style = FontStyle.new
       font_style_node.xpath('*').each do |font_style_node_child|

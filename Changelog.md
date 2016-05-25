@@ -29,6 +29,7 @@
 * Fix parsing default underline style for cell
 * Fix parsing TextField in Paragraph
 * Fix parsing Chart data if there is no `numRef`
+* Fix parsing non-defined font name in style
 
 #### `PptxParser`
 * Fix parsing Condition event and delay nil values
