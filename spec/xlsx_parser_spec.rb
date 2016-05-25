@@ -403,6 +403,11 @@ describe 'My behaviour' do
         xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/CellStyle/fill/cell_style_fill_color_tint_0_theme_1.xlsx')
         expect(xlsx.worksheets.first.rows.first.cells.first.style.fill_color.color).to eq(OoxmlParser::Color.new(0, 0, 0))
       end
+
+      it 'fill_color_nil' do
+        xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/CellStyle/fill/fill_color_nil.xlsx')
+        expect(xlsx.worksheets.first.rows[10].cells[4].style.fill_color).to be_nil
+      end
     end
   end
 
