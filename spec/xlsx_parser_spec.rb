@@ -378,6 +378,11 @@ describe 'My behaviour' do
       expect(xlsx.worksheets[0].rows[1].cells[31].style.font.font_style.underlined).to eq(OoxmlParser::Underline.new(:single))
     end
 
+    it 'cell_style_no_font_name' do
+      xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/CellStyle/cell_style_no_font_name.xlsx')
+      expect(xlsx.worksheets.first.rows.first.cells.first.style.font.name).to eq('Calibri')
+    end
+
     describe 'fill' do
       it 'cell_style_fill_color_0.5' do
         xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/CellStyle/fill/cell_style_fill_color_tint_0.5.xlsx')
