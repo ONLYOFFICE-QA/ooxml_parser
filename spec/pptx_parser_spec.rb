@@ -464,6 +464,14 @@ describe 'My behaviour' do
       end
     end
 
+    describe 'picture' do
+      it 'picture_not_exist' do
+        expect do
+          OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/slide/picture/picture_not_exist.pptx')
+        end.to output(/Couldn't find.* file on filesystem. Possible problem in original document/).to_stderr
+      end
+    end
+
     describe 'timing' do
       describe 'time_node' do
         describe 'condition' do
