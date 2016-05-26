@@ -469,6 +469,11 @@ describe 'My behaviour' do
               expect(pptx.slides.first.background.fill.image.stretch.fill_rectangle).to be_a(OoxmlParser::FillRectangle)
             end
           end
+
+          it 'image_no_embedded' do
+            pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/slide/background/fill/image/image_no_embedded.pptx')
+            expect(pptx.slides[25].background.fill.image.path).to be_empty
+          end
         end
       end
     end

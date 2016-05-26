@@ -41,6 +41,7 @@
 * Fix parsing slide background fill rectangle stretching
 * Fix parsing animation effect without transition
 * Fix parsing click highlight in links
+* Fix parsing image fill without embeded image
 
 ## 0.1.1 (2016-05-17)
 

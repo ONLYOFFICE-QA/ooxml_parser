@@ -16,6 +16,7 @@ module OoxmlParser
       blip_fill_node.xpath('*').each do |blip_fill_node_child|
         case blip_fill_node_child.name
         when 'blip'
+          next unless blip_fill_node_child.attribute('embed')
           path_to_original_image = OOXMLDocumentObject.get_link_from_rels(blip_fill_node_child.attribute('embed').value)
           FileUtils.copy(dir + path_to_original_image, OOXMLDocumentObject.media_folder + File.basename(path_to_original_image))
           image.path = OOXMLDocumentObject.media_folder + File.basename(path_to_original_image)
