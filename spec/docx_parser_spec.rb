@@ -670,9 +670,15 @@ describe 'My behaviour' do
   end
 
   describe 'compare' do
-    it 'Compare two similar docx' do
-      docx1 = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/compare/first_file_compare.docx')
-      docx2 = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/compare/second_file_compare.docx')
+    it 'Compare two similar docx - set 1' do
+      docx1 = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/compare/set_1/first.docx')
+      docx2 = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/compare/set_1/second.docx')
+      expect(docx1).to eq(docx2)
+    end
+
+    it 'Compare two similar docx - set 2' do
+      docx1 = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/compare/set_2/first.docx')
+      docx2 = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/compare/set_2/second.docx')
       expect(docx1).to eq(docx2)
     end
   end

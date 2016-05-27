@@ -1,5 +1,5 @@
 module OoxmlParser
-  class TableGrid
+  class TableGrid < OOXMLDocumentObject
     attr_accessor :columns, :mass_of_width_cells
 
     def initialize(columns = [])

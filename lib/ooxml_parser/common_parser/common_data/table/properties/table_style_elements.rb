@@ -1,6 +1,6 @@
 # Table Style in XLSX
 module OoxmlParser
-  class TableStyleElement
+  class TableStyleElement < OOXMLDocumentObject
     attr_accessor :cell_properties
 
     def initialize
