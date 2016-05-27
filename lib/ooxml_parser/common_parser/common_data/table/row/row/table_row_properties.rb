@@ -1,6 +1,6 @@
 module OoxmlParser
   # Class for describing Table Row Properties
-  class TableRowProperties
+  class TableRowProperties < OOXMLDocumentObject
     # @return [Float] Table Row Height
     attr_accessor :height
 

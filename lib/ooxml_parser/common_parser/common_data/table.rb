@@ -4,7 +4,7 @@ require_relative 'table/table_grid'
 require_relative 'table/margins/table_margins'
 require_relative 'table/margins/paragraph_margins'
 module OoxmlParser
-  class Table
+  class Table < OOXMLDocumentObject
     attr_accessor :grid, :rows, :properties, :number
 
     def initialize(rows = [])
