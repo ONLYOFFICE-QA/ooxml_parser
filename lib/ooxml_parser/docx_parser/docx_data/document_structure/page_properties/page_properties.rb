@@ -68,17 +68,10 @@ module OoxmlParser
       sect_pr.xpath('w:cols').each do |columns_grid|
         page_properties.columns = Columns.parse(columns_grid)
       end
-      sect_pr.xpath('w:headerReference').each do |header_reference|
-        target = OOXMLDocumentObject.get_link_from_rels(header_reference.attribute('id').value)
+      sect_pr.xpath('w:headerReference', 'w:footerReference').each do |doc_edge_reference|
+        target = OOXMLDocumentObject.get_link_from_rels(doc_edge_reference.attribute('id').value)
         OOXMLDocumentObject.add_to_xmls_stack("word/#{target}")
-        note = Note.parse(default_paragraph, default_character, target, header_reference.attribute('type').value, File.basename(target).sub('.xml', ''))
-        page_properties.notes << note
-        OOXMLDocumentObject.xmls_stack.pop
-      end
-      sect_pr.xpath('w:footerReference').each do |footer_reference|
-        target = OOXMLDocumentObject.get_link_from_rels(footer_reference.attribute('id').value)
-        OOXMLDocumentObject.add_to_xmls_stack("word/#{target}")
-        note = Note.parse(default_paragraph, default_character, target, footer_reference.attribute('type').value, File.basename(target).sub('.xml', ''))
+        note = Note.parse(default_paragraph, default_character, target, doc_edge_reference.attribute('type').value, File.basename(target).sub('.xml', ''))
         page_properties.notes << note
         OOXMLDocumentObject.xmls_stack.pop
       end
