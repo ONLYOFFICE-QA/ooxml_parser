@@ -119,7 +119,7 @@ module OoxmlParser
       !document_style_by_name(name).nil?
     end
 
-    def self.parse(path = OOXMLDocumentObject.path_to_folder)
+    def self.parse
       OOXMLDocumentObject.root_subfolder = 'word/'
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.namespace_prefix = 'w'

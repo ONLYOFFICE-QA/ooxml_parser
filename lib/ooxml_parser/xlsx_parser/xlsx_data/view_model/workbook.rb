@@ -64,7 +64,7 @@ module OoxmlParser
       formulas
     end
 
-    def self.parse(path_to_folder = OOXMLDocumentObject.path_to_folder)
+    def self.parse
       workbook = XLSXWorkbook.new
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.root_subfolder = 'xl/'
