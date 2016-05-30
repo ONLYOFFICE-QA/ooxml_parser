@@ -17,7 +17,8 @@ module OoxmlParser
       end
       doc.xpath('p:cmAuthorLst/p:cmAuthor').each do |author_node|
         comment_authors[author_node.attribute('id').value] = PresentationCommentAuthor.new(
-          author_node.attribute('id').value, author_node.attribute('name').value, author_node.attribute('initials').value)
+          author_node.attribute('id').value, author_node.attribute('name').value, author_node.attribute('initials').value
+        )
       end
       comment_authors
     end

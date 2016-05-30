@@ -65,11 +65,3 @@ Style/EmptyCaseCondition:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/colors/hsl_color.rb'
     - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/docx_paragraph_run/shape.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: symmetrical, new_line, same_line
-Style/MultilineMethodCallBraceLayout:
-  Exclude:
-    - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/presentation_comment/presentation_comment_author.rb'
