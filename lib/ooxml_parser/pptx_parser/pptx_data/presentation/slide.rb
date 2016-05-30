@@ -20,20 +20,26 @@ module OoxmlParser
       @elements.select { |cur_element| cur_element.is_a?(GraphicFrame) }
     end
 
-    def content_horizontal_align(object, slide_size)
-      transform = nil
+    # Get transform property of object, by object type
+    # @param object [Symbol] type of object: :image, :chart, :table, :shape
+    # @return [OOXMLDocumentObject] needed object
+    def transform_of_object(object)
       case object
       when :image
-        transform = elements.find { |e| e.is_a? Picture }.properties.transform
+        return elements.find { |e| e.is_a? Picture }.properties.transform
       when :chart
-        transform = elements.find { |e| e.is_a? GraphicFrame }.transform
+        return elements.find { |e| e.is_a? GraphicFrame }.transform
       when :table
-        transform = elements.find { |e| e.is_a? GraphicFrame }.transform
+        return elements.find { |e| e.is_a? GraphicFrame }.transform
       when :shape
-        transform = elements.find { |e| !e.shape_properties.preset.nil? }.shape_properties.transform
+        return elements.find { |e| !e.shape_properties.preset.nil? }.shape_properties.transform
       else
         raise "Dont know this type object - #{object}"
       end
+    end
+
+    def content_horizontal_align(object, slide_size)
+      transform = transform_of_object(object)
       return :left if transform.offset.x == 0
       return :center if ((slide_size.width / 2) - (transform.extents.x / 2)).round(1) == transform.offset.x.round(1)
       return :right if (slide_size.width - transform.extents.x).round(1) == transform.offset.x.round(1)
@@ -41,19 +47,7 @@ module OoxmlParser
     end
 
     def content_vertical_align(object, slide_size)
-      transform = nil
-      case object
-      when :image
-        transform = elements.find { |e| e.is_a? Picture }.properties.transform
-      when :chart
-        transform = elements.find { |e| e.is_a? GraphicFrame }.transform
-      when :table
-        transform = elements.find { |e| e.is_a? GraphicFrame }.transform
-      when :shape
-        transform = elements.find { |e| !e.shape_properties.preset.nil? }.shape_properties.transform
-      else
-        raise "Dont know this type object - #{object}"
-      end
+      transform = transform_of_object(object)
       return :top if transform.offset.y == 0
       return :middle if ((slide_size.height / 2) - (transform.extents.y / 2)).round(1) == transform.offset.y.round(1)
       return :bottom if (slide_size.height - transform.extents.y).round(1) == transform.offset.y.round(1)
