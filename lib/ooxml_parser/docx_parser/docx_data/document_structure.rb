@@ -148,24 +148,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       doc.search('//w:document').each do |document|
         document.xpath('w:background').each do |background|
-          doc_structure.background = DocumentBackground.new
-          doc_structure.background.color1 = Color.from_int16(background.attribute('color').value)
-          background.xpath('v:background').each do |second_color|
-            unless second_color.attribute('targetscreensize').nil?
-              doc_structure.background.size = second_color.attribute('targetscreensize').value.sub(',', 'x')
-            end
-            second_color.xpath('v:fill').each do |fill|
-              if !fill.attribute('color2').nil?
-                doc_structure.background.color2 = Color.from_int16(fill.attribute('color2').value.split(' ').first.delete('#'))
-                doc_structure.background.type = fill.attribute('type').value
-              elsif !fill.attribute('id').nil?
-                path_to_media_file = OOXMLDocumentObject.get_link_from_rels(fill.attribute('id').value)
-                path_to_image = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{path_to_media_file.gsub('..', '')}")
-                doc_structure.background.image = path_to_image
-                doc_structure.background.type = 'image'
-              end
-            end
-          end
+          doc_structure.background = DocumentBackground.parse(background)
         end
         document.xpath('w:body').each do |body|
           body.xpath('*').each do |element|
