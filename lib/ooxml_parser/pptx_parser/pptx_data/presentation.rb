@@ -12,8 +12,7 @@ module OoxmlParser
       @comments = comments
     end
 
-    def self.parse(path_to_folder)
-      OOXMLDocumentObject.path_to_folder = path_to_folder
+    def self.parse(path_to_folder = OOXMLDocumentObject.path_to_folder)
       OOXMLDocumentObject.root_subfolder = 'ppt/'
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.namespace_prefix = 'a'
