@@ -50,88 +50,22 @@ module OoxmlParser
       end
       cell_properties_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:tcBorders").each do |tc_boders|
         tc_boders.xpath("#{OOXMLDocumentObject.namespace_prefix}:top").each do |top|
-          next if top.attribute('val').value == 'nil'
-          top_border = BordersProperties.new
-          if top.attribute('color')
-            top_border.color = top.attribute('color').value
-            if !top.attribute('color').nil? && top.attribute('color').value != 'auto'
-              top_border.color = Color.from_int16(top.attribute('color').value)
-            end
-          end
-          top_border.sz = top.attribute('sz').value.to_f / 8.0
-          top_border.val = top.attribute('val').value
-          top_border.space = top.attribute('space').value if top.attribute('space')
-          cell_borders.top = top_border
+          cell_borders.top = BordersProperties.parse(top)
         end
         tc_boders.xpath("#{OOXMLDocumentObject.namespace_prefix}:right").each do |right|
-          next if right.attribute('val').value == 'nil'
-          right_border = BordersProperties.new
-          if right.attribute('color')
-            right_border.color = right.attribute('color').value
-            if !right.attribute('color').nil? && right.attribute('color').value != 'auto'
-              right_border.color = Color.from_int16(right.attribute('color').value)
-            end
-          end
-          right_border.sz = right.attribute('sz').value.to_f / 8.0
-          right_border.val = right.attribute('val').value
-          right_border.space = right.attribute('space').value if right.attribute('space')
-          cell_borders.right = right_border
+          cell_borders.right = BordersProperties.parse(right)
         end
         tc_boders.xpath("#{OOXMLDocumentObject.namespace_prefix}:left").each do |left|
-          next if left.attribute('val').value == 'nil'
-          left_border = BordersProperties.new
-          if left.attribute('color')
-            left_border.color = left.attribute('color').value
-            if !left.attribute('color').nil? && left.attribute('color').value != 'auto'
-              left_border.color = Color.from_int16(left.attribute('color').value)
-            end
-          end
-          left_border.sz = left.attribute('sz').value.to_f / 8.0
-          left_border.val = left.attribute('val').value
-          left_border.space = left.attribute('space').value if left.attribute('space')
-          cell_borders.left = left_border
+          cell_borders.left = BordersProperties.parse(left)
         end
         tc_boders.xpath("#{OOXMLDocumentObject.namespace_prefix}:bottom").each do |bottom|
-          next if bottom.attribute('val').value == 'nil'
-          bottom_border = BordersProperties.new
-          if bottom.attribute('color')
-            bottom_border.color = bottom.attribute('color').value
-            if !bottom.attribute('color').nil? && bottom.attribute('color').value != 'auto'
-              bottom_border.color = Color.from_int16(bottom.attribute('color').value)
-            end
-          end
-          bottom_border.sz = bottom.attribute('sz').value.to_f / 8.0
-          bottom_border.val = bottom.attribute('val').value
-          bottom_border.space = bottom.attribute('space').value if bottom.attribute('space')
-          cell_borders.bottom = bottom_border
+          cell_borders.bottom = BordersProperties.parse(bottom)
         end
         tc_boders.xpath("#{OOXMLDocumentObject.namespace_prefix}:tl2br").each do |tl2br|
-          next if tl2br.attribute('val').value == 'nil'
-          top_left_to_bottom_right = BordersProperties.new
-          if tl2br.attribute('color')
-            top_left_to_bottom_right.color = tl2br.attribute('color').value
-            if !tl2br.attribute('color').nil? && tl2br.attribute('color').value != 'auto'
-              top_left_to_bottom_right.color = Color.from_int16(tl2br.attribute('color').value)
-            end
-          end
-          top_left_to_bottom_right.sz = tl2br.attribute('sz').value.to_f / 8.0
-          top_left_to_bottom_right.val = tl2br.attribute('val').value
-          top_left_to_bottom_right.space = tl2br.attribute('space').value if tl2br.attribute('space')
-          cell_borders.top_left_to_bottom_right = top_left_to_bottom_right
+          cell_borders.top_left_to_bottom_right = BordersProperties.parse(tl2br)
         end
         tc_boders.xpath("#{OOXMLDocumentObject.namespace_prefix}:tr2bl").each do |tr2bl|
-          next if tr2bl.attribute('val').value == 'nil'
-          top_right_to_bottom_left = BordersProperties.new
-          if tr2bl.attribute('color')
-            top_right_to_bottom_left.color = tr2bl.attribute('color').value
-            if !tr2bl.attribute('color').nil? && tr2bl.attribute('color').value != 'auto'
-              top_right_to_bottom_left.color = Color.from_int16(tr2bl.attribute('color').value)
-            end
-          end
-          top_right_to_bottom_left.sz = tr2bl.attribute('sz').value.to_f / 8.0
-          top_right_to_bottom_left.val = tr2bl.attribute('val').value
-          top_right_to_bottom_left.space = tr2bl.attribute('space').value if tr2bl.attribute('space')
-          cell_borders.top_right_to_bottom_left = top_right_to_bottom_left
+          cell_borders.top_right_to_bottom_left = BordersProperties.parse(tr2bl)
         end
       end
       cell_properties_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:shd").each do |shd|
