@@ -11,20 +11,8 @@ module OoxmlParser
     def self.parse(transition_node)
       transition = Transition.new
       transition_node.xpath('*').each do |transition_node_child|
-        transition.properties.type = transition_node_child.name.to_sym
-        case transition_node_child.name
-        when 'blinds', 'checker', 'comb', 'cover', 'pull', 'push', 'randomBar', 'strips', 'wipe', 'zoom', 'warp'
-          transition.properties.direction = Alignment.parse(transition_node_child.attribute('dir')) if transition_node_child.attribute('dir')
-        when 'cut', 'fade'
-          transition.properties.through_black = OOXMLDocumentObject.option_enabled?(transition_node_child, 'thruBlk')
-        when 'split'
-          transition.properties.direction = Alignment.parse(transition_node_child.attribute('dir')) if transition_node_child.attribute('dir')
-          transition.properties.orientation = transition_node_child.attribute('orient').value.to_sym if transition_node_child.attribute('orient')
-        when 'wheel', 'wheelReverse'
-          transition.properties.spokes = OOXMLDocumentObject.option_enabled?(transition_node_child, 'spokes')
-        when 'sndAc'
-          transition.sound_action = SoundAction.parse(transition_node_child)
-        end
+        transition.properties = TransitionProperties.parse(transition_node_child)
+        transition.sound_action = SoundAction.parse(transition_node_child)
       end
       transition_node.attributes.each do |key, value|
         case key

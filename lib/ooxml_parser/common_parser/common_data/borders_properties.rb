@@ -41,6 +41,7 @@ module OoxmlParser
     # @param [Nokogiri::XML:Element] node with BordersProperties
     # @return [BordersProperties] value of BordersProperties
     def self.parse(node)
+      return nil if node.attribute('val').value == 'nil'
       border_properties = BordersProperties.new
       border_properties.val = node.attribute('val').value.to_sym
       border_properties.sz = node.attribute('sz').value.to_f / 8.0 if node.attribute('sz')

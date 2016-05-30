@@ -815,7 +815,7 @@ describe 'My behaviour' do
     describe 'borders' do
       it 'border_size_nil' do
         docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/borders/border_size_nil.docx')
-        expect(docx.document_styles[39].paragraph_properties.borders.bar.sz).to eq(0)
+        expect(docx.document_styles[39].paragraph_properties.borders.bar).to be_nil
       end
 
       it 'borders_space_nil' do

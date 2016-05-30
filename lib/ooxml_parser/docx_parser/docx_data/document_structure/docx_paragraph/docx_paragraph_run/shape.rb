@@ -9,24 +9,23 @@ module OoxmlParser
       @elements = elements
     end
 
-    def self.parse(shape_node, type, path)
+    def self.parse(shape_node, type)
       shape = Shape.new
       shape.type = type
       shape_node.attribute('style').value.to_s.split(';').each do |property|
-        case
-        when property.include?('margin-top')
+        if property.include?('margin-top')
           shape.properties.margins.top = property.split(':').last
-        when property.include?('margin-left')
+        elsif property.include?('margin-left')
           shape.properties.margins.left = property.split(':').last
-        when property.include?('margin-right')
+        elsif property.include?('margin-right')
           shape.properties.margins.right = property.split(':').last
-        when property.include?('width')
+        elsif property.include?('width')
           shape.properties.size.width = property.split(':').last
-        when property.include?('height')
+        elsif property.include?('height')
           shape.properties.size.height = property.split(':').last
-        when property.include?('z-index')
+        elsif property.include?('z-index')
           shape.properties.z_index = property.split(':').last
-        when property.include?('position')
+        elsif property.include?('position')
           shape.properties.position = property.split(':').last
         end
       end

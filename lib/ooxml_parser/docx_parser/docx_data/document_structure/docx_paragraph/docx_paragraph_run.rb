@@ -342,11 +342,11 @@ module OoxmlParser
           r_node_child.xpath('*').each do |pict_node_child|
             case pict_node_child.name
             when 'shape'
-              character_style.shape = Shape.parse(pict_node_child, :shape, OOXMLDocumentObject.path_to_folder)
+              character_style.shape = Shape.parse(pict_node_child, :shape)
             when 'rect'
-              character_style.shape = Shape.parse(pict_node_child, :rectangle, OOXMLDocumentObject.path_to_folder)
+              character_style.shape = Shape.parse(pict_node_child, :rectangle)
             when 'oval'
-              character_style.shape = Shape.parse(pict_node_child, :oval, OOXMLDocumentObject.path_to_folder)
+              character_style.shape = Shape.parse(pict_node_child, :oval)
             when 'shapetype'
             end
           end

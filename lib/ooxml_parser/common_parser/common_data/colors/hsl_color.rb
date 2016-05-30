@@ -31,12 +31,11 @@ module OoxmlParser
       unless max == min
         hls_color.s = delta / (255.0 - (255.0 - max - min).abs)
 
-        hls_color.h = case
-                      when max == red && green >= blue
+        hls_color.h = if max == red && green >= blue
                         60.0 * (green - blue) / delta
-                      when max == red && green < blue
+                      elsif max == red && green < blue
                         60.0 * (green - blue) / delta + 360.0
-                      when max == green
+                      elsif max == green
                         60.0 * (blue - red) / delta + 120.0
                       else
                         60.0 * (red - green) / delta + 240.0
@@ -52,18 +51,17 @@ module OoxmlParser
       x = chroma * (1 - ((@h / 60.0) % 2.0 - 1).abs)
       m = @l - chroma / 2.0
 
-      rgb = case
-            when @h == 0
+      rgb = if @h == 0
               Color.new(0, 0, 0)
-            when @h > 0 && @h < 60
+            elsif @h > 0 && @h < 60
               Color.new(chroma, x, 0)
-            when @h > 60 && @h < 120
+            elsif @h > 60 && @h < 120
               Color.new(x, chroma, 0)
-            when @h > 120 && @h < 180
+            elsif @h > 120 && @h < 180
               Color.new(0, chroma, x)
-            when @h > 180 && @h < 240
+            elsif @h > 180 && @h < 240
               Color.new(0, x, chroma)
-            when @h > 240 && @h < 300
+            elsif @h > 240 && @h < 300
               Color.new(x, 0, chroma)
             else
               Color.new(chroma, 0, x)
@@ -74,12 +72,11 @@ module OoxmlParser
     def set_color(t1, t2, t3)
       t3 += 1.0 if t3 < 0
       t3 -= 1.0 if t3 > 1
-      case
-      when 6.0 * t3 < 1 then
+      if 6.0 * t3 < 1
         t2 + (t1 - t2) * 6.0 * t3
-      when 2.0 * t3 < 1 then
+      elsif 2.0 * t3 < 1
         t1
-      when 3.0 * t3 < 2 then
+      elsif 3.0 * t3 < 2
         t2 + (t1 - t2) * ((2.0 / 3.0) - t3) * 6.0
       else
         t2
