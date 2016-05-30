@@ -9,7 +9,7 @@ module OoxmlParser
       @elements = elements
     end
 
-    def self.parse(shape_node, type, path)
+    def self.parse(shape_node, type)
       shape = Shape.new
       shape.type = type
       shape_node.attribute('style').value.to_s.split(';').each do |property|
