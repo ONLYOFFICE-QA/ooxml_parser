@@ -4,6 +4,7 @@ module OoxmlParser
     attr_accessor :start_sound, :end_sound
 
     def self.parse(sound_action_node)
+      return nil unless sound_action_node.name == 'sndAc'
       sound_action = SoundAction.new
       sound_action_node.xpath('*').each do |sound_action_node_child|
         case sound_action_node_child.name
