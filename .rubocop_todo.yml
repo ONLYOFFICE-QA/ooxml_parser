@@ -58,10 +58,3 @@ Style/AccessorMethodName:
 # Offense count: 210
 Style/Documentation:
   Enabled: false
-
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/EmptyCaseCondition:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/colors/hsl_color.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/docx_paragraph_run/shape.rb'
