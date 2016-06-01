@@ -3,6 +3,7 @@ require_relative 'properties/table_cell_margin'
 require_relative 'properties/table_look'
 require_relative 'properties/table_style'
 require_relative 'properties/table_position'
+require_relative 'table_properties/table_borders'
 module OoxmlParser
   class TableProperties < OOXMLDocumentObject
     attr_accessor :jc, :table_width, :shd, :table_borders, :table_properties, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
@@ -16,7 +17,7 @@ module OoxmlParser
       @jc = :left
       @shd = nil
       @stretching = true
-      @table_borders = Borders.new
+      @table_borders = TableBorders.new
       @table_properties = nil
       @table_width = nil
       @grid_column = nil
@@ -30,7 +31,7 @@ module OoxmlParser
       table.table_width = @table_width
       table.shd = @shd
       table.stretching = @stretching
-      table.table_borders = @table_borders.copy
+      table.table_borders = @table_borders
       table.table_properties = @table_properties
       table.table_cell_margin = @table_cell_margin
       table.table_indent = @table_indent
@@ -46,6 +47,8 @@ module OoxmlParser
         case table_props_node_child.name
         when 'tableStyleId'
           table_properties.style = TableStyle.parse(style_id: table_props_node_child.text)
+        when 'tblBorders'
+          table_properties.table_borders = TableBorders.parse(table_props_node_child)
         when 'tblStyle'
           style = DocxParagraphRun.get_style_by_id(table_props_node_child.attribute('val').value)
           next if style.nil?

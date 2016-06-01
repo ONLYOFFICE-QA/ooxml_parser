@@ -24,6 +24,7 @@
 * Fix parsing `anchor_lock` in frame properties
 * Fix parsing DocxBlip without properties
 * Fix parsing Default Styles for Table
+* Fix parsing Table Border style
 
 #### `XlsxParser`
 * Fix parsing default underline style for cell
