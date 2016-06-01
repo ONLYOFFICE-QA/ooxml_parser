@@ -733,6 +733,11 @@ describe 'My behaviour' do
           expect(docx.element_by_description[0].borders.right).to be_nil
           expect(docx.element_by_description[0].borders.bottom).to be_nil
         end
+
+        it 'table_border_size' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/table/borders/table_border_size.docx')
+          expect(docx.elements[1].table_properties.table_borders.top.sz).to eq(4.5)
+        end
       end
 
       describe 'cell' do
@@ -784,7 +789,7 @@ describe 'My behaviour' do
           expect(docx.elements.first.properties.table_borders.left).to be_nil
           expect(docx.elements.first.properties.table_borders.right).to be_nil
           expect(docx.elements.first.properties.table_borders.top).to be_nil
-          expect(docx.elements.first.properties.table_borders.bottom).to be_nil
+          expect(docx.elements.first.properties.table_borders.bottom).not_to be_nil
         end
 
         it 'border_color_nil_2' do
