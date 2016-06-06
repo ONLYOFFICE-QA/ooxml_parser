@@ -7,6 +7,7 @@
 * Extract GradientColor parsing to Class
 * Correct warn if document is password protected
 * Correct warn if document links to lost image
+* Add parsing Table relationships
 
 ### Fixes
 #### `DocxParser`

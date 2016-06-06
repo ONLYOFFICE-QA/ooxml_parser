@@ -10,6 +10,8 @@ module OoxmlParser
   class Worksheet < OOXMLDocumentObject
     attr_accessor :name, :rows, :merge, :charts, :hyperlinks, :drawings, :comments, :columns, :sheet_format_properties,
                   :autofilter, :table_parts, :sheet_views
+    # @return [Relationships] array of relationships
+    attr_accessor :relationships
 
     def initialize
       @columns = []
@@ -26,6 +28,11 @@ module OoxmlParser
     def self.parse(path_to_xml_file)
       worksheet = Worksheet.new
       @current_sheet_xml_name = File.basename path_to_xml_file
+
+      OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/_rels/#{@current_sheet_xml_name}.rels")
+      worksheet.relationships = Relationships.parse(Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml)).xpath('*').first)
+      OOXMLDocumentObject.xmls_stack.pop
+
       OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/#{File.basename(path_to_xml_file)}")
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       sheet = doc.search('//xmlns:worksheet').first
