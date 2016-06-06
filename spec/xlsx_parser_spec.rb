@@ -226,11 +226,6 @@ describe 'My behaviour' do
     expect(xlsx.worksheets.first.drawings.first.shape.text_body.paragraphs.first.runs.first.properties.hyperlink.url).to eq('http://www.yandex.ru/')
   end
 
-  it 'FormatAsTable.xlsx' do
-    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/FormatAsTable.xlsx')
-    expect(xlsx.worksheets.first.table_parts.first).to be_a(OoxmlParser::XlsxTable)
-  end
-
   it 'Comments.xlsx' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/Comments.xlsx')
     expect(xlsx.worksheets.first.comments.comments.first.characters.first.text).to eq('Hello')
