@@ -1,6 +1,9 @@
 # Change log
 
 ## master (unreleased)
+
+## 0.1.2 (2016-06-07)
+
 ### New features
 * Correct `==` method for DocxStructure.
 * Correctly handle and warn if docx file do not contain `docProps/app.xml`
