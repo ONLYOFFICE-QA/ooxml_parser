@@ -9,19 +9,7 @@ Gem::Specification.new do |s|
   s.summary = 'OoxmlParser Gem'
   s.description = 'Parse OOXML files (docx, xlsx, pptx)'
   s.email = ['shockwavenn@gmail.com', 'rzagudaev@gmail.com']
-  s.files = `git ls-files`.split($RS).reject do |file|
-    file =~ %r{^(?:
-    spec/.*
-    |Gemfile
-    |Rakefile
-    |\.rspec
-    |\.gitignore
-    |\.rubocop.yml
-    |\.rubocop_todo.yml
-    |\.travis.yml
-    |.*\.eps
-    )$}x
-  end
+  s.files = `git ls-files lib LICENSE.txt README.md `.split($RS)
   s.add_runtime_dependency('nokogiri', '~> 1.6')
   s.add_runtime_dependency('rubyzip', '~> 1.1')
   s.add_runtime_dependency('xml-simple', '~> 1.1')
