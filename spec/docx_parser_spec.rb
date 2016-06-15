@@ -124,7 +124,7 @@ describe 'My behaviour' do
     alternate_content = docx.elements.first.nonempty_runs.first.alternate_content
     expect(alternate_content.office2007_content.type).to eq(:shape)
     expect(alternate_content.office2010_content.graphic.data
-             .properties.preset_geometry).to eq(:line)
+             .properties.preset_geometry.name).to eq(:line)
   end
 
   it 'ShapeLineCustomGeometry.docx' do
@@ -132,7 +132,7 @@ describe 'My behaviour' do
     alternate_content = docx.elements.first.nonempty_runs.first.alternate_content
     expect(alternate_content.office2007_content.type).to eq(:shape)
     expect(alternate_content.office2010_content.graphic.data
-             .properties.preset_geometry).to eq(:custom)
+             .properties.preset_geometry.name).to eq(:custom)
   end
 
   it 'Check ParagraphLineBreak' do
@@ -1070,6 +1070,17 @@ describe 'My behaviour' do
     end
 
     describe 'shape' do
+      describe 'drawing' do
+        describe 'graphic' do
+          describe 'preset_geometry' do
+            it 'adjust_values' do
+              docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/shape/drawing/graphic/preset_geometry/adjust_values.docx')
+              expect(docx.notes.first.elements.first.nonempty_runs.first.alternate_content.office2010_content.graphic.data.properties.preset_geometry.adjust_values_list[0].formula).to eq('val 16667')
+            end
+          end
+        end
+      end
+
       describe 'text_box' do
         it 'text_box_list' do
           docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/paragraph/shape/text_box/text_box_list.docx')

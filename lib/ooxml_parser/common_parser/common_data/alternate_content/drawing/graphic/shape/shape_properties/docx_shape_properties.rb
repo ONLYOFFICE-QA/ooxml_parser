@@ -1,6 +1,7 @@
 require_relative 'docx_color'
 require_relative 'docx_shape_size'
 require_relative 'docx_shape_line'
+require_relative 'docx_shape_properties/preset_geometry'
 require_relative 'docx_shape_properties/text_box'
 require_relative 'custom_geometry/ooxml_custom_geometry'
 # DOCX Shape Properties
@@ -24,13 +25,14 @@ module OoxmlParser
         when 'xfrm'
           shape_properties.shape_size = DocxShapeSize.parse(shape_properties_node_child)
         when 'prstGeom'
-          shape_properties.preset_geometry = shape_properties_node_child.attribute('prst').value.to_sym
+          shape_properties.preset_geometry = PresetGeometry.parse(shape_properties_node_child)
         when 'txbx'
           shape_properties.text_box = TextBox.parse_list(shape_properties_node_child)
         when 'ln'
           shape_properties.line = DocxShapeLine.parse(shape_properties_node_child)
         when 'custGeom'
-          shape_properties.preset_geometry = :custom
+          shape_properties.preset_geometry = PresetGeometry.parse(shape_properties_node_child)
+          shape_properties.preset_geometry.name = :custom
           shape_properties.custom_geometry = OOXMLCustomGeometry.parse(shape_properties_node_child)
         end
       end

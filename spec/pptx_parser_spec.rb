@@ -141,7 +141,7 @@ describe 'My behaviour' do
 
   it 'Shape Naming' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/ShapeNaming.pptx')
-    expect(pptx.slides[0].elements[-1].shape_properties.preset).to eq(:rect)
+    expect(pptx.slides[0].elements[-1].shape_properties.preset.name).to eq(:rect)
   end
 
   it 'PresentationComment' do
@@ -165,8 +165,8 @@ describe 'My behaviour' do
 
   it 'GroupShapes.pptx' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/pptx_examples/GroupShapes.pptx')
-    expect(pptx.slides.first.elements.first.elements.first.shape_properties.preset).to eq(:ellipse)
-    expect(pptx.slides.first.elements.first.elements.last.shape_properties.preset).to eq(:mathPlus)
+    expect(pptx.slides.first.elements.first.elements.first.shape_properties.preset.name).to eq(:ellipse)
+    expect(pptx.slides.first.elements.first.elements.last.shape_properties.preset.name).to eq(:mathPlus)
   end
 
   describe 'Spacing Rule' do
