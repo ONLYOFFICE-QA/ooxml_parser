@@ -1,6 +1,8 @@
 # Change log
 
 ## master (unreleased)
+### New features
+* Add parsing of Shape Adjust Values List
 
 ## 0.1.2 (2016-06-07)
 

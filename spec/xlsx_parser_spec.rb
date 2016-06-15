@@ -168,7 +168,7 @@ describe 'My behaviour' do
 
   it 'Shape Line 2' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/xlsx_examples/ShapeLine2.xlsx')
-    expect(xlsx.worksheets.first.drawings.first.shape.properties.preset_geometry).to eq(:line)
+    expect(xlsx.worksheets.first.drawings.first.shape.properties.preset_geometry.name).to eq(:line)
   end
 
   it 'ABS_emb' do
