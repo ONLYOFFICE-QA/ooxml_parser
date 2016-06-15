@@ -10,9 +10,9 @@ module OoxmlParser
     def units_delimiter
       return (20 * 635.0) if @units == :points
       return (566.929 * 635.0) if @units == :centimeters
-      return 1 if @units == :dxa
+      return 1 if @units == :emu
       return 1440 if @units == :inches
-      return (1.0 / 635.0) if @units == :emu
+      return 635.0 if @units == :dxa
       warn "Cannot recognize #{@units} unit. Will use dxa by default"
       1
     end
