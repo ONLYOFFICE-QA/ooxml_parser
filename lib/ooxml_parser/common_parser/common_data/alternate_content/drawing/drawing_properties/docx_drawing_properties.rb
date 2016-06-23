@@ -7,5 +7,7 @@ module OoxmlParser
   class DocxDrawingProperties
     attr_accessor :distance_from_text, :simple_position, :wrap, :object_size, :vertical_position, :horizontal_position,
                   :relative_height
+    attr_accessor :size_relative_horizontal
+    attr_accessor :size_relative_vertical
   end
 end

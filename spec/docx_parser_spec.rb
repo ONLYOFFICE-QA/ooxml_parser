@@ -1164,5 +1164,16 @@ describe 'My behaviour' do
         expect(alternate_content.office2010_content.properties.object_size).to eq(OoxmlParser::OOXMLCoordinates.new(11.033, 12.543))
       end
     end
+
+    describe 'size' do
+      it 'size_relative' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/shape/size/size_relative.docx')
+        shape_properties = docx.elements.first.nonempty_runs.first.alternate_content.office2010_content.properties
+        expect(shape_properties.size_relative_horizontal.relative_from).to eq(:right_margin)
+        expect(shape_properties.size_relative_horizontal.width.value).to eq(50)
+        expect(shape_properties.size_relative_vertical.relative_from).to eq(:page)
+        expect(shape_properties.size_relative_vertical.height.value).to eq(0)
+      end
+    end
   end
 end

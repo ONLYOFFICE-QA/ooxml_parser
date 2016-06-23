@@ -1,4 +1,6 @@
 require_relative 'drawing_properties/docx_drawing_properties'
+require_relative 'drawing_properties/size_relative_horizontal'
+require_relative 'drawing_properties/size_relative_vertical'
 require_relative 'graphic/docx_graphic'
 # Docx Drawing Data
 module OoxmlParser
@@ -40,6 +42,10 @@ module OoxmlParser
             drawing.properties.vertical_position = DocxDrawingPosition.parse(content_node_child)
           when 'positionH'
             drawing.properties.horizontal_position = DocxDrawingPosition.parse(content_node_child)
+          when 'sizeRelH'
+            drawing.properties.size_relative_horizontal = SizeRelativeHorizontal.parse(content_node_child)
+          when 'sizeRelV'
+            drawing.properties.size_relative_vertical = SizeRelativeVertical.parse(content_node_child)
           end
         end
       end
