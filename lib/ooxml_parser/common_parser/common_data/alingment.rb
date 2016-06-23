@@ -48,6 +48,14 @@ module OoxmlParser
         :down
       when 'u'
         :up
+      when 'rightMargin'
+        :right_margin
+      when 'leftMargin'
+        :left_margin
+      when 'bottomMargin'
+        :bottom_margin
+      when 'topMargin'
+        :top_margin
       else
         node.value.to_sym
       end
