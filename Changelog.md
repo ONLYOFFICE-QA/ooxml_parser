@@ -4,6 +4,7 @@
 ### New features
 * Add parsing of Shape Adjust Values List
 * Add parsing Relative Sizes of shape
+* Add parsing math formula run properties (and redone some math model for it)
 
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit

@@ -7,39 +7,40 @@ require_relative 'docx_formula/fraction'
 require_relative 'docx_formula/function'
 require_relative 'docx_formula/group_char'
 require_relative 'docx_formula/limit'
+require_relative 'docx_formula/math_run'
 require_relative 'docx_formula/matrix'
 require_relative 'docx_formula/operator'
 require_relative 'docx_formula/index'
 require_relative 'docx_formula/radical'
 module OoxmlParser
   class DocxFormula
-    attr_accessor :elements
+    attr_accessor :formula_run
 
     def initialize(elements = [])
-      @elements = elements
+      @formula_run = elements
     end
 
     def self.parse(element)
       formula = DocxFormula.new
       element.xpath('*').each do |sub_element|
         if sub_element.name == 'r'
-          formula.elements << parse_math_character(sub_element)
+          formula.formula_run << MathRun.parse(sub_element)
         elsif sub_element.name == 'box'
           box = Box.new
-          box.element = parse_math_character(sub_element)
-          formula.elements << box
+          box.element = MathRun.parse(sub_element)
+          formula.formula_run << box
         elsif sub_element.name == 'borderBox'
           box = Box.new
           box.borders = true
-          box.element = parse_math_character(sub_element)
-          formula.elements << box
+          box.element = MathRun.parse(sub_element)
+          formula.formula_run << box
         elsif sub_element.name == 'func'
           function = Function.new
           sub_element.xpath('m:fName').each do |f_name|
             function.name = DocxFormula.parse(f_name)
           end
           function.argument = DocxFormula.parse(sub_element)
-          formula.elements << function
+          formula.formula_run << function
         elsif sub_element.name == 'rad'
           radical = Radical.new
           radical.value = DocxFormula.parse(sub_element)
@@ -47,12 +48,12 @@ module OoxmlParser
             radical.degree = DocxFormula.parse(deg)
             radical.degree = 2 if radical.degree.nil?
           end
-          formula.elements << radical
+          formula.formula_run << radical
         elsif sub_element.name == 'e'
-          formula.elements << DocxFormula.parse(sub_element)
+          formula.formula_run << DocxFormula.parse(sub_element)
         elsif sub_element.name == 'eqArr'
           sub_element.xpath('m:e').each do |e|
-            formula.elements << DocxFormula.parse(e)
+            formula.formula_run << DocxFormula.parse(e)
           end
         elsif sub_element.name == 'd'
           delimeter = Delimiter.new
@@ -65,7 +66,7 @@ module OoxmlParser
             end
           end
           delimeter.value = DocxFormula.parse(sub_element)
-          formula.elements << delimeter
+          formula.formula_run << delimeter
         elsif sub_element.name == 'nary'
           operator = Operator.new
           sub_element.xpath('m:naryPr').each do |nary_pr|
@@ -80,7 +81,7 @@ module OoxmlParser
             operator.top_value = DocxFormula.parse(sup)
           end
           operator.value = DocxFormula.parse(sub_element)
-          formula.elements << operator
+          formula.formula_run << operator
         elsif sub_element.name == 'sSubSup'
           index = Index.new
           index.value = DocxFormula.parse(sub_element)
@@ -90,21 +91,21 @@ module OoxmlParser
           sub_element.xpath('m:sub').each do |sub|
             index.top_index = DocxFormula.parse(sub)
           end
-          formula.elements << index
+          formula.formula_run << index
         elsif sub_element.name == 'sSup'
           index = Index.new
           index.value = DocxFormula.parse(sub_element)
           sub_element.xpath('m:sup').each do |sup|
             index.top_index = DocxFormula.parse(sup)
           end
-          formula.elements << index
+          formula.formula_run << index
         elsif sub_element.name == 'sSub'
           index = Index.new
           index.value = DocxFormula.parse(sub_element)
           sub_element.xpath('m:sub').each do |sub|
             index.top_index = DocxFormula.parse(sub)
           end
-          formula.elements << index
+          formula.formula_run << index
         elsif sub_element.name == 'f'
           fraction = Fraction.new
           sub_element.xpath('m:num').each do |num|
@@ -112,7 +113,7 @@ module OoxmlParser
           end
           sub_element.xpath('m:den').each do |den|
             fraction.denominator = DocxFormula.parse(den)
-            formula.elements << fraction
+            formula.formula_run << fraction
           end
         elsif sub_element.name == 'm'
           matrix = Matrix.new
@@ -138,7 +139,7 @@ module OoxmlParser
             end
             j += 1
           end
-          formula.elements << matrix
+          formula.formula_run << matrix
         elsif sub_element.name == 'bar'
           bar = Bar.new
           sub_element.xpath('m:barPr').each do |bar_pr|
@@ -147,7 +148,7 @@ module OoxmlParser
             end
           end
           bar.element = DocxFormula.parse(sub_element)
-          formula.elements << bar
+          formula.formula_run << bar
         elsif sub_element.name == 'acc'
           accent = Accent.new
           sub_element.xpath('m:accPr').each do |acc_pr|
@@ -156,7 +157,7 @@ module OoxmlParser
             end
           end
           accent.element = DocxFormula.parse(sub_element)
-          formula.elements << accent
+          formula.formula_run << accent
         elsif sub_element.name == 'groupChr'
           group_char = GroupChar.new
           sub_element.xpath('m:groupChrPr').each do |group_chr_pr|
@@ -171,7 +172,7 @@ module OoxmlParser
             end
           end
           group_char.element = DocxFormula.parse(sub_element)
-          formula.elements << group_char
+          formula.formula_run << group_char
         elsif sub_element.name == 'limUpp'
           limit = Limit.new
           limit.type = 'Upper'
@@ -179,7 +180,7 @@ module OoxmlParser
           sub_element.xpath('m:lim').each do |lim|
             limit.limit = DocxFormula.parse(lim)
           end
-          formula.elements << limit
+          formula.formula_run << limit
         elsif sub_element.name == 'limLow'
           limit = Limit.new
           limit.type = 'Lower'
@@ -187,17 +188,11 @@ module OoxmlParser
           sub_element.xpath('m:lim').each do |lim|
             limit.limit = DocxFormula.parse(lim)
           end
-          formula.elements << limit
+          formula.formula_run << limit
         end
       end
-      return nil if formula.elements.empty?
+      return nil if formula.formula_run.empty?
       formula
-    end
-
-    def self.parse_math_character(element)
-      element.xpath('m:t').each do |t|
-        return t.text
-      end
     end
   end
 end

@@ -816,6 +816,18 @@ describe 'My behaviour' do
     end
   end
 
+  describe 'formula' do
+    describe 'run' do
+      describe 'run_properties' do
+        it 'formula_manual_break' do
+          docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/formula/run/run_properties/formula_manual_break.docx')
+          expect(docx.elements.first.nonempty_runs.first.formula_run.first.properties.break).to be_truthy
+          expect(docx.elements.first.nonempty_runs.first.formula_run.first.text).to eq('±')
+        end
+      end
+    end
+  end
+
   describe 'paragraph' do
     describe 'borders' do
       it 'border_size_nil' do
