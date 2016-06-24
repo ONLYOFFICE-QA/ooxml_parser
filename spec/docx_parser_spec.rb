@@ -817,6 +817,13 @@ describe 'My behaviour' do
   end
 
   describe 'formula' do
+    describe 'argument_properties' do
+      it 'argument_properties_size' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/formula/argument_properties/argument_properties_size.docx')
+        expect(docx.elements.first.nonempty_runs.first.formula_run[1].top_index.argument_properties.argument_size.value).to eq(-1)
+      end
+    end
+
     describe 'run' do
       describe 'run_properties' do
         it 'formula_manual_break' do

@@ -5,6 +5,7 @@
 * Add parsing of Shape Adjust Values List
 * Add parsing Relative Sizes of shape
 * Add parsing math formula run properties (and redone some math model for it)
+* Add parsing math formula argument size property
 
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit
