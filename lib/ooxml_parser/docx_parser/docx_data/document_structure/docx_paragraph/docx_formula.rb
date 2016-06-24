@@ -1,5 +1,6 @@
 # Class for containg DocxFormulas
 require_relative 'docx_formula/accent'
+require_relative 'docx_formula/argument_properties'
 require_relative 'docx_formula/bar'
 require_relative 'docx_formula/box'
 require_relative 'docx_formula/delimeter'
@@ -15,6 +16,8 @@ require_relative 'docx_formula/radical'
 module OoxmlParser
   class DocxFormula
     attr_accessor :formula_run
+    # @return [ArgumentProperties] properties of arguments
+    attr_accessor :argument_properties
 
     def initialize(elements = [])
       @formula_run = elements
@@ -189,6 +192,8 @@ module OoxmlParser
             limit.limit = DocxFormula.parse(lim)
           end
           formula.formula_run << limit
+        elsif sub_element.name == 'argPr'
+          formula.argument_properties = ArgumentProperties.parse(sub_element)
         end
       end
       return nil if formula.formula_run.empty?
