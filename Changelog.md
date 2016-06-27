@@ -9,6 +9,7 @@
 
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit
+* Redone parsing of `nary` in formulas
 
 ## 0.1.2 (2016-06-07)
 

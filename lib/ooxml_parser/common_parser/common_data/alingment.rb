@@ -56,6 +56,10 @@ module OoxmlParser
         :bottom_margin
       when 'topMargin'
         :top_margin
+      when 'undOvr'
+        :under_over
+      when 'subSup'
+        :subscript_superscript
       else
         node.value.to_sym
       end

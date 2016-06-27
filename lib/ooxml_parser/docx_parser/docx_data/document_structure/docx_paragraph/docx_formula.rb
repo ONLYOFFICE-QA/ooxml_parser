@@ -10,6 +10,7 @@ require_relative 'docx_formula/group_char'
 require_relative 'docx_formula/limit'
 require_relative 'docx_formula/math_run'
 require_relative 'docx_formula/matrix'
+require_relative 'docx_formula/nary'
 require_relative 'docx_formula/operator'
 require_relative 'docx_formula/index'
 require_relative 'docx_formula/radical'
@@ -71,20 +72,7 @@ module OoxmlParser
           delimeter.value = DocxFormula.parse(sub_element)
           formula.formula_run << delimeter
         elsif sub_element.name == 'nary'
-          operator = Operator.new
-          sub_element.xpath('m:naryPr').each do |nary_pr|
-            nary_pr.xpath('m:chr').each do |chr|
-              operator.operator = chr.attribute('val').value
-            end
-          end
-          sub_element.xpath('m:sub').each do |sub|
-            operator.bottom_value = DocxFormula.parse(sub)
-          end
-          sub_element.xpath('m:sup').each do |sup|
-            operator.top_value = DocxFormula.parse(sup)
-          end
-          operator.value = DocxFormula.parse(sub_element)
-          formula.formula_run << operator
+          formula.formula_run << Nary.parse(sub_element)
         elsif sub_element.name == 'sSubSup'
           index = Index.new
           index.value = DocxFormula.parse(sub_element)
