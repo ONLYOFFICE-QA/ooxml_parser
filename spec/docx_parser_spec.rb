@@ -833,6 +833,11 @@ describe 'My behaviour' do
         end
       end
     end
+
+    it 'nary_formula_type' do
+      docx = OoxmlParser::DocxParser.parse_docx('spec/docx_examples/elements/formula/nary_formula_type.docx')
+      expect(docx.elements.first.nonempty_runs.first.formula_run[1].properties.limit_location.value).to eq(:under_over)
+    end
   end
 
   describe 'paragraph' do
