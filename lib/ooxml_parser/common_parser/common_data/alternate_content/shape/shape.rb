@@ -1,5 +1,5 @@
-require_relative 'shape_properties'
 require_relative 'non_visual_shape_properties'
+require_relative 'shape/text_body'
 module OoxmlParser
   class PresentationShape
     attr_accessor :non_visual_properties, :shape_properties, :text_body

@@ -1,3 +1,4 @@
+require_relative 'docx_shape/ooxml_text_box'
 require_relative 'shape_properties/docx_shape_properties'
 require_relative 'shape_body_properties/ooxml_shape_body_properties'
 # Docx Shape Data

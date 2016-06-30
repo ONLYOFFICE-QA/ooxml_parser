@@ -1,4 +1,3 @@
-require_relative 'ooxml_shift'
 module OoxmlParser
   class TransformEffect
     attr_accessor :offset, :extents, :child_offset, :child_extent
