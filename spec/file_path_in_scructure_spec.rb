@@ -1,5 +1,4 @@
-require 'rspec'
-require 'ooxml_parser'
+require 'spec_helper'
 
 describe 'File Path In Parsed sctructure' do
   it 'DocxStructure contains file path' do

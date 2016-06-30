@@ -22,10 +22,7 @@ module OoxmlParser
       table_node.xpath('*').each do |table_node_child|
         case table_node_child.name
         when 'tblGrid'
-          table.grid = TableGrid.new
-          table_node_child.xpath('gridCol').each do |grid_col_node|
-            table.grid.columns << (grid_col_node.attribute('w').value.to_f / 360_000.0).round(2)
-          end
+          table.grid = TableGrid.parse(table_node_child)
         when 'tr'
           table.rows << TableRow.parse(table_node_child)
         when 'tblPr'

@@ -27,9 +27,7 @@ module OoxmlParser
       columns.separator = columns_grid.attribute('sep').value unless columns_grid.attribute('sep').nil?
       columns.equal_width = option_enabled?(columns_grid, 'equalWidth') unless columns_grid.attribute('equalWidth').nil?
       columns_grid.xpath('w:col').each do |col|
-        width = (col.attribute('w').value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
-        space = (col.attribute('space').value.to_f / OoxmlParser.configuration.units_delimiter).round(2) unless col.attribute('space').nil?
-        columns.column_array << Column.new(width, space)
+        columns.column_array << Column.parse(col)
       end
       columns
     end

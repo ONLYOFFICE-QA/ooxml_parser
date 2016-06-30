@@ -1,5 +1,4 @@
-require 'rspec'
-require 'ooxml_parser'
+require 'spec_helper'
 
 describe '#configure' do
   it 'Default Unit of measurement is centimeter' do

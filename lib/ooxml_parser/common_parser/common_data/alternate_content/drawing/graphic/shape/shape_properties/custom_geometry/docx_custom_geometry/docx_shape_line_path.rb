@@ -1,5 +1,6 @@
-# Docx Shape Line Path
+require_relative 'docx_shape_line_path/docx_shape_line_element'
 module OoxmlParser
+  # Docx Shape Line Path
   class DocxShapeLinePath < OOXMLDocumentObject
     attr_accessor :width, :height, :fill, :stroke, :elements
 
@@ -20,23 +21,7 @@ module OoxmlParser
         end
       end
       path_node.xpath('*').each do |line_path_element_node|
-        line_element = DocxShapeLineElement.new
-        case line_path_element_node.name
-        when 'moveTo'
-          line_element.type = :move
-        when 'lnTo'
-          line_element.type = :line
-        when 'arcTo'
-          line_element.type = :arc
-        when 'cubicBezTo'
-          line_element.type = :cubic_bezier
-        when 'quadBezTo'
-          line_element.type = :quadratic_bezier
-        when 'close'
-          line_element.type = :close
-        end
-        line_path_element_node.xpath('a:pt', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main').each { |point_node| line_element.points << OOXMLCoordinates.parse(point_node, delimiter: 1) }
-        shape_line_path.elements << line_element
+        shape_line_path.elements << DocxShapeLineElement.parse(line_path_element_node)
       end
       shape_line_path
     end

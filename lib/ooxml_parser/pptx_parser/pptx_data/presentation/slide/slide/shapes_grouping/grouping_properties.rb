@@ -1,3 +1,4 @@
+require_relative 'groupoing_properties/transform_effect'
 module OoxmlParser
   class GroupingProperties
     attr_accessor :transform

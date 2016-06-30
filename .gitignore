@@ -7,4 +7,5 @@ doc
 
 # bundler
 .bundle
+coverage
 Gemfile.lock
