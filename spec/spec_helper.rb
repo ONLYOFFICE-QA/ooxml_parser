@@ -1,3 +1,6 @@
+require 'simplecov'
 require 'codeclimate-test-reporter'
-require 'ooxml_parser'
+
 CodeClimate::TestReporter.start
+SimpleCov.start
+require 'ooxml_parser'
