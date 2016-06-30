@@ -1,5 +1,4 @@
 # Table Properties Data
-require_relative 'properties/table_cell_margin'
 require_relative 'properties/table_look'
 require_relative 'properties/table_style'
 require_relative 'properties/table_position'
