@@ -1,5 +1,4 @@
-require 'rspec'
-require 'ooxml_parser'
+require 'spec_helper'
 
 describe 'Page Size Names' do
   it 'US Letter Portrait' do

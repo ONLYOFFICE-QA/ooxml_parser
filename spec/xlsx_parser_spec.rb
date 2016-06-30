@@ -1,5 +1,4 @@
-require 'rspec'
-require 'ooxml_parser'
+require 'spec_helper'
 
 describe 'My behaviour' do
   describe 'Chart' do

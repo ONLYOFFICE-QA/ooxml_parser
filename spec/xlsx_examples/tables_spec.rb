@@ -1,5 +1,4 @@
-require 'rspec'
-require 'ooxml_parser'
+require 'spec_helper'
 
 describe 'Check table.xml file' do
   it 'relation_to_table' do
