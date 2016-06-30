@@ -1,4 +1,3 @@
-require_relative 'docx_custom_geometry/docx_shape_line_element'
 require_relative 'docx_custom_geometry/docx_shape_line_path'
 # Docx Custom Geometry
 module OoxmlParser
