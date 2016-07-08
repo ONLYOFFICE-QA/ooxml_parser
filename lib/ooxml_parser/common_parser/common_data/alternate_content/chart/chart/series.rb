@@ -10,6 +10,8 @@ module OoxmlParser
     attr_accessor :order
     # @return [SeriesText] text of series
     attr_accessor :text
+    # @return [Categories] categories of chart
+    attr_accessor :categories
 
     # Parse Series
     # @param [Nokogiri::XML:Node] node with Series
@@ -24,6 +26,8 @@ module OoxmlParser
           series.order = Order.parse(series_childe_node)
         when 'tx'
           series.text = SeriesText.parse(series_childe_node)
+        when 'cat'
+          series.categories = Categories.parse(series_childe_node)
         end
       end
       series

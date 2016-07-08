@@ -19,4 +19,6 @@ module OoxmlParser
       text
     end
   end
+
+  Categories = SeriesText
 end
