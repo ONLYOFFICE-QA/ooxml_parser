@@ -12,4 +12,10 @@ describe 'My behaviour' do
     series = xlsx.worksheets[0].drawings[0].picture.chart.series.first
     expect(series.text.string.cache.points.first.index).to eq(0)
   end
+
+  it 'point_index_text.xlsx' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/series/text/string_reference/string_cache/point_index_text.xlsx')
+    series = xlsx.worksheets[0].drawings[0].picture.chart.series.first
+    expect(series.text.string.cache.points.first.text.value).to eq('Gold')
+  end
 end
