@@ -3,12 +3,15 @@ require_relative 'chart_cells_range'
 require_relative 'chart_legend'
 require_relative 'chart_point'
 require_relative 'display_labels_properties'
+require_relative 'chart/series'
 require_relative 'chart_style/office_2007_chart_style'
 require_relative 'chart_style/office_2010_chart_style'
 
 module OoxmlParser
   class Chart < OOXMLDocumentObject
     attr_accessor :type, :data, :grouping, :title, :legend, :display_labels, :axises, :alternate_content, :shape_properties
+    # @return [Array, Series] series of chart
+    attr_accessor :series
 
     def initialize
       @type = ''
@@ -17,6 +20,7 @@ module OoxmlParser
       @title = nil
       @legend = nil
       @axises = []
+      @series = []
     end
 
     def parse_properties(chart_prop_node)
@@ -35,6 +39,7 @@ module OoxmlParser
           end
           next if val.xpath('c:numRef').empty?
           @data << ChartCellsRange.parse(val.xpath('c:numRef').first).dup
+          @series << Series.parse(chart_props_node_child)
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.parse(chart_props_node_child)
         end
