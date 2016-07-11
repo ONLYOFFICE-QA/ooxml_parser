@@ -29,6 +29,7 @@ module OoxmlParser
         when 'grouping'
           @grouping = chart_props_node_child.attribute('val').value.to_sym
         when 'ser'
+          @series << Series.parse(chart_props_node_child)
           case @type
           when :bar, :line, :area, :pie, :doughnut, :radar, :stock, :surface_3d, :column
             val = chart_props_node_child.xpath('c:val')[0]
@@ -39,7 +40,6 @@ module OoxmlParser
           end
           next if val.xpath('c:numRef').empty?
           @data << ChartCellsRange.parse(val.xpath('c:numRef').first).dup
-          @series << Series.parse(chart_props_node_child)
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.parse(chart_props_node_child)
         end
