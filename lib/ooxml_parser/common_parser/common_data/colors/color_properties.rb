@@ -2,6 +2,7 @@
 module OoxmlParser
   class ColorProperties
     attr_accessor :alpha, :luminance_modulation, :luminance_offset
+    attr_accessor :tint
 
     def self.parse(color_properties_node)
       properties = ColorProperties.new
@@ -13,6 +14,8 @@ module OoxmlParser
           properties.luminance_modulation = color_properties_node_child.attribute('val').value.to_f / 100_000.0
         when 'lumOff'
           properties.luminance_offset = color_properties_node_child.attribute('val').value.to_f / 100_000.0
+        when 'tint'
+          properties.tint = color_properties_node_child.attribute('val').value.to_f / 100_000.0
         end
       end
       properties

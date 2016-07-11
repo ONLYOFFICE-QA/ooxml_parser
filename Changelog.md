@@ -11,6 +11,7 @@
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit
 * Redone parsing of `nary` in formulas
+* Fix parsing gradient color linear values
 
 ### Refactor
 * Move parsing Columns inside class

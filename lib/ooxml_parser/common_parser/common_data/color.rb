@@ -462,9 +462,8 @@ module OoxmlParser
           color = SchemeColor.new
           color.value = ThemeColors.list[color_node.attribute('val').value.to_sym]
           color.properties = ColorProperties.parse(color_node)
-          color.converted_color = HSLColor.calculate_with_luminance color.value,
-                                                                    color.properties.luminance_modulation,
-                                                                    color.properties.luminance_offset
+          color.converted_color = parse_scheme_color(color_node)
+          color.value.calculate_with_tint!(1.0 - color.properties.tint) if color.properties.tint
           color
         end
       end

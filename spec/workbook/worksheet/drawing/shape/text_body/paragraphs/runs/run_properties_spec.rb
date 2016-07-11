@@ -42,7 +42,7 @@ describe 'My behaviour' do
 
   it 'linear_gradient_no_scaled' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/shape/text_body/paragraphs/runs/properties/linear_gradient_no_scaled.xlsx')
-    expect(xlsx.worksheets[1].drawings[34].shape.text_body.paragraphs.first.runs.first.properties.font_color.color.path.scaled).to be_nil
+    expect(xlsx.worksheets[1].drawings[34].shape.text_body.paragraphs.first.runs.first.properties.font_color.color.linear_gradient.scaled).to be_nil
   end
 
   it 'shape_with_link.xlsx Link To' do
