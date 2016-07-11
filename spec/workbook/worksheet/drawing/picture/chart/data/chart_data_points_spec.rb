@@ -6,4 +6,10 @@ describe 'My behaviour' do
     drawing = xlsx.worksheets[0].drawings[0]
     expect(drawing.picture.chart.data.first.points.length).to eq(10)
   end
+
+  it 'chart_data_points_3d_chart' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/data/points/chart_data_points_3d_chart.xlsx')
+    drawing = xlsx.worksheets[0].drawings[0]
+    expect(drawing.picture.chart.data.first.points.first.value).to eq(200.55)
+  end
 end
