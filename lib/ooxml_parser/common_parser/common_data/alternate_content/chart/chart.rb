@@ -31,12 +31,10 @@ module OoxmlParser
         when 'ser'
           @series << Series.parse(chart_props_node_child)
           case @type
-          when :bar, :line, :area, :pie, :doughnut, :radar, :stock, :surface_3d, :column
-            val = chart_props_node_child.xpath('c:val')[0]
           when :point, :bubble
             val = chart_props_node_child.xpath('c:yVal')[0]
           else
-            next
+            val = chart_props_node_child.xpath('c:val')[0]
           end
           next if val.xpath('c:numRef').empty?
           @data << ChartCellsRange.parse(val.xpath('c:numRef').first).dup
