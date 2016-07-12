@@ -46,7 +46,7 @@ module OoxmlParser
         next unless footnote.attribute('id').value.to_i == header_footer.id
         paragraph_number = 0
         footnote.xpath('w:p').each do |paragraph|
-          header_footer.elements << DocxParagraph.parse(paragraph, paragraph_number, DocumentStructure.default_table_paragraph_style, DocumentStructure.default_table_run_style)
+          header_footer.elements << DocxParagraph.parse(paragraph, paragraph_number, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style)
           paragraph_number += 1
         end
       end
