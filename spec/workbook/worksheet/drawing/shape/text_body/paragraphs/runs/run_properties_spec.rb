@@ -50,4 +50,9 @@ describe 'My behaviour' do
     expect(xlsx.worksheets.first.drawings.first.shape.text_body.paragraphs.first.runs.first.properties.hyperlink).not_to be_nil
     expect(xlsx.worksheets.first.drawings.first.shape.text_body.paragraphs.first.runs.first.properties.hyperlink.url).to eq('http://www.yandex.ru/')
   end
+
+  it 'baseline_subscript' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/shape/text_body/paragraphs/runs/properties/baseline_subscript.xlsx')
+    expect(xlsx.worksheets.first.drawings.first.shape.text_body.paragraphs.first.runs.first.properties.baseline).to eq(:subscript)
+  end
 end
