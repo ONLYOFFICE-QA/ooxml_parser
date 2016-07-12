@@ -1,3 +1,4 @@
+require_relative 'table_cell_line/line_join'
 module OoxmlParser
   class TableCellLine < OOXMLDocumentObject
     attr_accessor :fill, :dash, :line_join, :head_end, :tail_end, :align, :width, :cap_type, :compound_line_type

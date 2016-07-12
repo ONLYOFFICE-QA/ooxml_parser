@@ -1,4 +1,3 @@
-require_relative 'whole_table/table_cell_style'
 # Describe single table element
 module OoxmlParser
   class TableElement
