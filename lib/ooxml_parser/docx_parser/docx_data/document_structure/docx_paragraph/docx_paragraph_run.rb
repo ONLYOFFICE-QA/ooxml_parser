@@ -111,7 +111,7 @@ module OoxmlParser
       true
     end
 
-    def self.parse(character_pr_tag, character_style = DocxParagraphRun.new, default_character = @default_character)
+    def self.parse(character_pr_tag, character_style = DocxParagraphRun.new, default_character = DocumentStructure.default_run_style)
       character_style.font_style = FontStyle.new
       character_pr_tag.xpath('w:rStyle').each do |r_style|
         style = get_style_by_id(r_style.attribute('val').value)
@@ -300,7 +300,7 @@ module OoxmlParser
       r_tag.xpath('*').each do |r_node_child|
         case r_node_child.name
         when 'rPr'
-          DocxParagraphRun.parse(r_node_child, character_style, @default_character)
+          DocxParagraphRun.parse(r_node_child, character_style, DocumentStructure.default_run_style)
         when 'instrText'
           if r_node_child.text.include?('HYPERLINK')
             hyperlink = Hyperlink.new(r_node_child.text.sub('HYPERLINK ', '').split(' \\o ').first, r_node_child.text.sub('HYPERLINK', '').split(' \\o ').last)
@@ -331,13 +331,9 @@ module OoxmlParser
             end
           end
         when 'footnoteReference'
-          character_style.footnote = HeaderFooter.new(:header)
-          character_style.footnote.id = r_node_child.attribute('id').value.to_i
-          character_style.footnote.parse('footnote', character_style.footnote.id, @default_paragraph, @default_character)
+          character_style.footnote = HeaderFooter.parse(r_node_child)
         when 'endnoteReference'
-          character_style.endnote = HeaderFooter.new(:footer)
-          character_style.endnote.id = r_node_child.attribute('id').value.to_i
-          character_style.endnote.parse('endnote', character_style.endnote.id, @default_paragraph, @default_character)
+          character_style.endnote = HeaderFooter.parse(r_node_child)
         when 'pict'
           r_node_child.xpath('*').each do |pict_node_child|
             case pict_node_child.name

@@ -124,19 +124,18 @@ module OoxmlParser
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.namespace_prefix = 'w'
       @comments = []
-      @default_paragraph = DocxParagraph.new
-      @default_character = DocxParagraphRun.new
-      @default_table_properties = TableProperties.new
+      DocumentStructure.default_paragraph_style = DocxParagraph.new
+      DocumentStructure.default_run_style = DocxParagraphRun.new
       PresentationTheme.parse('word/theme/theme1.xml')
       OOXMLDocumentObject.add_to_xmls_stack('word/styles.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       doc.search('//w:docDefaults').each do |doc_defaults|
         doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
-          @default_paragraph = DocxParagraph.parse(p_pr_defaults, 0)
+          DocumentStructure.default_paragraph_style = DocxParagraph.parse(p_pr_defaults, 0)
         end
         doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
           r_pr_defaults.xpath('w:rPr').each do |r_pr|
-            @default_character = DocxParagraphRun.parse(r_pr, DocxParagraphRun.new)
+            DocumentStructure.default_run_style = DocxParagraphRun.parse(r_pr, DocxParagraphRun.new)
           end
         end
       end
@@ -155,7 +154,7 @@ module OoxmlParser
             if element.name == 'p'
               child = element.child
               unless child.nil? && doc_structure.elements.last.class == Table
-                paragraph_style = DocxParagraph.parse(element, number, @default_paragraph, @default_character)
+                paragraph_style = DocxParagraph.parse(element, number, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style)
                 number += 1
                 doc_structure.elements << paragraph_style.copy
               end
@@ -166,7 +165,7 @@ module OoxmlParser
             end
           end
           body.xpath('w:sectPr').each do |sect_pr|
-            doc_structure.page_properties = PageProperties.parse(sect_pr, @default_paragraph, @default_character)
+            doc_structure.page_properties = PageProperties.parse(sect_pr, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style)
             doc_structure.notes = doc_structure.page_properties.notes # keep copy of notes to compatibility with previous docx models
           end
         end
@@ -183,31 +182,28 @@ module OoxmlParser
         next if style.attribute('default').nil?
         if (style.attribute('default').value == '1' || style.attribute('default').value == 'on' || style.attribute('default').value == 'true') && style.attribute('type').value == 'paragraph'
           style.xpath('w:pPr').each do |paragraph_pr_tag|
-            DocxParagraph.parse_paragraph_style(paragraph_pr_tag, @default_paragraph, @default_character)
+            DocxParagraph.parse_paragraph_style(paragraph_pr_tag, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style)
           end
           style.xpath('w:rPr').each do |character_pr_tag|
-            DocxParagraphRun.parse(character_pr_tag, @default_character, @default_character)
+            DocxParagraphRun.parse(character_pr_tag, DocumentStructure.default_run_style, DocumentStructure.default_run_style)
           end
         elsif (style.attribute('default').value == '1' || style.attribute('default').value == 'on' || style.attribute('default').value == 'true') && style.attribute('type').value == 'character'
           style.xpath('w:rPr').each do |character_pr_tag|
-            DocxParagraphRun.parse(character_pr_tag, @default_character, @default_character)
+            DocxParagraphRun.parse(character_pr_tag, DocumentStructure.default_run_style, DocumentStructure.default_run_style)
           end
         end
       end
-      DocumentStructure.default_table_paragraph_style = @default_paragraph.copy
+      DocumentStructure.default_table_paragraph_style = DocumentStructure.default_paragraph_style.copy
       DocumentStructure.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
-      DocumentStructure.default_table_run_style = @default_character.copy
+      DocumentStructure.default_table_run_style = DocumentStructure.default_run_style.copy
       doc.search('//w:style').each do |style|
         next if style.attribute('default').nil?
         next unless (style.attribute('default').value == '1' || style.attribute('default').value == 'on' || style.attribute('default').value == 'true') && style.attribute('type').value == 'table'
-        style.xpath('w:tblPr').each do |table_pr_tag|
-          @default_table_properties = TableProperties.parse(table_pr_tag)
-        end
         style.xpath('w:pPr').each do |table_paragraph_pr_tag|
           DocxParagraph.parse_paragraph_style(table_paragraph_pr_tag, DocumentStructure.default_table_paragraph_style, DocumentStructure.default_table_run_style)
         end
         style.xpath('w:rPr').each do |table_character_pr_tag|
-          DocxParagraphRun.parse(table_character_pr_tag, DocumentStructure.default_table_run_style, @default_character)
+          DocxParagraphRun.parse(table_character_pr_tag, DocumentStructure.default_table_run_style, DocumentStructure.default_run_style)
         end
       end
     end
@@ -216,6 +212,7 @@ module OoxmlParser
       attr_accessor :default_table_run_style
       attr_accessor :default_table_paragraph_style
       attr_accessor :default_paragraph_style
+      attr_accessor :default_run_style
     end
   end
 end
