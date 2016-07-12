@@ -331,13 +331,9 @@ module OoxmlParser
             end
           end
         when 'footnoteReference'
-          character_style.footnote = HeaderFooter.new(:header)
-          character_style.footnote.id = r_node_child.attribute('id').value.to_i
-          character_style.footnote.parse('footnote', character_style.footnote.id, @default_paragraph, @default_character)
+          character_style.footnote = HeaderFooter.parse(r_node_child)
         when 'endnoteReference'
-          character_style.endnote = HeaderFooter.new(:footer)
-          character_style.endnote.id = r_node_child.attribute('id').value.to_i
-          character_style.endnote.parse('endnote', character_style.endnote.id, @default_paragraph, @default_character)
+          character_style.endnote = HeaderFooter.parse(r_node_child)
         when 'pict'
           r_node_child.xpath('*').each do |pict_node_child|
             case pict_node_child.name
