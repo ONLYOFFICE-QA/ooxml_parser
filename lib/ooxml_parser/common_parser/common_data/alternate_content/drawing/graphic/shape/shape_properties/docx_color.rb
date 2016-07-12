@@ -31,7 +31,7 @@ module OoxmlParser
           fill_color.value = Color.parse_color_model(fill_node)
         when 'gradFill'
           fill_color.type = :gradient
-          fill_color.value = DocxGradientColor.parse(fill_node)
+          fill_color.value = GradientColor.parse(fill_node)
         when 'pattFill'
           fill_color.type = :pattern
           fill_color.value = DocxPatternFill.parse(fill_node)
