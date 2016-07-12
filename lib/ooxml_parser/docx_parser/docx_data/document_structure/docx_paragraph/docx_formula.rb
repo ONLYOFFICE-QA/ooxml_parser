@@ -11,7 +11,6 @@ require_relative 'docx_formula/limit'
 require_relative 'docx_formula/math_run'
 require_relative 'docx_formula/matrix'
 require_relative 'docx_formula/nary'
-require_relative 'docx_formula/operator'
 require_relative 'docx_formula/index'
 require_relative 'docx_formula/radical'
 module OoxmlParser
