@@ -1,4 +1,3 @@
-require_relative 'color/gradient_color/docx_gradient_color'
 require_relative 'color/docx_pattern_fill'
 # Color inside DOCX
 module OoxmlParser
