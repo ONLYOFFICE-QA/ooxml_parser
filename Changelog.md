@@ -7,6 +7,7 @@
 * Add parsing math formula run properties (and redone some math model for it)
 * Add parsing math formula argument size property
 * Add a whole lot new properties to parse in charts
+* Remove usage of Linux `file` command in favor of `ruby-filemagick` gem. Better cross-platform support
 
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit
