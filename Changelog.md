@@ -8,6 +8,7 @@
 * Add parsing math formula argument size property
 * Add a whole lot new properties to parse in charts
 * Remove usage of Linux `file` command in favor of `ruby-filemagick` gem. Better cross-platform support
+* Use ruby method to create tmp folder instead of calling Linux methods
 
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit
