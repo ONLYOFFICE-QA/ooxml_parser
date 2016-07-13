@@ -6,5 +6,8 @@ rvm:
 - 2.2
 - 2.1
 - 2.0
+addons:
+  apt_packages:
+    libmagic-dev
 script:
   - bundle exec parallel_rspec spec
