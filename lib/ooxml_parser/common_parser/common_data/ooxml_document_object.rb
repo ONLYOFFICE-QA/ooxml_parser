@@ -40,7 +40,7 @@ module OoxmlParser
 
       def copy_file_and_rename_to_zip(path)
         file_name = File.basename(path)
-        tmp_folder = "/tmp/office_open_xml_parser_#{SecureRandom.uuid}"
+        tmp_folder = Dir.mktmpdir('ruby-ooxml-parser')
         file_path = "#{tmp_folder}/#{file_name}"
         FileUtils.rm_rf(tmp_folder) if File.directory?(tmp_folder)
         FileUtils.mkdir_p(tmp_folder)
