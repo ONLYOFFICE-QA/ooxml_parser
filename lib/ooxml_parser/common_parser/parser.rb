@@ -10,7 +10,7 @@ module OoxmlParser
       OOXMLDocumentObject.unzip_file(path_to_zip_file, OOXMLDocumentObject.path_to_folder)
       model = yield
       model.file_path = path_to_file
-      FileUtils.remove_dir(OOXMLDocumentObject.path_to_folder)
+      FileUtils.rm_rf(OOXMLDocumentObject.path_to_folder)
       model
     end
   end
