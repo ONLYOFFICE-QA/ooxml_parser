@@ -11,6 +11,7 @@
 * Use ruby method to create tmp folder instead of calling Linux methods
 * Add method `OoxmlParser::Parser.parse` to parse any OOXML format with auto recognition
 * Add storing color scheme name in color class
+* Add parsing of properties of table - inside horizontal, vertical borders
 
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit
