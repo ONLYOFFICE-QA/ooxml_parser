@@ -89,6 +89,8 @@ module OoxmlParser
     # @return [String] Value of Color Style
     attr_accessor :style
     alias set_style style=
+    # @return [String] color scheme of color
+    attr_accessor :scheme
 
     # @return [Integer] Value of alpha-channel
     attr_accessor :alpha_channel
@@ -413,6 +415,7 @@ module OoxmlParser
       def parse_scheme_color(scheme_color_node)
         color = ThemeColors.list[scheme_color_node.attribute('val').value.to_sym]
         hls = HSLColor.rgb_to_hsl(color)
+        scheme_name = nil
         scheme_color_node.xpath('*').each do |scheme_color_node_child|
           case scheme_color_node_child.name
           when 'lumMod'
@@ -421,8 +424,15 @@ module OoxmlParser
             hls.l = hls.l + (scheme_color_node_child.attribute('val').value.to_f / 100_000.0)
           end
         end
+        scheme_color_node.attributes.each do |key, value|
+          case key
+          when 'val'
+            scheme_name = value.to_s
+          end
+        end
         color = hls.to_rgb
         color.alpha_channel = ColorAlphaChannel.parse(scheme_color_node)
+        color.scheme = scheme_name
         color
       end
 

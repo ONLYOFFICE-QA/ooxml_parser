@@ -48,4 +48,10 @@ describe 'Drawing Properties Color' do
     drawing = docx.element_by_description[1].nonempty_runs.first.drawing
     expect(drawing.graphic.data.shape_properties.fill.value.gradient_stops[0].color.converted_color).to eq(OoxmlParser::Color.new(237, 237, 237))
   end
+
+  it 'chart_fill_scheme_folor.docx' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/properties/colors/chart_fill_scheme_folor.docx')
+    data = docx.element_by_description[0].nonempty_runs.first.alternate_content.office2010_content.graphic.data
+    expect(data.properties.fill_color.value.scheme).to eq('accent6')
+  end
 end
