@@ -8,6 +8,6 @@ describe 'My behaviour' do
 
   it 'document_background_fill' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/background/document_background_fill.docx')
-    expect(File.exist?(docx.background.image)).to be_truthy
+    expect(docx.background.file_reference.content.length).to be > 1000
   end
 end

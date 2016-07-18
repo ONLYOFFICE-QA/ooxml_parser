@@ -14,7 +14,6 @@ describe 'My behaviour' do
   end
 
   it 'image_no_embedded' do
-    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/background/fill/image/image_no_embedded.pptx')
-    expect(pptx.slides[25].background.fill.image.path).to be_empty
+    expect { OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/background/fill/image/image_no_embedded.pptx') }.to raise_error(LoadError)
   end
 end

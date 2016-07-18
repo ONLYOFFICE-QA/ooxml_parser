@@ -4,8 +4,7 @@ describe 'My behaviour' do
   it 'ImageSize' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/image_size.xlsx')
     expect(xlsx.worksheets.first.drawings).not_to be_empty
-    image_path = xlsx.worksheets.first.drawings.first.picture.path_to_image
-    expect(File.size?(image_path)).to be > 0
+    expect(xlsx.worksheets.first.drawings.first.picture.path_to_image.file_reference.content.length).to be > 0
   end
 
   it 'Incorrect image resource' do

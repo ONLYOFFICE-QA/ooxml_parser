@@ -6,8 +6,6 @@ require 'zip'
 
 module OoxmlParser
   class OOXMLDocumentObject
-    DEFAULT_DIRECTORY_FOR_MEDIA = '/tmp'.freeze
-
     def ==(other)
       instance_variables.each do |current_attribute|
         unless instance_variable_get(current_attribute) == other.instance_variable_get(current_attribute)
@@ -83,12 +81,7 @@ module OoxmlParser
         raise LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)
         relationships = XmlSimple.xml_in(File.open(rels_path))
         relationships['Relationship'].each { |relationship| return relationship['Target'] if id == relationship['Id'] }
-      end
-
-      def media_folder
-        path = "#{DEFAULT_DIRECTORY_FOR_MEDIA}/media_from_#{@file_name}"
-        FileUtils.mkdir(path) unless File.exist?(path)
-        path + '/'
+        ''
       end
 
       def option_enabled?(node, attribute_name = 'val')
@@ -97,19 +90,6 @@ module OoxmlParser
         return false if node.attribute(attribute_name).nil?
         status = node.attribute(attribute_name).value
         status == 'true' || status == 'on' || status == '1'
-      end
-
-      def copy_media_file(path_to_file)
-        folder_to_save_media = '/tmp/media_from_' + File.basename(OOXMLDocumentObject.path_to_folder)
-        path_to_copied_file = folder_to_save_media + '/' + File.basename(path_to_file)
-        full_path_to_file = OOXMLDocumentObject.path_to_folder + path_to_file
-        unless File.exist?(full_path_to_file)
-          warn "Couldn't find #{full_path_to_file} file on filesystem. Possible problem in original document"
-          return nil
-        end
-        FileUtils.mkdir(folder_to_save_media) unless File.exist?(folder_to_save_media)
-        FileUtils.copy_file(full_path_to_file, path_to_copied_file)
-        path_to_copied_file
       end
     end
   end

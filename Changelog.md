@@ -20,6 +20,7 @@
 * Fix parsing Footnote and Endnote reference in runs
 
 ### Refactor
+* Redone parsing images - store in structure, instead of copying file to filesystem
 * Move parsing Columns inside class
 * Move parsing TableGrid inside class
 * Move parsing DocxShapeLinePath inside class

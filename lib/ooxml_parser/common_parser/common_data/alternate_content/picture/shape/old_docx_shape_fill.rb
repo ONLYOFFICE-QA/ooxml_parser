@@ -1,14 +1,16 @@
 # Fallback DOCX shape fill properties
 module OoxmlParser
   class OldDocxShapeFill < OOXMLDocumentObject
-    attr_accessor :path_to_image, :stretching_type, :opacity, :title
+    attr_accessor :stretching_type, :opacity, :title
+    # @return [FileReference] image structure
+    attr_accessor :file_reference
 
     def self.parse(fill_node)
       fill = OldDocxShapeFill.new
       fill_node.attributes.each do |key, value|
         case key
         when 'id'
-          fill.path_to_image = OOXMLDocumentObject.copy_media_file(OOXMLDocumentObject.root_subfolder + get_link_from_rels(value.value))
+          fill.file_reference = FileReference.parse(fill_node)
         when 'type'
           fill.stretching_type = case value.value
                                  when 'frame'

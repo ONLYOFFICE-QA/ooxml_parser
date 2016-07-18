@@ -16,7 +16,7 @@ describe 'drawing' do
       expect(drawing.graphic.data.type).to eq(:line)
       expect(drawing.graphic.data.grouping).to eq(:standard)
       expect(drawing.graphic.data.shape_properties.fill.type).to eq(:picture)
-      expect(drawing.graphic.data.shape_properties.fill.value.path_to_media_file).not_to be_nil
+      expect(drawing.graphic.data.shape_properties.fill.value.file_reference.content.length).to be > 1000
     end
 
     it 'chart_grid_lines_for_x' do
