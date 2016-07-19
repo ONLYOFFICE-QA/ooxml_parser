@@ -2,6 +2,7 @@
 
 ## master (unreleased)
 ### New features
+* Fully support of Windows platform
 * Add parsing of Shape Adjust Values List
 * Add parsing Relative Sizes of shape
 * Add parsing math formula run properties (and redone some math model for it)
