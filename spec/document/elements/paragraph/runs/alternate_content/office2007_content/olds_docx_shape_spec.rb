@@ -4,7 +4,7 @@ describe OoxmlParser::OldDocxShape do
   it 'old_docx_shape' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/alternate_content/office2007_content/old_docx_shape/old_docx_shape.docx')
     expect(docx.elements[29].character_style_array.first.alternate_content.office2007_content.data.elements
-               .first.elements.first.elements.first.elements.first.object.image).not_to be_nil
+               .first.elements.first.elements.first.elements.first.object.file_reference.content.length).to be > 1000
   end
 
   it 'pict_in_character_run' do

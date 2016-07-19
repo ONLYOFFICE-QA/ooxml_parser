@@ -5,7 +5,7 @@ describe 'My behaviour' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/picture/picture_exists.pptx')
     expect(pptx.slides.first.elements.size).to be >= 3
     expect(pptx.slides.first.elements.last).to be_a_kind_of OoxmlParser::Picture
-    expect(File.size?(pptx.slides.first.elements.last.image.path)).to be > 0
+    expect(pptx.slides.first.elements.last.image.file_reference.content.length).to be > 1000
   end
 
   it 'picture_not_exist' do

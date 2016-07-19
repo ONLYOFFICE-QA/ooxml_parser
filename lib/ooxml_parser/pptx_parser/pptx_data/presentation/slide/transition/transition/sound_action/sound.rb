@@ -1,6 +1,8 @@
 module OoxmlParser
   class Sound < OOXMLDocumentObject
-    attr_accessor :path, :name
+    attr_accessor :name
+    # @return [FileReference] image structure
+    attr_accessor :file_reference
 
     def initialize(path = '', name = '')
       @path = path
@@ -9,7 +11,7 @@ module OoxmlParser
 
     def self.parse(sound_node)
       sound = Sound.new
-      sound.path = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{get_link_from_rels(sound_node.attribute('embed').value).gsub('..', '')}")
+      sound.file_reference = FileReference.parse(sound_node)
       sound.name = sound_node.attribute('name').value
       sound
     end

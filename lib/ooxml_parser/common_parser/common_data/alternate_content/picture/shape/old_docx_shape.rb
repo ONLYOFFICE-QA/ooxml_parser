@@ -2,7 +2,9 @@ require_relative 'old_docx_shape_properties'
 # Fallback DOCX shape data
 module OoxmlParser
   class OldDocxShape < OOXMLDocumentObject
-    attr_accessor :properties, :text_box, :image, :fill
+    attr_accessor :properties, :text_box, :fill
+    # @return [FileReference] image structure
+    attr_accessor :file_reference
 
     def self.parse(shape_node)
       shape = OldDocxShape.new
@@ -12,8 +14,7 @@ module OoxmlParser
         when 'textbox'
           shape.text_box = TextBox.parse_list(shape_node_child)
         when 'imagedata'
-          path_to_image = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{get_link_from_rels(shape_node_child.attribute('id').value)}")
-          shape.image = path_to_image
+          shape.file_reference = FileReference.parse(shape_node_child)
         when 'fill'
           shape.fill = OldDocxShapeFill.parse(shape_node_child)
         end

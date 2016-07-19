@@ -1,7 +1,9 @@
 module OoxmlParser
   # Class for describing Document Background `w:background`
   class DocumentBackground
-    attr_accessor :color1, :size, :color2, :image, :type
+    attr_accessor :color1, :size, :color2, :type
+    # @return [FileReference] image structure
+    attr_accessor :file_reference
 
     def initialize(color1 = nil, type = 'simple')
       @color1 = color1
@@ -23,9 +25,7 @@ module OoxmlParser
             background.color2 = Color.from_int16(fill.attribute('color2').value.split(' ').first.delete('#'))
             background.type = fill.attribute('type').value
           elsif !fill.attribute('id').nil?
-            path_to_media_file = OOXMLDocumentObject.get_link_from_rels(fill.attribute('id').value)
-            path_to_image = OOXMLDocumentObject.copy_media_file("#{OOXMLDocumentObject.root_subfolder}/#{path_to_media_file.gsub('..', '')}")
-            background.image = path_to_image
+            background.file_reference = FileReference.parse(fill)
             background.type = 'image'
           end
         end
