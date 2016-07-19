@@ -20,10 +20,16 @@ module OoxmlParser
     def self.parse(path_to_file)
       Parser.parse_format(path_to_file) do
         format = Parser.recognize_folder_format
-        return DocumentStructure.parse if format == :docx
-        return XLSXWorkbook.parse if format == :xlsx
-        return Presentation.parse if format == :pptx
-        warn "#{path_to_file} is a simple zip file without OOXML content"
+        case format
+        when :docx
+          DocumentStructure.parse
+        when :xlsx
+          XLSXWorkbook.parse
+        when :pptx
+          Presentation.parse
+        else
+          warn "#{path_to_file} is a simple zip file without OOXML content"
+        end
       end
     end
 

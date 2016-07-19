@@ -18,4 +18,10 @@ describe 'File Path In Parsed sctructure' do
     pptx = OoxmlParser::PptxParser.parse_pptx(file_path)
     expect(pptx.file_path).to eq(file_path)
   end
+
+  it 'File path for common parser' do
+    file_path = 'spec/common/file_path/file_path.docx'
+    docx = OoxmlParser::Parser.parse(file_path)
+    expect(docx.file_path).to eq(file_path)
+  end
 end
