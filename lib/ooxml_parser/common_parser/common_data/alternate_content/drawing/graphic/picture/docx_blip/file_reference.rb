@@ -17,7 +17,7 @@ module OoxmlParser
       return file_ref if file_ref.path == 'NULL'
       full_path_to_file = OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.root_subfolder + file_ref.path
       if File.exist?(full_path_to_file)
-        file_ref.content = File.read(full_path_to_file)
+        file_ref.content = IO.binread(full_path_to_file)
       else
         warn "Couldn't find #{full_path_to_file} file on filesystem. Possible problem in original document"
       end
