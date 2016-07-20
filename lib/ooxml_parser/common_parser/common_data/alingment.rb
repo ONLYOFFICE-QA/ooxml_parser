@@ -60,6 +60,12 @@ module OoxmlParser
         :under_over
       when 'subSup'
         :subscript_superscript
+      when 'lrTb'
+        :left_to_right_top_to_bottom
+      when 'tbRl'
+        :top_to_bottom_right_to_left
+      when 'btLr'
+        :bottom_to_top_left_to_right
       else
         node.value.to_sym
       end

@@ -13,6 +13,7 @@
 * Add method `OoxmlParser::Parser.parse` to parse any OOXML format with auto recognition
 * Add storing color scheme name in color class
 * Add parsing of properties of table - inside horizontal, vertical borders
+* Add support of parsing more text directions in cell
 
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit

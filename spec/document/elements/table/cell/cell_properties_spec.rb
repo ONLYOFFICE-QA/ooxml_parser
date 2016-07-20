@@ -11,21 +11,6 @@ describe OoxmlParser::CellProperties do
     expect(docx.elements.first.rows.first.cells.first.properties.shd).to eq(:none)
   end
 
-  it 'table_cell_text_no_rotation' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/cell/properties/table_cell_text_no_rotation.docx')
-    expect(docx.elements[1].rows.first.cells.first.properties.text_direction).to eq(:horizontal)
-  end
-
-  it 'table_cell_text_rotated_90' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/cell/properties/table_cell_text_rotated_90.docx')
-    expect(docx.elements[1].rows.first.cells.first.properties.text_direction).to eq(:rotate_on_90)
-  end
-
-  it 'table_cell_text_rotated_270' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/cell/properties/table_cell_text_rotated_270.docx')
-    expect(docx.elements[1].rows.first.cells.first.properties.text_direction).to eq(:rotate_on_270)
-  end
-
   it 'table_custom_cell_margin.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/cell/properties/table_custom_cell_margin.docx')
     margins_in_doc = docx.element_by_description(location: :canvas, type: :paragraph)[1].rows[0].cells[0].properties.table_cell_margin
