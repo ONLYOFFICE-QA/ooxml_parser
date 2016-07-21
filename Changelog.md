@@ -14,6 +14,7 @@
 * Add storing color scheme name in color class
 * Add parsing of properties of table - inside horizontal, vertical borders
 * Add support of parsing more text directions in cell
+* Add support of `show_category_name` and `show_series_name` to chart label properties
 
 ### Fixes
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit

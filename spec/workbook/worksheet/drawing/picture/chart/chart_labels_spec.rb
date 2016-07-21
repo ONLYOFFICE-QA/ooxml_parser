@@ -5,4 +5,14 @@ describe 'My behaviour' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/labels/chart_labels_position.xlsx')
     expect(xlsx.worksheets[0].drawings[1].picture.chart.display_labels.position).to eq(:top)
   end
+
+  it 'legend_show_category_name.xlsx' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/legend/legend_show_category_name.xlsx')
+    expect(xlsx.worksheets[0].drawings[0].picture.chart.display_labels.show_category_name).to be_truthy
+  end
+
+  it 'legend_show_category_name.xlsx' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/legend/legend_show_series_name.xlsx')
+    expect(xlsx.worksheets[0].drawings[0].picture.chart.display_labels.show_series_name).to be_truthy
+  end
 end
