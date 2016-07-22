@@ -25,4 +25,9 @@ describe OoxmlParser::FontStyle do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/font_style/double_strikethrought.docx')
     expect(docx.elements.first.character_style_array.first.font_style.strike).to eq(:double)
   end
+
+  it 'run_style_from_default' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/font_style/run_style_from_default.docx')
+    expect(docx.elements.first.character_style_array[1].font).to eq('Comic Sans MS')
+  end
 end

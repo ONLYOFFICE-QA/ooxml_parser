@@ -21,6 +21,7 @@
 * Redone parsing of `nary` in formulas
 * Fix parsing gradient color linear values
 * Fix parsing Footnote and Endnote reference in runs
+* Fix problem with using run without any style - not got default
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
