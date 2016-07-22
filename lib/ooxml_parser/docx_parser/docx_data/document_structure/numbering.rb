@@ -1,68 +1,44 @@
-require_relative 'numbering/numbering_level'
+require_relative 'numbering/abstract_numbering'
+require_relative 'numbering/numbering_definition'
+
 module OoxmlParser
   class Numbering < OOXMLDocumentObject
-    attr_accessor :id, :nsid, :multilevel_type, :tmpl, :ilvls
+    # @return [Array, AbstractNumbering] abstract numbering list
+    attr_accessor :abstract_numbering_list
+    # @return [Array, NumberingDefinition] numbering definition list
+    attr_accessor :numbering_definition_list
 
-    def initialize(id = nil, multilevel_type = nil, ilvls = [])
-      @id = id
-      @multilevel_type = multilevel_type
-      @ilvls = ilvls
+    def initialize
+      @abstract_numbering_list = []
+      @numbering_definition_list = []
     end
 
-    def self.parse(id)
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/numbering.xml'), 'r:UTF-8')
+    def properties_by_num_id(num_id)
+      abstract_num_id = nil
+      @numbering_definition_list.each do |num_def|
+        next unless num_id == num_def.id
+        abstract_num_id = num_def.abstract_numbering_id.value
+        break
+      end
+      return nil if abstract_num_id.nil?
+      @abstract_numbering_list.each do |abstract_num_item|
+        return abstract_num_item if abstract_num_id == abstract_num_item.id
+      end
+    end
+
+    def self.parse
       numbering = Numbering.new
-      numbering.id = id
-      doc.search('//w:num').each do |num|
-        next unless id == num.attribute('numId').value
-        num.xpath('w:abstractNumId').each do |abstract_num_id|
-          abstract_num_id = abstract_num_id.attribute('val').value
-          doc.search('//w:abstractNum').each do |abstract_num|
-            next unless abstract_num_id == abstract_num.attribute('abstractNumId').value
-            abstract_num.xpath('w:multiLevelType').each do |multilevel_type|
-              numbering.multilevel_type = multilevel_type.attribute('val').value
-            end
-            lvls = []
-            abstract_num.xpath('w:lvl').each do |lvl|
-              numbering_lvl = NumberingLevel.new
-              numbering_lvl.ilvl = lvl.attribute('ilvl').value
-              lvl.xpath('w:start').each do |start|
-                numbering_lvl.start = start.attribute('val').value
-              end
-              lvl.xpath('w:numFmt').each do |num_format|
-                numbering_lvl.num_format = num_format.attribute('val').value
-              end
-              lvl.xpath('w:lvlText').each do |level_text|
-                numbering_lvl.level_text = level_text.attribute('val').value
-              end
-              lvl.xpath('w:lvlJc').each do |level_jc|
-                numbering_lvl.level_jc = level_jc.attribute('val').value
-              end
-              lvl.xpath('w:pPr').each do |p_pr|
-                p_pr.xpath('w:ind').each do |ind|
-                  numbering_lvl.ind = Indents.parse(ind)
-                end
-                lvl.xpath('w:rPr').each do |r_pr|
-                  r_pr.xpath('w:rFonts').each do |r_fonts|
-                    if !r_fonts.attribute('ascii').nil?
-                      numbering_lvl.font = r_fonts.attribute('ascii').value
-                    elsif !r_fonts.attribute('hAnsi').nil?
-                      numbering_lvl.font = r_fonts.attribute('hAnsi').value
-                    elsif !r_fonts.attribute('eastAsia').nil?
-                      numbering_lvl.font = r_fonts.attribute('eastAsia').value
-                    else
-                      numbering_lvl.font = r_fonts.attribute('cs').value unless r_fonts.attribute('cs').nil?
-                    end
-                  end
-                end
-              end
-              lvls << numbering_lvl
-            end
-            numbering.ilvls = lvls
-          end
+      numbering_xml = OOXMLDocumentObject.path_to_folder + 'word/numbering.xml'
+      return nil unless File.exist?(numbering_xml)
+      node = Nokogiri::XML(File.open(numbering_xml), 'r:UTF-8')
+      node.xpath('w:numbering/*').each do |numbering_child_node|
+        case numbering_child_node.name
+        when 'abstractNum'
+          numbering.abstract_numbering_list << AbstractNumbering.parse(numbering_child_node)
+        when 'num'
+          numbering.numbering_definition_list << NumberingDefinition.parse(numbering_child_node)
         end
       end
-
       numbering
     end
   end

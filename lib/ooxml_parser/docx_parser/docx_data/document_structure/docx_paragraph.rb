@@ -100,7 +100,7 @@ module OoxmlParser
       true
     end
 
-    def self.parse(p_tag, par_number = 0, default_paragraph = DocxParagraph.new, default_character = DocxParagraphRun.new)
+    def self.parse(p_tag, par_number = 0, default_paragraph = DocxParagraph.new, default_character = DocxParagraphRun.new, parent: nil)
       paragraph_style = default_paragraph.copy
       default_character_style = default_character.copy
       character_styles_array = []
@@ -191,10 +191,14 @@ module OoxmlParser
         character_styles_array.last.text = character_styles_array.last.text.rstrip
       end
       paragraph_style.character_style_array = character_styles_array
+      paragraph_style.parent = parent
       paragraph_style
     end
 
-    def self.parse_paragraph_style(paragraph_pr_tag, paragraph_style = DocxParagraph.new, default_char_style = DocxParagraphRun.new)
+    def self.parse_paragraph_style(paragraph_pr_tag,
+                                   paragraph_style = DocxParagraph.new,
+                                   default_char_style = DocxParagraphRun.new,
+                                   parent: nil)
       paragraph_pr_tag.xpath('w:tabs').each do |tabs_node|
         tabs_node.xpath('w:tab').each { |tab_node| paragraph_style.tabs << ParagraphTab.new(tab_node.attribute('val').value.to_sym, (tab_node.attribute('pos').value.to_f / 566.9).round(2)) }
       end
@@ -260,14 +264,7 @@ module OoxmlParser
         paragraph_style.frame_properties = FrameProperties.parse(frame_pr_node)
       end
       paragraph_pr_tag.xpath('w:numPr').each do |num_pr|
-        numbering = NumberingProperties.new
-        num_pr.xpath('w:ilvl').each do |ilvl|
-          numbering.ilvl = ilvl.attribute('val').value
-        end
-        num_pr.xpath('w:numId').each do |num_id|
-          numbering.numbering_properties = Numbering.parse(num_id.attribute('val').value) if File.exist?(OOXMLDocumentObject.path_to_folder + 'word/numbering.xml')
-        end
-        paragraph_style.numbering = numbering
+        paragraph_style.numbering = NumberingProperties.parse(num_pr, paragraph_style)
       end
       paragraph_pr_tag.xpath('w:jc').each do |jc|
         paragraph_style.align = jc.attribute('val').value.to_sym unless jc.attribute('val').nil?
@@ -303,6 +300,7 @@ module OoxmlParser
                                           'Next Page'
                                         end
       end
+      paragraph_style.parent = parent
       paragraph_style
     end
 

@@ -28,6 +28,7 @@
 * Move parsing Columns inside class
 * Move parsing TableGrid inside class
 * Move parsing DocxShapeLinePath inside class
+* Totally redone parsing of Numbering
 
 ## 0.1.2 (2016-06-07)
 

@@ -26,8 +26,9 @@ module OoxmlParser
     end
 
     # Parse single document style
+    # @param [OoxmlParser::OOXMLDocumentObject] parent parent object
     # @return [DocumentStyle]
-    def self.parse(node)
+    def self.parse(node, parent)
       document_style = DocumentStyle.new
       node.attributes.each do |key, value|
         case key
@@ -48,21 +49,22 @@ module OoxmlParser
         when 'rPr'
           document_style.run_properties = DocxParagraphRun.parse(subnode)
         when 'pPr'
-          document_style.paragraph_properties = DocxParagraph.parse_paragraph_style(subnode)
+          document_style.paragraph_properties = DocxParagraph.parse_paragraph_style(subnode, parent: document_style)
         when 'qFormat'
           document_style.q_format = true
         end
       end
+      document_style.parent = parent
       document_style
     end
 
     # Parse all document style list
     # @return [Array, DocumentStyle]
-    def self.parse_list
+    def self.parse_list(parent)
       styles_array = []
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
       doc.search('//w:style').each do |style|
-        styles_array << DocumentStyle.parse(style)
+        styles_array << DocumentStyle.parse(style, parent)
       end
       styles_array
     end

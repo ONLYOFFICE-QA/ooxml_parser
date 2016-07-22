@@ -40,6 +40,8 @@ module OoxmlParser
           paragraph_properties.numbering.start_at = properties_element.attribute('startAt').value if properties_element.attribute('startAt')
         when 'tabLst'
           paragraph_properties.tabs = ParagraphTab.parse(properties_element)
+        when 'ind'
+          paragraph_properties.indent = Indents.parse(properties_element)
         end
       end
       paragraph_properties
