@@ -1,6 +1,6 @@
-require_relative 'numbering_properties/numbering_level'
+require_relative 'numbering/numbering_level'
 module OoxmlParser
-  class NumberingProperties < OOXMLDocumentObject
+  class Numbering < OOXMLDocumentObject
     attr_accessor :id, :nsid, :multilevel_type, :tmpl, :ilvls
 
     def initialize(id = nil, multilevel_type = nil, ilvls = [])
@@ -11,7 +11,7 @@ module OoxmlParser
 
     def self.parse(id)
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/numbering.xml'), 'r:UTF-8')
-      numbering = NumberingProperties.new
+      numbering = Numbering.new
       numbering.id = id
       doc.search('//w:num').each do |num|
         next unless id == num.attribute('numId').value

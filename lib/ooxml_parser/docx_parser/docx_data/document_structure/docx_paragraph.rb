@@ -260,12 +260,12 @@ module OoxmlParser
         paragraph_style.frame_properties = FrameProperties.parse(frame_pr_node)
       end
       paragraph_pr_tag.xpath('w:numPr').each do |num_pr|
-        numbering = Numbering.new
+        numbering = NumberingProperties.new
         num_pr.xpath('w:ilvl').each do |ilvl|
           numbering.ilvl = ilvl.attribute('val').value
         end
         num_pr.xpath('w:numId').each do |num_id|
-          numbering.numbering_properties = NumberingProperties.parse(num_id.attribute('val').value) if File.exist?(OOXMLDocumentObject.path_to_folder + 'word/numbering.xml')
+          numbering.numbering_properties = Numbering.parse(num_id.attribute('val').value) if File.exist?(OOXMLDocumentObject.path_to_folder + 'word/numbering.xml')
         end
         paragraph_style.numbering = numbering
       end

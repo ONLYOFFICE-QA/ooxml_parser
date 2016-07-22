@@ -5,6 +5,7 @@ require_relative 'document_structure/document_background'
 require_relative 'document_structure/document_properties'
 require_relative 'document_structure/document_style'
 require_relative 'document_structure/header_footer'
+require_relative 'document_structure/numbering'
 require_relative 'document_structure/page_properties/page_properties'
 module OoxmlParser
   class DocumentStructure < CommonDocumentStructure

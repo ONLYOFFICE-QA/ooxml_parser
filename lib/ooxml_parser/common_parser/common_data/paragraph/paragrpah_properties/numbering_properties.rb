@@ -1,6 +1,5 @@
-require_relative 'numbering/numbering_properties'
 module OoxmlParser
-  class Numbering
+  class NumberingProperties
     attr_accessor :size, :font, :symbol, :start_at, :type, :ilvl, :numbering_properties
 
     def initialize(ilvl = 0, numbering_properties = nil)
