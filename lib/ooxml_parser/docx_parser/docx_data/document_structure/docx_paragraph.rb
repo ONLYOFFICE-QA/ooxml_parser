@@ -104,7 +104,7 @@ module OoxmlParser
       paragraph_style = default_paragraph.copy
       default_character_style = default_character.copy
       character_styles_array = []
-      custom_character_style = DocxParagraphRun.new
+      custom_character_style = default_character_style.copy
       char_number = 0
       comments = []
       p_tag.xpath('w:bookmarkStart').each do |bookmark_start|
