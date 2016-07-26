@@ -21,7 +21,7 @@
 * Redone parsing of `nary` in formulas
 * Fix parsing gradient color linear values
 * Fix parsing Footnote and Endnote reference in runs
-* Fix calculating position offset values in different units of measurements
+* Fix calculating position offset values, distance from text in different units of measurements
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
