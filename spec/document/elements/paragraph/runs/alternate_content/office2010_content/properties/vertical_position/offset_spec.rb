@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'My behaviour' do
-  it 'should do something' do
+  it 'offset_in_other_unit' do
     OoxmlParser.configure do |config|
       config.units = :emu
     end
