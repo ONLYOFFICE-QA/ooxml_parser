@@ -19,4 +19,9 @@ describe OoxmlParser::Numbering do
     expect(docx.elements[0].numbering.abstruct_numbering
                .level_list.first.run_properties.font_name).to eq('Symbol')
   end
+
+  it 'numbering_multilevel_type.docx' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_multilevel_type.docx')
+    expect(docx.elements[0].numbering.abstruct_numbering.multilevel_type.value).to eq(:hybrid_multi_level)
+  end
 end
