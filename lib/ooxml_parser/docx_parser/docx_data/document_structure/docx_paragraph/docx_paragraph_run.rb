@@ -9,6 +9,11 @@ module OoxmlParser
                   :link, :highlight, :shadow, :outline, :imprint, :emboss, :vanish, :effect, :caps, :w,
                   :position, :rtl, :em, :cs, :spacing, :break, :touch, :shape, :footnote, :endnote, :fld_char, :style,
                   :comments, :alternate_content, :page_number, :text_outline, :text_fill
+    # @return [Float]
+    # This element specifies the font size which shall be applied to all
+    # complex script characters in the contents of this run when displayed
+    attr_accessor :font_size_complex
+
     # @return [String] type of instruction used for upper level of run
     # http://officeopenxml.com/WPfieldInstructions.php
     attr_accessor :instruction
@@ -133,8 +138,10 @@ module OoxmlParser
       end
       character_pr_tag.xpath('*').each do |run_properties_node|
         case run_properties_node.name
-        when 'sz', 'szCs'
+        when 'sz'
           character_style.size = run_properties_node.attribute('val').value.to_i / 2.0
+        when 'szCs'
+          character_style.font_size_complex = run_properties_node.attribute('val').value.to_i / 2.0
         when 'highlight'
           character_style.highlight = run_properties_node.attribute('val').value
         when 'vertAlign'
