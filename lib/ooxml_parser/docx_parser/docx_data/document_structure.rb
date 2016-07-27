@@ -5,6 +5,7 @@ require_relative 'document_structure/document_background'
 require_relative 'document_structure/document_properties'
 require_relative 'document_structure/document_style'
 require_relative 'document_structure/header_footer'
+require_relative 'document_structure/numbering'
 require_relative 'document_structure/page_properties/page_properties'
 module OoxmlParser
   class DocumentStructure < CommonDocumentStructure
@@ -12,6 +13,8 @@ module OoxmlParser
 
     # @return [Array, DocumentStyle] array of document styles in current document
     attr_accessor :document_styles
+    # @return [Numbering] store numbering data
+    attr_accessor :numbering
 
     def initialize(elements = [], page_properties = nil, notes = [], background = nil, document_properties = DocumentProperties.new, comments = [])
       @elements = elements
@@ -87,8 +90,8 @@ module OoxmlParser
 
     def recognize_numbering(location: :canvas, type: :simple, paragraph_number: 0)
       elements = element_by_description(location: location, type: type)
-      lvl_text = elements[paragraph_number].numbering.numbering_properties.ilvls[0].level_text
-      num_format = elements[paragraph_number].numbering.numbering_properties.ilvls[0].num_format
+      lvl_text = elements[paragraph_number].numbering.abstruct_numbering.ilvls[0].level_text
+      num_format = elements[paragraph_number].numbering.abstruct_numbering.ilvls[0].num_format
       [num_format, lvl_text]
     end
 
@@ -141,7 +144,8 @@ module OoxmlParser
       end
       parse_default_style
       doc_structure = DocumentStructure.new
-      doc_structure.document_styles = DocumentStyle.parse_list
+      doc_structure.numbering = Numbering.parse
+      doc_structure.document_styles = DocumentStyle.parse_list(doc_structure)
       number = 0
       OOXMLDocumentObject.add_to_xmls_stack('word/document.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
@@ -154,7 +158,7 @@ module OoxmlParser
             if element.name == 'p'
               child = element.child
               unless child.nil? && doc_structure.elements.last.class == Table
-                paragraph_style = DocxParagraph.parse(element, number, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style)
+                paragraph_style = DocxParagraph.parse(element, number, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style, parent: doc_structure)
                 number += 1
                 doc_structure.elements << paragraph_style.copy
               end

@@ -1,11 +1,11 @@
+require_relative 'paragrpah_properties/numbering_properties'
 require_relative 'paragrpah_properties/spacing'
-require_relative 'paragrpah_properties/numbering'
 module OoxmlParser
   class ParagraphProperties < OOXMLDocumentObject
     attr_accessor :align, :numbering, :level, :spacing, :spacing_before, :spacing_after, :indent, :margin_left, :margin_right,
                   :tabs
 
-    def initialize(numbering = Numbering.new)
+    def initialize(numbering = NumberingProperties.new)
       @numbering = numbering
       @spacing = Spacing.new(0, 0, 1, :multiple)
     end
@@ -40,6 +40,8 @@ module OoxmlParser
           paragraph_properties.numbering.start_at = properties_element.attribute('startAt').value if properties_element.attribute('startAt')
         when 'tabLst'
           paragraph_properties.tabs = ParagraphTab.parse(properties_element)
+        when 'ind'
+          paragraph_properties.indent = Indents.parse(properties_element)
         end
       end
       paragraph_properties

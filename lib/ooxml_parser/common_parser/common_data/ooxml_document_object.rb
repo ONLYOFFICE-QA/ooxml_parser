@@ -6,6 +6,9 @@ require 'zip'
 
 module OoxmlParser
   class OOXMLDocumentObject
+    # @return [OOXMLDocumentObject] object which hold current object
+    attr_accessor :parent
+
     def ==(other)
       instance_variables.each do |current_attribute|
         unless instance_variable_get(current_attribute) == other.instance_variable_get(current_attribute)

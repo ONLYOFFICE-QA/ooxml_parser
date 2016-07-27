@@ -60,6 +60,8 @@ module OoxmlParser
           character_properties.vertical_align = properties_element.attribute('val').value.to_sym
         when 'rFont'
           character_properties.font_name = properties_element.attribute('val').value
+        when 'rFonts'
+          character_properties.font_name = properties_element.attribute('ascii').value if properties_element.attribute('ascii')
         when 'color'
           character_properties.font_color = Color.parse_color_tag(properties_element)
         when 'strike'
