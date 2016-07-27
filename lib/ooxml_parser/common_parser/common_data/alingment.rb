@@ -66,6 +66,12 @@ module OoxmlParser
         :top_to_bottom_right_to_left
       when 'btLr'
         :bottom_to_top_left_to_right
+      when 'singlelevel'
+        :single_level
+      when 'multilevel'
+        :multi_level
+      when 'hybridMultilevel'
+        :hybrid_multi_level
       else
         node.value.to_sym
       end

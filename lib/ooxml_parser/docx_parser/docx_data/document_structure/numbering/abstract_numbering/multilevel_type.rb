@@ -13,7 +13,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'val'
-          multilevel_type.value = value.value.to_f
+          multilevel_type.value = Alignment.parse(value)
         end
       end
       multilevel_type
