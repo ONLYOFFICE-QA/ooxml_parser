@@ -99,8 +99,8 @@ module OoxmlParser
       elements = element_by_description(location: location, type: type)
       set = []
       levels_count.times do |col|
-        set[0] = elements[col].numbering.numbering_properties.level_list[col].numbering_format.value
-        set[1] = elements[col].numbering.numbering_properties.level_list[col].text.value
+        set[0] = elements[col].numbering.abstruct_numbering.level_list[col].numbering_format.value
+        set[1] = elements[col].numbering.abstruct_numbering.level_list[col].text.value
       end
       set
     end
