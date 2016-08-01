@@ -90,8 +90,8 @@ module OoxmlParser
 
     def recognize_numbering(location: :canvas, type: :simple, paragraph_number: 0)
       elements = element_by_description(location: location, type: type)
-      lvl_text = elements[paragraph_number].numbering.abstruct_numbering.ilvls[0].level_text
-      num_format = elements[paragraph_number].numbering.abstruct_numbering.ilvls[0].num_format
+      lvl_text = elements[paragraph_number].numbering.abstruct_numbering.level_list[0].text.value
+      num_format = elements[paragraph_number].numbering.abstruct_numbering.level_list[0].numbering_format.value
       [num_format, lvl_text]
     end
 
@@ -99,8 +99,8 @@ module OoxmlParser
       elements = element_by_description(location: location, type: type)
       set = []
       levels_count.times do |col|
-        set[0] = elements[col].numbering.numbering_properties.ilvls[col].num_format
-        set[1] = elements[col].numbering.numbering_properties.ilvls[col].level_text
+        set[0] = elements[col].numbering.numbering_properties.level_list[col].numbering_format.value
+        set[1] = elements[col].numbering.numbering_properties.level_list[col].text.value
       end
       set
     end
