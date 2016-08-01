@@ -8,7 +8,7 @@ module OoxmlParser
     end
 
     def abstruct_numbering
-      @parent.parent.numbering.properties_by_num_id(@numbering_properties)
+      root_object.numbering.properties_by_num_id(@numbering_properties)
     end
 
     # Parse NumberingProperties

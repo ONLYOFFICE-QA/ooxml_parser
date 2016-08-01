@@ -9,8 +9,15 @@ module OoxmlParser
     # @return [OOXMLDocumentObject] object which hold current object
     attr_accessor :parent
 
+    def root_object
+      tree_object = self
+      tree_object = tree_object.parent until tree_object.parent.nil?
+      tree_object
+    end
+
     def ==(other)
       instance_variables.each do |current_attribute|
+        next if current_attribute == :@parent
         unless instance_variable_get(current_attribute) == other.instance_variable_get(current_attribute)
           return false
         end
