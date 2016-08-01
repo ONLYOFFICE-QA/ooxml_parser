@@ -20,8 +20,9 @@ module OoxmlParser
       @notes = []
     end
 
-    def self.parse(sect_pr, default_paragraph, default_character)
+    def self.parse(sect_pr, default_paragraph, default_character, parent: nil)
       page_properties = PageProperties.new
+      page_properties.parent = parent
       sect_pr.xpath('w:pgSz').each do |pg_sz|
         page_properties.size = Size.parse(pg_sz)
       end
@@ -71,7 +72,10 @@ module OoxmlParser
       sect_pr.xpath('w:headerReference', 'w:footerReference').each do |doc_edge_reference|
         target = OOXMLDocumentObject.get_link_from_rels(doc_edge_reference.attribute('id').value)
         OOXMLDocumentObject.add_to_xmls_stack("word/#{target}")
-        note = Note.parse(default_paragraph, default_character, target, doc_edge_reference.attribute('type').value, File.basename(target).sub('.xml', ''))
+        note = Note.parse(default_paragraph, default_character, target,
+                          doc_edge_reference.attribute('type').value,
+                          File.basename(target).sub('.xml', ''),
+                          parent: page_properties)
         page_properties.notes << note
         OOXMLDocumentObject.xmls_stack.pop
       end

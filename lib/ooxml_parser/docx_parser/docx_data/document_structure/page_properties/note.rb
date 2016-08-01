@@ -8,10 +8,11 @@ module OoxmlParser
       @assigned_to = assigned_to
     end
 
-    def self.parse(default_paragraph, default_character, target, assigned_to, type)
+    def self.parse(default_paragraph, default_character, target, assigned_to, type, parent: nil)
       note = Note.new
       note.type = type
       note.assigned_to = assigned_to
+      note.parent = parent
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + "word/#{target}"))
       if type.include?('footer')
         xpath_note = '//w:ftr'
@@ -24,7 +25,7 @@ module OoxmlParser
         number = 0
         ftr.xpath('*').each do |sub_element|
           if sub_element.name == 'p'
-            note.elements << DocxParagraph.parse(sub_element, number, default_paragraph, default_character)
+            note.elements << DocxParagraph.parse(sub_element, number, default_paragraph, default_character, parent: note)
             number += 1
           elsif sub_element.name == 'tbl'
             note.elements << Table.parse(sub_element, number)

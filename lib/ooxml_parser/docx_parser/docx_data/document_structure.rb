@@ -169,7 +169,10 @@ module OoxmlParser
             end
           end
           body.xpath('w:sectPr').each do |sect_pr|
-            doc_structure.page_properties = PageProperties.parse(sect_pr, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style)
+            doc_structure.page_properties = PageProperties.parse(sect_pr,
+                                                                 DocumentStructure.default_paragraph_style,
+                                                                 DocumentStructure.default_run_style,
+                                                                 parent: doc_structure)
             doc_structure.notes = doc_structure.page_properties.notes # keep copy of notes to compatibility with previous docx models
           end
         end

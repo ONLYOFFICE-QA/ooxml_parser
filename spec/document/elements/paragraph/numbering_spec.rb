@@ -24,4 +24,9 @@ describe OoxmlParser::Numbering do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_multilevel_type.docx')
     expect(docx.elements[0].numbering.abstruct_numbering.multilevel_type.value).to eq(:hybrid_multi_level)
   end
+
+  it 'numbering_in_header.docx' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_in_header.docx')
+    expect(docx.element_by_description(location: :header, type: :paragraph).first.numbering.abstruct_numbering.level_list.first.text.value).to eq('§')
+  end
 end
