@@ -6,13 +6,14 @@ module OoxmlParser
     # @return [FileReference] image structure
     attr_accessor :file_reference
 
-    def self.parse(shape_node)
+    def self.parse(shape_node, parent: nil)
       shape = OldDocxShape.new
+      shape.parent = parent
       shape.properties = OldDocxShapeProperties.parse(shape_node)
       shape_node.xpath('*').each do |shape_node_child|
         case shape_node_child.name
         when 'textbox'
-          shape.text_box = TextBox.parse_list(shape_node_child)
+          shape.text_box = TextBox.parse_list(shape_node_child, parent: shape)
         when 'imagedata'
           shape.file_reference = FileReference.parse(shape_node_child)
         when 'fill'
