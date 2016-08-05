@@ -11,8 +11,9 @@ module OoxmlParser
 
     alias cell_properties properties
 
-    def self.parse(cell_node)
+    def self.parse(cell_node, parent: nil)
       cell = TableCell.new
+      cell.parent = parent
       cell_node.xpath('*').each do |cell_node_child|
         case cell_node_child.name
         when 'txBody'
@@ -20,7 +21,10 @@ module OoxmlParser
         when 'tcPr'
           cell.properties = CellProperties.parse(cell_node_child)
         when 'p'
-          paragraph = DocxParagraph.parse(cell_node_child, 0, DocumentStructure.default_table_paragraph_style, DocumentStructure.default_table_run_style)
+          paragraph = DocxParagraph.parse(cell_node_child, 0,
+                                          DocumentStructure.default_table_paragraph_style,
+                                          DocumentStructure.default_table_run_style,
+                                          parent: cell)
           cell.elements << paragraph
         when 'tbl'
           table = Table.parse(cell_node_child)
