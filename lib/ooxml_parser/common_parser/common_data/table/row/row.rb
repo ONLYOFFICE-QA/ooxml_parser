@@ -10,8 +10,9 @@ module OoxmlParser
 
     alias table_row_height height
 
-    def self.parse(row_node)
+    def self.parse(row_node, parent: nil)
       row = TableRow.new
+      row.parent = parent
       row.height = (row_node.attribute('h').value.to_f / 360_000.0).round(2) unless row_node.attribute('h').nil?
       row_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:trPr").each do |table_prop_node|
         row.table_row_properties = TableRowProperties.parse(table_prop_node)
@@ -25,7 +26,7 @@ module OoxmlParser
         end
       end
       Presentation.current_font_style = FontStyle.new(true) # TODO: Add correct parsing of TableStyle.xml file and use it
-      row_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:tc").each { |cell_node| row.cells << TableCell.parse(cell_node) }
+      row_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:tc").each { |cell_node| row.cells << TableCell.parse(cell_node, parent: row) }
       Presentation.current_font_style = FontStyle.new
       row
     end

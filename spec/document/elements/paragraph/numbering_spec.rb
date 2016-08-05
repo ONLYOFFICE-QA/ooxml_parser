@@ -36,4 +36,9 @@ describe OoxmlParser::Numbering do
                .data.text_box.first.numbering.abstruct_numbering
                .level_list.first.text.value).to eq('Ø')
   end
+
+  it 'numbering_in_table.docx' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_in_table.docx')
+    expect(docx.element_by_description(location: :canvas, type: :table).first.numbering.abstruct_numbering.level_list.first.text.value).to eq('¨')
+  end
 end

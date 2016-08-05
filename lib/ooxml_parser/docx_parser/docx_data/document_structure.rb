@@ -163,7 +163,12 @@ module OoxmlParser
                 doc_structure.elements << paragraph_style.copy
               end
             elsif element.name == 'tbl'
-              table = Table.parse(element, number, TableProperties.new, DocumentStructure.default_table_paragraph_style, DocumentStructure.default_table_run_style)
+              table = Table.parse(element,
+                                  number,
+                                  TableProperties.new,
+                                  DocumentStructure.default_table_paragraph_style,
+                                  DocumentStructure.default_table_run_style,
+                                  parent: doc_structure)
               number += 1
               doc_structure.elements << table
             end
