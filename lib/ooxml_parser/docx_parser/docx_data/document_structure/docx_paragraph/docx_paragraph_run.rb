@@ -285,7 +285,7 @@ module OoxmlParser
       character_style
     end
 
-    def self.parse_character(r_tag, character_style, char_number)
+    def self.parse_character(r_tag, character_style, char_number, parent: nil)
       r_tag.xpath('*').each do |r_node_child|
         case r_node_child.name
         when 'rPr'
@@ -308,7 +308,7 @@ module OoxmlParser
         when 'drawing'
           character_style.drawings << DocxDrawing.parse(r_node_child)
         when 'AlternateContent'
-          character_style.alternate_content = AlternateContent.parse(r_node_child)
+          character_style.alternate_content = AlternateContent.parse(r_node_child, parent: character_style)
         when 'br'
           if r_node_child.attribute('type').nil?
             character_style.break = :line
@@ -338,6 +338,7 @@ module OoxmlParser
         end
       end
       character_style.number = char_number
+      character_style.parent = parent
       character_style
     end
 

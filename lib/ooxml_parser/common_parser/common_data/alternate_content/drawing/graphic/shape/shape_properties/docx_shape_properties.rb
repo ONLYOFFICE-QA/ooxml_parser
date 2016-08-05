@@ -17,8 +17,9 @@ module OoxmlParser
       @line = DocxShapeLine.new
     end
 
-    def self.parse(shape_properties_node)
+    def self.parse(shape_properties_node, parent: nil)
       shape_properties = DocxShapeProperties.new
+      shape_properties.parent = parent
       shape_properties.fill_color = DocxColor.parse(shape_properties_node)
       shape_properties_node.xpath('*').each do |shape_properties_node_child|
         case shape_properties_node_child.name

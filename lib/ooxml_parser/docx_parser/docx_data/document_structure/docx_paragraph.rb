@@ -141,7 +141,7 @@ module OoxmlParser
               paragraph_style.page_numbering = true
             end
           end
-          character_style = DocxParagraphRun.parse_character(p_element, character_style, char_number)
+          character_style = DocxParagraphRun.parse_character(p_element, character_style, char_number, parent: paragraph_style)
           character_style.comments = comments.dup
           character_styles_array << character_style.copy
           unless character_style.shape.nil?

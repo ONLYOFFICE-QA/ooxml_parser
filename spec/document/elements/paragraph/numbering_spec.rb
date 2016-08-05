@@ -29,4 +29,11 @@ describe OoxmlParser::Numbering do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_in_header.docx')
     expect(docx.element_by_description(location: :header, type: :paragraph).first.numbering.abstruct_numbering.level_list.first.text.value).to eq('§')
   end
+
+  it 'numbering_in_shape.docx' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_in_shape.docx')
+    expect(docx.elements[0].nonempty_runs.first.alternate_content.office2007_content
+               .data.text_box.first.numbering.abstruct_numbering
+               .level_list.first.text.value).to eq('Ø')
+  end
 end
