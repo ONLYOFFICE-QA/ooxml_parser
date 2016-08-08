@@ -2,6 +2,7 @@
 
 ## master (unreleased)
 ### New features
+* Add configuration to set accuracy of fraction part of digit
 * Fully support of Windows platform
 * Add parsing of Shape Adjust Values List
 * Add parsing Relative Sizes of shape

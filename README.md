@@ -17,10 +17,23 @@ Parse a docx file
     
 ## Configuration
 
-Set units of mesaurements:
+### Units of measurements
+
+Set units of measurements:
 Possible units are `:points`, `:centimeters`, `:dxa`, `:inches`, `:emu`
 Default is `:centimeters`
 
     OoxmlParser.configure do |config|
       config.units = :points
+    end
+    
+    
+
+### Accuracy
+
+Accuracy of digits in fraction part
+Default is 2 digits in fraction part
+
+    OoxmlParser.configure do |config|
+      config.accuracy = 3
     end
