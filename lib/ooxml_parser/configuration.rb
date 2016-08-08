@@ -1,9 +1,12 @@
 module OoxmlParser
   class Configuration
     attr_accessor :units
+    # @return [Integer] accuracy of digits in fraction part
+    attr_accessor :accuracy
 
     def initialize
       @units = :centimeters
+      @accuracy = 2
     end
 
     # @return [Float] by which divide units values
