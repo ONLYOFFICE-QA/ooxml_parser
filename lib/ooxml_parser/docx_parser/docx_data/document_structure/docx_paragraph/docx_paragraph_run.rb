@@ -117,61 +117,60 @@ module OoxmlParser
       true
     end
 
-    def self.parse(r_tag, character_style, char_number, parent: nil)
+    def parse(r_tag, char_number, parent: nil)
       r_tag.xpath('*').each do |r_node_child|
         case r_node_child.name
         when 'rPr'
-          RunPropertiesDocument.parse(r_node_child, character_style, DocumentStructure.default_run_style)
+          RunPropertiesDocument.parse(r_node_child, self, DocumentStructure.default_run_style)
         when 'instrText'
           if r_node_child.text.include?('HYPERLINK')
             hyperlink = Hyperlink.new(r_node_child.text.sub('HYPERLINK ', '').split(' \\o ').first, r_node_child.text.sub('HYPERLINK', '').split(' \\o ').last)
-            character_style.link = hyperlink
+            @link = hyperlink
           elsif r_node_child.text[/PAGE\s+\\\*/]
-            character_style.text = '*PAGE NUMBER*'
+            @text = '*PAGE NUMBER*'
           end
         when 'fldChar'
-          character_style.fld_char = r_node_child.attribute('fldCharType').value.to_sym
+          @fld_char = r_node_child.attribute('fldCharType').value.to_sym
         when 't'
-          character_style.text += r_node_child.text
+          @text += r_node_child.text
         when 'noBreakHyphen'
-          character_style.text += '–'
+          @text += '–'
         when 'tab'
-          character_style.text += "\t"
+          @text += "\t"
         when 'drawing'
-          character_style.drawings << DocxDrawing.parse(r_node_child)
+          @drawings << DocxDrawing.parse(r_node_child)
         when 'AlternateContent'
-          character_style.alternate_content = AlternateContent.parse(r_node_child, parent: character_style)
+          @alternate_content = AlternateContent.parse(r_node_child, parent: self)
         when 'br'
           if r_node_child.attribute('type').nil?
-            character_style.break = :line
-            character_style.text += "\r"
+            @break = :line
+            @text += "\r"
           else
             case r_node_child.attribute('type').value
             when 'page', 'column'
-              character_style.break = r_node_child.attribute('type').value.to_sym
+              @break = r_node_child.attribute('type').value.to_sym
             end
           end
         when 'footnoteReference'
-          character_style.footnote = HeaderFooter.parse(r_node_child)
+          @footnote = HeaderFooter.parse(r_node_child)
         when 'endnoteReference'
-          character_style.endnote = HeaderFooter.parse(r_node_child)
+          @endnote = HeaderFooter.parse(r_node_child)
         when 'pict'
           r_node_child.xpath('*').each do |pict_node_child|
             case pict_node_child.name
             when 'shape'
-              character_style.shape = Shape.parse(pict_node_child, :shape)
+              @shape = Shape.parse(pict_node_child, :shape)
             when 'rect'
-              character_style.shape = Shape.parse(pict_node_child, :rectangle)
+              @shape = Shape.parse(pict_node_child, :rectangle)
             when 'oval'
-              character_style.shape = Shape.parse(pict_node_child, :oval)
+              @shape = Shape.parse(pict_node_child, :oval)
             when 'shapetype'
             end
           end
         end
       end
-      character_style.number = char_number
-      character_style.parent = parent
-      character_style
+      @number = char_number
+      @parent = parent
     end
 
     def self.parse_font_by_theme(theme)
