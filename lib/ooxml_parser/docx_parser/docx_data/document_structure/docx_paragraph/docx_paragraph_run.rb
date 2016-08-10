@@ -118,6 +118,7 @@ module OoxmlParser
     end
 
     def parse(r_tag, char_number, parent: nil)
+      @parent = parent
       r_tag.xpath('*').each do |r_node_child|
         case r_node_child.name
         when 'rPr'
@@ -152,9 +153,9 @@ module OoxmlParser
             end
           end
         when 'footnoteReference'
-          @footnote = HeaderFooter.parse(r_node_child)
+          @footnote = HeaderFooter.parse(r_node_child, parent: self)
         when 'endnoteReference'
-          @endnote = HeaderFooter.parse(r_node_child)
+          @endnote = HeaderFooter.parse(r_node_child, parent: self)
         when 'pict'
           r_node_child.xpath('*').each do |pict_node_child|
             case pict_node_child.name
@@ -170,7 +171,6 @@ module OoxmlParser
         end
       end
       @number = char_number
-      @parent = parent
     end
 
     def self.parse_font_by_theme(theme)
@@ -190,16 +190,6 @@ module OoxmlParser
           end
         end
       end
-    end
-
-    def self.get_style_by_id(id)
-      doc = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml"))
-      doc.search('//w:styles').each do |styles|
-        styles.xpath('w:style').each do |style|
-          return style if style.attribute('styleId').value == id
-        end
-      end
-      nil
     end
   end
 end

@@ -1,3 +1,4 @@
+require_relative 'table_style_properties/table_style_properties_helper'
 module OoxmlParser
   # Class for parsing `w:tblStylePr`
   class TableStyleProperties < OOXMLDocumentObject
@@ -7,6 +8,7 @@ module OoxmlParser
     attr_accessor :run_properties
     # @return [CellProperties] properties of table cell
     attr_accessor :table_cell_properties
+    alias cell_properties table_cell_properties
 
     # Parse table style property
     # @param node [Nokogiri::XML::Element] node to parse

@@ -4,7 +4,7 @@ require_relative 'drawing_properties/size_relative_vertical'
 require_relative 'graphic/docx_graphic'
 # Docx Drawing Data
 module OoxmlParser
-  class DocxDrawing
+  class DocxDrawing < OOXMLDocumentObject
     attr_accessor :type, :properties, :graphic
 
     alias picture graphic
@@ -13,8 +13,9 @@ module OoxmlParser
       @properties = properties
     end
 
-    def self.parse(drawing_node)
+    def self.parse(drawing_node, parent: nil)
       drawing = DocxDrawing.new
+      drawing.parent = parent
       drawing_node.xpath('*').each do |drawing_node_child|
         case drawing_node_child.name
         when 'anchor'
@@ -37,7 +38,7 @@ module OoxmlParser
           when 'extent'
             drawing.properties.object_size = OOXMLCoordinates.parse(content_node_child, x_attr: 'cx', y_attr: 'cy')
           when 'graphic'
-            drawing.graphic = DocxGraphic.parse(content_node_child)
+            drawing.graphic = DocxGraphic.parse(content_node_child, parent: drawing)
           when 'positionV'
             drawing.properties.vertical_position = DocxDrawingPosition.parse(content_node_child)
           when 'positionH'

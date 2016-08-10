@@ -51,9 +51,7 @@ module OoxmlParser
         when 'tblBorders'
           table_properties.table_borders = TableBorders.parse(table_props_node_child)
         when 'tblStyle'
-          style = DocxParagraphRun.get_style_by_id(table_props_node_child.attribute('val').value)
-          next if style.nil?
-          table_properties.table_style = TableStyle.parse(table_style_node: style)
+          table_properties.table_style = table_properties.root_object.document_style_by_id(table_props_node_child.attribute('val').value)
         when 'tblW'
           table_properties.table_width = table_props_node_child.attribute('w').text.to_f / 567.0
         when 'jc'

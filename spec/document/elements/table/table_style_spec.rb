@@ -8,7 +8,7 @@ describe OoxmlParser::TableStyle do
 
   it 'Check Parsing Table Style Banding2 without color' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/style/table_style_columns_none.docx')
-    expect(docx.elements[1].table_properties.table_style.banding_2_horizontal.cell_properties.shd).to eq(:none)
+    expect(docx.elements[1].table_properties.table_style.banding_2_horizontal).to be_nil
   end
 
   it 'Check Parsing Table Style Banding2 with color' do

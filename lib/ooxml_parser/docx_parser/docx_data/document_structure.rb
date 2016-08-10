@@ -9,6 +9,7 @@ require_relative 'document_structure/numbering'
 require_relative 'document_structure/page_properties/page_properties'
 module OoxmlParser
   class DocumentStructure < CommonDocumentStructure
+    include DocumentStyleHelper
     attr_accessor :elements, :page_properties, :notes, :background, :document_properties, :comments
 
     # @return [Array, DocumentStyle] array of document styles in current document
@@ -103,23 +104,6 @@ module OoxmlParser
         set[1] = elements[col].numbering.abstruct_numbering.level_list[col].text.value
       end
       set
-    end
-
-    # Return document style by its name
-    # @param name [String] name of style
-    # @return [DocumentStyle, nil]
-    def document_style_by_name(name)
-      @document_styles.each do |style|
-        return style if style.name == name
-      end
-      nil
-    end
-
-    # Check if style exists in current document
-    # @param name [String] name of style
-    # @return [True, False]
-    def style_exist?(name)
-      !document_style_by_name(name).nil?
     end
 
     def self.parse

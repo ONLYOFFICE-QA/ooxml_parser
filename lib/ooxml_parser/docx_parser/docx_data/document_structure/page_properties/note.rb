@@ -28,7 +28,7 @@ module OoxmlParser
             note.elements << DocxParagraph.parse(sub_element, number, default_paragraph, default_character, parent: note)
             number += 1
           elsif sub_element.name == 'tbl'
-            note.elements << Table.parse(sub_element, number)
+            note.elements << Table.parse(sub_element, number, parent: note)
             number += 1
           elsif sub_element.name == 'std'
             sub_element.xpath('w:p').each do |p|

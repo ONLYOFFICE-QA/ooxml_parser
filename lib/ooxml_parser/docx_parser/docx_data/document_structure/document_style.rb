@@ -1,6 +1,8 @@
+require_relative 'document_style/document_style_helper'
 module OoxmlParser
   # Class for describing styles containing in +styles.xml+
   class DocumentStyle < OOXMLDocumentObject
+    include TableStylePropertiesHelper
     # @return [Symbol] Type of style (+:paragraph+ or +:table+)
     attr_accessor :type
     # @return [FixNum] number of style

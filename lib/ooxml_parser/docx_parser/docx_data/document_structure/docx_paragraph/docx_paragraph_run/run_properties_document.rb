@@ -5,11 +5,10 @@ module OoxmlParser
     def self.parse(character_pr_tag, character_style = DocxParagraphRun.new, default_character = DocumentStructure.default_run_style)
       character_style.font_style = FontStyle.new
       character_pr_tag.xpath('w:rStyle').each do |r_style|
-        style = DocxParagraphRun.get_style_by_id(r_style.attribute('val').value)
+        style = character_style.root_object.document_style_by_id(r_style.attribute('val').value)
         break if style.nil?
-        style.xpath('w:rPr').each do |style_rpr|
-          character_style = parse(style_rpr, character_style, default_character)
-        end
+        character_style = style.run_properties
+        character_style = default_character if character_style.nil?
       end
       character_pr_tag.xpath('w:rFonts').each do |r_font|
         r_font.attributes.each do |font_attribute, value|

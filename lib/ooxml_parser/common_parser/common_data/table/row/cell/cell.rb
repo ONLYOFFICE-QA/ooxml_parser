@@ -27,7 +27,7 @@ module OoxmlParser
                                           parent: cell)
           cell.elements << paragraph
         when 'tbl'
-          table = Table.parse(cell_node_child)
+          table = Table.parse(cell_node_child, parent: cell)
           cell.elements << table
         end
       end
