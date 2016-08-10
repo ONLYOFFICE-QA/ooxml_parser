@@ -117,7 +117,7 @@ module OoxmlParser
       true
     end
 
-    def self.parse_character(r_tag, character_style, char_number, parent: nil)
+    def self.parse(r_tag, character_style, char_number, parent: nil)
       r_tag.xpath('*').each do |r_node_child|
         case r_node_child.name
         when 'rPr'

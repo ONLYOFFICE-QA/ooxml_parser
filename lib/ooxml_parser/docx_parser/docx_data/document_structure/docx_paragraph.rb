@@ -128,7 +128,7 @@ module OoxmlParser
           instruction = p_element.attribute('instr').to_s
           paragraph_style.page_numbering = true if instruction.include?('PAGE')
           p_element.xpath('w:r').each do |r_tag|
-            character_style = DocxParagraphRun.parse_character(r_tag, default_character_style.copy, char_number)
+            character_style = DocxParagraphRun.parse(r_tag, default_character_style.copy, char_number)
             character_style.page_number = paragraph_style.page_numbering
             character_style.instruction = instruction
             character_styles_array << character_style.copy
@@ -141,7 +141,7 @@ module OoxmlParser
               paragraph_style.page_numbering = true
             end
           end
-          character_style = DocxParagraphRun.parse_character(p_element, character_style, char_number, parent: paragraph_style)
+          character_style = DocxParagraphRun.parse(p_element, character_style, char_number, parent: paragraph_style)
           character_style.comments = comments.dup
           character_styles_array << character_style.copy
           unless character_style.shape.nil?
@@ -158,7 +158,7 @@ module OoxmlParser
             end
           end
           p_element.xpath('w:r').each do |r_tag|
-            character_style = DocxParagraphRun.parse_character(r_tag, character_style, char_number)
+            character_style = DocxParagraphRun.parse(r_tag, character_style, char_number)
             character_styles_array << character_style.copy
             char_number += 1
           end
@@ -166,7 +166,7 @@ module OoxmlParser
             instruction = simple_field.attribute('instr').to_s
             paragraph_style.page_numbering = true if instruction.include?('PAGE')
             simple_field.xpath('w:r').each do |r_tag|
-              character_style = DocxParagraphRun.parse_character(r_tag, character_style.copy, char_number)
+              character_style = DocxParagraphRun.parse(r_tag, character_style.copy, char_number)
               character_style.page_number = paragraph_style.page_numbering
               character_style.instruction = instruction
               character_styles_array << character_style.copy
