@@ -18,6 +18,7 @@
 * Add support of `show_category_name` and `show_series_name` to chart label properties
 
 ### Fixes
+* Fix parsing document style id - it can be string, not only digit
 * Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit
 * Redone parsing of `nary` in formulas
 * Fix parsing gradient color linear values

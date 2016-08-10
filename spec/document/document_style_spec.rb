@@ -21,4 +21,9 @@ describe 'document style' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/style_exists.docx')
     expect(docx.style_exist?('ThisStyleIsNotExist')).to be_falsey
   end
+
+  it 'paragraph_style_id_word' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/paragraph_style_id_word.docx')
+    expect(docx.document_styles.first.style_id).to eq('Normal')
+  end
 end
