@@ -2,6 +2,7 @@
 require_relative 'properties/table_look'
 require_relative 'properties/table_style'
 require_relative 'properties/table_position'
+require_relative 'properties/table_style_properties'
 require_relative 'table_properties/table_borders'
 module OoxmlParser
   class TableProperties < OOXMLDocumentObject
@@ -40,8 +41,9 @@ module OoxmlParser
       table
     end
 
-    def self.parse(table_properties_node)
+    def self.parse(table_properties_node, parent: nil)
       table_properties = TableProperties.new
+      table_properties.parent = parent
       table_properties_node.xpath('*').each do |table_props_node_child|
         case table_props_node_child.name
         when 'tableStyleId'

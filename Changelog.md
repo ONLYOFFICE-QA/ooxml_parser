@@ -3,6 +3,7 @@
 ## master (unreleased)
 ### New features
 * Add configuration to set accuracy of fraction part of digit
+* Add parsing of Table Properties and Table Style Properties in Document Styles
 * Fully support of Windows platform
 * Add parsing of Shape Adjust Values List
 * Add parsing Relative Sizes of shape

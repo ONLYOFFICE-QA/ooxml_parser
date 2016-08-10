@@ -26,4 +26,14 @@ describe 'document style' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/paragraph_style_id_word.docx')
     expect(docx.document_styles.first.style_id).to eq('Normal')
   end
+
+  it 'table_document_style' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/table_document_style.docx')
+    expect(docx.document_style_by_name('Table Grid').table_properties).to be_a(OoxmlParser::TableProperties)
+  end
+
+  it 'table_style_properties_document_style' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/table_style_properties_document_style.docx')
+    expect(docx.document_style_by_name('Lined').table_style_properties_list.first).to be_a(OoxmlParser::TableStyleProperties)
+  end
 end
