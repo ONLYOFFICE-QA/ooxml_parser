@@ -8,13 +8,14 @@ module OoxmlParser
 
     alias chart data
 
-    def self.parse(graphic_node)
+    def self.parse(graphic_node, parent: nil)
       graphic = DocxGraphic.new
+      graphic.parent = parent
       graphic_node.xpath('a:graphicData/*', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main').each do |graphic_data_node_child|
         case graphic_data_node_child.name
         when 'wsp'
           graphic.type = :shape
-          graphic.data = DocxShape.parse(graphic_data_node_child)
+          graphic.data = DocxShape.parse(graphic_data_node_child, parent: graphic)
         when 'pic'
           graphic.type = :picture
           graphic.data = DocxPicture.parse(graphic_data_node_child)

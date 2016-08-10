@@ -24,7 +24,7 @@ module OoxmlParser
         end
         case alternate_content_node_child.name
         when 'Choice'
-          alternate_content.office2010_content = DocxDrawing.parse(alternate_content_node_child.xpath('w:drawing').first) unless alternate_content_node_child.xpath('w:drawing').first.nil?
+          alternate_content.office2010_content = DocxDrawing.parse(alternate_content_node_child.xpath('w:drawing').first, parent: alternate_content) unless alternate_content_node_child.xpath('w:drawing').first.nil?
         when 'Fallback'
           alternate_content.office2007_content = OldDocxPicture.parse(alternate_content_node_child.xpath('w:pict').first, parent: alternate_content) unless alternate_content_node_child.xpath('w:pict').first.nil?
         end

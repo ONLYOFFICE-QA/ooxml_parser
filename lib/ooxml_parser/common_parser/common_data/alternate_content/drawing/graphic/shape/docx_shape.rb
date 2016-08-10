@@ -6,14 +6,15 @@ module OoxmlParser
   class DocxShape < OOXMLDocumentObject
     attr_accessor :non_visual_properties, :properties, :style, :body_properties, :text_body
 
-    def self.parse(shape_node)
+    def self.parse(shape_node, parent: nil)
       shape = DocxShape.new
+      shape.parent = parent
       shape_node.xpath('*').each do |shape_node_child|
         case shape_node_child.name
         when 'spPr'
           shape.properties = DocxShapeProperties.parse(shape_node_child)
         when 'txbx'
-          shape.text_body = OOXMLTextBox.parse(shape_node_child)
+          shape.text_body = OOXMLTextBox.parse(shape_node_child, parent: shape)
         when 'txBody'
           shape.text_body = TextBody.parse(shape_node_child)
         when 'bodyPr'

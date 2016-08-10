@@ -9,6 +9,7 @@ require_relative 'document_structure/numbering'
 require_relative 'document_structure/page_properties/page_properties'
 module OoxmlParser
   class DocumentStructure < CommonDocumentStructure
+    include DocumentStyleHelper
     attr_accessor :elements, :page_properties, :notes, :background, :document_properties, :comments
 
     # @return [Array, DocumentStyle] array of document styles in current document
@@ -105,23 +106,6 @@ module OoxmlParser
       set
     end
 
-    # Return document style by its name
-    # @param name [String] name of style
-    # @return [DocumentStyle, nil]
-    def document_style_by_name(name)
-      @document_styles.each do |style|
-        return style if style.name == name
-      end
-      nil
-    end
-
-    # Check if style exists in current document
-    # @param name [String] name of style
-    # @return [True, False]
-    def style_exist?(name)
-      !document_style_by_name(name).nil?
-    end
-
     def self.parse
       OOXMLDocumentObject.root_subfolder = 'word/'
       OOXMLDocumentObject.xmls_stack = []
@@ -138,7 +122,7 @@ module OoxmlParser
         end
         doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
           r_pr_defaults.xpath('w:rPr').each do |r_pr|
-            DocumentStructure.default_run_style = DocxParagraphRun.parse(r_pr, DocxParagraphRun.new)
+            DocumentStructure.default_run_style = RunPropertiesDocument.parse(r_pr, DocxParagraphRun.new)
           end
         end
       end
@@ -197,11 +181,11 @@ module OoxmlParser
             DocxParagraph.parse_paragraph_style(paragraph_pr_tag, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style)
           end
           style.xpath('w:rPr').each do |character_pr_tag|
-            DocxParagraphRun.parse(character_pr_tag, DocumentStructure.default_run_style, DocumentStructure.default_run_style)
+            RunPropertiesDocument.parse(character_pr_tag, DocumentStructure.default_run_style, DocumentStructure.default_run_style)
           end
         elsif (style.attribute('default').value == '1' || style.attribute('default').value == 'on' || style.attribute('default').value == 'true') && style.attribute('type').value == 'character'
           style.xpath('w:rPr').each do |character_pr_tag|
-            DocxParagraphRun.parse(character_pr_tag, DocumentStructure.default_run_style, DocumentStructure.default_run_style)
+            RunPropertiesDocument.parse(character_pr_tag, DocumentStructure.default_run_style, DocumentStructure.default_run_style)
           end
         end
       end
@@ -215,7 +199,7 @@ module OoxmlParser
           DocxParagraph.parse_paragraph_style(table_paragraph_pr_tag, DocumentStructure.default_table_paragraph_style, DocumentStructure.default_table_run_style)
         end
         style.xpath('w:rPr').each do |table_character_pr_tag|
-          DocxParagraphRun.parse(table_character_pr_tag, DocumentStructure.default_table_run_style, DocumentStructure.default_run_style)
+          RunPropertiesDocument.parse(table_character_pr_tag, DocumentStructure.default_table_run_style, DocumentStructure.default_run_style)
         end
       end
     end

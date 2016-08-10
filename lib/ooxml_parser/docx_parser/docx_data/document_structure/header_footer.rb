@@ -37,16 +37,17 @@ module OoxmlParser
     # Parse HeaderFooter
     # @param [Nokogiri::XML:Node] node with HeaderFooter
     # @return [HeaderFooter] result of parsing
-    def self.parse(node)
+    def self.parse(node, parent: nil)
       header_footer = HeaderFooter.new
       header_footer.id = node.attribute('id').value.to_i
+      header_footer.parent = parent
       header_footer.parse_type(node)
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + header_footer.xml_path))
       doc.search(header_footer.xpath_for_search).each do |footnote|
         next unless footnote.attribute('id').value.to_i == header_footer.id
         paragraph_number = 0
         footnote.xpath('w:p').each do |paragraph|
-          header_footer.elements << DocxParagraph.parse(paragraph, paragraph_number, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style)
+          header_footer.elements << DocxParagraph.parse(paragraph, paragraph_number, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style, parent: header_footer)
           paragraph_number += 1
         end
       end

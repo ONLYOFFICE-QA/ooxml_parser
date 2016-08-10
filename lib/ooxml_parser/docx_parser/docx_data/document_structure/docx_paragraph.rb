@@ -89,7 +89,7 @@ module OoxmlParser
       other.character_style_array.each do |current_run|
         other.character_style_array.delete(current_run) if current_run.text.empty?
       end
-      ignored_attributes = [:@number]
+      ignored_attributes = [:@number, :@parent]
       all_instance_variables = instance_variables
       significan_attribues = all_instance_variables - ignored_attributes
       significan_attribues.each do |current_attributes|
@@ -102,6 +102,7 @@ module OoxmlParser
 
     def self.parse(p_tag, par_number = 0, default_paragraph = DocxParagraph.new, default_character = DocxParagraphRun.new, parent: nil)
       paragraph_style = default_paragraph.copy
+      paragraph_style.parent = parent
       default_character_style = default_character.copy
       character_styles_array = []
       custom_character_style = default_character_style.copy
@@ -116,7 +117,7 @@ module OoxmlParser
       p_tag.xpath('*').each do |p_element|
         if p_element.name == 'pPr'
           p_props = p_tag.xpath('w:pPr')
-          DocxParagraph.parse_paragraph_style(p_props, paragraph_style, custom_character_style)
+          DocxParagraph.parse_paragraph_style(p_props, paragraph_style, custom_character_style, parent: parent)
           p_tag.xpath('w:pict').each do |pict|
             pict.xpath('v:rect').each do
               paragraph_style.horizontal_line = true
@@ -128,7 +129,8 @@ module OoxmlParser
           instruction = p_element.attribute('instr').to_s
           paragraph_style.page_numbering = true if instruction.include?('PAGE')
           p_element.xpath('w:r').each do |r_tag|
-            character_style = DocxParagraphRun.parse_character(r_tag, default_character_style.copy, char_number)
+            character_style = default_character_style.copy
+            character_style.parse(r_tag, char_number, parent: parent)
             character_style.page_number = paragraph_style.page_numbering
             character_style.instruction = instruction
             character_styles_array << character_style.copy
@@ -141,7 +143,7 @@ module OoxmlParser
               paragraph_style.page_numbering = true
             end
           end
-          character_style = DocxParagraphRun.parse_character(p_element, character_style, char_number, parent: paragraph_style)
+          character_style.parse(p_element, char_number, parent: paragraph_style)
           character_style.comments = comments.dup
           character_styles_array << character_style.copy
           unless character_style.shape.nil?
@@ -158,7 +160,7 @@ module OoxmlParser
             end
           end
           p_element.xpath('w:r').each do |r_tag|
-            character_style = DocxParagraphRun.parse_character(r_tag, character_style, char_number)
+            character_style.parse(r_tag, char_number, parent: parent)
             character_styles_array << character_style.copy
             char_number += 1
           end
@@ -166,7 +168,7 @@ module OoxmlParser
             instruction = simple_field.attribute('instr').to_s
             paragraph_style.page_numbering = true if instruction.include?('PAGE')
             simple_field.xpath('w:r').each do |r_tag|
-              character_style = DocxParagraphRun.parse_character(r_tag, character_style.copy, char_number)
+              character_style.parse(r_tag, char_number, parent: paragraph_style)
               character_style.page_number = paragraph_style.page_numbering
               character_style.instruction = instruction
               character_styles_array << character_style.copy
@@ -288,7 +290,7 @@ module OoxmlParser
         end
       end
       paragraph_pr_tag.xpath('w:sectPr').each do |sect_pr|
-        paragraph_style.sector_properties = PageProperties.parse(sect_pr, paragraph_style, default_char_style)
+        paragraph_style.sector_properties = PageProperties.parse(sect_pr, paragraph_style, default_char_style, parent: parent)
         paragraph_style.section_break = case paragraph_style.sector_properties.type
                                         when 'oddPage'
                                           'Odd page'
@@ -313,7 +315,7 @@ module OoxmlParser
           paragraph_style.style = StyleParametres.parse(style)
         end
         style.xpath('w:rPr').each do |r_pr|
-          DocxParagraphRun.parse(r_pr, character_style, DocumentStructure.default_run_style)
+          RunPropertiesDocument.parse(r_pr, character_style, DocumentStructure.default_run_style)
         end
         break
       end
