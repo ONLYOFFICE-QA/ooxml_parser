@@ -35,7 +35,7 @@ module OoxmlParser
         when 'type'
           document_style.type = value.value.to_sym
         when 'styleId'
-          document_style.style_id = value.value.to_i
+          document_style.style_id = value.value
         end
       end
       node.xpath('*').each do |subnode|
