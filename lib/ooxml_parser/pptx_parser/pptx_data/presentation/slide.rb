@@ -40,7 +40,7 @@ module OoxmlParser
 
     def content_horizontal_align(object, slide_size)
       transform = transform_of_object(object)
-      return :left if transform.offset.x == 0
+      return :left if transform.offset.x.zero?
       return :center if ((slide_size.width / 2) - (transform.extents.x / 2)).round(1) == transform.offset.x.round(1)
       return :right if (slide_size.width - transform.extents.x).round(1) == transform.offset.x.round(1)
       :unknown
@@ -48,7 +48,7 @@ module OoxmlParser
 
     def content_vertical_align(object, slide_size)
       transform = transform_of_object(object)
-      return :top if transform.offset.y == 0
+      return :top if transform.offset.y.zero?
       return :middle if ((slide_size.height / 2) - (transform.extents.y / 2)).round(1) == transform.offset.y.round(1)
       return :bottom if (slide_size.height - transform.extents.y).round(1) == transform.offset.y.round(1)
       :unknown

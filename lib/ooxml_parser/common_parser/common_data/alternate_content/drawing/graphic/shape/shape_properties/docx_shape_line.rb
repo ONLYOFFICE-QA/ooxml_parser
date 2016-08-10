@@ -20,7 +20,7 @@ module OoxmlParser
     end
 
     def nil?
-      stroke_size == 0 && cap.nil?
+      stroke_size.zero? && cap.nil?
     end
 
     def self.parse(shape_line_node)

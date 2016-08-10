@@ -209,7 +209,7 @@ module OoxmlParser
       ddelta = delta / 255.0
       hls_color.l = dmax / 2.0
 
-      if delta != 0
+      if delta.nonzero?
         hls_color.s = if hls_color.l < 0.5
                         ddelta / dmax
                       else
