@@ -1,10 +1,13 @@
 module OoxmlParser
   # Class for parsing `w:tblStylePr`
   class TableStyleProperties < OOXMLDocumentObject
+    # @return [Symbol] type of Table Style Properties
+    attr_accessor :type
     # @return [RunProperties] properties of run
     attr_accessor :run_properties
     # @return [CellProperties] properties of table cell
     attr_accessor :table_cell_properties
+
     # Parse table style property
     # @param node [Nokogiri::XML::Element] node to parse
     # @param [OoxmlParser::OOXMLDocumentObject] parent parent object
@@ -12,6 +15,14 @@ module OoxmlParser
     def self.parse(node, parent: nil)
       table_style_pr = TableStyleProperties.new
       table_style_pr.parent = parent
+
+      node.attributes.each do |key, value|
+        case key
+        when 'type'
+          table_style_pr.type = value.value.to_sym
+        end
+      end
+
       node.xpath('*').each do |properties_child|
         case properties_child.name
         when 'rPr'

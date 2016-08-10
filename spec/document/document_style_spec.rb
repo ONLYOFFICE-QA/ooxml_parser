@@ -36,4 +36,9 @@ describe 'document style' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/table_style_properties_document_style.docx')
     expect(docx.document_style_by_name('Lined').table_style_properties_list.first).to be_a(OoxmlParser::TableStyleProperties)
   end
+
+  it 'table_style_properties_type' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/table_style_properties_type.docx')
+    expect(docx.document_style_by_name('Lined').table_style_properties_list.first.type).to eq(:band1Horz)
+  end
 end
