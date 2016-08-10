@@ -22,7 +22,7 @@ module OoxmlParser
     def initialize(bold = false, italic = false, underlined = Underline.new(:none), strike = :none)
       @bold = bold
       @italic = italic
-      @underlined = (underlined == false || underlined.nil?) ? Underline.new(:none) : underlined
+      @underlined = underlined == false || underlined.nil? ? Underline.new(:none) : underlined
       @strike = strike
     end
 
@@ -71,10 +71,10 @@ module OoxmlParser
     # @return [FontStyle] the result of overlapping of two styles
     def +(other)
       result = FontStyle.new
-      result.bold = (other.bold == @bold) ? @bold : other.bold
-      result.italic = (other.italic == @italic) ? @italic : other.italic
-      result.underlined = (other.underlined == @underlined) ? @underlined : other.underlined
-      result.strike = (other.strike == @strike) ? @strike : other.strike
+      result.bold = other.bold == @bold ? @bold : other.bold
+      result.italic = other.italic == @italic ? @italic : other.italic
+      result.underlined = other.underlined == @underlined ? @underlined : other.underlined
+      result.strike = other.strike == @strike ? @strike : other.strike
       result
     end
 
