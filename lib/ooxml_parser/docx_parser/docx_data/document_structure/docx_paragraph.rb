@@ -313,7 +313,7 @@ module OoxmlParser
           paragraph_style.style = StyleParametres.parse(style)
         end
         style.xpath('w:rPr').each do |r_pr|
-          DocxParagraphRun.parse(r_pr, character_style, DocumentStructure.default_run_style)
+          RunPropertiesDocument.parse(r_pr, character_style, DocumentStructure.default_run_style)
         end
         break
       end
