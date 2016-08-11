@@ -20,7 +20,7 @@ module OoxmlParser
     end
 
     def nil?
-      @sz == 0 && val == :none
+      @sz.zero? && val == :none
     end
 
     def to_s

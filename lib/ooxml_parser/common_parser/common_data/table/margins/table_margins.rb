@@ -11,8 +11,8 @@ module OoxmlParser
     end
 
     def ==(other)
-      (@top - other.top).round(2) == 0 && (@bottom - other.bottom).round(2) == 0 &&
-        (@left - other.left).round(2) == 0 && (@right - other.right).round(2) == 0
+      (@top - other.top).round(2).zero? && (@bottom - other.bottom).round(2).zero? &&
+        (@left - other.left).round(2).zero? && (@right - other.right).round(2).zero?
     end
 
     def to_s

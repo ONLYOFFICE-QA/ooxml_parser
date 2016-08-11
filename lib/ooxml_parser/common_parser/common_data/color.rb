@@ -166,7 +166,7 @@ module OoxmlParser
       red = color_to_check.red
       green = color_to_check.green
       blue = color_to_check.blue
-      ((self.red - red).abs < delta && (self.green - green).abs < delta && (self.blue - blue).abs < delta) ? true : false
+      (self.red - red).abs < delta && (self.green - green).abs < delta && (self.blue - blue).abs < delta ? true : false
     end
 
     def calculate_with_tint!(tint)
@@ -209,7 +209,7 @@ module OoxmlParser
       ddelta = delta / 255.0
       hls_color.l = dmax / 2.0
 
-      if delta != 0
+      if delta.nonzero?
         hls_color.s = if hls_color.l < 0.5
                         ddelta / dmax
                       else

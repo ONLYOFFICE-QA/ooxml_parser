@@ -51,7 +51,7 @@ module OoxmlParser
       x = chroma * (1 - ((@h / 60.0) % 2.0 - 1).abs)
       m = @l - chroma / 2.0
 
-      rgb = if @h == 0
+      rgb = if @h.zero?
               Color.new(0, 0, 0)
             elsif @h > 0 && @h < 60
               Color.new(chroma, x, 0)
@@ -95,7 +95,7 @@ module OoxmlParser
       hls_color = color.is_a?(HSLColor) ? color : HSLColor.rgb_to_hsl(color)
       # for hsl color which have h == 0 need another values of lumOff lumMod - 0.04(+-0.005)
       if lum_mod
-        if hls_color.h == 0
+        if hls_color.h.zero?
           hls_color.l *= case lum_mod
                          when 0.2
                            0.169
@@ -120,7 +120,7 @@ module OoxmlParser
       unless lum_off.nil?
         hls_color = HSLColor.rgb_to_hsl(current_rgb)
         # for hsl color which have h == 0 need another values of lumOff - 0.04(+-0.01)
-        if hls_color.h == 0
+        if hls_color.h.zero?
           hls_color.l += case lum_off
                          when 0.8
                            0.76

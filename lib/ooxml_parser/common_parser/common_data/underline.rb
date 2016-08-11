@@ -4,7 +4,7 @@ module OoxmlParser
     attr_accessor :style, :color
 
     def initialize(style = :none, color = nil)
-      @style = (style == 'single') ? :single : style
+      @style = style == 'single' ? :single : style
       @color = color
     end
 
