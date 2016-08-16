@@ -10,6 +10,12 @@ module OoxmlParser
     attr_accessor :table_cell_properties
     alias cell_properties table_cell_properties
 
+    def initialize(type: nil)
+      @type = type
+      @run_properties = nil
+      @table_cell_properties = CellProperties.new
+    end
+
     # Parse table style property
     # @param node [Nokogiri::XML::Element] node to parse
     # @param [OoxmlParser::OOXMLDocumentObject] parent parent object
