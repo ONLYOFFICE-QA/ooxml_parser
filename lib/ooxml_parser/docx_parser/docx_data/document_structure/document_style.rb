@@ -66,6 +66,7 @@ module OoxmlParser
         end
       end
       document_style.parent = parent
+      document_style.fill_empty_table_styles
       document_style
     end
 
