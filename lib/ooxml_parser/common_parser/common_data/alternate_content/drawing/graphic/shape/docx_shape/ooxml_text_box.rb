@@ -16,7 +16,7 @@ module OoxmlParser
         when 'p'
           text_body.elements << DocxParagraph.parse(text_body_node_child, index, parent: text_body)
         when 'tbl'
-          text_body.elements << Table.parse(text_body_node_child, index)
+          text_body.elements << Table.parse(text_body_node_child, index, parent: text_body)
         when 'bodyPr'
           text_body.properties = OOXMLShapeBodyProperties.parse(text_body_node_child)
         end
