@@ -1,11 +1,12 @@
 # noinspection RubyTooManyInstanceVariablesInspection
-require_relative 'docx_paragraph_run/run_properties_document'
+require_relative 'docx_paragraph_run/docx_paragraph_run_helpers'
 require_relative 'docx_paragraph_run/text_outline'
 require_relative 'docx_paragraph_run/text_fill'
 require_relative 'docx_paragraph_run/shape'
 
 module OoxmlParser
   class DocxParagraphRun < OOXMLDocumentObject
+    include DocxParagraphRunHelpers
     attr_accessor :number, :font, :vertical_align, :size, :font_color, :background_color, :font_style, :text, :drawings,
                   :link, :highlight, :shadow, :outline, :imprint, :emboss, :vanish, :effect, :caps, :w,
                   :position, :rtl, :em, :cs, :spacing, :break, :touch, :shape, :footnote, :endnote, :fld_char, :style,
@@ -122,7 +123,7 @@ module OoxmlParser
       r_tag.xpath('*').each do |r_node_child|
         case r_node_child.name
         when 'rPr'
-          RunPropertiesDocument.parse(r_node_child, self, DocumentStructure.default_run_style)
+          parse_properties(r_node_child, DocumentStructure.default_run_style)
         when 'instrText'
           if r_node_child.text.include?('HYPERLINK')
             hyperlink = Hyperlink.new(r_node_child.text.sub('HYPERLINK ', '').split(' \\o ').first, r_node_child.text.sub('HYPERLINK', '').split(' \\o ').last)

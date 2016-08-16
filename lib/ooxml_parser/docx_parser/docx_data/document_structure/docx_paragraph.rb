@@ -315,7 +315,7 @@ module OoxmlParser
           paragraph_style.style = StyleParametres.parse(style)
         end
         style.xpath('w:rPr').each do |r_pr|
-          RunPropertiesDocument.parse(r_pr, character_style, DocumentStructure.default_run_style)
+          character_style.parse_properties(r_pr, DocumentStructure.default_run_style)
         end
         break
       end

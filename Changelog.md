@@ -33,6 +33,7 @@
 * Move parsing TableGrid inside class
 * Move parsing DocxShapeLinePath inside class
 * Totally redone parsing of Numbering
+* Parsing DocxParagraphRun properties
 
 ## 0.1.2 (2016-06-07)
 
