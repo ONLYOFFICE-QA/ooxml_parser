@@ -15,7 +15,7 @@ module OoxmlParser
             DocumentStructure.default_paragraph_style.spacing = Spacing.new(0, 0.35, 1.15, :multiple)
             elements << DocxParagraph.parse(textbox_element, i, DocumentStructure.default_paragraph_style, parent: parent)
           when 'tbl'
-            elements << Table.parse(textbox_element, i)
+            elements << Table.parse(textbox_element, i, parent: parent)
           end
         end
       end
