@@ -26,6 +26,7 @@
 * Fix parsing Footnote and Endnote reference in runs
 * Fix calculating position offset values, distance from text in different units of measurements
 * Fix parsing table style in text box
+* Fix problem with parsing absolute file path in Windows 
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
