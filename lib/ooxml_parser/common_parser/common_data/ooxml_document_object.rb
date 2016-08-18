@@ -52,7 +52,6 @@ module OoxmlParser
         file_path = "#{tmp_folder}/#{file_name}"
         FileUtils.rm_rf(tmp_folder) if File.directory?(tmp_folder)
         FileUtils.mkdir_p(tmp_folder)
-        path = "#{Dir.pwd}/#{path}" unless path[0] == '/'
         raise "Cannot find file by path #{path}" unless File.exist?(path)
         FileUtils.cp path, tmp_folder
         file_path
