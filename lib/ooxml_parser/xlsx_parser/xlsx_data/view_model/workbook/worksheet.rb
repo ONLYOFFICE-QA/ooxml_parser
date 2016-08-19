@@ -33,6 +33,15 @@ module OoxmlParser
       OOXMLDocumentObject.xmls_stack.pop
     end
 
+    # @return [True, false] if structure contain any user data
+    def with_data?
+      return true unless @rows.empty?
+      return true unless @drawings.empty?
+      return true unless @charts.empty?
+      return true unless @hyperlinks.empty?
+      false
+    end
+
     def self.parse(path_to_xml_file)
       worksheet = Worksheet.new
       worksheet.xml_name = File.basename path_to_xml_file

@@ -3,6 +3,7 @@ require_relative 'document_structure/comment'
 require_relative 'document_structure/docx_paragraph'
 require_relative 'document_structure/document_background'
 require_relative 'document_structure/document_properties'
+require_relative 'document_structure/document_structure_helpers'
 require_relative 'document_structure/document_style'
 require_relative 'document_structure/header_footer'
 require_relative 'document_structure/numbering'
@@ -10,6 +11,7 @@ require_relative 'document_structure/page_properties/page_properties'
 module OoxmlParser
   class DocumentStructure < CommonDocumentStructure
     include DocumentStyleHelper
+    include DocumentStructureHelpers
     attr_accessor :elements, :page_properties, :notes, :background, :document_properties, :comments
 
     # @return [Array, DocumentStyle] array of document styles in current document

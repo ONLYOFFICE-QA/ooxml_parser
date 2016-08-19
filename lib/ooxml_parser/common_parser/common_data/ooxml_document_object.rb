@@ -25,6 +25,11 @@ module OoxmlParser
       true
     end
 
+    # @return [True, false] if structure contain any user data
+    def with_data?
+      true
+    end
+
     class << self
       attr_accessor :namespace_prefix
       attr_accessor :root_subfolder

@@ -75,6 +75,11 @@ module OoxmlParser
       end
     end
 
+    # @return [True, false] if structure contain any user data
+    def with_data?
+      !nonempty_runs.empty?
+    end
+
     def remove_empty_runs
       nonempty = nonempty_runs
       @character_style_array.each do |cur_run|

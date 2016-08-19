@@ -10,6 +10,14 @@ module OoxmlParser
       @text_body = text_body
     end
 
+    # @return [True, false] if structure contain any user data
+    def with_data?
+      return true if @text_body.nil?
+      return true if @text_body.paragraphs.length > 1
+      return true unless @text_body.paragraphs.first.runs.empty?
+      false
+    end
+
     def self.parse(shape_node)
       shape = PresentationShape.new
       shape_node.xpath('*').each do |shape_node_child|
