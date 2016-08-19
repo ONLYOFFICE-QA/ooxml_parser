@@ -4,6 +4,8 @@ module OoxmlParser
   class ParagraphProperties < OOXMLDocumentObject
     attr_accessor :align, :numbering, :level, :spacing, :spacing_before, :spacing_after, :indent, :margin_left, :margin_right,
                   :tabs
+    # @return [RunProperties] properties of run
+    attr_accessor :run_properties
 
     def initialize(numbering = NumberingProperties.new)
       @numbering = numbering
@@ -42,6 +44,8 @@ module OoxmlParser
           paragraph_properties.tabs = ParagraphTab.parse(properties_element)
         when 'ind'
           paragraph_properties.indent = Indents.parse(properties_element)
+        when 'rPr'
+          paragraph_properties.run_properties = RunProperties.parse(properties_element)
         end
       end
       paragraph_properties

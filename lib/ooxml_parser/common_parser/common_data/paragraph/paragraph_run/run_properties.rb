@@ -1,9 +1,17 @@
 require_relative 'run_properties/outline'
+require_relative 'run_properties/run_size'
+require_relative 'run_properties/run_spacing'
 require_relative 'run_properties/strikeout'
 module OoxmlParser
   class RunProperties < OOXMLDocumentObject
     attr_accessor :font_style, :font_color, :space, :dirty, :font_name, :font_size, :baseline, :hyperlink, :caps,
                   :vertical_align, :outline
+    # @return [RunSize] get run size
+    attr_accessor :size
+    # @return [RunSpacing] get run spacing
+    attr_accessor :spacing
+    # @return [RunSpacing] get color
+    attr_accessor :color
 
     def initialize(font_name = '', font_style = FontStyle.new, font_color = nil, space = nil, baseline = :baseline)
       @font_name = font_name
@@ -46,6 +54,12 @@ module OoxmlParser
       character_properties.font_color = DocxColorScheme.parse(character_props_node)
       character_props_node.xpath('*').each do |properties_element|
         case properties_element.name
+        when 'sz'
+          character_properties.size = RunSize.parse(properties_element)
+        when 'spacing'
+          character_properties.spacing = RunSpacing.parse(properties_element)
+        when 'color'
+          character_properties.color = Color.parse_color_tag(properties_element)
         when 'solidFill'
           character_properties.font_color = Color.parse_color(properties_element.xpath('*').first)
         when 'latin'
