@@ -1,9 +1,11 @@
 require_relative 'presentation/presentation_comment'
+require_relative 'presentation/presentation_helpers'
 require_relative 'presentation/presentation_theme'
 require_relative 'presentation/slide'
 require_relative 'presentation/slide_size'
 module OoxmlParser
   class Presentation < CommonDocumentStructure
+    include PresentationHelpers
     attr_accessor :slides, :theme, :slide_size, :comments
 
     def initialize(slides = [], theme = nil, comments = [])

@@ -1,7 +1,9 @@
 require_relative 'workbook/worksheet'
+require_relative 'workbook/workbook_helpers'
 # Class for storing XLSX Workbook
 module OoxmlParser
   class XLSXWorkbook < CommonDocumentStructure
+    include WorkbookHelpers
     attr_accessor :worksheets
     # @return [PresentationTheme] theme of Workbook
     attr_accessor :theme
