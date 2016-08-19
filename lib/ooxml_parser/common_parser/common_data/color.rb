@@ -405,6 +405,8 @@ module OoxmlParser
               return Color.get_rgb_by_color_index(color_tag.attribute('indexed').value.to_i)
             end
             return Color.get_rgb_by_color_index(color_tag.attribute('indexed').value.value.to_i)
+          elsif !color_tag.attribute('val').nil?
+            return Color.from_int16(color_tag.attribute('val').value.to_s)
           elsif !color_tag.attribute('theme').nil?
             return ThemeColors.parse_color_theme(color_tag)
           end

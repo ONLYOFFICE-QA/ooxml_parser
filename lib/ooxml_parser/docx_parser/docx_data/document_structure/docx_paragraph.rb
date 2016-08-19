@@ -10,6 +10,8 @@ module OoxmlParser
                   :character_style_array, :horizontal_line, :page_break, :kinoku, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control, :tabs, :frame_properties
+    # @return [ParagraphProperties] Properties of current paragraph
+    attr_accessor :paragraph_properties
 
     def initialize
       @number = 0
@@ -62,6 +64,7 @@ module OoxmlParser
       paragraph.orphan_control = @orphan_control
       paragraph.tabs = @tabs.dup
       paragraph.frame_properties = @frame_properties
+      paragraph.paragraph_properties = @paragraph_properties
       paragraph
     end
 
@@ -128,6 +131,7 @@ module OoxmlParser
               paragraph_style.horizontal_line = true
             end
           end
+          paragraph_style.paragraph_properties = ParagraphProperties.parse(p_element)
         elsif p_element.name == 'commentRangeStart'
           comments << p_element.attribute('id').value
         elsif p_element.name == 'fldSimple'
