@@ -1,4 +1,5 @@
 require_relative 'paragrpah_properties/numbering_properties'
+require_relative 'paragrpah_properties/paragraph_borders'
 require_relative 'paragrpah_properties/spacing'
 module OoxmlParser
   class ParagraphProperties < OOXMLDocumentObject
@@ -6,6 +7,8 @@ module OoxmlParser
                   :tabs
     # @return [RunProperties] properties of run
     attr_accessor :run_properties
+    # @return [Borders] borders of paragraph
+    attr_accessor :paragraph_borders
 
     def initialize(numbering = NumberingProperties.new)
       @numbering = numbering
@@ -46,6 +49,8 @@ module OoxmlParser
           paragraph_properties.indent = Indents.parse(properties_element)
         when 'rPr'
           paragraph_properties.run_properties = RunProperties.parse(properties_element)
+        when 'pBdr'
+          paragraph_properties.paragraph_borders = ParagraphBorders.parse(properties_element)
         end
       end
       paragraph_properties

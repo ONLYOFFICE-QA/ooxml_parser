@@ -1,6 +1,6 @@
 # Border Properties Data
 module OoxmlParser
-  class BordersProperties
+  class BordersProperties < OOXMLDocumentObject
     attr_accessor :color, :space, :sz, :val, :space, :shadow, :frame, :side
 
     def initialize(color = :auto, sz = 0, val = :none, space = 0)
@@ -8,15 +8,6 @@ module OoxmlParser
       @sz = sz
       @val = val
       @space = space
-    end
-
-    def ==(other)
-      instance_variables.each do |current_attributes|
-        unless instance_variable_get(current_attributes) == other.instance_variable_get(current_attributes)
-          return false
-        end
-      end
-      true
     end
 
     def nil?
