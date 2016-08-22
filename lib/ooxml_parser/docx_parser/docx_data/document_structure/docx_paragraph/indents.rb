@@ -70,16 +70,16 @@ module OoxmlParser
     def self.parse(node)
       indents = Indents.new
       unless node.attribute('firstLine').nil?
-        indents.first_line_indent = (node.attribute('firstLine').value.to_f / 566.9).round(2)
+        indents.first_line_indent = (node.attribute('firstLine').value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
       end
       unless node.attribute('left').nil?
-        indents.left_indent = (node.attribute('left').value.to_f / 566.9).round(2)
+        indents.left_indent = (node.attribute('left').value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
       end
       unless node.attribute('right').nil?
-        indents.right_indent = (node.attribute('right').value.to_f / 566.9).round(2)
+        indents.right_indent = (node.attribute('right').value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
       end
       unless node.attribute('hanging').nil?
-        indents.hanging_indent = (node.attribute('hanging').value.to_f / 566.9).round(2)
+        indents.hanging_indent = (node.attribute('hanging').value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
       end
       indents
     end
