@@ -9,10 +9,15 @@ module OoxmlParser
     attr_accessor :run_properties
     # @return [Borders] borders of paragraph
     attr_accessor :paragraph_borders
+    # @return [True, False] Specifies that the paragraph
+    # (or at least part of it) should be rendered on
+    # the same page as the next paragraph when possible
+    attr_accessor :keep_next
 
     def initialize(numbering = NumberingProperties.new)
       @numbering = numbering
       @spacing = Spacing.new(0, 0, 1, :multiple)
+      @keep_next = false
     end
 
     def self.parse(paragraph_props_node)
@@ -51,6 +56,8 @@ module OoxmlParser
           paragraph_properties.run_properties = RunProperties.parse(properties_element)
         when 'pBdr'
           paragraph_properties.paragraph_borders = ParagraphBorders.parse(properties_element)
+        when 'keepNext'
+          paragraph_properties.keep_next = true
         end
       end
       paragraph_properties
