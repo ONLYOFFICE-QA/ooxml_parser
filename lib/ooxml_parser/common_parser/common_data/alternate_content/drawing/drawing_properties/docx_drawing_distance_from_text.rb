@@ -8,13 +8,13 @@ module OoxmlParser
       distance_node.attributes.each do |key, value|
         case key
         when 'distT'
-          distance_from_text.top = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
+          distance_from_text.top = OoxmlSize.new(value.value.to_f, :emu)
         when 'distB'
-          distance_from_text.bottom = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
+          distance_from_text.bottom = OoxmlSize.new(value.value.to_f, :emu)
         when 'distL'
-          distance_from_text.left = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
+          distance_from_text.left = OoxmlSize.new(value.value.to_f, :emu)
         when 'distR'
-          distance_from_text.right = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
+          distance_from_text.right = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
       distance_from_text

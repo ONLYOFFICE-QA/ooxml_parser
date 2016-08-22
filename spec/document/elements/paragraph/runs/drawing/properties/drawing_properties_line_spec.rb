@@ -40,7 +40,8 @@ describe OoxmlParser::DocxShapeLine do
   it 'ShapeLineObjectSize' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/properties/line/shape_line_object_size.docx')
     alternate_content = docx.elements.first.nonempty_runs.first.alternate_content
-    expect(alternate_content.office2010_content.properties.object_size).to eq(OoxmlParser::OOXMLCoordinates.new(11.03, 12.54))
+    expect(alternate_content.office2010_content.properties.object_size).to eq(OoxmlParser::OOXMLCoordinates.new(OoxmlParser::OoxmlSize.new(11.03, :centimeter),
+                                                                                                                OoxmlParser::OoxmlSize.new(12.54, :centimeter)))
   end
 
   it 'adjust_values' do

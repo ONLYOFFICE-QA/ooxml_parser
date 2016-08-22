@@ -8,6 +8,8 @@ module OoxmlParser
   class OOXMLDocumentObject
     # @return [OOXMLDocumentObject] object which hold current object
     attr_accessor :parent
+    # @return [Symbol] units in which data is stored in format
+    attr_accessor :units
 
     def root_object
       tree_object = self

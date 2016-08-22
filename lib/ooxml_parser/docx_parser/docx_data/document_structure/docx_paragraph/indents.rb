@@ -1,5 +1,5 @@
 module OoxmlParser
-  class Indents
+  class Indents < OOXMLDocumentObject
     attr_accessor :first_line_indent, :left_indent, :right_indent, :hanging_indent
 
     def initialize(first_line_indent = 0.0, left_indent = 0.0, right_indent = 0.0, hanging_indent = nil)
@@ -7,6 +7,7 @@ module OoxmlParser
       @left_indent = left_indent
       @right_indent = right_indent
       @hanging_indent = hanging_indent
+      @units = :dxa
     end
 
     def ==(other)

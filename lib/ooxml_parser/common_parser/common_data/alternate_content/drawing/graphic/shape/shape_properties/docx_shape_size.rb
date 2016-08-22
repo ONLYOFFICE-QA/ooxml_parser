@@ -3,6 +3,10 @@ module OoxmlParser
   class DocxShapeSize
     attr_accessor :rotation, :flip_horizontal, :flip_vertical, :offset, :extent
 
+    def initialize
+      @units = :emu
+    end
+
     alias extents extent
 
     def self.parse(xfrm_node)
@@ -20,9 +24,9 @@ module OoxmlParser
       xfrm_node.xpath('*').each do |xfrm_node_child|
         case xfrm_node_child.name
         when 'off'
-          shape_size.offset = OOXMLCoordinates.parse(xfrm_node_child)
+          shape_size.offset = OOXMLCoordinates.parse(xfrm_node_child, unit: :emu)
         when 'ext'
-          shape_size.extent = OOXMLCoordinates.parse(xfrm_node_child, x_attr: 'cx', y_attr: 'cy')
+          shape_size.extent = OOXMLCoordinates.parse(xfrm_node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
         end
       end
       shape_size

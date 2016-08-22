@@ -4,8 +4,16 @@ module OoxmlParser
     attr_accessor :x, :y
 
     def initialize(x, y)
-      @x = x
-      @y = y
+      @x = if x.is_a?(OoxmlSize)
+             x
+           else
+             OoxmlSize.new(x)
+           end
+      @y = if y.is_a?(OoxmlSize)
+             y
+           else
+             OoxmlSize.new(y)
+           end
     end
 
     def to_s
@@ -25,9 +33,9 @@ module OoxmlParser
     # @param y_attr [String] name of y attribute
     # @param delimiter [Float] delimiter to devise values
     # @return [OOXMLCoordinates] result of parsing
-    def self.parse(position_node, x_attr: 'x', y_attr: 'y', delimiter: OoxmlParser.configuration.units_delimiter)
-      OOXMLCoordinates.new((position_node.attribute(x_attr).value.to_f / delimiter).round(OoxmlParser.configuration.accuracy),
-                           (position_node.attribute(y_attr).value.to_f / delimiter).round(OoxmlParser.configuration.accuracy))
+    def self.parse(position_node, x_attr: 'x', y_attr: 'y', unit: :dxa)
+      OOXMLCoordinates.new(OoxmlSize.new(position_node.attribute(x_attr).value.to_f, unit),
+                           OoxmlSize.new(position_node.attribute(y_attr).value.to_f, unit))
     end
   end
 end

@@ -1,4 +1,5 @@
 require_relative 'ooxml_coordinates'
+require_relative 'ooxml_size'
 require_relative 'docx_drawing_distance_from_text'
 require_relative 'docx_drawing_position'
 require_relative 'docx_wrap_drawing'

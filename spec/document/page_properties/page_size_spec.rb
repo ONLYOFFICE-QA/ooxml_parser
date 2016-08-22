@@ -73,14 +73,14 @@ describe 'Page Size Names' do
 
   it 'Unrecognized Page Size' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/page_properties/page_size/unrecognized_page_size.docx')
-    expect(docx.page_properties.size.name).to eq('Unknown page size: Height 5.0 Width 5.0')
+    expect(docx.page_properties.size.name).to include('Unknown page size')
   end
 end
 
 describe 'Other' do
   it 'page_size_custom.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/page_properties/page_size/page_size_custom.docx')
-    expect(docx.page_properties.size.width).to eq(5)
-    expect(docx.page_properties.size.height).to eq(29.7)
+    expect(docx.page_properties.size.width).to eq(OoxmlParser::OoxmlSize.new(5, :centimeter))
+    expect(docx.page_properties.size.height).to eq(OoxmlParser::OoxmlSize.new(29.7, :centimeter))
   end
 end
