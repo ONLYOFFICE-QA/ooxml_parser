@@ -1,5 +1,5 @@
 module OoxmlParser
-  class Size
+  class Size < OOXMLDocumentObject
     attr_accessor :height, :width, :orientation
 
     def initialize(height = nil, width = nil, orientation = :portrait)
@@ -34,17 +34,6 @@ module OoxmlParser
       'Height: ' + @height.to_s + ' Width: ' + @width.to_s + ' Orientation: ' + @orientation.to_s
     end
 
-    # noinspection RubyUnnecessaryReturnStatement
-    def ==(other)
-      is_same = false
-      if (@height == other.height) &&
-         (@width == other.width) &&
-         (@orientation == other.orientation)
-        is_same = true
-      end
-      is_same
-    end
-
     # @return [True, False] compare dimensions of size, ignoring orientation
     def same_dimensions?(other)
       (@height == other.height) && (@width == other.width) ||
@@ -53,19 +42,19 @@ module OoxmlParser
 
     # @return [String] get human format name
     def name
-      return 'US Letter' if same_dimensions?(Size.new(27.94, 21.59))
-      return 'US Legal' if same_dimensions?(Size.new(35.56, 21.59))
-      return 'A4' if same_dimensions?(Size.new(29.7, 21.0))
-      return 'A5' if same_dimensions?(Size.new(20.99, 14.81))
-      return 'B5' if same_dimensions?(Size.new(25.01, 17.6))
-      return 'Envelope #10' if same_dimensions?(Size.new(24.13, 10.48))
-      return 'Envelope DL' if same_dimensions?(Size.new(22.01, 11.01))
-      return 'Tabloid' if same_dimensions?(Size.new(43.17, 27.94))
-      return 'A3' if same_dimensions?(Size.new(42.01, 29.7))
-      return 'Tabloid Oversize' if same_dimensions?(Size.new(45.71, 30.48))
-      return 'ROC 16K' if same_dimensions?(Size.new(27.3, 19.68))
-      return 'Envelope Choukei 3' if same_dimensions?(Size.new(23.49, 11.99))
-      return 'Super B/A3' if same_dimensions?(Size.new(48.25, 33.02))
+      return 'US Letter' if same_dimensions?(Size.new(OoxmlSize.new(27.94, :centimeter), OoxmlSize.new(21.59, :centimeter)))
+      return 'US Legal' if same_dimensions?(Size.new(OoxmlSize.new(35.56, :centimeter), OoxmlSize.new(21.59, :centimeter)))
+      return 'A4' if same_dimensions?(Size.new(OoxmlSize.new(29.7, :centimeter), OoxmlSize.new(21.0, :centimeter)))
+      return 'A5' if same_dimensions?(Size.new(OoxmlSize.new(20.99, :centimeter), OoxmlSize.new(14.81, :centimeter)))
+      return 'B5' if same_dimensions?(Size.new(OoxmlSize.new(25.01, :centimeter), OoxmlSize.new(17.6, :centimeter)))
+      return 'Envelope #10' if same_dimensions?(Size.new(OoxmlSize.new(24.13, :centimeter), OoxmlSize.new(10.48, :centimeter)))
+      return 'Envelope DL' if same_dimensions?(Size.new(OoxmlSize.new(22.01, :centimeter), OoxmlSize.new(11.01, :centimeter)))
+      return 'Tabloid' if same_dimensions?(Size.new(OoxmlSize.new(43.17, :centimeter), OoxmlSize.new(27.94, :centimeter)))
+      return 'A3' if same_dimensions?(Size.new(OoxmlSize.new(42.01, :centimeter), OoxmlSize.new(29.7, :centimeter)))
+      return 'Tabloid Oversize' if same_dimensions?(Size.new(OoxmlSize.new(45.71, :centimeter), OoxmlSize.new(30.48, :centimeter)))
+      return 'ROC 16K' if same_dimensions?(Size.new(OoxmlSize.new(27.3, :centimeter), OoxmlSize.new(19.68, :centimeter)))
+      return 'Envelope Choukei 3' if same_dimensions?(Size.new(OoxmlSize.new(23.49, :centimeter), OoxmlSize.new(11.99, :centimeter)))
+      return 'Super B/A3' if same_dimensions?(Size.new(OoxmlSize.new(48.25, :centimeter), OoxmlSize.new(33.02, :centimeter)))
       "Unknown page size: Height #{@height} Width #{@width}"
     end
 
@@ -74,10 +63,16 @@ module OoxmlParser
     # @return [Size] value of Size
     def self.parse(node)
       size = Size.new
-      size.orientation = node.attribute('orient').value.to_sym unless node.attribute('orient').nil?
-      # TODO: implement and understand, why 566.929, but not `unit_delimeter`
-      size.height = (node.attribute('h').value.to_f / 566.929).round(2)
-      size.width = (node.attribute('w').value.to_f / 566.929).round(2)
+      node.attributes.each do |key, value|
+        case key
+        when 'orient'
+          size.orientation = value.value.to_sym
+        when 'h'
+          size.height = OoxmlSize.new(value.value.to_f)
+        when 'w'
+          size.width = OoxmlSize.new(value.value.to_f)
+        end
+      end
       size
     end
   end

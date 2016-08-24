@@ -1,5 +1,4 @@
 module OoxmlParser
-  # TODO: Rename to Size after renaming current Size to DocumentSize
   # Class for parsing `w:sz` object
   class RunSpacing < OOXMLDocumentObject
     # @return [Integer] value of size

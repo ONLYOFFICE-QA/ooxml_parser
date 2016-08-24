@@ -1,5 +1,5 @@
 module OoxmlParser
-  class PageMargins
+  class PageMargins < OOXMLDocumentObject
     attr_accessor :top, :bottom, :left, :right, :footer, :gutter, :header
 
     def initialize(top: nil, bottom: nil, left: nil, right: nil, header: nil, footer: nil, gutter: nil)
@@ -12,30 +12,29 @@ module OoxmlParser
       @gutter = gutter
     end
 
-    def ==(other)
-      other.class == PageMargins &&
-        @top == other.top &&
-        @bottom == other.bottom &&
-        @left == other.left &&
-        @right == other.right &&
-        @footer == other.footer &&
-        @header == other.header &&
-        @gutter == other.gutter
-    end
-
     # Parse BordersProperties
     # @param [Nokogiri::XML:Element] node with PageMargins
     # @return [PageMargins] value of PageMargins
     def self.parse(node)
       margins = PageMargins.new
-      # TODO: implement and understand, why 566.929, but not `unit_delimiter`
-      margins.top = (node.attribute('top').value.to_f / 566.929).round(2)
-      margins.left = (node.attribute('left').value.to_f / 566.929).round(2)
-      margins.right = (node.attribute('right').value.to_f / 566.929).round(2)
-      margins.bottom = (node.attribute('bottom').value.to_f / 566.929).round(2)
-      margins.header = (node.attribute('header').value.to_f / 566.929).round(2) unless node.attribute('header').nil?
-      margins.footer = (node.attribute('footer').value.to_f / 566.929).round(2) unless node.attribute('footer').nil?
-      margins.gutter = (node.attribute('gutter').value.to_f / 566.929).round(2)
+      node.attributes.each do |key, value|
+        case key
+        when 'top'
+          margins.top = OoxmlSize.new(value.value.to_f)
+        when 'left'
+          margins.left = OoxmlSize.new(value.value.to_f)
+        when 'right'
+          margins.right = OoxmlSize.new(value.value.to_f)
+        when 'bottom'
+          margins.bottom = OoxmlSize.new(value.value.to_f)
+        when 'header'
+          margins.header = OoxmlSize.new(value.value.to_f)
+        when 'footer'
+          margins.footer = OoxmlSize.new(value.value.to_f)
+        when 'gutter'
+          margins.gutter = OoxmlSize.new(value.value.to_f)
+        end
+      end
       margins
     end
   end

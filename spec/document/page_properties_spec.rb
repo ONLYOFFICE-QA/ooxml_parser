@@ -14,12 +14,12 @@ describe 'page_properties' do
 
     it 'left_column' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/page_properties/columns/left_column.docx')
-      expect(docx.page_properties.columns[0].width).to eq(0.01)
+      expect(docx.page_properties.columns[0].width).to eq(OoxmlParser::OoxmlSize.new(4.68, :centimeter))
     end
 
     it 'right_column' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/page_properties/columns/right_column.docx')
-      expect(docx.page_properties.columns[0].width).to eq(0.02)
+      expect(docx.page_properties.columns[0].width).to eq(OoxmlParser::OoxmlSize.new(10.63, :centimeter))
     end
 
     it 'several_types_of_columns' do
@@ -56,7 +56,13 @@ describe 'page_properties' do
   describe 'page_margins' do
     it 'page margins parsing' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/page_properties/page_margins/page_margins.docx')
-      expect(docx.page_properties.margins).to eq(OoxmlParser::PageMargins.new(top: 2, left: 3, bottom: 2, right: 1.5, gutter: 0, header: 1.25, footer: 1.25))
+      expect(docx.page_properties.margins).to eq(OoxmlParser::PageMargins.new(top: OoxmlParser::OoxmlSize.new(2, :centimeter),
+                                                                              left: OoxmlParser::OoxmlSize.new(3, :centimeter),
+                                                                              bottom: OoxmlParser::OoxmlSize.new(2, :centimeter),
+                                                                              right: OoxmlParser::OoxmlSize.new(1.5, :centimeter),
+                                                                              gutter: OoxmlParser::OoxmlSize.new(0, :centimeter),
+                                                                              header: OoxmlParser::OoxmlSize.new(1.25, :centimeter),
+                                                                              footer: OoxmlParser::OoxmlSize.new(1.25, :centimeter)))
     end
   end
 

@@ -36,7 +36,7 @@ module OoxmlParser
           when 'simplePos'
             drawing.properties.simple_position = OOXMLCoordinates.parse(content_node_child)
           when 'extent'
-            drawing.properties.object_size = OOXMLCoordinates.parse(content_node_child, x_attr: 'cx', y_attr: 'cy')
+            drawing.properties.object_size = OOXMLCoordinates.parse(content_node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
           when 'graphic'
             drawing.graphic = DocxGraphic.parse(content_node_child, parent: drawing)
           when 'positionV'

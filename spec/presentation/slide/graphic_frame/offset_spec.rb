@@ -9,8 +9,8 @@ describe 'My behaviour' do
   it 'Check image size' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/graphic_frame/offset/image_size.pptx')
     transform = pptx.slides.first.elements.last.properties.transform
-    expect(transform.extents.x).to eq(13)
-    expect(transform.extents.y).to eq(5)
+    expect(transform.extents.x).to eq(OoxmlParser::OoxmlSize.new(13, :centimeter))
+    expect(transform.extents.y).to eq(OoxmlParser::OoxmlSize.new(5, :centimeter))
   end
 
   it 'Check image shift' do

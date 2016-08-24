@@ -13,7 +13,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'w'
-          grid_column.width = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
+          grid_column.width = OoxmlSize.new(value.value.to_f)
         end
       end
       grid_column

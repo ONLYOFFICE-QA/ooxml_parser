@@ -16,9 +16,9 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'w'
-          column.width = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
+          column.width = OoxmlSize.new(value.value.to_f)
         when 'space'
-          column.space = (value.value.to_f / OoxmlParser.configuration.units_delimiter).round(2)
+          column.space = OoxmlSize.new(value.value.to_f)
         end
       end
       column

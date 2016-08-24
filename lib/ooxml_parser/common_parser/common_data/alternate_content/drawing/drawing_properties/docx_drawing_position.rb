@@ -24,7 +24,7 @@ module OoxmlParser
       drawing_position_node.xpath('*').each do |position_node_child|
         case position_node_child.name
         when 'posOffset', 'pctPosHOffset', 'pctPosVOffset'
-          position.offset = (position_node_child.text.to_f / OoxmlParser.configuration.units_delimiter).round(3)
+          position.offset = OoxmlSize.new(position_node_child.text.to_f, :emu)
         when 'align'
           position.align = position_node_child.text.to_sym
         end
