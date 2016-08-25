@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'My behaviour' do
   it 'ChartTransformOffset' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/graphic_frame/offset/transform_offset.pptx')
-    expect(pptx.slides.last.elements.last.transform.offset.y).to eq(0)
+    expect(pptx.slides.last.elements.last.transform.offset.y).to be_zero
   end
 
   it 'Check image size' do

@@ -12,7 +12,7 @@ module OoxmlParser
       comment_node.xpath('*').each do |comment_node_child|
         case comment_node_child.name
         when 'pos'
-          comment.position = OOXMLShift.parse(comment_node_child, 'x', 'y', 1)
+          comment.position = OOXMLCoordinates.parse(comment_node_child, x_attr: 'x', y_attr: 'y')
         when 'text'
           comment.text = comment_node_child.text.to_s
         end

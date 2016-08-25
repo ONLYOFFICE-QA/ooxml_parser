@@ -8,7 +8,7 @@ module OoxmlParser
     end
 
     def self.parse(tile_node)
-      tile = Tile.new(OOXMLShift.parse(tile_node, 'tx', 'ty'), OOXMLShift.parse(tile_node, 'sx', 'sy'))
+      tile = Tile.new(OOXMLCoordinates.parse(tile_node, x_attr: 'tx', y_attr: 'ty'), OOXMLCoordinates.parse(tile_node, x_attr: 'sx', y_attr: 'sy'))
       tile_node.attributes.each do |key, value|
         case key
         when 'algn'

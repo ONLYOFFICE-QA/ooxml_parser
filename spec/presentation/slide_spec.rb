@@ -10,4 +10,9 @@ describe 'Slide' do
     pptx = OoxmlParser::Parser.parse('spec/presentation/slide/image_vertical_alignment_middle.pptx')
     expect(pptx.slides.first.content_vertical_align(:image, pptx.slide_size)).to eq(:middle)
   end
+
+  it 'chart_content_distribute_vertically' do
+    pptx = OoxmlParser::Parser.parse('spec/presentation/slide/chart_content_distribute_vertically.pptx')
+    expect(pptx.slides.first.content_distribute(:chart, pptx.slide_size)).to include(:vertically)
+  end
 end
