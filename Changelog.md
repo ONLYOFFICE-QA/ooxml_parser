@@ -21,6 +21,7 @@
 * Add method to 3 base formats to check if it contain any user data `#with_data?`
 * Correct parsing of paragraph properties and run properties
 * Paragraphs now have correct parsing of borders
+* Run properties - language property
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

@@ -1,3 +1,4 @@
+require_relative 'run_properties/language'
 require_relative 'run_properties/outline'
 require_relative 'run_properties/run_size'
 require_relative 'run_properties/run_spacing'
@@ -12,6 +13,8 @@ module OoxmlParser
     attr_accessor :spacing
     # @return [RunSpacing] get color
     attr_accessor :color
+    # @return [Language] language property
+    attr_accessor :language
 
     def initialize(font_name = '', font_style = FontStyle.new, font_color = nil, space = nil, baseline = :baseline)
       @font_name = font_name
@@ -84,6 +87,8 @@ module OoxmlParser
           character_properties.hyperlink = Hyperlink.parse(properties_element)
         when 'ln'
           character_properties.outline = Outline.parse(properties_element)
+        when 'lang'
+          character_properties.language = Language.parse(properties_element)
         end
       end
       character_properties.font_color = DocxColorScheme.parse(character_props_node)

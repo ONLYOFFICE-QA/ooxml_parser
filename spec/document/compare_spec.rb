@@ -15,7 +15,7 @@ describe 'compare' do
 
   it 'compare_two_paragraphs' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/compare/compare_two_paragraphs.docx')
-    expect(docx.elements[0]).to eq(docx.elements[1])
+    expect(docx.elements[0]).not_to eq(docx.elements[1])
   end
 
   it 'compare_two_different_document' do
