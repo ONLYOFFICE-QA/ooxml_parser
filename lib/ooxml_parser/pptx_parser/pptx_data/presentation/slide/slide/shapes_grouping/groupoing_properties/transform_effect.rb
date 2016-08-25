@@ -12,13 +12,13 @@ module OoxmlParser
       transform_effect_node.xpath('*').each do |transform_effect_node_child|
         case transform_effect_node_child.name
         when 'ext'
-          transform_effect.extents = OOXMLShift.parse(transform_effect_node_child, 'cx', 'cy')
+          transform_effect.extents = OOXMLCoordinates.parse(transform_effect_node_child, x_attr: 'cx', y_attr: 'cy')
         when 'off'
-          transform_effect.offset = OOXMLShift.parse(transform_effect_node_child)
+          transform_effect.offset = OOXMLCoordinates.parse(transform_effect_node_child)
         when 'chOff'
-          transform_effect.child_offset = OOXMLShift.parse(transform_effect_node_child)
+          transform_effect.child_offset = OOXMLCoordinates.parse(transform_effect_node_child)
         when 'chExt'
-          transform_effect.child_extent = OOXMLShift.parse(transform_effect_node_child, 'cx', 'cy')
+          transform_effect.child_extent = OOXMLCoordinates.parse(transform_effect_node_child, x_attr: 'cx', y_attr: 'cy')
         end
       end
       transform_effect

@@ -41,6 +41,7 @@
 * Totally redone parsing of Numbering
 * Parsing DocxParagraphRun properties
 * Move some slide methods to helper
+* Remove `OoxmlShift` - use `OoxmlCoordinates` instead
 
 ## 0.1.2 (2016-06-07)
 
