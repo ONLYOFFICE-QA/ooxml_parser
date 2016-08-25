@@ -40,6 +40,7 @@
 * Move parsing DocxShapeLinePath inside class
 * Totally redone parsing of Numbering
 * Parsing DocxParagraphRun properties
+* Move some slide methods to helper
 
 ## 0.1.2 (2016-06-07)
 
