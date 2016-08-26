@@ -1,5 +1,5 @@
 require_relative 'document_grid'
-require_relative 'size'
+require_relative 'page_size'
 require_relative 'page_margins'
 require_relative 'columns'
 require_relative 'note'
@@ -24,7 +24,7 @@ module OoxmlParser
       page_properties = PageProperties.new
       page_properties.parent = parent
       sect_pr.xpath('w:pgSz').each do |pg_sz|
-        page_properties.size = Size.parse(pg_sz)
+        page_properties.size = PageSize.new.parse(pg_sz)
       end
       sect_pr.xpath('w:pgBorders').each do |pg_borders|
         page_borders = Borders.new
