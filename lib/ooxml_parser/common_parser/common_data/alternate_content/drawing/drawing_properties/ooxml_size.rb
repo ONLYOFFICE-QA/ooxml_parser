@@ -26,15 +26,15 @@ module OoxmlParser
     def to_emu
       case @unit
       when :centimeter
-        return OoxmlSize.new(@value * 360_000, :centimeter)
+        return OoxmlSize.new(@value * 360_000, @unit)
       when :point
-        return OoxmlSize.new(@value * 12_700, :point)
+        return OoxmlSize.new(@value * 12_700, @unit)
       when :half_point
-        return OoxmlSize.new(@value * (12_700 * 2), :point)
-      when :dxa
-        return OoxmlSize.new(@value * 635, :dxa)
+        return OoxmlSize.new(@value * (12_700 * 2), @unit)
+      when :dxa, :twip
+        return OoxmlSize.new(@value * 635, @unit)
       when :inch
-        return OoxmlSize.new(@value * 914_400, :inch)
+        return OoxmlSize.new(@value * 914_400, @unit)
       when :emu
         return self
       end
@@ -44,15 +44,15 @@ module OoxmlParser
       emu = to_emu
       case output_unit
       when :centimeter
-        return OoxmlSize.new((emu.value / 360_000).round(OoxmlParser.configuration.accuracy), :centimeter)
+        return OoxmlSize.new((emu.value / 360_000).round(OoxmlParser.configuration.accuracy), output_unit)
       when :point
-        return OoxmlSize.new((emu.value / 12_700).round(OoxmlParser.configuration.accuracy), :point)
+        return OoxmlSize.new((emu.value / 12_700).round(OoxmlParser.configuration.accuracy), output_unit)
       when :half_point
-        return OoxmlSize.new((emu.value / (12_700 * 2)).round(OoxmlParser.configuration.accuracy), :point)
-      when :dxa
-        return OoxmlSize.new((emu.value / 635).round(OoxmlParser.configuration.accuracy), :dxa)
+        return OoxmlSize.new((emu.value / (12_700 * 2)).round(OoxmlParser.configuration.accuracy), output_unit)
+      when :dxa, :twip
+        return OoxmlSize.new((emu.value / 635).round(OoxmlParser.configuration.accuracy), output_unit)
       when :inch
-        return OoxmlSize.new((emu.value / 914_400).round(OoxmlParser.configuration.accuracy), :inch)
+        return OoxmlSize.new((emu.value / 914_400).round(OoxmlParser.configuration.accuracy), output_unit)
       when :emu
         return emu
       end
