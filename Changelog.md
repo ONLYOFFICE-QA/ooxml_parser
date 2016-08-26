@@ -3,6 +3,7 @@
 ## master (unreleased)
 ### New features
 * Ability to set units of measurement to each value, not to all via config
+* Add twips (same as dxa) unit of measurement
 * Add configuration to set accuracy of fraction part of digit
 * Add parsing of Table Properties and Table Style Properties in Document Styles
 * Fully support of Windows platform
