@@ -24,6 +24,7 @@
 * Paragraphs now have correct parsing of borders
 * Run properties - language, position property
 * Parsing run shade
+* Parsing of Columns spacing
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

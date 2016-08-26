@@ -67,7 +67,7 @@ module OoxmlParser
         page_properties.document_grid = DocumentGrid.parse(doc_grid)
       end
       sect_pr.xpath('w:cols').each do |columns_grid|
-        page_properties.columns = Columns.parse(columns_grid)
+        page_properties.columns = Columns.new.parse(columns_grid)
       end
       sect_pr.xpath('w:headerReference', 'w:footerReference').each do |doc_edge_reference|
         target = OOXMLDocumentObject.get_link_from_rels(doc_edge_reference.attribute('id').value)
