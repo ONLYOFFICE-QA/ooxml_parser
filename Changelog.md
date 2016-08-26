@@ -46,6 +46,7 @@
 * Parsing DocxParagraphRun properties
 * Move some slide methods to helper
 * Remove `OoxmlShift` - use `OoxmlCoordinates` instead
+* Rename `Size` class to `PageSize` and `RunSize` to `Size`
 
 ## 0.1.2 (2016-06-07)
 
