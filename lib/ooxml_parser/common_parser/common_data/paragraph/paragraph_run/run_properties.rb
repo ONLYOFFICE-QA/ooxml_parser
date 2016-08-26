@@ -3,6 +3,7 @@ require_relative 'run_properties/outline'
 require_relative 'run_properties/position'
 require_relative 'run_properties/run_size'
 require_relative 'run_properties/run_spacing'
+require_relative 'run_properties/shade'
 require_relative 'run_properties/strikeout'
 module OoxmlParser
   class RunProperties < OOXMLDocumentObject
@@ -18,6 +19,8 @@ module OoxmlParser
     attr_accessor :language
     # @return [Position] position property
     attr_accessor :position
+    # @return [Shade] shade property
+    attr_accessor :shade
 
     def initialize(font_name = '', font_style = FontStyle.new, font_color = nil, space = nil, baseline = :baseline)
       @font_name = font_name
@@ -94,6 +97,8 @@ module OoxmlParser
           character_properties.language = Language.parse(properties_element)
         when 'position'
           character_properties.position = Position.parse(properties_element)
+        when 'shd'
+          character_properties.shade = Shade.parse(properties_element)
         end
       end
       character_properties.font_color = DocxColorScheme.parse(character_props_node)

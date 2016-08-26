@@ -23,6 +23,7 @@
 * Correct parsing of paragraph properties and run properties
 * Paragraphs now have correct parsing of borders
 * Run properties - language, position property
+* Parsing run shade
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
