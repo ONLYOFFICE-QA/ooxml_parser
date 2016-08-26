@@ -19,6 +19,8 @@ module OoxmlParser
     # @return [String] type of instruction used for upper level of run
     # http://officeopenxml.com/WPfieldInstructions.php
     attr_accessor :instruction
+    # @return [RunProperties] properties of run
+    attr_accessor :run_properties
 
     def initialize
       @number = 0
@@ -103,6 +105,7 @@ module OoxmlParser
       character.text_outline = @text_outline
       character.text_fill = @text_fill
       character.instruction = @instruction
+      character.run_properties = @run_properties
       character
     end
 
@@ -124,6 +127,7 @@ module OoxmlParser
         case r_node_child.name
         when 'rPr'
           parse_properties(r_node_child, DocumentStructure.default_run_style)
+          @run_properties = RunProperties.parse(r_node_child)
         when 'instrText'
           if r_node_child.text.include?('HYPERLINK')
             hyperlink = Hyperlink.new(r_node_child.text.sub('HYPERLINK ', '').split(' \\o ').first, r_node_child.text.sub('HYPERLINK', '').split(' \\o ').last)

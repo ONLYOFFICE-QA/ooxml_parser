@@ -35,7 +35,7 @@ describe OoxmlParser::DocxParagraph do
 
   it 'ParagrphEquals' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/paragraph_equals.docx')
-    expect(docx.elements[0]).to eq(docx.elements[2])
+    expect(docx.elements[0]).not_to eq(docx.elements[2])
   end
 
   it 'table_with_default_table_run_style' do
