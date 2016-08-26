@@ -22,8 +22,13 @@ describe OoxmlParser::Borders do
   it 'border_properties_nil' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/borders/border_properties_nil.docx')
     expect(docx.element_by_description[0].borders.top).to be_nil
-    expect(docx.element_by_description[0].borders.left.sz).to eq(1)
+    expect(docx.element_by_description[0].borders.left.size).to eq(OoxmlParser::OoxmlSize.new(1, :point))
     expect(docx.element_by_description[0].borders.right).to be_nil
     expect(docx.element_by_description[0].borders.bottom).to be_nil
+  end
+
+  it 'border_size_pt_8' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/borders/border_size_pt_8.docx')
+    expect(docx.elements.first.borders.between.sz).to eq(OoxmlParser::OoxmlSize.new(24, :one_eighth_point))
   end
 end

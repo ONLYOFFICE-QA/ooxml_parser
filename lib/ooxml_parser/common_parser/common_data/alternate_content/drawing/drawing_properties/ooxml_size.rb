@@ -26,15 +26,17 @@ module OoxmlParser
     def to_emu
       case @unit
       when :centimeter
-        return OoxmlSize.new(@value * 360_000, @unit)
+        return OoxmlSize.new(@value * 360_000, :emu)
       when :point
-        return OoxmlSize.new(@value * 12_700, @unit)
+        return OoxmlSize.new(@value * 12_700, :emu)
       when :half_point
-        return OoxmlSize.new(@value * (12_700 * 2), @unit)
+        return OoxmlSize.new(@value * (12_700 / 2), :emu)
+      when :one_eighth_point
+        return OoxmlSize.new(@value * (12_700 / 8), :emu)
       when :dxa, :twip
-        return OoxmlSize.new(@value * 635, @unit)
+        return OoxmlSize.new(@value * 635, :emu)
       when :inch
-        return OoxmlSize.new(@value * 914_400, @unit)
+        return OoxmlSize.new(@value * 914_400, :emu)
       when :emu
         return self
       end
@@ -49,6 +51,8 @@ module OoxmlParser
         return OoxmlSize.new((emu.value / 12_700).round(OoxmlParser.configuration.accuracy), output_unit)
       when :half_point
         return OoxmlSize.new((emu.value / (12_700 * 2)).round(OoxmlParser.configuration.accuracy), output_unit)
+      when :one_eighth_point
+        return OoxmlSize.new((emu.value / (12_700 * 8)).round(OoxmlParser.configuration.accuracy), output_unit)
       when :dxa, :twip
         return OoxmlSize.new((emu.value / 635).round(OoxmlParser.configuration.accuracy), output_unit)
       when :inch

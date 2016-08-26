@@ -60,6 +60,6 @@ describe OoxmlParser::TableProperties do
 
   it 'table_border_size' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_border_size.docx')
-    expect(docx.elements[1].table_properties.table_borders.top.sz).to eq(4.5)
+    expect(docx.elements[1].table_properties.table_borders.top.sz).to eq(OoxmlParser::OoxmlSize.new(4.5, :point))
   end
 end
