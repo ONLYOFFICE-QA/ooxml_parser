@@ -29,6 +29,8 @@ module OoxmlParser
         return OoxmlSize.new(@value * 360_000, :centimeter)
       when :point
         return OoxmlSize.new(@value * 12_700, :point)
+      when :half_point
+        return OoxmlSize.new(@value * (12_700 * 2), :point)
       when :dxa
         return OoxmlSize.new(@value * 635, :dxa)
       when :inch
@@ -45,6 +47,8 @@ module OoxmlParser
         return OoxmlSize.new((emu.value / 360_000).round(OoxmlParser.configuration.accuracy), :centimeter)
       when :point
         return OoxmlSize.new((emu.value / 12_700).round(OoxmlParser.configuration.accuracy), :point)
+      when :half_point
+        return OoxmlSize.new((emu.value / (12_700 * 2)).round(OoxmlParser.configuration.accuracy), :point)
       when :dxa
         return OoxmlSize.new((emu.value / 635).round(OoxmlParser.configuration.accuracy), :dxa)
       when :inch
