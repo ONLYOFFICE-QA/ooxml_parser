@@ -25,19 +25,19 @@ module OoxmlParser
         number = 0
         ftr.xpath('*').each do |sub_element|
           if sub_element.name == 'p'
-            note.elements << DocxParagraph.parse(sub_element, number, default_paragraph, default_character, parent: note)
+            note.elements << default_paragraph.copy.parse(sub_element, number, default_character, parent: note)
             number += 1
           elsif sub_element.name == 'tbl'
             note.elements << Table.parse(sub_element, number, parent: note)
             number += 1
           elsif sub_element.name == 'std'
             sub_element.xpath('w:p').each do |p|
-              note.elements << DocxParagraph.parse(p, number, default_paragraph, default_character)
+              note.elements << default_paragraph.copy.parse(p, number, default_character)
               number += 1
             end
             sub_element.xpath('w:sdtContent').each do |sdt_content|
               sdt_content.xpath('w:p').each do |p|
-                note.elements << DocxParagraph.parse(p, number, default_paragraph, default_character)
+                note.elements << default_paragraph.copy.parse(p, number, default_character)
                 number += 1
               end
             end

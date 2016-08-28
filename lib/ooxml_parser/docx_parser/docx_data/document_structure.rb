@@ -120,7 +120,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       doc.search('//w:docDefaults').each do |doc_defaults|
         doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
-          DocumentStructure.default_paragraph_style = DocxParagraph.parse(p_pr_defaults, 0)
+          DocumentStructure.default_paragraph_style = DocxParagraph.new.parse(p_pr_defaults, 0)
         end
         doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
           r_pr_defaults.xpath('w:rPr').each do |r_pr|
@@ -144,7 +144,7 @@ module OoxmlParser
             if element.name == 'p'
               child = element.child
               unless child.nil? && doc_structure.elements.last.class == Table
-                paragraph_style = DocxParagraph.parse(element, number, DocumentStructure.default_paragraph_style, DocumentStructure.default_run_style, parent: doc_structure)
+                paragraph_style = DocumentStructure.default_paragraph_style.copy.parse(element, number, DocumentStructure.default_run_style, parent: doc_structure)
                 number += 1
                 doc_structure.elements << paragraph_style.copy
               end
@@ -152,8 +152,6 @@ module OoxmlParser
               table = Table.parse(element,
                                   number,
                                   TableProperties.new,
-                                  DocumentStructure.default_table_paragraph_style,
-                                  DocumentStructure.default_table_run_style,
                                   parent: doc_structure)
               number += 1
               doc_structure.elements << table

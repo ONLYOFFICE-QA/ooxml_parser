@@ -21,11 +21,10 @@ module OoxmlParser
         when 'tcPr'
           cell.properties = CellProperties.parse(cell_node_child)
         when 'p'
-          paragraph = DocxParagraph.parse(cell_node_child, 0,
-                                          DocumentStructure.default_table_paragraph_style,
-                                          DocumentStructure.default_table_run_style,
-                                          parent: cell)
-          cell.elements << paragraph
+          cell.elements << DocumentStructure.default_table_paragraph_style.copy.parse(cell_node_child,
+                                                                                      0,
+                                                                                      DocumentStructure.default_table_run_style,
+                                                                                      parent: cell)
         when 'tbl'
           table = Table.parse(cell_node_child, parent: cell)
           cell.elements << table
