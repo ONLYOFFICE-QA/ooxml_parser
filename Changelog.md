@@ -36,6 +36,7 @@
 * Fix parsing table style in text box
 * Fix problem with parsing absolute file path in Windows 
 * Parse `keep_next` in paragraph properties
+* TransformEffect in correct `OoxmlSize` unit
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem

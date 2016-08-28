@@ -12,7 +12,7 @@ module OoxmlParser
       transform_effect_node.xpath('*').each do |transform_effect_node_child|
         case transform_effect_node_child.name
         when 'ext'
-          transform_effect.extents = OOXMLCoordinates.parse(transform_effect_node_child, x_attr: 'cx', y_attr: 'cy')
+          transform_effect.extents = OOXMLCoordinates.parse(transform_effect_node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
         when 'off'
           transform_effect.offset = OOXMLCoordinates.parse(transform_effect_node_child)
         when 'chOff'
