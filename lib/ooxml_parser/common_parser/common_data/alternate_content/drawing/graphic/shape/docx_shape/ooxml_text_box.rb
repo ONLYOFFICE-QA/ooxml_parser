@@ -14,7 +14,7 @@ module OoxmlParser
       text_box_content_node.xpath('*').each_with_index do |text_body_node_child, index|
         case text_body_node_child.name
         when 'p'
-          text_body.elements << DocxParagraph.parse(text_body_node_child, index, parent: text_body)
+          text_body.elements << DocxParagraph.new.parse(text_body_node_child, index, parent: text_body)
         when 'tbl'
           text_body.elements << Table.parse(text_body_node_child, index, parent: text_body)
         when 'bodyPr'

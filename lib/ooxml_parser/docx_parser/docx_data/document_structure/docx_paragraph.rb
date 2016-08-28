@@ -108,39 +108,38 @@ module OoxmlParser
       true
     end
 
-    def self.parse(p_tag, par_number = 0, default_paragraph = DocxParagraph.new, default_character = DocxParagraphRun.new, parent: nil)
-      paragraph_style = default_paragraph.copy
-      paragraph_style.parent = parent
+    def parse(p_tag, par_number = 0, default_character = DocxParagraphRun.new, parent: nil)
+      @parent = parent
       default_character_style = default_character.copy
       character_styles_array = []
       custom_character_style = default_character_style.copy
       char_number = 0
       comments = []
       p_tag.xpath('w:bookmarkStart').each do |bookmark_start|
-        paragraph_style.bookmark_start << Bookmark.new(bookmark_start.attribute('id').value, bookmark_start.attribute('name').value)
+        @bookmark_start << Bookmark.new(bookmark_start.attribute('id').value, bookmark_start.attribute('name').value)
       end
       p_tag.xpath('w:bookmarkEnd').each do |bookmark_end|
-        paragraph_style.bookmark_end << Bookmark.new(bookmark_end.attribute('id').value)
+        @bookmark_end << Bookmark.new(bookmark_end.attribute('id').value)
       end
       p_tag.xpath('*').each do |p_element|
         if p_element.name == 'pPr'
           p_props = p_tag.xpath('w:pPr')
-          DocxParagraph.parse_paragraph_style(p_props, paragraph_style, custom_character_style, parent: parent)
+          DocxParagraph.parse_paragraph_style(p_props, self, custom_character_style, parent: parent)
           p_tag.xpath('w:pict').each do |pict|
             pict.xpath('v:rect').each do
-              paragraph_style.horizontal_line = true
+              @horizontal_line = true
             end
           end
-          paragraph_style.paragraph_properties = ParagraphProperties.parse(p_element)
+          @paragraph_properties = ParagraphProperties.parse(p_element)
         elsif p_element.name == 'commentRangeStart'
           comments << p_element.attribute('id').value
         elsif p_element.name == 'fldSimple'
           instruction = p_element.attribute('instr').to_s
-          paragraph_style.page_numbering = true if instruction.include?('PAGE')
+          @page_numbering = true if instruction.include?('PAGE')
           p_element.xpath('w:r').each do |r_tag|
             character_style = default_character_style.copy
             character_style.parse(r_tag, char_number, parent: parent)
-            character_style.page_number = paragraph_style.page_numbering
+            character_style.page_number = @page_numbering
             character_style.instruction = instruction
             character_styles_array << character_style.copy
             char_number += 1
@@ -148,11 +147,9 @@ module OoxmlParser
         elsif p_element.name == 'r'
           character_style = custom_character_style.copy
           p_element.xpath('w:instrText').each do |insrt_text|
-            if insrt_text.text.include?('PAGE')
-              paragraph_style.page_numbering = true
-            end
+            @page_numbering = true if insrt_text.text.include?('PAGE')
           end
-          character_style.parse(p_element, char_number, parent: paragraph_style)
+          character_style.parse(p_element, char_number, parent: self)
           character_style.comments = comments.dup
           character_styles_array << character_style.copy
           unless character_style.shape.nil?
@@ -175,10 +172,10 @@ module OoxmlParser
           end
           p_element.xpath('w:fldSimple').each do |simple_field|
             instruction = simple_field.attribute('instr').to_s
-            paragraph_style.page_numbering = true if instruction.include?('PAGE')
+            @page_numbering = true if instruction.include?('PAGE')
             simple_field.xpath('w:r').each do |r_tag|
-              character_style.parse(r_tag, char_number, parent: paragraph_style)
-              character_style.page_number = paragraph_style.page_numbering
+              character_style.parse(r_tag, char_number, parent: self)
+              character_style.page_number = @page_numbering
               character_style.instruction = instruction
               character_styles_array << character_style.copy
               char_number += 1
@@ -197,13 +194,13 @@ module OoxmlParser
           end
         end
       end
-      paragraph_style.number = par_number
+      @number = par_number
       if character_styles_array.last.class == DocxParagraphRun
         character_styles_array.last.text = character_styles_array.last.text.rstrip
       end
-      paragraph_style.character_style_array = character_styles_array
-      paragraph_style.parent = parent
-      paragraph_style
+      @character_style_array = character_styles_array
+      @parent = parent
+      self
     end
 
     def self.parse_paragraph_style(paragraph_pr_tag,

@@ -17,7 +17,7 @@ module OoxmlParser
         document.xpath('w:comment').each do |comment_tag|
           comment = Comment.new(comment_tag.attribute('id').value)
           comment_tag.xpath('w:p').each_with_index do |p, index|
-            comment.paragraphs << DocxParagraph.parse(p, index)
+            comment.paragraphs << DocxParagraph.new.parse(p, index)
           end
           comments << comment.dup
         end
