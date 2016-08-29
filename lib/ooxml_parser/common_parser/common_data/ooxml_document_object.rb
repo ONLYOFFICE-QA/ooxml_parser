@@ -11,6 +11,10 @@ module OoxmlParser
     # @return [Symbol] units in which data is stored in format
     attr_accessor :units
 
+    def initialize(parent: nil)
+      @parent = parent
+    end
+
     def root_object
       tree_object = self
       tree_object = tree_object.parent until tree_object.parent.nil?

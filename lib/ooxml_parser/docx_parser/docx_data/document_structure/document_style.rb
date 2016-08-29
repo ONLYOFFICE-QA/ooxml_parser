@@ -21,6 +21,8 @@ module OoxmlParser
     attr_accessor :table_properties
     # @return [Array, TableStyleProperties] list of table style properties
     attr_accessor :table_style_properties_list
+    # @return [TableRowProperties] properties of table row
+    attr_accessor :table_row_properties
     # @return [True, False] Latent Style Primary Style Setting
     # Used to determine if current style is visible in style list in editors
     # According to http://www.wordarticles.com/Articles/WordStyles/LatentStyles.php
@@ -59,6 +61,8 @@ module OoxmlParser
           document_style.paragraph_properties = DocxParagraph.parse_paragraph_style(subnode, parent: document_style)
         when 'tblPr'
           document_style.table_properties = TableProperties.parse(subnode, parent: document_style)
+        when 'trPr'
+          document_style.table_row_properties = TableRowProperties.new(parent: document_style).parse(subnode)
         when 'tblStylePr'
           document_style.table_style_properties_list << TableStyleProperties.parse(subnode, parent: document_style)
         when 'qFormat'

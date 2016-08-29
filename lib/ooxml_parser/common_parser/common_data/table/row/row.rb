@@ -15,7 +15,7 @@ module OoxmlParser
       row.parent = parent
       row.height = (row_node.attribute('h').value.to_f / 360_000.0).round(2) unless row_node.attribute('h').nil?
       row_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:trPr").each do |table_prop_node|
-        row.table_row_properties = TableRowProperties.parse(table_prop_node)
+        row.table_row_properties = TableRowProperties.new(parent: row).parse(table_prop_node)
       end
       row_node.xpath('*').each do |row_node_child|
         row_node_child.xpath('*').each do |row_properties|

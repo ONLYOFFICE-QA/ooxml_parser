@@ -3,7 +3,7 @@ require 'spec_helper'
 describe OoxmlParser::TableRow do
   it 'table_row_height' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/row/table_row_height.docx')
-    expect(docx.elements[1].rows[1].table_row_properties.height).to eq(1000)
+    expect(docx.elements[1].rows[1].table_row_properties.height.value).to eq(OoxmlParser::OoxmlSize.new(1000, :twip))
   end
 
   it 'border_color_nil_1' do
