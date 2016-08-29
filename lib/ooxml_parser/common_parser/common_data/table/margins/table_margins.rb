@@ -1,5 +1,5 @@
 module OoxmlParser
-  class TableMargins
+  class TableMargins < OOXMLDocumentObject
     attr_accessor :is_default, :top, :bottom, :left, :right
 
     def initialize(is_default = true, top = nil, bottom = nil, left = nil, right = nil)
@@ -10,9 +10,16 @@ module OoxmlParser
       @right = right
     end
 
+    # TODO: Separate @is_default attribute and remove this method
     def ==(other)
-      (@top - other.top).round(2).zero? && (@bottom - other.bottom).round(2).zero? &&
-        (@left - other.left).round(2).zero? && (@right - other.right).round(2).zero?
+      instance_variables.each do |current_attribute|
+        next if current_attribute == :@parent
+        next if current_attribute == :@is_default
+        unless instance_variable_get(current_attribute) == other.instance_variable_get(current_attribute)
+          return false
+        end
+      end
+      true
     end
 
     def to_s
