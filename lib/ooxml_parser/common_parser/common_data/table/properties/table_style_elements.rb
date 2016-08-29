@@ -12,7 +12,7 @@ module OoxmlParser
       style_node.xpath('*').each do |style_node_child|
         case style_node_child.name
         when 'tcPr'
-          element_style.cell_properties = CellProperties.parse(style_node_child)
+          element_style.cell_properties = CellProperties.new(Borders.parse(style_node_child), PresentationFill.parse(style_node_child)).parse(style_node_child)
         end
       end
       element_style
