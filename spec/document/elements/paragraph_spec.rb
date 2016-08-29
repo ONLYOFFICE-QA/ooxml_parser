@@ -30,7 +30,9 @@ describe OoxmlParser::DocxParagraph do
   it 'SectionIndentHangingNilValue' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/section_indent_hanging_nil.docx')
     expect(docx.elements.first.sector_properties.notes.first
-               .elements.first.ind).to eq(OoxmlParser::Indents.new(1.02, 2.02, 3.03))
+               .elements.first.ind).to eq(OoxmlParser::Indents.new(OoxmlParser::OoxmlSize.new(1.02, :centimeter),
+                                                                   OoxmlParser::OoxmlSize.new(2.02, :centimeter),
+                                                                   OoxmlParser::OoxmlSize.new(3, :centimeter)))
   end
 
   it 'ParagrphEquals' do

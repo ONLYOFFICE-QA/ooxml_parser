@@ -41,7 +41,7 @@ module OoxmlParser
       when :table
         found_style.spacing = Spacing.new(found_style.spacing.before, 0, 1, found_style.spacing.line_rule)
       when :list
-        found_style.indent = Indents.new(-0.635, 1.27, 0)
+        found_style.indent = Indents.new(OoxmlParser::OoxmlSize.new(-0.635, :centimeter), OoxmlParser::OoxmlSize.new(1.27, :centimeter), OoxmlParser::OoxmlSize.new(0, :centimeter))
       end
 
       found_style

@@ -11,7 +11,7 @@ describe OoxmlParser::Numbering do
   it 'numbering_paragraph_indent.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_paragraph_indent.docx')
     expect(docx.elements[0].numbering.abstruct_numbering
-               .level_list.first.paragraph_properties.indent.hanging_indent).to eq(0.63)
+               .level_list.first.paragraph_properties.indent.hanging_indent).to eq(OoxmlParser::OoxmlSize.new(0.63, :centimeter))
   end
 
   it 'numbering_font_name.docx' do
