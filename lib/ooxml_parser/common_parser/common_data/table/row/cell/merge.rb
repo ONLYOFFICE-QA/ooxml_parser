@@ -1,5 +1,5 @@
 module OoxmlParser
-  class CellMerge
+  class GridSpan
     attr_accessor :type, :count_of_merged_cells, :value
 
     def initialize(type = 'horizontal', value = nil, count_of_merged_cells = 2)
@@ -8,15 +8,23 @@ module OoxmlParser
       @value = value
     end
 
-    # Parse Merge data
-    # @param [Nokogiri::XML:Element] node with Merge data
-    # @return [CellMerge] value of CellMerge
-    def self.parse(node)
-      merge = CellMerge.new
-      merge.count_of_merged_cells = node.attribute('count_rows_in_span').nil? ? nil : node.attribute('count_rows_in_span').value
-      merge.value = node.attribute('val').nil? ? nil : node.attribute('val').value.to_sym
-      merge.type = node.attribute('type').nil? ? nil : node.attribute('type').value.to_sym
-      merge
+    alias count_rows_in_span count_of_merged_cells
+
+    # Parse Grid Span data
+    # @param [Nokogiri::XML:Element] node with GridSpan data
+    # @return [GridSpan] value of GridSpan
+    def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'count_rows_in_span'
+          @count_of_merged_cells = value.value
+        when 'val'
+          @value = value.value.to_i
+        when 'type'
+          @type = value.value.to_sym
+        end
+      end
+      self
     end
   end
 end

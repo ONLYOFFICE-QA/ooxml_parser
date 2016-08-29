@@ -25,6 +25,7 @@
 * Run properties - language, position property
 * Parsing run shade
 * Parsing of Columns spacing
+* Redone parsing `gridSpan` and `vMerge`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
