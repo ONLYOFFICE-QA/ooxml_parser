@@ -5,7 +5,7 @@ module OoxmlParser
     # @param name [String] name of style
     # @return [DocumentStyle, nil]
     def document_style_by_name(name)
-      @document_styles.each do |style|
+      root_object.document_styles.each do |style|
         return style if style.name == name
       end
       nil
@@ -15,10 +15,16 @@ module OoxmlParser
     # @param name [String] id of style
     # @return [DocumentStyle, nil]
     def document_style_by_id(id)
-      @document_styles.each do |style|
+      root_object.document_styles.each do |style|
         return style if style.style_id == id
       end
       nil
+    end
+
+    # Return document style which is based on
+    # @return [DocumentStyle]
+    def based_on_style
+      document_style_by_id(@based_on)
     end
 
     # Check if style exists in current document

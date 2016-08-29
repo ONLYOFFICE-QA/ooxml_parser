@@ -26,6 +26,7 @@
 * Parsing run shade
 * Parsing of Columns spacing
 * Redone parsing `gridSpan` and `vMerge`
+* Add ability to get style on which style is based
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

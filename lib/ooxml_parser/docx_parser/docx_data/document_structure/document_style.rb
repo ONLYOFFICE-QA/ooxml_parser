@@ -3,6 +3,7 @@ module OoxmlParser
   # Class for describing styles containing in +styles.xml+
   class DocumentStyle < OOXMLDocumentObject
     include TableStylePropertiesHelper
+    include DocumentStyleHelper
     # @return [Symbol] Type of style (+:paragraph+ or +:table+)
     attr_accessor :type
     # @return [FixNum] number of style
@@ -52,9 +53,9 @@ module OoxmlParser
         when 'name'
           document_style.name = subnode.attribute('val').value
         when 'basedOn'
-          document_style.based_on = subnode.attribute('val').value.to_i
+          document_style.based_on = subnode.attribute('val').value
         when 'next'
-          document_style.next_style = subnode.attribute('val').value.to_i
+          document_style.next_style = subnode.attribute('val').value
         when 'rPr'
           document_style.run_properties = DocxParagraphRun.new.parse_properties(subnode)
         when 'pPr'
