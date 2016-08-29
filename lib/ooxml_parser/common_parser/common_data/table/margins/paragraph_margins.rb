@@ -1,10 +1,15 @@
 module OoxmlParser
   class ParagraphMargins < TableMargins
-    def initialize(top = 0.0, bottom = 0.0, left = 0.0, right = 0.0)
+    def initialize(top = OoxmlSize.new(0),
+                   bottom = OoxmlSize.new(0),
+                   left = OoxmlSize.new(0),
+                   right = OoxmlSize.new(0),
+                   parent: nil)
       @top = top
       @bottom = bottom
       @left = left
       @right = right
+      @parent = parent
     end
 
     def round(count_of_digits = 1)
@@ -15,21 +20,20 @@ module OoxmlParser
       ParagraphMargins.new(top, bottom, left, right)
     end
 
-    def self.parse(text_body_props_node)
-      margins = ParagraphMargins.new(0.127, 0.127, 0.254, 0.254)
+    def parse(text_body_props_node)
       text_body_props_node.attributes.each do |key, value|
         case key
         when 'bIns', 'marB'
-          margins.bottom = (value.value.to_f / 360_000.0).round(3)
+          @bottom = OoxmlSize.new(value.value.to_f)
         when 'tIns', 'marT'
-          margins.top = (value.value.to_f / 360_000.0).round(3)
+          @top = OoxmlSize.new(value.value.to_f)
         when 'lIns', 'marL'
-          margins.left = (value.value.to_f / 360_000.0).round(3)
+          @left = OoxmlSize.new(value.value.to_f)
         when 'rIns', 'marR'
-          margins.right = (value.value.to_f / 360_000.0).round(3)
+          @right = OoxmlSize.new(value.value.to_f)
         end
       end
-      margins
+      self
     end
   end
 end

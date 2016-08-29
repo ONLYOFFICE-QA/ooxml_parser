@@ -9,7 +9,10 @@ module OoxmlParser
 
     def self.parse(body_pr_node)
       body_properties = OOXMLShapeBodyProperties.new
-      body_properties.margins = ParagraphMargins.parse(body_pr_node)
+      body_properties.margins = ParagraphMargins.new(OoxmlSize.new(0.127, :centimeter),
+                                                     OoxmlSize.new(0.127, :centimeter),
+                                                     OoxmlSize.new(0.254, :centimeter),
+                                                     OoxmlSize.new(0.254, :centimeter)).parse(body_pr_node)
       body_pr_node.attributes.each do |key, value|
         case key
         when 'wrap'

@@ -2,12 +2,13 @@ module OoxmlParser
   class TableMargins < OOXMLDocumentObject
     attr_accessor :is_default, :top, :bottom, :left, :right
 
-    def initialize(is_default = true, top = nil, bottom = nil, left = nil, right = nil)
+    def initialize(is_default = true, top = nil, bottom = nil, left = nil, right = nil, parent: nil)
       @is_default = is_default
       @top = top
       @bottom = bottom
       @left = left
       @right = right
+      @parent = parent
     end
 
     # TODO: Separate @is_default attribute and remove this method
@@ -26,29 +27,20 @@ module OoxmlParser
       'Default: ' + is_default.to_s + ' top: ' + @top.to_s + ', bottom: ' + @bottom.to_s + ', left: ' + @left.to_s + ', right: ' + @right.to_s
     end
 
-    def round(count_of_digits = 1)
-      top = @top.round(count_of_digits)
-      bottom = @bottom.round(count_of_digits)
-      left = @left.round(count_of_digits)
-      right = @right.round(count_of_digits)
-      TableMargins.new(@is_default, top, bottom, left, right)
-    end
-
-    def self.parse(margin_node)
-      cell_margins = TableMargins.new
+    def parse(margin_node)
       margin_node.xpath('*').each do |cell_margin_node|
         case cell_margin_node.name
         when 'left'
-          cell_margins.left = (cell_margin_node.attribute('w').value.to_f / 566.9).round(2)
+          @left = OoxmlSize.new(cell_margin_node.attribute('w').value.to_f)
         when 'top'
-          cell_margins.top = (cell_margin_node.attribute('w').value.to_f / 566.9).round(2)
+          @top = OoxmlSize.new(cell_margin_node.attribute('w').value.to_f)
         when 'right'
-          cell_margins.right = (cell_margin_node.attribute('w').value.to_f / 566.9).round(2)
+          @right = OoxmlSize.new(cell_margin_node.attribute('w').value.to_f)
         when 'bottom'
-          cell_margins.bottom = (cell_margin_node.attribute('w').value.to_f / 566.9).round(2)
+          @bottom = OoxmlSize.new(cell_margin_node.attribute('w').value.to_f)
         end
       end
-      cell_margins
+      self
     end
   end
 end
