@@ -51,7 +51,7 @@ module OoxmlParser
         when 'tabLst'
           paragraph_properties.tabs = ParagraphTab.parse(properties_element)
         when 'ind'
-          paragraph_properties.indent = Indents.parse(properties_element)
+          paragraph_properties.indent = Indents.new(parent: paragraph_properties).parse(properties_element)
         when 'rPr'
           paragraph_properties.run_properties = RunProperties.parse(properties_element)
         when 'pBdr'

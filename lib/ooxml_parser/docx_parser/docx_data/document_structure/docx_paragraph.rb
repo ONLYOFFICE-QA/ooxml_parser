@@ -263,7 +263,7 @@ module OoxmlParser
         parse_paragraph_style_xml(p_style.attribute('val').value, paragraph_style, default_char_style)
       end
       paragraph_pr_tag.xpath('w:ind').each do |ind|
-        paragraph_style.ind = Indents.parse(ind)
+        paragraph_style.ind = Indents.new(parent: paragraph_style).parse(ind)
       end
       paragraph_pr_tag.xpath('w:kinoku').each do
         paragraph_style.kinoku = true
