@@ -1,8 +1,13 @@
+require_relative 'cell_properties/vertical_merge'
 require_relative 'merge'
 module OoxmlParser
   # Class for parsing 'w:tcPr' element
   class CellProperties < OOXMLDocumentObject
     attr_accessor :fill, :color, :borders, :text_direction, :anchor, :anchor_center, :horizontal_overflow, :merge, :table_cell_width, :borders_properties, :shd, :vertical_align
+    # @return [GridSpan] data about grid span
+    attr_accessor :grid_span
+    # @return [TableMargins] margins
+    attr_accessor :vertical_merge
     # @return [TableMargins] margins
     attr_accessor :table_cell_margin
 
@@ -14,16 +19,18 @@ module OoxmlParser
       @merge = false
     end
 
+    alias merge grid_span
+
     def parse(cell_properties_node)
       @borders_properties = Borders.new
       cell_properties_node.xpath('*').each do |cell_node_child|
         case cell_node_child.name
         when 'vMerge'
-          @merge = CellMerge.parse(cell_node_child)
+          @vertical_merge = VerticalMerge.new.parse(cell_node_child)
         when 'vAlign'
           @vertical_align = cell_node_child.attribute('val').value.to_sym
         when 'gridSpan'
-          @merge = CellMerge.new('horizontal', cell_node_child.attribute('val').value)
+          @grid_span = GridSpan.new.parse(cell_node_child)
         when 'tcW'
           @table_cell_width = cell_node_child.attribute('w').value.to_f / 567.5
         when 'tcMar'
