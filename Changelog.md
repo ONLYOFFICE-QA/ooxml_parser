@@ -38,6 +38,7 @@
 * Parse `keep_next` in paragraph properties
 * TransformEffect in correct `OoxmlSize` unit
 * `Indents` use `OoxmlSize`
+* `TableMargins` use `OoxmlSize`
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem

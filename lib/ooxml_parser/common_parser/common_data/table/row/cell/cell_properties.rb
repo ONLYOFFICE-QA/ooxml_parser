@@ -27,7 +27,7 @@ module OoxmlParser
         when 'tcW'
           @table_cell_width = cell_node_child.attribute('w').value.to_f / 567.5
         when 'tcMar'
-          @table_cell_margin = TableMargins.parse(cell_node_child)
+          @table_cell_margin = TableMargins.new(parent: self).parse(cell_node_child)
         when 'textDirection'
           @text_direction = Alignment.parse(cell_node_child.attribute('val'))
         when 'shd'

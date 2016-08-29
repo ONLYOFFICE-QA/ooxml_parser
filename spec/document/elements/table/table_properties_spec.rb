@@ -36,7 +36,11 @@ describe OoxmlParser::TableProperties do
   it 'table_cell_margin' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_cell_margin.docx')
     margins_in_doc = docx.element_by_description(location: :canvas, type: :paragraph)[1].table_properties.table_cell_margin
-    expect(OoxmlParser::TableMargins.new(true, 1.0, 0.19, 2.0, 0.19)).to eq(margins_in_doc)
+    expect(OoxmlParser::TableMargins.new(true,
+                                         OoxmlParser::OoxmlSize.new(1.0, :centimeter),
+                                         OoxmlParser::OoxmlSize.new(0.19, :centimeter),
+                                         OoxmlParser::OoxmlSize.new(2.0, :centimeter),
+                                         OoxmlParser::OoxmlSize.new(0.19, :centimeter))).to eq(margins_in_doc)
   end
 
   describe 'JC' do
