@@ -46,7 +46,7 @@ module OoxmlParser
         when 'timing'
           slide.timing = Timing.parse(slide_node_child)
         when 'transition'
-          slide.transition = Transition.parse(slide_node_child)
+          slide.transition = Transition.new(parent: slide).parse(slide_node_child)
         when 'AlternateContent'
           slide.alternate_content = PresentationAlternateContent.parse(slide_node_child)
         end

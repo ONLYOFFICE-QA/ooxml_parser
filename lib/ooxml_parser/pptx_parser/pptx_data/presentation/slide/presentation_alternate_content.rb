@@ -14,7 +14,7 @@ module OoxmlParser
         when 'timing'
           alternate_content.timing = Timing.parse(choice_node_child)
         when 'transition'
-          alternate_content.transition = Transition.parse(choice_node_child)
+          alternate_content.transition = Transition.new(parent: alternate_content).parse(choice_node_child)
         when 'sp'
           alternate_content.elements << PresentationShape.parse(choice_node_child)
         end
