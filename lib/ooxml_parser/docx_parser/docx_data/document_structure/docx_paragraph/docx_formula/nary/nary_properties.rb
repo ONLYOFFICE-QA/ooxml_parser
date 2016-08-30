@@ -5,7 +5,7 @@ module OoxmlParser
   class NaryProperties
     # @return [NaryGrow] grow value
     attr_accessor :grow
-    # @retunr [NaryLimitLocation] nary limit location
+    # @return [NaryLimitLocation] nary limit location
     attr_accessor :limit_location
 
     # Parse NaryProperties

@@ -1,0 +1,5 @@
+--exclude Gemfile
+--exclude circle.yml
+--exclude README.md
+--exclude Changelog.md
+--exclude LICENSE.txt

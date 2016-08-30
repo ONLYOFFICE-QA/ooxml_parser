@@ -28,7 +28,7 @@ module OoxmlParser
         when 'tr'
           table.rows << TableRow.parse(table_node_child, parent: table)
         when 'tblPr'
-          table.properties = TableProperties.parse(table_node_child, parent: table)
+          table.properties = TableProperties.new(parent: table).parse(table_node_child)
         end
       end
       table.number = number

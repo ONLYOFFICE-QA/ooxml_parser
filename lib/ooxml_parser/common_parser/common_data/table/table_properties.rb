@@ -5,24 +5,17 @@ require_relative 'properties/table_position'
 require_relative 'properties/table_style_properties'
 require_relative 'table_properties/table_borders'
 module OoxmlParser
+  # Class for parsing `w:tblPr` tags
   class TableProperties < OOXMLDocumentObject
     attr_accessor :jc, :table_width, :shd, :table_borders, :table_properties, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
                   :column_banding_size, :table_look, :grid_column, :right_to_left, :style
 
     alias table_properties table_positon
 
-    def initialize
-      @table_indent = nil
-      @table_cell_margin = nil
+    def initialize(parent: nil)
       @jc = :left
-      @shd = nil
-      @stretching = true
       @table_borders = TableBorders.new
-      @table_properties = nil
-      @table_width = nil
-      @grid_column = nil
-      @right_to_left = nil
-      @style = nil
+      @parent = parent
     end
 
     def copy
@@ -41,39 +34,40 @@ module OoxmlParser
       table
     end
 
-    def self.parse(table_properties_node, parent: nil)
-      table_properties = TableProperties.new
-      table_properties.parent = parent
-      table_properties_node.xpath('*').each do |table_props_node_child|
-        case table_props_node_child.name
+    # Parse TableProperties object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [TableProperties] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'tableStyleId'
-          table_properties.style = TableStyle.parse(style_id: table_props_node_child.text)
+          @style = TableStyle.parse(style_id: node_child.text)
         when 'tblBorders'
-          table_properties.table_borders = TableBorders.parse(table_props_node_child)
+          @table_borders = TableBorders.parse(node_child)
         when 'tblStyle'
-          table_properties.table_style = table_properties.root_object.document_style_by_id(table_props_node_child.attribute('val').value)
+          @table_style = root_object.document_style_by_id(node_child.attribute('val').value)
         when 'tblW'
-          table_properties.table_width = table_props_node_child.attribute('w').text.to_f / 567.0
+          @table_width = node_child.attribute('w').text.to_f / 567.0
         when 'jc'
-          table_properties.jc = table_props_node_child.attribute('val').text.to_sym
+          @jc = node_child.attribute('val').text.to_sym
         when 'shd'
-          unless table_props_node_child.attribute('fill').nil?
-            background_color = Color.from_int16(table_props_node_child.attribute('fill').value)
-            table_properties.shd = background_color
+          unless node_child.attribute('fill').nil?
+            background_color = Color.from_int16(node_child.attribute('fill').value)
+            @shd = background_color
           end
         when 'tblLook'
-          table_properties.table_look = TableLook.parse(table_props_node_child)
+          @table_look = TableLook.new(parent: self).parse(node_child)
         when 'tblInd'
-          table_properties.table_indent = table_props_node_child.attribute('w').text.to_f / 567.0
+          @table_indent = node_child.attribute('w').text.to_f / 567.0
         when 'tblpPr'
-          table_properties.table_positon = TablePosition.parse(table_props_node_child)
+          @table_positon = TablePosition.parse(node_child)
         when 'tblCellMar'
-          table_properties.table_cell_margin = TableMargins.new(parent: table_properties).parse(table_props_node_child)
+          @table_cell_margin = TableMargins.new(parent: table_properties).parse(node_child)
         end
       end
-      table_properties.table_look = TableLook.parse(table_properties_node) if table_properties.table_look.nil?
-      table_properties.right_to_left = OOXMLDocumentObject.option_enabled?(table_properties_node, 'rtl')
-      table_properties
+      @table_look = TableLook.new(parent: self).parse(node) if @table_look.nil?
+      @right_to_left = option_enabled?(node, 'rtl')
+      self
     end
   end
 end

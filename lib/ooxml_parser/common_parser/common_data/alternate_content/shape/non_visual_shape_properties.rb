@@ -11,7 +11,7 @@ module OoxmlParser
         when 'cNvPr'
           non_visual_properties.common_properties = CommonNonVisualProperties.parse(nv_props_node_child)
         when 'nvPr'
-          non_visual_properties.non_visual_properties = NonVisualProperties.parse(nv_props_node_child)
+          non_visual_properties.non_visual_properties = NonVisualProperties.new(parent: non_visual_properties).parse(nv_props_node_child)
         end
       end
       non_visual_properties

@@ -1,6 +1,6 @@
 require_relative 'border'
 module OoxmlParser
-  class Borders < OOXMLDocumentObject
+  class Borders < ParagraphBorders
     attr_accessor :left, :right, :top, :bottom, :inner_vertical, :inner_horizontal, :display, :between, :bar,
                   :top_left_to_bottom_right, :top_right_to_bottom_left, :offset_from
 
@@ -44,19 +44,6 @@ module OoxmlParser
       yield(left)
       yield(right)
       yield(top)
-    end
-
-    def border_visual_type
-      result = []
-      result << :left if @left.val == :single
-      result << :right if @right.val == :single
-      result << :top if @top.val == :single
-      result << :bottom if @bottom.val == :single
-      result << :inner if @between.val == :single
-      return :none if result == []
-      return :all if result == [:left, :right, :top, :bottom, :inner]
-      return :outer if result == [:left, :right, :top, :bottom]
-      return result.first if result.size == 1
     end
 
     def to_s

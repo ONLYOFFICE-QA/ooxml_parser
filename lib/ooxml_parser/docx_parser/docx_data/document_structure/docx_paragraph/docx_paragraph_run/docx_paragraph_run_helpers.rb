@@ -38,17 +38,25 @@ module OoxmlParser
         when 'position'
           self.position = (run_properties_node.attribute('val').value.to_f / (28.0 + 1.0 / 3.0) / 2.0).round(1)
         when 'rtl'
-          self.rtl = OOXMLDocumentObject.option_enabled?(run_properties_node)
+          self.rtl = option_enabled?(run_properties_node)
         when 'em'
           self.em = run_properties_node.attribute('val').value
         when 'cs'
-          self.cs = OOXMLDocumentObject.option_enabled?(run_properties_node)
+          self.cs = option_enabled?(run_properties_node)
         when 'spacing'
           self.spacing = (run_properties_node.attribute('val').value.to_f / 566.9).round(1)
         when 'textFill'
           self.text_fill = TextFill.parse(run_properties_node)
         when 'textOutline'
           self.text_outline = TextOutline.parse(run_properties_node)
+        when 'bCs', 'b'
+          font_style.bold = option_enabled?(run_properties_node)
+        when 'iCs', 'i'
+          font_style.italic = option_enabled?(run_properties_node)
+        when 'caps'
+          self.caps = :caps
+        when 'smallCaps'
+          self.caps = :small_caps if option_enabled?(run_properties_node)
         end
       end
       character_pr_tag.xpath('w:color').each do |color|
@@ -99,35 +107,6 @@ module OoxmlParser
           font_style.underlined = Underline.new
         end
       end
-      character_pr_tag.xpath('w:bCs').each do |b|
-        font_style.bold = if b.attribute('val').nil? || b.attribute('val').value != 'false'
-                            true
-                          else
-                            false
-                          end
-      end
-      character_pr_tag.xpath('w:b').each do |b|
-        font_style.bold = if b.attribute('val').nil? || b.attribute('val').value != 'false'
-                            true
-                          else
-                            false
-                          end
-      end
-      character_pr_tag.xpath('w:iCs').each do |i|
-        next if i.attribute('val').nil?
-        font_style.italic = if i.attribute('val').value != 'false'
-                              true
-                            else
-                              false
-                            end
-      end
-      character_pr_tag.xpath('w:i').each do |i|
-        font_style.italic = if i.attribute('val').nil? || i.attribute('val').value != 'false'
-                              true
-                            else
-                              false
-                            end
-      end
       character_pr_tag.xpath('w:strike').each do |strike|
         font_style.strike = if strike.attribute('val').nil? || strike.attribute('val').value != 'false' && strike.attribute('val').value != '0'
                               :single
@@ -141,22 +120,6 @@ module OoxmlParser
         elsif dstrike.attribute('val').value == '0' || dstrike.attribute('val').value == 'false'
         else
           font_style.strike = :double
-        end
-      end
-      character_pr_tag.xpath('w:caps').each do |caps|
-        if caps.attribute('val').nil?
-          self.caps = :caps
-        elsif caps.attribute('val').value == 'false'
-        else
-          self.caps = :caps
-        end
-      end
-      character_pr_tag.xpath('w:smallCaps').each do |small_caps|
-        if small_caps.attribute('val').nil?
-          self.caps = :small_caps
-        elsif small_caps.attribute('val').value == 'false'
-        else
-          self.caps = :small_caps
         end
       end
       self

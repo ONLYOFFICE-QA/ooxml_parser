@@ -127,7 +127,7 @@ module OoxmlParser
         case r_node_child.name
         when 'rPr'
           parse_properties(r_node_child, DocumentStructure.default_run_style)
-          @run_properties = RunProperties.parse(r_node_child)
+          @run_properties = RunProperties.new(parent: self).parse(r_node_child)
         when 'instrText'
           if r_node_child.text.include?('HYPERLINK')
             hyperlink = Hyperlink.new(r_node_child.text.sub('HYPERLINK ', '').split(' \\o ').first, r_node_child.text.sub('HYPERLINK', '').split(' \\o ').last)

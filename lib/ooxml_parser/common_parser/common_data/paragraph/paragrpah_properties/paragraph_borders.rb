@@ -14,6 +14,19 @@ module OoxmlParser
     # @return [BordersProperties] bar properties
     attr_accessor :bar
 
+    def border_visual_type
+      result = []
+      result << :left if @left.val == :single
+      result << :right if @right.val == :single
+      result << :top if @top.val == :single
+      result << :bottom if @bottom.val == :single
+      result << :inner if @between.val == :single
+      return :none if result == []
+      return :all if result == [:left, :right, :top, :bottom, :inner]
+      return :outer if result == [:left, :right, :top, :bottom]
+      result.first if result.size == 1
+    end
+
     # Parse Paragraph Borders data
     # @param [Nokogiri::XML:Element] node with Paragraph Borders data
     # @return [ParagraphBorders] value of Paragraph Borders data

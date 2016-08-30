@@ -1,4 +1,5 @@
 module OoxmlParser
+  # Class for parsing `bg` tag
   class Background < OOXMLDocumentObject
     attr_accessor :fill, :shade_to_title
 
@@ -6,14 +7,16 @@ module OoxmlParser
       @type = type
     end
 
-    def self.parse(background_node)
-      background = Background.new
-      background_properties_node = background_node.xpath('p:bgPr').first
+    # Parse Background object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Background] result of parsing
+    def parse(node)
+      background_properties_node = node.xpath('p:bgPr').first
       if background_properties_node
-        background.shade_to_title = OOXMLDocumentObject.option_enabled?(background_properties_node, 'shadeToTitle')
-        background.fill = PresentationFill.parse(background_properties_node)
+        @shade_to_title = attribute_enabled?(background_properties_node, 'shadeToTitle')
+        @fill = PresentationFill.parse(background_properties_node)
       end
-      background
+      self
     end
   end
 end
