@@ -31,7 +31,7 @@ module OoxmlParser
     # @param position_node [Nokogiri::XML:Element] node to parse
     # @param x_attr [String] name of x attribute
     # @param y_attr [String] name of y attribute
-    # @param delimiter [Float] delimiter to devise values
+    # @param unit [Symbol] unit in which data is stored
     # @return [OOXMLCoordinates] result of parsing
     def self.parse(position_node, x_attr: 'x', y_attr: 'y', unit: :dxa)
       return if position_node.attribute(x_attr).nil? || position_node.attribute(y_attr).nil?

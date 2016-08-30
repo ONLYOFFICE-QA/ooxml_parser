@@ -40,18 +40,18 @@ module OoxmlParser
     # Parse RunProperties object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [RunProperties] result of parsing
-    def parse(character_props_node)
+    def parse(node)
       @font_style = Presentation.current_font_style.dup
-      character_props_node.attributes.each do |key, value|
+      node.attributes.each do |key, value|
         case key
         when 'sz'
           @font_size = value.value.to_f / 100.0
         when 'spc'
           @space = (value.value.to_f / 2_834.0).round(2)
         when 'b'
-          @font_style.bold = option_enabled?(character_props_node, 'b')
+          @font_style.bold = option_enabled?(node, 'b')
         when 'i'
-          @font_style.italic = option_enabled?(character_props_node, 'i')
+          @font_style.italic = option_enabled?(node, 'i')
         when 'u'
           @font_style.underlined = Underline.parse(value.value)
         when 'strike'
@@ -69,8 +69,8 @@ module OoxmlParser
           @caps = value.value.to_sym
         end
       end
-      @font_color = DocxColorScheme.parse(character_props_node)
-      character_props_node.xpath('*').each do |properties_element|
+      @font_color = DocxColorScheme.parse(node)
+      node.xpath('*').each do |properties_element|
         case properties_element.name
         when 'sz'
           @size = Size.new.parse(properties_element)
@@ -110,7 +110,7 @@ module OoxmlParser
           @shade = Shade.parse(properties_element)
         end
       end
-      @font_color = DocxColorScheme.parse(character_props_node)
+      @font_color = DocxColorScheme.parse(node)
       @font_name = Presentation.default_font_typeface if @font_name.empty?
       @font_size = Presentation.default_font_size if @font_size.nil?
       self

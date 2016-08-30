@@ -12,7 +12,7 @@ module OoxmlParser
     end
 
     # Return document style by its id
-    # @param name [String] id of style
+    # @param id [String] id of style
     # @return [DocumentStyle, nil]
     def document_style_by_id(id)
       root_object.document_styles.each do |style|
