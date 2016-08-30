@@ -39,7 +39,7 @@ module OoxmlParser
                 end
               end
             when 'bg'
-              slide.background = Background.parse(common_slide_node_child)
+              slide.background = Background.new(parent: slide).parse(common_slide_node_child)
             end
           end
         when 'clrMapOvr'
