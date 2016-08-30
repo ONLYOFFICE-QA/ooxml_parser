@@ -55,7 +55,8 @@
 * Simplify code for parsing `CellProperties`, `PageProperties`, 
 `DocxParagraph`, `Bookmark`, `TableLook`, `ChartAxisTitle`, 
 `NonVisualProperties`, `ShapePlaceholder`, `RunProperties`, 
-`TableProperties`, `FrameProperties`, `Background`, `Transition`
+`TableProperties`, `FrameProperties`, `Background`, `Transition`,
+`TransitionProperties`
 
 ## 0.1.2 (2016-06-07)
 

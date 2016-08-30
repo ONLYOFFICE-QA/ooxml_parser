@@ -11,7 +11,7 @@ module OoxmlParser
 
     def parse(node)
       node.xpath('*').each do |node_child|
-        @properties = TransitionProperties.parse(node_child)
+        @properties = TransitionProperties.new(parent: self).parse(node_child)
         @sound_action = SoundAction.parse(node_child)
       end
       node.attributes.each do |key, value|
