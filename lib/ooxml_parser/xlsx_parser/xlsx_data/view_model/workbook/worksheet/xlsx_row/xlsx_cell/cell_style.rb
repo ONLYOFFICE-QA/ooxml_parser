@@ -2,6 +2,7 @@ require_relative 'cell_style/foreground_color'
 require_relative 'cell_style/alignment'
 require_relative 'cell_style/ooxml_font'
 module OoxmlParser
+  # Class for parsing cell style
   class CellStyle < OOXMLDocumentObject
     ALL_FORMAT_VALUE = %w|0 0.00 #,##0 #,##0.00 $#,##0_);($#,##0) $#,##0_);[Red]($#,##0) $#,##0.00_);($#,##0.00)
                           $#,##0.00_);[Red]($#,##0.00)
@@ -58,38 +59,40 @@ module OoxmlParser
       @alignment = alignment
     end
 
-    def self.parse(style_number)
+    # Parse CellStyle object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [CellStyle] result of parsing
+    def parse(style_number)
       current_cell_style = XLSXWorkbook.styles_node.xpath('//xmlns:cellXfs/xmlns:xf')[style_number.to_i]
-      cell_style = CellStyle.new
-      cell_style.alignment = XlsxAlignment.new
-      cell_style.font = if current_cell_style.attribute('applyFont').nil? || current_cell_style.attribute('applyFont').value == '0'
-                          OOXMLFont.parse(0)
-                        else
-                          OOXMLFont.parse(current_cell_style.attribute('fontId').value.to_i)
-                        end
+      @alignment = XlsxAlignment.new
+      @font = if current_cell_style.attribute('applyFont').nil? || current_cell_style.attribute('applyFont').value == '0'
+                OOXMLFont.parse(0)
+              else
+                OOXMLFont.parse(current_cell_style.attribute('fontId').value.to_i)
+              end
       unless current_cell_style.attribute('applyBorder').nil? || current_cell_style.attribute('applyBorder').value == '0'
-        cell_style.borders = Borders.parse_from_style(current_cell_style.attribute('borderId').value.to_i)
+        @borders = Borders.parse_from_style(current_cell_style.attribute('borderId').value.to_i)
       end
       unless current_cell_style.attribute('applyFill').nil? || current_cell_style.attribute('applyFill').value == '0'
-        cell_style.fill_color = ForegroundColor.parse(current_cell_style.attribute('fillId').value.to_i)
+        @fill_color = ForegroundColor.parse(current_cell_style.attribute('fillId').value.to_i)
       end
       unless current_cell_style.attribute('applyNumberFormat').nil? || current_cell_style.attribute('applyNumberFormat').value == '0'
         format_id = current_cell_style.attribute('numFmtId').value.to_i
         XLSXWorkbook.styles_node.xpath('//xmlns:numFmt').each do |numeric_format|
           if format_id == numeric_format.attribute('numFmtId').value.to_i
-            cell_style.numerical_format = numeric_format.attribute('formatCode').value
+            @numerical_format = numeric_format.attribute('formatCode').value
           elsif CellStyle::ALL_FORMAT_VALUE[format_id - 1]
-            cell_style.numerical_format = CellStyle::ALL_FORMAT_VALUE[format_id - 1]
+            @numerical_format = CellStyle::ALL_FORMAT_VALUE[format_id - 1]
           end
         end
-        cell_style.numerical_format = CellStyle::ALL_FORMAT_VALUE[format_id - 1] if CellStyle::ALL_FORMAT_VALUE[format_id - 1]
+        @numerical_format = CellStyle::ALL_FORMAT_VALUE[format_id - 1] if CellStyle::ALL_FORMAT_VALUE[format_id - 1]
       end
       unless current_cell_style.attribute('applyAlignment').nil? || current_cell_style.attribute('applyAlignment').value == '0'
         alignment_node = current_cell_style.xpath('xmlns:alignment').first
-        cell_style.alignment = XlsxAlignment.parse(alignment_node) unless alignment_node.nil?
+        @alignment = XlsxAlignment.parse(alignment_node) unless alignment_node.nil?
       end
-      cell_style.quote_prefix = option_enabled?(current_cell_style, 'quotePrefix')
-      cell_style
+      @quote_prefix = option_enabled?(current_cell_style, 'quotePrefix')
+      self
     end
   end
 end

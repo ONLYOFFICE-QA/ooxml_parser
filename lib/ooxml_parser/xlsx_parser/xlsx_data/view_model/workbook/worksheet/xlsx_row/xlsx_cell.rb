@@ -16,7 +16,7 @@ module OoxmlParser
     def self.parse(cell_node)
       text_string_id = nil
       text_string_id = cell_node.attribute('s').value unless cell_node.attribute('s').nil?
-      cell = XlsxCell.new(CellStyle.parse(text_string_id))
+      cell = XlsxCell.new(CellStyle.new(parent: cell).parse(text_string_id))
       if cell_node.attribute('t').nil?
         cell.raw_text = cell_node.xpath('xmlns:v').text
       else

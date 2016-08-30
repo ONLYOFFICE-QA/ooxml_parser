@@ -9,7 +9,7 @@ module OoxmlParser
     def parse(node)
       @from = node.attribute('min').value.to_i
       @to = node.attribute('max').value.to_i
-      @style = CellStyle.parse(node.attribute('style').value) unless node.attribute('style').nil?
+      @style = CellStyle.new(parent: self).parse(node.attribute('style').value) unless node.attribute('style').nil?
       @width = node.attribute('width').value.to_f - 0.7109375 if option_enabled?(node, 'customWidth')
       self
     end
