@@ -1,19 +1,29 @@
 require_relative 'shape_placeholder'
 module OoxmlParser
+  # Class for parsing `nvPr` object
   class NonVisualProperties < OOXMLDocumentObject
     attr_accessor :placeholder, :is_photo, :user_drawn
 
-    def self.parse(non_visual_properties_node)
-      non_visual_properties = NonVisualProperties.new
-      non_visual_properties_node.xpath('*').each do |non_visual_properties_node_child|
-        case non_visual_properties_node_child.name
-        when 'ph'
-          non_visual_properties.placeholder = ShapePlaceholder.parse(non_visual_properties_node_child)
+    # Parse NonVisualProperties object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [NonVisualProperties] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'isPhoto'
+          @is_photo = attribute_enabled?(value)
+        when 'userDrawn'
+          @user_drawn = attribute_enabled?(value)
         end
       end
-      non_visual_properties.is_photo = OOXMLDocumentObject.option_enabled?(non_visual_properties_node, 'isPhoto')
-      non_visual_properties.user_drawn = OOXMLDocumentObject.option_enabled?(non_visual_properties_node, 'userDrawn')
-      non_visual_properties
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'ph'
+          @placeholder = ShapePlaceholder.parse(node_child)
+        end
+      end
+      self
     end
   end
 end
