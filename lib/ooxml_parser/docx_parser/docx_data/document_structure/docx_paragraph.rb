@@ -242,7 +242,7 @@ module OoxmlParser
         when 'kinoku'
           paragraph_style.kinoku = true
         when 'framePr'
-          paragraph_style.frame_properties = FrameProperties.parse(node_child)
+          paragraph_style.frame_properties = FrameProperties.new(parent: paragraph_style).parse(node_child)
         when 'numPr'
           paragraph_style.numbering = NumberingProperties.parse(node_child, paragraph_style)
         when 'jc'
