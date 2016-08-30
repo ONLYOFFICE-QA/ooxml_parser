@@ -20,7 +20,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'ph'
-          @placeholder = ShapePlaceholder.parse(node_child)
+          @placeholder = ShapePlaceholder.new(parent: self).parse(node_child)
         end
       end
       self

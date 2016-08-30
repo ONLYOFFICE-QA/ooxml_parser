@@ -1,18 +1,21 @@
 module OoxmlParser
+  # Class for data about `ph` node
   class ShapePlaceholder < OOXMLDocumentObject
     attr_accessor :type, :has_custom_prompt
 
-    def self.parse(placeholder_node)
-      placeholder = ShapePlaceholder.new
-      placeholder_node.attributes.each do |key, value|
+    # Parse ShapePlaceholder object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ShapePlaceholder] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'type'
-          placeholder.type = value.value.to_sym
+          @type = value.value.to_sym
         when 'hasCustomPrompt'
-          placeholder.has_custom_prompt = OOXMLDocumentObject.option_enabled?(placeholder_node, 'hasCustomPrompt')
+          @has_custom_prompt = attribute_enabled?(node)
         end
       end
-      placeholder
+      self
     end
   end
 end
