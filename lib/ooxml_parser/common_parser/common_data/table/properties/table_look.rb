@@ -23,21 +23,21 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'firstRow'
-          @first_row = OOXMLDocumentObject.option_enabled?(value)
+          @first_row = attribute_enabled?(value)
         when 'lastRow'
-          @last_row = OOXMLDocumentObject.option_enabled?(value)
+          @last_row = attribute_enabled?(value)
         when 'firstCol', 'firstColumn'
-          @first_column = OOXMLDocumentObject.option_enabled?(value)
+          @first_column = attribute_enabled?(value)
         when 'lastCol', 'lastColumn'
-          @last_column = OOXMLDocumentObject.option_enabled?(value)
+          @last_column = attribute_enabled?(value)
         when 'noHBand'
-          @no_horizontal_banding = OOXMLDocumentObject.option_enabled?(value)
+          @no_horizontal_banding = attribute_enabled?(value)
         when 'noVBand'
-          @no_vertical_banding = OOXMLDocumentObject.option_enabled?(value)
+          @no_vertical_banding = attribute_enabled?(value)
         when 'bandRow'
-          @banding_row = OOXMLDocumentObject.option_enabled?(value)
+          @banding_row = attribute_enabled?(value)
         when 'bandCol'
-          @banding_column = OOXMLDocumentObject.option_enabled?(value)
+          @banding_column = attribute_enabled?(value)
         end
       end
       self

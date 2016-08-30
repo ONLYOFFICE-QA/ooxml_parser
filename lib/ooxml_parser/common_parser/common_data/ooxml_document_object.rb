@@ -40,6 +40,14 @@ module OoxmlParser
       OOXMLDocumentObject.option_enabled?(node, attribute_name)
     end
 
+    def attribute_enabled?(node, attribute_name = 'val')
+      return true if node.to_s == '1'
+      return false if node.to_s == '0'
+      return false if node.attribute(attribute_name).nil?
+      status = node.attribute(attribute_name).value
+      status == 'true' || status == 'on' || status == '1'
+    end
+
     class << self
       attr_accessor :namespace_prefix
       attr_accessor :root_subfolder
@@ -110,6 +118,7 @@ module OoxmlParser
 
       # TODO: Remove this method after all classes will use instance method
       def option_enabled?(node, attribute_name = 'val')
+        return true if node.attributes.empty?
         return true if node.to_s == '1'
         return false if node.to_s == '0'
         return false if node.attribute(attribute_name).nil?
