@@ -118,9 +118,9 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'bookmarkStart'
-          @bookmark_start << Bookmark.new(node_child.attribute('id').value, node_child.attribute('name').value)
+          @bookmark_start << Bookmark.new(parent: self).parse(node_child)
         when 'bookmarkEnd'
-          @bookmark_end << Bookmark.new(node_child.attribute('id').value)
+          @bookmark_end << Bookmark.new(parent: self).parse(node_child)
         when 'pPr'
           DocxParagraph.parse_paragraph_style(node_child, self, custom_character_style, parent: parent)
           node.xpath('w:pict').each do |pict|
