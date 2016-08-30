@@ -56,7 +56,7 @@
 `DocxParagraph`, `Bookmark`, `TableLook`, `ChartAxisTitle`, 
 `NonVisualProperties`, `ShapePlaceholder`, `RunProperties`, 
 `TableProperties`, `FrameProperties`, `Background`, `Transition`,
-`TransitionProperties`, `XlsxRow`
+`TransitionProperties`, `XlsxRow`, `XlsxColumnProperties`
 
 ## 0.1.2 (2016-06-07)
 
