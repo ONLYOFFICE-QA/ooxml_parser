@@ -13,7 +13,7 @@ module OoxmlParser
     # @return [ParagraphProperties] Properties of current paragraph
     attr_accessor :paragraph_properties
 
-    def initialize
+    def initialize(parent: nil)
       @number = 0
       @bookmark_start = []
       @bookmark_end = []
@@ -37,6 +37,7 @@ module OoxmlParser
       @orphan_control = true
       @tabs = []
       @frame_properties = nil
+      @parent = parent
     end
 
     def copy
@@ -122,7 +123,7 @@ module OoxmlParser
         when 'bookmarkEnd'
           @bookmark_end << Bookmark.new(parent: self).parse(node_child)
         when 'pPr'
-          DocxParagraph.parse_paragraph_style(node_child, self, custom_character_style, parent: parent)
+          parse_paragraph_style(node_child, custom_character_style)
           node.xpath('w:pict').each do |pict|
             pict.xpath('v:rect').each do
               @horizontal_line = true
@@ -201,82 +202,79 @@ module OoxmlParser
       self
     end
 
-    def self.parse_paragraph_style(node,
-                                   paragraph_style = DocxParagraph.new,
-                                   default_char_style = DocxParagraphRun.new,
-                                   parent: nil)
+    def parse_paragraph_style(node, default_char_style = DocxParagraphRun.new)
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'tabs'
-          node_child.xpath('w:tab').each { |tab_node| paragraph_style.tabs << ParagraphTab.new(tab_node.attribute('val').value.to_sym, (tab_node.attribute('pos').value.to_f / 566.9).round(2)) }
+          node_child.xpath('w:tab').each { |tab_node| @tabs << ParagraphTab.new(tab_node.attribute('val').value.to_sym, (tab_node.attribute('pos').value.to_f / 566.9).round(2)) }
         when 'pageBreakBefore'
           if node_child.attribute('val').nil? || node_child.attribute('val').value != 'false'
-            paragraph_style.page_break = true
+            @page_break = true
           end
         when 'pBdr'
-          paragraph_style.borders = ParagraphBorders.parse(node_child)
+          @borders = ParagraphBorders.parse(node_child)
         when 'keepLines'
           if node_child.attribute('val').nil?
-            paragraph_style.keep_lines = true
+            @keep_lines = true
           else
             unless node_child.attribute('val').value == 'false'
-              paragraph_style.keep_lines = true
+              @keep_lines = true
             end
           end
         when 'widowControl'
-          paragraph_style.orphan_control = OOXMLDocumentObject.option_enabled?(node_child)
+          @orphan_control = option_enabled?(node_child)
         when 'keepNext'
-          paragraph_style.keep_next = true
+          @keep_next = true
         when 'contextualSpacing'
-          paragraph_style.contextual_spacing = true
+          @contextual_spacing = true
         when 'shd'
           background_color_string = node_child.attribute('fill').value
-          paragraph_style.background_color = Color.from_int16(background_color_string)
+          @background_color = Color.from_int16(background_color_string)
           unless node_child.attribute('val').nil?
-            paragraph_style.background_color.set_style(node_child.attribute('val').value)
+            @background_color.set_style(node_child.attribute('val').value)
           end
         when 'pStyle'
-          parse_paragraph_style_xml(node_child.attribute('val').value, paragraph_style, default_char_style)
+          DocxParagraph.parse_paragraph_style_xml(node_child.attribute('val').value, self, default_char_style)
         when 'ind'
-          paragraph_style.ind = Indents.new(parent: paragraph_style).parse(node_child)
+          @ind = Indents.new(parent: self).parse(node_child)
         when 'kinoku'
-          paragraph_style.kinoku = true
+          @kinoku = true
         when 'framePr'
-          paragraph_style.frame_properties = FrameProperties.new(parent: paragraph_style).parse(node_child)
+          @frame_properties = FrameProperties.new(parent: self).parse(node_child)
         when 'numPr'
-          paragraph_style.numbering = NumberingProperties.parse(node_child, paragraph_style)
+          @numbering = NumberingProperties.parse(node_child, self)
         when 'jc'
-          paragraph_style.align = node_child.attribute('val').value.to_sym unless node_child.attribute('val').nil?
-          paragraph_style.align = :justify if node_child.attribute('val').value == 'both'
+          @align = node_child.attribute('val').value.to_sym unless node_child.attribute('val').nil?
+          @align = :justify if node_child.attribute('val').value == 'both'
         when 'spacing'
           unless node_child.attribute('before').nil?
-            paragraph_style.spacing.before = (node_child.attribute('before').value.to_f / 566.9).round(2)
+            @spacing.before = (node_child.attribute('before').value.to_f / 566.9).round(2)
           end
           unless node_child.attribute('after').nil?
-            paragraph_style.spacing.after = (node_child.attribute('after').value.to_f / 566.9).round(2)
+            @spacing.after = (node_child.attribute('after').value.to_f / 566.9).round(2)
           end
           unless node_child.attribute('lineRule').nil?
-            paragraph_style.spacing.line_rule = node_child.attribute('lineRule').value.sub('atLeast', 'at_least').to_sym
+            @spacing.line_rule = node_child.attribute('lineRule').value.sub('atLeast', 'at_least').to_sym
           end
           unless node_child.attribute('line').nil?
-            paragraph_style.spacing.line = (paragraph_style.spacing.line_rule == :auto ? (node_child.attribute('line').value.to_f / 240.0).round(2) : (node_child.attribute('line').value.to_f / 566.9).round(2))
+            @spacing.line = (@spacing.line_rule == :auto ? (node_child.attribute('line').value.to_f / 240.0).round(2) : (node_child.attribute('line').value.to_f / 566.9).round(2))
           end
         when 'sectPr'
-          paragraph_style.sector_properties = PageProperties.new(parent: paragraph_style).parse(node_child, paragraph_style, default_char_style)
-          paragraph_style.section_break = case paragraph_style.sector_properties.type
-                                          when 'oddPage'
-                                            'Odd page'
-                                          when 'evenPage'
-                                            'Even page'
-                                          when 'continuous'
-                                            'Current Page'
-                                          else
-                                            'Next Page'
-                                          end
+          @sector_properties = PageProperties.new(parent: self).parse(node_child, self, default_char_style)
+          @section_break = case @sector_properties.type
+                           when 'oddPage'
+                             'Odd page'
+                           when 'evenPage'
+                             'Even page'
+                           when 'continuous'
+                             'Current Page'
+                           else
+                             'Next Page'
+                           end
         end
       end
-      paragraph_style.parent = parent
-      paragraph_style
+      @parent = parent
+      self
     end
 
     def self.parse_paragraph_style_xml(id, paragraph_style, character_style)
@@ -284,7 +282,7 @@ module OoxmlParser
       doc.search('//w:style').each do |style|
         next unless style.attribute('styleId').value == id
         style.xpath('w:pPr').each do |p_pr|
-          parse_paragraph_style(p_pr, paragraph_style, character_style)
+          paragraph_style.parse_paragraph_style(p_pr, character_style)
           paragraph_style.style = StyleParametres.parse(style)
         end
         style.xpath('w:rPr').each do |r_pr|
