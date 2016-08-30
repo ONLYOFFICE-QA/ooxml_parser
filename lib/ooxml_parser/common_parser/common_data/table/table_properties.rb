@@ -62,7 +62,7 @@ module OoxmlParser
             table_properties.shd = background_color
           end
         when 'tblLook'
-          table_properties.table_look = TableLook.parse(table_props_node_child)
+          table_properties.table_look = TableLook.new(parent: self).parse(table_props_node_child)
         when 'tblInd'
           table_properties.table_indent = table_props_node_child.attribute('w').text.to_f / 567.0
         when 'tblpPr'
@@ -71,7 +71,7 @@ module OoxmlParser
           table_properties.table_cell_margin = TableMargins.new(parent: table_properties).parse(table_props_node_child)
         end
       end
-      table_properties.table_look = TableLook.parse(table_properties_node) if table_properties.table_look.nil?
+      table_properties.table_look = TableLook.new(parent: self).parse(table_properties_node) if table_properties.table_look.nil?
       table_properties.right_to_left = OOXMLDocumentObject.option_enabled?(table_properties_node, 'rtl')
       table_properties
     end
