@@ -37,7 +37,12 @@ module OoxmlParser
     end
 
     def option_enabled?(node, attribute_name = 'val')
-      OOXMLDocumentObject.option_enabled?(node, attribute_name)
+      return true if node.attributes.empty?
+      return true if node.to_s == '1'
+      return false if node.to_s == '0'
+      return false if node.attribute(attribute_name).nil?
+      status = node.attribute(attribute_name).value
+      status == 'true' || status == 'on' || status == '1'
     end
 
     def attribute_enabled?(node, attribute_name = 'val')
@@ -114,16 +119,6 @@ module OoxmlParser
         relationships = XmlSimple.xml_in(File.open(rels_path))
         relationships['Relationship'].each { |relationship| return relationship['Target'] if id == relationship['Id'] }
         ''
-      end
-
-      # TODO: Remove this method after all classes will use instance method
-      def option_enabled?(node, attribute_name = 'val')
-        return true if node.attributes.empty?
-        return true if node.to_s == '1'
-        return false if node.to_s == '0'
-        return false if node.attribute(attribute_name).nil?
-        status = node.attribute(attribute_name).value
-        status == 'true' || status == 'on' || status == '1'
       end
     end
   end
