@@ -13,7 +13,7 @@ module OoxmlParser
       character_node.xpath('*').each do |character_node_child|
         case character_node_child.name
         when 'rPr'
-          character.properties = RunProperties.parse(character_node_child)
+          character.properties = RunProperties.new(parent: character).parse(character_node_child)
         when 't'
           character.text = character_node_child.text
         end

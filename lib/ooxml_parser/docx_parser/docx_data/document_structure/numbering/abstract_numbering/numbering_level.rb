@@ -47,7 +47,7 @@ module OoxmlParser
         when 'pPr'
           level.paragraph_properties = ParagraphProperties.parse(num_level_child)
         when 'rPr'
-          level.run_properties = RunProperties.parse(num_level_child)
+          level.run_properties = RunProperties.new(parent: level).parse(num_level_child)
         end
       end
 

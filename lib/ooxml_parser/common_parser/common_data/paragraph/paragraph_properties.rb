@@ -53,7 +53,7 @@ module OoxmlParser
         when 'ind'
           paragraph_properties.indent = Indents.new(parent: paragraph_properties).parse(properties_element)
         when 'rPr'
-          paragraph_properties.run_properties = RunProperties.parse(properties_element)
+          paragraph_properties.run_properties = RunProperties.new(parent: paragraph_properties).parse(properties_element)
         when 'pBdr'
           paragraph_properties.paragraph_borders = ParagraphBorders.parse(properties_element)
         when 'keepNext'
