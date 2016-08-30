@@ -38,11 +38,11 @@ module OoxmlParser
         when 'position'
           self.position = (run_properties_node.attribute('val').value.to_f / (28.0 + 1.0 / 3.0) / 2.0).round(1)
         when 'rtl'
-          self.rtl = OOXMLDocumentObject.option_enabled?(run_properties_node)
+          self.rtl = option_enabled?(run_properties_node)
         when 'em'
           self.em = run_properties_node.attribute('val').value
         when 'cs'
-          self.cs = OOXMLDocumentObject.option_enabled?(run_properties_node)
+          self.cs = option_enabled?(run_properties_node)
         when 'spacing'
           self.spacing = (run_properties_node.attribute('val').value.to_f / 566.9).round(1)
         when 'textFill'
@@ -50,13 +50,13 @@ module OoxmlParser
         when 'textOutline'
           self.text_outline = TextOutline.parse(run_properties_node)
         when 'bCs', 'b'
-          font_style.bold = OOXMLDocumentObject.option_enabled?(run_properties_node)
+          font_style.bold = option_enabled?(run_properties_node)
         when 'iCs', 'i'
-          font_style.italic = OOXMLDocumentObject.option_enabled?(run_properties_node)
+          font_style.italic = option_enabled?(run_properties_node)
         when 'caps'
           self.caps = :caps
         when 'smallCaps'
-          self.caps = :small_caps if OOXMLDocumentObject.option_enabled?(run_properties_node)
+          self.caps = :small_caps if option_enabled?(run_properties_node)
         end
       end
       character_pr_tag.xpath('w:color').each do |color|
