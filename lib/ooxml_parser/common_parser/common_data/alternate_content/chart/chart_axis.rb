@@ -18,7 +18,7 @@ module OoxmlParser
         when 'delete'
           axis.display = false if axis_node_child.attribute('val').value == '1'
         when 'title'
-          axis.title = ChartAxisTitle.parse(axis_node_child)
+          axis.title = ChartAxisTitle.new(parent: axis).parse(axis_node_child)
         when 'majorGridlines'
           axis.major_grid_lines = true
         when 'minorGridlines'

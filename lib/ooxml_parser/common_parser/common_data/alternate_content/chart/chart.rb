@@ -115,7 +115,7 @@ module OoxmlParser
                     end
                   end
                 when 'title'
-                  chart.title = ChartAxisTitle.parse(chart_node_child)
+                  chart.title = ChartAxisTitle.new(parent: chart).parse(chart_node_child)
                 when 'legend'
                   chart.legend = ChartLegend.parse(chart_node_child)
                 end
