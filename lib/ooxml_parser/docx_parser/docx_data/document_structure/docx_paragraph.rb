@@ -296,7 +296,7 @@ module OoxmlParser
         end
       end
       paragraph_pr_tag.xpath('w:sectPr').each do |sect_pr|
-        paragraph_style.sector_properties = PageProperties.parse(sect_pr, paragraph_style, default_char_style, parent: parent)
+        paragraph_style.sector_properties = PageProperties.new(parent: paragraph_style).parse(sect_pr, paragraph_style, default_char_style)
         paragraph_style.section_break = case paragraph_style.sector_properties.type
                                         when 'oddPage'
                                           'Odd page'
