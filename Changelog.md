@@ -39,7 +39,7 @@
 * Fix parsing table style in text box
 * Fix problem with parsing absolute file path in Windows 
 * Parse `keep_next` in paragraph properties
-* TransformEffect in correct `OoxmlSize` unit
+* `TransformEffect`, `BordersProperties#size` in correct `OoxmlSize` unit
 * `Indents` use `OoxmlSize`
 * `TableMargins` use `OoxmlSize`
 * Hanging indent is now 0 by default, instead of nil
