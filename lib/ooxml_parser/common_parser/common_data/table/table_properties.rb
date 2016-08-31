@@ -1,4 +1,5 @@
 # Table Properties Data
+require_relative 'properties/table_layout'
 require_relative 'properties/table_look'
 require_relative 'properties/table_style'
 require_relative 'properties/table_style_column_band_size'
@@ -15,6 +16,8 @@ module OoxmlParser
     attr_accessor :table_style_column_band_size
     # @return [TableStyleRowBandSize] table style row band size
     attr_accessor :table_style_row_band_size
+    # @return [TableLayout] table layout
+    attr_accessor :table_layout
 
     alias table_properties table_positon
 
@@ -73,6 +76,8 @@ module OoxmlParser
           @table_style_column_band_size = TableStyleColumnBandSize.new(parent: self).parse(node_child)
         when 'tblStyleRowBandSize'
           @table_style_row_band_size = TableStyleRowBandSize.new(parent: self).parse(node_child)
+        when 'tblLayout'
+          @table_layout = TableLayout.new(parent: self).parse(node_child)
         end
       end
       @table_look = TableLook.new(parent: self).parse(node) if @table_look.nil?
