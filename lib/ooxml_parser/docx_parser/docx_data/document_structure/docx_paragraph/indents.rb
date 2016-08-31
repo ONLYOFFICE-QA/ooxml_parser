@@ -5,7 +5,7 @@ module OoxmlParser
     def initialize(first_line_indent = OoxmlSize.new(0),
                    left_indent = OoxmlSize.new(0),
                    right_indent = OoxmlSize.new(0),
-                   hanging_indent = nil,
+                   hanging_indent = OoxmlSize.new(0),
                    parent: nil)
       @first_line_indent = first_line_indent
       @left_indent = left_indent
