@@ -48,7 +48,7 @@ module OoxmlParser
       paragraph.align = @align
       paragraph.spacing = @spacing.copy
       paragraph.background_color = @background_color
-      paragraph.ind = @ind.copy
+      paragraph.ind = @ind.dup
       paragraph.numbering = @numbering
       paragraph.character_style_array = @character_style_array
       paragraph.horizontal_line = @horizontal_line
@@ -236,7 +236,7 @@ module OoxmlParser
         when 'pStyle'
           DocxParagraph.parse_paragraph_style_xml(node_child.attribute('val').value, self, default_char_style)
         when 'ind'
-          @ind = Indents.new(parent: self).parse(node_child)
+          @ind = DocumentStructure.default_paragraph_style.ind.dup.parse(node_child)
         when 'kinoku'
           @kinoku = true
         when 'framePr'

@@ -41,6 +41,7 @@
 * TransformEffect in correct `OoxmlSize` unit
 * `Indents` use `OoxmlSize`
 * `TableMargins` use `OoxmlSize`
+* Hanging indent is now 0 by default, instead of nil
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
