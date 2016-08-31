@@ -1,6 +1,8 @@
 # Table Properties Data
 require_relative 'properties/table_look'
 require_relative 'properties/table_style'
+require_relative 'properties/table_style_column_band_size'
+require_relative 'properties/table_style_row_band_size'
 require_relative 'properties/table_position'
 require_relative 'properties/table_style_properties'
 require_relative 'table_properties/table_borders'
@@ -9,6 +11,10 @@ module OoxmlParser
   class TableProperties < OOXMLDocumentObject
     attr_accessor :jc, :table_width, :shd, :table_borders, :table_properties, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
                   :column_banding_size, :table_look, :grid_column, :right_to_left, :style
+    # @return [TableStyleColumnBandSize] table style column band size
+    attr_accessor :table_style_column_band_size
+    # @return [TableStyleRowBandSize] table style row band size
+    attr_accessor :table_style_row_band_size
 
     alias table_properties table_positon
 
@@ -63,6 +69,10 @@ module OoxmlParser
           @table_positon = TablePosition.parse(node_child)
         when 'tblCellMar'
           @table_cell_margin = TableMargins.new(parent: table_properties).parse(node_child)
+        when 'tblStyleColBandSize'
+          @table_style_column_band_size = TableStyleColumnBandSize.new(parent: self).parse(node_child)
+        when 'tblStyleRowBandSize'
+          @table_style_row_band_size = TableStyleRowBandSize.new(parent: self).parse(node_child)
         end
       end
       @table_look = TableLook.new(parent: self).parse(node) if @table_look.nil?
