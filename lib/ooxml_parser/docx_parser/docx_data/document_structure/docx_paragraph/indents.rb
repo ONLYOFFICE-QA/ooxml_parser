@@ -24,11 +24,6 @@ module OoxmlParser
      right indent: #{@right_indent}, hanging indent: #{@hanging_indent}"
     end
 
-    # @return [Indents
-    def copy
-      Indents.new(@first_line_indent, @left_indent, @right_indent, @hanging_indent)
-    end
-
     # Parse Indents
     # @param [Nokogiri::XML:Element] node with Indents
     # @return [Indents] value of Indents

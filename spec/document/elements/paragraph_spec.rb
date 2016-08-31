@@ -32,7 +32,8 @@ describe OoxmlParser::DocxParagraph do
     expect(docx.elements.first.sector_properties.notes.first
                .elements.first.ind).to eq(OoxmlParser::Indents.new(OoxmlParser::OoxmlSize.new(1.02, :centimeter),
                                                                    OoxmlParser::OoxmlSize.new(2.02, :centimeter),
-                                                                   OoxmlParser::OoxmlSize.new(3, :centimeter)))
+                                                                   OoxmlParser::OoxmlSize.new(3, :centimeter),
+                                                                   OoxmlParser::OoxmlSize.new(0, :centimeter)))
   end
 
   it 'ParagrphEquals' do
