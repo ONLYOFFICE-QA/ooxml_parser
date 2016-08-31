@@ -67,7 +67,7 @@ module OoxmlParser
         when 'tblLook'
           @table_look = TableLook.new(parent: self).parse(node_child)
         when 'tblInd'
-          @table_indent = node_child.attribute('w').text.to_f / 567.0
+          @table_indent = OoxmlSize.new(node_child.attribute('w').text.to_f)
         when 'tblpPr'
           @table_positon = TablePosition.parse(node_child)
         when 'tblCellMar'
