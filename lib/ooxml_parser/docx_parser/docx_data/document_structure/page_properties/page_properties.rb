@@ -30,16 +30,16 @@ module OoxmlParser
             page_borders.offset_from = pg_size_subnode.attribute('offsetFrom').value.to_sym
           end
           pg_size_subnode.xpath('w:bottom').each do |bottom|
-            page_borders.bottom = BordersProperties.parse(bottom)
+            page_borders.bottom = BordersProperties.new(parent: page_borders).parse(bottom)
           end
           pg_size_subnode.xpath('w:left').each do |left|
-            page_borders.bottom = BordersProperties.parse(left)
+            page_borders.bottom = BordersProperties.new(parent: page_borders).parse(left)
           end
           pg_size_subnode.xpath('w:top').each do |top|
-            page_borders.bottom = BordersProperties.parse(top)
+            page_borders.bottom = BordersProperties.new(parent: page_borders).parse(top)
           end
           pg_size_subnode.xpath('w:right').each do |right|
-            page_borders.bottom = BordersProperties.parse(right)
+            page_borders.bottom = BordersProperties.new(parent: page_borders).parse(right)
           end
           @page_borders = page_borders
         when 'type'

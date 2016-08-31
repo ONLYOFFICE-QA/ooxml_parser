@@ -3,11 +3,12 @@ module OoxmlParser
   class BordersProperties < OOXMLDocumentObject
     attr_accessor :color, :space, :sz, :val, :space, :shadow, :frame, :side
 
-    def initialize(color = :auto, sz = 0, val = :none, space = 0)
+    def initialize(color = :auto, sz = 0, val = :none, space = 0, parent: nil)
       @color = color
       @sz = sz
       @val = val
       @space = space
+      @parent = parent
     end
 
     alias size sz
@@ -33,27 +34,24 @@ module OoxmlParser
     # Parse BordersProperties
     # @param [Nokogiri::XML:Element] node with BordersProperties
     # @return [BordersProperties] value of BordersProperties
-    def self.parse(node)
+    def parse(node)
       return nil if node.attribute('val').value == 'nil'
-      border_properties = BordersProperties.new
       node.attributes.each do |key, value|
         case key
         when 'val'
-          border_properties.val = value.value.to_sym
+          @val = value.value.to_sym
         when 'sz'
-          border_properties.sz = OoxmlSize.new(value.value.to_f, :one_eighth_point)
+          @sz = OoxmlSize.new(value.value.to_f, :one_eighth_point)
         when 'space'
-          border_properties.space = (value.value.to_f / 28.34).round(3)
+          @space = OoxmlSize.new(value.value.to_f, :point)
         when 'color'
-          border_properties.color = value.value.to_s
-          if border_properties.color != 'auto'
-            border_properties.color = Color.from_int16(border_properties.color)
-          end
+          @color = value.value.to_s
+          @color = Color.from_int16(@color) if @color != 'auto'
         when 'shadow'
-          border_properties.shadow = value.value
+          @shadow = value.value
         end
       end
-      border_properties
+      self
     end
   end
 end

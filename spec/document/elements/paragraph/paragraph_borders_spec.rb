@@ -13,10 +13,10 @@ describe OoxmlParser::Borders do
 
   it 'dropcap_borders.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/borders/dropcap_borders.docx')
-    expect(docx.elements[0].borders.top.space.round(1)).to eq(1.2)
-    expect(docx.elements[0].borders.right.space.round(1)).to eq(0.8)
-    expect(docx.elements[0].borders.bottom.space.round(1)).to eq(2.3)
-    expect(docx.elements[0].borders.left.space.round(1)).to eq(0.4)
+    expect(docx.elements[0].borders.top.space).to eq(OoxmlParser::OoxmlSize.new(1.2, :centimeter))
+    expect(docx.elements[0].borders.right.space).to eq(OoxmlParser::OoxmlSize.new(0.8, :centimeter))
+    expect(docx.elements[0].borders.bottom.space).to eq(OoxmlParser::OoxmlSize.new(2.3, :centimeter))
+    expect(docx.elements[0].borders.left.space).to eq(OoxmlParser::OoxmlSize.new(0.4, :centimeter))
   end
 
   it 'border_properties_nil' do

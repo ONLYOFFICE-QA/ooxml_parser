@@ -22,17 +22,17 @@ module OoxmlParser
       node.xpath('*').each do |cell_borders_node|
         case cell_borders_node.name
         when 'left'
-          borders.left = BordersProperties.parse(cell_borders_node)
+          borders.left = BordersProperties.new(parent: borders).parse(cell_borders_node)
         when 'top'
-          borders.top = BordersProperties.parse(cell_borders_node)
+          borders.top = BordersProperties.new(parent: borders).parse(cell_borders_node)
         when 'right'
-          borders.right = BordersProperties.parse(cell_borders_node)
+          borders.right = BordersProperties.new(parent: borders).parse(cell_borders_node)
         when 'bottom'
-          borders.bottom = BordersProperties.parse(cell_borders_node)
+          borders.bottom = BordersProperties.new(parent: borders).parse(cell_borders_node)
         when 'insideV'
-          borders.inside_vertical = BordersProperties.parse(cell_borders_node)
+          borders.inside_vertical = BordersProperties.new(parent: borders).parse(cell_borders_node)
         when 'insideH'
-          borders.inside_horizontal = BordersProperties.parse(cell_borders_node)
+          borders.inside_horizontal = BordersProperties.new(parent: borders).parse(cell_borders_node)
         end
       end
       borders
