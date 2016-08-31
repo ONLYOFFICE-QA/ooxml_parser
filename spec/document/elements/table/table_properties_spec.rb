@@ -6,12 +6,6 @@ describe OoxmlParser::TableProperties do
     expect(docx.elements[1].table_properties.table_width).to eq(12.698412698412698)
   end
 
-  it 'table_indent.docx' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_indent.docx')
-    expect(docx.element_by_description[1].table_properties
-               .table_indent.round(1)).to eq(1.5)
-  end
-
   it 'TableLook' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_look.docx')
     table_look = docx.elements[1].table_properties.table_look

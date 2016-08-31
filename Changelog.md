@@ -40,7 +40,7 @@
 * Fix problem with parsing absolute file path in Windows 
 * Parse `keep_next` in paragraph properties
 * `TransformEffect`, `BordersProperties#size` in correct `OoxmlSize` unit
-* `Indents` use `OoxmlSize`
+* `Indents`, `TableProperties#table_indent` use `OoxmlSize`
 * `TableMargins` use `OoxmlSize`
 * Hanging indent is now 0 by default, instead of nil
 
