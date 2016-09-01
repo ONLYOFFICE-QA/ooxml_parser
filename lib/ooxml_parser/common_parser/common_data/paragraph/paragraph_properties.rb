@@ -32,9 +32,9 @@ module OoxmlParser
         when 'indent'
           paragraph_properties.indent = (value.value.to_f / 360_000.0).round(2)
         when 'marR'
-          paragraph_properties.margin_right = (value.value.to_f / 360_000.0).round(2)
+          paragraph_properties.margin_right = OoxmlSize.new(value.value.to_f, :emu)
         when 'marL'
-          paragraph_properties.margin_left = (value.value.to_f / 360_000.0).round(2)
+          paragraph_properties.margin_left = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
       paragraph_props_node.xpath('*').each do |properties_element|
