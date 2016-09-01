@@ -42,6 +42,7 @@
 * `TransformEffect`, `BordersProperties#size` in correct `OoxmlSize` unit
 * `Indents`, `TableProperties#table_indent` use `OoxmlSize`
 * `TableMargins` use `OoxmlSize`
+* `ParagraphMargins` parse size in correct units
 * Hanging indent is now 0 by default, instead of nil
 
 ### Refactor

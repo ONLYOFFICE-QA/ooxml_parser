@@ -24,13 +24,13 @@ module OoxmlParser
       text_body_props_node.attributes.each do |key, value|
         case key
         when 'bIns', 'marB'
-          @bottom = OoxmlSize.new(value.value.to_f)
+          @bottom = OoxmlSize.new(value.value.to_f, :emu)
         when 'tIns', 'marT'
-          @top = OoxmlSize.new(value.value.to_f)
+          @top = OoxmlSize.new(value.value.to_f, :emu)
         when 'lIns', 'marL'
-          @left = OoxmlSize.new(value.value.to_f)
+          @left = OoxmlSize.new(value.value.to_f, :emu)
         when 'rIns', 'marR'
-          @right = OoxmlSize.new(value.value.to_f)
+          @right = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
       self
