@@ -8,7 +8,9 @@ module OoxmlParser
     attr_accessor :grid_span
     # @return [TableMargins] margins
     attr_accessor :vertical_merge
-    # @return [TableMargins] margins
+    # @return [ParagraphMargins] margins of text in cell
+    attr_accessor :margins
+    # @return [TableMargins] margins of cell
     attr_accessor :table_cell_margin
 
     def initialize(borders = nil, color = nil)
@@ -23,6 +25,7 @@ module OoxmlParser
 
     def parse(cell_properties_node)
       @borders_properties = Borders.new
+      @margins = ParagraphMargins.new(parent: self).parse(cell_properties_node)
       cell_properties_node.xpath('*').each do |cell_node_child|
         case cell_node_child.name
         when 'vMerge'
