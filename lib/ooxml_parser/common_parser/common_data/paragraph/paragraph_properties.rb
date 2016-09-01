@@ -30,7 +30,7 @@ module OoxmlParser
         when 'lvl'
           paragraph_properties.level = value.value.to_i
         when 'indent'
-          paragraph_properties.indent = (value.value.to_f / 360_000.0).round(2)
+          paragraph_properties.indent = OoxmlSize.new(value.value.to_f, :emu)
         when 'marR'
           paragraph_properties.margin_right = OoxmlSize.new(value.value.to_f, :emu)
         when 'marL'
