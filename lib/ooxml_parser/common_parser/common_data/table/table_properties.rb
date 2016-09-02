@@ -18,6 +18,8 @@ module OoxmlParser
     attr_accessor :table_style_row_band_size
     # @return [TableLayout] table layout
     attr_accessor :table_layout
+    # @return [OoxmlSize] table cell spacing
+    attr_accessor :table_cell_spacing
 
     alias table_properties table_positon
 
@@ -78,6 +80,8 @@ module OoxmlParser
           @table_style_row_band_size = TableStyleRowBandSize.new(parent: self).parse(node_child)
         when 'tblLayout'
           @table_layout = TableLayout.new(parent: self).parse(node_child)
+        when 'tblCellSpacing'
+          @table_cell_spacing = OoxmlSize.new.parse(node_child)
         end
       end
       @table_look = TableLook.new(parent: self).parse(node) if @table_look.nil?

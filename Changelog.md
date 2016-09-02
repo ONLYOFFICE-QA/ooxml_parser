@@ -27,7 +27,7 @@
 * Parsing of Columns spacing
 * Redone parsing `gridSpan` and `vMerge`
 * Add ability to get style on which style is based
-* Parsing `TableStyleColumnBandSize`, `TableStyleRowBandSize`, `TableLayout`
+* Parsing `TableStyleColumnBandSize`, `TableStyleRowBandSize`, `TableLayout`, table cell spacing for TableProperties
 * Correct parsing `Margins` for `tcPr`
 * OoxmlSize support a whole lot formats
 * Correct handling unsupported OoxmlSize format
