@@ -29,6 +29,8 @@
 * Add ability to get style on which style is based
 * Parsing `TableStyleColumnBandSize`, `TableStyleRowBandSize`, `TableLayout`
 * Correct parsing `Margins` for `tcPr`
+* OoxmlSize support a whole lot formats
+* Correct handling unsupported OoxmlSize format
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

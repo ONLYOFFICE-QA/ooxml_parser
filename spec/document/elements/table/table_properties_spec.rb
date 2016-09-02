@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe OoxmlParser::TableProperties do
-  it 'Parse Table spacing' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/custom_table_width.docx')
-    expect(docx.elements[1].table_properties.table_width).to eq(12.698412698412698)
-  end
-
   it 'TableLook' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_look.docx')
     table_look = docx.elements[1].table_properties.table_look
