@@ -56,7 +56,7 @@ module OoxmlParser
         when 'tblStyle'
           @table_style = root_object.document_style_by_id(node_child.attribute('val').value)
         when 'tblW'
-          @table_width = node_child.attribute('w').text.to_f / 567.0
+          @table_width = OoxmlSize.new.parse(node_child)
         when 'jc'
           @jc = node_child.attribute('val').text.to_sym
         when 'shd'
