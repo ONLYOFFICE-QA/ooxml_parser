@@ -3,7 +3,7 @@ require_relative 'merge'
 module OoxmlParser
   # Class for parsing 'w:tcPr' element
   class CellProperties < OOXMLDocumentObject
-    attr_accessor :fill, :color, :borders, :text_direction, :anchor, :anchor_center, :horizontal_overflow, :merge, :table_cell_width, :borders_properties, :shd, :vertical_align
+    attr_accessor :fill, :color, :borders, :text_direction, :anchor, :anchor_center, :horizontal_overflow, :table_cell_width, :borders_properties, :shd, :vertical_align
     # @return [GridSpan] data about grid span
     attr_accessor :grid_span
     # @return [TableMargins] margins
@@ -18,10 +18,7 @@ module OoxmlParser
       @color = color
       @fill = fill
       @shd = :none
-      @merge = false
     end
-
-    alias merge grid_span
 
     def parse(cell_properties_node)
       @borders_properties = Borders.new
