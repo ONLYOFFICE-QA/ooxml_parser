@@ -1,5 +1,6 @@
 require_relative 'paragrpah_properties/numbering_properties'
 require_relative 'paragrpah_properties/paragraph_borders'
+require_relative 'paragrpah_properties/paragraph_spacing'
 require_relative 'paragrpah_properties/spacing'
 module OoxmlParser
   class ParagraphProperties < OOXMLDocumentObject
@@ -65,6 +66,8 @@ module OoxmlParser
           @keep_next = true
         when 'sectPr'
           @section_properties = PageProperties.new(parent: self).parse(node_child, @parent, DocxParagraphRun.new)
+        when 'spacing'
+          @spacing = ParagraphSpacing.new(parent: self).parse(node_child)
         end
       end
       self
