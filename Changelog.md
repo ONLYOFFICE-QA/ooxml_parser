@@ -31,6 +31,7 @@
 * Correct parsing `Margins` for `tcPr`
 * OoxmlSize support a whole lot formats
 * Correct handling unsupported OoxmlSize format
+* `DocumentStlye` parse `CellProperties`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
