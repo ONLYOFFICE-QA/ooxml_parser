@@ -66,7 +66,7 @@
 `NonVisualProperties`, `ShapePlaceholder`, `RunProperties`, 
 `TableProperties`, `FrameProperties`, `Background`, `Transition`,
 `TransitionProperties`, `XlsxRow`, `XlsxColumnProperties`, `CellStyle`,
-`DisplayLabelsProperties`
+`DisplayLabelsProperties`, `ParagraphProperties`
 
 ## 0.1.2 (2016-06-07)
 

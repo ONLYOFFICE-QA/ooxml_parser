@@ -45,7 +45,7 @@ module OoxmlParser
         when 'lvlJc'
           level.justification = LevelJustification.parse(num_level_child)
         when 'pPr'
-          level.paragraph_properties = ParagraphProperties.parse(num_level_child)
+          level.paragraph_properties = ParagraphProperties.new(parent: level).parse(num_level_child)
         when 'rPr'
           level.run_properties = RunProperties.new(parent: level).parse(num_level_child)
         end
