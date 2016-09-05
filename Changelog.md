@@ -52,6 +52,7 @@
 * `ParagraphMargins` parse size in correct units
 * `ParagraphProperties` parse `PageProperties`
 * Hanging indent is now 0 by default, instead of nil
+* Correct parsing of `Drawing` of any type, not just `TwoCellAnchor`
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem

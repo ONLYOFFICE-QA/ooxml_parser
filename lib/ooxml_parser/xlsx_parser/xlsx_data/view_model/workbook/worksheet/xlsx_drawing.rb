@@ -35,15 +35,5 @@ module OoxmlParser
       end
       drawing
     end
-
-    def self.parse_list(worksheet)
-      drawing_node = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
-      drawing_node.xpath('xdr:wsDr/*').each do |drawing_node_child|
-        case drawing_node_child.name
-        when 'twoCellAnchor'
-          worksheet.drawings << XlsxDrawing.parse(drawing_node_child)
-        end
-      end
-    end
   end
 end
