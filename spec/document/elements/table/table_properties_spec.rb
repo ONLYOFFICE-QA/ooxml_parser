@@ -48,7 +48,7 @@ describe OoxmlParser::TableProperties do
   it 'table_shade_color' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_shade_color.docx')
     expect(docx.element_by_description(location: :canvas, type: :paragraph)[1]
-               .table_properties.shd).to eq(OoxmlParser::Color.new(30, 79, 121))
+               .table_properties.shade.fill).to eq(OoxmlParser::Color.new(30, 79, 121))
   end
 
   it 'table_border_size' do

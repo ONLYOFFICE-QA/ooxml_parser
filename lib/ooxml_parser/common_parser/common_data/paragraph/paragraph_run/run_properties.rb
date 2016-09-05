@@ -107,7 +107,7 @@ module OoxmlParser
         when 'position'
           @position = Position.parse(properties_element)
         when 'shd'
-          @shade = Shade.parse(properties_element)
+          @shade = Shade.new(parent: self).parse(properties_element)
         end
       end
       @font_color = DocxColorScheme.parse(node)
