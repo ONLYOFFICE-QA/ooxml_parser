@@ -49,6 +49,7 @@
 * `TableMargins` use `OoxmlSize`
 * `TableProperties` use `Shade` class
 * `ParagraphMargins` parse size in correct units
+* `ParagraphProperties` parse `PageProperties`
 * Hanging indent is now 0 by default, instead of nil
 
 ### Refactor
