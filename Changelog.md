@@ -46,6 +46,7 @@
 * `Indents`, `TableProperties#table_indent`, `ParagraphProperties#margin_left`, 
 `ParagraphProperties#margin_right`, `ParagraphProperties#indent` use `OoxmlSize`
 * `TableMargins` use `OoxmlSize`
+* `TableProperties` use `Shade` class
 * `ParagraphMargins` parse size in correct units
 * Hanging indent is now 0 by default, instead of nil
 

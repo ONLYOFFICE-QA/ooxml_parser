@@ -10,7 +10,7 @@ require_relative 'table_properties/table_borders'
 module OoxmlParser
   # Class for parsing `w:tblPr` tags
   class TableProperties < OOXMLDocumentObject
-    attr_accessor :jc, :table_width, :shd, :table_borders, :table_properties, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
+    attr_accessor :jc, :table_width, :table_borders, :table_properties, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
                   :column_banding_size, :table_look, :grid_column, :right_to_left, :style
     # @return [TableStyleColumnBandSize] table style column band size
     attr_accessor :table_style_column_band_size
@@ -20,6 +20,8 @@ module OoxmlParser
     attr_accessor :table_layout
     # @return [OoxmlSize] table cell spacing
     attr_accessor :table_cell_spacing
+    # @return [Shade] shade color of table
+    attr_accessor :shade
 
     alias table_properties table_positon
 
@@ -33,7 +35,7 @@ module OoxmlParser
       table = TableProperties.new
       table.jc = @jc
       table.table_width = @table_width
-      table.shd = @shd
+      table.shade = @shade
       table.stretching = @stretching
       table.table_borders = @table_borders
       table.table_properties = @table_properties
@@ -62,10 +64,7 @@ module OoxmlParser
         when 'jc'
           @jc = node_child.attribute('val').text.to_sym
         when 'shd'
-          unless node_child.attribute('fill').nil?
-            background_color = Color.from_int16(node_child.attribute('fill').value)
-            @shd = background_color
-          end
+          @shade = Shade.new(parent: self).parse(node_child)
         when 'tblLook'
           @table_look = TableLook.new(parent: self).parse(node_child)
         when 'tblInd'
