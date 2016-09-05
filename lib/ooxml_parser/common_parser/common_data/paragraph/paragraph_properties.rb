@@ -13,6 +13,8 @@ module OoxmlParser
     # (or at least part of it) should be rendered on
     # the same page as the next paragraph when possible
     attr_accessor :keep_next
+    # @return [PageProperties] properties of section
+    attr_accessor :section_properties
 
     def initialize(numbering = NumberingProperties.new, parent: nil)
       @numbering = numbering
@@ -61,6 +63,8 @@ module OoxmlParser
           @paragraph_borders = ParagraphBorders.parse(node_child)
         when 'keepNext'
           @keep_next = true
+        when 'sectPr'
+          @section_properties = PageProperties.new(parent: self).parse(node_child, @parent, DocxParagraphRun.new)
         end
       end
       self
