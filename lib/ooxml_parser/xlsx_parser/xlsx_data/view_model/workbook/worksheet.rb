@@ -42,6 +42,14 @@ module OoxmlParser
       false
     end
 
+    # Parse list of drawings in file
+    def parse_drawing
+      drawing_node = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      drawing_node.xpath('xdr:wsDr/*').each do |drawing_node_child|
+        @drawings << XlsxDrawing.parse(drawing_node_child)
+      end
+    end
+
     def self.parse(path_to_xml_file)
       worksheet = Worksheet.new
       worksheet.xml_name = File.basename path_to_xml_file
@@ -68,7 +76,7 @@ module OoxmlParser
           path_to_drawing = OOXMLDocumentObject.get_link_from_rels(worksheet_node_child.attribute('id').value)
           unless path_to_drawing.nil?
             OOXMLDocumentObject.add_to_xmls_stack(path_to_drawing)
-            XlsxDrawing.parse_list(worksheet)
+            worksheet.parse_drawing
             OOXMLDocumentObject.xmls_stack.pop
           end
         when 'hyperlinks'
