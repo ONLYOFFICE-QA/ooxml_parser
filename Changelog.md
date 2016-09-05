@@ -32,6 +32,7 @@
 * OoxmlSize support a whole lot formats
 * Correct handling unsupported OoxmlSize format
 * `DocumentStlye` parse `CellProperties`
+* Clean way to parse `ParagraphSpacing`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
