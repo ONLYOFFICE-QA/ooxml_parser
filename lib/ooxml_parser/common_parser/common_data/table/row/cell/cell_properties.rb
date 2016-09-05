@@ -20,6 +20,8 @@ module OoxmlParser
       @shd = :none
     end
 
+    alias table_cell_borders borders_properties
+
     def parse(cell_properties_node)
       @borders_properties = Borders.new
       @margins = ParagraphMargins.new(parent: self).parse(cell_properties_node)

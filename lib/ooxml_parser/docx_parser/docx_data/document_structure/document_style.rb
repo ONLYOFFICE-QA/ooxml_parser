@@ -24,6 +24,8 @@ module OoxmlParser
     attr_accessor :table_style_properties_list
     # @return [TableRowProperties] properties of table row
     attr_accessor :table_row_properties
+    # @return [CellProperties] properties of table cell
+    attr_accessor :table_cell_properties
     # @return [True, False] Latent Style Primary Style Setting
     # Used to determine if current style is visible in style list in editors
     # According to http://www.wordarticles.com/Articles/WordStyles/LatentStyles.php
@@ -64,6 +66,8 @@ module OoxmlParser
           document_style.table_properties = TableProperties.new(parent: document_style).parse(subnode)
         when 'trPr'
           document_style.table_row_properties = TableRowProperties.new(parent: document_style).parse(subnode)
+        when 'tcPr'
+          document_style.table_cell_properties = CellProperties.new(Borders.parse(subnode), PresentationFill.parse(subnode)).parse(subnode)
         when 'tblStylePr'
           document_style.table_style_properties_list << TableStyleProperties.parse(subnode, parent: document_style)
         when 'qFormat'
