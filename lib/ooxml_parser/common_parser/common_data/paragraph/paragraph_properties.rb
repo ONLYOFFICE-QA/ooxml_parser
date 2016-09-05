@@ -16,6 +16,11 @@ module OoxmlParser
     attr_accessor :keep_next
     # @return [PageProperties] properties of section
     attr_accessor :section_properties
+    # @return [True, False] This element specifies that any space specified
+    # before or after this paragraph, specified using the spacing element (17.3.1.33),
+    # should not be applied when the preceding and following paragraphs are of
+    # the same paragraph style, affecting the top and bottom spacing respectively
+    attr_accessor :contextual_spacing
 
     def initialize(numbering = NumberingProperties.new, parent: nil)
       @numbering = numbering
@@ -68,6 +73,8 @@ module OoxmlParser
           @section_properties = PageProperties.new(parent: self).parse(node_child, @parent, DocxParagraphRun.new)
         when 'spacing'
           @spacing = ParagraphSpacing.new(parent: self).parse(node_child)
+        when 'contextualSpacing'
+          @contextual_spacing = option_enabled?(node_child)
         end
       end
       self
