@@ -14,53 +14,56 @@ module OoxmlParser
     # the same page as the next paragraph when possible
     attr_accessor :keep_next
 
-    def initialize(numbering = NumberingProperties.new)
+    def initialize(numbering = NumberingProperties.new, parent: nil)
       @numbering = numbering
       @spacing = Spacing.new(0, 0, 1, :multiple)
       @keep_next = false
+      @parent = parent
     end
 
-    def self.parse(paragraph_props_node)
-      paragraph_properties = ParagraphProperties.new
-      paragraph_properties.spacing.parse(paragraph_props_node)
-      paragraph_props_node.attributes.each do |key, value|
+    # Parse ParagraphProperties object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ParagraphProperties] result of parsing
+    def parse(node)
+      @spacing.parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'algn'
-          paragraph_properties.align = Alignment.parse(value)
+          @align = Alignment.parse(value)
         when 'lvl'
-          paragraph_properties.level = value.value.to_i
+          @level = value.value.to_i
         when 'indent'
-          paragraph_properties.indent = OoxmlSize.new(value.value.to_f, :emu)
+          @indent = OoxmlSize.new(value.value.to_f, :emu)
         when 'marR'
-          paragraph_properties.margin_right = OoxmlSize.new(value.value.to_f, :emu)
+          @margin_right = OoxmlSize.new(value.value.to_f, :emu)
         when 'marL'
-          paragraph_properties.margin_left = OoxmlSize.new(value.value.to_f, :emu)
+          @margin_left = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
-      paragraph_props_node.xpath('*').each do |properties_element|
-        case properties_element.name
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'buSzPct'
-          paragraph_properties.numbering.size = properties_element.attribute('val').value
+          @numbering.size = node_child.attribute('val').value
         when 'buFont'
-          paragraph_properties.numbering.font = properties_element.attribute('typeface').value
+          @numbering.font = node_child.attribute('typeface').value
         when 'buChar'
-          paragraph_properties.numbering.symbol = properties_element.attribute('char').value
+          @numbering.symbol = node_child.attribute('char').value
         when 'buAutoNum'
-          paragraph_properties.numbering.type = properties_element.attribute('type').value.to_sym
-          paragraph_properties.numbering.start_at = properties_element.attribute('startAt').value if properties_element.attribute('startAt')
+          @numbering.type = node_child.attribute('type').value.to_sym
+          @numbering.start_at = node_child.attribute('startAt').value if node_child.attribute('startAt')
         when 'tabLst'
-          paragraph_properties.tabs = ParagraphTab.parse(properties_element)
+          @tabs = ParagraphTab.parse(node_child)
         when 'ind'
-          paragraph_properties.indent = Indents.new(parent: paragraph_properties).parse(properties_element)
+          @indent = Indents.new(parent: self).parse(node_child)
         when 'rPr'
-          paragraph_properties.run_properties = RunProperties.new(parent: paragraph_properties).parse(properties_element)
+          @run_properties = RunProperties.new(parent: self).parse(node_child)
         when 'pBdr'
-          paragraph_properties.paragraph_borders = ParagraphBorders.parse(properties_element)
+          @paragraph_borders = ParagraphBorders.parse(node_child)
         when 'keepNext'
-          paragraph_properties.keep_next = true
+          @keep_next = true
         end
       end
-      paragraph_properties
+      self
     end
   end
 end

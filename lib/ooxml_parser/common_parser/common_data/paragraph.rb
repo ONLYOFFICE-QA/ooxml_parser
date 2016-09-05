@@ -21,7 +21,7 @@ module OoxmlParser
       paragraph_node.xpath('*').each do |paragraph_node_child|
         case paragraph_node_child.name
         when 'pPr'
-          paragraph.properties = ParagraphProperties.parse(paragraph_node_child)
+          paragraph.properties = ParagraphProperties.new(parent: paragraph).parse(paragraph_node_child)
         when 'fld'
           paragraph.text_field = TextField.parse(paragraph_node_child)
         when 'r'

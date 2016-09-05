@@ -129,7 +129,7 @@ module OoxmlParser
               @horizontal_line = true
             end
           end
-          @paragraph_properties = ParagraphProperties.parse(node_child)
+          @paragraph_properties = ParagraphProperties.new(parent: self).parse(node_child)
         when 'commentRangeStart'
           comments << node_child.attribute('id').value
         when 'fldSimple'
