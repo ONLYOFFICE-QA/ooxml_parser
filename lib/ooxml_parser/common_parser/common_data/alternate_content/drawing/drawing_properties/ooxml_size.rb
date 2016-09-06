@@ -50,6 +50,8 @@ module OoxmlParser
         return OoxmlSize.new(@value * (12_700 / 2))
       when :one_eighth_point
         return OoxmlSize.new(@value * (12_700 / 8))
+      when :one_240th_cm
+        return OoxmlSize.new(@value * 1500)
       when :dxa, :twip
         return OoxmlSize.new(@value * 635, :emu)
       when :inch
@@ -72,6 +74,8 @@ module OoxmlParser
         return OoxmlSize.new((base_unit.value / (12_700 * 2)).round(OoxmlParser.configuration.accuracy), output_unit)
       when :one_eighth_point
         return OoxmlSize.new((base_unit.value / (12_700 * 8)).round(OoxmlParser.configuration.accuracy), output_unit)
+      when :one_240th_cm
+        return OoxmlSize.new((base_unit.value / 1500).round(OoxmlParser.configuration.accuracy), output_unit)
       when :dxa, :twip
         return OoxmlSize.new((base_unit.value / 635).round(OoxmlParser.configuration.accuracy), output_unit)
       when :inch

@@ -23,7 +23,11 @@ module OoxmlParser
         when 'lineRule'
           @line_rule = value.value.sub('atLeast', 'at_least').to_sym
         when 'line'
-          @line = OoxmlSize.new(value.value.to_f)
+          @line = if @line_rule == :auto
+                    OoxmlSize.new(value.value.to_f, :one_240th_cm)
+                  else
+                    OoxmlSize.new(value.value.to_f)
+                  end
         end
       end
       self

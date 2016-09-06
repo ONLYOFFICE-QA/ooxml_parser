@@ -34,6 +34,7 @@
 * `DocumentStlye` parse `CellProperties`
 * Clean way to parse `ParagraphSpacing`
 * `ParagraphTab` now stored in `Tabs` in `ParagraphProperties`
+* Add `OoxmlSize` support of `one_240th_cm` and use in `Spacing`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

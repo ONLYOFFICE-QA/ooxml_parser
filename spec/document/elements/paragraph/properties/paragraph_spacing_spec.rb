@@ -8,6 +8,6 @@ describe 'My behaviour' do
 
   it 'paragraph_spacing_line_value' do
     docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/properties/spacing/paragraph_spacing_line_value.docx')
-    expect(docx.elements.first.paragraph_properties.spacing.line).to eq(OoxmlParser::OoxmlSize.new(1.26, :centimeter))
+    expect(docx.elements.first.paragraph_properties.spacing.line).to eq(OoxmlParser::OoxmlSize.new(3, :centimeter))
   end
 end
