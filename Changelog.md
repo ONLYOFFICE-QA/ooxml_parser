@@ -49,7 +49,7 @@
 * `TransformEffect`, `BordersProperties#size` in correct `OoxmlSize` unit
 * `Indents`, `TableProperties#table_indent`, `ParagraphProperties#margin_left`, 
 `ParagraphProperties#margin_right`, `ParagraphProperties#indent` use `OoxmlSize`
-* `TableMargins`, `TablePosition`, `FrameProperties` use `OoxmlSize`
+* `TableMargins`, `TablePosition`, `FrameProperties`, `CellProperties#able_cell_width` use `OoxmlSize`
 * `TableProperties` use `Shade` class
 * `ParagraphMargins` parse size in correct units
 * `ParagraphProperties` parse `PageProperties`
