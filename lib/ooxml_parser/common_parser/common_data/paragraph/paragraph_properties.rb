@@ -2,6 +2,7 @@ require_relative 'paragrpah_properties/numbering_properties'
 require_relative 'paragrpah_properties/paragraph_borders'
 require_relative 'paragrpah_properties/paragraph_spacing'
 require_relative 'paragrpah_properties/spacing'
+require_relative 'paragrpah_properties/tab_list'
 require_relative 'paragrpah_properties/tabs'
 module OoxmlParser
   class ParagraphProperties < OOXMLDocumentObject
@@ -64,6 +65,8 @@ module OoxmlParser
           @numbering.start_at = node_child.attribute('startAt').value if node_child.attribute('startAt')
         when 'tabs'
           @tabs = Tabs.new(parent: self).parse(node_child)
+        when 'tabLst'
+          @tabs = TabList.new(parent: self).parse(node_child)
         when 'ind'
           @indent = Indents.new(parent: self).parse(node_child)
         when 'rPr'

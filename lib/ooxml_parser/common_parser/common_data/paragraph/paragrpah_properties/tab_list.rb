@@ -1,6 +1,7 @@
+require_relative 'tab_list/presentation_tab'
 module OoxmlParser
-  # Class for working with `w:tabs`
-  class Tabs < OOXMLDocumentObject
+  # Class for working with `a:tabLst`
+  class TabList < OOXMLDocumentObject
     # @return [Array, ParagraphTabs]
     attr_accessor :tabs_array
 
@@ -26,7 +27,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'tab'
-          @tabs_array << ParagraphTab.new(parent: self).parse(node_child)
+          @tabs_array << PresentationTab.new(parent: self).parse(node_child)
         end
       end
       self
