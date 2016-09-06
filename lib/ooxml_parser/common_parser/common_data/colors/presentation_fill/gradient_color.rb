@@ -16,7 +16,7 @@ module OoxmlParser
         case gradient_fill_node_child.name
         when 'gsLst'
           gradient_fill_node_child.xpath('*').each do |gradient_stop_node|
-            gradient_color.gradient_stops << GradientStop.parse(gradient_stop_node)
+            gradient_color.gradient_stops << GradientStop.new(parent: gradient_color).parse(gradient_stop_node)
           end
         when 'path'
           gradient_color.path = gradient_fill_node_child.attribute('path').value.to_sym

@@ -1,15 +1,28 @@
+require_relative 'gradient_stop/preset_color'
 module OoxmlParser
   class GradientStop < OOXMLDocumentObject
     attr_accessor :position, :color
 
-    def initialize(position)
-      @position = position
-    end
+    # Parse GradientStop object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [GradientStop] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'pos'
+          @position = value.value.to_i / 1_000
+        end
+      end
 
-    def self.parse(gs_node)
-      gradient_stop = GradientStop.new(gs_node.attribute('pos').value.to_i / 1_000)
-      gs_node.xpath('*').each { |color_node| gradient_stop.color = Color.parse_color(color_node) }
-      gradient_stop
+      node.xpath('*').each do |node_child|
+        @color = case node_child.name
+                 when 'prstClr'
+                   PresetColor.new(parent: self).parse(node_child)
+                 else
+                   Color.parse_color(node_child)
+                 end
+      end
+      self
     end
   end
 end
