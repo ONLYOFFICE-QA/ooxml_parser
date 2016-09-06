@@ -14,12 +14,12 @@ describe OoxmlParser::TableProperties do
 
   it 'table_properties_position_x_nil' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_properties_position_x_nil.docx')
-    expect(docx.elements[1].table_properties.table_properties.position_x).to eq(nil)
+    expect(docx.elements[1].table_properties.table_properties.position_x).to be_nil
   end
 
   it 'table_properties_position_x' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_properties_position_x.docx')
-    expect(docx.elements[1].table_properties.table_properties.position_x).to eq(2.20)
+    expect(docx.elements[1].table_properties.table_properties.position_x).to eq(OoxmlParser::OoxmlSize.new(2.2, :centimeter))
   end
 
   it 'table_cell_margin' do

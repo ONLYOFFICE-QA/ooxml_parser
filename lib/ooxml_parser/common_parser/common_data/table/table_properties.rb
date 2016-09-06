@@ -70,7 +70,7 @@ module OoxmlParser
         when 'tblInd'
           @table_indent = OoxmlSize.new(node_child.attribute('w').text.to_f)
         when 'tblpPr'
-          @table_positon = TablePosition.parse(node_child)
+          @table_positon = TablePosition.new(parent: self).parse(node_child)
         when 'tblCellMar'
           @table_cell_margin = TableMargins.new(parent: table_properties).parse(node_child)
         when 'tblStyleColBandSize'
