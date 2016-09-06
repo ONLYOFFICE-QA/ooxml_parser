@@ -2,10 +2,13 @@ require_relative 'paragrpah_properties/numbering_properties'
 require_relative 'paragrpah_properties/paragraph_borders'
 require_relative 'paragrpah_properties/paragraph_spacing'
 require_relative 'paragrpah_properties/spacing'
+require_relative 'paragrpah_properties/tab_list'
+require_relative 'paragrpah_properties/tabs'
 module OoxmlParser
   class ParagraphProperties < OOXMLDocumentObject
-    attr_accessor :align, :numbering, :level, :spacing, :spacing_before, :spacing_after, :indent, :margin_left, :margin_right,
-                  :tabs
+    attr_accessor :align, :numbering, :level, :spacing, :spacing_before, :spacing_after, :indent, :margin_left, :margin_right
+    # @return [Tabs] list of tabs
+    attr_accessor :tabs
     # @return [RunProperties] properties of run
     attr_accessor :run_properties
     # @return [Borders] borders of paragraph
@@ -26,6 +29,7 @@ module OoxmlParser
       @numbering = numbering
       @spacing = Spacing.new(0, 0, 1, :multiple)
       @keep_next = false
+      @tabs = []
       @parent = parent
     end
 
@@ -59,8 +63,10 @@ module OoxmlParser
         when 'buAutoNum'
           @numbering.type = node_child.attribute('type').value.to_sym
           @numbering.start_at = node_child.attribute('startAt').value if node_child.attribute('startAt')
+        when 'tabs'
+          @tabs = Tabs.new(parent: self).parse(node_child)
         when 'tabLst'
-          @tabs = ParagraphTab.parse(node_child)
+          @tabs = TabList.new(parent: self).parse(node_child)
         when 'ind'
           @indent = Indents.new(parent: self).parse(node_child)
         when 'rPr'

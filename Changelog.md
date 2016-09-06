@@ -33,6 +33,7 @@
 * Correct handling unsupported OoxmlSize format
 * `DocumentStlye` parse `CellProperties`
 * Clean way to parse `ParagraphSpacing`
+* `ParagraphTab` now stored in `Tabs` in `ParagraphProperties`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

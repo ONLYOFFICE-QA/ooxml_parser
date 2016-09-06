@@ -1,6 +1,6 @@
 module OoxmlParser
-  # Class for storing `w:tab` data
-  class ParagraphTab < OOXMLDocumentObject
+  # Class for storing `a:tab` data
+  class PresentationTab < OOXMLDocumentObject
     # @return [Symbol] Specifies the style of the tab.
     attr_accessor :value
     # @return [OOxmlSize] Specifies the position of the tab stop.
@@ -14,10 +14,10 @@ module OoxmlParser
     def parse(node)
       node.attributes.each do |key, value|
         case key
-        when 'val'
-          @value = value.value.to_sym
+        when 'algn'
+          @value = Alignment.parse(value)
         when 'pos'
-          @position = OoxmlSize.new(value.value.to_f)
+          @position = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
       self

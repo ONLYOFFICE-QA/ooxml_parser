@@ -9,7 +9,7 @@ module OoxmlParser
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
                   :character_style_array, :horizontal_line, :page_break, :kinoku, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
-                  :orphan_control, :tabs, :frame_properties
+                  :orphan_control, :frame_properties
     # @return [ParagraphProperties] Properties of current paragraph
     attr_accessor :paragraph_properties
 
@@ -35,7 +35,6 @@ module OoxmlParser
       @style = nil
       @keep_next = false
       @orphan_control = true
-      @tabs = []
       @frame_properties = nil
       @parent = parent
     end
@@ -63,7 +62,6 @@ module OoxmlParser
       paragraph.style = @style
       paragraph.keep_next = @keep_next
       paragraph.orphan_control = @orphan_control
-      paragraph.tabs = @tabs.dup
       paragraph.frame_properties = @frame_properties
       paragraph.paragraph_properties = @paragraph_properties
       paragraph
@@ -205,8 +203,6 @@ module OoxmlParser
     def parse_paragraph_style(node, default_char_style = DocxParagraphRun.new)
       node.xpath('*').each do |node_child|
         case node_child.name
-        when 'tabs'
-          node_child.xpath('w:tab').each { |tab_node| @tabs << ParagraphTab.new(tab_node.attribute('val').value.to_sym, (tab_node.attribute('pos').value.to_f / 566.9).round(2)) }
         when 'pageBreakBefore'
           if node_child.attribute('val').nil? || node_child.attribute('val').value != 'false'
             @page_break = true
