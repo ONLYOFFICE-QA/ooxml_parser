@@ -1,19 +1,26 @@
 module OoxmlParser
+  # Class for storing `w:tab` data
   class ParagraphTab < OOXMLDocumentObject
-    attr_accessor :align, :position
+    # @return [Symbol] Specifies the style of the tab.
+    attr_accessor :value
+    # @return [OOxmlSize] Specifies the position of the tab stop.
+    attr_accessor :position
 
-    def initialize(align, position)
-      @align = align
-      @position = position
-    end
+    alias align value
 
-    def self.parse(tabs_node)
-      tabs = []
-      tabs_node.xpath('a:tab').each do |tab_node|
-        tabs << ParagraphTab.new(Alignment.parse(tab_node.attribute('algn')),
-                                 (tab_node.attribute('pos').value.to_f / 360_000.0).round(2))
+    # Parse ParagraphTab object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ParagraphTab] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'val'
+          @value = value.value.to_sym
+        when 'pos'
+          @position = OoxmlSize.new(value.value.to_f)
+        end
       end
-      tabs
+      self
     end
   end
 end

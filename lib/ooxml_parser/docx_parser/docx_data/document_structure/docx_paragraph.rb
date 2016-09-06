@@ -205,8 +205,6 @@ module OoxmlParser
     def parse_paragraph_style(node, default_char_style = DocxParagraphRun.new)
       node.xpath('*').each do |node_child|
         case node_child.name
-        when 'tabs'
-          node_child.xpath('w:tab').each { |tab_node| @tabs << ParagraphTab.new(tab_node.attribute('val').value.to_sym, (tab_node.attribute('pos').value.to_f / 566.9).round(2)) }
         when 'pageBreakBefore'
           if node_child.attribute('val').nil? || node_child.attribute('val').value != 'false'
             @page_break = true
