@@ -27,7 +27,7 @@ module OoxmlParser
       node.xpath('*').each do |child_node|
         case child_node.name
         when 'legendPos'
-          @position = Alignment.parse(child_node.attribute('val'))
+          @position = value_to_symbol(child_node.attribute('val'))
         when 'overlay'
           @overlay = true if child_node.attribute('val').value.to_s == '1'
         end

@@ -9,11 +9,11 @@ module OoxmlParser
       @type = node.name.to_sym
       case node.name
       when 'blinds', 'checker', 'comb', 'cover', 'pull', 'push', 'randomBar', 'strips', 'wipe', 'zoom', 'warp'
-        @direction = Alignment.parse(node.attribute('dir')) if node.attribute('dir')
+        @direction = value_to_symbol(node.attribute('dir')) if node.attribute('dir')
       when 'cut', 'fade'
         @through_black = option_enabled?(node, 'thruBlk')
       when 'split'
-        @direction = Alignment.parse(node.attribute('dir')) if node.attribute('dir')
+        @direction = value_to_symbol(node.attribute('dir')) if node.attribute('dir')
         @orientation = node.attribute('orient').value.to_sym if node.attribute('orient')
       when 'wheel', 'wheelReverse'
         @spokes = option_enabled?(node, 'spokes')

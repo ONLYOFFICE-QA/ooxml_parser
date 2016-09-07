@@ -14,7 +14,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'relativeFrom'
-          @relative_from = Alignment.parse(value)
+          @relative_from = value_to_symbol(value)
         end
       end
 

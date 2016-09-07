@@ -6,7 +6,7 @@ module OoxmlParser
     def initialize(offset = nil, ratio = nil, parent: nil)
       @offset = offset
       @ratio = ratio
-      @parent = nil
+      @parent = parent
     end
 
     # Parse Tile object
@@ -16,7 +16,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'algn'
-          @align = Alignment.parse(value)
+          @align = value_to_symbol(value)
         end
       end
       self

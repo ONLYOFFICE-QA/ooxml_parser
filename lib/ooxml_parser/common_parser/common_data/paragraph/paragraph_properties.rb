@@ -41,7 +41,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'algn'
-          @align = Alignment.parse(value)
+          @align = value_to_symbol(value)
         when 'lvl'
           @level = value.value.to_i
         when 'indent'

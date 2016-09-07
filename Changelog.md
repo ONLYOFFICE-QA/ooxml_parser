@@ -78,6 +78,7 @@
 `ChartAxis`, `ChartLegend`, `SizeRelativeHorizontal`,
 `SizeRelativeVertical`, `OOXMLShapeBodyProperties`, `Tile`,
 `NaryLimitLocation`, `MultilevelType`
+* Replace usage `Alignment.parse` on `OOXMLDocumentObject#value_to_symbol` method
 
 ## 0.1.2 (2016-06-07)
 

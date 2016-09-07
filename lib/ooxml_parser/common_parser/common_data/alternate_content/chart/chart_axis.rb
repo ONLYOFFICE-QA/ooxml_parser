@@ -31,7 +31,7 @@ module OoxmlParser
         when 'minorGridlines'
           @minor_grid_lines = true
         when 'axPos'
-          @position = Alignment.parse(node_child.attribute('val'))
+          @position = value_to_symbol(node_child.attribute('val'))
         end
       end
       @display = false if @title.nil?

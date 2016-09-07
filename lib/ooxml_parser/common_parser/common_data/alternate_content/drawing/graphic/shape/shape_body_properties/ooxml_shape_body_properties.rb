@@ -20,7 +20,7 @@ module OoxmlParser
         when 'wrap'
           @wrap = value.value.to_sym
         when 'anchor'
-          @anchor = Alignment.parse(value)
+          @anchor = value_to_symbol(value)
         end
       end
       node.xpath('*').each do |node_child|
