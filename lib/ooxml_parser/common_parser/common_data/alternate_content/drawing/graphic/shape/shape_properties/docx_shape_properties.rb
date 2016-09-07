@@ -30,7 +30,7 @@ module OoxmlParser
         when 'txbx'
           shape_properties.text_box = TextBox.parse_list(shape_properties_node_child)
         when 'ln'
-          shape_properties.line = DocxShapeLine.parse(shape_properties_node_child)
+          shape_properties.line = DocxShapeLine.new(parent: shape_properties).parse(shape_properties_node_child)
         when 'custGeom'
           shape_properties.preset_geometry = PresetGeometry.parse(shape_properties_node_child)
           shape_properties.preset_geometry.name = :custom
