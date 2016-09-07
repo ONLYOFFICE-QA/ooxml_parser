@@ -1,21 +1,20 @@
 module OoxmlParser
   # Class for parsing `m:limLoc` object
-  class NaryLimitLocation
+  class NaryLimitLocation < OOXMLDocumentObject
     # @return [String] value of limit location
     attr_accessor :value
 
     # Parse NaryLimitLocation
     # @param [Nokogiri::XML:Node] node with NaryLimitLocation
     # @return [NaryLimitLocation] result of parsing
-    def self.parse(node)
-      limit_location = NaryLimitLocation.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'val'
-          limit_location.value = Alignment.parse(value)
+          @value = Alignment.parse(value)
         end
       end
-      limit_location
+      self
     end
   end
 end

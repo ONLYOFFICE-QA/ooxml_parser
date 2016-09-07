@@ -108,16 +108,14 @@ module OoxmlParser
                   end
                   chart_node_child.xpath('*').each do |plot_area_node_child|
                     case plot_area_node_child.name
-                    when 'catAx'
-                      chart.axises << ChartAxis.parse(plot_area_node_child)
-                    when 'valAx'
-                      chart.axises << ChartAxis.parse(plot_area_node_child)
+                    when 'catAx', 'valAx'
+                      chart.axises << ChartAxis.new(parent: chart).parse(plot_area_node_child)
                     end
                   end
                 when 'title'
                   chart.title = ChartAxisTitle.new(parent: chart).parse(chart_node_child)
                 when 'legend'
-                  chart.legend = ChartLegend.parse(chart_node_child)
+                  chart.legend = ChartLegend.new(parent: chart).parse(chart_node_child)
                 end
               end
             end

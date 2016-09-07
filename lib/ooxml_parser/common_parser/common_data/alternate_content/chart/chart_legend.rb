@@ -1,11 +1,14 @@
-# Legend of Chart
 module OoxmlParser
-  class ChartLegend
+  # Legend of Chart `legend` tag
+  class ChartLegend < OOXMLDocumentObject
     attr_accessor :position, :overlay
 
-    def initialize(position = :right, overlay = false)
+    def initialize(position = :right,
+                   overlay = false,
+                   parent: nil)
       @position = position
       @overlay = overlay
+      @parent = parent
     end
 
     # Return combined data from @position and @overlay
@@ -17,17 +20,19 @@ module OoxmlParser
       @position
     end
 
-    def self.parse(legend_node)
-      legend = ChartLegend.new
-      legend_node.xpath('*').each do |legend_node_child|
-        case legend_node_child.name
+    # Parse ChartLegend object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ChartLegend] result of parsing
+    def parse(node)
+      node.xpath('*').each do |child_node|
+        case child_node.name
         when 'legendPos'
-          legend.position = Alignment.parse(legend_node_child.attribute('val'))
+          @position = Alignment.parse(child_node.attribute('val'))
         when 'overlay'
-          legend.overlay = true if legend_node_child.attribute('val').value.to_s == '1'
+          @overlay = true if child_node.attribute('val').value.to_s == '1'
         end
       end
-      legend
+      self
     end
   end
 end

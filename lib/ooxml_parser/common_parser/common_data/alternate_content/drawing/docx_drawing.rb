@@ -44,9 +44,9 @@ module OoxmlParser
           when 'positionH'
             drawing.properties.horizontal_position = DocxDrawingPosition.parse(content_node_child)
           when 'sizeRelH'
-            drawing.properties.size_relative_horizontal = SizeRelativeHorizontal.parse(content_node_child)
+            drawing.properties.size_relative_horizontal = SizeRelativeHorizontal.new(parent: drawing).parse(content_node_child)
           when 'sizeRelV'
-            drawing.properties.size_relative_vertical = SizeRelativeVertical.parse(content_node_child)
+            drawing.properties.size_relative_vertical = SizeRelativeVertical.new(parent: drawing).parse(content_node_child)
           end
         end
       end

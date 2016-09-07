@@ -18,7 +18,7 @@ module OoxmlParser
         when 'txBody'
           shape.text_body = TextBody.parse(shape_node_child)
         when 'bodyPr'
-          shape.body_properties = OOXMLShapeBodyProperties.parse(shape_node_child)
+          shape.body_properties = OOXMLShapeBodyProperties.new(parent: shape).parse(shape_node_child)
         end
       end
       shape

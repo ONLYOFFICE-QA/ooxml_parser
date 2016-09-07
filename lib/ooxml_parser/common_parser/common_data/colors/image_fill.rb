@@ -21,7 +21,9 @@ module OoxmlParser
         when 'stretch'
           image.stretch = Stretching.parse(blip_fill_node_child) # !blip_fill_node_child.xpath('a:fillRect').first.nil?
         when 'tile'
-          image.tile = Tile.parse(blip_fill_node_child)
+          image.tile = Tile.new(OOXMLCoordinates.parse(blip_fill_node_child, x_attr: 'tx', y_attr: 'ty'),
+                                OOXMLCoordinates.parse(blip_fill_node_child, x_attr: 'sx', y_attr: 'sy'),
+                                parent: image).parse(blip_fill_node_child)
         end
       end
       image
