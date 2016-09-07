@@ -63,21 +63,21 @@ module OoxmlParser
       borders_node.xpath('*').each do |border_node|
         case border_node.name
         when 'lnL', 'left'
-          borders.left = TableCellLine.parse(border_node)
+          borders.left = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
         when 'lnR', 'right'
-          borders.right = TableCellLine.parse(border_node)
+          borders.right = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
         when 'lnT', 'top'
-          borders.top = TableCellLine.parse(border_node)
+          borders.top = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
         when 'lnB', 'bottom'
-          borders.bottom = TableCellLine.parse(border_node)
+          borders.bottom = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
         when 'lnTlToBr', 'tl2br'
-          borders.top_left_to_bottom_right = TableCellLine.parse(border_node)
+          borders.top_left_to_bottom_right = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
         when 'lnBlToTr', 'tr2bl'
-          borders.top_right_to_bottom_left = TableCellLine.parse(border_node)
+          borders.top_right_to_bottom_left = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
         when 'insideV'
-          borders.inner_vertical = TableCellLine.parse(border_node)
+          borders.inner_vertical = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
         when 'insideH'
-          borders.inner_horizontal = TableCellLine.parse(border_node)
+          borders.inner_horizontal = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
         end
       end
       borders

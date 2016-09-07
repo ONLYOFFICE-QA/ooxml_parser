@@ -15,7 +15,7 @@ describe 'My behaviour' do
       current_row.cells.each do |current_cell|
         current_cell.properties.borders.each_side do |current_side|
           expect(current_side.fill.color.converted_color).to eq(OoxmlParser::Color.new(165, 165, 165))
-          expect(current_side.width).to eq(4.5)
+          expect(current_side.width).to eq(OoxmlParser::OoxmlSize.new(4.5, :point))
         end
         expect(current_cell.properties.color.color.converted_color).to eq(OoxmlParser::Color.new(68, 114, 196))
       end
