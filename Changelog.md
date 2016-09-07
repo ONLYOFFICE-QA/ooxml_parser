@@ -74,7 +74,10 @@
 `NonVisualProperties`, `ShapePlaceholder`, `RunProperties`, 
 `TableProperties`, `FrameProperties`, `Background`, `Transition`,
 `TransitionProperties`, `XlsxRow`, `XlsxColumnProperties`, `CellStyle`,
-`DisplayLabelsProperties`, `ParagraphProperties`
+`DisplayLabelsProperties`, `ParagraphProperties`, 
+`ChartAxis`, `ChartLegend`, `SizeRelativeHorizontal`,
+`SizeRelativeVertical`, `OOXMLShapeBodyProperties`, `Tile`,
+`NaryLimitLocation`, `MultilevelType`
 
 ## 0.1.2 (2016-06-07)
 

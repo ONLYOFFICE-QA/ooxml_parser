@@ -1,21 +1,25 @@
 module OoxmlParser
+  # Class for parsing `tile` tag
   class Tile < OOXMLDocumentObject
     attr_accessor :offset, :ratio, :flip, :align
 
-    def initialize(offset = nil, ratio = nil)
+    def initialize(offset = nil, ratio = nil, parent: nil)
       @offset = offset
       @ratio = ratio
+      @parent = nil
     end
 
-    def self.parse(tile_node)
-      tile = Tile.new(OOXMLCoordinates.parse(tile_node, x_attr: 'tx', y_attr: 'ty'), OOXMLCoordinates.parse(tile_node, x_attr: 'sx', y_attr: 'sy'))
-      tile_node.attributes.each do |key, value|
+    # Parse Tile object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Tile] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'algn'
-          tile.align = Alignment.parse(value)
+          @align = Alignment.parse(value)
         end
       end
-      tile
+      self
     end
   end
 end

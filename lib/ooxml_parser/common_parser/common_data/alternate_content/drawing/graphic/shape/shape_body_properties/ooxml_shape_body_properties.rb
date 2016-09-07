@@ -1,33 +1,35 @@
-# Docx Shape Body Properties
 require_relative 'ooxml_shape_body_properties/preset_text_warp'
 
 module OoxmlParser
+  # Class for parsing `bodyPr`
   class OOXMLShapeBodyProperties < OOXMLDocumentObject
     attr_accessor :margins, :anchor, :wrap, :preset_text_warp
 
     alias vertical_align anchor
 
-    def self.parse(body_pr_node)
-      body_properties = OOXMLShapeBodyProperties.new
-      body_properties.margins = ParagraphMargins.new(OoxmlSize.new(0.127, :centimeter),
-                                                     OoxmlSize.new(0.127, :centimeter),
-                                                     OoxmlSize.new(0.254, :centimeter),
-                                                     OoxmlSize.new(0.254, :centimeter)).parse(body_pr_node)
-      body_pr_node.attributes.each do |key, value|
+    # Parse OOXMLShapeBodyProperties
+    # @param [Nokogiri::XML:Node] node with OOXMLShapeBodyProperties
+    # @return [OOXMLShapeBodyProperties] result of parsing
+    def parse(node)
+      @margins = ParagraphMargins.new(OoxmlSize.new(0.127, :centimeter),
+                                      OoxmlSize.new(0.127, :centimeter),
+                                      OoxmlSize.new(0.254, :centimeter),
+                                      OoxmlSize.new(0.254, :centimeter)).parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'wrap'
-          body_properties.wrap = value.value.to_sym
+          @wrap = value.value.to_sym
         when 'anchor'
-          body_properties.anchor = Alignment.parse(value)
+          @anchor = Alignment.parse(value)
         end
       end
-      body_pr_node.xpath('*').each do |body_properties_child|
-        case body_properties_child.name
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'prstTxWarp'
-          body_properties.preset_text_warp = PresetTextWarp.parse(body_properties_child)
+          @preset_text_warp = PresetTextWarp.parse(node_child)
         end
       end
-      body_properties
+      self
     end
   end
 end

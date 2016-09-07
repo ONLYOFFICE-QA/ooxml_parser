@@ -1,34 +1,41 @@
 require_relative 'chart_axis_title'
-# Chart Axis
 module OoxmlParser
+  # Parsing Chart axis tags 'catAx', 'valAx'
   class ChartAxis < OOXMLDocumentObject
     attr_accessor :title, :display, :position, :major_grid_lines, :minor_grid_lines
 
-    def initialize(title = ChartAxisTitle.new, display = true, major_grid_lines = false, minor_grid_lines = false)
+    def initialize(title = ChartAxisTitle.new,
+                   display = true,
+                   major_grid_lines = false,
+                   minor_grid_lines = false,
+                   parent: nil)
       @title = title
       @display = display
       @minor_grid_lines = minor_grid_lines
       @major_grid_lines = major_grid_lines
+      @parent = parent
     end
 
-    def self.parse(axis_node)
-      axis = ChartAxis.new
-      axis_node.xpath('*').each do |axis_node_child|
-        case axis_node_child.name
+    # Parse ChartAxis object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ChartAxis] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'delete'
-          axis.display = false if axis_node_child.attribute('val').value == '1'
+          @display = false if node_child.attribute('val').value == '1'
         when 'title'
-          axis.title = ChartAxisTitle.new(parent: axis).parse(axis_node_child)
+          @title = ChartAxisTitle.new(parent: self).parse(node_child)
         when 'majorGridlines'
-          axis.major_grid_lines = true
+          @major_grid_lines = true
         when 'minorGridlines'
-          axis.minor_grid_lines = true
+          @minor_grid_lines = true
         when 'axPos'
-          axis.position = Alignment.parse(axis_node_child.attribute('val'))
+          @position = Alignment.parse(node_child.attribute('val'))
         end
       end
-      axis.display = false if axis.title.nil?
-      axis
+      @display = false if @title.nil?
+      self
     end
   end
 end

@@ -18,7 +18,7 @@ module OoxmlParser
         when 'grow'
           nary_properties.grow = NaryGrow.parse(nary_pr_child)
         when 'limLoc'
-          nary_properties.limit_location = NaryLimitLocation.parse(nary_pr_child)
+          nary_properties.limit_location = NaryLimitLocation.new(parent: nary_properties).parse(nary_pr_child)
         end
       end
       nary_properties

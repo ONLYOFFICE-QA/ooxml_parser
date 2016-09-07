@@ -32,7 +32,7 @@ module OoxmlParser
       node.xpath('*').each do |numbering_child_node|
         case numbering_child_node.name
         when 'multiLevelType'
-          abstract_numbering.multilevel_type = MultilevelType.parse(numbering_child_node)
+          abstract_numbering.multilevel_type = MultilevelType.new(parent: abstract_numbering).parse(numbering_child_node)
         when 'lvl'
           abstract_numbering.level_list << NumberingLevel.parse(numbering_child_node)
         end
