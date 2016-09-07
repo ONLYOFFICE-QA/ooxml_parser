@@ -3,9 +3,11 @@ require 'securerandom'
 require 'nokogiri'
 require 'xmlsimple'
 require 'zip'
+require_relative 'ooxml_document_object/ooxml_document_object_helper'
 
 module OoxmlParser
   class OOXMLDocumentObject
+    include OoxmlDocumentObjectHelper
     # @return [OOXMLDocumentObject] object which hold current object
     attr_accessor :parent
     # @return [Symbol] units in which data is stored in format

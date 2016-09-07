@@ -20,7 +20,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'dLblPos'
-          @position = Alignment.parse(node_child.attribute('val'))
+          @position = value_to_symbol(node_child.attribute('val'))
         when 'showLegendKey'
           @show_legend_key = true if node_child.attribute('val').value == '1'
         when 'showVal'

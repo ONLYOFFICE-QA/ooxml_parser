@@ -1,5 +1,4 @@
 require_relative 'ooxml_parser/common_parser/common_data/ooxml_document_object'
-require_relative 'ooxml_parser/common_parser/common_data/alingment'
 require_relative 'ooxml_parser/common_parser/common_data/color'
 require_relative 'ooxml_parser/common_parser/common_data/coordinates'
 require_relative 'ooxml_parser/common_parser/common_data/font_style'

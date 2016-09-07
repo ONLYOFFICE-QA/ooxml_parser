@@ -15,7 +15,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'algn'
-          @value = Alignment.parse(value)
+          @value = value_to_symbol(value)
         when 'pos'
           @position = OoxmlSize.new(value.value.to_f, :emu)
         end

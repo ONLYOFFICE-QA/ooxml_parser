@@ -11,7 +11,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'val'
-          @value = Alignment.parse(value)
+          @value = value_to_symbol(value)
         end
       end
       self

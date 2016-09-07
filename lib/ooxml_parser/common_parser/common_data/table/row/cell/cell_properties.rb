@@ -38,7 +38,7 @@ module OoxmlParser
         when 'tcMar'
           @table_cell_margin = TableMargins.new(parent: self).parse(cell_node_child)
         when 'textDirection'
-          @text_direction = Alignment.parse(cell_node_child.attribute('val'))
+          @text_direction = value_to_symbol(cell_node_child.attribute('val'))
         when 'shd'
           next if cell_node_child.attribute('val').value == 'nil'
           @shd = cell_node_child.attribute('fill').value
@@ -74,7 +74,7 @@ module OoxmlParser
         when 'vert'
           @text_direction = value.value.to_sym
         when 'anchor'
-          @anchor = Alignment.parse(value)
+          @anchor = value_to_symbol(value)
         when 'anchorCtr'
           @anchor_center = value.value
         when 'horzOverflow'

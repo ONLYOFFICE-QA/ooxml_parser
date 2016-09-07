@@ -33,7 +33,7 @@ module OoxmlParser
         when 'w'
           @width = OoxmlSize.new(value.value.to_f, :emu)
         when 'cap'
-          @cap = Alignment.parse(value)
+          @cap = value_to_symbol(value)
         end
       end
 

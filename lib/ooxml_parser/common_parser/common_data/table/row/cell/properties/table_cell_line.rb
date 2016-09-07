@@ -19,7 +19,7 @@ module OoxmlParser
         when 'w'
           @width = OoxmlSize.new(value.value.to_f, :emu)
         when 'algn'
-          @align = Alignment.parse(value)
+          @align = value_to_symbol(value)
         end
       end
 
