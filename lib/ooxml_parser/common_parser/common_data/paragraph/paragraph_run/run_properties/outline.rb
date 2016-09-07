@@ -1,23 +1,27 @@
 # Class for parsing Run Outline properties
 module OoxmlParser
+  # Class for parsing `w:ln` tags
   class Outline < OOXMLDocumentObject
     attr_accessor :width
     attr_accessor :color_scheme
 
-    def initialize
+    def initialize(parent: nil)
       @width = 0
+      @parent = parent
     end
 
-    def self.parse(node)
-      outline = Outline.new
+    # Parse Outline object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Outline] result of parsing
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'w'
-          outline.width = (value.value.to_f / 12_699.3).round(2)
+          @width = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
-      outline.color_scheme = DocxColorScheme.parse(node)
-      outline
+      @color_scheme = DocxColorScheme.parse(node)
+      self
     end
   end
 end

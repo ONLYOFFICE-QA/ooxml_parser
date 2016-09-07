@@ -49,7 +49,8 @@
 * Parse `keep_next` in paragraph properties
 * `TransformEffect`, `BordersProperties#size` in correct `OoxmlSize` unit
 * `Indents`, `TableProperties#table_indent`, `ParagraphProperties#margin_left`, 
-`ParagraphProperties#margin_right`, `ParagraphProperties#indent`, `DocxShapeLine#width`, `TextOutline#width` use `OoxmlSize`
+`ParagraphProperties#margin_right`, `ParagraphProperties#indent`, `DocxShapeLine#width`, 
+`TextOutline#width`, `Outline#width` use `OoxmlSize`
 * `TableMargins`, `TablePosition`, `FrameProperties`, `CellProperties#able_cell_width` use `OoxmlSize`
 * `TableProperties` use `Shade` class
 * `ParagraphMargins` parse size in correct units

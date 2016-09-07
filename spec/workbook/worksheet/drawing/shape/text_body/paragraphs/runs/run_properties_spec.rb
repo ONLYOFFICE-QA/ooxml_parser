@@ -13,7 +13,7 @@ describe 'My behaviour' do
 
   it 'fill_without_outline.xlsx - nil size' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/shape/text_body/paragraphs/runs/properties/fill_without_outline.xlsx')
-    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.outline.width).to eq(0)
+    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.outline.width).to be_zero
   end
 
   it 'outline_without_fill.xlsx - color' do
@@ -23,12 +23,12 @@ describe 'My behaviour' do
 
   it 'outline_without_fill.xlsx - size' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/shape/text_body/paragraphs/runs/properties/outline_without_fill.xlsx')
-    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.outline.width).to eq(1.24)
+    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.outline.width).to eq(OoxmlParser::OoxmlSize.new(1.24, :point))
   end
 
   it 'outline_width_6px.xlsx - big size' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/shape/text_body/paragraphs/runs/properties/outline_width_6px.xlsx')
-    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.outline.width).to eq(6)
+    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.outline.width).to eq(OoxmlParser::OoxmlSize.new(6, :point))
   end
 
   it 'gradient_fill.xlsx' do

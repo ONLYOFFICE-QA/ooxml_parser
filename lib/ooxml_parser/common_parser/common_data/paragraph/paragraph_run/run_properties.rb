@@ -101,7 +101,7 @@ module OoxmlParser
         when 'hlinkClick'
           @hyperlink = Hyperlink.parse(properties_element)
         when 'ln'
-          @outline = Outline.parse(properties_element)
+          @outline = Outline.new(parent: self).parse(properties_element)
         when 'lang'
           @language = Language.parse(properties_element)
         when 'position'
