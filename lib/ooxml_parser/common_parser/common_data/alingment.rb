@@ -72,6 +72,12 @@ module OoxmlParser
         :multi_level
       when 'hybridMultilevel'
         :hybrid_multi_level
+      when 'rnd'
+        :round
+      when 'sq'
+        :square
+      when 'flat'
+        :flat
       else
         node.value.to_sym
       end
