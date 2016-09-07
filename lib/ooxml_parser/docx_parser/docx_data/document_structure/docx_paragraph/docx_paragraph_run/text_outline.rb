@@ -1,22 +1,27 @@
 # Class for parsing text outline and its properties
 module OoxmlParser
+  # Class for parsing `w:textOutline`
   class TextOutline < OOXMLDocumentObject
     attr_accessor :width, :color_scheme
 
-    def initialize
-      @width = 0
+    def initialize(parent: nil)
+      @width = OoxmlSize.new(0)
       @color_scheme = :none
+      @parent = parent
     end
 
-    def self.parse(node)
-      text_outline = TextOutline.new
-
-      unless node.attribute('w').nil?
-        text_outline.width = (node.attribute('w').value.to_f / 12_699).round(2)
+    # Parse TextOutline object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [TextOutline] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'w'
+          @width = OoxmlSize.new(value.value.to_f, :emu)
+        end
       end
-
-      text_outline.color_scheme = DocxColorScheme.parse(node)
-      text_outline
+      @color_scheme = DocxColorScheme.parse(node)
+      self
     end
   end
 end

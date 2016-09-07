@@ -48,7 +48,7 @@ module OoxmlParser
         when 'textFill'
           self.text_fill = TextFill.parse(run_properties_node)
         when 'textOutline'
-          self.text_outline = TextOutline.parse(run_properties_node)
+          self.text_outline = TextOutline.new(parent: self).parse(run_properties_node)
         when 'bCs', 'b'
           font_style.bold = option_enabled?(run_properties_node)
         when 'iCs', 'i'
