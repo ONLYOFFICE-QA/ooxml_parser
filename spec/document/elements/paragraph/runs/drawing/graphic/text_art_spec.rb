@@ -4,13 +4,13 @@ describe 'Text Art' do
   it 'text_borders_width_1pt.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/graphic/text_art/text_borders_width_1pt.docx')
     expect(docx.elements.first.character_style_array.first.alternate_content.office2010_content.graphic
-               .data.text_body.elements.first.character_style_array.first.text_outline.width).to eq(1)
+               .data.text_body.elements.first.character_style_array.first.text_outline.width).to eq(OoxmlParser::OoxmlSize.new(1, :point))
   end
 
   it 'text_borders_width_2.25pt.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/graphic/text_art/text_borders_width_2.25pt.docx')
     expect(docx.elements.first.character_style_array.first.alternate_content.office2010_content.graphic
-               .data.text_body.elements.first.character_style_array.first.text_outline.width).to eq(2.25)
+               .data.text_body.elements.first.character_style_array.first.text_outline.width).to eq(OoxmlParser::OoxmlSize.new(2.25, :point))
   end
 
   it 'text_outline_color_standart.docx' do
@@ -86,7 +86,7 @@ describe 'Text Art' do
   it 'without_outline_width.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/graphic/text_art/without_outline_color.docx')
     expect(docx.elements.first.character_style_array.first.alternate_content.office2010_content.graphic
-               .data.text_body.elements.first.character_style_array.first.text_outline.width).to eq(0)
+               .data.text_body.elements.first.character_style_array.first.text_outline.width).to be_zero
   end
 
   it 'without_outline.docx - color outline check' do
