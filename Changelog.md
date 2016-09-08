@@ -36,6 +36,7 @@
 * `ParagraphTab` now stored in `Tabs` in `ParagraphProperties`
 * Add `OoxmlSize` support of `one_240th_cm` and use in `Spacing`
 * Add parsing `PresetColor` to `GradientStop`
+* Add Parsing `NumberingLevel#suffix`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

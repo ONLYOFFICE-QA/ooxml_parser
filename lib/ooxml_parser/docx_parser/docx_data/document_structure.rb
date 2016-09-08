@@ -130,7 +130,7 @@ module OoxmlParser
       end
       parse_default_style
       doc_structure = DocumentStructure.new
-      doc_structure.numbering = Numbering.parse
+      doc_structure.numbering = Numbering.new(parent: doc_structure).parse
       doc_structure.document_styles = DocumentStyle.parse_list(doc_structure)
       number = 0
       OOXMLDocumentObject.add_to_xmls_stack('word/document.xml')
