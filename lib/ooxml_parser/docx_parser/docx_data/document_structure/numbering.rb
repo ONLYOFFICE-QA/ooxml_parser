@@ -8,9 +8,10 @@ module OoxmlParser
     # @return [Array, NumberingDefinition] numbering definition list
     attr_accessor :numbering_definition_list
 
-    def initialize
+    def initialize(parent: nil)
       @abstract_numbering_list = []
       @numbering_definition_list = []
+      @parent = parent
     end
 
     def properties_by_num_id(num_id)
@@ -26,20 +27,19 @@ module OoxmlParser
       end
     end
 
-    def self.parse
-      numbering = Numbering.new
+    def parse
       numbering_xml = OOXMLDocumentObject.path_to_folder + 'word/numbering.xml'
       return nil unless File.exist?(numbering_xml)
       node = Nokogiri::XML(File.open(numbering_xml), 'r:UTF-8')
       node.xpath('w:numbering/*').each do |numbering_child_node|
         case numbering_child_node.name
         when 'abstractNum'
-          numbering.abstract_numbering_list << AbstractNumbering.parse(numbering_child_node)
+          @abstract_numbering_list << AbstractNumbering.new(parent: self).parse(numbering_child_node)
         when 'num'
-          numbering.numbering_definition_list << NumberingDefinition.parse(numbering_child_node)
+          @numbering_definition_list << NumberingDefinition.new(parent: self).parse(numbering_child_node)
         end
       end
-      numbering
+      self
     end
   end
 end

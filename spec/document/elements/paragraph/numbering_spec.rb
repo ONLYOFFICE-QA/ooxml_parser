@@ -41,4 +41,9 @@ describe OoxmlParser::Numbering do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_in_table.docx')
     expect(docx.element_by_description(location: :canvas, type: :table).first.numbering.abstruct_numbering.level_list.first.text.value).to eq('¨')
   end
+
+  it 'numbering_suffix' do
+    docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_suffix.docx')
+    expect(docx.element_by_description.first.numbering.abstruct_numbering.level_list.first.suffix.value).to eq(:space)
+  end
 end
