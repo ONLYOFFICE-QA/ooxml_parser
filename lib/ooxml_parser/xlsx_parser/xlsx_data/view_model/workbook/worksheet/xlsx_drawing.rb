@@ -1,39 +1,44 @@
-require_relative 'xlsx_drawing/xlsx_drawing_position'
+require_relative 'xlsx_drawing/xlsx_drawing_position_parameters'
 require_relative 'xlsx_drawing/xlsx_shape_grouping'
 module OoxmlParser
   class XlsxDrawing < OOXMLDocumentObject
-    attr_accessor :position, :picture, :shape, :grouping
+    attr_accessor :picture, :shape, :grouping
+    # @return [XlsxDrawingPositionParameters] position from
+    attr_accessor :from
+    # @return [XlsxDrawingPositionParameters] position to
+    attr_accessor :to
 
-    def initialize(position = XlsxDrawingPosition.new)
-      @position = position
-    end
-
-    def self.parse(drawing_node)
-      drawing = XlsxDrawing.new
-      drawing.position = XlsxDrawingPosition.parse(drawing_node)
-      drawing_node.xpath('*').each do |drawing_node_child|
-        case drawing_node_child.name
+    # Parse XlsxDrawing object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [XlsxDrawing] result of parsing
+    def parse(node)
+      node.xpath('*').each do |child_node|
+        case child_node.name
+        when 'from'
+          @from = XlsxDrawingPositionParameters.new(parent: self).parse(child_node)
+        when 'to'
+          @to = XlsxDrawingPositionParameters.new(parent: self).parse(child_node)
         when 'sp'
-          drawing.shape = DocxShape.parse(drawing_node_child)
+          @shape = DocxShape.parse(child_node)
         when 'grpSp'
-          drawing.grouping = XlsxShapeGrouping.parse(drawing_node_child)
+          @grouping = XlsxShapeGrouping.parse(child_node)
         when 'pic'
-          drawing.picture = DocxPicture.parse(drawing_node_child)
+          @picture = DocxPicture.parse(child_node)
         when 'graphicFrame'
-          drawing.picture = DocxPicture.new
-          graphic_data_node = drawing_node_child.xpath('a:graphic/a:graphicData', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main')
+          @picture = DocxPicture.new
+          graphic_data_node = child_node.xpath('a:graphic/a:graphicData', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main')
           graphic_data_node.xpath('*').each do |graphic_data_node_child|
             case graphic_data_node_child.name
             when 'chart'
               path_to_chart_xml = OOXMLDocumentObject.get_link_from_rels(graphic_data_node_child.attribute('id').value)
               OOXMLDocumentObject.add_to_xmls_stack(path_to_chart_xml)
-              drawing.picture.chart = Chart.parse
+              @picture.chart = Chart.parse
               OOXMLDocumentObject.xmls_stack.pop
             end
           end
         end
       end
-      drawing
+      self
     end
   end
 end

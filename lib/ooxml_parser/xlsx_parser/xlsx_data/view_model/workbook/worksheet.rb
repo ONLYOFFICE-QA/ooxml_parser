@@ -46,7 +46,7 @@ module OoxmlParser
     def parse_drawing
       drawing_node = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       drawing_node.xpath('xdr:wsDr/*').each do |drawing_node_child|
-        @drawings << XlsxDrawing.parse(drawing_node_child)
+        @drawings << XlsxDrawing.new(parent: self).parse(drawing_node_child)
       end
     end
 
