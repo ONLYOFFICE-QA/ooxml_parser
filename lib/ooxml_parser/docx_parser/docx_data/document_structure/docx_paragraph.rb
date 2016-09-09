@@ -225,7 +225,7 @@ module OoxmlParser
           @contextual_spacing = true
         when 'shd'
           background_color_string = node_child.attribute('fill').value
-          @background_color = Color.from_int16(background_color_string)
+          @background_color = Color.new(parent: self).parse_hex_string(background_color_string)
           unless node_child.attribute('val').nil?
             @background_color.set_style(node_child.attribute('val').value)
           end

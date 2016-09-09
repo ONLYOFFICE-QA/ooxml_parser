@@ -46,7 +46,7 @@ module OoxmlParser
           @space = OoxmlSize.new(value.value.to_f, :point)
         when 'color'
           @color = value.value.to_s
-          @color = Color.from_int16(@color) if @color != 'auto'
+          @color = Color.new(parent: self).parse_hex_string(@color) if @color != 'auto'
         when 'shadow'
           @shadow = value.value
         end

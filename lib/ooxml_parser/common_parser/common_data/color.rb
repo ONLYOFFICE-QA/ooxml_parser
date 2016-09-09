@@ -1,3 +1,4 @@
+require_relative 'color/color_helper'
 require_relative 'colors/color_alpha_channel'
 require_relative 'colors/hsl_color'
 require_relative 'colors/scheme_color'
@@ -6,7 +7,8 @@ require_relative 'colors/theme_colors'
 # @author Pavel.Lobashov
 # Class for Color in RGB
 module OoxmlParser
-  class Color
+  class Color < OOXMLDocumentObject
+    include ColorHelper
     # @return [Array] Deprecated Indexed colors
     # List of color duplicated from `OpenXML Sdk IndexedColors` class
     # See https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.indexedcolors.aspx
@@ -102,10 +104,14 @@ module OoxmlParser
     # Value of color if non selected
     VALUE_FOR_NONE_COLOR = nil
 
-    def initialize(new_red = VALUE_FOR_NONE_COLOR, new_green = VALUE_FOR_NONE_COLOR, new_blue = VALUE_FOR_NONE_COLOR)
+    def initialize(new_red = VALUE_FOR_NONE_COLOR,
+                   new_green = VALUE_FOR_NONE_COLOR,
+                   new_blue = VALUE_FOR_NONE_COLOR,
+                   parent: nil)
       @red = new_red
       @green = new_green
       @blue = new_blue
+      @parent = parent
     end
 
     def to_s
@@ -114,6 +120,10 @@ module OoxmlParser
       else
         "RGB (#{@red}, #{@green}, #{@blue})"
       end
+    end
+
+    def inspect
+      to_s
     end
 
     def to_hex
@@ -262,27 +272,6 @@ module OoxmlParser
 
       alias random generate_random_color
 
-      def from_int16(color)
-        return nil unless color
-        return Color.new(nil, nil, nil) if color == 'auto' || color == 'null'
-
-        char_array = color.split(//)
-        alpha_channel, red, green, blue = nil
-        if char_array.length == 6
-          red = (char_array[0] + char_array[1]).hex
-          green = (char_array[2] + char_array[3]).hex
-          blue = (char_array[4] + char_array[5]).hex
-        elsif char_array.length == 8
-          alpha_channel = (char_array[0] + char_array[1]).hex
-          red = (char_array[2] + char_array[3]).hex
-          green = (char_array[4] + char_array[5]).hex
-          blue = (char_array[6] + char_array[7]).hex
-        end
-        font_color = Color.new(red, green, blue)
-        font_color.set_alpha_channel(alpha_channel) if alpha_channel
-        font_color
-      end
-
       def parse_color_hash(hash)
         Color.new(hash['red'], hash['green'], hash['blue'])
       end
@@ -296,7 +285,7 @@ module OoxmlParser
 
       def get_rgb_by_color_index(index)
         color_by_index = COLOR_INDEXED[index]
-        color_by_index == 'n/a' ? Color.new : Color.from_int16(color_by_index)
+        color_by_index == 'n/a' ? Color.new : Color.new.parse_hex_string(color_by_index)
       end
 
       def parse_string(str)
@@ -397,16 +386,16 @@ module OoxmlParser
         unless color_tag.nil?
           if color_tag.attribute('indexed').nil? && !color_tag.attribute('rgb').nil?
             if color_tag.attribute('rgb').value.is_a?(String)
-              return Color.from_int16(color_tag.attribute('rgb').value.to_s)
+              return Color.new.parse_hex_string(color_tag.attribute('rgb').value.to_s)
             end
-            return Color.from_int16(color_tag.attribute('rgb').value.value.to_s)
+            return Color.new.parse_hex_string(color_tag.attribute('rgb').value.value.to_s)
           elsif color_tag.attribute('rgb').nil? && !color_tag.attribute('indexed').nil?
             if color_tag.attribute('indexed').value.is_a?(String)
               return Color.get_rgb_by_color_index(color_tag.attribute('indexed').value.to_i)
             end
             return Color.get_rgb_by_color_index(color_tag.attribute('indexed').value.value.to_i)
           elsif !color_tag.attribute('val').nil?
-            return Color.from_int16(color_tag.attribute('val').value.to_s)
+            return Color.new.parse_hex_string(color_tag.attribute('val').value.to_s)
           elsif !color_tag.attribute('theme').nil?
             return ThemeColors.parse_color_theme(color_tag)
           end
@@ -453,7 +442,7 @@ module OoxmlParser
             color = Color.new(color_model_node.attribute('r').value.to_i, color_model_node.attribute('g').value.to_i, color_model_node.attribute('b').value.to_i)
             color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
           when 'srgbClr'
-            color = Color.from_int16(color_model_node.attribute('val').value)
+            color = Color.new.parse_hex_string(color_model_node.attribute('val').value)
             color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
           when 'schemeClr'
             color = parse_scheme_color(color_model_node)
@@ -467,7 +456,7 @@ module OoxmlParser
       def parse_color(color_node)
         case color_node.name
         when 'srgbClr'
-          color = Color.from_int16(color_node.attribute('val').value)
+          color = Color.new.parse_hex_string(color_node.attribute('val').value)
           color.properties = ColorProperties.parse(color_node)
           color
         when 'schemeClr'

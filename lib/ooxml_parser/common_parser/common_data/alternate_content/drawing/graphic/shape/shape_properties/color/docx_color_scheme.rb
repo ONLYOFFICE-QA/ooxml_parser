@@ -22,7 +22,7 @@ module OoxmlParser
           color_scheme.color = :none
           color_scheme.type = :none
         when 'srgbClr'
-          color_scheme.color = Color.from_int16(color_scheme_node_child.attribute('val').value)
+          color_scheme.color = Color.new(parent: color_scheme).parse_hex_string(color_scheme_node_child.attribute('val').value)
         when 'schemeClr'
           color_scheme.color = Color.parse_scheme_color(color_scheme_node_child)
         end

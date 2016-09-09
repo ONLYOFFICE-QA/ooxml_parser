@@ -52,7 +52,7 @@ module OoxmlParser
           next if node_child.attribute('val').value == 'nil'
           @shd = node_child.attribute('fill').value
           if !node_child.attribute('fill').nil? && node_child.attribute('fill').value != 'auto'
-            @shd = Color.from_int16(node_child.attribute('fill').value)
+            @shd = Color.new(parent: self).parse_hex_string(node_child.attribute('fill').value)
           end
         when 'fill'
           @fill = DocxColorScheme.parse(node_child)
