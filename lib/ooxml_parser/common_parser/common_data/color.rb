@@ -304,16 +304,6 @@ module OoxmlParser
 
       alias parse parse_string
 
-      def parse_int16_string(color)
-        return nil if color.nil?
-
-        char_array = color.split(//)
-        red = (char_array[0] + char_array[1]).hex
-        green = (char_array[2] + char_array[3]).hex
-        blue = (char_array[4] + char_array[5]).hex
-        Color.new(red, green, blue)
-      end
-
       def srgb_to_scrgb(color)
         lineal_value = color.to_f / 255.0
         result_color = if lineal_value < 0
