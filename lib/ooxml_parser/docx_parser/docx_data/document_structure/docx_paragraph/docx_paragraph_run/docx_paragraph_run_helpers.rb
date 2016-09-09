@@ -63,7 +63,7 @@ module OoxmlParser
         color.attributes.each do |key, value|
           case key
           when 'val'
-            self.font_color = Color.from_int16(value.value)
+            self.font_color = Color.new(parent: self).parse_hex_string(value.value)
           when 'themeColor'
             unless ThemeColors.list[value.value.to_sym].nil?
               if value.value == 'text2' || value.value == 'background2' || value.value.include?('accent') # Don't know why. Just works
@@ -82,7 +82,7 @@ module OoxmlParser
       character_pr_tag.xpath('w:shd').each do |shd|
         self.background_color = shd.attribute('fill').value
         unless shd.attribute('fill').value == 'auto' || shd.attribute('fill').value == '' || shd.attribute('fill').value == 'null'
-          self.background_color = Color.from_int16(shd.attribute('fill').value)
+          self.background_color = Color.new(parent: self).parse_hex_string(shd.attribute('fill').value)
         end
       end
       character_pr_tag.xpath('w:uCs').each do |u|
@@ -90,7 +90,7 @@ module OoxmlParser
         if !u.attribute('val').nil? && u.attribute('val').value != 'none' && u.attribute('val').value != false
           font_style.underlined.style = u.attribute('val').value
           unless u.attribute('color').nil?
-            font_style.underlined.color = Color.from_int16(u.attribute('color').value)
+            font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(u.attribute('color').value)
           end
         else
           font_style.underlined = Underline.new
@@ -101,7 +101,7 @@ module OoxmlParser
         if !u.attribute('val').nil? && u.attribute('val').value != 'none' && u.attribute('val').value != false
           font_style.underlined.style = u.attribute('val').value
           unless u.attribute('color').nil?
-            font_style.underlined.color = Color.from_int16(u.attribute('color').value)
+            font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(u.attribute('color').value)
           end
         else
           font_style.underlined = Underline.new

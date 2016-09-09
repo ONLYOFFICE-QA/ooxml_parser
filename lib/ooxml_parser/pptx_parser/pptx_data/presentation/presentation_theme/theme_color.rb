@@ -28,10 +28,10 @@ module OoxmlParser
         when 'sysClr'
           theme_color.type = :system
           theme_color.value = color_node_child.attribute('val').value
-          theme_color.color = Color.from_int16(color_node_child.attribute('lastClr').value.to_s) unless color_node_child.attribute('lastClr').nil?
+          theme_color.color = Color.new(parent: theme_color).parse_hex_string(color_node_child.attribute('lastClr').value.to_s) unless color_node_child.attribute('lastClr').nil?
         when 'srgbClr'
           theme_color.type = :rgb
-          theme_color.color = Color.from_int16(color_node_child.attribute('val').value.to_s)
+          theme_color.color = Color.new(parent: theme_color).parse_hex_string(color_node_child.attribute('val').value.to_s)
         end
       end
       theme_color

@@ -8,11 +8,11 @@ module OoxmlParser
       shape_node.attributes.each do |key, value|
         case key
         when 'fillcolor'
-          properties.fill_color = Color.from_int16(value.value.delete('#'))
+          properties.fill_color = Color.new(parent: properties).parse_hex_string(value.value.delete('#'))
         when 'opacity'
           properties.opacity = value.value.to_f
         when 'strokecolor'
-          properties.stroke_color = Color.from_int16(value.value.delete('#'))
+          properties.stroke_color = Color.new(parent: properties).parse_hex_string(value.value.delete('#'))
         when 'strokeweight'
           properties.stroke_weight = value.value.to_f
         when ''

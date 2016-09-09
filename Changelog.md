@@ -81,6 +81,8 @@
 `SizeRelativeVertical`, `OOXMLShapeBodyProperties`, `Tile`,
 `NaryLimitLocation`, `MultilevelType`
 * Replace usage `Alignment.parse` on `OOXMLDocumentObject#value_to_symbol` method
+* Refactor `Color.from_int16` to `Color#parse_hex_string` method
+* Remove unused `Color#parse_int16_string`
 
 ## 0.1.2 (2016-06-07)
 

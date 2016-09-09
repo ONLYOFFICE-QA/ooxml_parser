@@ -19,7 +19,7 @@ module OoxmlParser
         when 'color'
           @color = value.value.to_sym
         when 'fill'
-          @fill = Color.from_int16(value.value.to_s)
+          @fill = Color.new(parent: self).parse_hex_string(value.value.to_s)
         end
       end
       self

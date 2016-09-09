@@ -15,14 +15,14 @@ module OoxmlParser
     # @return [DocumentBackground] result of parsing
     def self.parse(node)
       background = DocumentBackground.new
-      background.color1 = Color.from_int16(node.attribute('color').value)
+      background.color1 = Color.new(parent: background).parse_hex_string(node.attribute('color').value)
       node.xpath('v:background').each do |second_color|
         unless second_color.attribute('targetscreensize').nil?
           background.size = second_color.attribute('targetscreensize').value.sub(',', 'x')
         end
         second_color.xpath('v:fill').each do |fill|
           if !fill.attribute('color2').nil?
-            background.color2 = Color.from_int16(fill.attribute('color2').value.split(' ').first.delete('#'))
+            background.color2 = Color.new(parent: background).parse_hex_string(fill.attribute('color2').value.split(' ').first.delete('#'))
             background.type = fill.attribute('type').value
           elsif !fill.attribute('id').nil?
             background.file_reference = FileReference.parse(fill)
