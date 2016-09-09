@@ -15,12 +15,6 @@ module OoxmlParser
       @parent = parent
     end
 
-    def root_object
-      tree_object = self
-      tree_object = tree_object.parent until tree_object.parent.nil?
-      tree_object
-    end
-
     def ==(other)
       instance_variables.each do |current_attribute|
         next if current_attribute == :@parent
@@ -34,23 +28,6 @@ module OoxmlParser
     # @return [True, false] if structure contain any user data
     def with_data?
       true
-    end
-
-    def option_enabled?(node, attribute_name = 'val')
-      return true if node.attributes.empty?
-      return true if node.to_s == '1'
-      return false if node.to_s == '0'
-      return false if node.attribute(attribute_name).nil?
-      status = node.attribute(attribute_name).value
-      status == 'true' || status == 'on' || status == '1'
-    end
-
-    def attribute_enabled?(node, attribute_name = 'val')
-      return true if node.to_s == '1'
-      return false if node.to_s == '0'
-      return false if node.attribute(attribute_name).nil?
-      status = node.attribute(attribute_name).value
-      status == 'true' || status == 'on' || status == '1'
     end
 
     class << self
