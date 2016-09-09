@@ -3,10 +3,6 @@ module OoxmlParser
   class DocxShapeSize
     attr_accessor :rotation, :flip_horizontal, :flip_vertical, :offset, :extent
 
-    def initialize
-      @units = :emu
-    end
-
     alias extents extent
 
     def self.parse(xfrm_node)

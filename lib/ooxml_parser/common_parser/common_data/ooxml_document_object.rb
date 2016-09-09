@@ -10,8 +10,6 @@ module OoxmlParser
     include OoxmlDocumentObjectHelper
     # @return [OOXMLDocumentObject] object which hold current object
     attr_accessor :parent
-    # @return [Symbol] units in which data is stored in format
-    attr_accessor :units
 
     def initialize(parent: nil)
       @parent = parent
