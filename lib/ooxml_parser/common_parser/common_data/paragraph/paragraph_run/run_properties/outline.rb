@@ -6,7 +6,7 @@ module OoxmlParser
     attr_accessor :color_scheme
 
     def initialize(parent: nil)
-      @width = 0
+      @width = OoxmlSize.new(0)
       @parent = parent
     end
 
