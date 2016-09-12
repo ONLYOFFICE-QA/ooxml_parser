@@ -5,6 +5,7 @@ describe 'My behaviour' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/graphic_frame/graphic_data/chart/shape_properties/line/chart_stroke_no_line.pptx')
     drawing = pptx.slides[0].elements.last
     expect(drawing.graphic_data.first.shape_properties.line.width).to be_zero
+    expect(drawing.graphic_data.first.shape_properties.line.width).to eq(OoxmlParser::OoxmlSize.new(0, :point))
   end
 
   it 'chart_stroke_0.5.pptx' do
