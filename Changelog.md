@@ -60,6 +60,7 @@
 * `ParagraphProperties` parse `contextual_spacing`
 * Hanging indent is now 0 by default, instead of nil
 * Correct parsing of `Drawing` of any type, not just `TwoCellAnchor`
+* `Outline` default width in `OoxmlSize`
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
