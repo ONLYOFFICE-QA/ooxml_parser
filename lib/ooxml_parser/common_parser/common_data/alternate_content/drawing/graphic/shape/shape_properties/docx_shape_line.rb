@@ -42,7 +42,7 @@ module OoxmlParser
         when 'solidFill'
           @color_scheme = DocxColorScheme.parse(node_child)
         when 'noFill'
-          @width = 0
+          @width = OoxmlSize.new(0)
         when 'headEnd'
           @head_end = LineEnd.parse(node_child)
         when 'tailEnd'
