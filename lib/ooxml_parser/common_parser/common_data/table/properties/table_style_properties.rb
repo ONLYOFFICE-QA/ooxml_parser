@@ -36,7 +36,7 @@ module OoxmlParser
         when 'rPr'
           table_style_pr.run_properties = RunProperties.new(parent: table_style_pr).parse(properties_child)
         when 'tcPr'
-          table_style_pr.table_cell_properties = CellProperties.new(Borders.parse(properties_child), PresentationFill.parse(properties_child)).parse(properties_child)
+          table_style_pr.table_cell_properties = CellProperties.new(parent: table_style_pr).parse(properties_child)
         end
       end
       table_style_pr

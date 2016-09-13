@@ -5,29 +5,32 @@ module OoxmlParser
   class PresentationFill < OOXMLDocumentObject
     attr_accessor :type, :image, :color, :pattern
 
-    def self.parse(parent_fill_node)
-      fill = PresentationFill.new
-      return nil if parent_fill_node.xpath('*').empty?
-      parent_fill_node.xpath('*').each do |fill_node|
-        case fill_node.name
+    # Parse PresentationFill object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [PresentationFill] result of parsing
+    def parse(node)
+      return nil if node.xpath('*').empty?
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'gradFill'
-          fill.type = :gradient
-          fill.color = GradientColor.parse(fill_node)
+          @type = :gradient
+          @color = GradientColor.parse(node_child)
         when 'solidFill'
-          fill.type = :solid
-          fill.color = Color.parse_color(fill_node.xpath('*').first)
+          @type = :solid
+          @color = Color.parse_color(node_child.xpath('*').first)
         when 'blipFill'
-          fill.type = :image
-          fill.image = ImageFill.parse(fill_node)
+          @type = :image
+          @image = ImageFill.parse(node_child)
         when 'pattFill'
-          fill.type = :pattern
-          fill.pattern = PresentationPattern.parse(fill_node)
+          @type = :pattern
+          @pattern = PresentationPattern.parse(node_child)
         when 'noFill'
-          fill.type = :noneColor
-          fill.color = :none
+          @type = :noneColor
+          @color = :none
         end
       end
-      fill
+      return nil if @type.nil?
+      self
     end
   end
 end

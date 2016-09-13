@@ -10,7 +10,7 @@ module OoxmlParser
       whole_table_node.xpath('*').each do |whole_table_node_child|
         case whole_table_node_child.name
         when 'tcStyle', 'tcPr'
-          table_element.cell_style = CellProperties.new(Borders.parse(whole_table_node_child), PresentationFill.parse(whole_table_node_child)).parse(whole_table_node_child)
+          table_element.cell_style = CellProperties.new.parse(whole_table_node_child)
         end
       end
       table_element

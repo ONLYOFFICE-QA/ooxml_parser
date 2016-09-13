@@ -14,7 +14,7 @@ module OoxmlParser
       background_properties_node = node.xpath('p:bgPr').first
       if background_properties_node
         @shade_to_title = attribute_enabled?(background_properties_node, 'shadeToTitle')
-        @fill = PresentationFill.parse(background_properties_node)
+        @fill = PresentationFill.new(parent: self).parse(background_properties_node)
       end
       self
     end

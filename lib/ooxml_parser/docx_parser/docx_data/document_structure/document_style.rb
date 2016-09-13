@@ -67,7 +67,7 @@ module OoxmlParser
         when 'trPr'
           document_style.table_row_properties = TableRowProperties.new(parent: document_style).parse(subnode)
         when 'tcPr'
-          document_style.table_cell_properties = CellProperties.new(Borders.parse(subnode), PresentationFill.parse(subnode)).parse(subnode)
+          document_style.table_cell_properties = CellProperties.new(parent: document_style).parse(subnode)
         when 'tblStylePr'
           document_style.table_style_properties_list << TableStyleProperties.parse(subnode, parent: document_style)
         when 'qFormat'
