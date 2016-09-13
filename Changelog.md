@@ -35,6 +35,7 @@
 * Clean way to parse `ParagraphSpacing`
 * `ParagraphTab` now stored in `Tabs` in `ParagraphProperties`
 * Add `OoxmlSize` support of `one_240th_cm` and use in `Spacing`
+* Add `OoxmlSize` support of `spacing_point` and use in `Spacing`
 * Add parsing `PresetColor` to `GradientStop`
 * Add Parsing `NumberingLevel#suffix`
 * Add parsing `CellProperties#no_wrap`

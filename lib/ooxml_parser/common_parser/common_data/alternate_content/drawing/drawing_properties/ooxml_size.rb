@@ -56,6 +56,10 @@ module OoxmlParser
         return OoxmlSize.new(@value * 635, :emu)
       when :inch
         return OoxmlSize.new(@value * 914_400, :emu)
+      when :spacing_point
+        return OoxmlSize.new(@value * (12_700 / 100), :emu)
+      when :one_1000th_percent
+        return OoxmlSize.new(@value / 1000, :percent)
       else
         return self
       end
@@ -82,6 +86,8 @@ module OoxmlParser
         return OoxmlSize.new((base_unit.value / 914_400).round(OoxmlParser.configuration.accuracy), output_unit)
       when :percent
         return OoxmlSize.new((base_unit.value / 50).round(OoxmlParser.configuration.accuracy), output_unit)
+      when :spacing_point
+        return OoxmlSize.new((base_unit.value / (12_700 * 100)).round(OoxmlParser.configuration.accuracy), output_unit)
       else
         return base_unit
       end

@@ -30,8 +30,10 @@ module OoxmlParser
       else
         self.line_rule = line_rule.to_sym if line_rule.instance_of?(String)
 
-        if @before.to_f.round(2) == other.before.to_f.round(2) && @after.to_f.round(2) == other.after.to_f.round(2) &&
-           @line.to_f.round(2) == other.line.to_f.round(2) && @line_rule.to_s == other.line_rule.to_s
+        if @before == other.before &&
+           @after == other.after &&
+           @line == other.line &&
+           @line_rule.to_s == other.line_rule.to_s
           return true
         else
           return false
@@ -87,11 +89,9 @@ module OoxmlParser
       node.xpath('*').each do |spacing_node_child|
         case spacing_node_child.name
         when 'spcPct'
-          return (spacing_node_child.attribute('val').value.to_f / 100_000.0).round(2)
+          return OoxmlSize.new(spacing_node_child.attribute('val').value.to_f, :one_1000th_percent)
         when 'spcPts'
-          return (spacing_node_child.attribute('val').value.to_f / 2_834.0).round(2)
-        else
-          return (spacing_node_child.attribute('val').value.to_f / 1_000.0).round(2)
+          return OoxmlSize.new(spacing_node_child.attribute('val').value.to_f, :spacing_point)
         end
       end
     end
