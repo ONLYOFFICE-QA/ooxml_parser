@@ -8,38 +8,39 @@ module OoxmlParser
     attr_accessor :run_properties
     # @return [CellProperties] properties of table cell
     attr_accessor :table_cell_properties
+    # @return [TableProperties] properties of table
+    attr_accessor :table_properties
     alias cell_properties table_cell_properties
 
-    def initialize(type: nil)
+    def initialize(type: nil, parent: nil)
       @type = type
       @run_properties = nil
       @table_cell_properties = CellProperties.new
+      @parent = parent
     end
 
     # Parse table style property
     # @param node [Nokogiri::XML::Element] node to parse
-    # @param [OoxmlParser::OOXMLDocumentObject] parent parent object
     # @return [TableStyleProperties]
-    def self.parse(node, parent: nil)
-      table_style_pr = TableStyleProperties.new
-      table_style_pr.parent = parent
-
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'type'
-          table_style_pr.type = value.value.to_sym
+          @type = value.value.to_sym
         end
       end
 
-      node.xpath('*').each do |properties_child|
-        case properties_child.name
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'rPr'
-          table_style_pr.run_properties = RunProperties.new(parent: table_style_pr).parse(properties_child)
+          @run_properties = RunProperties.new(parent: self).parse(node_child)
         when 'tcPr'
-          table_style_pr.table_cell_properties = CellProperties.new(parent: table_style_pr).parse(properties_child)
+          @table_cell_properties = CellProperties.new(parent: self).parse(node_child)
+        when 'tblPr'
+          @table_properties = TableProperties.new(parent: self).parse(node_child)
         end
       end
-      table_style_pr
+      self
     end
   end
 end
