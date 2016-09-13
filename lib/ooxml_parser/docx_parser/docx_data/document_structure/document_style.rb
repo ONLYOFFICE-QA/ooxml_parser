@@ -32,51 +32,49 @@ module OoxmlParser
     attr_accessor :q_format
     alias visible? q_format
 
-    def initialize
+    def initialize(parent: nil)
       @q_format = false
       @table_style_properties_list = []
+      @parent = parent
     end
 
     # Parse single document style
-    # @param [OoxmlParser::OOXMLDocumentObject] parent parent object
     # @return [DocumentStyle]
-    def self.parse(node, parent)
-      document_style = DocumentStyle.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'type'
-          document_style.type = value.value.to_sym
+          @type = value.value.to_sym
         when 'styleId'
-          document_style.style_id = value.value
+          @style_id = value.value
         end
       end
       node.xpath('*').each do |subnode|
         case subnode.name
         when 'name'
-          document_style.name = subnode.attribute('val').value
+          @name = subnode.attribute('val').value
         when 'basedOn'
-          document_style.based_on = subnode.attribute('val').value
+          @based_on = subnode.attribute('val').value
         when 'next'
-          document_style.next_style = subnode.attribute('val').value
+          @next_style = subnode.attribute('val').value
         when 'rPr'
-          document_style.run_properties = DocxParagraphRun.new.parse_properties(subnode)
+          @run_properties = DocxParagraphRun.new.parse_properties(subnode)
         when 'pPr'
-          document_style.paragraph_properties = DocxParagraph.new(parent: document_style).parse_paragraph_style(subnode)
+          @paragraph_properties = DocxParagraph.new(parent: self).parse_paragraph_style(subnode)
         when 'tblPr'
-          document_style.table_properties = TableProperties.new(parent: document_style).parse(subnode)
+          @table_properties = TableProperties.new(parent: self).parse(subnode)
         when 'trPr'
-          document_style.table_row_properties = TableRowProperties.new(parent: document_style).parse(subnode)
+          @table_row_properties = TableRowProperties.new(parent: self).parse(subnode)
         when 'tcPr'
-          document_style.table_cell_properties = CellProperties.new(parent: document_style).parse(subnode)
+          @table_cell_properties = CellProperties.new(parent: self).parse(subnode)
         when 'tblStylePr'
-          document_style.table_style_properties_list << TableStyleProperties.parse(subnode, parent: document_style)
+          @table_style_properties_list << TableStyleProperties.new(parent: self).parse(subnode)
         when 'qFormat'
-          document_style.q_format = true
+          @q_format = true
         end
       end
-      document_style.parent = parent
-      document_style.fill_empty_table_styles
-      document_style
+      fill_empty_table_styles
+      self
     end
 
     # Parse all document style list
@@ -85,7 +83,7 @@ module OoxmlParser
       styles_array = []
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
       doc.search('//w:style').each do |style|
-        styles_array << DocumentStyle.parse(style, parent)
+        styles_array << DocumentStyle.new(parent: parent).parse(style)
       end
       styles_array
     end
