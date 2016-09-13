@@ -27,7 +27,10 @@ module OoxmlParser
 
     def initialize(numbering = NumberingProperties.new, parent: nil)
       @numbering = numbering
-      @spacing = Spacing.new(0, 0, 1, :multiple)
+      @spacing = Spacing.new(OoxmlSize.new(0),
+                             OoxmlSize.new(0),
+                             OoxmlSize.new(1, :centimeter),
+                             :multiple)
       @keep_next = false
       @tabs = []
       @parent = parent
