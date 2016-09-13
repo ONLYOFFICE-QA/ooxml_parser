@@ -4,19 +4,19 @@ describe 'My behaviour' do
   it 'Character Spacing 1cm' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/space/spacing_1_cm.pptx')
     paragraph = pptx.slides.first.elements.first.text_body.paragraphs.first
-    expect(paragraph.characters.first.properties.space).to eq(1)
+    expect(paragraph.characters.first.properties.space).to eq(OoxmlParser::OoxmlSize.new(1, :centimeter))
   end
 
   it 'Character Spacing 5cm' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/space/spacing_5_cm.pptx')
     paragraph = pptx.slides.first.elements.first.text_body.paragraphs.first
-    expect(paragraph.characters.first.properties.space).to eq(5)
+    expect(paragraph.characters.first.properties.space).to eq(OoxmlParser::OoxmlSize.new(5, :centimeter))
   end
 
   it 'Character Spacing 0.1cm' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/space/spacing_0.1cm.pptx')
     paragraph = pptx.slides.first.elements.first.text_body.paragraphs.first
-    expect(paragraph.characters.first.properties.space).to eq(0.1)
+    expect(paragraph.characters.first.properties.space).to eq(OoxmlParser::OoxmlSize.new(0.1, :centimeter))
   end
 
   it 'Spacing' do

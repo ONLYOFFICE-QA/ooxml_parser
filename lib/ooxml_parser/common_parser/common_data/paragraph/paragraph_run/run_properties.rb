@@ -47,7 +47,7 @@ module OoxmlParser
         when 'sz'
           @font_size = value.value.to_f / 100.0
         when 'spc'
-          @space = (value.value.to_f / 2_834.0).round(2)
+          @space = OoxmlSize.new(value.value.to_f, :one_100th_point)
         when 'b'
           @font_style.bold = option_enabled?(node, 'b')
         when 'i'
