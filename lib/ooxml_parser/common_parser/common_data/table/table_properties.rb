@@ -11,7 +11,7 @@ module OoxmlParser
   # Class for parsing `w:tblPr` tags
   class TableProperties < OOXMLDocumentObject
     attr_accessor :jc, :table_width, :table_borders, :table_properties, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
-                  :column_banding_size, :table_look, :grid_column, :right_to_left, :style
+                  :column_banding_size, :table_look, :grid_column, :style
     # @return [TableStyleColumnBandSize] table style column band size
     attr_accessor :table_style_column_band_size
     # @return [TableStyleRowBandSize] table style row band size
@@ -42,7 +42,6 @@ module OoxmlParser
       table.table_cell_margin = @table_cell_margin
       table.table_indent = @table_indent
       table.grid_column = @grid_column
-      table.right_to_left = @right_to_left
       table.style = style
       table
     end
@@ -84,7 +83,6 @@ module OoxmlParser
         end
       end
       @table_look = TableLook.new(parent: self).parse(node) if @table_look.nil?
-      @right_to_left = option_enabled?(node, 'rtl')
       self
     end
   end
