@@ -20,11 +20,9 @@ module OoxmlParser
     # > ECMA-376, 3rd Edition (June, 2011), Fundamentals and Markup Language Reference 17.4.30.
     attr_accessor :no_wrap
 
-    def initialize(borders = nil, color = nil)
-      @borders = borders
-      @color = color
-      @fill = fill
+    def initialize(parent: nil)
       @shd = :none
+      @parent = parent
     end
 
     alias table_cell_borders borders_properties
@@ -32,6 +30,8 @@ module OoxmlParser
     def parse(node)
       @borders_properties = Borders.new
       @margins = ParagraphMargins.new(parent: self).parse(node)
+      @color = PresentationFill.new(parent: self).parse(node)
+      @borders = Borders.new(parent: self).parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'vMerge'

@@ -8,12 +8,14 @@ module OoxmlParser
                    right = BordersProperties.new,
                    top = BordersProperties.new,
                    bottom = BordersProperties.new,
-                   between = BordersProperties.new)
+                   between = BordersProperties.new,
+                   parent: nil)
       @left = left
       @right = right
       @top = top
       @bottom = bottom
       @between = between
+      @parent = parent
     end
 
     def copy
@@ -58,29 +60,31 @@ module OoxmlParser
       visible
     end
 
-    def self.parse(borders_node)
-      borders = Borders.new
-      borders_node.xpath('*').each do |border_node|
-        case border_node.name
+    # Parse Borders object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Borders] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'lnL', 'left'
-          borders.left = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
+          @left = TableCellLine.new(parent: self).parse(node_child)
         when 'lnR', 'right'
-          borders.right = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
+          @right = TableCellLine.new(parent: self).parse(node_child)
         when 'lnT', 'top'
-          borders.top = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
+          @top = TableCellLine.new(parent: self).parse(node_child)
         when 'lnB', 'bottom'
-          borders.bottom = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
+          @bottom = TableCellLine.new(parent: self).parse(node_child)
         when 'lnTlToBr', 'tl2br'
-          borders.top_left_to_bottom_right = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
+          @top_left_to_bottom_right = TableCellLine.new(parent: self).parse(node_child)
         when 'lnBlToTr', 'tr2bl'
-          borders.top_right_to_bottom_left = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
+          @top_right_to_bottom_left = TableCellLine.new(parent: self).parse(node_child)
         when 'insideV'
-          borders.inner_vertical = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
+          @inner_vertical = TableCellLine.new(parent: self).parse(node_child)
         when 'insideH'
-          borders.inner_horizontal = TableCellLine.new(PresentationFill.parse(border_node), LineJoin.parse(border_node), parent: borders).parse(border_node)
+          @inner_horizontal = TableCellLine.new(parent: self).parse(node_child)
         end
       end
-      borders
+      self
     end
 
     def self.parse_from_style(style_number)

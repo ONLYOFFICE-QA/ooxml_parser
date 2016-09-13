@@ -19,7 +19,7 @@ module OoxmlParser
         when 'txBody'
           cell.text_body = TextBody.parse(cell_node_child)
         when 'tcPr'
-          cell.properties = CellProperties.new(Borders.parse(cell_node_child), PresentationFill.parse(cell_node_child)).parse(cell_node_child)
+          cell.properties = CellProperties.new(parent: self).parse(cell_node_child)
         when 'p'
           cell.elements << DocumentStructure.default_table_paragraph_style.copy.parse(cell_node_child,
                                                                                       0,

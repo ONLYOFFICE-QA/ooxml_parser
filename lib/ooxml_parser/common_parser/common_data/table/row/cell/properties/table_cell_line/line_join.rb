@@ -1,19 +1,21 @@
 module OoxmlParser
-  class LineJoin
+  class LineJoin < OOXMLDocumentObject
     attr_accessor :type, :limit
 
-    def self.parse(parent_node)
-      line_join = LineJoin.new
+    # Parse LineJoin object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [LineJoin] result of parsing
+    def parse(parent_node)
       parent_node.xpath('*').each do |line_join_node|
         case line_join_node.name
         when 'round', 'bevel'
-          line_join.type = line_join_node.name.to_sym
+          @type = line_join_node.name.to_sym
         when 'miter'
-          line_join.type = :miter
-          line_join.limit = line_join_node.attribute('lim').value.to_f
+          @type = :miter
+          @limit = line_join_node.attribute('lim').value.to_f
         end
       end
-      line_join
+      self
     end
   end
 end

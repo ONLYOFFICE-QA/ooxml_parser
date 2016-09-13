@@ -14,6 +14,8 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [TableCellLine] result of parsing
     def parse(node)
+      @fill = PresentationFill.new(parent: self).parse(node)
+      @line_join = LineJoin.new(parent: self).parse(node)
       node.attributes.each do |key, value|
         case key
         when 'w'
