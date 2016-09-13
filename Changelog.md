@@ -57,7 +57,7 @@
 `ParagraphProperties#margin_right`, `ParagraphProperties#indent`, `DocxShapeLine#width`, 
 `TextOutline#width`, `Outline#width`, `TableCellLine#width`, `XlsxDrawingPositionParameters` use `OoxmlSize`
 * `TableMargins`, `TablePosition`, `FrameProperties`, `CellProperties#able_cell_width` use `OoxmlSize`
-* `TableProperties` use `Shade` class
+* `TableProperties`, `TableCellProperties` use `Shade` class
 * `ParagraphMargins` parse size in correct units
 * `ParagraphProperties` parse `PageProperties`
 * `ParagraphProperties` parse `contextual_spacing`

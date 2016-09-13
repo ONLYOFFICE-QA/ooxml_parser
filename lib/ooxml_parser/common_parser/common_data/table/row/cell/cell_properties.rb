@@ -3,13 +3,15 @@ require_relative 'merge'
 module OoxmlParser
   # Class for parsing 'w:tcPr' element
   class CellProperties < OOXMLDocumentObject
-    attr_accessor :fill, :color, :borders, :text_direction, :anchor, :anchor_center, :horizontal_overflow, :table_cell_width, :borders_properties, :shd, :vertical_align
+    attr_accessor :fill, :color, :borders, :text_direction, :anchor, :anchor_center, :horizontal_overflow, :table_cell_width, :borders_properties, :vertical_align
     # @return [GridSpan] data about grid span
     attr_accessor :grid_span
     # @return [TableMargins] margins
     attr_accessor :vertical_merge
     # @return [ParagraphMargins] margins of text in cell
     attr_accessor :margins
+    # @return [Shade] shade of cell
+    attr_accessor :shade
     # @return [TableMargins] margins of cell
     attr_accessor :table_cell_margin
     # @return [True, False] This element will prevent text from
@@ -19,11 +21,6 @@ module OoxmlParser
     # width is set to auto or pct, then the content of the cell will not wrap.
     # > ECMA-376, 3rd Edition (June, 2011), Fundamentals and Markup Language Reference 17.4.30.
     attr_accessor :no_wrap
-
-    def initialize(parent: nil)
-      @shd = :none
-      @parent = parent
-    end
 
     alias table_cell_borders borders_properties
 
@@ -49,11 +46,7 @@ module OoxmlParser
         when 'noWrap'
           @no_wrap = option_enabled?(node_child)
         when 'shd'
-          next if node_child.attribute('val').value == 'nil'
-          @shd = node_child.attribute('fill').value
-          if !node_child.attribute('fill').nil? && node_child.attribute('fill').value != 'auto'
-            @shd = Color.new(parent: self).parse_hex_string(node_child.attribute('fill').value)
-          end
+          @shade = Shade.new(parent: self).parse(node_child)
         when 'fill'
           @fill = DocxColorScheme.parse(node_child)
         when 'tcBorders'
