@@ -26,7 +26,7 @@ module OoxmlParser
                                                                                       DocumentStructure.default_table_run_style,
                                                                                       parent: cell)
         when 'tbl'
-          table = Table.parse(cell_node_child, parent: cell)
+          table = Table.new(parent: cell).parse(cell_node_child)
           cell.elements << table
         end
       end

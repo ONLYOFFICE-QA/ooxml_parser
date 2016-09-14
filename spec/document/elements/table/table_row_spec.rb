@@ -25,7 +25,7 @@ describe OoxmlParser::TableRow do
   it 'TableCellSpacing' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/row/row_cells_spacing.docx')
     docx.element_by_description(location: :canvas, type: :paragraph)[1].rows.each do |current_row|
-      expect(current_row.cells_spacing.round(1)).to eq(1.5)
+      expect(current_row.table_row_properties.cells_spacing).to eq(OoxmlParser::OoxmlSize.new(1.5 / 2.0, :centimeter))
     end
   end
 end

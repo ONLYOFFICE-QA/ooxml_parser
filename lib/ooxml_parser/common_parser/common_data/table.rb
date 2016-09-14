@@ -7,32 +7,33 @@ module OoxmlParser
   class Table < OOXMLDocumentObject
     attr_accessor :grid, :rows, :properties, :number
 
-    def initialize(rows = [])
+    def initialize(rows = [], parent: nil)
       @rows = rows
+      @parent = parent
     end
 
     alias table_properties properties
 
-    def self.parse(table_node,
-                   number = 0,
-                   default_table_properties = TableProperties.new,
-                   parent: nil)
+    # Parse Table object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Table] result of parsing
+    def parse(node,
+              number = 0,
+              default_table_properties = TableProperties.new)
       table_properties = default_table_properties.copy
       table_properties.jc = :left
-      table = Table.new
-      table.parent = parent
-      table_node.xpath('*').each do |table_node_child|
-        case table_node_child.name
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'tblGrid'
-          table.grid = TableGrid.parse(table_node_child)
+          @grid = TableGrid.parse(node_child)
         when 'tr'
-          table.rows << TableRow.parse(table_node_child, parent: table)
+          @rows << TableRow.new(parent: self).parse(node_child)
         when 'tblPr'
-          table.properties = TableProperties.new(parent: table).parse(table_node_child)
+          @properties = TableProperties.new(parent: self).parse(node_child)
         end
       end
-      table.number = number
-      table
+      @number = number
+      self
     end
   end
 end
