@@ -58,7 +58,7 @@
 * `Indents`, `TableProperties#table_indent`, `ParagraphProperties#margin_left`, 
 `ParagraphProperties#margin_right`, `ParagraphProperties#indent`, `DocxShapeLine#width`, 
 `TextOutline#width`, `Outline#width`, `TableCellLine#width`, `XlsxDrawingPositionParameters` use `OoxmlSize`
-* `TableMargins`, `TablePosition`, `FrameProperties`, `CellProperties#able_cell_width` use `OoxmlSize`
+* `TableMargins`, `TablePosition`, `FrameProperties`, `CellProperties#able_cell_width`, `TableRow#height` use `OoxmlSize`
 * `TableProperties`, `TableCellProperties` use `Shade` class
 * `ParagraphMargins` parse size in correct units
 * `ParagraphProperties` parse `PageProperties`
