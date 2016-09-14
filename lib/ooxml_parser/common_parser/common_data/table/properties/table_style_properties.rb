@@ -10,6 +10,8 @@ module OoxmlParser
     attr_accessor :table_cell_properties
     # @return [TableProperties] properties of table
     attr_accessor :table_properties
+    # @return [ParagraphProperties] properties of paragraph
+    attr_accessor :paragraph_properties
     alias cell_properties table_cell_properties
 
     def initialize(type: nil, parent: nil)
@@ -38,6 +40,8 @@ module OoxmlParser
           @table_cell_properties = CellProperties.new(parent: self).parse(node_child)
         when 'tblPr'
           @table_properties = TableProperties.new(parent: self).parse(node_child)
+        when 'pPr'
+          @paragraph_properties = ParagraphProperties.new(parent: self).parse(node_child)
         end
       end
       self

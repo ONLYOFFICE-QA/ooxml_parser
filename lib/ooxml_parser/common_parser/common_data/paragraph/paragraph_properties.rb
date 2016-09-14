@@ -24,6 +24,8 @@ module OoxmlParser
     # should not be applied when the preceding and following paragraphs are of
     # the same paragraph style, affecting the top and bottom spacing respectively
     attr_accessor :contextual_spacing
+    # @return [Symbol] The alignment or justification to be applied to a paragraph
+    attr_accessor :justification
 
     def initialize(numbering = NumberingProperties.new, parent: nil)
       @numbering = numbering
@@ -82,6 +84,8 @@ module OoxmlParser
           @section_properties = PageProperties.new(parent: self).parse(node_child, @parent, DocxParagraphRun.new)
         when 'spacing'
           @spacing = ParagraphSpacing.new(parent: self).parse(node_child)
+        when 'jc'
+          @justification = value_to_symbol(node_child.attribute('val'))
         when 'contextualSpacing'
           @contextual_spacing = option_enabled?(node_child)
         end

@@ -41,6 +41,8 @@
 * Add Parsing `NumberingLevel#suffix`
 * Add parsing `CellProperties#no_wrap`
 * Add parsing `TableStyleProperties#table_properties`
+* Add parsing `TableStyleProperties#paragraph_properties`
+* Add parsing `ParagraphProperties#justification`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
