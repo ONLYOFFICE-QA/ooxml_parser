@@ -15,8 +15,13 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [TableRow] result of parsing
     def parse(node)
-      @height = (node.attribute('h').value.to_f / 360_000.0).round(2) unless node.attribute('h').nil?
       Presentation.current_font_style = FontStyle.new(true) # TODO: Add correct parsing of TableStyle.xml file and use it
+      node.attributes.each do |key, value|
+        case key
+        when 'h'
+          @height = OoxmlSize.new(value.value.to_f, :emu)
+        end
+      end
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'trPr'
