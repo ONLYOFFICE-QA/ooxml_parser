@@ -18,7 +18,7 @@ module OoxmlParser
           graphic_frame_node_child.xpath('a:graphicData/*').each do |graphic_node_child|
             case graphic_node_child.name
             when 'tbl'
-              graphic_data << Table.parse(graphic_node_child)
+              graphic_data << Table.new(parent: graphic_frame).parse(graphic_node_child)
             when 'chart'
               OOXMLDocumentObject.add_to_xmls_stack(OOXMLDocumentObject.get_link_from_rels(graphic_node_child.attribute('id').value))
               graphic_data << Chart.parse

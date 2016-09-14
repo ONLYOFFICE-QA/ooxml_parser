@@ -91,6 +91,7 @@
 * Refactor `Color.from_int16` to `Color#parse_hex_string` method
 * Remove unused `Color#parse_int16_string`
 * Remove parsing `TableProperties#right_to_left`, since it was totally wrong
+* Move `table_cell_spacing` to `TableRowProperties` and use OoxmlSize
 
 ## 0.1.2 (2016-06-07)
 

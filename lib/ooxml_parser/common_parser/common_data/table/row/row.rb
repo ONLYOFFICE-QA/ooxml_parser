@@ -2,33 +2,31 @@ require_relative 'cell/cell'
 require_relative 'row/table_row_properties'
 module OoxmlParser
   class TableRow < OOXMLDocumentObject
-    attr_accessor :height, :cells, :cells_spacing, :table_row_properties
+    attr_accessor :height, :cells, :table_row_properties
 
-    def initialize(cells = [])
+    def initialize(cells = [], parent: nil)
       @cells = cells
+      @parent = parent
     end
 
     alias table_row_height height
 
-    def self.parse(row_node, parent: nil)
-      row = TableRow.new
-      row.parent = parent
-      row.height = (row_node.attribute('h').value.to_f / 360_000.0).round(2) unless row_node.attribute('h').nil?
-      row_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:trPr").each do |table_prop_node|
-        row.table_row_properties = TableRowProperties.new(parent: row).parse(table_prop_node)
-      end
-      row_node.xpath('*').each do |row_node_child|
-        row_node_child.xpath('*').each do |row_properties|
-          case row_properties.name
-          when 'tblCellSpacing'
-            row.cells_spacing = (row_properties.attribute('w').value.to_f / 283.3).round(2)
-          end
+    # Parse TableRow object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [TableRow] result of parsing
+    def parse(node)
+      @height = (node.attribute('h').value.to_f / 360_000.0).round(2) unless node.attribute('h').nil?
+      Presentation.current_font_style = FontStyle.new(true) # TODO: Add correct parsing of TableStyle.xml file and use it
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'trPr'
+          @table_row_properties = TableRowProperties.new(parent: self).parse(node_child)
+        when 'tc'
+          @cells << TableCell.parse(node_child, parent: self)
         end
       end
-      Presentation.current_font_style = FontStyle.new(true) # TODO: Add correct parsing of TableStyle.xml file and use it
-      row_node.xpath("#{OOXMLDocumentObject.namespace_prefix}:tc").each { |cell_node| row.cells << TableCell.parse(cell_node, parent: row) }
       Presentation.current_font_style = FontStyle.new
-      row
+      self
     end
   end
 end
