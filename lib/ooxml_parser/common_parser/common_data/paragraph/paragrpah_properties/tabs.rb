@@ -1,3 +1,4 @@
+require_relative 'tabs/paragraph_tab'
 module OoxmlParser
   # Class for working with `w:tabs`
   class Tabs < OOXMLDocumentObject

@@ -97,6 +97,7 @@
 * Remove unused `Color#parse_int16_string`
 * Remove parsing `TableProperties#right_to_left`, since it was totally wrong
 * Move `table_cell_spacing` to `TableRowProperties` and use OoxmlSize
+* Remove class `ParagraphStyle`
 
 ## 0.1.2 (2016-06-07)
 

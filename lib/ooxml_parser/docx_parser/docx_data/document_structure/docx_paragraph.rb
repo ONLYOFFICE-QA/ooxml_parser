@@ -1,9 +1,10 @@
 # noinspection RubyTooManyInstanceVariablesInspection
+require_relative 'docx_paragraph/bookmark'
 require_relative 'docx_paragraph/docx_paragraph_run'
 require_relative 'docx_paragraph/indents'
 require_relative 'docx_paragraph/frame_properties'
 require_relative 'docx_paragraph/docx_formula'
-require_relative 'docx_paragraph/paragraph_style'
+require_relative 'docx_paragraph/style_parametres'
 module OoxmlParser
   class DocxParagraph < OOXMLDocumentObject
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
@@ -279,7 +280,7 @@ module OoxmlParser
         next unless style.attribute('styleId').value == id
         style.xpath('w:pPr').each do |p_pr|
           paragraph_style.parse_paragraph_style(p_pr, character_style)
-          paragraph_style.style = StyleParametres.parse(style)
+          paragraph_style.style = StyleParametres.new(parent: paragraph_style).parse(style)
         end
         style.xpath('w:rPr').each do |r_pr|
           character_style.parse_properties(r_pr, DocumentStructure.default_run_style)
