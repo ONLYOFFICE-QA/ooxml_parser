@@ -14,6 +14,14 @@ module OoxmlParser
       @background = background
     end
 
+    def with_data?
+      return true unless @background.nil?
+      @elements.each do |current_element|
+        return true if current_element.with_data?
+      end
+      false
+    end
+
     def self.parse(path_to_slide_xml)
       slide = Slide.new
       OOXMLDocumentObject.add_to_xmls_stack(path_to_slide_xml)

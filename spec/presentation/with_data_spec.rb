@@ -35,4 +35,10 @@ describe 'Presentation#with_data?' do
     pptx = OoxmlParser::Parser.parse('spec/presentation/with_data/docx_picture.pptx')
     expect(pptx).to be_with_data
   end
+
+  it 'blip_fill' do
+    pptx = OoxmlParser::Parser.parse('spec/presentation/with_data/blip_fill.pptx')
+    pptx.with_data?
+    expect(pptx).to be_with_data
+  end
 end
