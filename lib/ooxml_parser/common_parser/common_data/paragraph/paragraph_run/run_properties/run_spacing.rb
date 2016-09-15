@@ -12,7 +12,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'val'
-          index.value = value.value.to_f
+          index.value = OoxmlSize.new(value.value.to_f)
         end
       end
       index
