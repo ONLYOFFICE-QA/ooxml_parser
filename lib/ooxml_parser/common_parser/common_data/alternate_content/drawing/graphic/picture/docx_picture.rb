@@ -1,7 +1,7 @@
 require_relative 'docx_blip'
 # Docx Picture Data
 module OoxmlParser
-  class DocxPicture
+  class DocxPicture < OOXMLDocumentObject
     attr_accessor :path_to_image, :properties, :nonvisual_properties, :chart
 
     alias image path_to_image
