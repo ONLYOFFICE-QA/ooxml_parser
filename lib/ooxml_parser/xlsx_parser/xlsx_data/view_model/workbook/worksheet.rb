@@ -36,6 +36,7 @@ module OoxmlParser
     # @return [True, false] if structure contain any user data
     def with_data?
       return true unless @rows.empty?
+      return true unless @columns.empty?
       return true unless @drawings.empty?
       return true unless @charts.empty?
       return true unless @hyperlinks.empty?

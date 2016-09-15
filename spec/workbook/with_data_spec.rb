@@ -15,4 +15,9 @@ describe 'Workbook#with_data' do
     xlsx = OoxmlParser::Parser.parse('spec/workbook/with_data/text_in_cell.xlsx')
     expect(xlsx).to be_with_data
   end
+
+  it 'custom_column_width' do
+    xlsx = OoxmlParser::Parser.parse('spec/workbook/with_data/custom_column_width.xlsx')
+    expect(xlsx).to be_with_data
+  end
 end
