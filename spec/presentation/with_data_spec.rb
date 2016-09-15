@@ -30,4 +30,9 @@ describe 'Presentation#with_data?' do
     pptx = OoxmlParser::Parser.parse('spec/presentation/with_data/chart.pptx')
     expect(pptx).to be_with_data
   end
+
+  it 'docx_picture' do
+    pptx = OoxmlParser::Parser.parse('spec/presentation/with_data/docx_picture.pptx')
+    expect(pptx).to be_with_data
+  end
 end

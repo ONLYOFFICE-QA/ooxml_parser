@@ -67,6 +67,7 @@
 * Correct parsing of `Drawing` of any type, not just `TwoCellAnchor`
 * `Outline` default width in `OoxmlSize`
 * `DocxShapeLine` correct zero if `nofill`
+* Fix error for `DocxPicture#with_data?`
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
