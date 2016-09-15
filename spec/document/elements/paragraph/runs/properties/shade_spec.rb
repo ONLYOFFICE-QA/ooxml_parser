@@ -1,6 +1,12 @@
 require 'spec_helper'
 
-describe 'Shade' do
+describe OoxmlParser::Shade do
+  it 'shade should be able to have all arguments set by constructor' do
+    expect(OoxmlParser::Shade.new(color: :auto,
+                                  value: :clear,
+                                  fill: OoxmlParser::Color.new(127, 127, 127))).to be_a(OoxmlParser::Shade)
+  end
+
   it 'should do something' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/properties/shade/shade_clear.docx')
     expect(docx.elements.first.nonempty_runs[1].run_properties.shade.value).to eq(:clear)

@@ -8,6 +8,16 @@ module OoxmlParser
     # @return [Color] fill of shade
     attr_accessor :fill
 
+    def initialize(value: nil,
+                   color: nil,
+                   fill: nil,
+                   parent: nil)
+      @value = value
+      @color = color
+      @fill = fill
+      @parent = parent
+    end
+
     # Parse Shade
     # @param [Nokogiri::XML:Node] node with Shade
     # @return [Shade] result of parsing
