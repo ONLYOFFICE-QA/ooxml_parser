@@ -71,6 +71,7 @@
 * `Worksheet#with_data?` recognize custom columns
 * `Slide#with_data?` recognize custom background (Fix #256)
 * `RunSpacing#value` is in OoxmlSize
+* `Shade` should be able to set all argument via constructor
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
