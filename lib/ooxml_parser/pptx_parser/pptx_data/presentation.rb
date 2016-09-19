@@ -17,7 +17,6 @@ module OoxmlParser
     def self.parse
       OOXMLDocumentObject.root_subfolder = 'ppt/'
       OOXMLDocumentObject.xmls_stack = []
-      OOXMLDocumentObject.namespace_prefix = 'a'
       OOXMLDocumentObject.add_to_xmls_stack('ppt/presentation.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       presentation = Presentation.new

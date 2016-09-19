@@ -50,23 +50,21 @@ module OoxmlParser
         when 'fill'
           @fill = DocxColorScheme.parse(node_child)
         when 'tcBorders'
-          node_child.xpath("#{OOXMLDocumentObject.namespace_prefix}:top").each do |top|
-            @borders_properties.top = BordersProperties.new(parent: self).parse(top)
-          end
-          node_child.xpath("#{OOXMLDocumentObject.namespace_prefix}:right").each do |right|
-            @borders_properties.right = BordersProperties.new(parent: self).parse(right)
-          end
-          node_child.xpath("#{OOXMLDocumentObject.namespace_prefix}:left").each do |left|
-            @borders_properties.left = BordersProperties.new(parent: self).parse(left)
-          end
-          node_child.xpath("#{OOXMLDocumentObject.namespace_prefix}:bottom").each do |bottom|
-            @borders_properties.bottom = BordersProperties.new(parent: self).parse(bottom)
-          end
-          node_child.xpath("#{OOXMLDocumentObject.namespace_prefix}:tl2br").each do |tl2br|
-            @borders_properties.top_left_to_bottom_right = BordersProperties.new(parent: self).parse(tl2br)
-          end
-          node_child.xpath("#{OOXMLDocumentObject.namespace_prefix}:tr2bl").each do |tr2bl|
-            @borders_properties.top_right_to_bottom_left = BordersProperties.new(parent: self).parse(tr2bl)
+          node_child.xpath('*').each do |border_child|
+            case border_child.name
+            when 'top'
+              @borders_properties.top = BordersProperties.new(parent: self).parse(border_child)
+            when 'right'
+              @borders_properties.right = BordersProperties.new(parent: self).parse(border_child)
+            when 'left'
+              @borders_properties.left = BordersProperties.new(parent: self).parse(border_child)
+            when 'bottom'
+              @borders_properties.bottom = BordersProperties.new(parent: self).parse(border_child)
+            when 'tl2br'
+              @borders_properties.top_left_to_bottom_right = BordersProperties.new(parent: self).parse(border_child)
+            when 'tr2bl'
+              @borders_properties.top_right_to_bottom_left = BordersProperties.new(parent: self).parse(border_child)
+            end
           end
         end
       end
