@@ -111,7 +111,6 @@ module OoxmlParser
     def self.parse
       OOXMLDocumentObject.root_subfolder = 'word/'
       OOXMLDocumentObject.xmls_stack = []
-      OOXMLDocumentObject.namespace_prefix = 'w'
       @comments = []
       DocumentStructure.default_paragraph_style = DocxParagraph.new
       DocumentStructure.default_run_style = DocxParagraphRun.new

@@ -31,7 +31,6 @@ module OoxmlParser
     end
 
     class << self
-      attr_accessor :namespace_prefix
       attr_accessor :root_subfolder
       attr_accessor :theme
       attr_accessor :xmls_stack
