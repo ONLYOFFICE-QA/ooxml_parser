@@ -3,6 +3,10 @@ module OoxmlParser
   # Single Row of XLSX
   class XlsxRow < OOXMLDocumentObject
     attr_accessor :cells, :height, :style, :hidden
+    # @return [True, False] true if the row height has been manually set.
+    attr_accessor :custom_height
+    # @return [Integer] Indicates to which row in the sheet this <row> definition corresponds.
+    attr_accessor :index
 
     def initialize(parent: nil)
       @cells = []
@@ -13,8 +17,18 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [XlsxRow] result of parsing
     def parse(node)
-      @height = node.attribute('ht').value if option_enabled?(node, 'customHeight') && node.attribute('ht')
-      @hidden = option_enabled?(node, 'hidden')
+      node.attributes.each do |key, value|
+        case key
+        when 'customHeight'
+          @custom_height = option_enabled?(node, 'customHeight')
+        when 'ht'
+          @height = OoxmlSize.new(value.value.to_f, :point)
+        when 'hidden'
+          @hidden = option_enabled?(node, 'hidden')
+        when 'r'
+          @index = value.value.to_i
+        end
+      end
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'c'
