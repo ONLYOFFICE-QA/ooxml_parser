@@ -2,15 +2,27 @@ module OoxmlParser
   # Properties of XLSX column
   class XlsxColumnProperties < OOXMLDocumentObject
     attr_accessor :from, :to, :width, :style
+    # @return [True, False] is width custom
+    attr_accessor :custom_width
 
     # Parse XlsxColumnProperties object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [XlsxColumnProperties] result of parsing
     def parse(node)
-      @from = node.attribute('min').value.to_i
-      @to = node.attribute('max').value.to_i
-      @style = CellStyle.new(parent: self).parse(node.attribute('style').value) unless node.attribute('style').nil?
-      @width = node.attribute('width').value.to_f - 0.7109375 if option_enabled?(node, 'customWidth')
+      node.attributes.each do |key, value|
+        case key
+        when 'min'
+          @from = value.value.to_i
+        when 'max'
+          @to = value.value.to_i
+        when 'style'
+          @style = CellStyle.new(parent: self).parse(value.value)
+        when 'width'
+          @width = value.value.to_f - 0.7109375
+        when 'customWidth'
+          @custom_width = option_enabled?(node, 'customWidth')
+        end
+      end
       self
     end
 
