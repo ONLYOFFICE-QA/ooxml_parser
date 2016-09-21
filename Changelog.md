@@ -44,6 +44,7 @@
 * Add parsing `TableStyleProperties#paragraph_properties`
 * Add parsing `ParagraphProperties#justification`
 * Add parsing `TableRowProperties#table_header` (fix #264)
+* Add parsing `XlsxColumnProperties#custom_width`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
