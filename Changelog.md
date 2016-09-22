@@ -104,6 +104,7 @@
 * Simplify `XlsxRow` parsing.
 * `FontStyle` class cleanup
 * Remove unused class `TableStyleElement`
+* `Border` class cleanup
 
 ## 0.1.2 (2016-06-07)
 
