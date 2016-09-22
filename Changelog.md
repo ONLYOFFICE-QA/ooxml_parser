@@ -105,6 +105,7 @@
 * `FontStyle` class cleanup
 * Remove unused class `TableStyleElement`
 * `Border` class cleanup
+* Merge `PictureWidth` and `PictureHeight` in single `PictureDimension` class
 
 ## 0.1.2 (2016-06-07)
 

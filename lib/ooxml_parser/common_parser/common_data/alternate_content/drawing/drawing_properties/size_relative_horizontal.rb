@@ -1,4 +1,4 @@
-require_relative 'size_relative_horizontal/picture_width'
+require_relative 'size_relative/picture_dimension'
 module OoxmlParser
   # Class for parsing `wp14:sizeRelH` object
   class SizeRelativeHorizontal < OOXMLDocumentObject
@@ -21,7 +21,7 @@ module OoxmlParser
       node.xpath('*').each do |preset_geometry_child|
         case preset_geometry_child.name
         when 'pctWidth'
-          @width = PictureWidth.parse(preset_geometry_child)
+          @width = PictureDimension.new(parent: self).parse(preset_geometry_child)
         end
       end
 
