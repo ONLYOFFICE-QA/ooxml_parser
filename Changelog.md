@@ -102,6 +102,7 @@
 * Remove class `ParagraphStyle`
 * Remove useless attribute `OOXMLDocumentObject.namespace_perfix`
 * Simplify `XlsxRow` parsing.
+* `FontStyle` class cleanup
 
 ## 0.1.2 (2016-06-07)
 
