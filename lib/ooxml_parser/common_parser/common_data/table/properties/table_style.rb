@@ -1,4 +1,3 @@
-require_relative 'table_style_elements'
 require_relative 'table_element'
 # Style of Table
 module OoxmlParser
@@ -9,18 +8,6 @@ module OoxmlParser
 
     def initialize(id = nil)
       @id = id
-      @banding_1_horizontal = TableStyleElement.new
-      @banding_2_horizontal = TableStyleElement.new
-      @banding_1_vertical = TableStyleElement.new
-      @banding_2_vertical = TableStyleElement.new
-      @last_column = TableStyleElement.new
-      @first_column = TableStyleElement.new
-      @last_row = TableStyleElement.new
-      @first_row = TableStyleElement.new
-      @southeast_cell = TableStyleElement.new
-      @southwest_cell = TableStyleElement.new
-      @northeast_cell = TableStyleElement.new
-      @northwest_cell = TableStyleElement.new
     end
 
     def self.parse(style_id: nil, table_style_node: nil)
