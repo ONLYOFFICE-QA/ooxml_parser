@@ -103,6 +103,7 @@
 * Remove useless attribute `OOXMLDocumentObject.namespace_perfix`
 * Simplify `XlsxRow` parsing.
 * `FontStyle` class cleanup
+* Remove unused class `TableStyleElement`
 
 ## 0.1.2 (2016-06-07)
 
