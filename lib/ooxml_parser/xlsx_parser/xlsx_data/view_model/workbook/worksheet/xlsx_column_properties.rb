@@ -4,6 +4,9 @@ module OoxmlParser
     attr_accessor :from, :to, :width, :style
     # @return [True, False] is width custom
     attr_accessor :custom_width
+    # @return [True, False] Flag indicating if the
+    # specified column(s) is set to 'best fit'
+    attr_accessor :best_fit
 
     # Parse XlsxColumnProperties object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -21,6 +24,8 @@ module OoxmlParser
           @width = value.value.to_f - 0.7109375
         when 'customWidth'
           @custom_width = option_enabled?(node, 'customWidth')
+        when 'bestFit'
+          @best_fit = attribute_enabled?(value)
         end
       end
       self
