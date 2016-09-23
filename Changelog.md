@@ -100,7 +100,7 @@
 * Simplify `XlsxRow` parsing.
 * `FontStyle` class cleanup
 * Simplify `Borders.parse_from_style`
-
+* Simplify `Color.parse_color_tag`
 * `Border` class cleanup
 * Merge `PictureWidth` and `PictureHeight` in single `PictureDimension` class
 
