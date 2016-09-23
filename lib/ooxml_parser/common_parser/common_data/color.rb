@@ -368,25 +368,20 @@ module OoxmlParser
         end
       end
 
-      def parse_color_tag(color_tag)
-        unless color_tag.nil?
-          if color_tag.attribute('indexed').nil? && !color_tag.attribute('rgb').nil?
-            if color_tag.attribute('rgb').value.is_a?(String)
-              return Color.new.parse_hex_string(color_tag.attribute('rgb').value.to_s)
-            end
-            return Color.new.parse_hex_string(color_tag.attribute('rgb').value.value.to_s)
-          elsif color_tag.attribute('rgb').nil? && !color_tag.attribute('indexed').nil?
-            if color_tag.attribute('indexed').value.is_a?(String)
-              return Color.get_rgb_by_color_index(color_tag.attribute('indexed').value.to_i)
-            end
-            return Color.get_rgb_by_color_index(color_tag.attribute('indexed').value.value.to_i)
-          elsif !color_tag.attribute('val').nil?
-            return Color.new.parse_hex_string(color_tag.attribute('val').value.to_s)
-          elsif !color_tag.attribute('theme').nil?
-            return ThemeColors.parse_color_theme(color_tag)
+      def parse_color_tag(node)
+        return if node.nil?
+        node.attributes.each do |key, value|
+          case key
+          when 'val'
+            return Color.new.parse_hex_string(value.value.to_s)
+          when 'theme'
+            return ThemeColors.parse_color_theme(node)
+          when 'rgb'
+            return Color.new.parse_hex_string(value.value.to_s)
+          when 'indexed'
+            return Color.get_rgb_by_color_index(value.value.to_i)
           end
         end
-        nil
       end
 
       def parse_scheme_color(scheme_color_node)
