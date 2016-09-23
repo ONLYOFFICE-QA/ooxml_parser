@@ -88,27 +88,19 @@ module OoxmlParser
     end
 
     def self.parse_from_style(style_number)
-      border_style_node = XLSXWorkbook.styles_node.xpath('//xmlns:border')[style_number.to_i]
+      node = XLSXWorkbook.styles_node.xpath('//xmlns:border')[style_number.to_i]
       cell_borders = Borders.new
-      unless border_style_node.xpath('xmlns:bottom')[0].attribute('style').nil?
-        cell_borders.bottom = Border.new
-        cell_borders.bottom.style = border_style_node.xpath('xmlns:bottom')[0].attribute('style').value
-        cell_borders.bottom.color = Color.parse_color_tag(border_style_node.xpath('xmlns:bottom/xmlns:color')[0])
-      end
-      unless border_style_node.xpath('xmlns:top')[0].attribute('style').nil?
-        cell_borders.top = Border.new
-        cell_borders.top.style = border_style_node.xpath('xmlns:top')[0].attribute('style').value
-        cell_borders.top.color = Color.parse_color_tag(border_style_node.xpath('xmlns:top/xmlns:color')[0])
-      end
-      unless border_style_node.xpath('xmlns:right')[0].attribute('style').nil?
-        cell_borders.right = Border.new
-        cell_borders.right.style = border_style_node.xpath('xmlns:right')[0].attribute('style').value
-        cell_borders.right.color = Color.parse_color_tag(border_style_node.xpath('xmlns:right/xmlns:color')[0])
-      end
-      unless border_style_node.xpath('xmlns:left')[0].attribute('style').nil?
-        cell_borders.left = Border.new
-        cell_borders.left.style = border_style_node.xpath('xmlns:left')[0].attribute('style').value
-        cell_borders.left.color = Color.parse_color_tag(border_style_node.xpath('xmlns:left/xmlns:color')[0])
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'bottom'
+          cell_borders.bottom = Border.new(parent: cell_borders).parse(node_child)
+        when 'top'
+          cell_borders.top = Border.new(parent: cell_borders).parse(node_child)
+        when 'right'
+          cell_borders.right = Border.new(parent: cell_borders).parse(node_child)
+        when 'left'
+          cell_borders.left = Border.new(parent: cell_borders).parse(node_child)
+        end
       end
       cell_borders
     end

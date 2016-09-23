@@ -99,6 +99,7 @@
 * Move `table_cell_spacing` to `TableRowProperties` and use OoxmlSize
 * Simplify `XlsxRow` parsing.
 * `FontStyle` class cleanup
+* Simplify `Borders.parse_from_style`
 
 * `Border` class cleanup
 * Merge `PictureWidth` and `PictureHeight` in single `PictureDimension` class
