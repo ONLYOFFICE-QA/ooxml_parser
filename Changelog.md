@@ -45,6 +45,7 @@
 * Add parsing `ParagraphProperties#justification`
 * Add parsing `TableRowProperties#table_header` (fix #264)
 * Add parsing `XlsxColumnProperties#custom_width`, `XlsxColumnProperties#best_fit`
+* New way to parse default RunProperties and ParagraphProperties. Old way is still there
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
