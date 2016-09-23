@@ -8,28 +8,6 @@ module OoxmlParser
       @orientation = orientation
     end
 
-    def self.get_name_by_size(height, width, is_portrait = true)
-      unless is_portrait
-        swap_value = height
-        height = width
-        width = swap_value
-      end
-      return 'US Letter' if height == '15840' && width == '12240'
-      return 'US Legal' if height == '20160' && width == '12240'
-      return 'A4' if height == '16838' && width == '11906'
-      return 'A5' if height == '11900' && width == '8396'
-      return 'B5' if height == '14179' && width == '9978'
-      return 'Envelope #10' if height == '13680' && width == '5941'
-      return 'Envelope DL' if height == '12478' && width == '6242'
-      return 'Tabloid' if height == '24474' && width == '15840'
-      return 'A3' if height == '23817' && width == '16838'
-      return 'Tabloid Oversize' if height == '25914' && width == '17280'
-      return 'ROC 16K' if height == '15477' && width == '11157'
-      return 'Envelope Choukei 3' if height == '13317' && width == '6797'
-      return 'Super B/A3' if height == '27354' && width == '18720'
-      'Unknown page size: Height ' + height.to_s + ' Width ' + width.to_s
-    end
-
     def to_s
       'Height: ' + @height.to_s + ' Width: ' + @width.to_s + ' Orientation: ' + @orientation.to_s
     end

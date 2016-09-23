@@ -83,7 +83,6 @@
 * Totally redone parsing of Numbering
 * Parsing DocxParagraphRun properties
 * Move some slide methods to helper
-* Remove `OoxmlShift` - use `OoxmlCoordinates` instead
 * Rename `Size` class to `PageSize` and `RunSize` to `Size`
 * Simplify code for parsing `CellProperties`, `PageProperties`, 
 `DocxParagraph`, `Bookmark`, `TableLook`, `ChartAxisTitle`, 
@@ -96,16 +95,21 @@
 `NaryLimitLocation`, `MultilevelType`, `CellProperties`
 * Replace usage `Alignment.parse` on `OOXMLDocumentObject#value_to_symbol` method
 * Refactor `Color.from_int16` to `Color#parse_hex_string` method
-* Remove unused `Color#parse_int16_string`
-* Remove parsing `TableProperties#right_to_left`, since it was totally wrong
 * Move `table_cell_spacing` to `TableRowProperties` and use OoxmlSize
-* Remove class `ParagraphStyle`
-* Remove useless attribute `OOXMLDocumentObject.namespace_perfix`
 * Simplify `XlsxRow` parsing.
 * `FontStyle` class cleanup
-* Remove unused class `TableStyleElement`
+
 * `Border` class cleanup
 * Merge `PictureWidth` and `PictureHeight` in single `PictureDimension` class
+
+### Removal
+* Remove unused method `PageSize.get_name_by_size`
+* Remove unused class `TableStyleElement`
+* Remove `OoxmlShift` - use `OoxmlCoordinates` instead
+* Remove unused `Color#parse_int16_string`
+* Remove parsing `TableProperties#right_to_left`, since it was totally wrong
+* Remove class `ParagraphStyle`
+* Remove useless attribute `OOXMLDocumentObject.namespace_perfix`
 
 ## 0.1.2 (2016-06-07)
 
