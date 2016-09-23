@@ -8,6 +8,7 @@ require_relative 'document_structure/document_style'
 require_relative 'document_structure/header_footer'
 require_relative 'document_structure/numbering'
 require_relative 'document_structure/page_properties/page_properties'
+require_relative 'document_structure/styles'
 module OoxmlParser
   class DocumentStructure < CommonDocumentStructure
     include DocumentStyleHelper
@@ -18,6 +19,8 @@ module OoxmlParser
     attr_accessor :document_styles
     # @return [Numbering] store numbering data
     attr_accessor :numbering
+    # @return [Styles] styles of document
+    attr_accessor :styles
 
     def initialize(elements = [], page_properties = nil, notes = [], background = nil, document_properties = DocumentProperties.new, comments = [])
       @elements = elements
@@ -117,6 +120,7 @@ module OoxmlParser
       PresentationTheme.parse('word/theme/theme1.xml')
       OOXMLDocumentObject.add_to_xmls_stack('word/styles.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
       doc.search('//w:docDefaults').each do |doc_defaults|
         doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
           DocumentStructure.default_paragraph_style = DocxParagraph.new.parse(p_pr_defaults, 0)
@@ -131,6 +135,7 @@ module OoxmlParser
       doc_structure = DocumentStructure.new
       doc_structure.numbering = Numbering.new(parent: doc_structure).parse
       doc_structure.document_styles = DocumentStyle.parse_list(doc_structure)
+      doc_structure.styles = Styles.new(parent: doc_structure).parse
       number = 0
       OOXMLDocumentObject.add_to_xmls_stack('word/document.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
