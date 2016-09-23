@@ -110,6 +110,7 @@
 * Remove parsing `TableProperties#right_to_left`, since it was totally wrong
 * Remove class `ParagraphStyle`
 * Remove useless attribute `OOXMLDocumentObject.namespace_perfix`
+* Remove method `Color.parse_color_hash`
 
 ## 0.1.2 (2016-06-07)
 

@@ -272,10 +272,6 @@ module OoxmlParser
 
       alias random generate_random_color
 
-      def parse_color_hash(hash)
-        Color.new(hash['red'], hash['green'], hash['blue'])
-      end
-
       # Read array of color from the AllTestData's constant
       # @param [Array] const_array_name - array of the string
       # @return [Array, Color] array of color
