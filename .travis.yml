@@ -7,9 +7,7 @@ rvm:
 - 2.1
 - 2.0
 addons:
-  code_climate:
-    repo_token: 0deb9b6dcbe43d8dc0af250919d9871f289e1bb90a050e5e22d5efd5c0a559e0
   apt_packages:
     libmagic-dev
 script:
-  - CODECLIMATE_REPO_TOKEN=0deb9b6dcbe43d8dc0af250919d9871f289e1bb90a050e5e22d5efd5c0a559e0 bundle exec parallel_rspec spec
+  - bundle exec parallel_rspec spec
