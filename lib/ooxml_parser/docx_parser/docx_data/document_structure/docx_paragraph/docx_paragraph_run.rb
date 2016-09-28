@@ -1,5 +1,6 @@
 # noinspection RubyTooManyInstanceVariablesInspection
 require_relative 'docx_paragraph_run/docx_paragraph_run_helpers'
+require_relative 'docx_paragraph_run/object'
 require_relative 'docx_paragraph_run/text_outline'
 require_relative 'docx_paragraph_run/text_fill'
 require_relative 'docx_paragraph_run/shape'
@@ -21,6 +22,8 @@ module OoxmlParser
     attr_accessor :instruction
     # @return [RunProperties] properties of run
     attr_accessor :run_properties
+    # @return [RunObject] object of run
+    attr_accessor :object
 
     def initialize
       @number = 0
@@ -59,6 +62,7 @@ module OoxmlParser
       @text_outline = nil
       @text_fill = nil
       @instruction = nil
+      @object = nil
     end
 
     def drawing
@@ -106,6 +110,7 @@ module OoxmlParser
       character.text_fill = @text_fill
       character.instruction = @instruction
       character.run_properties = @run_properties
+      character.object = @object
       character
     end
 
@@ -123,46 +128,46 @@ module OoxmlParser
 
     def parse(r_tag, char_number, parent: nil)
       @parent = parent
-      r_tag.xpath('*').each do |r_node_child|
-        case r_node_child.name
+      r_tag.xpath('*').each do |node_child|
+        case node_child.name
         when 'rPr'
-          parse_properties(r_node_child, DocumentStructure.default_run_style)
-          @run_properties = RunProperties.new(parent: self).parse(r_node_child)
+          parse_properties(node_child, DocumentStructure.default_run_style)
+          @run_properties = RunProperties.new(parent: self).parse(node_child)
         when 'instrText'
-          if r_node_child.text.include?('HYPERLINK')
-            hyperlink = Hyperlink.new(r_node_child.text.sub('HYPERLINK ', '').split(' \\o ').first, r_node_child.text.sub('HYPERLINK', '').split(' \\o ').last)
+          if node_child.text.include?('HYPERLINK')
+            hyperlink = Hyperlink.new(node_child.text.sub('HYPERLINK ', '').split(' \\o ').first, node_child.text.sub('HYPERLINK', '').split(' \\o ').last)
             @link = hyperlink
-          elsif r_node_child.text[/PAGE\s+\\\*/]
+          elsif node_child.text[/PAGE\s+\\\*/]
             @text = '*PAGE NUMBER*'
           end
         when 'fldChar'
-          @fld_char = r_node_child.attribute('fldCharType').value.to_sym
+          @fld_char = node_child.attribute('fldCharType').value.to_sym
         when 't'
-          @text += r_node_child.text
+          @text += node_child.text
         when 'noBreakHyphen'
           @text += '–'
         when 'tab'
           @text += "\t"
         when 'drawing'
-          @drawings << DocxDrawing.parse(r_node_child)
+          @drawings << DocxDrawing.parse(node_child)
         when 'AlternateContent'
-          @alternate_content = AlternateContent.parse(r_node_child, parent: self)
+          @alternate_content = AlternateContent.parse(node_child, parent: self)
         when 'br'
-          if r_node_child.attribute('type').nil?
+          if node_child.attribute('type').nil?
             @break = :line
             @text += "\r"
           else
-            case r_node_child.attribute('type').value
+            case node_child.attribute('type').value
             when 'page', 'column'
-              @break = r_node_child.attribute('type').value.to_sym
+              @break = node_child.attribute('type').value.to_sym
             end
           end
         when 'footnoteReference'
-          @footnote = HeaderFooter.parse(r_node_child, parent: self)
+          @footnote = HeaderFooter.parse(node_child, parent: self)
         when 'endnoteReference'
-          @endnote = HeaderFooter.parse(r_node_child, parent: self)
+          @endnote = HeaderFooter.parse(node_child, parent: self)
         when 'pict'
-          r_node_child.xpath('*').each do |pict_node_child|
+          node_child.xpath('*').each do |pict_node_child|
             case pict_node_child.name
             when 'shape'
               @shape = Shape.parse(pict_node_child, :shape)
@@ -173,6 +178,8 @@ module OoxmlParser
             when 'shapetype'
             end
           end
+        when 'object'
+          @object = RunObject.new(parent: self).parse(node_child)
         end
       end
       @number = char_number
