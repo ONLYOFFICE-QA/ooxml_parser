@@ -47,6 +47,7 @@
 * Add parsing `XlsxColumnProperties#custom_width`, `XlsxColumnProperties#best_fit`
 * Add parsing `DocxParagraphRun#object` and `Object#ole_object`
 * New way to parse default RunProperties and ParagraphProperties. Old way is still there
+* Add parsing `RunStyle`. Implement #140
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
