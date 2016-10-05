@@ -3,6 +3,7 @@ require_relative 'run_properties/outline'
 require_relative 'run_properties/position'
 require_relative 'run_properties/size'
 require_relative 'run_properties/run_spacing'
+require_relative 'run_properties/run_style'
 require_relative 'run_properties/shade'
 require_relative 'run_properties/strikeout'
 module OoxmlParser
@@ -22,6 +23,8 @@ module OoxmlParser
     attr_accessor :position
     # @return [Shade] shade property
     attr_accessor :shade
+    # @return [RunStyle] run style
+    attr_accessor :run_style
 
     def initialize(font_name = '',
                    font_style = FontStyle.new,
@@ -70,44 +73,46 @@ module OoxmlParser
         end
       end
       @font_color = DocxColorScheme.parse(node)
-      node.xpath('*').each do |properties_element|
-        case properties_element.name
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'sz'
-          @size = Size.new.parse(properties_element)
+          @size = Size.new.parse(node_child)
         when 'spacing'
-          @spacing = RunSpacing.parse(properties_element)
+          @spacing = RunSpacing.parse(node_child)
         when 'color'
-          @color = Color.parse_color_tag(properties_element)
+          @color = Color.parse_color_tag(node_child)
         when 'solidFill'
-          @font_color = Color.parse_color(properties_element.xpath('*').first)
+          @font_color = Color.parse_color(node_child.xpath('*').first)
         when 'latin'
-          @font_name = properties_element.attribute('typeface').value
+          @font_name = node_child.attribute('typeface').value
         when 'b'
-          @font_style.bold = option_enabled?(properties_element)
+          @font_style.bold = option_enabled?(node_child)
         when 'i'
-          @font_style.italic = option_enabled?(properties_element, 'i')
+          @font_style.italic = option_enabled?(node_child, 'i')
         when 'u'
           @font_style.underlined = Underline.new(:single)
         when 'vertAlign'
-          @vertical_align = properties_element.attribute('val').value.to_sym
+          @vertical_align = node_child.attribute('val').value.to_sym
         when 'rFont'
-          @font_name = properties_element.attribute('val').value
+          @font_name = node_child.attribute('val').value
         when 'rFonts'
-          @font_name = properties_element.attribute('ascii').value if properties_element.attribute('ascii')
+          @font_name = node_child.attribute('ascii').value if node_child.attribute('ascii')
         when 'color'
-          @font_color = Color.parse_color_tag(properties_element)
+          @font_color = Color.parse_color_tag(node_child)
         when 'strike'
-          @font_style.strike = option_enabled?(properties_element)
+          @font_style.strike = option_enabled?(node_child)
         when 'hlinkClick'
-          @hyperlink = Hyperlink.parse(properties_element)
+          @hyperlink = Hyperlink.parse(node_child)
         when 'ln'
-          @outline = Outline.new(parent: self).parse(properties_element)
+          @outline = Outline.new(parent: self).parse(node_child)
         when 'lang'
-          @language = Language.parse(properties_element)
+          @language = Language.parse(node_child)
         when 'position'
-          @position = Position.parse(properties_element)
+          @position = Position.parse(node_child)
         when 'shd'
-          @shade = Shade.new(parent: self).parse(properties_element)
+          @shade = Shade.new(parent: self).parse(node_child)
+        when 'rStyle'
+          @run_style = RunStyle.new(parent: self).parse(node_child)
         end
       end
       @font_color = DocxColorScheme.parse(node)
