@@ -13,7 +13,7 @@ module OoxmlParser
         case picture_node_child.name
         when 'shape'
           picture.type = :shape
-          picture.data = OldDocxShape.parse(picture_node_child, parent: picture)
+          picture.data = OldDocxShape.new(parent: picture).parse(picture_node_child, parent: picture)
         when 'group'
           picture.type = :group
           picture.data = OldDocxGroup.parse(picture_node_child)
