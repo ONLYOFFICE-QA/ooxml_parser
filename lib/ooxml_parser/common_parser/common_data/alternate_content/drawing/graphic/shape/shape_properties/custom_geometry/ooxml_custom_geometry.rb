@@ -13,7 +13,9 @@ module OoxmlParser
       custom_geometry_node.xpath('*').each do |custom_geometry_node_child|
         case custom_geometry_node_child.name
         when 'pathLst'
-          custom_geometry_node_child.xpath('a:path', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main').each { |path_node| custom_geometry.paths_list << DocxShapeLinePath.parse(path_node) }
+          custom_geometry_node_child.xpath('a:path', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main').each do |path_node|
+            custom_geometry.paths_list << DocxShapeLinePath.new(parent: custom_geometry).parse(path_node)
+          end
         end
       end
       custom_geometry
