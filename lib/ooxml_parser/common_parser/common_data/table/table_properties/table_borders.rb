@@ -17,25 +17,24 @@ module OoxmlParser
     # Parse Table Borders data
     # @param [Nokogiri::XML:Element] node with Table Borders data
     # @return [TableBorders] value of Table Borders data
-    def self.parse(node)
-      borders = TableBorders.new
-      node.xpath('*').each do |cell_borders_node|
-        case cell_borders_node.name
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'left'
-          borders.left = BordersProperties.new(parent: borders).parse(cell_borders_node)
+          @left = BordersProperties.new(parent: self).parse(node_child)
         when 'top'
-          borders.top = BordersProperties.new(parent: borders).parse(cell_borders_node)
+          @top = BordersProperties.new(parent: self).parse(node_child)
         when 'right'
-          borders.right = BordersProperties.new(parent: borders).parse(cell_borders_node)
+          @right = BordersProperties.new(parent: self).parse(node_child)
         when 'bottom'
-          borders.bottom = BordersProperties.new(parent: borders).parse(cell_borders_node)
+          @bottom = BordersProperties.new(parent: self).parse(node_child)
         when 'insideV'
-          borders.inside_vertical = BordersProperties.new(parent: borders).parse(cell_borders_node)
+          @inside_vertical = BordersProperties.new(parent: self).parse(node_child)
         when 'insideH'
-          borders.inside_horizontal = BordersProperties.new(parent: borders).parse(cell_borders_node)
+          @inside_horizontal = BordersProperties.new(parent: self).parse(node_child)
         end
       end
-      borders
+      self
     end
   end
 end
