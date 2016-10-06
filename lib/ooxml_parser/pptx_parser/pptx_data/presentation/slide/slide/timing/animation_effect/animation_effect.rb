@@ -1,22 +1,27 @@
 module OoxmlParser
-  class AnimationEffect
+  class AnimationEffect < OOXMLDocumentObject
     attr_accessor :transition, :filter, :behavior
 
-    def initialize(behavior = nil)
-      @behavior = behavior
-    end
-
-    def self.parse(animation_effect_node)
-      animation_effect = AnimationEffect.new
-      animation_effect.transition = animation_effect_node.attribute('transition').value if animation_effect_node.attribute('transition')
-      animation_effect.filter = animation_effect_node.attribute('filter').value if animation_effect_node.attribute('filter')
-      animation_effect_node.xpath('*').each do |animation_effect_node_child|
-        case animation_effect_node_child.name
-        when 'cBhvr'
-          animation_effect.behavior = Behavior.parse(animation_effect_node_child)
+    # Parse AnimationEffect object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [AnimationEffect] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'transition'
+          @transition = value.value
+        when 'filter'
+          @filter = value.value
         end
       end
-      animation_effect
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'cBhvr'
+          @behavior = Behavior.parse(node_child)
+        end
+      end
+      self
     end
   end
 end

@@ -41,7 +41,7 @@ module OoxmlParser
         when 'set'
           timings << SetTimeNode.parse(time_node)
         when 'animEffect'
-          timings << AnimationEffect.parse(time_node)
+          timings << AnimationEffect.new(parent: timings).parse(time_node)
         when 'video'
           timings << :video
         when 'audio'
