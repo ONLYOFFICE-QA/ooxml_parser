@@ -16,7 +16,7 @@ module OoxmlParser
       node.xpath('*').each do |preset_geometry_child|
         case preset_geometry_child.name
         when 'avLst'
-          geometry.adjust_values_list = ShapeAdjustValueList.parse(preset_geometry_child)
+          geometry.adjust_values_list = ShapeAdjustValueList.new(parent: geometry).parse(preset_geometry_child)
         end
       end
       geometry
