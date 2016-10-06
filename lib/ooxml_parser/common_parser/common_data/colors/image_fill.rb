@@ -16,7 +16,7 @@ module OoxmlParser
       blip_fill_node.xpath('*').each do |blip_fill_node_child|
         case blip_fill_node_child.name
         when 'blip'
-          image.file_reference = FileReference.parse(blip_fill_node_child)
+          image.file_reference = FileReference.new(parent: image).parse(blip_fill_node_child)
           image.properties = ImageProperties.parse(blip_fill_node_child)
         when 'stretch'
           image.stretch = Stretching.parse(blip_fill_node_child) # !blip_fill_node_child.xpath('a:fillRect').first.nil?

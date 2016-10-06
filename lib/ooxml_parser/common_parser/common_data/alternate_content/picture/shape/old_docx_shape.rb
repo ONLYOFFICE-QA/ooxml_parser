@@ -15,7 +15,7 @@ module OoxmlParser
         when 'textbox'
           shape.text_box = TextBox.parse_list(shape_node_child, parent: shape)
         when 'imagedata'
-          shape.file_reference = FileReference.parse(shape_node_child)
+          shape.file_reference = FileReference.new(parent: shape).parse(shape_node_child)
         when 'fill'
           shape.fill = OldDocxShapeFill.parse(shape_node_child)
         end

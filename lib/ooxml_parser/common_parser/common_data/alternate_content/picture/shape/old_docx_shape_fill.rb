@@ -10,7 +10,7 @@ module OoxmlParser
       fill_node.attributes.each do |key, value|
         case key
         when 'id'
-          fill.file_reference = FileReference.parse(fill_node)
+          fill.file_reference = FileReference.new(parent: fill).parse(fill_node)
         when 'type'
           fill.stretching_type = case value.value
                                  when 'frame'
