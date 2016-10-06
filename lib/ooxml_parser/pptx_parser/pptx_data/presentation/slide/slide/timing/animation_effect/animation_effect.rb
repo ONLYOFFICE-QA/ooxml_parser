@@ -18,7 +18,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'cBhvr'
-          @behavior = Behavior.parse(node_child)
+          @behavior = Behavior.new(parent: self).parse(node_child)
         end
       end
       self

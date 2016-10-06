@@ -100,7 +100,8 @@
 `OldDocxShapeFill`, `ShapeGuide`, `ShapeAdjustValueList`,
 `PresetGeometry`, `DocxShapeSize`, `DocxShapeLinePath`,
 `DocxShapeLineElement`, `OOXMLCustomGeometry`, `DocxShapeProperties`, 
-`LineEnd`, `CommonTiming`, `AnimationEffect`, `TargetElement`
+`LineEnd`, `CommonTiming`, `AnimationEffect`, `TargetElement`,
+`Behavior`
 * Replace usage `Alignment.parse` on `OOXMLDocumentObject#value_to_symbol` method
 * Refactor `Color.from_int16` to `Color#parse_hex_string` method
 * Move `table_cell_spacing` to `TableRowProperties` and use OoxmlSize
