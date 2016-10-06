@@ -26,31 +26,31 @@ module OoxmlParser
         nodes.xpath(xpath).each do |style_node_child|
           case instance_eval(attributes)
           when 'wholeTbl'
-            table_style.whole_table = TableElement.parse(style_node_child)
+            table_style.whole_table = TableElement.new(parent: table_style).parse(style_node_child)
           when 'band1H'
-            table_style.banding_1_horizontal = TableElement.parse(style_node_child)
+            table_style.banding_1_horizontal = TableElement.new(parent: table_style).parse(style_node_child)
           when 'band2H', 'band2Horz'
-            table_style.banding_2_horizontal = TableElement.parse(style_node_child)
+            table_style.banding_2_horizontal = TableElement.new(parent: table_style).parse(style_node_child)
           when 'band1V'
-            table_style.banding_1_vertical = TableElement.parse(style_node_child)
+            table_style.banding_1_vertical = TableElement.new(parent: table_style).parse(style_node_child)
           when 'band2V'
-            table_style.banding_2_vertical = TableElement.parse(style_node_child)
+            table_style.banding_2_vertical = TableElement.new(parent: table_style).parse(style_node_child)
           when 'lastCol'
-            table_style.last_column = TableElement.parse(style_node_child)
+            table_style.last_column = TableElement.new(parent: table_style).parse(style_node_child)
           when 'firstCol'
-            table_style.first_column = TableElement.parse(style_node_child)
+            table_style.first_column = TableElement.new(parent: table_style).parse(style_node_child)
           when 'lastRow'
-            table_style.last_row = TableElement.parse(style_node_child)
+            table_style.last_row = TableElement.new(parent: table_style).parse(style_node_child)
           when 'firstRow'
-            table_style.first_row = TableElement.parse(style_node_child)
+            table_style.first_row = TableElement.new(parent: table_style).parse(style_node_child)
           when 'seCell'
-            table_style.southeast_cell = TableElement.parse(style_node_child)
+            table_style.southeast_cell = TableElement.new(parent: table_style).parse(style_node_child)
           when 'swCell'
-            table_style.southwest_cell = TableElement.parse(style_node_child)
+            table_style.southwest_cell = TableElement.new(parent: table_style).parse(style_node_child)
           when 'neCell'
-            table_style.northeast_cell = TableElement.parse(style_node_child)
+            table_style.northeast_cell = TableElement.new(parent: table_style).parse(style_node_child)
           when 'nwCell'
-            table_style.northwest_cell = TableElement.parse(style_node_child)
+            table_style.northwest_cell = TableElement.new(parent: table_style).parse(style_node_child)
           end
         end
       end

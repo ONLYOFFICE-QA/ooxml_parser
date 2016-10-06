@@ -55,7 +55,7 @@ module OoxmlParser
         when 'tableStyleId'
           @style = TableStyle.parse(style_id: node_child.text)
         when 'tblBorders'
-          @table_borders = TableBorders.parse(node_child)
+          @table_borders = TableBorders.new(parent: self).parse(node_child)
         when 'tblStyle'
           @table_style = root_object.document_style_by_id(node_child.attribute('val').value)
         when 'tblW'

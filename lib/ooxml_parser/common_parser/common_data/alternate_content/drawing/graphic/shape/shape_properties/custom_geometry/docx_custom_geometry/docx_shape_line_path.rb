@@ -4,26 +4,29 @@ module OoxmlParser
   class DocxShapeLinePath < OOXMLDocumentObject
     attr_accessor :width, :height, :fill, :stroke, :elements
 
-    def initialize(elements = [])
+    def initialize(elements = [], parent: nil)
       @elements = elements
+      @parent = parent
     end
 
-    def self.parse(path_node)
-      shape_line_path = DocxShapeLinePath.new
-      path_node.attributes.each do |key, value|
+    # Parse DocxShapeLinePath object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxShapeLinePath] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'w'
-          shape_line_path.width = value.value.to_f
+          @width = value.value.to_f
         when 'h'
-          shape_line_path.height = value.value.to_f
+          @height = value.value.to_f
         when 'stroke'
-          shape_line_path.stroke = value.value.to_f
+          @stroke = value.value.to_f
         end
       end
-      path_node.xpath('*').each do |line_path_element_node|
-        shape_line_path.elements << DocxShapeLineElement.parse(line_path_element_node)
+      node.xpath('*').each do |node_child|
+        @elements << DocxShapeLineElement.new(parent: self).parse(node_child)
       end
-      shape_line_path
+      self
     end
   end
 end

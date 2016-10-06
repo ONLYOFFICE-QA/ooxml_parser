@@ -16,7 +16,7 @@ module OoxmlParser
         case group_node_child.name
         when 'shape'
           element = OldDocxGroupElement.new(:shape)
-          element.object = OldDocxShape.parse(group_node_child)
+          element.object = OldDocxShape.new(parent: element).parse(group_node_child)
           group.elements << element
         when 'wrap'
           group.properties.wrap = group_node_child.attribute('type').value.to_sym unless group_node_child.attribute('type').nil?

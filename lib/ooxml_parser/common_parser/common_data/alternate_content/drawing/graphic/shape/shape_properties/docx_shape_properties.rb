@@ -13,31 +13,33 @@ module OoxmlParser
     alias fill fill_color
     alias preset preset_geometry
 
-    def initialize
+    def initialize(parent: nil)
       @line = DocxShapeLine.new
+      @parent = parent
     end
 
-    def self.parse(shape_properties_node, parent: nil)
-      shape_properties = DocxShapeProperties.new
-      shape_properties.parent = parent
-      shape_properties.fill_color = DocxColor.parse(shape_properties_node)
-      shape_properties_node.xpath('*').each do |shape_properties_node_child|
-        case shape_properties_node_child.name
+    # Parse DocxShapeProperties object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxShapeProperties] result of parsing
+    def parse(node)
+      @fill_color = DocxColor.parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'xfrm'
-          shape_properties.shape_size = DocxShapeSize.parse(shape_properties_node_child)
+          @shape_size = DocxShapeSize.new(parent: self).parse(node_child)
         when 'prstGeom'
-          shape_properties.preset_geometry = PresetGeometry.parse(shape_properties_node_child)
+          @preset_geometry = PresetGeometry.new(parent: self).parse(node_child)
         when 'txbx'
-          shape_properties.text_box = TextBox.parse_list(shape_properties_node_child)
+          @text_box = TextBox.parse_list(node_child)
         when 'ln'
-          shape_properties.line = DocxShapeLine.new(parent: shape_properties).parse(shape_properties_node_child)
+          @line = DocxShapeLine.new(parent: self).parse(node_child)
         when 'custGeom'
-          shape_properties.preset_geometry = PresetGeometry.parse(shape_properties_node_child)
-          shape_properties.preset_geometry.name = :custom
-          shape_properties.custom_geometry = OOXMLCustomGeometry.parse(shape_properties_node_child)
+          @preset_geometry = PresetGeometry.new(parent: self).parse(node_child)
+          @preset_geometry.name = :custom
+          @custom_geometry = OOXMLCustomGeometry.new(parent: self).parse(node_child)
         end
       end
-      shape_properties
+      self
     end
   end
 end

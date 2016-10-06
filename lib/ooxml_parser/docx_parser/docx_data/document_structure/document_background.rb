@@ -25,7 +25,7 @@ module OoxmlParser
             background.color2 = Color.new(parent: background).parse_hex_string(fill.attribute('color2').value.split(' ').first.delete('#'))
             background.type = fill.attribute('type').value
           elsif !fill.attribute('id').nil?
-            background.file_reference = FileReference.parse(fill)
+            background.file_reference = FileReference.new(parent: background).parse(fill)
             background.type = 'image'
           end
         end

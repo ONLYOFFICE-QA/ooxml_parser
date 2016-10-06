@@ -25,7 +25,7 @@ module OoxmlParser
         when 'nvSpPr'
           shape.non_visual_properties = NonVisualShapeProperties.parse(shape_node_child)
         when 'spPr'
-          shape.shape_properties = DocxShapeProperties.parse(shape_node_child)
+          shape.shape_properties = DocxShapeProperties.new(parent: shape).parse(shape_node_child)
         when 'txBody'
           shape.text_body = TextBody.parse(shape_node_child)
         end

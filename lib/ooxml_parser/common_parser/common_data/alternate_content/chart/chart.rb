@@ -55,7 +55,7 @@ module OoxmlParser
             when 'AlternateContent'
               chart.alternate_content = AlternateContent.parse(chart_space_node_child)
             when 'spPr'
-              chart.shape_properties = DocxShapeProperties.parse chart_space_node_child
+              chart.shape_properties = DocxShapeProperties.new(parent: chart).parse(chart_space_node_child)
             when 'chart'
               chart_space_node_child.xpath('*').each do |chart_node_child|
                 case chart_node_child.name

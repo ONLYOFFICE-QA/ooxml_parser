@@ -1,25 +1,24 @@
 module OoxmlParser
   # Class for describing Shape Guide
-  class ShapeGuide
+  class ShapeGuide < OOXMLDocumentObject
     # @return [String] name of guide
     attr_accessor :name
     # @return [String] shape guide formula
     attr_accessor :formula
 
-    # Parse Relationships
+    # Parse ShapeGuide
     # @param [Nokogiri::XML:Node] node with Shape Guide
     # @return [ShapeGuide] result of parsing
-    def self.parse(node)
-      guide = ShapeGuide.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'name'
-          guide.name = value.value.to_sym
+          @name = value.value.to_sym
         when 'fmla'
-          guide.formula = value.value
+          @formula = value.value
         end
       end
-      guide
+      self
     end
   end
 end

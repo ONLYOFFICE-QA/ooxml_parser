@@ -12,7 +12,7 @@ module OoxmlParser
       shape_node.xpath('*').each do |shape_node_child|
         case shape_node_child.name
         when 'spPr'
-          shape.properties = DocxShapeProperties.parse(shape_node_child)
+          shape.properties = DocxShapeProperties.new(parent: shape).parse(shape_node_child)
         when 'txbx'
           shape.text_body = OOXMLTextBox.parse(shape_node_child, parent: shape)
         when 'txBody'

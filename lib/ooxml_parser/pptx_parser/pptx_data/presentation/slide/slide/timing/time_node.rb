@@ -18,7 +18,7 @@ module OoxmlParser
       time_node.xpath('*').each do |time_node_child|
         case time_node_child.name
         when 'cTn'
-          time.common_time_node = CommonTiming.parse(time_node_child)
+          time.common_time_node = CommonTiming.new(parent: time).parse(time_node_child)
         when 'prevCondLst'
           time.previous_conditions_list = Condition.parse_list(time_node_child)
         end
@@ -39,9 +39,9 @@ module OoxmlParser
         when 'anim'
           timings << TimeNode.parse(time_node, :animate)
         when 'set'
-          timings << SetTimeNode.parse(time_node)
+          timings << SetTimeNode.new(parent: timings).parse(time_node)
         when 'animEffect'
-          timings << AnimationEffect.parse(time_node)
+          timings << AnimationEffect.new(parent: timings).parse(time_node)
         when 'video'
           timings << :video
         when 'audio'

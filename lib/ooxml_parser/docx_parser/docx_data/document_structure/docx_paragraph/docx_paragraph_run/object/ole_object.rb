@@ -16,7 +16,7 @@ module OoxmlParser
           @id = value.value
         end
       end
-      @file_reference = FileReference.parse(node)
+      @file_reference = FileReference.new(parent: self).parse(node)
       self
     end
   end

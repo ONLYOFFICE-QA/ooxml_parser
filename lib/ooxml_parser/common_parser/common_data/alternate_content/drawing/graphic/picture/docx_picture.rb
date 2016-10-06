@@ -15,7 +15,7 @@ module OoxmlParser
         when 'blipFill'
           picture.path_to_image = DocxBlip.parse(picture_node_child)
         when 'spPr'
-          picture.properties = DocxShapeProperties.parse(picture_node_child)
+          picture.properties = DocxShapeProperties.new(parent: picture).parse(picture_node_child)
         end
       end
       picture

@@ -12,7 +12,7 @@ module OoxmlParser
       grouping_node.xpath('*').each do |grouping_node_child|
         case grouping_node_child.name
         when 'grpSpPr'
-          grouping.properties = DocxShapeProperties.parse(grouping_node_child)
+          grouping.properties = DocxShapeProperties.new(parent: grouping).parse(grouping_node_child)
         when 'grpSp'
           grouping.grouping = parse(grouping_node_child)
         when 'sp'

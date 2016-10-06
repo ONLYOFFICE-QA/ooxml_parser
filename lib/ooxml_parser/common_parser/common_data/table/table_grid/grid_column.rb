@@ -7,16 +7,14 @@ module OoxmlParser
     # Parse GridColumn
     # @param [Nokogiri::XML:Node] node with GridColumn
     # @return [GridColumn] result of parsing
-    def self.parse(node)
-      grid_column = GridColumn.new
-
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'w'
-          grid_column.width = OoxmlSize.new(value.value.to_f)
+          @width = OoxmlSize.new(value.value.to_f)
         end
       end
-      grid_column
+      self
     end
   end
 end

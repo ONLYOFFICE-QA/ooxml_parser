@@ -1,39 +1,39 @@
 module OoxmlParser
   # Docx Shape Line Element
-  class DocxShapeLineElement
+  class DocxShapeLineElement < OOXMLDocumentObject
     attr_accessor :type, :points
 
-    def initialize(points = [])
+    def initialize(points = [], parent: nil)
       @points = points
+      @parent = nil
     end
 
     # Parse DocxShapeLineElement
     # @param [Nokogiri::XML:Node] node with DocxShapeLineElement
     # @return [DocxShapeLineElement] result of parsing
-    def self.parse(node)
-      line_element = DocxShapeLineElement.new
+    def parse(node)
       case node.name
       when 'moveTo'
-        line_element.type = :move
+        @type = :move
       when 'lnTo'
-        line_element.type = :line
+        @type = :line
       when 'arcTo'
-        line_element.type = :arc
+        @type = :arc
       when 'cubicBezTo'
-        line_element.type = :cubic_bezier
+        @type = :cubic_bezier
       when 'quadBezTo'
-        line_element.type = :quadratic_bezier
+        @type = :quadratic_bezier
       when 'close'
-        line_element.type = :close
+        @type = :close
       end
 
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'pt'
-          line_element.points << OOXMLCoordinates.parse(node_child)
+          @points << OOXMLCoordinates.parse(node_child)
         end
       end
-      line_element
+      self
     end
   end
 end

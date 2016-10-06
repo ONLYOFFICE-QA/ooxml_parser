@@ -11,7 +11,7 @@ module OoxmlParser
 
     def self.parse(sound_node)
       sound = Sound.new
-      sound.file_reference = FileReference.parse(sound_node)
+      sound.file_reference = FileReference.new(parent: self).parse(sound_node)
       sound.name = sound_node.attribute('name').value
       sound
     end

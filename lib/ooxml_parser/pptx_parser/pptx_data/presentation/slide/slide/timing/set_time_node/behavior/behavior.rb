@@ -1,29 +1,30 @@
 require_relative 'target_element'
 module OoxmlParser
-  class Behavior
+  class Behavior < OOXMLDocumentObject
     attr_accessor :common_time_node, :attribute_name_list, :target
 
-    def initialize(common_time_node = nil, attribute_name_list = [], target = nil)
-      @common_time_node = common_time_node
-      @attribute_name_list = attribute_name_list
-      @target = target
+    def initialize(parent: nil)
+      @attribute_name_list = []
+      @parent = parent
     end
 
-    def self.parse(behavior_node)
-      behavior = Behavior.new
-      behavior_node.xpath('*').each do |behavior_node_child|
-        case behavior_node_child.name
+    # Parse Behavior object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Behavior] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'cTn'
-          behavior.common_time_node = CommonTiming.parse(behavior_node_child)
+          @common_time_node = CommonTiming.new(parent: self).parse(node_child)
         when 'tgtEl'
-          behavior.target = TargetElement.parse(behavior_node_child)
+          @target = TargetElement.new(parent: self).parse(node_child)
         when 'attrNameLst'
-          behavior_node_child.xpath('p:attrName').each do |attribute_name_node|
-            behavior.attribute_name_list << attribute_name_node.text
+          node_child.xpath('p:attrName').each do |attribute_name_node|
+            @attribute_name_list << attribute_name_node.text
           end
         end
       end
-      behavior
+      self
     end
   end
 end
