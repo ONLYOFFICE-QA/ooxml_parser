@@ -1,21 +1,22 @@
-require_relative 'line_end/line_size'
 module OoxmlParser
   class LineEnd < OOXMLDocumentObject
     attr_accessor :type, :length, :width
 
-    def self.parse(line_end_node)
-      line_end = LineEnd.new
-      line_end_node.attributes.each do |key, value|
+    # Parse LineEnd object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [LineEnd] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'type'
-          line_end.type = value.value.to_sym
+          @type = value.value.to_sym
         when 'w'
-          line_end.width = LineSize.parse(value.value)
+          @width = value_to_symbol(value)
         when 'len'
-          line_end.length = LineSize.parse(value.value)
+          @length = value_to_symbol(value)
         end
       end
-      line_end
+      self
     end
   end
 end

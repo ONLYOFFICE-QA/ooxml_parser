@@ -44,9 +44,9 @@ module OoxmlParser
         when 'noFill'
           @width = OoxmlSize.new(0)
         when 'headEnd'
-          @head_end = LineEnd.parse(node_child)
+          @head_end = LineEnd.new(parent: self).parse(node_child)
         when 'tailEnd'
-          @tail_end = LineEnd.parse(node_child)
+          @tail_end = LineEnd.new(parent: self).parse(node_child)
         end
       end
       self
