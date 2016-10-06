@@ -39,7 +39,7 @@ module OoxmlParser
       node.xpath('*').each do |column_node|
         case column_node.name
         when 'col'
-          @column_array << Column.parse(column_node)
+          @column_array << Column.new(parent: self).parse(column_node)
         end
       end
       self
