@@ -24,7 +24,7 @@ module OoxmlParser
         end
       end
       node.xpath('*').each do |node_child|
-        @elements << DocxShapeLineElement.parse(node_child)
+        @elements << DocxShapeLineElement.new(parent: self).parse(node_child)
       end
       self
     end
