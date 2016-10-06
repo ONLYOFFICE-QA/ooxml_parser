@@ -1,19 +1,21 @@
 # Describe single table element
 module OoxmlParser
-  class TableElement
+  class TableElement < OOXMLDocumentObject
     attr_accessor :cell_style
 
     alias cell_properties cell_style
 
-    def self.parse(whole_table_node)
-      table_element = TableElement.new
-      whole_table_node.xpath('*').each do |whole_table_node_child|
-        case whole_table_node_child.name
+    # Parse TableElement object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [TableElement] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'tcStyle', 'tcPr'
-          table_element.cell_style = CellProperties.new.parse(whole_table_node_child)
+          @cell_style = CellProperties.new(parent: self).parse(node_child)
         end
       end
-      table_element
+      self
     end
   end
 end
