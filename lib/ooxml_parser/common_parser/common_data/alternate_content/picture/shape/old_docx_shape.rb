@@ -16,7 +16,7 @@ module OoxmlParser
         when 'imagedata'
           @file_reference = FileReference.new(parent: self).parse(node_child)
         when 'fill'
-          @fill = OldDocxShapeFill.parse(node_child)
+          @fill = OldDocxShapeFill.new(parent: self).parse(node_child)
         end
       end
       self
