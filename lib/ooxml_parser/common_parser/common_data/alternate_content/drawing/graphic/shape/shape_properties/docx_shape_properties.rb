@@ -34,7 +34,7 @@ module OoxmlParser
         when 'custGeom'
           shape_properties.preset_geometry = PresetGeometry.new(parent: shape_properties).parse(shape_properties_node_child)
           shape_properties.preset_geometry.name = :custom
-          shape_properties.custom_geometry = OOXMLCustomGeometry.parse(shape_properties_node_child)
+          shape_properties.custom_geometry = OOXMLCustomGeometry.new(parent: shape_properties).parse(shape_properties_node_child)
         end
       end
       shape_properties
