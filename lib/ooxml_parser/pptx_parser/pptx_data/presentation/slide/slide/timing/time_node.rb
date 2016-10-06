@@ -18,7 +18,7 @@ module OoxmlParser
       time_node.xpath('*').each do |time_node_child|
         case time_node_child.name
         when 'cTn'
-          time.common_time_node = CommonTiming.parse(time_node_child)
+          time.common_time_node = CommonTiming.new(parent: time).parse(time_node_child)
         when 'prevCondLst'
           time.previous_conditions_list = Condition.parse_list(time_node_child)
         end

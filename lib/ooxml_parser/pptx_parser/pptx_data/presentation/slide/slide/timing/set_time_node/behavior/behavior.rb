@@ -14,7 +14,7 @@ module OoxmlParser
       behavior_node.xpath('*').each do |behavior_node_child|
         case behavior_node_child.name
         when 'cTn'
-          behavior.common_time_node = CommonTiming.parse(behavior_node_child)
+          behavior.common_time_node = CommonTiming.new(parent: behavior).parse(behavior_node_child)
         when 'tgtEl'
           behavior.target = TargetElement.parse(behavior_node_child)
         when 'attrNameLst'

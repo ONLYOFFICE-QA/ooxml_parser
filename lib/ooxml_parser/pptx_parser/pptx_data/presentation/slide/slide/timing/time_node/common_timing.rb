@@ -3,31 +3,39 @@ module OoxmlParser
   class CommonTiming
     attr_accessor :id, :duration, :restart, :children, :start_conditions, :end_conditions
 
-    def initialize
-      @id = nil
-      @duration = nil
-      @restart = nil
+    def initialize(parent: nil)
       @children = []
       @start_conditions = []
       @end_conditions = []
+      @parent = parent
     end
 
-    def self.parse(common_time_node)
-      common_timing = CommonTiming.new
-      common_timing.duration = common_time_node.attribute('dur').value unless common_time_node.attribute('dur').nil?
-      common_timing.restart = common_time_node.attribute('restart').value unless common_time_node.attribute('restart').nil?
-      common_timing.id = common_time_node.attribute('id').value
-      common_time_node.xpath('*').each do |common_time_node_child|
-        case common_time_node_child.name
-        when 'stCondLst'
-          common_timing.start_conditions = Condition.parse_list(common_time_node_child)
-        when 'endCondLst'
-          common_timing.end_conditions = Condition.parse_list(common_time_node_child)
-        when 'childTnLst'
-          common_timing.children = TimeNode.parse_list(common_time_node_child)
+    # Parse CommonTiming object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [CommonTiming] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'dur'
+          @duration = value.value
+        when 'restart'
+          @restart = value.value
+        when 'id'
+          @id = value.value
         end
       end
-      common_timing
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'stCondLst'
+          @start_conditions = Condition.parse_list(node_child)
+        when 'endCondLst'
+          @end_conditions = Condition.parse_list(node_child)
+        when 'childTnLst'
+          @children = TimeNode.parse_list(node_child)
+        end
+      end
+      self
     end
   end
 end
