@@ -24,7 +24,7 @@ module OoxmlParser
       shape_properties_node.xpath('*').each do |shape_properties_node_child|
         case shape_properties_node_child.name
         when 'xfrm'
-          shape_properties.shape_size = DocxShapeSize.parse(shape_properties_node_child)
+          shape_properties.shape_size = DocxShapeSize.new(parent: shape_properties).parse(shape_properties_node_child)
         when 'prstGeom'
           shape_properties.preset_geometry = PresetGeometry.new(parent: shape_properties).parse(shape_properties_node_child)
         when 'txbx'
