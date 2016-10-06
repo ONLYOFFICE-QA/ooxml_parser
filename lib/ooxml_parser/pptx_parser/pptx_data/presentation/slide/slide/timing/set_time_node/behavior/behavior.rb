@@ -16,7 +16,7 @@ module OoxmlParser
         when 'cTn'
           behavior.common_time_node = CommonTiming.new(parent: behavior).parse(behavior_node_child)
         when 'tgtEl'
-          behavior.target = TargetElement.parse(behavior_node_child)
+          behavior.target = TargetElement.new(parent: behavior).parse(behavior_node_child)
         when 'attrNameLst'
           behavior_node_child.xpath('p:attrName').each do |attribute_name_node|
             behavior.attribute_name_list << attribute_name_node.text

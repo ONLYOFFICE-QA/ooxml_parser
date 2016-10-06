@@ -1,31 +1,34 @@
 module OoxmlParser
-  class TargetElement
+  class TargetElement < OOXMLDocumentObject
     attr_accessor :type, :id, :name, :built_in
 
-    def initialize(type = '', id = '')
+    def initialize(type = '', id = '', parent: nil)
       @type = type
       @id = id
+      @parent = parent
     end
 
-    def self.parse(target_node)
-      target = TargetElement.new
-      target_node.xpath('*').each do |target_node_child|
-        case target_node_child.name
+    # Parse TargetElement object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [TargetElement] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'sldTgt'
-          target.type = :slide
+          @type = :slide
         when 'sndTgt'
-          target.type = :sound
-          target.name = target_node_child.attribute('name').value
-          target.built_in = target_node_child.attribute('builtIn').value ? StringHelper.to_bool(target_node_child.attribute('builtIn').value) : false
+          @type = :sound
+          @name = node_child.attribute('name').value
+          @built_in = node_child.attribute('builtIn').value ? StringHelper.to_bool(node_child.attribute('builtIn').value) : false
         when 'spTgt'
-          target.type = :shape
-          target.id = target_node_child.attribute('spid').value
+          @type = :shape
+          @id = node_child.attribute('spid').value
         when 'inkTgt'
-          target.type = :ink
-          target.id = target_node_child.attribute('spid').value
+          @type = :ink
+          @id = node_child.attribute('spid').value
         end
       end
-      target
+      self
     end
   end
 end
