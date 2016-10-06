@@ -26,13 +26,13 @@ module OoxmlParser
         when 'xfrm'
           shape_properties.shape_size = DocxShapeSize.parse(shape_properties_node_child)
         when 'prstGeom'
-          shape_properties.preset_geometry = PresetGeometry.parse(shape_properties_node_child)
+          shape_properties.preset_geometry = PresetGeometry.new(parent: shape_properties).parse(shape_properties_node_child)
         when 'txbx'
           shape_properties.text_box = TextBox.parse_list(shape_properties_node_child)
         when 'ln'
           shape_properties.line = DocxShapeLine.new(parent: shape_properties).parse(shape_properties_node_child)
         when 'custGeom'
-          shape_properties.preset_geometry = PresetGeometry.parse(shape_properties_node_child)
+          shape_properties.preset_geometry = PresetGeometry.new(parent: shape_properties).parse(shape_properties_node_child)
           shape_properties.preset_geometry.name = :custom
           shape_properties.custom_geometry = OOXMLCustomGeometry.parse(shape_properties_node_child)
         end
