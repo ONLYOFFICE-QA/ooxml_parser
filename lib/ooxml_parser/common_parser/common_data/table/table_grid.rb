@@ -24,7 +24,7 @@ module OoxmlParser
       node.xpath('*').each do |grid_child|
         case grid_child.name
         when 'gridCol'
-          grid.columns << GridColumn.parse(grid_child)
+          grid.columns << GridColumn.new(parent: grid).parse(grid_child)
         end
       end
       grid
