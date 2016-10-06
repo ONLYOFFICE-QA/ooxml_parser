@@ -22,7 +22,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'gd'
-          list.shape_guides_list << ShapeGuide.parse(node_child)
+          list.shape_guides_list << ShapeGuide.new(parent: list).parse(node_child)
         end
       end
       list
