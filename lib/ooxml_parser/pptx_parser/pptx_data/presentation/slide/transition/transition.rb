@@ -4,11 +4,6 @@ module OoxmlParser
   class Transition < OOXMLDocumentObject
     attr_accessor :speed, :properties, :sound_action, :advance_on_click, :delay, :duration
 
-    def initialize(properties = TransitionProperties.new, parent: nil)
-      @properties = properties
-      @parent = parent
-    end
-
     def parse(node)
       node.xpath('*').each do |node_child|
         @properties = TransitionProperties.new(parent: self).parse(node_child)
