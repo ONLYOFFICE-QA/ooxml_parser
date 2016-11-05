@@ -1,30 +1,33 @@
-# Character Alignment in XLSX
 module OoxmlParser
-  class XlsxAlignment
+  # Character Alignment in XLSX
+  class XlsxAlignment < OOXMLDocumentObject
     attr_accessor :horizontal, :vertical, :wrap_text, :text_rotation
 
-    def initialize(horizontal = :left, vertical = :bottom, wrap_text = false)
+    def initialize(horizontal = :left, vertical = :bottom, wrap_text = false, parent: nil)
       @horizontal = horizontal
       @vertical = vertical
       @wrap_text = wrap_text
+      @parent = parent
     end
 
-    def self.parse(alignment_node)
-      alignment = XlsxAlignment.new
-      alignment_node.attributes.each do |key, value|
+    # Parse XlsxAlignment object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [XlsxAlignment] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'horizontal'
-          alignment.horizontal = value.value.to_sym
-          alignment.wrap_text = true if alignment.horizontal == :justify
+          @horizontal = value.value.to_sym
+          @wrap_text = true if @horizontal == :justify
         when 'vertical'
-          alignment.vertical = value.value.to_sym
+          @vertical = value.value.to_sym
         when 'wrapText'
-          alignment.wrap_text = value.value.to_s == '1'
+          @wrap_text = value.value.to_s == '1'
         when 'textRotation'
-          alignment.text_rotation = value.value.to_i
+          @text_rotation = value.value.to_i
         end
       end
-      alignment
+      self
     end
   end
 end

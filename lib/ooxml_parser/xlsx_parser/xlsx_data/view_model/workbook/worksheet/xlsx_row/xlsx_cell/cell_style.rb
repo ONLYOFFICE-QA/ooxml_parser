@@ -64,7 +64,6 @@ module OoxmlParser
     # @return [CellStyle] result of parsing
     def parse(style_number)
       current_cell_style = XLSXWorkbook.styles_node.xpath('//xmlns:cellXfs/xmlns:xf')[style_number.to_i]
-      @alignment = XlsxAlignment.new
       @font = if current_cell_style.attribute('applyFont').nil? || current_cell_style.attribute('applyFont').value == '0'
                 OOXMLFont.parse(0)
               else
@@ -88,8 +87,12 @@ module OoxmlParser
         @numerical_format = CellStyle::ALL_FORMAT_VALUE[format_id - 1] if CellStyle::ALL_FORMAT_VALUE[format_id - 1]
       end
       unless current_cell_style.attribute('applyAlignment').nil? || current_cell_style.attribute('applyAlignment').value == '0'
-        alignment_node = current_cell_style.xpath('xmlns:alignment').first
-        @alignment = XlsxAlignment.parse(alignment_node) unless alignment_node.nil?
+        current_cell_style.xpath('*').each do |node_child|
+          case node_child.name
+          when 'alignment'
+            @alignment = XlsxAlignment.new(parent: self).parse(node_child)
+          end
+        end
       end
       @quote_prefix = option_enabled?(current_cell_style, 'quotePrefix')
       self
