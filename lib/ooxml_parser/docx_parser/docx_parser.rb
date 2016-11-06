@@ -1,4 +1,5 @@
 require_relative '../common_parser/common_data/ooxml_document_object'
+require_relative '../common_parser/common_data/valued_child'
 require_relative 'docx_data/document_structure'
 
 module OoxmlParser
