@@ -4,6 +4,7 @@ require_relative 'chart_legend'
 require_relative 'chart_point'
 require_relative 'display_labels_properties'
 require_relative 'chart/series'
+require_relative 'chart/view_3d'
 require_relative 'chart_style/office_2007_chart_style'
 require_relative 'chart_style/office_2010_chart_style'
 
@@ -12,6 +13,8 @@ module OoxmlParser
     attr_accessor :type, :data, :grouping, :title, :legend, :display_labels, :axises, :alternate_content, :shape_properties
     # @return [Array, Series] series of chart
     attr_accessor :series
+    # @return [View3D] properties of 3D view
+    attr_accessor :view_3d
 
     def initialize
       @type = ''
@@ -116,6 +119,8 @@ module OoxmlParser
                   chart.title = ChartAxisTitle.new(parent: chart).parse(chart_node_child)
                 when 'legend'
                   chart.legend = ChartLegend.new(parent: chart).parse(chart_node_child)
+                when 'view3D'
+                  chart.view_3d = View3D.new(parent: chart).parse(chart_node_child)
                 end
               end
             end
