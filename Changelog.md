@@ -49,6 +49,7 @@
 * New way to parse default RunProperties and ParagraphProperties. Old way is still there
 * Add parsing `RunStyle`. Implement #140
 * Add parsing `Chart#view3D`
+* Add parsing math data in xlsx files
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
