@@ -51,7 +51,11 @@ module OoxmlParser
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string
     attr_accessor :quote_prefix
 
-    def initialize(font = nil, borders = nil, fill_color = ForegroundColor.new, numerical_format = 'General', alignment = nil)
+    def initialize(font = nil,
+                   borders = nil,
+                   fill_color = ForegroundColor.new,
+                   numerical_format = 'General',
+                   alignment = XlsxAlignment.new)
       @font = font
       @borders = borders
       @fill_color = fill_color
@@ -90,7 +94,7 @@ module OoxmlParser
         current_cell_style.xpath('*').each do |node_child|
           case node_child.name
           when 'alignment'
-            @alignment = XlsxAlignment.new(parent: self).parse(node_child)
+            @alignment.parse(node_child)
           end
         end
       end
