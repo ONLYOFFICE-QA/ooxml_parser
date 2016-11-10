@@ -1,3 +1,4 @@
+require_relative 'alternate_content/choice'
 require_relative 'chart/chart'
 require_relative 'drawing/docx_drawing'
 require_relative 'shape/shape'
@@ -6,6 +7,8 @@ require_relative 'picture/old_docx_picture'
 module OoxmlParser
   class AlternateContent < OOXMLDocumentObject
     attr_accessor :office2010_content, :office2007_content
+    # @return [Choice] choice data
+    attr_accessor :choice
 
     def self.parse(alt_content_node, parent: nil)
       alternate_content = AlternateContent.new
@@ -25,6 +28,7 @@ module OoxmlParser
         case alternate_content_node_child.name
         when 'Choice'
           alternate_content.office2010_content = DocxDrawing.parse(alternate_content_node_child.xpath('w:drawing').first, parent: alternate_content) unless alternate_content_node_child.xpath('w:drawing').first.nil?
+          alternate_content.choice = Choice.new(parent: alternate_content).parse(alternate_content_node_child)
         when 'Fallback'
           alternate_content.office2007_content = OldDocxPicture.parse(alternate_content_node_child.xpath('w:pict').first, parent: alternate_content) unless alternate_content_node_child.xpath('w:pict').first.nil?
         end

@@ -4,6 +4,8 @@ require_relative 'paragraph/text_field'
 module OoxmlParser
   class Paragraph
     attr_accessor :properties, :runs, :text_field, :formulas
+    # @return [AlternateContent] alternate content data
+    attr_accessor :alternate_content
 
     def initialize(runs = [], formulas = [])
       @runs = runs
@@ -26,8 +28,8 @@ module OoxmlParser
           paragraph.text_field = TextField.parse(paragraph_node_child)
         when 'r'
           paragraph.characters << ParagraphRun.parse(paragraph_node_child)
-        when 'm'
-          # TODO: add parsing formulas in paragraph
+        when 'AlternateContent'
+          paragraph.alternate_content = AlternateContent.parse(paragraph_node_child, parent: paragraph_node)
         end
       end
       paragraph
