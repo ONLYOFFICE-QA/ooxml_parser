@@ -50,6 +50,7 @@
 * Add parsing `RunStyle`. Implement #140
 * Add parsing `Chart#view3D`
 * Add parsing math data in xlsx files
+* Add parsing `PreSubSuperscript` class - `m:sPre` tag
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
