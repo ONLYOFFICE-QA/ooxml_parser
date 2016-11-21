@@ -4,6 +4,8 @@ require_relative 'line/line_end'
 module OoxmlParser
   class DocxShapeLine < OOXMLDocumentObject
     attr_accessor :width, :color_scheme, :cap, :head_end, :tail_end, :fill
+    # @return [ValuedChild] dash properties
+    attr_accessor :dash
 
     alias color color_scheme
 
@@ -47,6 +49,8 @@ module OoxmlParser
           @head_end = LineEnd.new(parent: self).parse(node_child)
         when 'tailEnd'
           @tail_end = LineEnd.new(parent: self).parse(node_child)
+        when 'prstDash'
+          @dash = ValuedChild.new(:symbol, parent: self).parse(node_child)
         end
       end
       self
