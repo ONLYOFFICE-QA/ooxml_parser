@@ -19,6 +19,7 @@ module OoxmlParser
         case key
         when 'val'
           @value = value.value.to_s if type == :string
+          @value = value_to_symbol(value) if type == :symbol
           @value = value.value.to_i if type == :integer
         end
       end
