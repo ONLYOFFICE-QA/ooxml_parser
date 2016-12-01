@@ -4,9 +4,13 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'codecov', require: false, group: :test
-gem 'parallel_tests', group: [:development, :test]
-gem 'rake', '~> 10.1'
-gem 'rspec', '~> 3.4.0'
-gem 'rubocop'
-gem 'simplecov', require: false, group: :test
+group :test do
+  gem 'codecov', require: false
+  gem 'parallel_tests'
+  gem 'rspec'
+end
+
+group :development do
+  gem 'overcommit', require: false
+  gem 'rubocop', require: false
+end
