@@ -72,7 +72,7 @@ module OoxmlParser
           delimeter.value = DocxFormula.parse(sub_element)
           formula.formula_run << delimeter
         elsif sub_element.name == 'nary'
-          formula.formula_run << Nary.parse(sub_element)
+          formula.formula_run << Nary.new(parent: formula).parse(sub_element)
         elsif sub_element.name == 'sSubSup'
           index = Index.new
           index.value = DocxFormula.parse(sub_element)

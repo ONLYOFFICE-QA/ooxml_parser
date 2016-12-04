@@ -1,7 +1,7 @@
 require_relative 'nary/nary_properties'
 module OoxmlParser
   # Class for parsing `m:nary` object
-  class Nary
+  class Nary < OOXMLDocumentObject
     # @return [DocxFormula] top value
     attr_accessor :top_value
 
@@ -14,19 +14,18 @@ module OoxmlParser
     # Parse Nary
     # @param [Nokogiri::XML:Node] node with Nary
     # @return [Nary] result of parsing
-    def self.parse(node)
-      nary = Nary.new
+    def parse(node)
       node.xpath('*').each do |nary_child_node|
         case nary_child_node.name
         when 'sub'
-          nary.bottom_value = DocxFormula.parse(nary_child_node)
+          @bottom_value = DocxFormula.parse(nary_child_node)
         when 'sup'
-          nary.top_value = DocxFormula.parse(nary_child_node)
+          @top_value = DocxFormula.parse(nary_child_node)
         when 'naryPr'
-          nary.properties = NaryProperties.parse(nary_child_node)
+          @properties = NaryProperties.new(parent: self).parse(nary_child_node)
         end
       end
-      nary
+      self
     end
   end
 end

@@ -1,21 +1,20 @@
 module OoxmlParser
   # Class for parsing `m:grow` object
-  class NaryGrow
+  class NaryGrow < OOXMLDocumentObject
     # @return [String] value of grow
     attr_accessor :value
 
     # Parse NaryGrow
     # @param [Nokogiri::XML:Node] node with NaryGrow
     # @return [NaryGrow] result of parsing
-    def self.parse(node)
-      nary_grow = NaryGrow.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'val'
-          nary_grow.value = value.value
+          @value = value.value
         end
       end
-      nary_grow
+      self
     end
   end
 end
