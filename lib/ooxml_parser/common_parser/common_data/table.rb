@@ -14,6 +14,14 @@ module OoxmlParser
 
     alias table_properties properties
 
+    def to_s
+      "Rows: #{@rows.join(',')}"
+    end
+
+    def inspect
+      to_s
+    end
+
     # Parse Table object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [Table] result of parsing

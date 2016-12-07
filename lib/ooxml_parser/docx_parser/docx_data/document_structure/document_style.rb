@@ -38,6 +38,14 @@ module OoxmlParser
       @parent = parent
     end
 
+    def to_s
+      "Table style properties list: #{@table_style_properties_list.join(',')}"
+    end
+
+    def inspect
+      to_s
+    end
+
     # Parse single document style
     # @return [DocumentStyle]
     def parse(node)

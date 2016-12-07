@@ -13,6 +13,12 @@ describe 'compare' do
     expect(docx1).to eq(docx2)
   end
 
+  it 'Compare two similar docx - set 3' do
+    docx1 = OoxmlParser::DocxParser.parse_docx('spec/document/compare/set_3/first.docx')
+    docx2 = OoxmlParser::DocxParser.parse_docx('spec/document/compare/set_3/second.docx')
+    expect(docx1).not_to eq(docx2)
+  end
+
   it 'compare_two_paragraphs' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/compare/compare_two_paragraphs.docx')
     expect(docx.elements[0]).not_to eq(docx.elements[1])
