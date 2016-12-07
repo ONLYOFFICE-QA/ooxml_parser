@@ -83,6 +83,7 @@
 * `Shade` should be able to set all argument via constructor
 * `DocxParagraph#nonempty_runs` recognized `footnote` and `endnote`
 * Fix parsing emty `TransitionProperties`
+* Fix memory hog on calculating diffs
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
