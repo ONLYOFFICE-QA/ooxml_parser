@@ -84,6 +84,7 @@
 * `DocxParagraph#nonempty_runs` recognized `footnote` and `endnote`
 * Fix parsing emty `TransitionProperties`
 * Fix memory hog on calculating diffs
+* Fix values of `OOXMLFont`: was not float
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
@@ -109,7 +110,7 @@
 `LineEnd`, `CommonTiming`, `AnimationEffect`, `TargetElement`,
 `Behavior`, `SetTimeNode`, `Column`, `TableBorders`, `GridColumn`,
 `TableElement`, `XlsxAlignment`, `NaryProperties`, `NaryLimitLocation`,
-`NaryGrow`, 'Nary'
+`NaryGrow`, `Nary`, `OOXMLFont`
 * Replace usage `Alignment.parse` on `OOXMLDocumentObject#value_to_symbol` method
 * Refactor `Color.from_int16` to `Color#parse_hex_string` method
 * Move `table_cell_spacing` to `TableRowProperties` and use OoxmlSize

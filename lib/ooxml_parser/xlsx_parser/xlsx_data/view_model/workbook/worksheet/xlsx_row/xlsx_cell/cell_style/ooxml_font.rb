@@ -1,36 +1,36 @@
-# Font Data
 module OoxmlParser
+  # Font Data
   class OOXMLFont < OOXMLDocumentObject
     attr_accessor :name, :size, :font_style, :color
 
-    def initialize(name = 'Calibri', size = '11', font_style = nil, color = nil)
-      @name = name
-      @size = size
-      @font_style = font_style
-      @color = color
+    def initialize(parent: nil)
+      @name = 'Calibri'
+      @size = 11
+      @parent = parent
     end
 
-    def self.parse(style_number)
-      font = OOXMLFont.new
+    def parse(style_number)
+      @font_style = FontStyle.new
       font_style_node = XLSXWorkbook.styles_node.xpath('//xmlns:font')[style_number.to_i]
-      font.name = font_style_node.xpath('xmlns:name').first.attribute('val').value if font_style_node.xpath('xmlns:name').first
-      font.size = font_style_node.xpath('xmlns:sz').first.attribute('val').value.to_i if font_style_node.xpath('xmlns:sz').first
-      font.font_style = FontStyle.new
-      font_style_node.xpath('*').each do |font_style_node_child|
-        case font_style_node_child.name
+      font_style_node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'name'
+          @name = node_child.attribute('val').value
+        when 'sz'
+          @size = node_child.attribute('val').value.to_f
         when 'b'
-          font.font_style.bold = true
+          @font_style.bold = true
         when 'i'
-          font.font_style.italic = true
+          @font_style.italic = true
         when 'strike'
-          font.font_style.strike = :single
+          @font_style.strike = :single
         when 'u'
-          font.font_style.underlined = Underline.new(:single)
+          @font_style.underlined = Underline.new(:single)
         when 'color'
-          font.color = Color.parse_color_tag(font_style_node_child)
+          @color = Color.parse_color_tag(node_child)
         end
       end
-      font
+      self
     end
   end
 end
