@@ -2,10 +2,8 @@ module OoxmlParser
   class Note < OOXMLDocumentObject
     attr_accessor :type, :elements, :assigned_to
 
-    def initialize(type = nil, elements = [], assigned_to = nil)
-      @type = type
-      @elements = elements
-      @assigned_to = assigned_to
+    def initialize
+      @elements = []
     end
 
     def self.parse(default_paragraph, default_character, target, assigned_to, type, parent: nil)

@@ -22,13 +22,11 @@ module OoxmlParser
     # @return [Styles] styles of document
     attr_accessor :styles
 
-    def initialize(elements = [], page_properties = nil, notes = [], background = nil, document_properties = DocumentProperties.new, comments = [])
-      @elements = elements
-      @page_properties = page_properties
-      @notes = notes
-      @background = background
-      @document_properties = document_properties
-      @comments = comments
+    def initialize
+      @elements = []
+      @notes = []
+      @document_properties = DocumentProperties.new
+      @comments = []
       @document_styles = []
     end
 

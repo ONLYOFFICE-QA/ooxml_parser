@@ -26,17 +26,10 @@ module OoxmlParser
     # @return [RunStyle] run style
     attr_accessor :run_style
 
-    def initialize(font_name = '',
-                   font_style = FontStyle.new,
-                   font_color = nil,
-                   space = nil,
-                   baseline = :baseline,
-                   parent: nil)
-      @font_name = font_name
-      @font_style = font_style
-      @font_color = font_color
-      @space = space
-      @baseline = baseline
+    def initialize(parent: nil)
+      @font_name = ''
+      @font_style = FontStyle.new
+      @baseline = :baseline
       @parent = parent
     end
 
