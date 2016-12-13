@@ -43,27 +43,27 @@ module OoxmlParser
     def to_base_unit
       case @unit
       when :centimeter
-        return OoxmlSize.new(@value * 360_000)
+        OoxmlSize.new(@value * 360_000)
       when :point
-        return OoxmlSize.new(@value * 12_700)
+        OoxmlSize.new(@value * 12_700)
       when :half_point
-        return OoxmlSize.new(@value * (12_700 / 2))
+        OoxmlSize.new(@value * (12_700 / 2))
       when :one_eighth_point
-        return OoxmlSize.new(@value * (12_700 / 8))
+        OoxmlSize.new(@value * (12_700 / 8))
       when :one_100th_point
-        return OoxmlSize.new(@value * (12_700 / 100))
+        OoxmlSize.new(@value * (12_700 / 100))
       when :one_240th_cm
-        return OoxmlSize.new(@value * 1500)
+        OoxmlSize.new(@value * 1500)
       when :dxa, :twip
         return OoxmlSize.new(@value * 635, :emu)
       when :inch
-        return OoxmlSize.new(@value * 914_400, :emu)
+        OoxmlSize.new(@value * 914_400, :emu)
       when :spacing_point
-        return OoxmlSize.new(@value * (12_700 / 100), :emu)
+        OoxmlSize.new(@value * (12_700 / 100), :emu)
       when :one_1000th_percent
-        return OoxmlSize.new(@value / 1000, :percent)
+        OoxmlSize.new(@value / 1000, :percent)
       else
-        return self
+        self
       end
     end
 

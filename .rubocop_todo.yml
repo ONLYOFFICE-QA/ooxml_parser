@@ -61,11 +61,3 @@ Style/AccessorMethodName:
 # Offense count: 153
 Style/Documentation:
   Enabled: false
-
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/drawing_properties/ooxml_size.rb'
-    - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide/slide_helper.rb'
