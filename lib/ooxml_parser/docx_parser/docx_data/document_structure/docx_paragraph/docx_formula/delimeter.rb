@@ -1,12 +1,33 @@
-# Delimiter Data
 module OoxmlParser
-  class Delimiter
+  # Class for `d` data
+  class Delimiter < OOXMLDocumentObject
     attr_accessor :begin_character, :value, :end_character
 
-    def initialize(begin_character = '(', value = nil, end_character = ')')
-      @begin_character = begin_character
-      @value = value
-      @end_character = end_character
+    def initialize(parent: nil)
+      @begin_character = '('
+      @end_character = ')'
+      @parent = parent
+    end
+
+    # Parse Delimiter object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Delimiter] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'dPr'
+          node_child.xpath('*').each do |node_child_child|
+            case node_child_child.name
+            when 'begChr'
+              @begin_character = node_child_child.attribute('val').value
+            when 'endChr'
+              @end_character = node_child_child.attribute('val').value
+            end
+          end
+        end
+      end
+      @value = DocxFormula.new(parent: self).parse(node)
+      self
     end
   end
 end

@@ -9,7 +9,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'oMath'
-          @math = DocxFormula.parse(node_child)
+          @math = DocxFormula.new(parent: self).parse(node_child)
         end
       end
       self

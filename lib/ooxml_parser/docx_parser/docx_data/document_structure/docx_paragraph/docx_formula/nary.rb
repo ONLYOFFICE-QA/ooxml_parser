@@ -18,9 +18,9 @@ module OoxmlParser
       node.xpath('*').each do |nary_child_node|
         case nary_child_node.name
         when 'sub'
-          @bottom_value = DocxFormula.parse(nary_child_node)
+          @bottom_value = DocxFormula.new(parent: self).parse(nary_child_node)
         when 'sup'
-          @top_value = DocxFormula.parse(nary_child_node)
+          @top_value = DocxFormula.new(parent: self).parse(nary_child_node)
         when 'naryPr'
           @properties = NaryProperties.new(parent: self).parse(nary_child_node)
         end

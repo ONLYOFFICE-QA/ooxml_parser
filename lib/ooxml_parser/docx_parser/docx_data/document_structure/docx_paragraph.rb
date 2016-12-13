@@ -187,7 +187,7 @@ module OoxmlParser
           end
         when 'oMathPara'
           node_child.xpath('m:oMath').each do |o_math|
-            character_styles_array << DocxFormula.parse(o_math)
+            character_styles_array << DocxFormula.new(parent: self).parse(o_math)
           end
         when 'commentRangeEnd'
           comments.each_with_index do |comment, index|
