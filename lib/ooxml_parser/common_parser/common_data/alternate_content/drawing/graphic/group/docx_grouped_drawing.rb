@@ -14,7 +14,6 @@ module OoxmlParser
         case grouping_node_child.name
         when 'grpSpPr'
           grouping.properties = DocxShapeProperties.new(parent: grouping).parse(grouping_node_child)
-        when 'cNvGrpSpPr'
         when 'pic'
           element = DocxGroupElement.new(:picture)
           element.object = DocxPicture.parse(grouping_node_child)

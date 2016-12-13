@@ -34,8 +34,6 @@ module OoxmlParser
             when 'spTree'
               common_slide_node_child.xpath('*').each do |slide_element_node|
                 case slide_element_node.name
-                when 'nvGrpSpPr'
-                when 'grpSpPr'
                 when 'sp'
                   slide.elements << PresentationShape.parse(slide_element_node).dup
                 when 'pic'
@@ -50,7 +48,6 @@ module OoxmlParser
               slide.background = Background.new(parent: slide).parse(common_slide_node_child)
             end
           end
-        when 'clrMapOvr'
         when 'timing'
           slide.timing = Timing.parse(slide_node_child)
         when 'transition'

@@ -175,7 +175,6 @@ module OoxmlParser
               @shape = Shape.parse(pict_node_child, :rectangle)
             when 'oval'
               @shape = Shape.parse(pict_node_child, :oval)
-            when 'shapetype'
             end
           end
         when 'object'

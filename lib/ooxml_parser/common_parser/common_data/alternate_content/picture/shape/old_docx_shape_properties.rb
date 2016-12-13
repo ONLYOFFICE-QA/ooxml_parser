@@ -15,7 +15,6 @@ module OoxmlParser
           properties.stroke_color = Color.new(parent: properties).parse_hex_string(value.value.delete('#'))
         when 'strokeweight'
           properties.stroke_weight = value.value.to_f
-        when ''
         end
       end
       properties

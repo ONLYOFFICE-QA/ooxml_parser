@@ -11,7 +11,6 @@ module OoxmlParser
       grouping = ShapesGrouping.new
       grouping_node.xpath('*').each do |grouping_node_child|
         case grouping_node_child.name
-        when 'nvGrpSpPr'
         when 'grpSpPr'
           grouping.properties = GroupingProperties.parse(grouping_node_child)
         when 'pic'

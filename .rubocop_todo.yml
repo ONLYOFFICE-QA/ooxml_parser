@@ -6,17 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 9
-Lint/EmptyWhen:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/graphic/group/docx_grouped_drawing.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/graphic/picture/docx_picture.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/picture/shape/old_docx_shape_properties.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/docx_paragraph_run.rb'
-    - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide.rb'
-    - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide/graphic_frame/graphic_frame.rb'
-    - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide/slide/shapes_grouping.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods.
