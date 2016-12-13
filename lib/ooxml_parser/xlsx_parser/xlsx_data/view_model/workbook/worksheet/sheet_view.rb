@@ -1,18 +1,20 @@
 require_relative 'sheet_view/pane'
-# Class for Sheet View
 module OoxmlParser
-  class SheetView
+  # Class for `sheetView` data
+  class SheetView < OOXMLDocumentObject
     attr_accessor :pane
 
-    def self.parse(sheet_view_node)
-      sheet_view = SheetView.new
-      sheet_view_node.xpath('*').each do |sheet_view_node_child|
-        case sheet_view_node_child.name
+    # Parse SheetView object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [SheetView] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'pane'
-          sheet_view.pane = Pane.parse(sheet_view_node_child)
+          @pane = Pane.new(parent: self).parse(node_child)
         end
       end
-      sheet_view
+      self
     end
   end
 end
