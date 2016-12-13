@@ -97,8 +97,6 @@ module OoxmlParser
           @font_name = node_child.attribute('val').value
         when 'rFonts'
           @font_name = node_child.attribute('ascii').value if node_child.attribute('ascii')
-        when 'color'
-          @font_color = Color.parse_color_tag(node_child)
         when 'strike'
           @font_style.strike = option_enabled?(node_child)
         when 'hlinkClick'
