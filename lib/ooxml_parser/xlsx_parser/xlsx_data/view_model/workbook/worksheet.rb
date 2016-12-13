@@ -92,7 +92,9 @@ module OoxmlParser
           worksheet.table_parts = []
           worksheet_node_child.xpath('xmlns:tablePart').each { |table_part_node| worksheet.table_parts << XlsxTable.parse(table_part_node) }
         when 'sheetViews'
-          worksheet_node_child.xpath('xmlns:sheetView').each { |sheet_view_node| worksheet.sheet_views << SheetView.parse(sheet_view_node) }
+          worksheet_node_child.xpath('*').each do |view_child|
+            worksheet.sheet_views << SheetView.new(parent: worksheet).parse(view_child)
+          end
         end
       end
       worksheet.comments = ExcelComments.parse_file(File.basename(path_to_xml_file), OOXMLDocumentObject.path_to_folder)

@@ -110,7 +110,7 @@
 `LineEnd`, `CommonTiming`, `AnimationEffect`, `TargetElement`,
 `Behavior`, `SetTimeNode`, `Column`, `TableBorders`, `GridColumn`,
 `TableElement`, `XlsxAlignment`, `NaryProperties`, `NaryLimitLocation`,
-`NaryGrow`, `Nary`, `OOXMLFont`, `ExcelComment`
+`NaryGrow`, `Nary`, `OOXMLFont`, `ExcelComment`, `SheetView`, `Pane`
 * Replace usage `Alignment.parse` on `OOXMLDocumentObject#value_to_symbol` method
 * Refactor `Color.from_int16` to `Color#parse_hex_string` method
 * Move `table_cell_spacing` to `TableRowProperties` and use OoxmlSize

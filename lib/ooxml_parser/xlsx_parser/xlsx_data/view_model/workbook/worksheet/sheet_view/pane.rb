@@ -1,23 +1,25 @@
-# XLSX data of pane
 module OoxmlParser
-  class Pane
+  # Class for `pane` data
+  class Pane < OOXMLDocumentObject
     attr_accessor :state, :top_left_cell, :x_split, :y_split
 
-    def self.parse(pane_node)
-      pane = Pane.new
-      pane_node.attributes.each do |key, value|
+    # Parse Pane object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Pane] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'state'
-          pane.state = value.value.to_sym
+          @state = value.value.to_sym
         when 'topLeftCell'
-          pane.top_left_cell = Coordinates.parse_coordinates_from_string(value.value)
+          @top_left_cell = Coordinates.parse_coordinates_from_string(value.value)
         when 'xSplit'
-          pane.x_split = value.value
+          @x_split = value.value
         when 'ySplit'
-          pane.y_split = value.value
+          @y_split = value.value
         end
       end
-      pane
+      self
     end
   end
 end
