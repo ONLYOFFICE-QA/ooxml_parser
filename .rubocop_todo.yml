@@ -6,13 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: AllowUnusedKeywordArguments, IgnoreEmptyMethods.
-Lint/UnusedMethodArgument:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/graphic/shape/shape_properties/custom_geometry/docx_custom_geometry/docx_shape_line_path/docx_shape_line_element.rb'
-
 # Offense count: 125
 Metrics/AbcSize:
   Max: 227
