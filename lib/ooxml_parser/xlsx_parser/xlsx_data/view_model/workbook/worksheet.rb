@@ -1,10 +1,10 @@
 require_relative 'worksheet/excel_comments'
 require_relative 'worksheet/sheet_format_properties'
 require_relative 'worksheet/sheet_view'
+require_relative 'worksheet/table_part'
 require_relative 'worksheet/xlsx_column_properties'
 require_relative 'worksheet/xlsx_drawing'
 require_relative 'worksheet/xlsx_row'
-require_relative 'worksheet/xlsx_table'
 # Properties of worksheet
 module OoxmlParser
   class Worksheet < OOXMLDocumentObject
@@ -89,8 +89,9 @@ module OoxmlParser
         when 'autoFilter'
           worksheet.autofilter = Coordinates.parser_coordinates_range(worksheet_node_child.attribute('ref').value.to_s)
         when 'tableParts'
-          worksheet.table_parts = []
-          worksheet_node_child.xpath('xmlns:tablePart').each { |table_part_node| worksheet.table_parts << XlsxTable.parse(table_part_node) }
+          worksheet_node_child.xpath('*').each do |part_node|
+            worksheet.table_parts << TablePart.new(parent: worksheet).parse(part_node)
+          end
         when 'sheetViews'
           worksheet_node_child.xpath('*').each do |view_child|
             worksheet.sheet_views << SheetView.new(parent: worksheet).parse(view_child)
