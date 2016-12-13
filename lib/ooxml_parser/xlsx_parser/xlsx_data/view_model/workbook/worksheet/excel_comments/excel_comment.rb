@@ -1,4 +1,3 @@
-require_relative 'excel_comment/excel_comment_character'
 # Single Comment of XLSX
 module OoxmlParser
   class ExcelComment < OOXMLDocumentObject
@@ -11,8 +10,7 @@ module OoxmlParser
     def self.parse(comment_node)
       comment = ExcelComment.new
       comment_node.xpath('xmlns:text/xmlns:r').each do |character_node|
-        character = ExcelCommentCharacter.parse(character_node)
-        comment.characters << character.dup
+        comment.characters << ParagraphRun.parse(character_node)
       end
       comment
     end
