@@ -4,6 +4,8 @@ module OoxmlParser
   # Class for parsing `bodyPr`
   class OOXMLShapeBodyProperties < OOXMLDocumentObject
     attr_accessor :margins, :anchor, :wrap, :preset_text_warp
+    # @return [Symbol] Vertical Text
+    attr_accessor :vertical
 
     alias vertical_align anchor
 
@@ -21,6 +23,8 @@ module OoxmlParser
           @wrap = value.value.to_sym
         when 'anchor'
           @anchor = value_to_symbol(value)
+        when 'vert'
+          @vertical = value_to_symbol(value)
         end
       end
       node.xpath('*').each do |node_child|
