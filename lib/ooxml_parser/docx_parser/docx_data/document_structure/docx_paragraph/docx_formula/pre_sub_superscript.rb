@@ -14,11 +14,11 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'sub'
-          @bottom_value = DocxFormula.parse(node_child)
+          @bottom_value = DocxFormula.new(parent: self).parse(node_child)
         when 'sup'
-          @top_value = DocxFormula.parse(node_child)
+          @top_value = DocxFormula.new(parent: self).parse(node_child)
         when 'e'
-          @base = DocxFormula.parse(node_child)
+          @base = DocxFormula.new(parent: self).parse(node_child)
         end
       end
       self

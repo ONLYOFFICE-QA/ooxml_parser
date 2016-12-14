@@ -10,9 +10,8 @@ module OoxmlParser
       graphic_frame = GraphicFrame.new
       graphic_frame_node.xpath('*').each do |graphic_frame_node_child|
         case graphic_frame_node_child.name
-        when 'nvGraphicFramePr'
         when 'xfrm'
-          graphic_frame.transform = TransformEffect.parse(graphic_frame_node_child)
+          graphic_frame.transform = DocxShapeSize.new(parent: graphic_frame_node).parse(graphic_frame_node_child)
         when 'graphic'
           graphic_data = []
           graphic_frame_node_child.xpath('a:graphicData/*').each do |graphic_node_child|

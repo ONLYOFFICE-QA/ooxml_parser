@@ -1,4 +1,3 @@
-require_relative 'shapes_grouping/grouping_properties'
 module OoxmlParser
   class ShapesGrouping
     attr_accessor :elements, :properties
@@ -11,13 +10,12 @@ module OoxmlParser
       grouping = ShapesGrouping.new
       grouping_node.xpath('*').each do |grouping_node_child|
         case grouping_node_child.name
-        when 'nvGrpSpPr'
         when 'grpSpPr'
-          grouping.properties = GroupingProperties.parse(grouping_node_child)
+          grouping.properties = DocxShapeProperties.new(parent: grouping).parse(grouping_node_child)
         when 'pic'
           grouping.elements << DocxPicture.parse(grouping_node_child)
         when 'sp'
-          grouping.elements << PresentationShape.parse(grouping_node_child).dup
+          grouping.elements << DocxShape.parse(grouping_node_child).dup
         when 'grpSp'
           grouping.elements << parse(grouping_node_child)
         when 'graphicFrame'

@@ -1,11 +1,20 @@
-# Box data
 module OoxmlParser
-  class Box
+  # Class for `box`, `borderBox` data
+  class Box < OOXMLDocumentObject
     attr_accessor :borders, :element
 
-    def initialize(borders = false, element = nil)
-      @borders = borders
-      @element = element
+    def initialize(parent: nil)
+      @borders = false
+      @parent = parent
+    end
+
+    # Parse Box object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Box] result of parsing
+    def parse(node)
+      @borders = true if node.name == 'borderBox'
+      @element = MathRun.parse(node)
+      self
     end
   end
 end

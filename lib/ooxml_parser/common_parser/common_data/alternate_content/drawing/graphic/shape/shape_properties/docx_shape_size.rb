@@ -2,6 +2,8 @@
 module OoxmlParser
   class DocxShapeSize < OOXMLDocumentObject
     attr_accessor :rotation, :flip_horizontal, :flip_vertical, :offset, :extent
+    attr_accessor :child_offset
+    attr_accessor :child_extent
 
     alias extents extent
 
@@ -25,6 +27,10 @@ module OoxmlParser
           @offset = OOXMLCoordinates.parse(node_child, unit: :emu)
         when 'ext'
           @extent = OOXMLCoordinates.parse(node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
+        when 'chOff'
+          @child_offset = OOXMLCoordinates.parse(node_child, unit: :emu)
+        when 'chExt'
+          @child_extent = OOXMLCoordinates.parse(node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
         end
       end
       self

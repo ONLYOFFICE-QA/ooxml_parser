@@ -15,13 +15,13 @@ module OoxmlParser
     def transform_of_object(object)
       case object
       when :image
-        return elements.find { |e| e.is_a? Picture }.properties.transform
+        elements.find { |e| e.is_a? Picture }.properties.transform
       when :chart
-        return elements.find { |e| e.is_a? GraphicFrame }.transform
+        elements.find { |e| e.is_a? GraphicFrame }.transform
       when :table
-        return elements.find { |e| e.is_a? GraphicFrame }.transform
+        elements.find { |e| e.is_a? GraphicFrame }.transform
       when :shape
-        return elements.find { |e| !e.shape_properties.preset.nil? }.shape_properties.transform
+        elements.find { |e| !e.shape_properties.preset.nil? }.shape_properties.transform
       else
         raise "Dont know this type object - #{object}"
       end

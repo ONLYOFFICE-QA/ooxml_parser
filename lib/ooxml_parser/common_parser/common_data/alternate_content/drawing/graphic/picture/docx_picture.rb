@@ -11,7 +11,6 @@ module OoxmlParser
       picture = DocxPicture.new
       picture_node.xpath('*').each do |picture_node_child|
         case picture_node_child.name
-        when 'nvPicPr'
         when 'blipFill'
           picture.path_to_image = DocxBlip.parse(picture_node_child)
         when 'spPr'
