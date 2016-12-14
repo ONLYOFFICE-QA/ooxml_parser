@@ -52,6 +52,7 @@
 * Add parsing math data in xlsx files
 * Add parsing `PreSubSuperscript` class - `m:sPre` tag
 * Add parsing `a:prstDash` for `DocxShapeLine`
+* Add parsing `OOXMLShapeBodyProperties#vertical`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
