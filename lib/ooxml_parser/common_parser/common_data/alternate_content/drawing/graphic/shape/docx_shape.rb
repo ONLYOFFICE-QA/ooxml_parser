@@ -24,7 +24,7 @@ module OoxmlParser
       shape_node.xpath('*').each do |shape_node_child|
         case shape_node_child.name
         when 'nvSpPr'
-          shape.non_visual_properties = NonVisualShapeProperties.parse(shape_node_child)
+          shape.non_visual_properties = NonVisualShapeProperties.new(parent: shape).parse(shape_node_child)
         when 'spPr'
           shape.properties = DocxShapeProperties.new(parent: shape).parse(shape_node_child)
         when 'txbx'
