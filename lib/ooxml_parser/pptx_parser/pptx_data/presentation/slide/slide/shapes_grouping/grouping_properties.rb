@@ -1,4 +1,3 @@
-require_relative 'groupoing_properties/transform_effect'
 module OoxmlParser
   class GroupingProperties
     attr_accessor :transform
@@ -8,7 +7,7 @@ module OoxmlParser
       grouping_properties_node.xpath('*').each do |grouping_property_node|
         case grouping_property_node.name
         when 'xfrm'
-          grouping_properties.transform = TransformEffect.parse(grouping_property_node)
+          grouping_properties.transform = DocxShapeSize.new(parent: grouping_properties_node).parse(grouping_property_node)
         end
       end
       grouping_properties
