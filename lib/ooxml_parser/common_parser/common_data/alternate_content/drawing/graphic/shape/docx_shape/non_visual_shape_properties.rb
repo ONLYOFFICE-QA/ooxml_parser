@@ -1,5 +1,5 @@
-require_relative 'common_non_visual_properties'
-require_relative 'non_visual_properties'
+require_relative 'non_visual_shape_properties/common_non_visual_properties'
+require_relative 'non_visual_shape_properties/non_visual_properties'
 module OoxmlParser
   class NonVisualShapeProperties
     attr_accessor :common_properties, :non_visual_properties

@@ -1,7 +1,6 @@
 require_relative 'alternate_content/choice'
 require_relative 'chart/chart'
 require_relative 'drawing/docx_drawing'
-require_relative 'shape/shape'
 require_relative 'picture/old_docx_picture'
 # Class for storing fallback graphic elements
 module OoxmlParser

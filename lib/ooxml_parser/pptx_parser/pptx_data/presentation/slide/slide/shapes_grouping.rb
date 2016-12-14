@@ -15,7 +15,7 @@ module OoxmlParser
         when 'pic'
           grouping.elements << DocxPicture.parse(grouping_node_child)
         when 'sp'
-          grouping.elements << PresentationShape.parse(grouping_node_child).dup
+          grouping.elements << DocxShape.parse(grouping_node_child).dup
         when 'grpSp'
           grouping.elements << parse(grouping_node_child)
         when 'graphicFrame'

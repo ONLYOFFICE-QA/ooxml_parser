@@ -35,7 +35,7 @@ module OoxmlParser
               common_slide_node_child.xpath('*').each do |slide_element_node|
                 case slide_element_node.name
                 when 'sp'
-                  slide.elements << PresentationShape.parse(slide_element_node).dup
+                  slide.elements << DocxShape.parse(slide_element_node).dup
                 when 'pic'
                   slide.elements << DocxPicture.parse(slide_element_node)
                 when 'graphicFrame'
