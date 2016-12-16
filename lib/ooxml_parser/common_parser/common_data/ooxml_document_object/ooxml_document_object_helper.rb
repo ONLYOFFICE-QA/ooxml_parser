@@ -65,7 +65,7 @@ module OoxmlDocumentObjectHelper
     return false if node.to_s == '0'
     return false if node.attribute(attribute_name).nil?
     status = node.attribute(attribute_name).value
-    status == 'true' || status == 'on' || status == '1'
+    !(status == 'false' || status == 'off' || status == '0')
   end
 
   def attribute_enabled?(node, attribute_name = 'val')
