@@ -86,6 +86,7 @@
 * Fix parsing emty `TransitionProperties`
 * Fix memory hog on calculating diffs
 * Fix values of `OOXMLFont`: was not float
+* Fix parsing `Underline` style
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
