@@ -5,7 +5,6 @@ require_relative 'run_properties/size'
 require_relative 'run_properties/run_spacing'
 require_relative 'run_properties/run_style'
 require_relative 'run_properties/shade'
-require_relative 'run_properties/strikeout'
 module OoxmlParser
   # Data about `rPr` object
   class RunProperties < OOXMLDocumentObject
@@ -51,7 +50,7 @@ module OoxmlParser
         when 'u'
           @font_style.underlined = Underline.parse(value.value)
         when 'strike'
-          @font_style.strike = Strikeout.parse(value)
+          @font_style.strike = value_to_symbol(value)
         when 'baseline'
           case value.value.to_i
           when -25_000, -30_000

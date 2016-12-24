@@ -52,4 +52,10 @@ describe 'My behaviour' do
     drawing = pptx.slides[0].elements.last
     expect(drawing.graphic_data.first.title.elements.first.runs.first.properties.font_style.bold).to eq(false)
   end
+
+  it 'strike_style_no_strike' do
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/font_style/strike_style_no_strike.pptx')
+    shape = pptx.slides[0].elements.last
+    expect(shape.text_body.paragraphs[1].runs.first.properties.font_style.strike).to eq(:none)
+  end
 end
