@@ -87,6 +87,7 @@
 * Fix memory hog on calculating diffs
 * Fix values of `OOXMLFont`: was not float
 * Fix parsing `Underline` style
+* Fix parsing Strike `noStrike`
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
