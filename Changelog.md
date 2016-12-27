@@ -53,6 +53,7 @@
 * Add parsing `PreSubSuperscript` class - `m:sPre` tag
 * Add parsing `a:prstDash` for `DocxShapeLine`
 * Add parsing `OOXMLShapeBodyProperties#vertical`
+* Add parsing `CellStyle#apply_number_format`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

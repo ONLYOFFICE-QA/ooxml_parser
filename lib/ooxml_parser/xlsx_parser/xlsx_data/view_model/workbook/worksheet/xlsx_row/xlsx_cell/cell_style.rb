@@ -50,6 +50,8 @@ module OoxmlParser
     attr_accessor :font, :borders, :fill_color, :numerical_format, :alignment
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string
     attr_accessor :quote_prefix
+    # @return [True, False] is number format is applied
+    attr_accessor :apply_number_format
 
     def initialize(font = nil,
                    borders = nil,
@@ -80,6 +82,7 @@ module OoxmlParser
         @fill_color = ForegroundColor.parse(current_cell_style.attribute('fillId').value.to_i)
       end
       unless current_cell_style.attribute('applyNumberFormat').nil? || current_cell_style.attribute('applyNumberFormat').value == '0'
+        @apply_number_format = true
         format_id = current_cell_style.attribute('numFmtId').value.to_i
         XLSXWorkbook.styles_node.xpath('//xmlns:numFmt').each do |numeric_format|
           if format_id == numeric_format.attribute('numFmtId').value.to_i
