@@ -16,11 +16,11 @@ module OoxmlParser
           grouping.properties = DocxShapeProperties.new(parent: grouping).parse(grouping_node_child)
         when 'pic'
           element = DocxGroupElement.new(:picture)
-          element.object = DocxPicture.parse(grouping_node_child)
+          element.object = DocxPicture.new(parent: element).parse(grouping_node_child)
           grouping.elements << element
         when 'wsp'
           element = DocxGroupElement.new(:shape)
-          element.object = DocxShape.parse(grouping_node_child)
+          element.object = DocxShape.new(parent: element).parse(grouping_node_child)
           grouping.elements << element
         when 'grpSp'
           element = parse(grouping_node_child)

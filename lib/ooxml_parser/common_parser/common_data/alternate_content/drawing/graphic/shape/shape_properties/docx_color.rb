@@ -14,7 +14,7 @@ module OoxmlParser
         case fill_node.name
         when 'blipFill'
           fill_color.type = :picture
-          fill_color.value = DocxBlip.parse(fill_node)
+          fill_color.value = DocxBlip.new(parent: fill_color).parse(fill_node)
           fill_node.xpath('*').each do |fill_type_node_child|
             case fill_type_node_child.name
             when 'tile'

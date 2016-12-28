@@ -8,15 +8,14 @@ module OoxmlParser
     # Parse Order
     # @param [Nokogiri::XML:Node] node with Order
     # @return [Order] result of parsing
-    def self.parse(node)
-      text = SeriesText.new
+    def parse(node)
       node.xpath('*').each do |series_child|
         case series_child.name
         when 'strRef'
-          text.string = StringReference.parse(series_child)
+          @string = StringReference.parse(series_child)
         end
       end
-      text
+      self
     end
   end
 

@@ -1,23 +1,25 @@
 require_relative 'docx_blip'
-# Docx Picture Data
 module OoxmlParser
+  # Class for parsing `pic`
   class DocxPicture < OOXMLDocumentObject
     attr_accessor :path_to_image, :properties, :nonvisual_properties, :chart
 
     alias image path_to_image
     alias shape_properties properties
 
-    def self.parse(picture_node)
-      picture = DocxPicture.new
-      picture_node.xpath('*').each do |picture_node_child|
-        case picture_node_child.name
+    # Parse DocxPicture object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxPicture] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'blipFill'
-          picture.path_to_image = DocxBlip.parse(picture_node_child)
+          @path_to_image = DocxBlip.new(parent: self).parse(node_child)
         when 'spPr'
-          picture.properties = DocxShapeProperties.new(parent: picture).parse(picture_node_child)
+          @properties = DocxShapeProperties.new(parent: self).parse(node_child)
         end
       end
-      picture
+      self
     end
   end
 

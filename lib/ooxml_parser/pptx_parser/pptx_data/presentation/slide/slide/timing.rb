@@ -1,23 +1,27 @@
 require_relative 'timing/time_node'
 module OoxmlParser
-  class Timing
+  # Class for parsing `timing`
+  class Timing < OOXMLDocumentObject
     attr_accessor :time_node_list, :build_list, :extension_list
 
-    def initialize(time_node_list = [], build_list = [], extension_list = [])
-      @time_node_list = time_node_list
-      @build_list = build_list
-      @extension_list = extension_list
+    def initialize(parent: nil)
+      @time_node_list = []
+      @build_list = []
+      @extension_list = []
+      @parent = parent
     end
 
-    def self.parse(timing_node)
-      timing = Timing.new
-      timing_node.xpath('*').each do |timing_node_child|
-        case timing_node_child.name
+    # Parse Timing object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Timing] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'tnLst'
-          timing.time_node_list = TimeNode.parse_list(timing_node_child)
+          @time_node_list = TimeNode.parse_list(node_child)
         end
       end
-      timing
+      self
     end
   end
 end

@@ -5,13 +5,16 @@ require_relative 'slide/slide/shapes_grouping'
 require_relative 'slide/slide/timing'
 require_relative 'slide/slide_helper'
 module OoxmlParser
+  # Class for parsing `slide.xml`
   class Slide < OOXMLDocumentObject
     include SlideHelper
     attr_accessor :elements, :background, :transition, :timing, :alternate_content
 
-    def initialize(elements = [], background = nil)
-      @elements = elements
-      @background = background
+    def initialize(parent: nil, xml_path: nil)
+      @elements = []
+      @background = nil
+      @parent = parent
+      @xml_path = xml_path
     end
 
     def with_data?
@@ -22,42 +25,43 @@ module OoxmlParser
       false
     end
 
-    def self.parse(path_to_slide_xml)
-      slide = Slide.new
-      OOXMLDocumentObject.add_to_xmls_stack(path_to_slide_xml)
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
-      doc.xpath('//p:sld/*').each do |slide_node_child|
-        case slide_node_child.name
+    # Parse Slide object
+    # @return [Slide] result of parsing
+    def parse
+      OOXMLDocumentObject.add_to_xmls_stack(@xml_path)
+      node = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      node.xpath('//p:sld/*').each do |node_child|
+        case node_child.name
         when 'cSld'
-          slide_node_child.xpath('*').each do |common_slide_node_child|
+          node_child.xpath('*').each do |common_slide_node_child|
             case common_slide_node_child.name
             when 'spTree'
               common_slide_node_child.xpath('*').each do |slide_element_node|
                 case slide_element_node.name
                 when 'sp'
-                  slide.elements << DocxShape.parse(slide_element_node).dup
+                  @elements << DocxShape.new(parent: self).parse(slide_element_node).dup
                 when 'pic'
-                  slide.elements << DocxPicture.parse(slide_element_node)
+                  @elements << DocxPicture.new(parent: self).parse(slide_element_node)
                 when 'graphicFrame'
-                  slide.elements << GraphicFrame.parse(slide_element_node)
+                  @elements << GraphicFrame.new(parent: self).parse(slide_element_node)
                 when 'grpSp'
-                  slide.elements << ShapesGrouping.parse(slide_element_node)
+                  @elements << ShapesGrouping.new(parent: self).parse(slide_element_node)
                 end
               end
             when 'bg'
-              slide.background = Background.new(parent: slide).parse(common_slide_node_child)
+              @background = Background.new(parent: self).parse(common_slide_node_child)
             end
           end
         when 'timing'
-          slide.timing = Timing.parse(slide_node_child)
+          @timing = Timing.new(parent: self).parse(node_child)
         when 'transition'
-          slide.transition = Transition.new(parent: slide).parse(slide_node_child)
+          @transition = Transition.new(parent: self).parse(node_child)
         when 'AlternateContent'
-          slide.alternate_content = PresentationAlternateContent.parse(slide_node_child)
+          @alternate_content = PresentationAlternateContent.new(parent: self).parse(node_child)
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
-      slide
+      self
     end
   end
 end

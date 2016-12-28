@@ -32,7 +32,7 @@ module OoxmlParser
         when 'grouping'
           @grouping = chart_props_node_child.attribute('val').value.to_sym
         when 'ser'
-          @series << Series.parse(chart_props_node_child)
+          @series << Series.new(parent: self).parse(chart_props_node_child)
           case @type
           when :point, :bubble
             val = chart_props_node_child.xpath('c:yVal')[0]
