@@ -3,11 +3,25 @@ module OoxmlParser
   # Class for `sheetView` data
   class SheetView < OOXMLDocumentObject
     attr_accessor :pane
+    # @return [True, False] Flag indicating whether this sheet should display gridlines.
+    attr_accessor :show_gridlines
+
+    def initialize(parent: nil)
+      @parent = parent
+      @show_gridlines = true
+    end
 
     # Parse SheetView object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [SheetView] result of parsing
     def parse(node)
+      node.attributes.each do |key, _value|
+        case key
+        when 'showGridLines'
+          @show_gridlines = attribute_enabled?(node, key)
+        end
+      end
+
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'pane'

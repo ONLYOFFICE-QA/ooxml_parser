@@ -54,6 +54,7 @@
 * Add parsing `a:prstDash` for `DocxShapeLine`
 * Add parsing `OOXMLShapeBodyProperties#vertical`
 * Add parsing `CellStyle#apply_number_format`
+* Add parsing `SheetView#show_gridlines`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
