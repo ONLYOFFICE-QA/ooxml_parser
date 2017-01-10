@@ -1,28 +1,32 @@
 module OoxmlParser
-  class ShapesGrouping
+  # Class for parsing `grpSp`
+  class ShapesGrouping < OOXMLDocumentObject
     attr_accessor :elements, :properties
 
-    def initialize(elements = [])
-      @elements = elements
+    def initialize(parent: nil)
+      @elements = []
+      @parent = parent
     end
 
-    def self.parse(grouping_node)
-      grouping = ShapesGrouping.new
-      grouping_node.xpath('*').each do |grouping_node_child|
-        case grouping_node_child.name
+    # Parse ShapesGrouping object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ShapesGrouping] result of parsing
+    def parse(node)
+      node.xpath('*').each do |child_node|
+        case child_node.name
         when 'grpSpPr'
-          grouping.properties = DocxShapeProperties.new(parent: grouping).parse(grouping_node_child)
+          @properties = DocxShapeProperties.new(parent: self).parse(child_node)
         when 'pic'
-          grouping.elements << DocxPicture.parse(grouping_node_child)
+          @elements << DocxPicture.new(parent: self).parse(child_node)
         when 'sp'
-          grouping.elements << DocxShape.parse(grouping_node_child).dup
+          @elements << DocxShape.new(parent: self).parse(child_node).dup
         when 'grpSp'
-          grouping.elements << parse(grouping_node_child)
+          @elements << ShapesGrouping.new(parent: self).parse(child_node)
         when 'graphicFrame'
-          grouping.elements << GraphicFrame.parse(grouping_node_child)
+          @elements << GraphicFrame.new(parent: self).parse(child_node)
         end
       end
-      grouping
+      self
     end
   end
 end

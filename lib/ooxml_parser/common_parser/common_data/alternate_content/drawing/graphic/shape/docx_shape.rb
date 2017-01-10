@@ -3,8 +3,8 @@ require_relative 'docx_shape/non_visual_shape_properties'
 require_relative 'docx_shape/text_body'
 require_relative 'shape_properties/docx_shape_properties'
 require_relative 'shape_body_properties/ooxml_shape_body_properties'
-# Docx Shape Data
 module OoxmlParser
+  # Class for parsing `sp`, `wsp` tags
   class DocxShape < OOXMLDocumentObject
     attr_accessor :non_visual_properties, :properties, :style, :body_properties, :text_body
 
@@ -18,24 +18,25 @@ module OoxmlParser
       false
     end
 
-    def self.parse(shape_node, parent: nil)
-      shape = DocxShape.new
-      shape.parent = parent
-      shape_node.xpath('*').each do |shape_node_child|
-        case shape_node_child.name
+    # Parse DocxShape object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxShape] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'nvSpPr'
-          shape.non_visual_properties = NonVisualShapeProperties.new(parent: shape).parse(shape_node_child)
+          @non_visual_properties = NonVisualShapeProperties.new(parent: self).parse(node_child)
         when 'spPr'
-          shape.properties = DocxShapeProperties.new(parent: shape).parse(shape_node_child)
+          @properties = DocxShapeProperties.new(parent: self).parse(node_child)
         when 'txbx'
-          shape.text_body = OOXMLTextBox.parse(shape_node_child, parent: shape)
+          @text_body = OOXMLTextBox.parse(node_child, parent: self)
         when 'txBody'
-          shape.text_body = TextBody.parse(shape_node_child)
+          @text_body = TextBody.parse(node_child)
         when 'bodyPr'
-          shape.body_properties = OOXMLShapeBodyProperties.new(parent: shape).parse(shape_node_child)
+          @body_properties = OOXMLShapeBodyProperties.new(parent: self).parse(node_child)
         end
       end
-      shape
+      self
     end
   end
 end

@@ -19,11 +19,11 @@ module OoxmlParser
         when 'to'
           @to = XlsxDrawingPositionParameters.new(parent: self).parse(child_node)
         when 'sp'
-          @shape = DocxShape.parse(child_node)
+          @shape = DocxShape.new(parent: self).parse(child_node)
         when 'grpSp'
           @grouping = XlsxShapeGrouping.parse(child_node)
         when 'pic'
-          @picture = DocxPicture.parse(child_node)
+          @picture = DocxPicture.new(parent: self).parse(child_node)
         when 'graphicFrame'
           @picture = DocxPicture.new
           graphic_data_node = child_node.xpath('a:graphic/a:graphicData', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main')

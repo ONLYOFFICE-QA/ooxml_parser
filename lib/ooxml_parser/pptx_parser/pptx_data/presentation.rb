@@ -25,12 +25,14 @@ module OoxmlParser
       presentation_node.xpath('*').each do |presentation_node_child|
         case presentation_node_child.name
         when 'sldSz'
-          presentation.slide_size = SlideSize.parse(presentation_node_child)
+          presentation.slide_size = SlideSize.new(parent: presentation).parse(presentation_node_child)
         when 'sldIdLst'
           presentation_node_child.xpath('p:sldId').each do |silde_id_node|
             id = nil
             silde_id_node.attribute_nodes.select { |node| id = node.to_s if node.namespace && node.namespace.prefix == 'r' }
-            presentation.slides << Slide.parse("#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(id)}")
+            presentation.slides << Slide.new(parent: presentation,
+                                             xml_path: "#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(id)}")
+                                   .parse
           end
         end
       end

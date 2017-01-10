@@ -16,21 +16,20 @@ module OoxmlParser
     # Parse Series
     # @param [Nokogiri::XML:Node] node with Series
     # @return [Series] result of parsing
-    def self.parse(node)
-      series = Series.new
-      node.xpath('*').each do |series_childe_node|
-        case series_childe_node.name
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'idx'
-          series.index = SeriesIndex.parse(series_childe_node)
+          @index = SeriesIndex.new(parent: self).parse(node_child)
         when 'order'
-          series.order = Order.parse(series_childe_node)
+          @order = Order.new(parent: self).parse(node_child)
         when 'tx'
-          series.text = SeriesText.parse(series_childe_node)
+          @text = SeriesText.new(parent: self).parse(node_child)
         when 'cat'
-          series.categories = Categories.parse(series_childe_node)
+          @categories = Categories.new(parent: self).parse(node_child)
         end
       end
-      series
+      self
     end
   end
 end

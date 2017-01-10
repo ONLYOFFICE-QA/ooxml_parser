@@ -4,18 +4,17 @@ module OoxmlParser
     # @return [Integer] value of index
     attr_accessor :value
 
-    # Parse Index
+    # Parse SeriesIndex
     # @param [Nokogiri::XML:Node] node with Index
-    # @return [Index] result of parsing
-    def self.parse(node)
-      index = SeriesIndex.new
+    # @return [SeriesIndex] result of parsing
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'val'
-          index.value = value.value.to_f
+          @value = value.value.to_f
         end
       end
-      index
+      self
     end
   end
 end

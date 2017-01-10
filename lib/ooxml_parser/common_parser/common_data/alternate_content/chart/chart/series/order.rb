@@ -7,15 +7,14 @@ module OoxmlParser
     # Parse Order
     # @param [Nokogiri::XML:Node] node with Order
     # @return [Order] result of parsing
-    def self.parse(node)
-      index = Order.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'val'
-          index.value = value.value.to_f
+          @value = value.value.to_f
         end
       end
-      index
+      self
     end
   end
 end

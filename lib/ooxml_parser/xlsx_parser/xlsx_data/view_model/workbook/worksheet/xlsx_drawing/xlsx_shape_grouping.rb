@@ -16,9 +16,9 @@ module OoxmlParser
         when 'grpSp'
           grouping.grouping = parse(grouping_node_child)
         when 'sp'
-          grouping.shapes << DocxShape.parse(grouping_node_child)
+          grouping.shapes << DocxShape.new(parent: grouping).parse(grouping_node_child)
         when 'pic'
-          grouping.pictures << DocxPicture.parse(grouping_node_child)
+          grouping.pictures << DocxPicture.new(parent: grouping).parse(grouping_node_child)
         when 'graphicFrame'
           picture = DocxPicture.new
           graphic_data_node = grouping_node_child.xpath('a:graphic/a:graphicData', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main')

@@ -15,10 +15,10 @@ module OoxmlParser
         case graphic_data_node_child.name
         when 'wsp'
           graphic.type = :shape
-          graphic.data = DocxShape.parse(graphic_data_node_child, parent: graphic)
+          graphic.data = DocxShape.new(parent: graphic).parse(graphic_data_node_child)
         when 'pic'
           graphic.type = :picture
-          graphic.data = DocxPicture.parse(graphic_data_node_child)
+          graphic.data = DocxPicture.new(parent: graphic).parse(graphic_data_node_child)
         when 'chart'
           graphic.type = :chart
           OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(graphic_data_node_child.attribute('id').value)}")
