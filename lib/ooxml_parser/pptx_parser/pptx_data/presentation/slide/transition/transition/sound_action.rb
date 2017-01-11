@@ -1,20 +1,22 @@
 require_relative 'sound_action/sound'
 module OoxmlParser
-  class SoundAction
+  # Class for parsing SoundAction
+  class SoundAction < OOXMLDocumentObject
     attr_accessor :start_sound, :end_sound
 
-    def self.parse(sound_action_node)
-      return nil unless sound_action_node.name == 'sndAc'
-      sound_action = SoundAction.new
-      sound_action_node.xpath('*').each do |sound_action_node_child|
-        case sound_action_node_child.name
+    # Parse HyperlinkForHover
+    # @param [Nokogiri::XML:Node] node with NumberingProperties
+    # @return [HyperlinkForHover] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'stSnd'
-          sound_action.start_sound = Sound.parse(sound_action_node_child.xpath('p:snd').first) unless sound_action_node_child.xpath('p:snd').first.nil?
+          @start_sound = Sound.new(parent: self).parse(node_child.xpath('p:snd').first) unless node_child.xpath('p:snd').first.nil?
         when 'endSnd'
-          sound_action.end_sound = Sound.parse(sound_action_node_child.xpath('p:snd').first) unless sound_action_node_child.xpath('p:snd').first.nil?
+          @end_sound = Sound.new(parent: self).parse(node_child.xpath('p:snd').first) unless node_child.xpath('p:snd').first.nil?
         end
       end
-      sound_action
+      self
     end
   end
 end

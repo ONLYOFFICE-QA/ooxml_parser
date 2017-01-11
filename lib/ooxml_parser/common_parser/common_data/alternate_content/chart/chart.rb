@@ -5,8 +5,6 @@ require_relative 'chart_point'
 require_relative 'display_labels_properties'
 require_relative 'chart/series'
 require_relative 'chart/view_3d'
-require_relative 'chart_style/office_2007_chart_style'
-require_relative 'chart_style/office_2010_chart_style'
 
 module OoxmlParser
   class Chart < OOXMLDocumentObject
@@ -56,7 +54,7 @@ module OoxmlParser
           chart_node.xpath('*').each do |chart_space_node_child|
             case chart_space_node_child.name
             when 'AlternateContent'
-              chart.alternate_content = AlternateContent.parse(chart_space_node_child)
+              chart.alternate_content = AlternateContent.new(parent: chart).parse(chart_space_node_child)
             when 'spPr'
               chart.shape_properties = DocxShapeProperties.new(parent: chart).parse(chart_space_node_child)
             when 'chart'

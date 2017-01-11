@@ -10,17 +10,16 @@ module OoxmlParser
     # Parse Order
     # @param [Nokogiri::XML:Node] node with Order
     # @return [Order] result of parsing
-    def self.parse(node)
-      str_ref = StringReference.new
+    def parse(node)
       node.xpath('*').each do |reference_child|
         case reference_child.name
         when 'f'
-          str_ref.formula = reference_child.text
+          @formula = reference_child.text
         when 'strCache'
-          str_ref.cache = StringCache.parse(reference_child)
+          @cache = StringCache.new(parent: self).parse(reference_child)
         end
       end
-      str_ref
+      self
     end
   end
 end

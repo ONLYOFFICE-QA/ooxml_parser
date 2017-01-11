@@ -14,7 +14,7 @@ module OoxmlParser
         case node_child.name
         when 'gradFill'
           @type = :gradient
-          @color = GradientColor.parse(node_child)
+          @color = GradientColor.new(parent: self).parse(node_child)
         when 'solidFill'
           @type = :solid
           @color = Color.parse_color(node_child.xpath('*').first)

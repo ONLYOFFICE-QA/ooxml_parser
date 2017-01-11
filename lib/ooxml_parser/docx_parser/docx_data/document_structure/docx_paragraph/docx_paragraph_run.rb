@@ -149,9 +149,9 @@ module OoxmlParser
         when 'tab'
           @text += "\t"
         when 'drawing'
-          @drawings << DocxDrawing.parse(node_child)
+          @drawings << DocxDrawing.new(parent: self).parse(node_child)
         when 'AlternateContent'
-          @alternate_content = AlternateContent.parse(node_child, parent: self)
+          @alternate_content = AlternateContent.new(parent: self).parse(node_child)
         when 'br'
           if node_child.attribute('type').nil?
             @break = :line

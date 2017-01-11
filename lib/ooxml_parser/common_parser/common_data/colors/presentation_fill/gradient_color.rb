@@ -1,30 +1,34 @@
 require_relative 'gradient_color/gradient_stop'
 require_relative 'gradient_color/linear_gradient'
 module OoxmlParser
+  # Class for parsing `gradFill` tags
   class GradientColor
     attr_accessor :gradient_stops, :path
     # @return [LinearGradient] content of Linear Gradient
     attr_accessor :linear_gradient
 
-    def initialize(colors = [])
-      @gradient_stops = colors
+    def initialize(parent: nil)
+      @gradient_stops = []
+      @parent = parent
     end
 
-    def self.parse(gradient_fill_node)
-      gradient_color = GradientColor.new
-      gradient_fill_node.xpath('*').each do |gradient_fill_node_child|
-        case gradient_fill_node_child.name
+    # Parse GradientColor object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [GradientColor] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'gsLst'
-          gradient_fill_node_child.xpath('*').each do |gradient_stop_node|
-            gradient_color.gradient_stops << GradientStop.new(parent: gradient_color).parse(gradient_stop_node)
+          node_child.xpath('*').each do |gradient_stop_node|
+            @gradient_stops << GradientStop.new(parent: self).parse(gradient_stop_node)
           end
         when 'path'
-          gradient_color.path = gradient_fill_node_child.attribute('path').value.to_sym
+          @path = node_child.attribute('path').value.to_sym
         when 'lin'
-          gradient_color.linear_gradient = LinearGradient.parse(gradient_fill_node_child)
+          @linear_gradient = LinearGradient.new(parent: self).parse(node_child)
         end
       end
-      gradient_color
+      self
     end
   end
 end

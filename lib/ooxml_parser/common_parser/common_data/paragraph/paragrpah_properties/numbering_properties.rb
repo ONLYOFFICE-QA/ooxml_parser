@@ -1,10 +1,11 @@
 module OoxmlParser
+  # Class for parsing `numPr` tags
   class NumberingProperties < OOXMLDocumentObject
     attr_accessor :size, :font, :symbol, :start_at, :type, :ilvl, :numbering_properties
 
-    def initialize(ilvl = 0, numbering_properties = nil)
+    def initialize(ilvl = 0, parent: nil)
       @ilvl = ilvl
-      @numbering_properties = numbering_properties
+      @parent = parent
     end
 
     def abstruct_numbering
@@ -13,20 +14,17 @@ module OoxmlParser
 
     # Parse NumberingProperties
     # @param [Nokogiri::XML:Node] node with NumberingProperties
-    # @param [OoxmlParser::OOXMLDocumentObject] parent parent object
     # @return [NumberingProperties] result of parsing
-    def self.parse(node, parent)
-      num_properties = NumberingProperties.new
-      num_properties.parent = parent
-      node.xpath('*').each do |num_prop_child|
-        case num_prop_child.name
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'ilvl'
-          num_properties.ilvl = num_prop_child.attribute('val').value.to_i
+          @ilvl = node_child.attribute('val').value.to_i
         when 'numId'
-          num_properties.numbering_properties = num_prop_child.attribute('val').value.to_i
+          @numbering_properties = node_child.attribute('val').value.to_i
         end
       end
-      num_properties
+      self
     end
 
     def numbering_level_current

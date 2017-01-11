@@ -77,7 +77,7 @@ module OoxmlParser
         when 'rPr'
           @run_properties = RunProperties.new(parent: self).parse(node_child)
         when 'pBdr'
-          @paragraph_borders = ParagraphBorders.parse(node_child)
+          @paragraph_borders = ParagraphBorders.new(parent: self).parse(node_child)
         when 'keepNext'
           @keep_next = true
         when 'sectPr'

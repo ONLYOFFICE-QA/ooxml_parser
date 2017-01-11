@@ -22,7 +22,7 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [DocxShapeProperties] result of parsing
     def parse(node)
-      @fill_color = DocxColor.parse(node)
+      @fill_color = DocxColor.new(parent: self).parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'xfrm'

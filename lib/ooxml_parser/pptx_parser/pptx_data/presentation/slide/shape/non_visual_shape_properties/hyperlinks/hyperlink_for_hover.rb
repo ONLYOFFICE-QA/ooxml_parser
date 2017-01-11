@@ -1,5 +1,6 @@
 module OoxmlParser
-  class HyperlinkForHover
+  # Class for parsing `hlinkHover` tags
+  class HyperlinkForHover < OOXMLDocumentObject
     attr_accessor :id, :action, :sound
 
     def initialize(id = '', action = '')
@@ -7,17 +8,19 @@ module OoxmlParser
       @action = action
     end
 
-    def self.parse(hyperlink_for_hover_node)
-      hyperlink_for_hover = HyperlinkForHover.new
-      hyperlink_for_hover.id = hyperlink_for_hover_node.attribute('id').value
-      hyperlink_for_hover.action = hyperlink_for_hover_node.attribute('action').value
-      hyperlink_for_hover_node.xpath('*').each do |hyperlink_for_hover_node_child|
+    # Parse HyperlinkForHover
+    # @param [Nokogiri::XML:Node] node with NumberingProperties
+    # @return [HyperlinkForHover] result of parsing
+    def parse(node)
+      @id = node.attribute('id').value
+      @action = node.attribute('action').value
+      node.xpath('*').each do |hyperlink_for_hover_node_child|
         case hyperlink_for_hover_node_child.name
         when 'snd'
-          hyperlink_for_hover.sound = Sound.parse(hyperlink_for_hover_node_child)
+          @sound = Sound.new(parent: self).parse(hyperlink_for_hover_node_child)
         end
       end
-      hyperlink_for_hover
+      self
     end
   end
 end

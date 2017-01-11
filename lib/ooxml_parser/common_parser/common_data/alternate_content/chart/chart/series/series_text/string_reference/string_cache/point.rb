@@ -10,23 +10,22 @@ module OoxmlParser
     # Parse PointCount
     # @param [Nokogiri::XML:Node] node with PointCount
     # @return [PointCount] result of parsing
-    def self.parse(node)
-      point = Point.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'idx'
-          point.index = value.value.to_f
+          @index = value.value.to_f
         end
       end
 
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'v'
-          point.text = TextValue.parse(node_child)
+          @text = TextValue.new(parent: self).parse(node_child)
         end
       end
 
-      point
+      self
     end
   end
 end

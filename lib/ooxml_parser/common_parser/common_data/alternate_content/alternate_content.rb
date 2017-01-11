@@ -1,38 +1,40 @@
 require_relative 'alternate_content/choice'
+require_relative 'alternate_content/chart_style'
 require_relative 'chart/chart'
 require_relative 'drawing/docx_drawing'
 require_relative 'picture/old_docx_picture'
-# Class for storing fallback graphic elements
 module OoxmlParser
+  # Class for storing fallback graphic elements
   class AlternateContent < OOXMLDocumentObject
     attr_accessor :office2010_content, :office2007_content
     # @return [Choice] choice data
     attr_accessor :choice
 
-    def self.parse(alt_content_node, parent: nil)
-      alternate_content = AlternateContent.new
-      alternate_content.parent = parent
-      alt_content_node.xpath('*').each do |alternate_content_node_child|
+    # Parse AlternateContent
+    # @param [Nokogiri::XML:Node] node with Relationships
+    # @return [AlternateContent] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
         begin
-          alternate_content_node_child.xpath('w:drawing')
+          node_child.xpath('w:drawing')
         rescue Nokogiri::XML::XPath::SyntaxError # This mean it is Chart
-          case alternate_content_node_child.name
+          case node_child.name
           when 'Choice'
-            alternate_content.office2010_content = Office2010ChartStyle.parse(alternate_content_node_child)
+            @office2010_content = ChartStyle.new(parent: self).parse(node_child)
           when 'Fallback'
-            alternate_content.office2007_content = Office2007ChartStyle.parse(alternate_content_node_child)
+            @office2007_content = ChartStyle.new(parent: self).parse(node_child)
           end
           next
         end
-        case alternate_content_node_child.name
+        case node_child.name
         when 'Choice'
-          alternate_content.office2010_content = DocxDrawing.parse(alternate_content_node_child.xpath('w:drawing').first, parent: alternate_content) unless alternate_content_node_child.xpath('w:drawing').first.nil?
-          alternate_content.choice = Choice.new(parent: alternate_content).parse(alternate_content_node_child)
+          @office2010_content = DocxDrawing.new(parent: self).parse(node_child.xpath('w:drawing').first) unless node_child.xpath('w:drawing').first.nil?
+          @choice = Choice.new(parent: self).parse(node_child)
         when 'Fallback'
-          alternate_content.office2007_content = OldDocxPicture.parse(alternate_content_node_child.xpath('w:pict').first, parent: alternate_content) unless alternate_content_node_child.xpath('w:pict').first.nil?
+          @office2007_content = OldDocxPicture.parse(node_child.xpath('w:pict').first, parent: self) unless node_child.xpath('w:pict').first.nil?
         end
       end
-      alternate_content
+      self
     end
   end
 end

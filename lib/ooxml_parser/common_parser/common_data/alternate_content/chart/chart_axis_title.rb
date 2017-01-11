@@ -23,7 +23,7 @@ module OoxmlParser
             case rich_node_child.name
             when 'p'
               Presentation.current_font_style = FontStyle.new(true) # Default font style for chart title always bold
-              @elements << Paragraph.parse(rich_node_child)
+              @elements << Paragraph.new(parent: self).parse(rich_node_child)
               Presentation.current_font_style = FontStyle.new
             end
           end

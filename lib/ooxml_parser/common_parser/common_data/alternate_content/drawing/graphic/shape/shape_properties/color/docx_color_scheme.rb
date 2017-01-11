@@ -1,33 +1,36 @@
-# DOCX Color Scheme
 module OoxmlParser
+  # DOCX Color Scheme
   class DocxColorScheme < OOXMLDocumentObject
     attr_accessor :color, :type
 
-    def initialize
+    def initialize(parent: nil)
       @color = Color.new
       @type = :unknown
+      @parent = parent
     end
 
-    def self.parse(color_scheme_node)
-      color_scheme = DocxColorScheme.new
-      color_scheme_node.xpath('*').each do |color_scheme_node_child|
-        case color_scheme_node_child.name
+    # Parse DocxColorScheme object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxColorScheme] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'solidFill'
-          color_scheme.type = :solid
-          color_scheme.color = Color.parse_color_model(color_scheme_node_child)
+          @type = :solid
+          @color = Color.parse_color_model(node_child)
         when 'gradFill'
-          color_scheme.type = :gradient
-          color_scheme.color = GradientColor.parse(color_scheme_node_child)
+          @type = :gradient
+          @color = GradientColor.new(parent: self).parse(node_child)
         when 'noFill'
-          color_scheme.color = :none
-          color_scheme.type = :none
+          @color = :none
+          @type = :none
         when 'srgbClr'
-          color_scheme.color = Color.new(parent: color_scheme).parse_hex_string(color_scheme_node_child.attribute('val').value)
+          @color = Color.new(parent: self).parse_hex_string(node_child.attribute('val').value)
         when 'schemeClr'
-          color_scheme.color = Color.parse_scheme_color(color_scheme_node_child)
+          @color = Color.parse_scheme_color(node_child)
         end
       end
-      color_scheme
+      self
     end
 
     def to_s

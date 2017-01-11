@@ -45,7 +45,7 @@ module OoxmlParser
         when 'type'
           @type = pg_size_subnode.attribute('val').value
         when 'pgMar'
-          @margins = PageMargins.parse(pg_size_subnode)
+          @margins = PageMargins.new(parent: self).parse(pg_size_subnode)
         when 'pgNumType'
           @num_type = pg_size_subnode.attribute('fmt').value unless pg_size_subnode.attribute('fmt').nil?
         when 'formProt'
@@ -53,7 +53,7 @@ module OoxmlParser
         when 'textDirection'
           @text_direction = pg_size_subnode.attribute('val').value
         when 'docGrid'
-          @document_grid = DocumentGrid.parse(pg_size_subnode)
+          @document_grid = DocumentGrid.new(parent: self).parse(pg_size_subnode)
         when 'cols'
           @columns = Columns.new.parse(pg_size_subnode)
         when 'headerReference', 'footerReference'

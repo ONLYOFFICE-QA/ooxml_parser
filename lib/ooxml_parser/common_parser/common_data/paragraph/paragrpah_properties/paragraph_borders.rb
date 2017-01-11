@@ -30,25 +30,24 @@ module OoxmlParser
     # Parse Paragraph Borders data
     # @param [Nokogiri::XML:Element] node with Paragraph Borders data
     # @return [ParagraphBorders] value of Paragraph Borders data
-    def self.parse(node)
-      paragraph_borders = ParagraphBorders.new
-      node.xpath('*').each do |border_pr_child|
-        case border_pr_child.name
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'bottom'
-          paragraph_borders.bottom = BordersProperties.new(parent: paragraph_borders).parse(border_pr_child)
+          @bottom = BordersProperties.new(parent: self).parse(node_child)
         when 'left'
-          paragraph_borders.left = BordersProperties.new(parent: paragraph_borders).parse(border_pr_child)
+          @left = BordersProperties.new(parent: self).parse(node_child)
         when 'top'
-          paragraph_borders.top = BordersProperties.new(parent: paragraph_borders).parse(border_pr_child)
+          @top = BordersProperties.new(parent: self).parse(node_child)
         when 'right'
-          paragraph_borders.right = BordersProperties.new(parent: paragraph_borders).parse(border_pr_child)
+          @right = BordersProperties.new(parent: self).parse(node_child)
         when 'between'
-          paragraph_borders.between = BordersProperties.new(parent: paragraph_borders).parse(border_pr_child)
+          @between = BordersProperties.new(parent: self).parse(node_child)
         when 'bar'
-          paragraph_borders.bar = BordersProperties.new(parent: paragraph_borders).parse(border_pr_child)
+          @bar = BordersProperties.new(parent: self).parse(node_child)
         end
       end
-      paragraph_borders
+      self
     end
   end
 end

@@ -1,8 +1,16 @@
 module OoxmlParser
+  # Class for parsing `pgMar` tags
   class PageMargins < OOXMLDocumentObject
     attr_accessor :top, :bottom, :left, :right, :footer, :gutter, :header
 
-    def initialize(top: nil, bottom: nil, left: nil, right: nil, header: nil, footer: nil, gutter: nil)
+    def initialize(top: nil,
+                   bottom: nil,
+                   left: nil,
+                   right: nil,
+                   header: nil,
+                   footer: nil,
+                   gutter: nil,
+                   parent: nil)
       @top = top
       @bottom = bottom
       @left = left
@@ -10,32 +18,32 @@ module OoxmlParser
       @header = header
       @footer = footer
       @gutter = gutter
+      @parent = parent
     end
 
     # Parse BordersProperties
     # @param [Nokogiri::XML:Element] node with PageMargins
     # @return [PageMargins] value of PageMargins
-    def self.parse(node)
-      margins = PageMargins.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'top'
-          margins.top = OoxmlSize.new(value.value.to_f)
+          @top = OoxmlSize.new(value.value.to_f)
         when 'left'
-          margins.left = OoxmlSize.new(value.value.to_f)
+          @left = OoxmlSize.new(value.value.to_f)
         when 'right'
-          margins.right = OoxmlSize.new(value.value.to_f)
+          @right = OoxmlSize.new(value.value.to_f)
         when 'bottom'
-          margins.bottom = OoxmlSize.new(value.value.to_f)
+          @bottom = OoxmlSize.new(value.value.to_f)
         when 'header'
-          margins.header = OoxmlSize.new(value.value.to_f)
+          @header = OoxmlSize.new(value.value.to_f)
         when 'footer'
-          margins.footer = OoxmlSize.new(value.value.to_f)
+          @footer = OoxmlSize.new(value.value.to_f)
         when 'gutter'
-          margins.gutter = OoxmlSize.new(value.value.to_f)
+          @gutter = OoxmlSize.new(value.value.to_f)
         end
       end
-      margins
+      self
     end
   end
 end

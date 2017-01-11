@@ -32,7 +32,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'r'
-          @formula_run << MathRun.parse(node_child)
+          @formula_run << MathRun.new(parent: self).parse(node_child)
         when 'box', 'borderBox'
           @formula_run << Box.new(parent: self).parse(node_child)
         when 'func'
@@ -58,7 +58,7 @@ module OoxmlParser
         when 'groupChr'
           @formula_run << GroupChar.new(parent: self).parse(node_child)
         when 'argPr'
-          @argument_properties = ArgumentProperties.parse(node_child)
+          @argument_properties = ArgumentProperties.new(parent: self).parse(node_child)
         when 'sPre'
           @formula_run << PreSubSuperscript.new(parent: self).parse(node_child)
         when 'limUpp', 'limLow'

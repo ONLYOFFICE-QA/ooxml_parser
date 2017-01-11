@@ -21,7 +21,7 @@ module OoxmlParser
           end
         when 'commentList'
           comments_node_child.xpath('xmlns:comment').each do |comment_node|
-            excel_comments.comments << ExcelComment.parse(comment_node)
+            excel_comments.comments << ExcelComment.new(parent: excel_comments).parse(comment_node)
           end
         end
       end

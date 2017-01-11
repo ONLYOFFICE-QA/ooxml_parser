@@ -1,18 +1,21 @@
-# Single Comment of XLSX
 module OoxmlParser
+  # Single Comment of XLSX
   class ExcelComment < OOXMLDocumentObject
     attr_accessor :characters
 
-    def initialize(characters = [])
-      @characters = characters
+    def initialize(parent: nil)
+      @characters = []
+      @parent = parent
     end
 
-    def self.parse(comment_node)
-      comment = ExcelComment.new
-      comment_node.xpath('xmlns:text/xmlns:r').each do |character_node|
-        comment.characters << ParagraphRun.parse(character_node)
+    # Parse ExcelComment object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ExcelComment] result of parsing
+    def parse(node)
+      node.xpath('xmlns:text/xmlns:r').each do |node_child|
+        @characters << ParagraphRun.new(parse: self).parse(node_child)
       end
-      comment
+      self
     end
   end
 end

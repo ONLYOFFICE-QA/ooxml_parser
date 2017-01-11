@@ -20,7 +20,7 @@ module OoxmlParser
           @width = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
-      @color_scheme = DocxColorScheme.parse(node)
+      @color_scheme = DocxColorScheme.new(parent: self).parse(node)
       self
     end
   end

@@ -163,7 +163,7 @@ module OoxmlParser
         when 'hyperlink'
           character_style = default_character_style.copy
           if !node_child.attribute('id').nil?
-            character_style.link = Hyperlink.parse(node_child)
+            character_style.link = Hyperlink.new(parent: character_style).parse(node_child)
           else
             unless node_child.attribute('anchor').nil?
               character_style.link = node_child.attribute('anchor').value
@@ -215,7 +215,7 @@ module OoxmlParser
             @page_break = true
           end
         when 'pBdr'
-          @borders = ParagraphBorders.parse(node_child)
+          @borders = ParagraphBorders.new(parent: self).parse(node_child)
         when 'keepLines'
           if node_child.attribute('val').nil?
             @keep_lines = true
@@ -245,7 +245,7 @@ module OoxmlParser
         when 'framePr'
           @frame_properties = FrameProperties.new(parent: self).parse(node_child)
         when 'numPr'
-          @numbering = NumberingProperties.parse(node_child, self)
+          @numbering = NumberingProperties.new(parent: self).parse(node_child)
         when 'jc'
           @align = node_child.attribute('val').value.to_sym unless node_child.attribute('val').nil?
           @align = :justify if node_child.attribute('val').value == 'both'

@@ -8,24 +8,24 @@ module OoxmlParser
     # @return [Array, Point] array of points
     attr_accessor :points
 
-    def initialize
+    def initialize(parent: nil)
       @points = []
+      @parent = parent
     end
 
     # Parse Order
     # @param [Nokogiri::XML:Node] node with Order
     # @return [Order] result of parsing
-    def self.parse(node)
-      cache = StringCache.new
+    def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'ptCount'
-          cache.point_count = PointCount.parse(node_child)
+          @point_count = PointCount.new(parent: self).parse(node_child)
         when 'pt'
-          cache.points << Point.parse(node_child)
+          @points << Point.new(parent: self).parse(node_child)
         end
       end
-      cache
+      self
     end
   end
 end

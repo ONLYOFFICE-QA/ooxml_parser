@@ -82,7 +82,7 @@ module OoxmlParser
           end
         when 'hyperlinks'
           worksheet_node_child.xpath('xmlns:hyperlink').each do |hyperlink_node|
-            worksheet.hyperlinks << Hyperlink.parse(hyperlink_node).dup
+            worksheet.hyperlinks << Hyperlink.new(parent: worksheet).parse(hyperlink_node).dup
           end
         when 'cols'
           worksheet.columns = XlsxColumnProperties.parse_list(worksheet_node_child)

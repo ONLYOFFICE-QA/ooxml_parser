@@ -17,19 +17,19 @@ module OoxmlParser
         case wrap_node.name
         when 'wrapSquare'
           wrap.wrap_text = :square
-          wrap.distance_from_text = DocxDrawingDistanceFromText.parse(wrap_node)
+          wrap.distance_from_text = DocxDrawingDistanceFromText.new(parent: wrap).parse(wrap_node)
           break
         when 'wrapTight'
           wrap.wrap_text = :tight
-          wrap.distance_from_text = DocxDrawingDistanceFromText.parse(wrap_node)
+          wrap.distance_from_text = DocxDrawingDistanceFromText.new(parent: wrap).parse(wrap_node)
           break
         when 'wrapThrough'
           wrap.wrap_text = :through
-          wrap.distance_from_text = DocxDrawingDistanceFromText.parse(wrap_node)
+          wrap.distance_from_text = DocxDrawingDistanceFromText.new(parent: wrap).parse(wrap_node)
           break
         when 'wrapTopAndBottom'
           wrap.wrap_text = :topbottom
-          wrap.distance_from_text = DocxDrawingDistanceFromText.parse(wrap_node)
+          wrap.distance_from_text = DocxDrawingDistanceFromText.new(parent: wrap).parse(wrap_node)
           break
         end
       end

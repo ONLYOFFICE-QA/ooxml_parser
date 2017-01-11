@@ -27,7 +27,7 @@ module OoxmlParser
         when 'trPr'
           @table_row_properties = TableRowProperties.new(parent: self).parse(node_child)
         when 'tc'
-          @cells << TableCell.parse(node_child, parent: self)
+          @cells << TableCell.new(parent: self).parse(node_child)
         end
       end
       Presentation.current_font_style = FontStyle.new

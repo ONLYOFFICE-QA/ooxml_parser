@@ -12,7 +12,7 @@ module OoxmlParser
       node.xpath('*').each do |series_child|
         case series_child.name
         when 'strRef'
-          @string = StringReference.parse(series_child)
+          @string = StringReference.new(parent: self).parse(series_child)
         end
       end
       self
