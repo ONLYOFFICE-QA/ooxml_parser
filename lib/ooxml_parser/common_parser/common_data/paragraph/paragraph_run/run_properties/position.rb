@@ -7,15 +7,14 @@ module OoxmlParser
     # Parse Position
     # @param [Nokogiri::XML:Node] node with Position
     # @return [Position] result of parsing
-    def self.parse(node)
-      position = Position.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'val'
-          position.value = OoxmlSize.new(value.value.to_f, :half_point)
+          @value = OoxmlSize.new(value.value.to_f, :half_point)
         end
       end
-      position
+      self
     end
   end
 end

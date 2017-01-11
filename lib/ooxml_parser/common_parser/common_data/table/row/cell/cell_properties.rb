@@ -48,7 +48,7 @@ module OoxmlParser
         when 'shd'
           @shade = Shade.new(parent: self).parse(node_child)
         when 'fill'
-          @fill = DocxColorScheme.parse(node_child)
+          @fill = DocxColorScheme.new(parent: self).parse(node_child)
         when 'tcBorders'
           node_child.xpath('*').each do |border_child|
             case border_child.name

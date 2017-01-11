@@ -13,7 +13,7 @@ module OoxmlParser
     # @return [Box] result of parsing
     def parse(node)
       @borders = true if node.name == 'borderBox'
-      @element = MathRun.parse(node)
+      @element = MathRun.new(parent: self).parse(node)
       self
     end
   end

@@ -2,55 +2,57 @@ require_relative 'drawing_properties/docx_drawing_properties'
 require_relative 'drawing_properties/size_relative_horizontal'
 require_relative 'drawing_properties/size_relative_vertical'
 require_relative 'graphic/docx_graphic'
-# Docx Drawing Data
 module OoxmlParser
+  # Class for parsing `graphic` tags
   class DocxDrawing < OOXMLDocumentObject
     attr_accessor :type, :properties, :graphic
 
     alias picture graphic
 
-    def initialize(properties = DocxDrawingProperties.new)
+    def initialize(properties = DocxDrawingProperties.new, parent: nil)
       @properties = properties
+      @parent = parent
     end
 
-    def self.parse(drawing_node, parent: nil)
-      drawing = DocxDrawing.new
-      drawing.parent = parent
-      drawing_node.xpath('*').each do |drawing_node_child|
-        case drawing_node_child.name
+    # Parse DocxDrawing
+    # @param [Nokogiri::XML:Node] node with NumberingProperties
+    # @return [DocxDrawing] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'anchor'
-          drawing.type = :flow
+          @type = :flow
         when 'inline'
-          drawing.type = :inline
+          @type = :inline
         end
-        drawing.properties.distance_from_text = DocxDrawingDistanceFromText.parse(drawing_node_child)
-        drawing.properties.wrap = DocxWrapDrawing.parse(drawing_node_child)
-        drawing_node_child.attributes.each do |key, value|
+        @properties.distance_from_text = DocxDrawingDistanceFromText.new(parent: self).parse(node_child)
+        @properties.wrap = DocxWrapDrawing.parse(node_child)
+        node_child.attributes.each do |key, value|
           case key
           when 'relativeHeight'
-            drawing.properties.relative_height = value.value.to_i
+            @properties.relative_height = value.value.to_i
           end
         end
-        drawing_node_child.xpath('*').each do |content_node_child|
+        node_child.xpath('*').each do |content_node_child|
           case content_node_child.name
           when 'simplePos'
-            drawing.properties.simple_position = OOXMLCoordinates.parse(content_node_child)
+            @properties.simple_position = OOXMLCoordinates.parse(content_node_child)
           when 'extent'
-            drawing.properties.object_size = OOXMLCoordinates.parse(content_node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
+            @properties.object_size = OOXMLCoordinates.parse(content_node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
           when 'graphic'
-            drawing.graphic = DocxGraphic.parse(content_node_child, parent: drawing)
+            @graphic = DocxGraphic.new(parent: self).parse(content_node_child)
           when 'positionV'
-            drawing.properties.vertical_position = DocxDrawingPosition.parse(content_node_child)
+            @properties.vertical_position = DocxDrawingPosition.parse(content_node_child)
           when 'positionH'
-            drawing.properties.horizontal_position = DocxDrawingPosition.parse(content_node_child)
+            @properties.horizontal_position = DocxDrawingPosition.parse(content_node_child)
           when 'sizeRelH'
-            drawing.properties.size_relative_horizontal = SizeRelativeHorizontal.new(parent: drawing).parse(content_node_child)
+            @properties.size_relative_horizontal = SizeRelativeHorizontal.new(parent: self).parse(content_node_child)
           when 'sizeRelV'
-            drawing.properties.size_relative_vertical = SizeRelativeVertical.new(parent: drawing).parse(content_node_child)
+            @properties.size_relative_vertical = SizeRelativeVertical.new(parent: self).parse(content_node_child)
           end
         end
       end
-      drawing
+      self
     end
   end
 end

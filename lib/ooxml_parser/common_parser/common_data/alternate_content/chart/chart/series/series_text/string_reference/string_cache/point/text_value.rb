@@ -7,10 +7,9 @@ module OoxmlParser
     # Parse TextValue
     # @param [Nokogiri::XML:Node] node with TextValue
     # @return [TextValue] result of parsing
-    def self.parse(node)
-      text_value = TextValue.new
-      text_value.value = node.text
-      text_value
+    def parse(node)
+      @value = node.text
+      self
     end
   end
 end

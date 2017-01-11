@@ -1,18 +1,21 @@
 module OoxmlParser
-  class TextField
+  # Class for parsing `fld` tags
+  class TextField < OOXMLDocumentObject
     attr_accessor :id, :type, :text
 
-    def self.parse(text_field_node)
-      text_field = TextField.new
-      text_field.id = text_field_node.attribute('id').value
-      text_field.type = text_field_node.attribute('type').value
-      text_field_node.xpath('*').each do |text_field_node_child|
+    # Parse TextField object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [TextField] result of parsing
+    def parse(node)
+      @id = node.attribute('id').value
+      @type = node.attribute('type').value
+      node.xpath('*').each do |text_field_node_child|
         case text_field_node_child.name
         when 't'
-          text_field.text = text_field_node_child.text
+          @text = text_field_node_child.text
         end
       end
-      text_field
+      self
     end
   end
 end

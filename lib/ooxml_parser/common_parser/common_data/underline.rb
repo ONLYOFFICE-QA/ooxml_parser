@@ -1,11 +1,12 @@
-# Class for working Underline style parameter
 module OoxmlParser
-  class Underline
+  # Class for parsing `u` tags
+  class Underline < OOXMLDocumentObject
     attr_accessor :style, :color
 
-    def initialize(style = :none, color = nil)
+    def initialize(style = :none, color = nil, parent: nil)
       @style = style == 'single' ? :single : style
       @color = color
+      @parent = parent
     end
 
     def ==(other)
@@ -26,15 +27,17 @@ module OoxmlParser
       end
     end
 
-    def self.parse(attribute_value)
-      underline = Underline.new
-      case attribute_value
+    # Parse Underline object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Underline] result of parsing
+    def parse(node)
+      case node
       when 'sng'
-        underline.style = :single
+        @style = :single
       when 'none'
-        underline.style = :none
+        @style = :none
       end
-      underline
+      self
     end
   end
 end

@@ -7,15 +7,14 @@ module OoxmlParser
     # Parse PointCount
     # @param [Nokogiri::XML:Node] node with PointCount
     # @return [PointCount] result of parsing
-    def self.parse(node)
-      point_count = PointCount.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'val'
-          point_count.value = value.value.to_f
+          @value = value.value.to_f
         end
       end
-      point_count
+      self
     end
   end
 end

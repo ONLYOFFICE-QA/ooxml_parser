@@ -37,7 +37,7 @@ module OoxmlParser
       XLSXWorkbook.shared_strings[value.to_i].xpath('*').each do |si_node_child|
         case si_node_child.name
         when 'r'
-          cell.character = ParagraphRun.parse(si_node_child)
+          cell.character = ParagraphRun.new(parent: cell).parse(si_node_child)
         when 't'
           cell.raw_text = si_node_child.text
         end

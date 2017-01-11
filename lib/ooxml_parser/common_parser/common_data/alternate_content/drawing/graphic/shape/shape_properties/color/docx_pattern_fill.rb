@@ -1,20 +1,22 @@
-# Docx Pattern Fill Data
 module OoxmlParser
+  # Docx Pattern Fill Data
   class DocxPatternFill < OOXMLDocumentObject
     attr_accessor :foreground_color, :background_color, :preset
 
-    def self.parse(fill_node)
-      pattern = DocxPatternFill.new
-      pattern.preset = fill_node.attribute('prst').value.to_sym
-      fill_node.xpath('*').each do |fill_node_child|
-        case fill_node_child.name
+    # Parse DocxPatternFill object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxPatternFill] result of parsing
+    def parse(node)
+      @preset = node.attribute('prst').value.to_sym
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'fgClr'
-          pattern.foreground_color = Color.parse_color_model(fill_node_child)
+          @foreground_color = Color.parse_color_model(node_child)
         when 'bgClr'
-          pattern.background_color = Color.parse_color_model(fill_node_child)
+          @background_color = Color.parse_color_model(node_child)
         end
       end
-      pattern
+      self
     end
   end
 end

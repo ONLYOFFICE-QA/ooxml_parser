@@ -29,9 +29,9 @@ module OoxmlParser
         when 'spPr'
           @properties = DocxShapeProperties.new(parent: self).parse(node_child)
         when 'txbx'
-          @text_body = OOXMLTextBox.parse(node_child, parent: self)
+          @text_body = OOXMLTextBox.new(parent: self).parse(node_child)
         when 'txBody'
-          @text_body = TextBody.parse(node_child)
+          @text_body = TextBody.new(parent: self).parse(node_child)
         when 'bodyPr'
           @body_properties = OOXMLShapeBodyProperties.new(parent: self).parse(node_child)
         end

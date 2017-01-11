@@ -7,7 +7,10 @@ module OoxmlParser
     def parse(node)
       node.xpath('*').each do |node_child|
         @properties = TransitionProperties.new(parent: self).parse(node_child)
-        @sound_action = SoundAction.parse(node_child)
+        case node_child.name
+        when 'sndAc'
+          @sound_action = SoundAction.new(parent: self).parse(node_child)
+        end
       end
       node.attributes.each do |key, value|
         case key

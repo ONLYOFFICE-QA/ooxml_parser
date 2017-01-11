@@ -7,15 +7,14 @@ module OoxmlParser
     # Parse Language
     # @param [Nokogiri::XML:Node] node with Language
     # @return [Language] result of parsing
-    def self.parse(node)
-      language = Language.new
+    def parse(node)
       node.attributes.each do |key, value|
         case key
         when 'val'
-          language.value = value.value.to_s
+          @value = value.value.to_s
         end
       end
-      language
+      self
     end
   end
 end

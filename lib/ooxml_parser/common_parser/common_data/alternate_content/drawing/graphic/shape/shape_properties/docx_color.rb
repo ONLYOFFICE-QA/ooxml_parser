@@ -1,42 +1,40 @@
 require_relative 'color/docx_pattern_fill'
-# Color inside DOCX
 module OoxmlParser
+  # Color inside DOCX
   class DocxColor < OOXMLDocumentObject
     attr_accessor :type, :value, :stretching_type, :alpha
 
-    def initialize(value = nil)
-      @value = value
-    end
-
-    def self.parse(shape_properties_node)
-      fill_color = DocxColor.new
-      shape_properties_node.xpath('*').each do |fill_node|
-        case fill_node.name
+    # Parse DocxColor object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxColor] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'blipFill'
-          fill_color.type = :picture
-          fill_color.value = DocxBlip.new(parent: fill_color).parse(fill_node)
-          fill_node.xpath('*').each do |fill_type_node_child|
+          @type = :picture
+          @value = DocxBlip.new(parent: self).parse(node_child)
+          node_child.xpath('*').each do |fill_type_node_child|
             case fill_type_node_child.name
             when 'tile'
-              fill_color.stretching_type = :tile
+              @stretching_type = :tile
             when 'stretch'
-              fill_color.stretching_type = :stretch
+              @stretching_type = :stretch
             when 'blip'
-              fill_type_node_child.xpath('alphaModFix').each { |alpha_node| fill_color.alpha = alpha_node.attribute('amt').value.to_i / 1_000.0 }
+              fill_type_node_child.xpath('alphaModFix').each { |alpha_node| @alpha = alpha_node.attribute('amt').value.to_i / 1_000.0 }
             end
           end
         when 'solidFill'
-          fill_color.type = :solid
-          fill_color.value = Color.parse_color_model(fill_node)
+          @type = :solid
+          @value = Color.parse_color_model(node_child)
         when 'gradFill'
-          fill_color.type = :gradient
-          fill_color.value = GradientColor.parse(fill_node)
+          @type = :gradient
+          @value = GradientColor.new(parent: self).parse(node_child)
         when 'pattFill'
-          fill_color.type = :pattern
-          fill_color.value = DocxPatternFill.parse(fill_node)
+          @type = :pattern
+          @value = DocxPatternFill.new(parent: self).parse(node_child)
         end
       end
-      fill_color
+      self
     end
   end
 end

@@ -1,11 +1,16 @@
 module OoxmlParser
+  # Class for parsing `hlinkClick`, `hyperlink` tags
   class Hyperlink < OOXMLDocumentObject
     attr_accessor :url, :tooltip, :coordinates, :id, :highlight_click, :action
 
-    def initialize(link = nil, tooltip = nil, coordinates = nil)
+    def initialize(link = nil,
+                   tooltip = nil,
+                   coordinates = nil,
+                   parent: nil)
       @url = link
       @tooltip = tooltip
       @coordinates = coordinates
+      @parent = parent
     end
 
     alias link url
@@ -13,46 +18,48 @@ module OoxmlParser
     alias link= url=
     alias link_to= url=
 
-    def self.parse(on_click_hyperlink_node)
-      hyperlink = Hyperlink.new
-      on_click_hyperlink_node.attributes.each do |key, value|
+    # Parse Hyperlink object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Hyperlink] result of parsing
+    def parse(node)
+      node.attributes.each do |key, value|
         case key
         when 'location'
-          hyperlink.url = Coordinates.parse_coordinates_from_string(value.value)
+          @url = Coordinates.parse_coordinates_from_string(value.value)
         when 'id'
-          hyperlink.url = OOXMLDocumentObject.get_link_from_rels(on_click_hyperlink_node.attribute('id').value)
+          @url = OOXMLDocumentObject.get_link_from_rels(node.attribute('id').value)
         when 'tooltip'
-          hyperlink.tooltip = value.value
+          @tooltip = value.value
         when 'ref'
-          hyperlink.coordinates = Coordinates.parse_coordinates_from_string(value.value)
+          @coordinates = Coordinates.parse_coordinates_from_string(value.value)
         end
       end
-      action = on_click_hyperlink_node.attribute('action').value unless on_click_hyperlink_node.attribute('action').nil?
+      action = node.attribute('action').value unless node.attribute('action').nil?
       case action
       when 'ppaction://hlinkshowjump?jump=previousslide'
-        hyperlink.action = :previous_slide
+        @action = :previous_slide
       when 'ppaction://hlinkshowjump?jump=nextslide'
-        hyperlink.action = :next_slide
+        @action = :next_slide
       when 'ppaction://hlinkshowjump?jump=firstslide'
-        hyperlink.action = :first_slide
+        @action = :first_slide
       when 'ppaction://hlinkshowjump?jump=lastslide'
-        hyperlink.action = :last_slide
+        @action = :last_slide
       when 'ppaction://hlinksldjump'
-        hyperlink.action = :slide
-        hyperlink.link_to = OOXMLDocumentObject.get_link_from_rels(on_click_hyperlink_node.attribute('id').value).scan(/\d+/).join('').to_i
+        @action = :slide
+        @url = OOXMLDocumentObject.get_link_from_rels(node.attribute('id').value).scan(/\d+/).join('').to_i
       else
-        unless on_click_hyperlink_node.attribute('id').nil?
-          hyperlink.action = :external_link
-          hyperlink.link_to = OOXMLDocumentObject.get_link_from_rels(on_click_hyperlink_node.attribute('id').value)
+        unless node.attribute('id').nil?
+          @action = :external_link
+          @url = OOXMLDocumentObject.get_link_from_rels(node.attribute('id').value)
         end
       end
-      return hyperlink unless on_click_hyperlink_node.attribute('highlightClick')
-      hyperlink.highlight_click = if on_click_hyperlink_node.attribute('highlightClick').value == '1'
-                                    true
-                                  else
-                                    false
-                                  end
-      hyperlink
+      return self unless node.attribute('highlightClick')
+      @highlight_click = if node.attribute('highlightClick').value == '1'
+                           true
+                         else
+                           false
+                         end
+      self
     end
   end
 end

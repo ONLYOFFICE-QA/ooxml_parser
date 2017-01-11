@@ -1,25 +1,25 @@
 module OoxmlParser
   # Class for parsing `m:rPr` object
-  class MathRunProperties
+  class MathRunProperties < OOXMLDocumentObject
     # @return [True, False] is run with break
     attr_accessor :break
 
-    def initialize
+    def initialize(parent: nil)
       @break = false
+      @parent = parent
     end
 
     # Parse MathRunProperties
     # @param [Nokogiri::XML:Node] node with MathRunProperties
     # @return [MathRunProperties] result of parsing
-    def self.parse(node)
-      math_run_properties = MathRunProperties.new
+    def parse(node)
       node.xpath('*').each do |math_run_child|
         case math_run_child.name
         when 'brk'
-          math_run_properties.break = true
+          @break = true
         end
       end
-      math_run_properties
+      self
     end
   end
 end

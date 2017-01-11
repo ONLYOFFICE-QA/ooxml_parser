@@ -30,7 +30,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'prstTxWarp'
-          @preset_text_warp = PresetTextWarp.parse(node_child)
+          @preset_text_warp = PresetTextWarp.new(parent: self).parse(node_child)
         end
       end
       self

@@ -45,7 +45,7 @@ module OoxmlParser
         when 'spacing'
           self.spacing = (node_child.attribute('val').value.to_f / 566.9).round(1)
         when 'textFill'
-          self.text_fill = TextFill.parse(node_child)
+          self.text_fill = TextFill.new(parent: self).parse(node_child)
         when 'textOutline'
           self.text_outline = TextOutline.new(parent: self).parse(node_child)
         when 'bCs', 'b'

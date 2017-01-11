@@ -1,13 +1,14 @@
-# Class for parsing text outline and its properties
 module OoxmlParser
+  # Data about `textFill` object
   class TextFill < OOXMLDocumentObject
     attr_accessor :color_scheme
 
-    def self.parse(node)
-      text_fill = TextFill.new
-
-      text_fill.color_scheme = DocxColorScheme.parse(node)
-      text_fill
+    # Parse TextFill object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [TextFill] result of parsing
+    def parse(node)
+      @color_scheme = DocxColorScheme.new(parent: self).parse(node)
+      self
     end
   end
 end

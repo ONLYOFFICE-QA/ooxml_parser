@@ -19,9 +19,9 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'hlinkClick'
-          @on_click_hyperlink = Hyperlink.parse(node_child)
+          @on_click_hyperlink = Hyperlink.new(parent: self).parse(node_child)
         when 'hlinkHover'
-          @hyperlink_for_hover = HyperlinkForHover.parse(node_child)
+          @hyperlink_for_hover = HyperlinkForHover.new(parent: self).parse(node_child)
         end
       end
       self

@@ -1,23 +1,26 @@
 module OoxmlParser
-  class TextBody
+  # Class for parsing `txBody` tags
+  class TextBody < OOXMLDocumentObject
     attr_accessor :properties, :paragraphs
 
-    def initialize(properties = nil, paragraphs = [])
-      @properties = properties
-      @paragraphs = paragraphs
+    def initialize(parent: nil)
+      @paragraphs = []
+      @parent = parent
     end
 
-    def self.parse(text_body_node)
-      text_body = TextBody.new
-      text_body_node.xpath('*').each do |text_body_node_child|
-        case text_body_node_child.name
+    # Parse TextBody object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [TextBody] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'p'
-          text_body.paragraphs << Paragraph.parse(text_body_node_child)
+          @paragraphs << Paragraph.new(parent: self).parse(node_child)
         when 'bodyPr'
-          text_body.properties = OOXMLShapeBodyProperties.new(parent: text_body).parse(text_body_node_child)
+          @properties = OOXMLShapeBodyProperties.new(parent: self).parse(node_child)
         end
       end
-      text_body
+      self
     end
   end
 end

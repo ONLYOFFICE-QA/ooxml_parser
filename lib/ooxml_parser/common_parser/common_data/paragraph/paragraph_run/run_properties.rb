@@ -48,7 +48,7 @@ module OoxmlParser
         when 'i'
           @font_style.italic = option_enabled?(node, 'i')
         when 'u'
-          @font_style.underlined = Underline.parse(value.value)
+          @font_style.underlined = Underline.new(parent: self).parse(value.value)
         when 'strike'
           @font_style.strike = value_to_symbol(value)
         when 'baseline'
@@ -64,13 +64,12 @@ module OoxmlParser
           @caps = value.value.to_sym
         end
       end
-      @font_color = DocxColorScheme.parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'sz'
           @size = Size.new.parse(node_child)
         when 'spacing'
-          @spacing = RunSpacing.parse(node_child)
+          @spacing = RunSpacing.new(parent: self).parse(node_child)
         when 'color'
           @color = Color.parse_color_tag(node_child)
         when 'solidFill'
@@ -92,20 +91,20 @@ module OoxmlParser
         when 'strike'
           @font_style.strike = option_enabled?(node_child)
         when 'hlinkClick'
-          @hyperlink = Hyperlink.parse(node_child)
+          @hyperlink = Hyperlink.new(parent: self).parse(node_child)
         when 'ln'
           @outline = Outline.new(parent: self).parse(node_child)
         when 'lang'
-          @language = Language.parse(node_child)
+          @language = Language.new(parent: self).parse(node_child)
         when 'position'
-          @position = Position.parse(node_child)
+          @position = Position.new(parent: self).parse(node_child)
         when 'shd'
           @shade = Shade.new(parent: self).parse(node_child)
         when 'rStyle'
           @run_style = RunStyle.new(parent: self).parse(node_child)
         end
       end
-      @font_color = DocxColorScheme.parse(node)
+      @font_color = DocxColorScheme.new(parent: self).parse(node)
       @font_name = Presentation.default_font_typeface if @font_name.empty?
       @font_size = Presentation.default_font_size if @font_size.nil?
       self

@@ -2,15 +2,19 @@ require_relative 'paragraph/paragraph_properties'
 require_relative 'paragraph/paragraph_run'
 require_relative 'paragraph/text_field'
 module OoxmlParser
-  class Paragraph
+  # Class for parsing `p` tags
+  class Paragraph < OOXMLDocumentObject
     attr_accessor :properties, :runs, :text_field, :formulas
     # @return [AlternateContent] alternate content data
     attr_accessor :alternate_content
 
-    def initialize(runs = [], formulas = [])
+    def initialize(runs = [],
+                   formulas = [],
+                   parent: nil)
       @runs = runs
       @formulas = formulas
       @runs = []
+      @parent = parent
     end
 
     alias characters runs
@@ -18,21 +22,23 @@ module OoxmlParser
     alias characters= runs=
     alias character_style_array= runs=
 
-    def self.parse(paragraph_node)
-      paragraph = Paragraph.new
-      paragraph_node.xpath('*').each do |paragraph_node_child|
-        case paragraph_node_child.name
+    # Parse Paragraph object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Paragraph] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'pPr'
-          paragraph.properties = ParagraphProperties.new(parent: paragraph).parse(paragraph_node_child)
+          @properties = ParagraphProperties.new(parent: self).parse(node_child)
         when 'fld'
-          paragraph.text_field = TextField.parse(paragraph_node_child)
+          @text_field = TextField.new(parent: self).parse(node_child)
         when 'r'
-          paragraph.characters << ParagraphRun.parse(paragraph_node_child)
+          @runs << ParagraphRun.new(parent: self).parse(node_child)
         when 'AlternateContent'
-          paragraph.alternate_content = AlternateContent.parse(paragraph_node_child, parent: paragraph_node)
+          @alternate_content = AlternateContent.new(parent: self).parse(node_child)
         end
       end
-      paragraph
+      self
     end
   end
 end

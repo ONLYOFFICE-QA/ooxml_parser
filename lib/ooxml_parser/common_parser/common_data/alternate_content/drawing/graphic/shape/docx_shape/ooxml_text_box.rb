@@ -1,27 +1,29 @@
 module OoxmlParser
+  # Class for parsing `txbx` tags
   class OOXMLTextBox < OOXMLDocumentObject
     attr_accessor :properties, :elements
 
-    def initialize(properties = nil, elements = [])
-      @properties = properties
-      @elements = elements
+    def initialize(parent: nil)
+      @elements = []
+      @parent = parent
     end
 
-    def self.parse(text_body_node, parent: nil)
-      text_body = OOXMLTextBox.new
-      text_body.parent = parent
-      text_box_content_node = text_body_node.xpath('w:txbxContent').first
-      text_box_content_node.xpath('*').each_with_index do |text_body_node_child, index|
-        case text_body_node_child.name
+    # Parse OOXMLTextBox object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [OOXMLTextBox] result of parsing
+    def parse(node)
+      text_box_content_node = node.xpath('w:txbxContent').first
+      text_box_content_node.xpath('*').each_with_index do |node_child, index|
+        case node_child.name
         when 'p'
-          text_body.elements << DocxParagraph.new.parse(text_body_node_child, index, parent: text_body)
+          @elements << DocxParagraph.new(parent: self).parse(node_child, index)
         when 'tbl'
-          text_body.elements << Table.new(parent: text_body).parse(text_body_node_child, index)
+          @elements << Table.new(parent: self).parse(node_child, index)
         when 'bodyPr'
-          text_body.properties = OOXMLShapeBodyProperties.new(parent: text_body).parse(text_body_node_child)
+          @properties = OOXMLShapeBodyProperties.new(parent: self).parse(node_child)
         end
       end
-      text_body
+      self
     end
   end
 end

@@ -1,5 +1,6 @@
 require_relative 'paragraph_run/run_properties'
 module OoxmlParser
+  # Class for parsing `r` tags
   class ParagraphRun < OOXMLDocumentObject
     attr_accessor :properties, :text
 
@@ -8,17 +9,19 @@ module OoxmlParser
       @text = text
     end
 
-    def self.parse(character_node)
-      character = ParagraphRun.new
+    # Parse ParagraphRun object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ParagraphRun] result of parsing
+    def parse(character_node)
       character_node.xpath('*').each do |character_node_child|
         case character_node_child.name
         when 'rPr'
-          character.properties = RunProperties.new(parent: character).parse(character_node_child)
+          @properties = RunProperties.new(parent: self).parse(character_node_child)
         when 't'
-          character.text = character_node_child.text
+          @text = character_node_child.text
         end
       end
-      character
+      self
     end
   end
 end

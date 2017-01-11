@@ -43,13 +43,13 @@ module OoxmlParser
       node.xpath('*').each do |num_level_child|
         case num_level_child.name
         when 'start'
-          @start = Start.parse(num_level_child)
+          @start = Start.new(parent: self).parse(num_level_child)
         when 'numFmt'
-          @numbering_format = NumberingFormat.parse(num_level_child)
+          @numbering_format = NumberingFormat.new(parent: self).parse(num_level_child)
         when 'lvlText'
-          @text = LevelText.parse(num_level_child)
+          @text = LevelText.new(parent: self).parse(num_level_child)
         when 'lvlJc'
-          @justification = LevelJustification.parse(num_level_child)
+          @justification = LevelJustification.new(parent: self).parse(num_level_child)
         when 'pPr'
           @paragraph_properties = ParagraphProperties.new(parent: self).parse(num_level_child)
         when 'rPr'
