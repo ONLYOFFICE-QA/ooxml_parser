@@ -68,8 +68,8 @@ module OoxmlParser
     # Parse CellStyle object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [CellStyle] result of parsing
-    def parse(style_number)
-      current_cell_style = XLSXWorkbook.styles_node.xpath('//xmlns:cellXfs/xmlns:xf')[style_number.to_i]
+    def parse(node)
+      current_cell_style = XLSXWorkbook.styles_node.xpath('//xmlns:cellXfs/xmlns:xf')[node.to_i]
       @font = if current_cell_style.attribute('applyFont').nil? || current_cell_style.attribute('applyFont').value == '0'
                 OOXMLFont.new(parent: self).parse(0)
               else
