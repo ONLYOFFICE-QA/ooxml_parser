@@ -12,13 +12,13 @@ module OoxmlParser
     # Parse ParagraphRun object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [ParagraphRun] result of parsing
-    def parse(character_node)
-      character_node.xpath('*').each do |character_node_child|
-        case character_node_child.name
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'rPr'
-          @properties = RunProperties.new(parent: self).parse(character_node_child)
+          @properties = RunProperties.new(parent: self).parse(node_child)
         when 't'
-          @text = character_node_child.text
+          @text = node_child.text
         end
       end
       self
