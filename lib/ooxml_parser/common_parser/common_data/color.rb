@@ -205,66 +205,6 @@ module OoxmlParser
       Color.new(red, green, blue)
     end
 
-    # code from js to ruby
-    # https://github.com/ONLYOFFICE/ONLYOFFICE-OnlineEditors/blob/master/OfficeWeb/sdk/Excel/model/DrawingObjects/Format/Format.js
-    def to_hsl
-      max_hls = 255.0
-      cd13 = 1.0 / 3.0
-      cd23 = 2.0 / 3.0
-      hls_color = HSLColor.new
-      min = [@red, @green, @blue].min.to_f
-      max = [@red, @green, @blue].max.to_f
-      delta = (max - min).to_f
-      dmax = (max + min) / 255.0
-      ddelta = delta / 255.0
-      hls_color.l = dmax / 2.0
-
-      if delta.nonzero?
-        hls_color.s = if hls_color.l < 0.5
-                        ddelta / dmax
-                      else
-                        ddelta / (2.0 - dmax)
-                      end
-        ddelta *= 1_530.0
-        d_r = (max - @red) / ddelta
-        d_g = (max - @green) / ddelta
-        d_b = (max - @blue) / ddelta
-
-        if @red == max
-          hls_color.h = d_b - d_r
-        elsif @green == max
-          hls_color.h = cd13 + d_r - d_b
-        elsif @blue == max
-          hls_color.h = cd23 + d_g - d_r
-        end
-
-        hls_color.h += 1 if hls_color.h < 0
-        hls_color.h -= 1 if hls_color.h < 1
-      end
-      hls_color.h = ((hls_color.h * max_hls).round >> 0) & 0xFF
-      hls_color.h = 0 if hls_color.h < 0
-      hls_color.h = 255 if hls_color.h > 255
-
-      hls_color.l = ((hls_color.l * max_hls).round >> 0) & 0xFF
-      hls_color.l = 0 if hls_color.l < 0
-      hls_color.l = 255 if hls_color.l > 255
-
-      hls_color.s = ((hls_color.s * max_hls).round >> 0) & 0xFF
-      hls_color.s = 0 if hls_color.s < 0
-      hls_color.s = 255 if hls_color.s > 255
-
-      hls_color
-    end
-
-    # redefine code from our to_hsl realisation to standartised way for services like http://serennu.com/colour/hsltorgb.php
-    def to_hsl_standardised
-      hsl = to_hsl
-      hsl.h = hsl.h * 360 / 256
-      hsl.l = (hsl.l * 100.0 / 255.0).round
-      hsl.s = (hsl.s * 100.0 / 255.0).round
-      hsl
-    end
-
     class << self
       def generate_random_color
         Color.new(rand(256), rand(256), rand(256))
