@@ -27,7 +27,7 @@ module OoxmlParser
           OOXMLDocumentObject.xmls_stack.pop
         when 'wgp'
           @type = :group
-          @data = DocxGroupedDrawing.parse(node_child)
+          @data = DocxGroupedDrawing.new(parent: self).parse(node_child)
         end
       end
       self

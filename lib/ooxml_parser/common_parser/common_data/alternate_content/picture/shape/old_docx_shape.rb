@@ -6,8 +6,7 @@ module OoxmlParser
     # @return [FileReference] image structure
     attr_accessor :file_reference
 
-    def parse(node, parent: nil)
-      @parent = parent
+    def parse(node)
       @properties = OldDocxShapeProperties.parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name

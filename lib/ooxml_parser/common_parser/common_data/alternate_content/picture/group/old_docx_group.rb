@@ -2,30 +2,32 @@ require_relative 'old_docx_group_properties'
 require_relative 'old_docx_group_element'
 # Fallback DOCX group data
 module OoxmlParser
-  class OldDocxGroup
+  class OldDocxGroup < OOXMLDocumentObject
     attr_accessor :elements, :properties
 
-    def initialize(properties = OldDocxGroupProperties.new, elements = [])
+    def initialize(properties = OldDocxGroupProperties.new, parent: nil)
       @properties = properties
-      @elements = elements
+      @elements = []
+      @parent = parent
     end
 
-    def self.parse(group_node)
-      group = OldDocxGroup.new
-      group_node.xpath('*').each do |group_node_child|
-        case group_node_child.name
+    # Parse OldDocxGroup object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [OldDocxGroup] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'shape'
           element = OldDocxGroupElement.new(:shape)
-          element.object = OldDocxShape.new(parent: element).parse(group_node_child)
-          group.elements << element
+          element.object = OldDocxShape.new(parent: self).parse(node_child)
+          @elements << element
         when 'wrap'
-          group.properties.wrap = group_node_child.attribute('type').value.to_sym unless group_node_child.attribute('type').nil?
+          @properties.wrap = node_child.attribute('type').value.to_sym unless node_child.attribute('type').nil?
         when 'group'
-          element = parse(group_node_child)
-          group.elements << element
+          @elements << OldDocxGroup.new(parent: self).parse(node_child)
         end
       end
-      group
+      self
     end
   end
 end
