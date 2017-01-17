@@ -170,11 +170,11 @@ module OoxmlParser
           node_child.xpath('*').each do |pict_node_child|
             case pict_node_child.name
             when 'shape'
-              @shape = Shape.parse(pict_node_child, :shape)
+              @shape = Shape.new(parent: self).parse(pict_node_child, :shape)
             when 'rect'
-              @shape = Shape.parse(pict_node_child, :rectangle)
+              @shape = Shape.new(parent: self).parse(pict_node_child, :rectangle)
             when 'oval'
-              @shape = Shape.parse(pict_node_child, :oval)
+              @shape = Shape.new(parent: self).parse(pict_node_child, :oval)
             end
           end
         when 'object'
