@@ -12,9 +12,16 @@ module OoxmlParser
     # @param [Nokogiri::XML:Node] node with Relationship
     # @return [Relationship] result of parsing
     def parse(node)
-      @id = node.attribute('Id').value
-      @type = node.attribute('Type').value
-      @target = node.attribute('Target').value
+      node.attributes.each do |key, value|
+        case key
+        when 'Id'
+          @id = value.value
+        when 'Type'
+          @type = value.value
+        when 'Target'
+          @target = value.value
+        end
+      end
       self
     end
   end

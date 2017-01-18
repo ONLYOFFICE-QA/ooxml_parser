@@ -9,12 +9,16 @@ module OoxmlParser
     attr_accessor :content
 
     def parse(node)
-      @resource_id = node.attribute('embed').value if node.attribute('embed')
-      @resource_id = node.attribute('id').value if node.attribute('id')
-      @path = OOXMLDocumentObject.get_link_from_rels(@resource_id).gsub('..', '')
+      node.attributes.each do |key, value|
+        case key
+        when 'embed', 'id', 'link'
+          @resource_id = value.value
+        end
+      end
+      @path = OOXMLDocumentObject.get_link_from_rels(@resource_id)
       raise LoadError, "Cant find path to media file by id: #{@resource_id}" if @path.empty?
       return self if @path == 'NULL'
-      full_path_to_file = OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.root_subfolder + @path
+      full_path_to_file = OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.root_subfolder + @path.gsub('..', '')
       if File.exist?(full_path_to_file)
         @content = IO.binread(full_path_to_file)
       else

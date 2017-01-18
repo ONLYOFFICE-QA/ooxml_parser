@@ -98,13 +98,9 @@ module OoxmlParser
       end
 
       def link_to_theme_xml
-        doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'xl/_rels/workbook.xml.rels'))
-        doc.xpath('xmlns:Relationships/xmlns:Relationship').each do |relationship_node|
-          if relationship_node.attribute('Target').value.include?('theme')
-            return relationship_node.attribute('Target').value
-          end
-        end
-        nil
+        file = File.open(OOXMLDocumentObject.path_to_folder + 'xl/_rels/workbook.xml.rels')
+        relationships = Relationships.parse_rels(file)
+        relationships.target_by_type('theme')
       end
     end
   end

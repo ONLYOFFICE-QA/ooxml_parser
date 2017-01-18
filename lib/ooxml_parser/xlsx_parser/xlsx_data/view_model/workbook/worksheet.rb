@@ -29,7 +29,7 @@ module OoxmlParser
 
     def parse_relationships
       OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/_rels/#{@xml_name}.rels")
-      @relationships = Relationships.new.parse(Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml)).xpath('*').first) if File.exist?(OOXMLDocumentObject.current_xml)
+      @relationships = Relationships.parse_rels(OOXMLDocumentObject.current_xml) if File.exist?(OOXMLDocumentObject.current_xml)
       OOXMLDocumentObject.xmls_stack.pop
     end
 
