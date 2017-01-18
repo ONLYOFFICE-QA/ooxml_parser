@@ -33,7 +33,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'tblGrid'
-          @grid = TableGrid.parse(node_child)
+          @grid = TableGrid.new(parent: self).parse(node_child)
         when 'tr'
           @rows << TableRow.new(parent: self).parse(node_child)
         when 'tblPr'

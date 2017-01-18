@@ -4,9 +4,10 @@ module OoxmlParser
     attr_accessor :id, :elements, :type
     attr_accessor :path_suffix
 
-    def initialize(type = :header)
+    def initialize(type = :header, parent: nil)
       @type = type
       @elements = []
+      @parent = parent
     end
 
     # @return [String] string for search of xpath
@@ -37,21 +38,19 @@ module OoxmlParser
     # Parse HeaderFooter
     # @param [Nokogiri::XML:Node] node with HeaderFooter
     # @return [HeaderFooter] result of parsing
-    def self.parse(node, parent: nil)
-      header_footer = HeaderFooter.new
-      header_footer.id = node.attribute('id').value.to_i
-      header_footer.parent = parent
-      header_footer.parse_type(node)
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + header_footer.xml_path))
-      doc.search(header_footer.xpath_for_search).each do |footnote|
-        next unless footnote.attribute('id').value.to_i == header_footer.id
+    def parse(node)
+      @id = node.attribute('id').value.to_i
+      parse_type(node)
+      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + xml_path))
+      doc.search(xpath_for_search).each do |footnote|
+        next unless footnote.attribute('id').value.to_i == @id
         paragraph_number = 0
         footnote.xpath('w:p').each do |paragraph|
-          header_footer.elements << DocumentStructure.default_paragraph_style.copy.parse(paragraph, paragraph_number, DocumentStructure.default_run_style, parent: header_footer)
+          @elements << DocumentStructure.default_paragraph_style.copy.parse(paragraph, paragraph_number, DocumentStructure.default_run_style, parent: self)
           paragraph_number += 1
         end
       end
-      header_footer
+      self
     end
   end
 end

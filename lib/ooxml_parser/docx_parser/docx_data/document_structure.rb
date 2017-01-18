@@ -139,7 +139,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       doc.search('//w:document').each do |document|
         document.xpath('w:background').each do |background|
-          doc_structure.background = DocumentBackground.parse(background)
+          doc_structure.background = DocumentBackground.new(parent: doc_structure).parse(background)
         end
         document.xpath('w:body').each do |body|
           body.xpath('*').each do |element|
@@ -167,7 +167,7 @@ module OoxmlParser
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
-      doc_structure.document_properties = DocumentProperties.parse
+      doc_structure.document_properties = DocumentProperties.new(parent: doc_structure).parse
       doc_structure.comments = Comment.parse_list
       doc_structure
     end

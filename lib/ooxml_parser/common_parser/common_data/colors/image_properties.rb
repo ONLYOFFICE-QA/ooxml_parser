@@ -1,16 +1,19 @@
 module OoxmlParser
-  class ImageProperties
+  # Class for parsing ImageProperties
+  class ImageProperties < OOXMLDocumentObject
     attr_accessor :alpha_modulate_fixed_effect
 
-    def self.parse(blip_properties_node)
-      properties = ImageProperties.new
-      blip_properties_node.xpath('*').each do |property_node|
-        case property_node.name
+    # Parse ImageProperties object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ImageProperties] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'alphaModFix'
-          properties.alpha_modulate_fixed_effect = (property_node.attribute('amt').value.to_f / 1_000.0).round(1)
+          @alpha_modulate_fixed_effect = (node_child.attribute('amt').value.to_f / 1_000.0).round(1)
         end
       end
-      properties
+      self
     end
   end
 end

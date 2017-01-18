@@ -163,9 +163,9 @@ module OoxmlParser
             end
           end
         when 'footnoteReference'
-          @footnote = HeaderFooter.parse(node_child, parent: self)
+          @footnote = HeaderFooter.new(parent: self).parse(node_child)
         when 'endnoteReference'
-          @endnote = HeaderFooter.parse(node_child, parent: self)
+          @endnote = HeaderFooter.new(parent: self).parse(node_child)
         when 'pict'
           node_child.xpath('*').each do |pict_node_child|
             case pict_node_child.name

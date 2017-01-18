@@ -1,39 +1,42 @@
-# Docx Wrap Drawing
 module OoxmlParser
-  class DocxWrapDrawing
+  # Docx Wrap Drawing
+  class DocxWrapDrawing < OOXMLDocumentObject
     attr_accessor :wrap_text, :distance_from_text
 
-    def initialize(wrap_text = :none)
-      @wrap_text = wrap_text
+    def initialize(parent: nil)
+      @wrap_text = :none
+      @parent = parent
     end
 
-    def self.parse(drawing_node)
-      wrap = DocxWrapDrawing.new
-      unless drawing_node.attribute('behindDoc').nil?
-        wrap.wrap_text = :behind if drawing_node.attribute('behindDoc').value == '1'
-        wrap.wrap_text = :infront if drawing_node.attribute('behindDoc').value == '0'
+    # Parse DocxWrapDrawing object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxWrapDrawing] result of parsing
+    def parse(node)
+      unless node.attribute('behindDoc').nil?
+        @wrap_text = :behind if node.attribute('behindDoc').value == '1'
+        @wrap_text = :infront if node.attribute('behindDoc').value == '0'
       end
-      drawing_node.xpath('*').each do |wrap_node|
-        case wrap_node.name
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'wrapSquare'
-          wrap.wrap_text = :square
-          wrap.distance_from_text = DocxDrawingDistanceFromText.new(parent: wrap).parse(wrap_node)
+          @wrap_text = :square
+          @distance_from_text = DocxDrawingDistanceFromText.new(parent: self).parse(node_child)
           break
         when 'wrapTight'
-          wrap.wrap_text = :tight
-          wrap.distance_from_text = DocxDrawingDistanceFromText.new(parent: wrap).parse(wrap_node)
+          @wrap_text = :tight
+          @distance_from_text = DocxDrawingDistanceFromText.new(parent: self).parse(node_child)
           break
         when 'wrapThrough'
-          wrap.wrap_text = :through
-          wrap.distance_from_text = DocxDrawingDistanceFromText.new(parent: wrap).parse(wrap_node)
+          @wrap_text = :through
+          @distance_from_text = DocxDrawingDistanceFromText.new(parent: self).parse(node_child)
           break
         when 'wrapTopAndBottom'
-          wrap.wrap_text = :topbottom
-          wrap.distance_from_text = DocxDrawingDistanceFromText.new(parent: wrap).parse(wrap_node)
+          @wrap_text = :topbottom
+          @distance_from_text = DocxDrawingDistanceFromText.new(parent: self).parse(node_child)
           break
         end
       end
-      wrap
+      self
     end
   end
 end

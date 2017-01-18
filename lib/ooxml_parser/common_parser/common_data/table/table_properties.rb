@@ -53,7 +53,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'tableStyleId'
-          @style = TableStyle.parse(style_id: node_child.text)
+          @style = TableStyle.new(parent: self).parse(style_id: node_child.text)
         when 'tblBorders'
           @table_borders = TableBorders.new(parent: self).parse(node_child)
         when 'tblStyle'

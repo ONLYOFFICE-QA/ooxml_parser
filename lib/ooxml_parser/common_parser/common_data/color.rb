@@ -378,12 +378,12 @@ module OoxmlParser
         case color_node.name
         when 'srgbClr'
           color = Color.new.parse_hex_string(color_node.attribute('val').value)
-          color.properties = ColorProperties.parse(color_node)
+          color.properties = ColorProperties.new(parent: color).parse(color_node)
           color
         when 'schemeClr'
           color = SchemeColor.new
           color.value = ThemeColors.list[color_node.attribute('val').value.to_sym]
-          color.properties = ColorProperties.parse(color_node)
+          color.properties = ColorProperties.new(parent: color).parse(color_node)
           color.converted_color = parse_scheme_color(color_node)
           color.value.calculate_with_tint!(1.0 - color.properties.tint) if color.properties.tint
           color

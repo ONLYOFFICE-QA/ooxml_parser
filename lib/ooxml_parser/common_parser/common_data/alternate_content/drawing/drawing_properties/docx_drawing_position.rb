@@ -1,35 +1,37 @@
-# Docx Drawing Position
 module OoxmlParser
-  class DocxDrawingPosition
+  # Docx Drawing Position
+  class DocxDrawingPosition < OOXMLDocumentObject
     attr_accessor :relative_from, :offset, :align
 
-    def self.parse(drawing_position_node)
-      position = DocxDrawingPosition.new
-      position.relative_from = case drawing_position_node.attribute('relativeFrom').value
-                               when 'leftMargin'
-                                 :left_margin
-                               when 'rightMargin'
-                                 :right_margin
-                               when 'bottomMargin'
-                                 :bottom_margin
-                               when 'topMargin'
-                                 :top_margin
-                               when 'insideMargin'
-                                 :inside_margin
-                               when 'outsideMargin'
-                                 :outside_margin
-                               else
-                                 drawing_position_node.attribute('relativeFrom').value.to_sym
-                               end
-      drawing_position_node.xpath('*').each do |position_node_child|
-        case position_node_child.name
+    # Parse DocxDrawingPosition object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxDrawingPosition] result of parsing
+    def parse(node)
+      @relative_from = case node.attribute('relativeFrom').value
+                       when 'leftMargin'
+                         :left_margin
+                       when 'rightMargin'
+                         :right_margin
+                       when 'bottomMargin'
+                         :bottom_margin
+                       when 'topMargin'
+                         :top_margin
+                       when 'insideMargin'
+                         :inside_margin
+                       when 'outsideMargin'
+                         :outside_margin
+                       else
+                         node.attribute('relativeFrom').value.to_sym
+                       end
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'posOffset', 'pctPosHOffset', 'pctPosVOffset'
-          position.offset = OoxmlSize.new(position_node_child.text.to_f, :emu)
+          @offset = OoxmlSize.new(node_child.text.to_f, :emu)
         when 'align'
-          position.align = position_node_child.text.to_sym
+          @align = node_child.text.to_sym
         end
       end
-      position
+      self
     end
   end
 end

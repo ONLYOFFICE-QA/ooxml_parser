@@ -20,10 +20,10 @@ module OoxmlParser
           @color = Color.parse_color(node_child.xpath('*').first)
         when 'blipFill'
           @type = :image
-          @image = ImageFill.parse(node_child)
+          @image = ImageFill.new(parent: self).parse(node_child)
         when 'pattFill'
           @type = :pattern
-          @pattern = PresentationPattern.parse(node_child)
+          @pattern = PresentationPattern.new(parent: self).parse(node_child)
         when 'noFill'
           @type = :noneColor
           @color = :none
