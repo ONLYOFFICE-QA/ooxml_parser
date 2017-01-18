@@ -1,27 +1,28 @@
 require_relative 'shape/old_docx_shape'
 require_relative 'shape/old_docx_shape_fill'
 require_relative 'group/old_docx_group'
-# Fallback DOCX Picture
 module OoxmlParser
+  # Fallback DOCX Picture
   class OldDocxPicture < OOXMLDocumentObject
     attr_accessor :data, :type, :style_number
 
-    def self.parse(picture_node, parent: nil)
-      picture = OldDocxPicture.new
-      picture.parent = parent
-      picture_node.xpath('*').each do |picture_node_child|
-        case picture_node_child.name
+    # Parse OldDocxPicture object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [OldDocxPicture] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'shape'
-          picture.type = :shape
-          picture.data = OldDocxShape.new(parent: picture).parse(picture_node_child)
+          @type = :shape
+          @data = OldDocxShape.new(parent: self).parse(node_child)
         when 'group'
-          picture.type = :group
-          picture.data = OldDocxGroup.new(parent: picture).parse(picture_node_child)
+          @type = :group
+          @data = OldDocxGroup.new(parent: self).parse(node_child)
         when 'style'
-          picture.style_number = picture_node_child.attribute('val').value.to_i
+          @style_number = node_child.attribute('val').value.to_i
         end
       end
-      picture
+      self
     end
   end
 end

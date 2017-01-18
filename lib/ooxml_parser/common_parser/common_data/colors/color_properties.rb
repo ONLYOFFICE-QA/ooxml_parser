@@ -1,24 +1,26 @@
-# Class for color transformations
 module OoxmlParser
-  class ColorProperties
+  # Class for color transformations
+  class ColorProperties < OOXMLDocumentObject
     attr_accessor :alpha, :luminance_modulation, :luminance_offset
     attr_accessor :tint
 
-    def self.parse(color_properties_node)
-      properties = ColorProperties.new
-      color_properties_node.xpath('*').each do |color_properties_node_child|
-        case color_properties_node_child.name
+    # Parse ColorProperties object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ColorProperties] result of parsing
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'alpha'
-          properties.alpha = (color_properties_node_child.attribute('val').value.to_f / 1_000.0).round
+          @alpha = (node_child.attribute('val').value.to_f / 1_000.0).round
         when 'lumMod'
-          properties.luminance_modulation = color_properties_node_child.attribute('val').value.to_f / 100_000.0
+          @luminance_modulation = node_child.attribute('val').value.to_f / 100_000.0
         when 'lumOff'
-          properties.luminance_offset = color_properties_node_child.attribute('val').value.to_f / 100_000.0
+          @luminance_offset = node_child.attribute('val').value.to_f / 100_000.0
         when 'tint'
-          properties.tint = color_properties_node_child.attribute('val').value.to_f / 100_000.0
+          @tint = node_child.attribute('val').value.to_f / 100_000.0
         end
       end
-      properties
+      self
     end
   end
 end

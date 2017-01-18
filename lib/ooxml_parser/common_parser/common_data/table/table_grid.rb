@@ -5,8 +5,9 @@ module OoxmlParser
     # @return [Array, GridColumn] array of columns
     attr_accessor :columns
 
-    def initialize(columns = [])
-      @columns = columns
+    def initialize(parent: nil)
+      @columns = []
+      @parent = parent
     end
 
     def ==(other)
@@ -19,15 +20,14 @@ module OoxmlParser
     # Parse TableGrid
     # @param [Nokogiri::XML:Node] node with TableGrid
     # @return [TableGrid] result of parsing
-    def self.parse(node)
-      grid = TableGrid.new
+    def parse(node)
       node.xpath('*').each do |grid_child|
         case grid_child.name
         when 'gridCol'
-          grid.columns << GridColumn.new(parent: grid).parse(grid_child)
+          @columns << GridColumn.new(parent: self).parse(grid_child)
         end
       end
-      grid
+      self
     end
   end
 end

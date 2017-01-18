@@ -26,7 +26,7 @@ module OoxmlParser
           @type = :inline
         end
         @properties.distance_from_text = DocxDrawingDistanceFromText.new(parent: self).parse(node_child)
-        @properties.wrap = DocxWrapDrawing.parse(node_child)
+        @properties.wrap = DocxWrapDrawing.new(parent: self).parse(node_child)
         node_child.attributes.each do |key, value|
           case key
           when 'relativeHeight'
@@ -42,9 +42,9 @@ module OoxmlParser
           when 'graphic'
             @graphic = DocxGraphic.new(parent: self).parse(content_node_child)
           when 'positionV'
-            @properties.vertical_position = DocxDrawingPosition.parse(content_node_child)
+            @properties.vertical_position = DocxDrawingPosition.new(parent: self).parse(content_node_child)
           when 'positionH'
-            @properties.horizontal_position = DocxDrawingPosition.parse(content_node_child)
+            @properties.horizontal_position = DocxDrawingPosition.new(parent: self).parse(content_node_child)
           when 'sizeRelH'
             @properties.size_relative_horizontal = SizeRelativeHorizontal.new(parent: self).parse(content_node_child)
           when 'sizeRelV'

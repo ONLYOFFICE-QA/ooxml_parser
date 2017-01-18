@@ -31,7 +31,7 @@ module OoxmlParser
           @office2010_content = DocxDrawing.new(parent: self).parse(node_child.xpath('w:drawing').first) unless node_child.xpath('w:drawing').first.nil?
           @choice = Choice.new(parent: self).parse(node_child)
         when 'Fallback'
-          @office2007_content = OldDocxPicture.parse(node_child.xpath('w:pict').first, parent: self) unless node_child.xpath('w:pict').first.nil?
+          @office2007_content = OldDocxPicture.new(parent: self).parse(node_child.xpath('w:pict').first) unless node_child.xpath('w:pict').first.nil?
         end
       end
       self

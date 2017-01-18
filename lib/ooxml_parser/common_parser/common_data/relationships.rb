@@ -17,15 +17,14 @@ module OoxmlParser
     # Parse Relationships
     # @param [Nokogiri::XML:Node] node with Relationships
     # @return [Relationships] result of parsing
-    def self.parse(node)
-      rels = Relationships.new
+    def parse(node)
       node.xpath('*').each do |node_children|
         case node_children.name
         when 'Relationship'
-          rels.relationship << Relationship.parse(node_children)
+          @relationship << Relationship.new(parent: self).parse(node_children)
         end
       end
-      rels
+      self
     end
   end
 end
