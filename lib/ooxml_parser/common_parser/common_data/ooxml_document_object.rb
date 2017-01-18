@@ -91,19 +91,8 @@ module OoxmlParser
       def get_link_from_rels(id)
         rels_path = dir + "_rels/#{File.basename(OOXMLDocumentObject.xmls_stack.last)}.rels"
         raise LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)
-        relationships = Nokogiri::XML(File.open(rels_path))
-        relationships.xpath('*').each do |node_child|
-          case node_child.name
-          when 'Relationships'
-            node_child.xpath('*').each do |node_child_child|
-              case node_child_child.name
-              when 'Relationship'
-                return node_child_child.attribute('Target').text if node_child_child.attribute('Id').text == id
-              end
-            end
-          end
-        end
-        ''
+        relationships = Relationships.parse_rels(rels_path)
+        relationships.target_by_id(id)
       end
     end
   end
