@@ -30,11 +30,18 @@ module OoxmlParser
 
     def self.parse_file(file_name, path_to_folder)
       path_to_comments_xml = ''
-      return nil unless File.exist?(path_to_folder + "xl/worksheets/_rels/#{file_name}.rels")
-      relationships = XmlSimple.xml_in(File.open(path_to_folder + "xl/worksheets/_rels/#{file_name}.rels"))
-      if relationships['Relationship']
-        relationships['Relationship'].each do |relationship|
-          path_to_comments_xml = path_to_folder + 'xl/' + relationship['Target'].gsub('..', '') if File.basename(relationship['Target']).include?('comment')
+      file = path_to_folder + "xl/worksheets/_rels/#{file_name}.rels"
+      return nil unless File.exist?(file)
+      relationships = Nokogiri::XML(File.open(file))
+      relationships.xpath('*').each do |node_child|
+        case node_child.name
+        when 'Relationships'
+          node_child.xpath('*').each do |node_child_child|
+            case node_child_child.name
+            when 'Relationship'
+              path_to_comments_xml = path_to_folder + 'xl/' + node_child_child.attribute('Target').text.gsub('..', '') if File.basename(node_child_child.attribute('Target').text).include?('comment')
+            end
+          end
         end
       end
       ExcelComments.parse(path_to_comments_xml) unless path_to_comments_xml == ''

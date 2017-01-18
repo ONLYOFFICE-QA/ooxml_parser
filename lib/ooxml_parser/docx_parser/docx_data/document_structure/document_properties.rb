@@ -11,9 +11,20 @@ module OoxmlParser
         warn "There is no 'docProps/app.xml' in docx. It may be some problem with it"
         return self
       end
-      doc_props = XmlSimple.xml_in(File.open(properties_file))
-      @pages = doc_props['Pages'].first.to_i unless doc_props['Pages'].nil?
-      @words = doc_props['Words'].first.to_i unless doc_props['Words'].nil?
+      node = Nokogiri::XML(File.open(properties_file))
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'Properties'
+          node_child.xpath('*').each do |node_child_child|
+            case node_child_child.name
+            when 'Pages'
+              @pages = node_child_child.text.to_i
+            when 'Words'
+              @words = node_child_child.text.to_i
+            end
+          end
+        end
+      end
       self
     end
   end
