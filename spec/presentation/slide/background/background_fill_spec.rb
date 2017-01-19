@@ -7,6 +7,11 @@ describe 'My behaviour' do
                .background_color.value).to eq(OoxmlParser::Color.new(231, 230, 230))
   end
 
+  it 'slide_pattern_preset.pptx' do
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/background/fill/slide_pattern_preset.pptx')
+    expect(pptx.slides[0].background.fill.pattern.preset).to eq(:dashDnDiag)
+  end
+
   it 'slide_gradient.pptx' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/background/fill/slide_gradient.pptx')
     gradient_stops = pptx.slides[0].background.fill.color.gradient_stops
