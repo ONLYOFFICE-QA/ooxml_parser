@@ -17,7 +17,10 @@ module OoxmlParser
       end
       return self if @resource_id.nil?
       @path = OOXMLDocumentObject.get_link_from_rels(@resource_id)
-      raise LoadError, "Cant find path to media file by id: #{@resource_id}" if @path.empty?
+      if @path.empty?
+        warn "Cant find path to media file by id: #{@resource_id}"
+        return self
+      end
       return self if @path == 'NULL'
       full_path_to_file = OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.root_subfolder + @path.gsub('..', '')
       if File.exist?(full_path_to_file)

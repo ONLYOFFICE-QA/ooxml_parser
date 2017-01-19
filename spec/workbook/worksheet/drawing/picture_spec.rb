@@ -12,6 +12,7 @@ describe 'My behaviour' do
   end
 
   it 'image_incorrect_link.xlsx' do
-    expect { OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/image_incorrect_link.xlsx') }.to raise_error(LoadError)
+    expect { OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/image_incorrect_link.xlsx') }
+      .to output("Cant find path to media file by id: rId1\n").to_stderr
   end
 end
