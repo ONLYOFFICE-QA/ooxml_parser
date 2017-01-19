@@ -55,6 +55,7 @@
 * Add parsing `OOXMLShapeBodyProperties#vertical`
 * Add parsing `CellStyle#apply_number_format`
 * Add parsing `SheetView#show_gridlines`, `SheetView#show_row_column_headers`
+* Do not crash, just show stderr if resource not found
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
