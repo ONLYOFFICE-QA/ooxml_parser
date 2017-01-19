@@ -10,7 +10,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'prst'
-          @pattern = value.value.to_sym
+          @preset = value.value.to_sym
         end
       end
 
