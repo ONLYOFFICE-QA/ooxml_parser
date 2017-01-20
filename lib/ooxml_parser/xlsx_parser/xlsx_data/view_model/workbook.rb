@@ -1,3 +1,4 @@
+require_relative 'workbook/chartsheet'
 require_relative 'workbook/worksheet'
 require_relative 'workbook/workbook_helpers'
 # Class for storing XLSX Workbook
@@ -7,6 +8,8 @@ module OoxmlParser
     attr_accessor :worksheets
     # @return [PresentationTheme] theme of Workbook
     attr_accessor :theme
+    # @return [Relationships] rels of book
+    attr_accessor :relationships
 
     def initialize(worksheets = [])
       @worksheets = worksheets
@@ -68,6 +71,7 @@ module OoxmlParser
 
     def self.parse
       workbook = XLSXWorkbook.new
+      workbook.relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.root_subfolder = 'xl/'
       self.shared_strings = nil
@@ -76,8 +80,13 @@ module OoxmlParser
       XLSXWorkbook.styles_node = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml"))
       workbook.theme = PresentationTheme.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
       doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
-        workbook.worksheets << Worksheet.parse('xl/' + OOXMLDocumentObject.get_link_from_rels(sheet.attribute('id').value))
-        workbook.worksheets.last.name = sheet.attribute('name').value
+        file = workbook.relationships.target_by_id(sheet.attribute('id').value)
+        if file.start_with?('worksheets')
+          workbook.worksheets << Worksheet.parse(file)
+          workbook.worksheets.last.name = sheet.attribute('name').value
+        elsif file.start_with?('chartsheets')
+          workbook.worksheets << Chartsheet.new(parent: workbook).parse(file)
+        end
       end
       OOXMLDocumentObject.xmls_stack.pop
       workbook
