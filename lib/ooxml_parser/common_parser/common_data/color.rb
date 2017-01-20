@@ -221,6 +221,7 @@ module OoxmlParser
 
       def get_rgb_by_color_index(index)
         color_by_index = COLOR_INDEXED[index]
+        return :unknown if color_by_index.nil?
         color_by_index == 'n/a' ? Color.new : Color.new.parse_hex_string(color_by_index)
       end
 

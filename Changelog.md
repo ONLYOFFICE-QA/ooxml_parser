@@ -91,6 +91,7 @@
 * Fix values of `OOXMLFont`: was not float
 * Fix parsing `Underline` style
 * Fix parsing Strike `noStrike`
+* Do not crash if indexed color have unknown index
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem
