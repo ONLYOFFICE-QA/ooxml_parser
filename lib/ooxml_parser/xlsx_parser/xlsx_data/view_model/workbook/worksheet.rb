@@ -67,7 +67,7 @@ module OoxmlParser
           end
         when 'sheetFormatPr'
           if !worksheet_node_child.attribute('defaultColWidth').nil? && !worksheet_node_child.attribute('defaultRowHeight').nil?
-            worksheet.sheet_format_properties = SheetFormatProperties.parse(worksheet_node_child)
+            worksheet.sheet_format_properties = SheetFormatProperties.new(parent: worksheet).parse(worksheet_node_child)
           end
         when 'mergeCells'
           worksheet_node_child.xpath('xmlns:mergeCell').each do |merge_node|

@@ -53,16 +53,11 @@ module OoxmlParser
     # @return [True, False] is number format is applied
     attr_accessor :apply_number_format
 
-    def initialize(font = nil,
-                   borders = nil,
-                   fill_color = ForegroundColor.new,
-                   numerical_format = 'General',
-                   alignment = XlsxAlignment.new)
-      @font = font
-      @borders = borders
-      @fill_color = fill_color
-      @numerical_format = numerical_format
-      @alignment = alignment
+    def initialize(parent: nil)
+      @fill_color = ForegroundColor.new(parent: self)
+      @numerical_format = 'General'
+      @alignment = XlsxAlignment.new
+      @parent = parent
     end
 
     # Parse CellStyle object
@@ -79,7 +74,7 @@ module OoxmlParser
         @borders = Borders.parse_from_style(current_cell_style.attribute('borderId').value.to_i)
       end
       unless current_cell_style.attribute('applyFill').nil? || current_cell_style.attribute('applyFill').value == '0'
-        @fill_color = ForegroundColor.parse(current_cell_style.attribute('fillId').value.to_i)
+        @fill_color = ForegroundColor.new(parent: self).parse(current_cell_style.attribute('fillId').value.to_i)
       end
       unless current_cell_style.attribute('applyNumberFormat').nil? || current_cell_style.attribute('applyNumberFormat').value == '0'
         @apply_number_format = true

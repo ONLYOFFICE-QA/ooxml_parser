@@ -2,28 +2,30 @@ require_relative 'time_node/common_timing'
 require_relative 'animation_effect/animation_effect'
 require_relative 'set_time_node/set_time_node'
 module OoxmlParser
-  class TimeNode
+  # Class for parsing TimeNode tags
+  class TimeNode < OOXMLDocumentObject
     attr_accessor :type, :common_time_node, :previous_conditions_list, :next_conditions_list
 
-    def initialize(type = nil, common_time_node = nil, previous_conditions_list = [], next_conditions_list = [])
+    def initialize(type = nil, parent: nil)
       @type = type
-      @common_time_node = common_time_node
-      @previous_conditions_list = previous_conditions_list
-      @next_conditions_list = next_conditions_list
+      @previous_conditions_list = []
+      @next_conditions_list = []
+      @parent = parent
     end
 
-    def self.parse(time_node, type)
-      time = TimeNode.new
-      time.type = type
-      time_node.xpath('*').each do |time_node_child|
-        case time_node_child.name
+    # Parse TimeNode
+    # @param node [Nokogiri::XML::Element] node to parse
+    # @return [TimeNode] value of SheetFormatProperties
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'cTn'
-          time.common_time_node = CommonTiming.new(parent: time).parse(time_node_child)
+          @common_time_node = CommonTiming.new(parent: self).parse(node_child)
         when 'prevCondLst'
-          time.previous_conditions_list = Condition.parse_list(time_node_child)
+          @previous_conditions_list = Condition.parse_list(node_child)
         end
       end
-      time
+      self
     end
 
     def self.parse_list(timing_list_node)
@@ -31,13 +33,13 @@ module OoxmlParser
       timing_list_node.xpath('*').each do |time_node|
         case time_node.name
         when 'par'
-          timings << TimeNode.parse(time_node, :parallel)
+          timings << TimeNode.new(:parallel, parent: timings).parse(time_node)
         when 'seq'
-          timings << TimeNode.parse(time_node, :sequence)
+          timings << TimeNode.new(:sequence, parent: timings).parse(time_node)
         when 'excl'
-          timings << TimeNode.parse(time_node, :exclusive)
+          timings << TimeNode.new(:exclusive, parent: timings).parse(time_node)
         when 'anim'
-          timings << TimeNode.parse(time_node, :animate)
+          timings << TimeNode.new(:animate, parent: timings).parse(time_node)
         when 'set'
           timings << SetTimeNode.new(parent: timings).parse(time_node)
         when 'animEffect'
