@@ -32,7 +32,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'c'
-          @cells[Coordinates.parse_coordinates_from_string(node_child.attribute('r').value.to_s).get_column_number.to_i - 1] = XlsxCell.parse(node_child)
+          @cells[Coordinates.parse_coordinates_from_string(node_child.attribute('r').value.to_s).get_column_number.to_i - 1] = XlsxCell.new(parent: self).parse(node_child)
         end
       end
       self

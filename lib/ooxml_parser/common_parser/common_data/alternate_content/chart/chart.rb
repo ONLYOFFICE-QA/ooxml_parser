@@ -38,7 +38,7 @@ module OoxmlParser
             val = chart_props_node_child.xpath('c:val')[0]
           end
           next if val.xpath('c:numRef').empty?
-          @data << ChartCellsRange.parse(val.xpath('c:numRef').first).dup
+          @data << ChartCellsRange.new(parent: self).parse(val.xpath('c:numRef').first).dup
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.new(parent: self).parse(chart_props_node_child)
         end

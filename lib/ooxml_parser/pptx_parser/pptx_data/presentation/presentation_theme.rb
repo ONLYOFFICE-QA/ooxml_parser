@@ -22,7 +22,7 @@ module OoxmlParser
           case theme_element_node.name
           when 'clrScheme'
             theme_element_node.xpath('*').each do |color_scheme_element|
-              OOXMLDocumentObject.theme.color_scheme[color_scheme_element.name.to_sym] = ThemeColor.parse(color_scheme_element)
+              OOXMLDocumentObject.theme.color_scheme[color_scheme_element.name.to_sym] = ThemeColor.new.parse(color_scheme_element)
             end
             OOXMLDocumentObject.theme.color_scheme[:background1] = OOXMLDocumentObject.theme.color_scheme[:lt1]
             OOXMLDocumentObject.theme.color_scheme[:background2] = OOXMLDocumentObject.theme.color_scheme[:lt2]

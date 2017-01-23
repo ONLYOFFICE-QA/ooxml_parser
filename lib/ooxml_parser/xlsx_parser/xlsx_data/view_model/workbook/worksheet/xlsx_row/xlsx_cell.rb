@@ -7,25 +7,29 @@ module OoxmlParser
     # @return [String] text without applying any style modificators, like quote_prefix
     attr_accessor :raw_text
 
-    def initialize(style = nil, text = '')
+    def initialize(style = nil, text = '', parent: nil)
       @style = style
       @text = text
       @raw_text = ''
+      @parent = parent
     end
 
-    def self.parse(cell_node)
+    # Parse XlsxCell object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [XlsxCell] result of parsing
+    def parse(node)
       text_string_id = nil
-      text_string_id = cell_node.attribute('s').value unless cell_node.attribute('s').nil?
-      cell = XlsxCell.new(CellStyle.new(parent: cell).parse(text_string_id))
-      if cell_node.attribute('t').nil?
-        cell.raw_text = cell_node.xpath('xmlns:v').text
+      text_string_id = node.attribute('s').value unless node.attribute('s').nil?
+      @style = CellStyle.new(parent: self).parse(text_string_id)
+      if node.attribute('t').nil?
+        @raw_text = node.xpath('xmlns:v').text
       else
-        cell_node.attribute('t').value == 's' ? get_shared_string(cell_node.xpath('xmlns:v').text, cell) : cell.raw_text = cell_node.xpath('xmlns:v').text
+        node.attribute('t').value == 's' ? XlsxCell.get_shared_string(node.xpath('xmlns:v').text, self) : @raw_text = node.xpath('xmlns:v').text
       end
-      cell.formula = cell_node.xpath('xmlns:f').text unless cell_node.xpath('xmlns:f').text == ''
-      cell.text = cell.raw_text.dup unless cell.raw_text.nil?
-      cell.text.insert(0, "'") if cell.style.quote_prefix
-      cell
+      @formula = node.xpath('xmlns:f').text unless node.xpath('xmlns:f').text == ''
+      @text = @raw_text.dup unless @raw_text.nil?
+      @text.insert(0, "'") if @style.quote_prefix
+      self
     end
 
     # Get shared string by it's number

@@ -21,7 +21,7 @@ module OoxmlParser
         when 'sp'
           @shape = DocxShape.new(parent: self).parse(child_node)
         when 'grpSp'
-          @grouping = XlsxShapeGrouping.parse(child_node)
+          @grouping = XlsxShapeGrouping.new(parent: self).parse(child_node)
         when 'pic'
           @picture = DocxPicture.new(parent: self).parse(child_node)
         when 'graphicFrame'

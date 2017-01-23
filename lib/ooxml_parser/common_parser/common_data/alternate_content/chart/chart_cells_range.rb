@@ -1,23 +1,26 @@
-# Cell Range of Chart
 module OoxmlParser
-  class ChartCellsRange
+  # Cell Range of Chart
+  class ChartCellsRange < OOXMLDocumentObject
     attr_accessor :list, :points
 
-    def initialize(list = '', points = [])
-      @list = list
-      @points = points
+    def initialize(parent: nil)
+      @list = ''
+      @points = []
+      @parent = parent
     end
 
-    def self.parse(num_ref_node)
-      chart_range = ChartCellsRange.new
-      chart_range.list = num_ref_node.xpath('c:f')[0].text.split('!').first
-      coordinates = Coordinates.parser_coordinates_range(num_ref_node.xpath('c:f')[0].text) # .split('!')[1].gsub('$', ''))
-      num_ref_node.xpath('c:numCache/c:pt').each_with_index do |point_node, index|
+    # Parse ChartCellsRange object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ChartCellsRange] result of parsing
+    def parse(node)
+      @list = node.xpath('c:f')[0].text.split('!').first
+      coordinates = Coordinates.parser_coordinates_range(node.xpath('c:f')[0].text) # .split('!')[1].gsub('$', ''))
+      node.xpath('c:numCache/c:pt').each_with_index do |point_node, index|
         point = ChartPoint.new(coordinates[index])
         point.value = point_node.xpath('c:v').first.text.to_f unless point_node.xpath('c:v').first.nil?
-        chart_range.points << point
+        @points << point
       end
-      chart_range
+      self
     end
   end
 end
