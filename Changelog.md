@@ -57,6 +57,7 @@
 * Add parsing `SheetView#show_gridlines`, `SheetView#show_row_column_headers`
 * Do not crash, just show stderr if resource not found
 * Add base support of `chartsheets`
+* Add `parse_hex_string` for 3 digit colors
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
