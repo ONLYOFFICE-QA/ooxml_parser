@@ -21,6 +21,7 @@ module OoxmlParser
     attr_accessor :numbering
     # @return [Styles] styles of document
     attr_accessor :styles
+    attr_accessor :theme_colors
 
     def initialize
       @elements = []
@@ -110,12 +111,13 @@ module OoxmlParser
     end
 
     def self.parse
+      doc_structure = DocumentStructure.new
       OOXMLDocumentObject.root_subfolder = 'word/'
       OOXMLDocumentObject.xmls_stack = []
       @comments = []
       DocumentStructure.default_paragraph_style = DocxParagraph.new
       DocumentStructure.default_run_style = DocxParagraphRun.new
-      PresentationTheme.parse('word/theme/theme1.xml')
+      doc_structure.theme_colors = PresentationTheme.parse('word/theme/theme1.xml')
       OOXMLDocumentObject.add_to_xmls_stack('word/styles.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
@@ -130,7 +132,6 @@ module OoxmlParser
         end
       end
       parse_default_style
-      doc_structure = DocumentStructure.new
       doc_structure.numbering = Numbering.new(parent: doc_structure).parse
       doc_structure.document_styles = DocumentStyle.parse_list(doc_structure)
       doc_structure.styles = Styles.new(parent: doc_structure).parse
