@@ -2,6 +2,7 @@
 require_relative 'docx_paragraph/bookmark'
 require_relative 'docx_paragraph/docx_paragraph_run'
 require_relative 'docx_paragraph/indents'
+require_relative 'docx_paragraph/inserted'
 require_relative 'docx_paragraph/frame_properties'
 require_relative 'docx_paragraph/docx_formula'
 require_relative 'docx_paragraph/style_parametres'
@@ -13,6 +14,8 @@ module OoxmlParser
                   :orphan_control, :frame_properties
     # @return [ParagraphProperties] Properties of current paragraph
     attr_accessor :paragraph_properties
+    # @return [Inserted] data inserted by review
+    attr_accessor :inserted
 
     def initialize(parent: nil)
       @number = 0
@@ -65,6 +68,7 @@ module OoxmlParser
       paragraph.orphan_control = @orphan_control
       paragraph.frame_properties = @frame_properties
       paragraph.paragraph_properties = @paragraph_properties
+      paragraph.inserted = @inserted
       paragraph
     end
 
@@ -196,6 +200,8 @@ module OoxmlParser
               break
             end
           end
+        when 'ins'
+          @inserted = Inserted.new(parent: self).parse(node_child)
         end
       end
       @number = par_number

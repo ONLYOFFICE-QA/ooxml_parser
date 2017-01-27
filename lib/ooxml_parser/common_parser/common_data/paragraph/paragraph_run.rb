@@ -4,9 +4,10 @@ module OoxmlParser
   class ParagraphRun < OOXMLDocumentObject
     attr_accessor :properties, :text
 
-    def initialize(properties = RunProperties.new, text = '')
+    def initialize(properties = RunProperties.new, text = '', parent: nil)
       @properties = properties
       @text = text
+      @parent = parent
     end
 
     # Parse ParagraphRun object
