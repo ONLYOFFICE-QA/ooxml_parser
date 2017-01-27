@@ -13,7 +13,7 @@ module OoxmlParser
     # @return [ExcelComment] result of parsing
     def parse(node)
       node.xpath('xmlns:text/xmlns:r').each do |node_child|
-        @characters << ParagraphRun.new(parse: self).parse(node_child)
+        @characters << ParagraphRun.new(parent: self).parse(node_child)
       end
       self
     end
