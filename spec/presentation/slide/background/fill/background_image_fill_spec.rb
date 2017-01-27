@@ -14,6 +14,6 @@ describe 'My behaviour' do
   end
 
   it 'image_embeded_by_link' do
-    expect { OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/background/fill/image/image_no_embedded.pptx') }.not_to raise_error(LoadError)
+    expect { OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/background/fill/image/image_no_embedded.pptx') }.not_to raise_error
   end
 end
