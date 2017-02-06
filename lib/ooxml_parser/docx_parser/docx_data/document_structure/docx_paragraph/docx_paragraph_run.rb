@@ -12,11 +12,6 @@ module OoxmlParser
                   :link, :highlight, :shadow, :outline, :imprint, :emboss, :vanish, :effect, :caps, :w,
                   :position, :rtl, :em, :cs, :spacing, :break, :touch, :shape, :footnote, :endnote, :fld_char, :style,
                   :comments, :alternate_content, :page_number, :text_outline, :text_fill
-    # @return [Float]
-    # This element specifies the font size which shall be applied to all
-    # complex script characters in the contents of this run when displayed
-    attr_accessor :font_size_complex
-
     # @return [String] type of instruction used for upper level of run
     # http://officeopenxml.com/WPfieldInstructions.php
     attr_accessor :instruction

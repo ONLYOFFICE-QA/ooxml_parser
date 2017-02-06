@@ -16,8 +16,6 @@ module OoxmlParser
           end
         when 'sz'
           self.size = node_child.attribute('val').value.to_i / 2.0
-        when 'szCs'
-          self.font_size_complex = node_child.attribute('val').value.to_i / 2.0
         when 'highlight'
           self.highlight = node_child.attribute('val').value
         when 'vertAlign'
