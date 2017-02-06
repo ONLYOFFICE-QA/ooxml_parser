@@ -24,8 +24,6 @@ module OoxmlParser
           self.effect = node_child.attribute('val').value
         when 'position'
           self.position = (node_child.attribute('val').value.to_f / (28.0 + 1.0 / 3.0) / 2.0).round(1)
-        when 'rtl'
-          self.rtl = option_enabled?(node_child)
         when 'em'
           self.em = node_child.attribute('val').value
         when 'cs'

@@ -10,7 +10,7 @@ module OoxmlParser
     include DocxParagraphRunHelpers
     attr_accessor :number, :font, :vertical_align, :size, :font_color, :background_color, :font_style, :text, :drawings,
                   :link, :highlight, :effect, :caps, :w,
-                  :position, :rtl, :em, :cs, :spacing, :break, :touch, :shape, :footnote, :endnote, :fld_char, :style,
+                  :position, :em, :cs, :spacing, :break, :touch, :shape, :footnote, :endnote, :fld_char, :style,
                   :comments, :alternate_content, :page_number, :text_outline, :text_fill
     # @return [String] type of instruction used for upper level of run
     # http://officeopenxml.com/WPfieldInstructions.php
@@ -36,7 +36,6 @@ module OoxmlParser
       @caps = nil
       @w = false
       @position = 0.0
-      @rtl = false
       @em = nil
       @cs = false
       @spacing = 0.0
@@ -77,7 +76,6 @@ module OoxmlParser
       character.caps = @caps
       character.w = @w
       character.position = @position
-      character.rtl = @rtl
       character.em = @em
       character.cs = @cs
       character.spacing = @spacing
