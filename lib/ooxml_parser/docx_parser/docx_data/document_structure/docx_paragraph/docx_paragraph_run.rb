@@ -9,7 +9,7 @@ module OoxmlParser
   class DocxParagraphRun < OOXMLDocumentObject
     include DocxParagraphRunHelpers
     attr_accessor :number, :font, :vertical_align, :size, :font_color, :background_color, :font_style, :text, :drawings,
-                  :link, :highlight, :imprint, :emboss, :vanish, :effect, :caps, :w,
+                  :link, :highlight, :emboss, :vanish, :effect, :caps, :w,
                   :position, :rtl, :em, :cs, :spacing, :break, :touch, :shape, :footnote, :endnote, :fld_char, :style,
                   :comments, :alternate_content, :page_number, :text_outline, :text_fill
     # @return [String] type of instruction used for upper level of run
@@ -32,7 +32,6 @@ module OoxmlParser
       @drawings = []
       @link = nil
       @highlight = nil
-      @imprint = nil
       @emboss = nil
       @vanish = nil
       @effect = nil
@@ -76,7 +75,6 @@ module OoxmlParser
       character.drawings = @drawings.clone
       character.link = @link
       character.highlight = @highlight
-      character.imprint = @imprint
       character.emboss = @emboss
       character.vanish = @vanish
       character.effect = @effect
