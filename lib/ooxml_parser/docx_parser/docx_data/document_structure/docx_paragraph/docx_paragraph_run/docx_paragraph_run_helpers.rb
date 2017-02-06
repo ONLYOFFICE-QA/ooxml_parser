@@ -16,32 +16,16 @@ module OoxmlParser
           end
         when 'sz'
           self.size = node_child.attribute('val').value.to_i / 2.0
-        when 'szCs'
-          self.font_size_complex = node_child.attribute('val').value.to_i / 2.0
         when 'highlight'
           self.highlight = node_child.attribute('val').value
         when 'vertAlign'
           self.vertical_align = node_child.attribute('val').value.to_sym
-        when 'shadow'
-          self.shadow = true
-        when 'outline'
-          self.outline = true
-        when 'imprint'
-          self.imprint = true
-        when 'emboss'
-          self.emboss = true
-        when 'vanish'
-          self.vanish = true
         when 'effect'
           self.effect = node_child.attribute('val').value
         when 'position'
           self.position = (node_child.attribute('val').value.to_f / (28.0 + 1.0 / 3.0) / 2.0).round(1)
-        when 'rtl'
-          self.rtl = option_enabled?(node_child)
         when 'em'
           self.em = node_child.attribute('val').value
-        when 'cs'
-          self.cs = option_enabled?(node_child)
         when 'spacing'
           self.spacing = (node_child.attribute('val').value.to_f / 566.9).round(1)
         when 'textFill'
