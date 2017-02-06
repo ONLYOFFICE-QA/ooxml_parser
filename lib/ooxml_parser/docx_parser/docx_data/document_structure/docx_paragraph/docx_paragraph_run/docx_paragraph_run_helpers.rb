@@ -20,8 +20,6 @@ module OoxmlParser
           self.highlight = node_child.attribute('val').value
         when 'vertAlign'
           self.vertical_align = node_child.attribute('val').value.to_sym
-        when 'vanish'
-          self.vanish = true
         when 'effect'
           self.effect = node_child.attribute('val').value
         when 'position'

@@ -12,6 +12,7 @@ module OoxmlParser
                   :vertical_align, :outline
     attr_accessor :shadow
     attr_accessor :emboss
+    attr_accessor :vanish
     # @return [Size] get run size
     attr_accessor :size
     # @return [RunSpacing] get run spacing
@@ -80,6 +81,8 @@ module OoxmlParser
           @shadow = option_enabled?(node_child)
         when 'emboss'
           @emboss = option_enabled?(node_child)
+        when 'vanish'
+          @vanish = option_enabled?(node_child)
         when 'spacing'
           @spacing = RunSpacing.new(parent: self).parse(node_child)
         when 'color'
