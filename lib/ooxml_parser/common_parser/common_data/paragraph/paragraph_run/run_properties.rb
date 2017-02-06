@@ -10,6 +10,7 @@ module OoxmlParser
   class RunProperties < OOXMLDocumentObject
     attr_accessor :font_style, :font_color, :space, :dirty, :font_name, :font_size, :baseline, :hyperlink, :caps,
                   :vertical_align, :outline
+    attr_accessor :shadow
     # @return [Size] get run size
     attr_accessor :size
     # @return [RunSpacing] get run spacing
@@ -47,6 +48,8 @@ module OoxmlParser
           @font_size = value.value.to_f / 100.0
         when 'szCs'
           @font_size_complex = node.attribute('val').value.to_i / 2.0
+        when 'shadow'
+          @shadow = true
         when 'spc'
           @space = OoxmlSize.new(value.value.to_f, :one_100th_point)
         when 'b'
