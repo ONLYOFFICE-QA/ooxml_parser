@@ -11,7 +11,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'style'
-          @style = value.value.to_sym
+          @style = value_to_symbol(value)
         end
       end
 
