@@ -1,5 +1,4 @@
 require_relative 'xlsx_drawing/xlsx_drawing_position_parameters'
-require_relative 'xlsx_drawing/xlsx_shape_grouping'
 module OoxmlParser
   class XlsxDrawing < OOXMLDocumentObject
     attr_accessor :picture, :shape, :grouping
@@ -21,7 +20,7 @@ module OoxmlParser
         when 'sp'
           @shape = DocxShape.new(parent: self).parse(child_node)
         when 'grpSp'
-          @grouping = XlsxShapeGrouping.new(parent: self).parse(child_node)
+          @grouping = ShapesGrouping.new(parent: self).parse(child_node)
         when 'pic'
           @picture = DocxPicture.new(parent: self).parse(child_node)
         when 'graphicFrame'

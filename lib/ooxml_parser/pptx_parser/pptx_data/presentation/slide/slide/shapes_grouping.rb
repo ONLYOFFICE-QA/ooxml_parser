@@ -24,6 +24,8 @@ module OoxmlParser
           @elements << ShapesGrouping.new(parent: self).parse(child_node)
         when 'graphicFrame'
           @elements << GraphicFrame.new(parent: self).parse(child_node)
+        when 'wsp'
+          @elements << DocxShape.new(parent: self).parse(child_node)
         end
       end
       self

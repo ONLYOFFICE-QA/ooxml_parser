@@ -114,9 +114,9 @@ describe 'drawing' do
     expect(alternate.office2007_content.data.elements.first.elements[1].type).to eq(:shape)
 
     expect(alternate.office2010_content.graphic.data.elements.length).to eq(2)
-    expect(alternate.office2010_content.graphic.data.elements[1].type).to eq(:shape)
+    expect(alternate.office2010_content.graphic.data.elements[1]).to be_a(OoxmlParser::DocxShape)
     expect(alternate.office2010_content.graphic.data.elements.first.elements.length).to eq(2)
-    expect(alternate.office2010_content.graphic.data.elements.first.elements[0].type).to eq(:shape)
-    expect(alternate.office2010_content.graphic.data.elements.first.elements[1].type).to eq(:shape)
+    expect(alternate.office2010_content.graphic.data.elements.first.elements[0]).to be_a(OoxmlParser::DocxShape)
+    expect(alternate.office2010_content.graphic.data.elements.first.elements[1]).to be_a(OoxmlParser::DocxShape)
   end
 end

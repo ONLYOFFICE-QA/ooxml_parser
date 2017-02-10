@@ -1,5 +1,4 @@
 require_relative 'shape/docx_shape'
-require_relative 'group/docx_grouped_drawing'
 require_relative 'picture/docx_picture'
 module OoxmlParser
   # Class for parsing `graphic` tags
@@ -27,7 +26,7 @@ module OoxmlParser
           OOXMLDocumentObject.xmls_stack.pop
         when 'wgp'
           @type = :group
-          @data = DocxGroupedDrawing.new(parent: self).parse(node_child)
+          @data = ShapesGrouping.new(parent: self).parse(node_child)
         end
       end
       self
