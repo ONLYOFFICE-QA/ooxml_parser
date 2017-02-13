@@ -1,5 +1,4 @@
 require_relative 'tile'
-require_relative 'image_properties'
 require_relative 'image/stretching'
 module OoxmlParser
   class ImageFill < OOXMLDocumentObject
@@ -20,7 +19,6 @@ module OoxmlParser
         case node_child.name
         when 'blip'
           @file_reference = FileReference.new(parent: self).parse(node_child)
-          @properties = ImageProperties.new(parent: self).parse(node_child)
         when 'stretch'
           @stretch = Stretching.new(parent: self).parse(node_child)
         when 'tile'
