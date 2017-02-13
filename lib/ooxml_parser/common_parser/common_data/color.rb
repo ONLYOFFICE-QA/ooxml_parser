@@ -191,20 +191,6 @@ module OoxmlParser
       @blue = (@blue * shade.to_f).to_i
     end
 
-    def shade(shade_value)
-      red = Color.scrgb_to_srgb(Color.shade_for_component(Color.srgb_to_scrgb(@red), shade_value))
-      green = Color.scrgb_to_srgb(Color.shade_for_component(Color.srgb_to_scrgb(@green), shade_value))
-      blue = Color.scrgb_to_srgb(Color.shade_for_component(Color.srgb_to_scrgb(@blue), shade_value))
-      Color.new(red, green, blue)
-    end
-
-    def tint(shade_value)
-      red = Color.scrgb_to_srgb(Color.tint_for_component(Color.srgb_to_scrgb(@red), shade_value))
-      green = Color.scrgb_to_srgb(Color.tint_for_component(Color.srgb_to_scrgb(@green), shade_value))
-      blue = Color.scrgb_to_srgb(Color.tint_for_component(Color.srgb_to_scrgb(@blue), shade_value))
-      Color.new(red, green, blue)
-    end
-
     class << self
       def generate_random_color
         Color.new(rand(256), rand(256), rand(256))
@@ -240,51 +226,6 @@ module OoxmlParser
       end
 
       alias parse parse_string
-
-      def srgb_to_scrgb(color)
-        lineal_value = color.to_f / 255.0
-        result_color = if lineal_value < 0
-                         0
-                       elsif lineal_value <= 0.04045
-                         lineal_value / 12.92
-                       elsif lineal_value <= 1
-                         ((lineal_value + 0.055) / 1.055)**2.4
-                       else
-                         1
-                       end
-        result_color
-      end
-
-      def scrgb_to_srgb(color)
-        result_color = if color < 0
-                         0
-                       elsif color <= 0.0031308
-                         color * 12.92
-                       elsif color < 1
-                         1.055 * (color**(1.0 / 2.4)) - 0.055
-                       else
-                         1
-                       end
-        (result_color * 255.0).to_i
-      end
-
-      def shade_for_component(color_component, shade_value)
-        if color_component * shade_value < 0
-          0
-        elsif color_component * shade_value > 1
-          1
-        else
-          color_component * shade_value
-        end
-      end
-
-      def tint_for_component(color_component, tint)
-        if tint > 0
-          color_component * (1 - tint) + tint
-        else
-          color_component * (1 + tint)
-        end
-      end
 
       def to_color(something)
         case something
