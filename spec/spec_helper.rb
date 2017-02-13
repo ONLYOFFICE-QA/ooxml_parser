@@ -1,6 +1,8 @@
-require 'simplecov'
-SimpleCov.start
+if ENV['CI'] == 'true'
+  require 'simplecov'
+  SimpleCov.start
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
 
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
 require 'ooxml_parser'
