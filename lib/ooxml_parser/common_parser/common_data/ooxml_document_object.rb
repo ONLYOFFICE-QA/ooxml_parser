@@ -83,8 +83,10 @@ module OoxmlParser
       def add_to_xmls_stack(path)
         OOXMLDocumentObject.xmls_stack << if path.include?('..')
                                             "#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/#{path}"
-                                          else
+                                          elsif path.start_with?(OOXMLDocumentObject.root_subfolder)
                                             path
+                                          else
+                                            OOXMLDocumentObject.root_subfolder + path
                                           end
       end
 

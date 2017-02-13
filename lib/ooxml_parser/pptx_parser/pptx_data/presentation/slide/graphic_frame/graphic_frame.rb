@@ -17,14 +17,19 @@ module OoxmlParser
           @transform = DocxShapeSize.new(parent: self).parse(node_child)
         when 'graphic'
           graphic_data = []
-          node_child.xpath('a:graphicData/*').each do |graphic_node_child|
-            case graphic_node_child.name
-            when 'tbl'
-              graphic_data << Table.new(parent: self).parse(graphic_node_child)
-            when 'chart'
-              OOXMLDocumentObject.add_to_xmls_stack(OOXMLDocumentObject.get_link_from_rels(graphic_node_child.attribute('id').value))
-              graphic_data << Chart.parse
-              OOXMLDocumentObject.xmls_stack.pop
+          node_child.xpath('*').each do |node_child_child|
+            case node_child_child.name
+            when 'graphicData'
+              node_child_child.xpath('*').each do |graphic_node_child|
+                case graphic_node_child.name
+                when 'tbl'
+                  graphic_data << Table.new(parent: self).parse(graphic_node_child)
+                when 'chart'
+                  OOXMLDocumentObject.add_to_xmls_stack(OOXMLDocumentObject.get_link_from_rels(graphic_node_child.attribute('id').value))
+                  graphic_data << Chart.parse
+                  OOXMLDocumentObject.xmls_stack.pop
+                end
+              end
             end
           end
           @graphic_data = graphic_data
