@@ -69,74 +69,12 @@ module OoxmlParser
       Color.new(((rgb.red + m) * 255.0).round, ((rgb.green + m) * 255.0).round, ((rgb.blue + m) * 255.0).round)
     end
 
-    def set_color(t1, t2, t3)
-      t3 += 1.0 if t3 < 0
-      t3 -= 1.0 if t3 > 1
-      if 6.0 * t3 < 1
-        t2 + (t1 - t2) * 6.0 * t3
-      elsif 2.0 * t3 < 1
-        t1
-      elsif 3.0 * t3 < 2
-        t2 + (t1 - t2) * ((2.0 / 3.0) - t3) * 6.0
-      else
-        t2
-      end
-    end
-
     def calculate_lum_value(tint, lum)
       if tint.nil?
         lum
       else
         tint < 0 ? lum * (1.0 + tint) : lum * (1.0 - tint) + (255 - 255 * (1.0 - tint))
       end
-    end
-
-    def self.calculate_with_luminance(color, lum_mod, lum_off = nil)
-      hls_color = color.is_a?(HSLColor) ? color : HSLColor.rgb_to_hsl(color)
-      # for hsl color which have h == 0 need another values of lumOff lumMod - 0.04(+-0.005)
-      if lum_mod
-        if hls_color.h.zero?
-          hls_color.l *= case lum_mod
-                         when 0.2
-                           0.169
-                         when 0.4
-                           0.369
-                         when 0.6
-                           0.55
-                         when 0.75
-                           0.705
-                         when 0.5
-                           0.469
-                         else
-                           lum_mod
-                         end
-        else
-          hls_color.l *= lum_mod
-        end
-      end
-      current_rgb = hls_color.to_rgb
-      return current_rgb if current_rgb == Color.new
-
-      unless lum_off.nil?
-        hls_color = HSLColor.rgb_to_hsl(current_rgb)
-        # for hsl color which have h == 0 need another values of lumOff - 0.04(+-0.01)
-        if hls_color.h.zero?
-          hls_color.l += case lum_off
-                         when 0.8
-                           0.76
-                         when 0.6
-                           0.55
-                         when 0.4
-                           0.36
-                         else
-                           lum_off
-                         end
-        else
-          hls_color.l += lum_off
-        end
-        current_rgb = hls_color.to_rgb
-      end
-      current_rgb
     end
 
     def calculate_rgb_with_tint(tint)
