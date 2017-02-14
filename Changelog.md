@@ -59,6 +59,7 @@
 * Add base support of `chartsheets`
 * Add `parse_hex_string` for 3 digit colors
 * Add parsing 'DocxParagraph#inserted' context
+* Add parsing `bgPr` and `stretch`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
