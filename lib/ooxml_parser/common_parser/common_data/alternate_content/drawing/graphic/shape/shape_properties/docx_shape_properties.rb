@@ -1,6 +1,7 @@
 require_relative 'docx_color'
 require_relative 'docx_shape_size'
 require_relative 'docx_shape_line'
+require_relative 'docx_shape_properties/blip_fill'
 require_relative 'docx_shape_properties/preset_geometry'
 require_relative 'docx_shape_properties/text_box'
 require_relative 'custom_geometry/ooxml_custom_geometry'
@@ -8,6 +9,7 @@ require_relative 'custom_geometry/ooxml_custom_geometry'
 module OoxmlParser
   class DocxShapeProperties < OOXMLDocumentObject
     attr_accessor :shape_size, :preset_geometry, :fill_color, :text_box, :line, :custom_geometry
+    attr_accessor :blip_fill
 
     alias transform shape_size
     alias fill fill_color
@@ -33,6 +35,8 @@ module OoxmlParser
           @text_box = TextBox.parse_list(node_child)
         when 'ln'
           @line = DocxShapeLine.new(parent: self).parse(node_child)
+        when 'blipFill'
+          @blip_fill = BlipFill.new(parent: self).parse(node_child)
         when 'custGeom'
           @preset_geometry = PresetGeometry.new(parent: self).parse(node_child)
           @preset_geometry.name = :custom

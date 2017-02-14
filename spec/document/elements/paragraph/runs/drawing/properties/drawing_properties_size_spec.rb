@@ -7,6 +7,6 @@ describe 'Drawing Properties Size' do
     expect(shape_properties.size_relative_horizontal.relative_from).to eq(:right_margin)
     expect(shape_properties.size_relative_horizontal.width.value).to eq(OoxmlParser::OoxmlSize.new(50, :percent))
     expect(shape_properties.size_relative_vertical.relative_from).to eq(:page)
-    expect(shape_properties.size_relative_vertical.height.value).to eq(OoxmlParser::OoxmlSize.new(50, :percent))
+    expect(shape_properties.size_relative_vertical.height.value).to eq(OoxmlParser::OoxmlSize.new(0, :percent))
   end
 end

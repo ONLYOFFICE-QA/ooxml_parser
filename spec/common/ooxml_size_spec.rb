@@ -10,4 +10,14 @@ describe 'OoxmlSize' do
       expect(OoxmlParser::OoxmlSize.new(1, :point).to_unit(:one_100th_point)).to eq(OoxmlParser::OoxmlSize.new(100, :one_100th_point))
     end
   end
+
+  describe 'one_1000th_percent' do
+    it 'compare same - percent and one_1000th_percent' do
+      expect(OoxmlParser::OoxmlSize.new(44, :percent)).to eq(OoxmlParser::OoxmlSize.new(43_999, :one_1000th_percent))
+    end
+
+    it 'compare different - percent and one_1000th_percent' do
+      expect(OoxmlParser::OoxmlSize.new(43, :percent)).not_to eq(OoxmlParser::OoxmlSize.new(43_999, :one_1000th_percent))
+    end
+  end
 end

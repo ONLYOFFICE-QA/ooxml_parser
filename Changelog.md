@@ -132,6 +132,7 @@
 * Simplify `Color.parse_color_tag`
 * `Border` class cleanup
 * Merge `PictureWidth` and `PictureHeight` in single `PictureDimension` class
+* Redone parsing of `AlphaModFix` and blips
 
 ### Removal
 * Remove unused method `PageSize.get_name_by_size`

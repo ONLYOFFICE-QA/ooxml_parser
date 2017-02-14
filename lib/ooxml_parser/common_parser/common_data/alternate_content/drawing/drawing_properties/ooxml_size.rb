@@ -60,8 +60,12 @@ module OoxmlParser
         OoxmlSize.new(@value * 914_400, :emu)
       when :spacing_point
         OoxmlSize.new(@value * (12_700 / 100), :emu)
+      when :percent
+        OoxmlSize.new(@value * 100_000, :one_100000th_percent)
+      when :pct
+        OoxmlSize.new(@value * 1_000, :one_100000th_percent)
       when :one_1000th_percent
-        OoxmlSize.new(@value / 1000, :percent)
+        OoxmlSize.new(@value * 100, :one_100000th_percent)
       else
         self
       end
