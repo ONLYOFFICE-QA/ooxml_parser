@@ -23,7 +23,7 @@ describe 'My behaviour' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/space/spacing.pptx')
     expect(pptx.slides.first.elements.last.text_body.paragraphs.first.properties.spacing).to eq(OoxmlParser::Spacing.new(OoxmlParser::OoxmlSize.new(0, :centimeter),
                                                                                                                          OoxmlParser::OoxmlSize.new(0.35, :centimeter),
-                                                                                                                         OoxmlParser::OoxmlSize.new(15, :percent),
+                                                                                                                         OoxmlParser::OoxmlSize.new(115, :percent),
                                                                                                                          :multiple))
   end
 
