@@ -2,6 +2,8 @@ module OoxmlParser
   # Class for parsing `hlinkClick`, `hyperlink` tags
   class Hyperlink < OOXMLDocumentObject
     attr_accessor :url, :tooltip, :coordinates, :id, :highlight_click, :action
+    attr_accessor :action_link
+    attr_accessor :id
 
     def initialize(link = nil,
                    tooltip = nil,
@@ -27,15 +29,19 @@ module OoxmlParser
         when 'location'
           @url = Coordinates.parse_coordinates_from_string(value.value)
         when 'id'
-          @url = OOXMLDocumentObject.get_link_from_rels(node.attribute('id').value)
+          @id = value.value
+          @url = OOXMLDocumentObject.get_link_from_rels(@id)
         when 'tooltip'
           @tooltip = value.value
         when 'ref'
           @coordinates = Coordinates.parse_coordinates_from_string(value.value)
+        when 'action'
+          @action_link = value.value
+        when 'highlightClick'
+          @highlight_click = attribute_enabled?(value)
         end
       end
-      action = node.attribute('action').value unless node.attribute('action').nil?
-      case action
+      case @action_link
       when 'ppaction://hlinkshowjump?jump=previousslide'
         @action = :previous_slide
       when 'ppaction://hlinkshowjump?jump=nextslide'
@@ -46,19 +52,13 @@ module OoxmlParser
         @action = :last_slide
       when 'ppaction://hlinksldjump'
         @action = :slide
-        @url = OOXMLDocumentObject.get_link_from_rels(node.attribute('id').value).scan(/\d+/).join('').to_i
+        @url = OOXMLDocumentObject.get_link_from_rels(@id).scan(/\d+/).join('').to_i
       else
-        unless node.attribute('id').nil?
+        unless @id.nil?
           @action = :external_link
-          @url = OOXMLDocumentObject.get_link_from_rels(node.attribute('id').value)
+          @url = OOXMLDocumentObject.get_link_from_rels(@id)
         end
       end
-      return self unless node.attribute('highlightClick')
-      @highlight_click = if node.attribute('highlightClick').value == '1'
-                           true
-                         else
-                           false
-                         end
       self
     end
   end
