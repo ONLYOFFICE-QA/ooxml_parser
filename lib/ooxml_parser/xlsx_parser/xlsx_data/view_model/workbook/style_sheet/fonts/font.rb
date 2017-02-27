@@ -1,6 +1,6 @@
 module OoxmlParser
-  # Font Data
-  class OOXMLFont < OOXMLDocumentObject
+  # Parsing `fonts` tag
+  class Font < OOXMLDocumentObject
     attr_accessor :name, :size, :font_style, :color
 
     def initialize(parent: nil)
@@ -9,10 +9,9 @@ module OoxmlParser
       @parent = parent
     end
 
-    def parse(style_number)
+    def parse(node)
       @font_style = FontStyle.new
-      font_style_node = XLSXWorkbook.styles_node.xpath('//xmlns:font')[style_number.to_i]
-      font_style_node.xpath('*').each do |node_child|
+      node.xpath('*').each do |node_child|
         case node_child.name
         when 'name'
           @name = node_child.attribute('val').value

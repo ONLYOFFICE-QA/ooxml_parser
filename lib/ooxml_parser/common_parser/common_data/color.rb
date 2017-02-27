@@ -165,7 +165,7 @@ module OoxmlParser
     # @param [Integer] delta max delta for each of specters
     def looks_like?(color_to_check = nil, delta = 8)
       color_to_check = color_to_check.converted_color if color_to_check.is_a?(SchemeColor)
-      color_to_check = color_to_check.color if color_to_check.is_a?(ForegroundColor)
+      color_to_check = color_to_check.pattern_fill.foreground_folor if color_to_check.is_a?(Fill)
       color_to_check = color_to_check.color.converted_color if color_to_check.is_a?(PresentationFill)
       color_to_check = Color.parse(color_to_check) if color_to_check.is_a?(String)
       color_to_check = Color.parse(color_to_check.to_s) if color_to_check.is_a?(Symbol)
@@ -231,8 +231,10 @@ module OoxmlParser
         case something
         when SchemeColor
           something.converted_color
-        when ForegroundColor, DocxColorScheme
+        when DocxColorScheme
           something.color
+        when Fill
+          something.pattern_fill.foreground_folor
         when PresentationFill
           if something.color.respond_to? :converted_color
             something.color.converted_color

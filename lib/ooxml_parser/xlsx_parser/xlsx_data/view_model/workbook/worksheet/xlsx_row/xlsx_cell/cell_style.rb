@@ -1,6 +1,4 @@
-require_relative 'cell_style/foreground_color'
 require_relative 'cell_style/alignment'
-require_relative 'cell_style/ooxml_font'
 module OoxmlParser
   # Class for parsing cell style
   class CellStyle < OOXMLDocumentObject
@@ -50,11 +48,26 @@ module OoxmlParser
     attr_accessor :font, :borders, :fill_color, :numerical_format, :alignment
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string
     attr_accessor :quote_prefix
-    # @return [True, False] is number format is applied
+    # @return [True, False] is font applied
+    attr_accessor :apply_font
+    # @return [True, False] is border applied
+    attr_accessor :apply_border
+    # @return [True, False] is fill applied
+    attr_accessor :apply_fill
+    # @return [True, False] is number format applied
     attr_accessor :apply_number_format
+    # @return [True, False] is alignment applied
+    attr_accessor :apply_alignment
+    # @return [Integer] id of font
+    attr_accessor :font_id
+    # @return [Integer] id of border
+    attr_accessor :border_id
+    # @return [Integer] id of fill
+    attr_accessor :fill_id
+    # @return [Integer] id of number format
+    attr_accessor :number_format_id
 
     def initialize(parent: nil)
-      @fill_color = ForegroundColor.new(parent: self)
       @numerical_format = 'General'
       @alignment = XlsxAlignment.new
       @parent = parent
@@ -64,40 +77,52 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [CellStyle] result of parsing
     def parse(node)
-      current_cell_style = XLSXWorkbook.styles_node.xpath('//xmlns:cellXfs/xmlns:xf')[node.to_i]
-      @font = if current_cell_style.attribute('applyFont').nil? || current_cell_style.attribute('applyFont').value == '0'
-                OOXMLFont.new(parent: self).parse(0)
-              else
-                OOXMLFont.new(parent: self).parse(current_cell_style.attribute('fontId').value.to_i)
-              end
-      unless current_cell_style.attribute('applyBorder').nil? || current_cell_style.attribute('applyBorder').value == '0'
-        @borders = Borders.parse_from_style(current_cell_style.attribute('borderId').value.to_i)
-      end
-      unless current_cell_style.attribute('applyFill').nil? || current_cell_style.attribute('applyFill').value == '0'
-        @fill_color = ForegroundColor.new(parent: self).parse(current_cell_style.attribute('fillId').value.to_i)
-      end
-      unless current_cell_style.attribute('applyNumberFormat').nil? || current_cell_style.attribute('applyNumberFormat').value == '0'
-        @apply_number_format = true
-        format_id = current_cell_style.attribute('numFmtId').value.to_i
-        XLSXWorkbook.styles_node.xpath('//xmlns:numFmt').each do |numeric_format|
-          if format_id == numeric_format.attribute('numFmtId').value.to_i
-            @numerical_format = numeric_format.attribute('formatCode').value
-          elsif CellStyle::ALL_FORMAT_VALUE[format_id - 1]
-            @numerical_format = CellStyle::ALL_FORMAT_VALUE[format_id - 1]
-          end
-        end
-        @numerical_format = CellStyle::ALL_FORMAT_VALUE[format_id - 1] if CellStyle::ALL_FORMAT_VALUE[format_id - 1]
-      end
-      unless current_cell_style.attribute('applyAlignment').nil? || current_cell_style.attribute('applyAlignment').value == '0'
-        current_cell_style.xpath('*').each do |node_child|
-          case node_child.name
-          when 'alignment'
-            @alignment.parse(node_child)
-          end
+      style_node = XLSXWorkbook.styles_node.xpath('//xmlns:cellXfs/xmlns:xf')[node.to_i]
+      style_node.attributes.each do |key, value|
+        case key
+        when 'applyFont'
+          @apply_font = attribute_enabled?(value)
+        when 'applyBorder'
+          @apply_border = attribute_enabled?(value)
+        when 'applyFill'
+          @apply_fill = attribute_enabled?(value)
+        when 'applyNumberFormat'
+          @apply_number_format = attribute_enabled?(value)
+        when 'applyAlignment'
+          @apply_alignment = attribute_enabled?(value)
+        when 'fontId'
+          @font_id = value.value.to_i
+        when 'borderId'
+          @border_id = value.value.to_i
+        when 'fillId'
+          @fill_id = value.value.to_i
+        when 'numFmtId'
+          @number_format_id = value.value.to_i
+        when 'quotePrefix'
+          @quote_prefix = attribute_enabled?(value)
         end
       end
-      @quote_prefix = option_enabled?(current_cell_style, 'quotePrefix')
+      style_node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'alignment'
+          @alignment.parse(node_child) if @apply_alignment
+        end
+      end
+      calculate_values
       self
+    end
+
+    def calculate_values
+      @font = root_object.style_sheet.fonts[@font_id] if @apply_font
+      @borders = Borders.parse_from_style(@border_id) if @apply_border
+      @fill_color = root_object.style_sheet.fills[@fill_id] if @apply_fill
+      return unless @apply_number_format
+      format = root_object.style_sheet.number_formats.format_by_id(@number_format_id)
+      @numerical_format = if format
+                            format.format_code
+                          else
+                            CellStyle::ALL_FORMAT_VALUE[@number_format_id - 1]
+                          end
     end
   end
 end
