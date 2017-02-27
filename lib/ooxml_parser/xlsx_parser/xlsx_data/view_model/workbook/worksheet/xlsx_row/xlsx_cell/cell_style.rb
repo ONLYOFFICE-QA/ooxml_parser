@@ -1,6 +1,5 @@
 require_relative 'cell_style/foreground_color'
 require_relative 'cell_style/alignment'
-require_relative 'cell_style/ooxml_font'
 module OoxmlParser
   # Class for parsing cell style
   class CellStyle < OOXMLDocumentObject
@@ -115,11 +114,7 @@ module OoxmlParser
     end
 
     def calculate_values
-      @font = if @apply_font
-                OOXMLFont.new(parent: self).parse(@font_id)
-              else
-                OOXMLFont.new(parent: self).parse(0)
-              end
+      @font = root_object.style_sheet.fonts[@font_id] if @apply_font
       @borders = Borders.parse_from_style(@border_id) if @apply_border
       @fill_color = ForegroundColor.new(parent: self).parse(@fill_id) if @apply_fill
       return unless @apply_number_format

@@ -1,11 +1,16 @@
+require_relative 'style_sheet/fonts'
 require_relative 'style_sheet/number_formats'
 module OoxmlParser
   # Parsing file styles.xml
   class StyleSheet < OOXMLDocumentObject
+    # @return [NumberFormats] number formats
     attr_accessor :number_formats
+    # @return [Fonts] fonts
+    attr_accessor :fonts
 
     def initialize(parent: nil)
       @number_formats = NumberFormats.new(parent: self)
+      @fonts = Fonts.new(parent: self)
       @parent = parent
     end
 
@@ -15,6 +20,8 @@ module OoxmlParser
         case node_child.name
         when 'numFmts'
           @number_formats.parse(node_child)
+        when 'fonts'
+          @fonts.parse(node_child)
         end
       end
       self
