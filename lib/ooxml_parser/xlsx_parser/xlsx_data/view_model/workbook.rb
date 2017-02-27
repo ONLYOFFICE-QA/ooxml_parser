@@ -86,7 +86,7 @@ module OoxmlParser
       doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
         file = workbook.relationships.target_by_id(sheet.attribute('id').value)
         if file.start_with?('worksheets')
-          workbook.worksheets << Worksheet.parse(file)
+          workbook.worksheets << Worksheet.parse(file, parent: workbook)
           workbook.worksheets.last.name = sheet.attribute('name').value
         elsif file.start_with?('chartsheets')
           workbook.worksheets << Chartsheet.new(parent: workbook).parse(file)

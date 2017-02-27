@@ -116,21 +116,19 @@ module OoxmlParser
 
     def calculate_values
       @font = if @apply_font
-                OOXMLFont.new(parent: self).parse(0)
-              else
                 OOXMLFont.new(parent: self).parse(@font_id)
+              else
+                OOXMLFont.new(parent: self).parse(0)
               end
       @borders = Borders.parse_from_style(@border_id) if @apply_border
       @fill_color = ForegroundColor.new(parent: self).parse(@fill_id) if @apply_fill
       return unless @apply_number_format
-      XLSXWorkbook.styles_node.xpath('//xmlns:numFmt').each do |numeric_format|
-        if @number_format_id == numeric_format.attribute('numFmtId').value.to_i
-          @numerical_format = numeric_format.attribute('formatCode').value
-        elsif CellStyle::ALL_FORMAT_VALUE[@number_format_id - 1]
-          @numerical_format = CellStyle::ALL_FORMAT_VALUE[@number_format_id - 1]
-        end
-      end
-      @numerical_format = CellStyle::ALL_FORMAT_VALUE[@number_format_id - 1] if CellStyle::ALL_FORMAT_VALUE[@number_format_id - 1]
+      format = root_object.style_sheet.number_formats.format_by_id(@number_format_id)
+      @numerical_format = if format
+                            format.format_code
+                          else
+                            CellStyle::ALL_FORMAT_VALUE[@number_format_id - 1]
+                          end
     end
   end
 end

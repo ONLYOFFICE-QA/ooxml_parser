@@ -34,5 +34,14 @@ module OoxmlParser
       end
       self
     end
+
+    # @param id [Integer] id of format
+    # @return [NumberFormat, nil] value of format
+    def format_by_id(id)
+      @number_formats_array.each do |cur_format|
+        return cur_format if cur_format.id == id
+      end
+      nil
+    end
   end
 end

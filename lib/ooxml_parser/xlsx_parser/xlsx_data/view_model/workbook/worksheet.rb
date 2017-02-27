@@ -51,10 +51,11 @@ module OoxmlParser
       end
     end
 
-    def self.parse(path_to_xml_file)
+    def self.parse(path_to_xml_file, parent: nil)
       worksheet = Worksheet.new
       worksheet.xml_name = File.basename path_to_xml_file
       worksheet.parse_relationships
+      worksheet.parent = parent
       OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/#{File.basename(path_to_xml_file)}")
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       sheet = doc.search('//xmlns:worksheet').first
@@ -85,7 +86,7 @@ module OoxmlParser
             worksheet.hyperlinks << Hyperlink.new(parent: worksheet).parse(hyperlink_node).dup
           end
         when 'cols'
-          worksheet.columns = XlsxColumnProperties.parse_list(worksheet_node_child)
+          worksheet.columns = XlsxColumnProperties.parse_list(worksheet_node_child, parent: worksheet)
         when 'autoFilter'
           worksheet.autofilter = Coordinates.parser_coordinates_range(worksheet_node_child.attribute('ref').value.to_s)
         when 'tableParts'
