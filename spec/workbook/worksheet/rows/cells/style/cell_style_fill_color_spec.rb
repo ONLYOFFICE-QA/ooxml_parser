@@ -8,7 +8,7 @@ describe 'My behaviour' do
 
   it 'fill_color_none.xlsx' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/rows/cells/style/fill_color/fill_color_none.xlsx')
-    expect(xlsx.worksheets.first.rows.first.cells.first.style.fill_color.color).to eq(OoxmlParser::Color.new(nil, nil, nil))
+    expect(xlsx.worksheets.first.rows.first.cells.first.style.fill_color).to be_nil
   end
 
   it 'cell_style_fill_color_0.5' do
