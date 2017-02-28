@@ -21,6 +21,11 @@ describe 'My behaviour' do
     expect(xlsx.worksheets.first.rows.first.cells.first.style.font.color).to eq(OoxmlParser::Color.new(255, 0, 0))
   end
 
+  it 'Font Color Black' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/rows/cells/style/font/font_color_black.xlsx')
+    expect(xlsx.worksheets.first.rows.first.cells.first.style.font.color).to eq(OoxmlParser::Color.new(0, 0, 0))
+  end
+
   it 'font_strikeout.xlsx' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/rows/cells/style/font/font_strikeout.xlsx')
     expect(xlsx.worksheets.first.rows.first.cells.first.style.font.font_style.strike).to eq(:single)
