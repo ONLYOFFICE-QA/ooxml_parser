@@ -17,5 +17,9 @@ module OoxmlParser
       end
       self
     end
+
+    def to_color
+      pattern_fill.foreground_color
+    end
   end
 end

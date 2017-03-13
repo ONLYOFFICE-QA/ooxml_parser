@@ -234,7 +234,7 @@ module OoxmlParser
         when DocxColorScheme
           something.color
         when Fill
-          something.pattern_fill.foreground_folor
+          something.to_color
         when PresentationFill
           if something.color.respond_to? :converted_color
             something.color.converted_color
