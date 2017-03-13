@@ -170,6 +170,7 @@ module OoxmlParser
       color_to_check = Color.parse(color_to_check) if color_to_check.is_a?(String)
       color_to_check = Color.parse(color_to_check.to_s) if color_to_check.is_a?(Symbol)
       color_to_check = Color.parse(color_to_check.value) if color_to_check.is_a?(DocxColor)
+      return true if none? && color_to_check.nil?
       return false if none? && !color_to_check.none?
       return false if !none? && color_to_check.none?
       return true if self == color_to_check
