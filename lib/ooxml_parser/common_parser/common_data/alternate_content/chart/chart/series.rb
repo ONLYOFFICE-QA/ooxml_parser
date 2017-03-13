@@ -12,6 +12,8 @@ module OoxmlParser
     attr_accessor :text
     # @return [Categories] categories of chart
     attr_accessor :categories
+    # @return [DisplayLabelsProperties]
+    attr_accessor :display_labels
 
     # Parse Series
     # @param [Nokogiri::XML:Node] node with Series
@@ -27,6 +29,8 @@ module OoxmlParser
           @text = SeriesText.new(parent: self).parse(node_child)
         when 'cat'
           @categories = Categories.new(parent: self).parse(node_child)
+        when 'dLbls'
+          @display_labels = DisplayLabelsProperties.new(parent: self).parse(node_child)
         end
       end
       self
