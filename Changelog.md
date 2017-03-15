@@ -98,6 +98,7 @@
 * Fix parsing Strike `noStrike`
 * Do not crash if indexed color have unknown index
 * Fix converting to symbols for border styles
+* Fix comparing docx's with shapes
 
 ### Refactor
 * Redone parsing images - store in structure, instead of copying file to filesystem

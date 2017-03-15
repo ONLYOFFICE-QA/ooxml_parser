@@ -101,12 +101,6 @@ module OoxmlParser
     end
 
     def ==(other)
-      character_style_array.each do |current_run|
-        character_style_array.delete(current_run) if current_run.text.empty?
-      end
-      other.character_style_array.each do |current_run|
-        other.character_style_array.delete(current_run) if current_run.text.empty?
-      end
       ignored_attributes = [:@number, :@parent]
       all_instance_variables = instance_variables
       significan_attribues = all_instance_variables - ignored_attributes

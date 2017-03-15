@@ -29,4 +29,10 @@ describe 'compare' do
     docx2 = OoxmlParser::DocxParser.parse_docx('spec/document/compare/different_set/second.docx')
     expect(docx1).not_to eq(docx2)
   end
+
+  it 'two_same_docs' do
+    docx1 = OoxmlParser::DocxParser.parse_docx('spec/document/compare/two_same_docs/first.docx')
+    docx2 = OoxmlParser::DocxParser.parse_docx('spec/document/compare/two_same_docs/second.docx')
+    expect(docx1).to eq(docx2)
+  end
 end
