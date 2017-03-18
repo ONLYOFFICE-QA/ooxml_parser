@@ -1,4 +1,5 @@
 require_relative 'document_grid'
+require_relative 'footnote_properties'
 require_relative 'page_size'
 require_relative 'page_margins'
 require_relative 'columns'
@@ -7,6 +8,8 @@ module OoxmlParser
   class PageProperties < OOXMLDocumentObject
     attr_accessor :type, :size, :margins, :document_grid, :num_type, :form_prot, :text_direction, :page_borders, :columns,
                   :notes
+    # @return [FootnoteProperties] properties of footnote
+    attr_accessor :footnote_properties
 
     def initialize(parent: nil)
       @notes = []
@@ -65,6 +68,8 @@ module OoxmlParser
                             parent: self)
           @notes << note
           OOXMLDocumentObject.xmls_stack.pop
+        when 'footnotePr'
+          @footnote_properties = FootnoteProperties.new(parent: self).parse(pg_size_subnode)
         end
       end
       self
