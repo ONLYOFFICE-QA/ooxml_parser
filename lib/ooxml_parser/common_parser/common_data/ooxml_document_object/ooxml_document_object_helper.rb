@@ -31,6 +31,8 @@ module OoxmlDocumentObjectHelper
                            pageBottom: :page_bottom,
                            sectEnd: :section_end,
                            docEnd: :document_end,
+                           eachSect: :each_section,
+                           eachPage: :each_page,
                            sngStrike: :single,
                            dblStrike: :double,
                            noStrike: :none,
