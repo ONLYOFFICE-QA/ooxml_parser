@@ -62,6 +62,7 @@
 * Add parsing `bgPr` and `stretch`
 * Add parsing `DisplayLabelsProperties` in `Series`
 * Add parsing `FootnoteProperties`
+* Add parsing `Settings#default_tab_stop`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

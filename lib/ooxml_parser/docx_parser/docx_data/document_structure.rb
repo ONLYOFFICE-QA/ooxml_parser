@@ -8,6 +8,7 @@ require_relative 'document_structure/document_style'
 require_relative 'document_structure/header_footer'
 require_relative 'document_structure/numbering'
 require_relative 'document_structure/page_properties/page_properties'
+require_relative 'document_structure/settings'
 require_relative 'document_structure/styles'
 module OoxmlParser
   class DocumentStructure < CommonDocumentStructure
@@ -22,6 +23,8 @@ module OoxmlParser
     # @return [Styles] styles of document
     attr_accessor :styles
     attr_accessor :theme_colors
+    # @return [Settings] settings
+    attr_accessor :settings
 
     def initialize
       @elements = []
@@ -170,6 +173,7 @@ module OoxmlParser
       OOXMLDocumentObject.xmls_stack.pop
       doc_structure.document_properties = DocumentProperties.new(parent: doc_structure).parse
       doc_structure.comments = Comment.parse_list
+      doc_structure.settings = Settings.new(parent: doc_structure).parse
       doc_structure
     end
 

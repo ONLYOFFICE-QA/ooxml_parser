@@ -19,7 +19,7 @@ module OoxmlParser
         case key
         when 'type'
           @unit = value.value.to_sym
-        when 'w'
+        when 'w', 'val'
           @value = value.value.to_f
         end
       end
