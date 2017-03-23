@@ -1,3 +1,4 @@
+require_relative 'docx_drawing/doc_properties'
 require_relative 'drawing_properties/docx_drawing_properties'
 require_relative 'drawing_properties/size_relative_horizontal'
 require_relative 'drawing_properties/size_relative_vertical'
@@ -6,6 +7,8 @@ module OoxmlParser
   # Class for parsing `graphic` tags
   class DocxDrawing < OOXMLDocumentObject
     attr_accessor :type, :properties, :graphic
+    # @return [DocProperties] doc properties
+    attr_accessor :doc_properties
 
     alias picture graphic
 
@@ -49,6 +52,8 @@ module OoxmlParser
             @properties.size_relative_horizontal = SizeRelativeHorizontal.new(parent: self).parse(content_node_child)
           when 'sizeRelV'
             @properties.size_relative_vertical = SizeRelativeVertical.new(parent: self).parse(content_node_child)
+          when 'docPr'
+            @doc_properties = DocProperties.new(parent: self).parse(content_node_child)
           end
         end
       end
