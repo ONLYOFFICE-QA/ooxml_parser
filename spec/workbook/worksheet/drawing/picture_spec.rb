@@ -7,6 +7,11 @@ describe 'My behaviour' do
     expect(xlsx.worksheets.first.drawings.first.picture.path_to_image.file_reference.content.length).to be > 0
   end
 
+  it 'picture_with_non_visual' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/picture_with_non_visual.xlsx')
+    expect(xlsx.worksheets.first.drawings.first.picture.non_visual_properties).to be_a(OoxmlParser::NonVisualShapeProperties)
+  end
+
   it 'Incorrect image resource' do
     expect { OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/incorrect_image_resource.xlsx') }.to raise_error(LoadError)
   end
