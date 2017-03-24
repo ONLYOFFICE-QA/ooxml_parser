@@ -64,6 +64,7 @@
 * Add parsing `FootnoteProperties`
 * Add parsing `Settings#default_tab_stop`
 * Add parsing `DocProperties`
+* Add parsing `Table#description` and `Table#title`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit

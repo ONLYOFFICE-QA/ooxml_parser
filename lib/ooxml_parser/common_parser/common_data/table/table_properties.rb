@@ -22,6 +22,10 @@ module OoxmlParser
     attr_accessor :table_cell_spacing
     # @return [Shade] shade color of table
     attr_accessor :shade
+    # @return [ValuedChild] caption of table
+    attr_accessor :caption
+    # @return [ValuedChild] description of table
+    attr_accessor :description
 
     alias table_properties table_positon
 
@@ -80,6 +84,10 @@ module OoxmlParser
           @table_layout = TableLayout.new(parent: self).parse(node_child)
         when 'tblCellSpacing'
           @table_cell_spacing = OoxmlSize.new.parse(node_child)
+        when 'tblCaption'
+          @caption = ValuedChild.new(:string, parent: self).parse(node_child)
+        when 'tblDescription'
+          @description = ValuedChild.new(:string, parent: self).parse(node_child)
         end
       end
       @table_look = TableLook.new(parent: self).parse(node) if @table_look.nil?
