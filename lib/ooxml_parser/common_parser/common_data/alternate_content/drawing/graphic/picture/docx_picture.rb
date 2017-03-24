@@ -3,6 +3,8 @@ module OoxmlParser
   # Class for parsing `pic`
   class DocxPicture < OOXMLDocumentObject
     attr_accessor :path_to_image, :properties, :nonvisual_properties, :chart
+    # @return [NonVisualShapeProperties] properties of shape
+    attr_accessor :non_visual_properties
 
     alias image path_to_image
     alias shape_properties properties
@@ -17,6 +19,8 @@ module OoxmlParser
           @path_to_image = DocxBlip.new(parent: self).parse(node_child)
         when 'spPr'
           @properties = DocxShapeProperties.new(parent: self).parse(node_child)
+        when 'nvPicPr'
+          @non_visual_properties = NonVisualShapeProperties.new(parent: self).parse(node_child)
         end
       end
       self
