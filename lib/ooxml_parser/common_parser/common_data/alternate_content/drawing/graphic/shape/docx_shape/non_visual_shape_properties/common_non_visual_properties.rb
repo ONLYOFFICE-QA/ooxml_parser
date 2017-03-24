@@ -1,7 +1,11 @@
 module OoxmlParser
   # Class for `cNvPr` data
   class CommonNonVisualProperties < OOXMLDocumentObject
-    attr_accessor :name, :id, :description, :on_click_hyperlink, :hyperlink_for_hover
+    attr_accessor :name, :id, :on_click_hyperlink, :hyperlink_for_hover
+    # @return [String] title of shape
+    attr_accessor :title
+    # @return [String] description of shape
+    attr_accessor :description
 
     # Parse CommonNonVisualProperties object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -13,6 +17,10 @@ module OoxmlParser
           @name = value.value
         when 'id'
           @id = value.value
+        when 'title'
+          @title = value.value
+        when 'descr'
+          @description = value.value
         end
       end
 
