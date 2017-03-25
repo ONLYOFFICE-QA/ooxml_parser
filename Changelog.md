@@ -1,6 +1,8 @@
 # Change log
 
 ## master (unreleased)
+
+## 0.2.0 (2017-03-25)
 ### New features
 * Ability to set units of measurement to each value, not to all via config
 * Add twips (same as dxa), one_eighth_point unit of measurement
