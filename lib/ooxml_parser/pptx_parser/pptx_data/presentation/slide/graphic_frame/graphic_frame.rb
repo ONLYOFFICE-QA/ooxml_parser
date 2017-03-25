@@ -2,6 +2,8 @@ module OoxmlParser
   # Class for parsing `graphicFrame`
   class GraphicFrame < OOXMLDocumentObject
     attr_accessor :properties, :transform, :graphic_data
+    # @return [NonVisualShapeProperties] non visual properties
+    attr_accessor :non_visual_properties
 
     def initialize(graphic_data = [])
       @graphic_data = graphic_data
@@ -33,6 +35,8 @@ module OoxmlParser
             end
           end
           @graphic_data = graphic_data
+        when 'nvGraphicFramePr'
+          @non_visual_properties = NonVisualShapeProperties.new(parent: self).parse(node_child)
         end
       end
       self
