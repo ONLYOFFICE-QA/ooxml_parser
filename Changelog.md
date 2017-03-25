@@ -67,6 +67,7 @@
 * Add parsing `Table#description` and `Table#title`
 * Add parsing `CommonNonVisualProperties#title` and `CommonNonVisualProperties#description`
 * Add parsing `DocxPicture#non_visual_properties`
+* Add parsing `X14Table`
 
 ### Fixes
 * Fix parsing document style id - it can be string, not only digit
