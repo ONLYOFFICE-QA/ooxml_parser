@@ -3,6 +3,8 @@
 ## master (unreleased)
 ### New features
 * Parsing `OleObject` in `GraphicFrame`
+* Parsing `CommentsExtended`
+* Parsing `DocxParagraph#paragraph_id`, `DocxParagraph#text_id`
 
 ## 0.2.0 (2017-03-25)
 ### New features
