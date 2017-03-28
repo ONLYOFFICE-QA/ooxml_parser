@@ -3,6 +3,7 @@
 ## master (unreleased)
 ### New features
 * Parsing `OleObject` in `GraphicFrame`
+* Parsing `CommentsExtended`
 
 ## 0.2.0 (2017-03-25)
 ### New features
