@@ -175,7 +175,7 @@ module OoxmlParser
       end
       OOXMLDocumentObject.xmls_stack.pop
       doc_structure.document_properties = DocumentProperties.new(parent: doc_structure).parse
-      doc_structure.comments = Comment.parse_list
+      doc_structure.comments = Comment.parse_list(parent: doc_structure)
       doc_structure.comments_extended = CommentsExtended.new(parent: doc_structure).parse
       doc_structure.settings = DocumentSettings.new(parent: doc_structure).parse
       doc_structure

@@ -1,5 +1,6 @@
 # noinspection RubyTooManyInstanceVariablesInspection
 require_relative 'docx_paragraph/bookmark'
+require_relative 'docx_paragraph/docx_paragraph_helper'
 require_relative 'docx_paragraph/docx_paragraph_run'
 require_relative 'docx_paragraph/indents'
 require_relative 'docx_paragraph/inserted'
@@ -8,6 +9,7 @@ require_relative 'docx_paragraph/docx_formula'
 require_relative 'docx_paragraph/style_parametres'
 module OoxmlParser
   class DocxParagraph < OOXMLDocumentObject
+    include DocxParagraphHelper
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
                   :character_style_array, :horizontal_line, :page_break, :kinoku, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
@@ -16,6 +18,10 @@ module OoxmlParser
     attr_accessor :paragraph_properties
     # @return [Inserted] data inserted by review
     attr_accessor :inserted
+    # @return [Integer] id of paragraph (for comment)
+    attr_accessor :paragraph_id
+    # @return [Integer] id of text (for comment)
+    attr_accessor :text_id
 
     def initialize(parent: nil)
       @number = 0
@@ -69,6 +75,9 @@ module OoxmlParser
       paragraph.frame_properties = @frame_properties
       paragraph.paragraph_properties = @paragraph_properties
       paragraph.inserted = @inserted
+      paragraph.paragraph_id = @paragraph_id
+      paragraph.text_id = @text_id
+      paragraph.parent = @parent
       paragraph
     end
 
@@ -119,6 +128,14 @@ module OoxmlParser
       custom_character_style = default_character_style.copy
       char_number = 0
       comments = []
+      node.attributes.each do |key, value|
+        case key
+        when 'paraId'
+          @paragraph_id = value.value.to_i
+        when 'textId'
+          @text_id = value.value.to_i
+        end
+      end
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'bookmarkStart'

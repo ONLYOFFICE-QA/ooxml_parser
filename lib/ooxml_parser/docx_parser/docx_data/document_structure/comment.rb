@@ -8,7 +8,7 @@ module OoxmlParser
       @paragraphs = paragraphs
     end
 
-    def self.parse_list
+    def self.parse_list(parent: nil)
       comments = []
       comments_filename = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/comments.xml"
       return [] unless File.exist?(comments_filename)
@@ -17,7 +17,7 @@ module OoxmlParser
         document.xpath('w:comment').each do |comment_tag|
           comment = Comment.new(comment_tag.attribute('id').value)
           comment_tag.xpath('w:p').each_with_index do |p, index|
-            comment.paragraphs << DocxParagraph.new.parse(p, index)
+            comment.paragraphs << DocxParagraph.new.parse(p, index, parent: parent)
           end
           comments << comment.dup
         end

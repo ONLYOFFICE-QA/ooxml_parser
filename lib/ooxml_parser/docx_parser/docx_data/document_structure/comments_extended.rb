@@ -26,5 +26,14 @@ module OoxmlParser
       end
       self
     end
+
+    # @param id [Integer] id of comment
+    # @return [CommentExtended] comment by id
+    def by_id(id)
+      @comments_extended_array.each do |cur_comment|
+        return cur_comment if cur_comment.paragraph_id == id
+      end
+      nil
+    end
   end
 end
