@@ -6,6 +6,8 @@ module OoxmlParser
     attr_accessor :from
     # @return [XlsxDrawingPositionParameters] position to
     attr_accessor :to
+    # @return [GraphicFrame] graphic frame
+    attr_accessor :graphic_frame
 
     # Parse XlsxDrawing object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -24,17 +26,7 @@ module OoxmlParser
         when 'pic'
           @picture = DocxPicture.new(parent: self).parse(child_node)
         when 'graphicFrame'
-          @picture = DocxPicture.new
-          graphic_data_node = child_node.xpath('a:graphic/a:graphicData', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main')
-          graphic_data_node.xpath('*').each do |graphic_data_node_child|
-            case graphic_data_node_child.name
-            when 'chart'
-              path_to_chart_xml = OOXMLDocumentObject.get_link_from_rels(graphic_data_node_child.attribute('id').value)
-              OOXMLDocumentObject.add_to_xmls_stack(path_to_chart_xml)
-              @picture.chart = Chart.parse
-              OOXMLDocumentObject.xmls_stack.pop
-            end
-          end
+          @graphic_frame = GraphicFrame.new(parent: self).parse(child_node)
         end
       end
       self

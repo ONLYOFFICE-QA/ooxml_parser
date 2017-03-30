@@ -6,6 +6,9 @@
 * Parsing `CommentsExtended`
 * Parsing `DocxParagraph#paragraph_id`, `DocxParagraph#text_id`
 
+### Refactor
+* Change interface of `XlsxDrawing#graphic_frame`
+
 ## 0.2.0 (2017-03-25)
 ### New features
 * Ability to set units of measurement to each value, not to all via config
