@@ -28,7 +28,7 @@ module OoxmlParser
 
     def visible?
       return false if nil?
-      !(val == 'none')
+      val != 'none'
     end
 
     # Parse BordersProperties

@@ -13,7 +13,7 @@ module OoxmlParser
     # List of color duplicated from `OpenXML Sdk IndexedColors` class
     # See https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.indexedcolors.aspx
     COLOR_INDEXED =
-      %w(
+      %w[
         000000
         FFFFFF
         FF0000
@@ -80,7 +80,7 @@ module OoxmlParser
         333333
         n/a
         n/a
-      ).freeze
+      ].freeze
 
     # @return [Integer] Value of Red Part
     attr_accessor :red
@@ -136,6 +136,10 @@ module OoxmlParser
       (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR)
     end
 
+    def any?
+      !none?
+    end
+
     def white?
       (@red == 255) && (@green == 255) && (@blue == 255)
     end
@@ -171,7 +175,7 @@ module OoxmlParser
       color_to_check = Color.parse(color_to_check.to_s) if color_to_check.is_a?(Symbol)
       color_to_check = Color.parse(color_to_check.value) if color_to_check.is_a?(DocxColor)
       return true if none? && color_to_check.nil?
-      return false if none? && !color_to_check.none?
+      return false if none? && color_to_check.any?
       return false if !none? && color_to_check.none?
       return true if self == color_to_check
       red = color_to_check.red

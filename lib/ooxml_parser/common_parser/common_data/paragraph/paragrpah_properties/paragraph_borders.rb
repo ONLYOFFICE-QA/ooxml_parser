@@ -22,8 +22,8 @@ module OoxmlParser
       result << :bottom if @bottom.val == :single
       result << :inner if @between.val == :single
       return :none if result == []
-      return :all if result == [:left, :right, :top, :bottom, :inner]
-      return :outer if result == [:left, :right, :top, :bottom]
+      return :all if result == %i[left right top bottom inner]
+      return :outer if result == %i[left right top bottom]
       result.first if result.size == 1
     end
 
