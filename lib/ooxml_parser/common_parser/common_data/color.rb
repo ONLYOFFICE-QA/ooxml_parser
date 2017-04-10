@@ -13,7 +13,7 @@ module OoxmlParser
     # List of color duplicated from `OpenXML Sdk IndexedColors` class
     # See https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.indexedcolors.aspx
     COLOR_INDEXED =
-      %w(
+      %w[
         000000
         FFFFFF
         FF0000
@@ -80,7 +80,7 @@ module OoxmlParser
         333333
         n/a
         n/a
-      ).freeze
+      ].freeze
 
     # @return [Integer] Value of Red Part
     attr_accessor :red
