@@ -136,6 +136,10 @@ module OoxmlParser
       (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR)
     end
 
+    def any?
+      !none?
+    end
+
     def white?
       (@red == 255) && (@green == 255) && (@blue == 255)
     end
@@ -171,7 +175,7 @@ module OoxmlParser
       color_to_check = Color.parse(color_to_check.to_s) if color_to_check.is_a?(Symbol)
       color_to_check = Color.parse(color_to_check.value) if color_to_check.is_a?(DocxColor)
       return true if none? && color_to_check.nil?
-      return false if none? && !color_to_check.none?
+      return false if none? && color_to_check.any?
       return false if !none? && color_to_check.none?
       return true if self == color_to_check
       red = color_to_check.red

@@ -63,12 +63,3 @@ Style/Documentation:
 Style/EmptyLineAfterMagicComment:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/ooxml_document_object/ooxml_document_object_helper.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: InverseMethods, InverseBlocks.
-Style/InverseMethods:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/borders_properties.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-    - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide/slide_helper.rb'
