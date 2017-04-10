@@ -57,9 +57,3 @@ Style/AccessorMethodName:
 # Offense count: 78
 Style/Documentation:
   Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/EmptyLineAfterMagicComment:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/ooxml_document_object/ooxml_document_object_helper.rb'

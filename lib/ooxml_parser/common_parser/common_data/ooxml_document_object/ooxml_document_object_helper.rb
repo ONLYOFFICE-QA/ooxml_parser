@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # Module for helper methods for OOXMLDocumentObject
 module OoxmlDocumentObjectHelper
   private
