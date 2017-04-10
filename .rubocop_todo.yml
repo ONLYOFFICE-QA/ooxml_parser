@@ -79,10 +79,3 @@ Style/InverseMethods:
 Style/PercentLiteralDelimiters:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles.
-# SupportedStyles: percent, brackets
-Style/SymbolArray:
-  EnforcedStyle: brackets

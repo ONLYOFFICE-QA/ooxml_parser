@@ -44,7 +44,7 @@ module OoxmlParser
     end
 
     def content_distribute(object, slide_size)
-      return [:horizontally, :vertically] if content_horizontal_align(object, slide_size) == :center && content_vertical_align(object, slide_size) == :middle
+      return %i[horizontally vertically] if content_horizontal_align(object, slide_size) == :center && content_vertical_align(object, slide_size) == :middle
       return [:horizontally] if content_horizontal_align(object, slide_size) == :center
       return [:vertically] if content_vertical_align(object, slide_size) == :middle
     end
