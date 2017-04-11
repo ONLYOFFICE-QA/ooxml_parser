@@ -8,6 +8,7 @@
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
+* Remove duplicate classes for `Tabs`
 
 ## 0.2.0 (2017-03-25)
 ### New features

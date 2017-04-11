@@ -1,4 +1,4 @@
-require_relative 'tabs/paragraph_tab'
+require_relative 'tabs/tab'
 module OoxmlParser
   # Class for working with `w:tabs`
   class Tabs < OOXMLDocumentObject
@@ -27,7 +27,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'tab'
-          @tabs_array << ParagraphTab.new(parent: self).parse(node_child)
+          @tabs_array << Tab.new(parent: self).parse(node_child)
         end
       end
       self
