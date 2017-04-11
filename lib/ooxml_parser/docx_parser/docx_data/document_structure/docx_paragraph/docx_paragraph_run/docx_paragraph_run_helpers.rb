@@ -61,15 +61,7 @@ module OoxmlParser
           unless node_child.attribute('fill').value == 'auto' || node_child.attribute('fill').value == '' || node_child.attribute('fill').value == 'null'
             self.background_color = Color.new(parent: self).parse_hex_string(node_child.attribute('fill').value)
           end
-        when 'uCs'
-          font_style.underlined = Underline.new
-          if option_enabled?(node_child)
-            font_style.underlined.style = node_child.attribute('val').value
-            unless node_child.attribute('color').nil?
-              font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(node_child.attribute('color').value)
-            end
-          end
-        when 'u'
+        when 'u', 'uCs'
           font_style.underlined = Underline.new
           if option_enabled?(node_child)
             font_style.underlined.style = node_child.attribute('val').value
