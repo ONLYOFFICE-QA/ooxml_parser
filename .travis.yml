@@ -1,5 +1,8 @@
 language: ruby
 
+sudo: required
+dist: trusty
+
 rvm:
 - ruby-head
 - 2.4.1
