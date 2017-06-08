@@ -5,7 +5,7 @@
 * Parsing `OleObject` in `GraphicFrame`
 * Parsing `CommentsExtended`
 * Parsing `DocxParagraph#paragraph_id`, `DocxParagraph#text_id`
-* Parsing `ConnectionShape` in `Slide#elements`
+* Parsing `ConnectionShape` in `Slide#elements`, `XlsxDrawing#shape`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`

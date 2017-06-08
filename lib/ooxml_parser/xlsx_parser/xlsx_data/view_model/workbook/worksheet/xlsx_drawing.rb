@@ -27,6 +27,8 @@ module OoxmlParser
           @picture = DocxPicture.new(parent: self).parse(child_node)
         when 'graphicFrame'
           @graphic_frame = GraphicFrame.new(parent: self).parse(child_node)
+        when 'cxnSp'
+          @shape = ConnectionShape.new(parent: self).parse(child_node)
         end
       end
       self
