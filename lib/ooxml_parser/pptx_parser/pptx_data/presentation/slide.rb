@@ -1,5 +1,6 @@
 require_relative 'slide/presentation_alternate_content'
 require_relative 'slide/background'
+require_relative 'slide/connection_shape.rb'
 require_relative 'slide/graphic_frame/graphic_frame'
 require_relative 'slide/slide/shapes_grouping'
 require_relative 'slide/slide/timing'
@@ -46,6 +47,8 @@ module OoxmlParser
                   @elements << GraphicFrame.new(parent: self).parse(slide_element_node)
                 when 'grpSp'
                   @elements << ShapesGrouping.new(parent: self).parse(slide_element_node)
+                when 'cxnSp'
+                  @elements << ConnectionShape.new(parent: self).parse(slide_element_node)
                 end
               end
             when 'bg'
