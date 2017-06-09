@@ -6,6 +6,7 @@
 * Parsing `CommentsExtended`
 * Parsing `DocxParagraph#paragraph_id`, `DocxParagraph#text_id`
 * Parsing `ConnectionShape` in `Slide#elements`, `XlsxDrawing#shape`
+* Parsing `TablePart#table_style_info`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
