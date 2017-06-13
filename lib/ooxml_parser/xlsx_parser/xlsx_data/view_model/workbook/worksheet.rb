@@ -88,7 +88,7 @@ module OoxmlParser
         when 'cols'
           worksheet.columns = XlsxColumnProperties.parse_list(worksheet_node_child, parent: worksheet)
         when 'autoFilter'
-          worksheet.autofilter = Coordinates.parser_coordinates_range(worksheet_node_child.attribute('ref').value.to_s)
+          worksheet.autofilter = Autofilter.new(parent: self).parse(worksheet_node_child)
         when 'tableParts'
           worksheet_node_child.xpath('*').each do |part_node|
             worksheet.table_parts << TablePart.new(parent: worksheet).parse(part_node)

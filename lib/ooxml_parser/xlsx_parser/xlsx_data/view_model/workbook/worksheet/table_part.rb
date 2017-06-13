@@ -1,3 +1,4 @@
+require_relative 'table_part/autofilter'
 require_relative 'table_part/extension_list'
 require_relative 'table_part/table_style_info'
 module OoxmlParser
@@ -29,7 +30,7 @@ module OoxmlParser
       table_node.xpath('*').each do |node_child|
         case node_child.name
         when 'autoFilter'
-          @autofilter = Coordinates.parser_coordinates_range node_child.attribute('ref').value
+          @autofilter = Autofilter.new(parent: self).parse(node_child)
         when 'extLst'
           @extension_list = ExtensionList.new(parent: self).parse(node_child)
         when 'tableStyleInfo'

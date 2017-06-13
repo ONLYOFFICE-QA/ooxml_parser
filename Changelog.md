@@ -7,10 +7,12 @@
 * Parsing `DocxParagraph#paragraph_id`, `DocxParagraph#text_id`
 * Parsing `ConnectionShape` in `Slide#elements`, `XlsxDrawing#shape`
 * Parsing `TablePart#table_style_info`
+* Parsing `Autofilter#filterColumn`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
 * Remove duplicate classes for `Tabs`
+* Refactor `Table#autofilter`
 
 ## 0.2.0 (2017-03-25)
 ### New features
