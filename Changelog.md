@@ -8,6 +8,7 @@
 * Parsing `ConnectionShape` in `Slide#elements`, `XlsxDrawing#shape`
 * Parsing `TablePart#table_style_info`
 * Parsing `Autofilter#filterColumn`
+* Parsing `Worksheet#ole_objects`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`

@@ -1,4 +1,5 @@
 require_relative 'worksheet/excel_comments'
+require_relative 'worksheet/ole_objects'
 require_relative 'worksheet/sheet_format_properties'
 require_relative 'worksheet/sheet_view'
 require_relative 'worksheet/table_part'
@@ -14,6 +15,8 @@ module OoxmlParser
     attr_accessor :xml_name
     # @return [Relationships] array of relationships
     attr_accessor :relationships
+    # @return [Relationships] array of ole objects
+    attr_accessor :ole_objects
 
     def initialize
       @columns = []
@@ -97,6 +100,8 @@ module OoxmlParser
           worksheet_node_child.xpath('*').each do |view_child|
             worksheet.sheet_views << SheetView.new(parent: worksheet).parse(view_child)
           end
+        when 'oleObjects'
+          worksheet.ole_objects = OleObjects.new(parent: worksheet).parse(worksheet_node_child)
         end
       end
       worksheet.comments = ExcelComments.parse_file(File.basename(path_to_xml_file), OOXMLDocumentObject.path_to_folder)
