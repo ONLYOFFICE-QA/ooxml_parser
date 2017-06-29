@@ -6,6 +6,8 @@ module OoxmlParser
     attr_accessor :margins, :anchor, :wrap, :preset_text_warp
     # @return [Symbol] Vertical Text
     attr_accessor :vertical
+    # @return [Symbol] Number of Columns
+    attr_reader :number_columns
 
     alias vertical_align anchor
 
@@ -25,6 +27,8 @@ module OoxmlParser
           @anchor = value_to_symbol(value)
         when 'vert'
           @vertical = value_to_symbol(value)
+        when 'numCol'
+          @number_columns = value.value.to_i
         end
       end
       node.xpath('*').each do |node_child|
