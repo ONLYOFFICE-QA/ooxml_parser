@@ -10,6 +10,7 @@
 * Parsing `Autofilter#filterColumn`
 * Parsing `Worksheet#ole_objects`
 * Parsing `AlternateContent#ole_object`
+* Parsing `OOXMLShapeBodyProperties#number_columns`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
