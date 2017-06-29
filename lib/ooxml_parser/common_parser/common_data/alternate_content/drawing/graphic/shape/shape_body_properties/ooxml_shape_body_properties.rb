@@ -8,6 +8,8 @@ module OoxmlParser
     attr_accessor :vertical
     # @return [Symbol] Number of Columns
     attr_reader :number_columns
+    # @return [Symbol] Spacing between columns
+    attr_reader :space_columns
 
     alias vertical_align anchor
 
@@ -29,6 +31,8 @@ module OoxmlParser
           @vertical = value_to_symbol(value)
         when 'numCol'
           @number_columns = value.value.to_i
+        when 'spcCol'
+          @space_columns = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
       node.xpath('*').each do |node_child|
