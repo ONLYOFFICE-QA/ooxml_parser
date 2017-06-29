@@ -11,6 +11,7 @@
 * Parsing `Worksheet#ole_objects`
 * Parsing `AlternateContent#ole_object`
 * Parsing `OOXMLShapeBodyProperties#number_columns`
+* Parsing `OOXMLShapeBodyProperties#space_columns`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
