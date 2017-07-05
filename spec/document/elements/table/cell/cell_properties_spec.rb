@@ -3,7 +3,7 @@ require 'spec_helper'
 describe OoxmlParser::CellProperties do
   it 'cell_properties_merge_restart' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/cell/properties/cell_properties_merge_restart.docx')
-    expect(docx.elements[556].rows.first.cells.first.properties.vertical_merge.value).to eq(:restart)
+    expect(docx.elements[557].rows.first.cells.first.properties.vertical_merge.value).to eq(:restart)
   end
 
   it 'shade_nil' do

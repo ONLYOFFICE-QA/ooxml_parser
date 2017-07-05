@@ -150,19 +150,22 @@ module OoxmlParser
         end
         document.xpath('w:body').each do |body|
           body.xpath('*').each do |element|
-            if element.name == 'p'
+            case element.name
+            when 'p'
               child = element.child
               unless child.nil? && doc_structure.elements.last.class == Table
                 paragraph_style = DocumentStructure.default_paragraph_style.copy.parse(element, number, DocumentStructure.default_run_style, parent: doc_structure)
                 number += 1
                 doc_structure.elements << paragraph_style.copy
               end
-            elsif element.name == 'tbl'
+            when 'tbl'
               table = Table.new(parent: doc_structure).parse(element,
                                                              number,
                                                              TableProperties.new)
               number += 1
               doc_structure.elements << table
+            when 'sdt'
+              doc_structure.elements << StructuredDocumentTag.new(parent: self).parse(element)
             end
           end
           body.xpath('w:sectPr').each do |sect_pr|

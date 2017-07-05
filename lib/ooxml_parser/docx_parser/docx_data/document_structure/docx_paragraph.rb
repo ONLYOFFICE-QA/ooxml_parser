@@ -101,6 +101,8 @@ module OoxmlParser
       end
     end
 
+    alias runs character_style_array
+
     # @return [True, false] if structure contain any user data
     def with_data?
       !nonempty_runs.empty?
