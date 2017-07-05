@@ -13,6 +13,7 @@
 * Parsing `OOXMLShapeBodyProperties#number_columns`
 * Parsing `OOXMLShapeBodyProperties#space_columns`
 * Parsing `DocxParagraph#sdt`
+* Parsing `DocumentStructure#sdt`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
