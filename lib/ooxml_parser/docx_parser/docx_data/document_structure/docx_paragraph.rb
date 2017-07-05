@@ -4,6 +4,7 @@ require_relative 'docx_paragraph/docx_paragraph_helper'
 require_relative 'docx_paragraph/docx_paragraph_run'
 require_relative 'docx_paragraph/indents'
 require_relative 'docx_paragraph/inserted'
+require_relative 'docx_paragraph/structured_document_tag'
 require_relative 'docx_paragraph/frame_properties'
 require_relative 'docx_paragraph/docx_formula'
 require_relative 'docx_paragraph/style_parametres'
@@ -22,6 +23,8 @@ module OoxmlParser
     attr_accessor :paragraph_id
     # @return [Integer] id of text (for comment)
     attr_accessor :text_id
+    # @return [StructuredDocumentTag] structured document tag data
+    attr_accessor :sdt
 
     def initialize(parent: nil)
       @number = 0
@@ -77,6 +80,7 @@ module OoxmlParser
       paragraph.inserted = @inserted
       paragraph.paragraph_id = @paragraph_id
       paragraph.text_id = @text_id
+      paragraph.sdt = @sdt
       paragraph.parent = @parent
       paragraph
     end
@@ -213,6 +217,8 @@ module OoxmlParser
           end
         when 'ins'
           @inserted = Inserted.new(parent: self).parse(node_child)
+        when 'sdt'
+          @sdt = StructuredDocumentTag.new(parent: self).parse(node_child)
         end
       end
       @number = par_number
