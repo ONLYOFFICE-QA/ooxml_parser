@@ -28,7 +28,7 @@ module OoxmlParser
     def parse(node,
               number = 0,
               default_table_properties = TableProperties.new)
-      table_properties = default_table_properties.copy
+      table_properties = default_table_properties.dup
       table_properties.jc = :left
       node.xpath('*').each do |node_child|
         case node_child.name
