@@ -19,6 +19,7 @@
 * Change interface of `XlsxDrawing#graphic_frame`
 * Remove duplicate classes for `Tabs`
 * Refactor `Table#autofilter`
+* Simplification of `DocxParagraphRun#new` 
 
 ## 0.2.0 (2017-03-25)
 ### New features

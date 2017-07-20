@@ -26,31 +26,15 @@ module OoxmlParser
       @vertical_align = :baseline
       @size = 11
       @font_color = Color.new
-      @background_color = nil
       @font_style = FontStyle.new
       @text = ''
       @drawings = []
-      @link = nil
-      @highlight = nil
-      @effect = nil
-      @caps = nil
       @w = false
       @position = 0.0
-      @em = nil
       @spacing = 0.0
       @break = false
-      @touch = nil
-      @footnote = nil
-      @endnote = nil
-      @fld_char = nil
-      @style = nil
       @comments = []
-      @alternate_content = nil
       @page_number = false
-      @text_outline = nil
-      @text_fill = nil
-      @instruction = nil
-      @object = nil
     end
 
     def drawing
