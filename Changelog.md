@@ -20,6 +20,7 @@
 * Remove duplicate classes for `Tabs`
 * Refactor `Table#autofilter`
 * Simplification of `DocxParagraphRun#new` 
+* Simplification of `DocxParagraphRun#dup` 
 
 ## 0.2.0 (2017-03-25)
 ### New features

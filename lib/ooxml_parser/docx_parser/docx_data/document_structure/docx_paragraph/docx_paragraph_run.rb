@@ -37,45 +37,15 @@ module OoxmlParser
       @page_number = false
     end
 
+    def initialize_copy(source)
+      super
+      @drawings = source.drawings.clone
+      @comments = source.comments.clone
+    end
+
     def drawing
       # TODO: Rewrite all tests without this methos
       @drawings.empty? ? nil : drawings.first
-    end
-
-    def copy
-      character = DocxParagraphRun.new
-      character.number = number
-      character.font = font
-      character.vertical_align = vertical_align
-      character.size = size
-      character.font_color = font_color
-      character.background_color = @background_color
-      character.font_style = @font_style
-      character.text = @text
-      character.drawings = @drawings.clone
-      character.link = @link
-      character.highlight = @highlight
-      character.effect = @effect
-      character.caps = @caps
-      character.w = @w
-      character.position = @position
-      character.em = @em
-      character.spacing = @spacing
-      character.break = @break
-      character.touch = @touch
-      character.footnote = @footnote
-      character.endnote = @endnote
-      character.fld_char = @fld_char
-      character.style = @style
-      character.comments = @comments.clone
-      character.alternate_content = @alternate_content
-      character.page_number = @page_number
-      character.text_outline = @text_outline
-      character.text_fill = @text_fill
-      character.instruction = @instruction
-      character.run_properties = @run_properties
-      character.object = @object
-      character
     end
 
     def ==(other)
