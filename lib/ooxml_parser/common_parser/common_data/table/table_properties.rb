@@ -35,21 +35,6 @@ module OoxmlParser
       @parent = parent
     end
 
-    def copy
-      table = TableProperties.new
-      table.jc = @jc
-      table.table_width = @table_width
-      table.shade = @shade
-      table.stretching = @stretching
-      table.table_borders = @table_borders
-      table.table_properties = @table_properties
-      table.table_cell_margin = @table_cell_margin
-      table.table_indent = @table_indent
-      table.grid_column = @grid_column
-      table.style = style
-      table
-    end
-
     # Parse TableProperties object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [TableProperties] result of parsing
