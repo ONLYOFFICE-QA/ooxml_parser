@@ -1,3 +1,5 @@
+require 'date'
+
 module OoxmlParser
   # Class for parsing `w:ins` tag - Inserted Run Content
   class Inserted < OOXMLDocumentObject

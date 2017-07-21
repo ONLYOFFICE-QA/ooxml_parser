@@ -23,6 +23,9 @@
 * Simplification of `DocxParagraphRun#dup` 
 * Simplification of `TableProperties#dup` 
 
+### Fixes
+* Fix `uninitialized constant OoxmlParser::Inserted::DateTime` while parsing `Inserted#date`
+
 ## 0.2.0 (2017-03-25)
 ### New features
 * Ability to set units of measurement to each value, not to all via config
