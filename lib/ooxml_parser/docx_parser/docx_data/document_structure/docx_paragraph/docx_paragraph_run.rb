@@ -49,7 +49,7 @@ module OoxmlParser
     end
 
     def ==(other)
-      ignored_attributes = [:@number]
+      ignored_attributes = %i[@number @parent]
       all_instance_variables = instance_variables
       significan_attribues = all_instance_variables - ignored_attributes
       significan_attribues.each do |current_attributes|

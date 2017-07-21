@@ -19,6 +19,7 @@
 * Change interface of `XlsxDrawing#graphic_frame`
 * Remove duplicate classes for `Tabs`
 * Refactor `Table#autofilter`
+* Simplification of `DocxParagraph#dup` 
 * Simplification of `DocxParagraphRun#new` 
 * Simplification of `DocxParagraphRun#dup` 
 * Simplification of `TableProperties#dup` 
