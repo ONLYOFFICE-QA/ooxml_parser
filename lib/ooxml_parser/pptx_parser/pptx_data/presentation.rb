@@ -7,6 +7,8 @@ module OoxmlParser
   class Presentation < CommonDocumentStructure
     include PresentationHelpers
     attr_accessor :slides, :theme, :slide_size, :comments
+    # @return [Relationships] relationships of presentation
+    attr_accessor :relationships
 
     def initialize(slides = [], theme = nil, comments = [])
       @slides = slides
@@ -32,12 +34,13 @@ module OoxmlParser
             silde_id_node.attribute_nodes.select { |node| id = node.to_s if node.namespace && node.namespace.prefix == 'r' }
             presentation.slides << Slide.new(parent: presentation,
                                              xml_path: "#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(id)}")
-                                   .parse
+                                        .parse
           end
         end
       end
       presentation.comments = PresentationComment.parse_list
       OOXMLDocumentObject.xmls_stack.pop
+      presentation.relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
       presentation
     end
 

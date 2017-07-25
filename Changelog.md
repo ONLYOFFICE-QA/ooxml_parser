@@ -14,6 +14,7 @@
 * Parsing `OOXMLShapeBodyProperties#space_columns`
 * Parsing `DocxParagraph#sdt`
 * Parsing `DocumentStructure#sdt`
+* Parsing `Presentation#relationships`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
