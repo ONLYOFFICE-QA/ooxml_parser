@@ -24,6 +24,7 @@
 * Simplification of `DocxParagraphRun#new` 
 * Simplification of `DocxParagraphRun#dup` 
 * Simplification of `TableProperties#dup` 
+* Redone parsing of `Slide` data
 
 ### Fixes
 * Fix `uninitialized constant OoxmlParser::Inserted::DateTime` while parsing `Inserted#date`

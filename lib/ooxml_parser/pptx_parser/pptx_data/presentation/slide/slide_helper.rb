@@ -2,11 +2,11 @@ module OoxmlParser
   # Methods to help working with slide data
   module SlideHelper
     def nonempty_elements
-      @elements.reject { |cur_shape| cur_shape.text_body.paragraphs.first.characters.empty? }
+      elements.reject { |cur_shape| cur_shape.text_body.paragraphs.first.characters.empty? }
     end
 
     def graphic_frames
-      @elements.select { |cur_element| cur_element.is_a?(GraphicFrame) }
+      elements.select { |cur_element| cur_element.is_a?(GraphicFrame) }
     end
 
     # Get transform property of object, by object type
