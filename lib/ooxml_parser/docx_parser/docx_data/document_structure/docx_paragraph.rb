@@ -51,6 +51,7 @@ module OoxmlParser
       @bookmark_start = source.bookmark_start.clone
       @bookmark_end = source.bookmark_end.clone
       @character_style_array = source.character_style_array.clone
+      @spacing = source.spacing.clone
     end
 
     def nonempty_runs
