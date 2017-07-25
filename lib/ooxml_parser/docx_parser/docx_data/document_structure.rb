@@ -154,9 +154,9 @@ module OoxmlParser
             when 'p'
               child = element.child
               unless child.nil? && doc_structure.elements.last.class == Table
-                paragraph_style = DocumentStructure.default_paragraph_style.copy.parse(element, number, DocumentStructure.default_run_style, parent: doc_structure)
+                paragraph_style = DocumentStructure.default_paragraph_style.dup.parse(element, number, DocumentStructure.default_run_style, parent: doc_structure)
                 number += 1
-                doc_structure.elements << paragraph_style.copy
+                doc_structure.elements << paragraph_style.dup
               end
             when 'tbl'
               table = Table.new(parent: doc_structure).parse(element,
@@ -201,7 +201,7 @@ module OoxmlParser
           end
         end
       end
-      DocumentStructure.default_table_paragraph_style = DocumentStructure.default_paragraph_style.copy
+      DocumentStructure.default_table_paragraph_style = DocumentStructure.default_paragraph_style.dup
       DocumentStructure.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
       DocumentStructure.default_table_run_style = DocumentStructure.default_run_style.dup
       doc.search('//w:style').each do |style|

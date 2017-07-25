@@ -23,7 +23,7 @@ module OoxmlParser
         number = 0
         ftr.xpath('*').each do |sub_element|
           if sub_element.name == 'p'
-            note.elements << default_paragraph.copy.parse(sub_element, number, default_character, parent: note)
+            note.elements << default_paragraph.dup.parse(sub_element, number, default_character, parent: note)
             number += 1
           elsif sub_element.name == 'tbl'
             note.elements << Table.new(parent: note).parse(sub_element, number)

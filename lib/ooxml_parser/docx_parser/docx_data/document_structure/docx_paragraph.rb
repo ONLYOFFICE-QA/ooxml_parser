@@ -32,57 +32,25 @@ module OoxmlParser
       @bookmark_end = []
       @align = 'left'
       @spacing = Spacing.new
-      @background_color = nil
       @ind = Indents.new
       @kinoku = false
-      @numbering = nil
       @character_style_array = []
       @horizontal_line = false
       @page_break = false
       @borders = Borders.new
       @keep_lines = false
       @contextual_spacing = false
-      @sector_properties = nil
       @page_numbering = false
-      @section_break = nil
-      @style = nil
       @keep_next = false
       @orphan_control = true
-      @frame_properties = nil
       @parent = parent
     end
 
-    def copy
-      paragraph = DocxParagraph.new
-      paragraph.number = number
-      paragraph.bookmark_start = @bookmark_start.dup
-      paragraph.bookmark_end = @bookmark_end.dup
-      paragraph.align = @align
-      paragraph.spacing = @spacing.copy
-      paragraph.background_color = @background_color
-      paragraph.ind = @ind.dup
-      paragraph.numbering = @numbering
-      paragraph.character_style_array = @character_style_array
-      paragraph.horizontal_line = @horizontal_line
-      paragraph.page_break = @page_break
-      paragraph.kinoku = @kinoku
-      paragraph.borders = @borders
-      paragraph.keep_lines = @keep_lines
-      paragraph.contextual_spacing = @contextual_spacing
-      paragraph.sector_properties = @sector_properties
-      paragraph.page_numbering = @page_numbering
-      paragraph.section_break = @section_break
-      paragraph.style = @style
-      paragraph.keep_next = @keep_next
-      paragraph.orphan_control = @orphan_control
-      paragraph.frame_properties = @frame_properties
-      paragraph.paragraph_properties = @paragraph_properties
-      paragraph.inserted = @inserted
-      paragraph.paragraph_id = @paragraph_id
-      paragraph.text_id = @text_id
-      paragraph.sdt = @sdt
-      paragraph.parent = @parent
-      paragraph
+    def initialize_copy(source)
+      super
+      @bookmark_start = source.bookmark_start.clone
+      @bookmark_end = source.bookmark_end.clone
+      @character_style_array = source.character_style_array.clone
     end
 
     def nonempty_runs
