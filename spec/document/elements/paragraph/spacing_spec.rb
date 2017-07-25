@@ -31,6 +31,11 @@ describe OoxmlParser::Spacing do
     expect(docx.elements.first.spacing).to eq(OoxmlParser::Spacing.new(0, 0.35, 1.15, :auto))
   end
 
+  it 'Parsing line rule' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/line_rule.docx')
+    expect(docx.elements.first.spacing.line_rule).to eq(:auto)
+  end
+
   describe 'contextual spacing' do
     it 'contextual_spacing false' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/contextual_spacing_false.docx')
