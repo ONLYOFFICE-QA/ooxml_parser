@@ -1,4 +1,5 @@
 require_relative 'color/color_helper'
+require_relative 'color/ooxml_color'
 require_relative 'colors/color_alpha_channel'
 require_relative 'colors/hsl_color'
 require_relative 'colors/scheme_color'

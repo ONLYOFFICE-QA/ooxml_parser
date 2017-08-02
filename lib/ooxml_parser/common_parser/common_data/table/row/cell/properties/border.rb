@@ -18,7 +18,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'color'
-          @color = Color.parse_color_tag(node_child)
+          @color = OoxmlColor.new(parent: self).parse(node_child)
         end
       end
       self
