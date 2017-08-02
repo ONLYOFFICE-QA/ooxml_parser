@@ -25,6 +25,7 @@
 * Simplification of `DocxParagraphRun#dup` 
 * Simplification of `TableProperties#dup` 
 * Redone parsing of `Slide` data
+* Remove `Color#parse_color_tag` in favor of `OoxmlColor#parse`
 
 ### Fixes
 * Fix `uninitialized constant OoxmlParser::Inserted::DateTime` while parsing `Inserted#date`
