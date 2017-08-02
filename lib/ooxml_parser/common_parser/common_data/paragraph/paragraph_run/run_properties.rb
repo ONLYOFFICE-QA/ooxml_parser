@@ -89,7 +89,7 @@ module OoxmlParser
         when 'spacing'
           @spacing = RunSpacing.new(parent: self).parse(node_child)
         when 'color'
-          @color = Color.parse_color_tag(node_child)
+          @color = OoxmlColor.new(parent: self).parse(node_child)
         when 'solidFill'
           @font_color = Color.parse_color(node_child.xpath('*').first)
         when 'latin'

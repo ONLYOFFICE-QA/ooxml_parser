@@ -1,4 +1,5 @@
 require_relative 'color/color_helper'
+require_relative 'color/ooxml_color'
 require_relative 'colors/color_alpha_channel'
 require_relative 'colors/hsl_color'
 require_relative 'colors/scheme_color'
@@ -254,22 +255,6 @@ module OoxmlParser
           Color.parse(something.value)
         else
           something
-        end
-      end
-
-      def parse_color_tag(node)
-        return if node.nil?
-        node.attributes.each do |key, value|
-          case key
-          when 'val'
-            return Color.new.parse_hex_string(value.value.to_s)
-          when 'theme'
-            return ThemeColors.parse_color_theme(node)
-          when 'rgb'
-            return Color.new.parse_hex_string(value.value.to_s)
-          when 'indexed'
-            return Color.get_rgb_by_color_index(value.value.to_i)
-          end
         end
       end
 

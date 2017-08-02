@@ -22,9 +22,9 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'fgColor'
-          @foreground_color = Color.parse_color_tag(node_child)
+          @foreground_color = OoxmlColor.new(parent: self).parse(node_child)
         when 'bgColor'
-          @background_color = Color.parse_color_tag(node_child)
+          @background_color = OoxmlColor.new(parent: self).parse(node_child)
         end
       end
       self

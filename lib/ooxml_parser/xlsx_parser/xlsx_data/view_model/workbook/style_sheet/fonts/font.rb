@@ -26,7 +26,7 @@ module OoxmlParser
         when 'u'
           @font_style.underlined = Underline.new(:single)
         when 'color'
-          @color = Color.parse_color_tag(node_child)
+          @color = OoxmlColor.new(parent: self).parse(node_child)
         end
       end
       self

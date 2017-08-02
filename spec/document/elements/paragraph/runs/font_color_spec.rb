@@ -21,7 +21,7 @@ describe 'font_color' do
     pending('Color problems. I cannot solve it')
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/font_color/copied_paragrph_with_color_2.docx')
     expect(docx.elements.first.character_style_array.first.font_color).to eq(OoxmlParser::Color.new(191, 191, 191))
-    expect(docx.elements.last.character_style_array.first.font_color).to eq(OoxmlParser::Color.new(95, 74, 121))
+    expect(docx.elements.last.character_style_array.first.font_color).to eq(OoxmlParser::Color.new(95, 73, 122))
   end
 
   it 'Font color 1' do
