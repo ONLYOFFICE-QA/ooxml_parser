@@ -22,6 +22,7 @@ module OoxmlParser
 
     def ==(other)
       return to_color == other if other.is_a?(Color)
+      return to_color == other if other.is_a?(Symbol)
       super
     end
 
