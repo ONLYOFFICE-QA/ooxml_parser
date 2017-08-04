@@ -13,10 +13,13 @@ module OoxmlParser
     attr_reader :tint
     # @return [Float] Indexed id
     attr_reader :indexed
+    # @return [Color] rgb color
+    attr_reader :rgb
 
     def to_color
       return Color.get_rgb_by_color_index(indexed) if indexed
       return ThemeColors.parse_color_theme(theme, tint) if theme
+      return rgb if rgb
       value
     end
 
@@ -44,6 +47,8 @@ module OoxmlParser
           @tint = value.value.to_f
         when 'indexed'
           @indexed = value.value.to_i
+        when 'rgb'
+          @rgb = Color.new.parse_hex_string(value.value)
         end
       end
       self
