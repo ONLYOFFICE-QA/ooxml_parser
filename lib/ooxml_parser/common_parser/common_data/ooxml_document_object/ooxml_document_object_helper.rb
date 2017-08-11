@@ -1,5 +1,28 @@
 # Module for helper methods for OOXMLDocumentObject
 module OoxmlDocumentObjectHelper
+  # Convert object to hash
+  # @return [Hash]
+  def to_hash
+    result_hash = {}
+    instance_variables.each do |current_attribute|
+      next if current_attribute == :@parent
+      attribute_value = instance_variable_get(current_attribute)
+      next unless attribute_value
+      if attribute_value.is_a?(Array)
+        attribute_value.each_with_index do |object_element, index|
+          result_hash["#{current_attribute}_#{index}".to_sym] = object_element.to_hash
+        end
+      else
+        result_hash[current_attribute.to_sym] = if attribute_value.respond_to?(:to_hash)
+                                                  attribute_value.to_hash
+                                                else
+                                                  attribute_value.to_s
+                                                end
+      end
+    end
+    result_hash
+  end
+
   private
 
   VALUE_TO_SYMBOL_HASH = { l: :left,

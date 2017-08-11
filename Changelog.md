@@ -2,6 +2,7 @@
 
 ## master (unreleased)
 ### New features
+* Add `to_hash` method to OOXMLDocumentObject. `to_json` also working
 * Parsing `OleObject` in `GraphicFrame`
 * Parsing `CommentsExtended`
 * Parsing `DocxParagraph#paragraph_id`, `DocxParagraph#text_id`
