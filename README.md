@@ -4,6 +4,8 @@ _ooxml_parser_ is a Ooxml files (docx, xlsx, pptx) parser written in Ruby.
 
 ## Installation
 
+    $ brew install libmagic # MacOSX
+    $ sudo apt-get install libmagic-dev # Linux
     $ gem install ooxml_parser
     
 ## Usage
