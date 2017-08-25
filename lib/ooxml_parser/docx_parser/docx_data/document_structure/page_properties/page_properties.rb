@@ -62,9 +62,11 @@ module OoxmlParser
         when 'headerReference', 'footerReference'
           target = OOXMLDocumentObject.get_link_from_rels(pg_size_subnode.attribute('id').value)
           OOXMLDocumentObject.add_to_xmls_stack("word/#{target}")
-          note = Note.parse(default_paragraph, default_character, target,
-                            pg_size_subnode.attribute('type').value,
-                            File.basename(target).sub('.xml', ''),
+          note = Note.parse(default_paragraph: default_paragraph,
+                            default_character: default_character,
+                            target: target,
+                            assigned_to: pg_size_subnode.attribute('type').value,
+                            type: File.basename(target).sub('.xml', ''),
                             parent: self)
           @notes << note
           OOXMLDocumentObject.xmls_stack.pop

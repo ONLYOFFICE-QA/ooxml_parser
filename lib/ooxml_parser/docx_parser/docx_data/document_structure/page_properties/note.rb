@@ -6,15 +6,15 @@ module OoxmlParser
       @elements = []
     end
 
-    def self.parse(default_paragraph, default_character, target, assigned_to, type, parent: nil)
+    def self.parse(params)
       note = Note.new
-      note.type = type
-      note.assigned_to = assigned_to
-      note.parent = parent
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + "word/#{target}"))
-      if type.include?('footer')
+      note.type = params[:type]
+      note.assigned_to = params[:assigned_to]
+      note.parent = params[:parent]
+      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + "word/#{params[:target]}"))
+      if note.type.include?('footer')
         xpath_note = '//w:ftr'
-      elsif type.include?('header')
+      elsif note.type.include?('header')
         xpath_note = '//w:hdr'
       else
         raise "Cannot parse unknown Note type: #{type}"
@@ -23,19 +23,19 @@ module OoxmlParser
         number = 0
         ftr.xpath('*').each do |sub_element|
           if sub_element.name == 'p'
-            note.elements << default_paragraph.dup.parse(sub_element, number, default_character, parent: note)
+            note.elements << params[:default_paragraph].dup.parse(sub_element, number, params[:default_character], parent: note)
             number += 1
           elsif sub_element.name == 'tbl'
             note.elements << Table.new(parent: note).parse(sub_element, number)
             number += 1
           elsif sub_element.name == 'std'
             sub_element.xpath('w:p').each do |p|
-              note.elements << default_paragraph.copy.parse(p, number, default_character)
+              note.elements << params[:default_paragraph].copy.parse(p, number, params[:default_character])
               number += 1
             end
             sub_element.xpath('w:sdtContent').each do |sdt_content|
               sdt_content.xpath('w:p').each do |p|
-                note.elements << default_paragraph.copy.parse(p, number, default_character)
+                note.elements << params[:default_paragraph].copy.parse(p, number, params[:default_character])
                 number += 1
               end
             end

@@ -3,22 +3,15 @@ module OoxmlParser
   class PageMargins < OOXMLDocumentObject
     attr_accessor :top, :bottom, :left, :right, :footer, :gutter, :header
 
-    def initialize(top: nil,
-                   bottom: nil,
-                   left: nil,
-                   right: nil,
-                   header: nil,
-                   footer: nil,
-                   gutter: nil,
-                   parent: nil)
-      @top = top
-      @bottom = bottom
-      @left = left
-      @right = right
-      @header = header
-      @footer = footer
-      @gutter = gutter
-      @parent = parent
+    def initialize(params)
+      @top = params[:top]
+      @bottom = params[:bottom]
+      @left = params[:left]
+      @right = params[:right]
+      @header = params[:header]
+      @footer = params[:footer]
+      @gutter = params[:gutter]
+      @parent = params[:parent]
     end
 
     # Parse BordersProperties
