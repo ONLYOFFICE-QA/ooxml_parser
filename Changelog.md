@@ -16,6 +16,7 @@
 * Parsing `DocxParagraph#sdt`
 * Parsing `DocumentStructure#sdt`
 * Parsing `Presentation#relationships`
+* Parsing `Extension#sparkline_groups` and `SparklineGroup#type`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
