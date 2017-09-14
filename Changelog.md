@@ -30,6 +30,7 @@
 
 ### Fixes
 * Fix `uninitialized constant OoxmlParser::Inserted::DateTime` while parsing `Inserted#date`
+* Fix detecting password protected files on old `FileMagic`
 
 ## 0.2.0 (2017-03-25)
 ### New features
