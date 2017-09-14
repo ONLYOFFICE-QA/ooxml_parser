@@ -42,7 +42,9 @@ module OoxmlParser
         # Support of Encrtypted status in `file` util was introduced in file v5.20
         # but LTS version of ubuntu before 16.04 uses older `file` and it return `Composite Document`
         # https://github.com/file/file/blob/master/ChangeLog#L217
-        if file_result.include?('encrypted') || file_result.include?('Composite Document File V2 Document, No summary info')
+        if file_result.include?('encrypted') ||
+           file_result.include?('Composite Document File V2 Document, No summary info') ||
+           file_result.include?('application/CDFV2-corrupt')
           warn("File #{path_to_file} is encrypted. Can't parse it")
           return true
         end
