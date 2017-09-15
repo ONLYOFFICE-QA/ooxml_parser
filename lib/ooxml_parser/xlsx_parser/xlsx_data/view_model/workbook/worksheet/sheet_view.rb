@@ -18,7 +18,7 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [SheetView] result of parsing
     def parse(node)
-      node.attributes.each do |key, _value|
+      node.attributes.each_key do |key|
         case key
         when 'showGridLines'
           @show_gridlines = attribute_enabled?(node, key)

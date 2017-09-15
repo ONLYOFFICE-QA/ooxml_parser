@@ -46,7 +46,7 @@ module OoxmlParser
 
     class << self
       # @return [FontStyle] current font_style
-      attr_accessor :current_font_style
+      attr_writer :current_font_style
 
       def current_font_style
         @current_font_style = FontStyle.new if @current_font_style.nil?

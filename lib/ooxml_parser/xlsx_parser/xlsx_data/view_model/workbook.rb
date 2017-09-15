@@ -98,7 +98,7 @@ module OoxmlParser
 
     class << self
       # @return [Array, Nokogiri::XML::Eelement] list of shared strings
-      attr_accessor :shared_strings
+      attr_writer :shared_strings
       attr_accessor :styles_node
 
       # Accessor for shared string. Initialization for this array

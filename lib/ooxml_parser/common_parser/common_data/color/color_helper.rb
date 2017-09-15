@@ -3,7 +3,7 @@ module ColorHelper
   # Parse string in hex
   # @param [String] hex_string with or without alpha-channel
   def parse_hex_string(hex_string)
-    return self if hex_string == 'auto' || hex_string == 'null'
+    return self if %w[auto null].include?(hex_string)
 
     char_array = hex_string.split(//)
     if char_array.length == 3
