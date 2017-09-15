@@ -87,8 +87,3 @@ Style/Documentation:
 Style/Encoding:
   Exclude:
     - 'Gemfile'
-
-# Offense count: 1
-Style/MultipleComparison:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/color/color_helper.rb'
