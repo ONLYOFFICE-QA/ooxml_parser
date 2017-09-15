@@ -17,6 +17,18 @@ module OoxmlParser
     attr_reader :negative_point
     # @return [True, False] show markers
     attr_reader :markers
+    # @return [OoxmlColor] high points color
+    attr_reader :color_high
+    # @return [OoxmlColor] low points color
+    attr_reader :color_low
+    # @return [OoxmlColor] first points color
+    attr_reader :color_first
+    # @return [OoxmlColor] last points color
+    attr_reader :color_last
+    # @return [OoxmlColor] negative points color
+    attr_reader :color_negative
+    # @return [OoxmlColor] markers color
+    attr_reader :color_markers
 
     # Parse SparklineGroup
     # @param [Nokogiri::XML:Node] node with SparklineGroup
@@ -40,6 +52,23 @@ module OoxmlParser
           @negative_point = attribute_enabled?(value)
         when 'markers'
           @markers = attribute_enabled?(value)
+        end
+      end
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'colorHigh'
+          @color_high = OoxmlColor.new(parent: self).parse(node_child)
+        when 'colorLow'
+          @color_low = OoxmlColor.new(parent: self).parse(node_child)
+        when 'colorFirst'
+          @color_first = OoxmlColor.new(parent: self).parse(node_child)
+        when 'colorLast'
+          @color_last = OoxmlColor.new(parent: self).parse(node_child)
+        when 'colorNegative'
+          @color_negative = OoxmlColor.new(parent: self).parse(node_child)
+        when 'colorMarkers'
+          @color_markers = OoxmlColor.new(parent: self).parse(node_child)
         end
       end
       self
