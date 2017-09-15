@@ -1,7 +1,7 @@
 # Border Properties Data
 module OoxmlParser
   class BordersProperties < OOXMLDocumentObject
-    attr_accessor :color, :space, :sz, :val, :space, :shadow, :frame, :side
+    attr_accessor :color, :space, :sz, :val, :shadow, :frame, :side
 
     def initialize(color = :auto, sz = 0, val = :none, space = 0, parent: nil)
       @color = color

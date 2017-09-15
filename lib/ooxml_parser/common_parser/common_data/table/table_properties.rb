@@ -10,7 +10,7 @@ require_relative 'table_properties/table_borders'
 module OoxmlParser
   # Class for parsing `w:tblPr` tags
   class TableProperties < OOXMLDocumentObject
-    attr_accessor :jc, :table_width, :table_borders, :table_properties, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
+    attr_accessor :jc, :table_width, :table_borders, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
                   :column_banding_size, :table_look, :grid_column, :style
     # @return [TableStyleColumnBandSize] table style column band size
     attr_accessor :table_style_column_band_size
