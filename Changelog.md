@@ -17,7 +17,8 @@
 * Parsing `DocumentStructure#sdt`
 * Parsing `Presentation#relationships`
 * Parsing `Extension#sparkline_groups`
-* Parsing `SparklineGroup#type`, `SparklineGroup#line_weight`, `SparklineGroup` show points
+* Parsing `SparklineGroup#type`, `SparklineGroup#line_weight`, `SparklineGroup` show points,
+`SparklineGroup` points colors
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
