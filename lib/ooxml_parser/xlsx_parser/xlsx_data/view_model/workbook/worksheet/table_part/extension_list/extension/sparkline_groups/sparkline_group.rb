@@ -17,6 +17,8 @@ module OoxmlParser
     attr_reader :negative_point
     # @return [True, False] show markers
     attr_reader :markers
+    # @return [OoxmlColor] color of series
+    attr_reader :color_series
     # @return [OoxmlColor] high points color
     attr_reader :color_high
     # @return [OoxmlColor] low points color
@@ -57,6 +59,8 @@ module OoxmlParser
 
       node.xpath('*').each do |node_child|
         case node_child.name
+        when 'colorSeries'
+          @color_series = OoxmlColor.new(parent: self).parse(node_child)
         when 'colorHigh'
           @color_high = OoxmlColor.new(parent: self).parse(node_child)
         when 'colorLow'

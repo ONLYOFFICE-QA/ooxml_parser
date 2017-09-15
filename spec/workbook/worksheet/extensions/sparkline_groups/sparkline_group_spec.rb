@@ -23,6 +23,7 @@ describe 'Sparkline group' do
 
   it 'sparkline_points_colors.xlsx' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/extensions/sparkline_groups/sparkline_group/sparkline_points_colors.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].color_series).to be_a(OoxmlParser::OoxmlColor)
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].color_high).to be_a(OoxmlParser::OoxmlColor)
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].color_low).to be_a(OoxmlParser::OoxmlColor)
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].color_negative).to be_a(OoxmlParser::OoxmlColor)
