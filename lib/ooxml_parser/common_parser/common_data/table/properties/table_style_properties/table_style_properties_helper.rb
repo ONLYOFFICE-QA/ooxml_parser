@@ -15,7 +15,7 @@ module OoxmlParser
                                 first_row: :firstRow,
                                 last_row: :lastRow }.freeze
 
-    TABLE_STYLES_NAMES_HASH.keys.each do |table_style_name|
+    TABLE_STYLES_NAMES_HASH.each_key do |table_style_name|
       define_method(table_style_name) do
         @table_style_properties_list.each do |table_style|
           return table_style if table_style.type == TABLE_STYLES_NAMES_HASH[table_style_name]
@@ -29,7 +29,7 @@ module OoxmlParser
     # with `ooxml_parser` 0.1.2 and earlier
     # @return [Nothing]
     def fill_empty_table_styles
-      TABLE_STYLES_NAMES_HASH.values.each do |current_table_style|
+      TABLE_STYLES_NAMES_HASH.each_value do |current_table_style|
         style_exist = false
         @table_style_properties_list.each do |existing_style|
           style_exist = true if existing_style.type == current_table_style
