@@ -3,6 +3,8 @@ module OoxmlParser
   class SparklineGroup < OOXMLDocumentObject
     # @return [Symbol] type of group
     attr_reader :type
+    # @return [OoxmlSize] line weight
+    attr_reader :line_weight
 
     # Parse SparklineGroup
     # @param [Nokogiri::XML:Node] node with SparklineGroup
@@ -12,6 +14,8 @@ module OoxmlParser
         case key
         when 'type'
           @type = value_to_symbol(value)
+        when 'lineWeight'
+          @line_weight = OoxmlSize.new(value.value.to_f, :point)
         end
       end
       self
