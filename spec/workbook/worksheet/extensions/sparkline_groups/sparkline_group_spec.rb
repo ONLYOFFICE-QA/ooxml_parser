@@ -36,4 +36,9 @@ describe 'Sparkline group' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/extensions/sparkline_groups/sparkline_group/sparkline_display_empty_cells.xlsx')
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].display_empty_cells_as).to eq(:zero)
   end
+
+  it 'sparkline_display_hidden.xlsx' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/extensions/sparkline_groups/sparkline_group/sparkline_display_hidden.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].display_hidden).to be_truthy
+  end
 end

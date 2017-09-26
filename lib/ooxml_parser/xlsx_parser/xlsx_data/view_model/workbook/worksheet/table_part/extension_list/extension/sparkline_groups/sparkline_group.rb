@@ -3,6 +3,8 @@ module OoxmlParser
   class SparklineGroup < OOXMLDocumentObject
     # @return [Symbol] display empty cells as
     attr_reader :display_empty_cells_as
+    # @return [True, False] display empty cells as
+    attr_reader :display_hidden
     # @return [Symbol] type of group
     attr_reader :type
     # @return [OoxmlSize] line weight
@@ -44,6 +46,8 @@ module OoxmlParser
           @type = value_to_symbol(value)
         when 'displayEmptyCellsAs'
           @display_empty_cells_as = value_to_symbol(value)
+        when 'displayHidden'
+          @display_hidden = attribute_enabled?(value)
         when 'lineWeight'
           @line_weight = OoxmlSize.new(value.value.to_f, :point)
         when 'high'
