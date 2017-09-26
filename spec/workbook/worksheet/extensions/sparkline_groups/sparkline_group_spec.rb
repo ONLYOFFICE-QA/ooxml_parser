@@ -31,4 +31,9 @@ describe 'Sparkline group' do
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].color_last).to be_a(OoxmlParser::OoxmlColor)
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].color_markers).to be_a(OoxmlParser::OoxmlColor)
   end
+
+  it 'sparkline_display_empty_cells.xlsx' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/extensions/sparkline_groups/sparkline_group/sparkline_display_empty_cells.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].display_empty_cells_as).to eq(:zero)
+  end
 end
