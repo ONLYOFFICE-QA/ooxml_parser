@@ -1,6 +1,8 @@
 module OoxmlParser
   # Class for `sparklineGroup` data
   class SparklineGroup < OOXMLDocumentObject
+    # @return [Symbol] display empty cells as
+    attr_reader :display_empty_cells_as
     # @return [Symbol] type of group
     attr_reader :type
     # @return [OoxmlSize] line weight
@@ -40,6 +42,8 @@ module OoxmlParser
         case key
         when 'type'
           @type = value_to_symbol(value)
+        when 'displayEmptyCellsAs'
+          @display_empty_cells_as = value_to_symbol(value)
         when 'lineWeight'
           @line_weight = OoxmlSize.new(value.value.to_f, :point)
         when 'high'
