@@ -19,7 +19,8 @@
 * Parsing `Extension#sparkline_groups`
 * Parsing `SparklineGroup#type`, `SparklineGroup#line_weight`, `SparklineGroup` show points,
 `SparklineGroup` points colors, `SparklineGroup#display_empty_cells_as`,
-`SparklineGroup#display_hidden`
+`SparklineGroup#display_hidden`, `SparklineGroup#display_x_axis`, 
+`SparklineGroup#right_to_left`, SparklineGroup max and min axis type and value
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
