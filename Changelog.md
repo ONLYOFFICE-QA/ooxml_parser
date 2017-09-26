@@ -18,7 +18,8 @@
 * Parsing `Presentation#relationships`
 * Parsing `Extension#sparkline_groups`
 * Parsing `SparklineGroup#type`, `SparklineGroup#line_weight`, `SparklineGroup` show points,
-`SparklineGroup` points colors, `SparklineGroup#display_empty_cells_as`
+`SparklineGroup` points colors, `SparklineGroup#display_empty_cells_as`,
+`SparklineGroup#display_hidden`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
