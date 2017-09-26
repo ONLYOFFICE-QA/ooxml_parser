@@ -5,6 +5,18 @@ module OoxmlParser
     attr_reader :display_empty_cells_as
     # @return [True, False] display empty cells as
     attr_reader :display_hidden
+    # @return [True, False] display x axis
+    attr_reader :display_x_axis
+    # @return [True, False] right to left
+    attr_reader :right_to_left
+    # @return [True, False] minimal axis type
+    attr_reader :min_axis_type
+    # @return [True, False] maximal axis type
+    attr_reader :max_axis_type
+    # @return [Float] manual minimum value
+    attr_reader :manual_min
+    # @return [[Float] manual maximum value
+    attr_reader :manual_max
     # @return [Symbol] type of group
     attr_reader :type
     # @return [OoxmlSize] line weight
@@ -48,6 +60,18 @@ module OoxmlParser
           @display_empty_cells_as = value_to_symbol(value)
         when 'displayHidden'
           @display_hidden = attribute_enabled?(value)
+        when 'displayXAxis'
+          @display_x_axis = attribute_enabled?(value)
+        when 'rightToLeft'
+          @right_to_left = attribute_enabled?(value)
+        when 'minAxisType'
+          @min_axis_type = value_to_symbol(value)
+        when 'maxAxisType'
+          @max_axis_type = value_to_symbol(value)
+        when 'manualMin'
+          @manual_min = value.value.to_f
+        when 'manualMax'
+          @manual_max = value.value.to_f
         when 'lineWeight'
           @line_weight = OoxmlSize.new(value.value.to_f, :point)
         when 'high'

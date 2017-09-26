@@ -41,4 +41,13 @@ describe 'Sparkline group' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/extensions/sparkline_groups/sparkline_group/sparkline_display_hidden.xlsx')
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].display_hidden).to be_truthy
   end
+
+  it 'sparkline_options.xlsx' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/extensions/sparkline_groups/sparkline_group/sparkline_options.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].display_x_axis).to be_truthy
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].right_to_left).to be_truthy
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].min_axis_type).to eq(:custom)
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].max_axis_type).to eq(:group)
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].manual_min).to eq(5)
+  end
 end
