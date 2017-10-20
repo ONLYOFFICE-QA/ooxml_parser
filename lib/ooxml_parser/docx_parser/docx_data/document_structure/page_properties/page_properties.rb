@@ -10,6 +10,8 @@ module OoxmlParser
                   :notes
     # @return [FootnoteProperties] properties of footnote
     attr_accessor :footnote_properties
+    # @return [True, False] Specifies whether the section should have a different header and footer for its first page
+    attr_reader :title_page
 
     def initialize(parent: nil)
       @notes = []
@@ -57,6 +59,8 @@ module OoxmlParser
           @text_direction = pg_size_subnode.attribute('val').value
         when 'docGrid'
           @document_grid = DocumentGrid.new(parent: self).parse(pg_size_subnode)
+        when 'titlePg'
+          @title_page = option_enabled?(pg_size_subnode)
         when 'cols'
           @columns = Columns.new.parse(pg_size_subnode)
         when 'headerReference', 'footerReference'
