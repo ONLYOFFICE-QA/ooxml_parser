@@ -39,6 +39,7 @@
 * Fix `uninitialized constant OoxmlParser::Inserted::DateTime` while parsing `Inserted#date`
 * Fix detecting password protected files on old `FileMagic`
 * `pct` OoxmlSize values actually is 1/50 of percent
+* `DocumentStyle#paragraph_properties` is `ParagraphProperties`
 
 ## 0.2.0 (2017-03-25)
 ### New features
