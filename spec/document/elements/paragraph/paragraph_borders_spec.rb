@@ -3,12 +3,12 @@ require 'spec_helper'
 describe OoxmlParser::Borders do
   it 'border_size_nil' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/borders/border_size_nil.docx')
-    expect(docx.document_styles[39].paragraph_properties.borders.bar).to be_nil
+    expect(docx.document_styles[39].paragraph_properties.paragraph_borders.bar).to be_nil
   end
 
   it 'borders_space_nil' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/borders/borders_space_nil.docx')
-    expect(docx.document_styles[25].paragraph_properties.borders.bar.space).to eq(0)
+    expect(docx.document_styles[25].paragraph_properties.paragraph_borders.bar.space).to eq(0)
   end
 
   it 'dropcap_borders.docx' do

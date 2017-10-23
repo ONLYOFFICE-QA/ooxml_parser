@@ -6,6 +6,8 @@ require_relative 'paragrpah_properties/tabs'
 module OoxmlParser
   class ParagraphProperties < OOXMLDocumentObject
     attr_accessor :align, :numbering, :level, :spacing, :spacing_before, :spacing_after, :indent, :margin_left, :margin_right
+    # @return [FrameProperties] frame properties
+    attr_reader :frame_properties
     # @return [Tabs] list of tabs
     attr_accessor :tabs
     # @return [RunProperties] properties of run
@@ -67,6 +69,8 @@ module OoxmlParser
         when 'buAutoNum'
           @numbering.type = node_child.attribute('type').value.to_sym
           @numbering.start_at = node_child.attribute('startAt').value if node_child.attribute('startAt')
+        when 'framePr'
+          @frame_properties = FrameProperties.new(parent: self).parse(node_child)
         when 'tabs'
           @tabs = Tabs.new(parent: self).parse(node_child)
         when 'tabLst'
