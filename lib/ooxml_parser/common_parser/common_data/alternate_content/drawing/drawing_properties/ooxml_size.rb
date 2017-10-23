@@ -63,7 +63,7 @@ module OoxmlParser
       when :percent
         OoxmlSize.new(@value * 100_000, :one_100000th_percent)
       when :pct
-        OoxmlSize.new(@value * 1_000, :one_100000th_percent)
+        OoxmlSize.new(@value * 100_000 / 50, :one_100000th_percent)
       when :one_1000th_percent
         OoxmlSize.new(@value * 100, :one_100000th_percent)
       else
