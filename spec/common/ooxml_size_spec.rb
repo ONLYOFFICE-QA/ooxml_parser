@@ -20,4 +20,14 @@ describe 'OoxmlSize' do
       expect(OoxmlParser::OoxmlSize.new(43, :percent)).not_to eq(OoxmlParser::OoxmlSize.new(43_999, :one_1000th_percent))
     end
   end
+
+  describe 'pct' do
+    it 'compare same - percent and one 50th of percent' do
+      expect(OoxmlParser::OoxmlSize.new(44, :percent)).to eq(OoxmlParser::OoxmlSize.new(44 * 50, :pct))
+    end
+
+    it 'compare different - percent and one 50th of percent' do
+      expect(OoxmlParser::OoxmlSize.new(43, :percent)).not_to eq(OoxmlParser::OoxmlSize.new(43.99 * 50, :pct))
+    end
+  end
 end
