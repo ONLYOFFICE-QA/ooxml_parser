@@ -24,6 +24,7 @@
 * Parsing `PageProperties#title_page`
 * Parsing `TableStyleProperties#table_row_properties`
 * Parsing `ChartAxis#tick_label_position`
+* Parsing `ChartAxis#scaling`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`

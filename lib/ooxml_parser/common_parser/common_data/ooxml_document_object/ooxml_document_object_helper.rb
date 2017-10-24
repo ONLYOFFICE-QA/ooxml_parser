@@ -80,6 +80,8 @@ module OoxmlDocumentObjectHelper
                            tbRl: :top_to_bottom_right_to_left,
                            btLr: :bottom_to_top_left_to_right,
                            singlelevel: :single_level,
+                           maxMin: :max_min,
+                           minMax: :min_max,
                            multilevel: :multi_level,
                            nextTo: :next_to,
                            hybridMultilevel: :hybrid_multi_level,
