@@ -23,6 +23,7 @@
 `SparklineGroup#right_to_left`, SparklineGroup max and min axis type and value
 * Parsing `PageProperties#title_page`
 * Parsing `TableStyleProperties#table_row_properties`
+* Parsing `ChartAxis#tick_label_position`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`

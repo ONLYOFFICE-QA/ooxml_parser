@@ -81,6 +81,7 @@ module OoxmlDocumentObjectHelper
                            btLr: :bottom_to_top_left_to_right,
                            singlelevel: :single_level,
                            multilevel: :multi_level,
+                           nextTo: :next_to,
                            hybridMultilevel: :hybrid_multi_level,
                            rnd: :round,
                            sq: :square }.freeze

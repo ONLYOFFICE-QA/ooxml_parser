@@ -3,6 +3,8 @@ module OoxmlParser
   # Parsing Chart axis tags 'catAx', 'valAx'
   class ChartAxis < OOXMLDocumentObject
     attr_accessor :title, :display, :position, :major_grid_lines, :minor_grid_lines
+    # @return [ValuedChild] the position of the tick labels
+    attr_reader :tick_label_position
 
     def initialize(title = ChartAxisTitle.new,
                    display = true,
@@ -30,6 +32,8 @@ module OoxmlParser
           @major_grid_lines = true
         when 'minorGridlines'
           @minor_grid_lines = true
+        when 'tickLblPos'
+          @tick_label_position = ValuedChild.new(:symbol, parent: self).parse(node_child)
         when 'axPos'
           @position = value_to_symbol(node_child.attribute('val'))
         end
