@@ -31,5 +31,11 @@ describe 'My behaviour' do
       drawing = xlsx.worksheets[0].drawings[0]
       expect(drawing.graphic_frame.graphic_data.first.axises[1].position).to eq(:left)
     end
+
+    it 'Chart - Axises - tick_label_position.xlsx' do
+      xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/axises/tick_label_position.xlsx')
+      drawing = xlsx.worksheets[0].drawings[0]
+      expect(drawing.graphic_frame.graphic_data.first.axises[1].tick_label_position.value).to eq(:next_to)
+    end
   end
 end
