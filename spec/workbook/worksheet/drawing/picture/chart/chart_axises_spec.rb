@@ -37,5 +37,11 @@ describe 'My behaviour' do
       drawing = xlsx.worksheets[0].drawings[0]
       expect(drawing.graphic_frame.graphic_data.first.axises[1].tick_label_position.value).to eq(:next_to)
     end
+
+    it 'Chart - Axises - scaling_orientation.xlsx' do
+      xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/axises/scaling_orientation.xlsx')
+      drawing = xlsx.worksheets[0].drawings[0]
+      expect(drawing.graphic_frame.graphic_data.first.axises[1].scaling.orientation.value).to eq(:min_max)
+    end
   end
 end
