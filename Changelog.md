@@ -25,6 +25,7 @@
 * Parsing `TableStyleProperties#table_row_properties`
 * Parsing `ChartAxis#tick_label_position`
 * Parsing `ChartAxis#scaling`
+* Parsing `ConnectionShape` in `ShapesGrouping` 
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
