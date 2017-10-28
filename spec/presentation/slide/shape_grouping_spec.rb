@@ -12,4 +12,11 @@ describe 'My behaviour' do
     expect(elements.first).to be_a_kind_of OoxmlParser::ShapesGrouping
     expect(elements[0].elements.size).to eq(2)
   end
+
+  it 'grouping_with_connector.pptx' do
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shapes_grouping/grouping_with_connector.pptx')
+    elements = pptx.slides.first.elements
+    expect(elements.first).to be_a_kind_of OoxmlParser::ShapesGrouping
+    expect(elements[0].elements.size).to eq(2)
+  end
 end

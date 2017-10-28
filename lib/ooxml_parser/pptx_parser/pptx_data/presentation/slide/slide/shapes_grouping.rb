@@ -14,6 +14,8 @@ module OoxmlParser
     def parse(node)
       node.xpath('*').each do |child_node|
         case child_node.name
+        when 'cxnSp'
+          @elements << ConnectionShape.new(parent: self).parse(child_node)
         when 'grpSpPr'
           @properties = DocxShapeProperties.new(parent: self).parse(child_node)
         when 'pic'
