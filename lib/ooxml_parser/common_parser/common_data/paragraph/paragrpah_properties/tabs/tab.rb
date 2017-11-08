@@ -3,6 +3,8 @@ module OoxmlParser
   class Tab < OOXMLDocumentObject
     # @return [Symbol] Specifies the style of the tab.
     attr_accessor :value
+    # @return [Symbol] Specifies the leader symbol of tab
+    attr_reader :leader
     # @return [OOxmlSize] Specifies the position of the tab stop.
     attr_accessor :position
 
@@ -16,6 +18,8 @@ module OoxmlParser
         case key
         when 'algn', 'val'
           @value = value_to_symbol(value)
+        when 'leader'
+          @leader = value_to_symbol(value)
         when 'pos'
           @position = OoxmlSize.new(value.value.to_f, position_unit(node))
         end

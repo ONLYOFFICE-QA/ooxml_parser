@@ -26,6 +26,7 @@
 * Parsing `ChartAxis#tick_label_position`
 * Parsing `ChartAxis#scaling`
 * Parsing `ConnectionShape` in `ShapesGrouping` 
+* Parsing `Tab#leader`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
