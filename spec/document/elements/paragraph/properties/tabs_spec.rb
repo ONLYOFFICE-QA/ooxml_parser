@@ -11,4 +11,9 @@ describe 'My behaviour' do
     docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/properties/tabs/tab_leader.docx')
     expect(docx.elements.first.paragraph_properties.tabs[0].leader).to eq(:dot)
   end
+
+  it 'tab_leader_middle_dot' do
+    docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/properties/tabs/tab_leader_middle_dot.docx')
+    expect(docx.elements.first.paragraph_properties.tabs[0].leader).to eq(:middle_dot)
+  end
 end
