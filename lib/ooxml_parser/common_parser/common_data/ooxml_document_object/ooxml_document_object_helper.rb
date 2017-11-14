@@ -81,6 +81,7 @@ module OoxmlDocumentObjectHelper
                            btLr: :bottom_to_top_left_to_right,
                            singlelevel: :single_level,
                            maxMin: :max_min,
+                           middleDot: :middle_dot,
                            minMax: :min_max,
                            multilevel: :multi_level,
                            nextTo: :next_to,
