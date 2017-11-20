@@ -1,9 +1,11 @@
 module OoxmlParser
   # Class for describing Document Background `w:background`
   class DocumentBackground < OOXMLDocumentObject
-    attr_accessor :color1, :size, :color2, :type
+    attr_reader :color1, :size, :color2, :type
     # @return [FileReference] image structure
-    attr_accessor :file_reference
+    attr_reader :file_reference
+    # @return [Fill] fill data
+    attr_reader :fill
 
     def initialize(parent: nil)
       @color1 = nil
@@ -20,13 +22,10 @@ module OoxmlParser
         unless second_color.attribute('targetscreensize').nil?
           @size = second_color.attribute('targetscreensize').value.sub(',', 'x')
         end
-        second_color.xpath('v:fill').each do |fill|
-          if !fill.attribute('color2').nil?
-            @color2 = Color.new(parent: self).parse_hex_string(fill.attribute('color2').value.split(' ').first.delete('#'))
-            @type = fill.attribute('type').value
-          elsif !fill.attribute('id').nil?
-            @file_reference = FileReference.new(parent: self).parse(fill)
-            @type = 'image'
+        second_color.xpath('*').each do |node_child|
+          case node_child.name
+          when 'fill'
+            @fill = Fill.new(parent: self).parse(node_child)
           end
         end
       end
