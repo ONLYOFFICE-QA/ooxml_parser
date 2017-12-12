@@ -13,6 +13,10 @@ module OoxmlParser
     attr_accessor :transition, :timing, :alternate_content
     # @return [CommonSlideData] common slide data
     attr_reader :common_slide_data
+    # @return [Relationships] relationships of slide
+    attr_reader :relationships
+    # @return [String] name of slide
+    attr_reader :name
 
     def initialize(parent: nil, xml_path: nil)
       @parent = parent
@@ -39,6 +43,7 @@ module OoxmlParser
     # @return [Slide] result of parsing
     def parse
       OOXMLDocumentObject.add_to_xmls_stack(@xml_path)
+      @name = File.basename(@xml_path, '.*')
       node = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       node.xpath('//p:sld/*').each do |node_child|
         case node_child.name
@@ -53,6 +58,7 @@ module OoxmlParser
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
+      @relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}#{File.dirname(@xml_path)}/_rels/#{@name}.xml.rels")
       self
     end
   end
