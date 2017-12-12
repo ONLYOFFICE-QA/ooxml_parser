@@ -2,6 +2,7 @@ require_relative 'slide/presentation_alternate_content'
 require_relative 'slide/background'
 require_relative 'slide/common_slide_data'
 require_relative 'slide/connection_shape.rb'
+require_relative 'slide/presentation_notes.rb'
 require_relative 'slide/graphic_frame/graphic_frame'
 require_relative 'slide/slide/shapes_grouping'
 require_relative 'slide/slide/timing'
@@ -13,6 +14,12 @@ module OoxmlParser
     attr_accessor :transition, :timing, :alternate_content
     # @return [CommonSlideData] common slide data
     attr_reader :common_slide_data
+    # @return [Relationships] relationships of slide
+    attr_reader :relationships
+    # @return [String] name of slide
+    attr_reader :name
+    # @return [Notes] note of slide
+    attr_reader :note
 
     def initialize(parent: nil, xml_path: nil)
       @parent = parent
@@ -39,6 +46,7 @@ module OoxmlParser
     # @return [Slide] result of parsing
     def parse
       OOXMLDocumentObject.add_to_xmls_stack(@xml_path)
+      @name = File.basename(@xml_path, '.*')
       node = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       node.xpath('//p:sld/*').each do |node_child|
         case node_child.name
@@ -53,7 +61,18 @@ module OoxmlParser
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
+      @relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}#{File.dirname(@xml_path)}/_rels/#{@name}.xml.rels")
+      parse_note
       self
+    end
+
+    private
+
+    # Parse slide notes if present
+    def parse_note
+      notes_target = @relationships.target_by_type('notes')
+      return nil unless notes_target
+      @note = PresentationNotes.new(parent: self).parse("#{OOXMLDocumentObject.path_to_folder}#{File.dirname(@xml_path)}/#{notes_target}")
     end
   end
 end
