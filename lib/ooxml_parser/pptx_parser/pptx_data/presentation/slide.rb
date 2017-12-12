@@ -66,6 +66,9 @@ module OoxmlParser
       self
     end
 
+    private
+
+    # Parse slide notes if present
     def parse_note
       notes_target = @relationships.target_by_type('notes')
       return nil unless notes_target
