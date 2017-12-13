@@ -78,12 +78,6 @@ Style/DateTime:
 Style/Documentation:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/Encoding:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/paragraph/paragrpah_properties/spacing.rb'
-
 # Offense count: 1667
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
