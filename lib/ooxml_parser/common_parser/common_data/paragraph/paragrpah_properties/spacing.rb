@@ -1,4 +1,3 @@
-# endcoding: utf-8
 # @author Pavel.Lobashov
 
 # Class to describe spacing

@@ -16,9 +16,7 @@ module OoxmlParser
       instance_variables.each do |current_attribute|
         next if current_attribute == :@parent
         next if current_attribute == :@is_default
-        unless instance_variable_get(current_attribute) == other.instance_variable_get(current_attribute)
-          return false
-        end
+        return false unless instance_variable_get(current_attribute) == other.instance_variable_get(current_attribute)
       end
       true
     end

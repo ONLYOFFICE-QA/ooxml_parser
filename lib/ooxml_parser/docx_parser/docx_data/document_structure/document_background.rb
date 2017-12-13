@@ -19,9 +19,7 @@ module OoxmlParser
     def parse(node)
       @color1 = Color.new(parent: self).parse_hex_string(node.attribute('color').value)
       node.xpath('v:background').each do |second_color|
-        unless second_color.attribute('targetscreensize').nil?
-          @size = second_color.attribute('targetscreensize').value.sub(',', 'x')
-        end
+        @size = second_color.attribute('targetscreensize').value.sub(',', 'x') unless second_color.attribute('targetscreensize').nil?
         second_color.xpath('*').each do |node_child|
           case node_child.name
           when 'fill'

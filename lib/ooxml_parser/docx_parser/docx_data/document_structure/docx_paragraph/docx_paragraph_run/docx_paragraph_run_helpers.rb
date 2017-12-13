@@ -65,9 +65,7 @@ module OoxmlParser
           font_style.underlined = Underline.new
           if option_enabled?(node_child)
             font_style.underlined.style = node_child.attribute('val').value
-            unless node_child.attribute('color').nil?
-              font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(node_child.attribute('color').value)
-            end
+            font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(node_child.attribute('color').value) unless node_child.attribute('color').nil?
           end
         when 'strike'
           font_style.strike = :single if option_enabled?(node_child)

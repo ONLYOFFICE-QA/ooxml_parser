@@ -28,12 +28,8 @@ module OoxmlParser
           @size = PageSize.new.parse(pg_size_subnode)
         when 'pgBorders'
           page_borders = Borders.new
-          unless pg_size_subnode.attribute('display').nil?
-            page_borders.display = pg_size_subnode.attribute('display').value.to_sym
-          end
-          unless pg_size_subnode.attribute('offsetFrom').nil?
-            page_borders.offset_from = pg_size_subnode.attribute('offsetFrom').value.to_sym
-          end
+          page_borders.display = pg_size_subnode.attribute('display').value.to_sym unless pg_size_subnode.attribute('display').nil?
+          page_borders.offset_from = pg_size_subnode.attribute('offsetFrom').value.to_sym unless pg_size_subnode.attribute('offsetFrom').nil?
           pg_size_subnode.xpath('w:bottom').each do |bottom|
             page_borders.bottom = BordersProperties.new(parent: page_borders).parse(bottom)
           end

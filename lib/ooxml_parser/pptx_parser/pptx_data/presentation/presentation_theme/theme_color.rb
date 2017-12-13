@@ -14,9 +14,7 @@ module OoxmlParser
       else
         all_instance_variables = instance_variables
         all_instance_variables.each do |current_attributes|
-          unless instance_variable_get(current_attributes) == other.instance_variable_get(current_attributes)
-            return false
-          end
+          return false unless instance_variable_get(current_attributes) == other.instance_variable_get(current_attributes)
         end
         true
       end
