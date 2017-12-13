@@ -29,9 +29,7 @@ module OoxmlParser
       def parser_coordinates_range(arguments_string)
         sheet_name = 'Sheet1'
 
-        if arguments_string.include?('!')
-          sheet_name, arguments_string = arguments_string.split('!')
-        end
+        sheet_name, arguments_string = arguments_string.split('!') if arguments_string.include?('!')
 
         range = arguments_string.split(':')
 

@@ -89,9 +89,7 @@ module OoxmlParser
       all_instance_variables = instance_variables
       significan_attribues = all_instance_variables - ignored_attributes
       significan_attribues.each do |current_attributes|
-        unless instance_variable_get(current_attributes) == other.instance_variable_get(current_attributes)
-          return false
-        end
+        return false unless instance_variable_get(current_attributes) == other.instance_variable_get(current_attributes)
       end
       true
     end
@@ -146,18 +144,14 @@ module OoxmlParser
           character_style.parse(node_child, char_number, parent: self)
           character_style.comments = comments.dup
           character_styles_array << character_style.dup
-          unless character_style.shape.nil?
-            character_styles_array.last.shape = character_style.shape
-          end
+          character_styles_array.last.shape = character_style.shape unless character_style.shape.nil?
           char_number += 1
         when 'hyperlink'
           character_style = default_character_style.dup
           if !node_child.attribute('id').nil?
             character_style.link = Hyperlink.new(parent: character_style).parse(node_child)
           else
-            unless node_child.attribute('anchor').nil?
-              character_style.link = node_child.attribute('anchor').value
-            end
+            character_style.link = node_child.attribute('anchor').value unless node_child.attribute('anchor').nil?
           end
           node_child.xpath('w:r').each do |r_tag|
             character_style.parse(r_tag, char_number, parent: parent)
@@ -193,9 +187,7 @@ module OoxmlParser
         end
       end
       @number = par_number
-      if character_styles_array.last.class == DocxParagraphRun
-        character_styles_array.last.text = character_styles_array.last.text.rstrip
-      end
+      character_styles_array.last.text = character_styles_array.last.text.rstrip if character_styles_array.last.class == DocxParagraphRun
       @character_style_array = character_styles_array
       @parent = parent
       self
@@ -205,18 +197,14 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'pageBreakBefore'
-          if node_child.attribute('val').nil? || node_child.attribute('val').value != 'false'
-            @page_break = true
-          end
+          @page_break = true if node_child.attribute('val').nil? || node_child.attribute('val').value != 'false'
         when 'pBdr'
           @borders = ParagraphBorders.new(parent: self).parse(node_child)
         when 'keepLines'
           if node_child.attribute('val').nil?
             @keep_lines = true
           else
-            unless node_child.attribute('val').value == 'false'
-              @keep_lines = true
-            end
+            @keep_lines = true unless node_child.attribute('val').value == 'false'
           end
         when 'widowControl'
           @orphan_control = option_enabled?(node_child)
@@ -227,9 +215,7 @@ module OoxmlParser
         when 'shd'
           background_color_string = node_child.attribute('fill').value
           @background_color = Color.new(parent: self).parse_hex_string(background_color_string)
-          unless node_child.attribute('val').nil?
-            @background_color.set_style(node_child.attribute('val').value)
-          end
+          @background_color.set_style(node_child.attribute('val').value) unless node_child.attribute('val').nil?
         when 'pStyle'
           DocxParagraph.parse_paragraph_style_xml(node_child.attribute('val').value, self, default_char_style)
         when 'ind'
@@ -244,15 +230,9 @@ module OoxmlParser
           @align = node_child.attribute('val').value.to_sym unless node_child.attribute('val').nil?
           @align = :justify if node_child.attribute('val').value == 'both'
         when 'spacing'
-          unless node_child.attribute('before').nil?
-            @spacing.before = (node_child.attribute('before').value.to_f / 566.9).round(2)
-          end
-          unless node_child.attribute('after').nil?
-            @spacing.after = (node_child.attribute('after').value.to_f / 566.9).round(2)
-          end
-          unless node_child.attribute('lineRule').nil?
-            @spacing.line_rule = node_child.attribute('lineRule').value.sub('atLeast', 'at_least').to_sym
-          end
+          @spacing.before = (node_child.attribute('before').value.to_f / 566.9).round(2) unless node_child.attribute('before').nil?
+          @spacing.after = (node_child.attribute('after').value.to_f / 566.9).round(2) unless node_child.attribute('after').nil?
+          @spacing.line_rule = node_child.attribute('lineRule').value.sub('atLeast', 'at_least').to_sym unless node_child.attribute('lineRule').nil?
           unless node_child.attribute('line').nil?
             @spacing.line = (@spacing.line_rule == :auto ? (node_child.attribute('line').value.to_f / 240.0).round(2) : (node_child.attribute('line').value.to_f / 566.9).round(2))
           end

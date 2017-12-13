@@ -53,9 +53,7 @@ module OoxmlParser
       all_instance_variables = instance_variables
       significan_attribues = all_instance_variables - ignored_attributes
       significan_attribues.each do |current_attributes|
-        unless instance_variable_get(current_attributes) == other.instance_variable_get(current_attributes)
-          return false
-        end
+        return false unless instance_variable_get(current_attributes) == other.instance_variable_get(current_attributes)
       end
       true
     end
