@@ -28,6 +28,7 @@
 * Parsing `ConnectionShape` in `ShapesGrouping` 
 * Parsing `Tab#leader`
 * Parsing Slide Notes
+* Parsing `SDTProperties#lock`, `SDTProperties#tag`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
