@@ -2,8 +2,13 @@ require 'spec_helper'
 
 describe 'StdContent' do
   it 'check std_content_text' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/std/std_content/std_content_text.docx')
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/std/std_content/sdt_content_text.docx')
     expect(docx.elements.first.sdt.sdt_content.runs.first.text).to eq('Simple Test Text')
+  end
+
+  it 'sdt_properties_alias.docx' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/std/std_content/sdt_properties_alias.docx')
+    expect(docx.elements.first.sdt.properties.alias.value).to eq('Title')
   end
 
   it 'sdt_properties_tag.docx' do
