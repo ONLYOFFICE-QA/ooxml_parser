@@ -1,6 +1,8 @@
 module OoxmlParser
   # Class for parsing `w:sdtPr` tags
   class SDTProperties < OOXMLDocumentObject
+    # @return [ValuedChild] alias value
+    attr_reader :alias
     # @return [ValuedChild] tag value
     attr_reader :tag
     # @return [ValuedChild] Locking Setting
@@ -12,6 +14,8 @@ module OoxmlParser
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name
+        when 'alias'
+          @alias = ValuedChild.new(:string, parent: self).parse(node_child)
         when 'tag'
           @tag = ValuedChild.new(:string, parent: self).parse(node_child)
         when 'lock'
