@@ -10,45 +10,39 @@ module OoxmlParser
     # @param style_id [String] id to parse
     # @return [TableStyle] result of parsing
     def parse(style_id: nil)
-      unless style_id.nil?
-        nodes = get_style_node(style_id)
-        return nil if nodes.nil?
-        xpath = '*'
-        attributes = 'style_node_child.name'
-      end
-      begin
-        nodes.xpath(xpath).each do |style_node_child|
-          case instance_eval(attributes)
-          when 'wholeTbl'
-            @whole_table = TableElement.new(parent: self).parse(style_node_child)
-          when 'band1H'
-            @banding_1_horizontal = TableElement.new(parent: self).parse(style_node_child)
-          when 'band2H', 'band2Horz'
-            @banding_2_horizontal = TableElement.new(parent: self).parse(style_node_child)
-          when 'band1V'
-            @banding_1_vertical = TableElement.new(parent: self).parse(style_node_child)
-          when 'band2V'
-            @banding_2_vertical = TableElement.new(parent: self).parse(style_node_child)
-          when 'lastCol'
-            @last_column = TableElement.new(parent: self).parse(style_node_child)
-          when 'firstCol'
-            @first_column = TableElement.new(parent: self).parse(style_node_child)
-          when 'lastRow'
-            @last_row = TableElement.new(parent: self).parse(style_node_child)
-          when 'firstRow'
-            @first_row = TableElement.new(parent: self).parse(style_node_child)
-          when 'seCell'
-            @southeast_cell = TableElement.new(parent: self).parse(style_node_child)
-          when 'swCell'
-            @southwest_cell = TableElement.new(parent: self).parse(style_node_child)
-          when 'neCell'
-            @northeast_cell = TableElement.new(parent: self).parse(style_node_child)
-          when 'nwCell'
-            @northwest_cell = TableElement.new(parent: self).parse(style_node_child)
-          end
+      nodes = get_style_node(style_id)
+      return nil unless nodes
+      nodes.xpath('*').each do |style_node_child|
+        case style_node_child.name
+        when 'wholeTbl'
+          @whole_table = TableElement.new(parent: self).parse(style_node_child)
+        when 'band1H'
+          @banding_1_horizontal = TableElement.new(parent: self).parse(style_node_child)
+        when 'band2H', 'band2Horz'
+          @banding_2_horizontal = TableElement.new(parent: self).parse(style_node_child)
+        when 'band1V'
+          @banding_1_vertical = TableElement.new(parent: self).parse(style_node_child)
+        when 'band2V'
+          @banding_2_vertical = TableElement.new(parent: self).parse(style_node_child)
+        when 'lastCol'
+          @last_column = TableElement.new(parent: self).parse(style_node_child)
+        when 'firstCol'
+          @first_column = TableElement.new(parent: self).parse(style_node_child)
+        when 'lastRow'
+          @last_row = TableElement.new(parent: self).parse(style_node_child)
+        when 'firstRow'
+          @first_row = TableElement.new(parent: self).parse(style_node_child)
+        when 'seCell'
+          @southeast_cell = TableElement.new(parent: self).parse(style_node_child)
+        when 'swCell'
+          @southwest_cell = TableElement.new(parent: self).parse(style_node_child)
+        when 'neCell'
+          @northeast_cell = TableElement.new(parent: self).parse(style_node_child)
+        when 'nwCell'
+          @northwest_cell = TableElement.new(parent: self).parse(style_node_child)
         end
       end
-      @id = style_id unless style_id.nil?
+      @id = style_id
       self
     end
 
