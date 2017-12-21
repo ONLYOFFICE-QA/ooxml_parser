@@ -25,7 +25,7 @@ module OoxmlParser
         when 'author'
           @author = value.value.to_s
         when 'date'
-          @date = DateTime.parse(value.value.to_s)
+          @date = parse_date(value.value.to_s)
         when 'oouserid'
           @user_id = value.value.to_s
         end
@@ -38,6 +38,18 @@ module OoxmlParser
         end
       end
       self
+    end
+
+    private
+
+    # Parse date and handle incorrect dates
+    # @param value [Sting] value of date
+    # @return [DateTime, String] if date correct or incorrect
+    def parse_date(value)
+      DateTime.parse(value)
+    rescue ArgumentError
+      warn "Date #{value} is incorrect format"
+      value
     end
   end
 end

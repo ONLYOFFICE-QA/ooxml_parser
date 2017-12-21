@@ -48,6 +48,7 @@
 * `pct` OoxmlSize values actually is 1/50 of percent
 * `DocumentStyle#paragraph_properties` is `ParagraphProperties`
 * Fix crash if chart series has no values
+* Fix crash if `Inserted#date` is incorrect
 
 ## 0.2.0 (2017-03-25)
 ### New features
