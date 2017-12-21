@@ -7,7 +7,7 @@ task default: :spec
 
 desc 'Task for parse all files in directory'
 task :parse_files, [:dir] do |_, args|
-  files = Dir["#{args[:dir]}/**/*"].shuffle
+  files = Dir["#{args[:dir]}/**/*"].sort
   files.each do |file|
     next if File.directory? file
     p "Parsing file: #{file}"
