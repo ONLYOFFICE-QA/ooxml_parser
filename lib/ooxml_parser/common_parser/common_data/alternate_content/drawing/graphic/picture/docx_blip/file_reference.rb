@@ -18,7 +18,7 @@ module OoxmlParser
       return self unless @resource_id
       return self if @resource_id.empty?
       @path = OOXMLDocumentObject.get_link_from_rels(@resource_id)
-      if @path.empty?
+      if !@path || @path.empty?
         warn "Cant find path to media file by id: #{@resource_id}"
         return self
       end
