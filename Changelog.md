@@ -51,6 +51,7 @@
 * Fix crash if `Inserted#date` is incorrect
 * Fix crash if `FileReference#resource_id` is empty
 * Fix crash if `FileReference#path` is nil
+* Do not hangup on parsing Coordinates like `Donut!A7:A7,Donut!A16:A16`
 
 ## 0.2.0 (2017-03-25)
 ### New features

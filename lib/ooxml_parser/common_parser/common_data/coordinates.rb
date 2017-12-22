@@ -27,6 +27,7 @@ module OoxmlParser
       end
 
       def parser_coordinates_range(arguments_string)
+        return parse_coordinates_array(arguments_string) if arguments_string.include?(',')
         sheet_name = 'Sheet1'
 
         sheet_name, arguments_string = arguments_string.split('!') if arguments_string.include?('!')
@@ -66,6 +67,18 @@ module OoxmlParser
           raise 'Wrong arguments format'
         end
         arguments_array
+      end
+
+      # Parse array of coordinates
+      # @param arguments_string [String] string
+      # @return [Array] result
+      def parse_coordinates_array(arguments_string)
+        result = []
+        coord_array = arguments_string.split(',')
+        coord_array.each do |current_coord|
+          result << parser_coordinates_range(current_coord)
+        end
+        result
       end
 
       # This method check is argument contains coordinate
