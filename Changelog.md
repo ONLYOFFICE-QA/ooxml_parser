@@ -50,6 +50,7 @@
 * Fix crash if chart series has no values
 * Fix crash if `Inserted#date` is incorrect
 * Fix crash if `FileReference#resource_id` is empty
+* Fix crash if `FileReference#path` is nil
 
 ## 0.2.0 (2017-03-25)
 ### New features
