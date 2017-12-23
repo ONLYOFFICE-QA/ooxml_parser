@@ -28,6 +28,7 @@ module OoxmlParser
 
       def parser_coordinates_range(arguments_string)
         return parse_coordinates_array(arguments_string) if arguments_string.include?(',')
+        return warn "Formulas with # is unsupported: #{arguments_string}" if arguments_string.include?('#')
         sheet_name = 'Sheet1'
 
         sheet_name, arguments_string = arguments_string.split('!') if arguments_string.include?('!')
