@@ -16,4 +16,10 @@ describe 'OoxmlParser::Coordinates' do
       OoxmlParser::Coordinates.parser_coordinates_range("'file!'file:xls'#'Ecc-C2345'.AJ23:'file:xls'#'Ecc-C2345'.AJ236")
     end.to output(/Formulas with # is unsupported/).to_stderr
   end
+
+  it 'Coordinates.parser_coordinates_range not crash if formula just !' do
+    expect do
+      OoxmlParser::Coordinates.parser_coordinates_range('!')
+    end.to output(/Formulas consists from `!` only/).to_stderr
+  end
 end
