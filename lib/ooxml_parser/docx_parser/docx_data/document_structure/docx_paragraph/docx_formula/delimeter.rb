@@ -19,9 +19,9 @@ module OoxmlParser
           node_child.xpath('*').each do |node_child_child|
             case node_child_child.name
             when 'begChr'
-              @begin_character = node_child_child.attribute('val').value
+              @begin_character = ValuedChild.new(:string, parent: self).parse(node_child_child)
             when 'endChr'
-              @end_character = node_child_child.attribute('val').value
+              @end_character = ValuedChild.new(:string, parent: self).parse(node_child_child)
             end
           end
         end
