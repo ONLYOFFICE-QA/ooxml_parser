@@ -29,6 +29,7 @@
 * Parsing `Tab#leader`
 * Parsing Slide Notes
 * Parsing `SDTProperties#alias`, `SDTProperties#lock`, `SDTProperties#tag`
+* Parsing `Font#vertical_alignment`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`

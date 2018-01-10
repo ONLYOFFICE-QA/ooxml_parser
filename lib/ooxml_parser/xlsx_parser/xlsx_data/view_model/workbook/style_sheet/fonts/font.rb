@@ -2,6 +2,8 @@ module OoxmlParser
   # Parsing `fonts` tag
   class Font < OOXMLDocumentObject
     attr_accessor :name, :size, :font_style, :color
+    # @return [ValuedChild] vertical alignment of font
+    attr_reader :vertical_alignment
 
     def initialize(parent: nil)
       @name = 'Calibri'
@@ -27,6 +29,8 @@ module OoxmlParser
           @font_style.underlined = Underline.new(:single)
         when 'color'
           @color = OoxmlColor.new(parent: self).parse(node_child)
+        when 'vertAlign'
+          @vertical_alignment = ValuedChild.new(:symbol, parent: self).parse(node_child)
         end
       end
       self
