@@ -56,6 +56,7 @@
 * Do not hangup on parsing Coordinates with `#`
 * Fix crash on parsing Coordinates consist of `!`
 * Fix crash on `Delimeter`
+* Fix crash on parsing `Coordinates` with sheet name with `!`
 
 ## 0.2.0 (2017-03-25)
 ### New features

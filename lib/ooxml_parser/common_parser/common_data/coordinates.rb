@@ -32,7 +32,10 @@ module OoxmlParser
         return warn 'Formulas consists from `!` only' if arguments_string == '!'
         sheet_name = 'Sheet1'
 
-        sheet_name, arguments_string = arguments_string.split('!') if arguments_string.include?('!')
+        if arguments_string.include?('!')
+          sheet_name = arguments_string.match(/.*!/).to_s
+          arguments_string = arguments_string.sub(sheet_name, '')
+        end
 
         range = arguments_string.split(':')
 
