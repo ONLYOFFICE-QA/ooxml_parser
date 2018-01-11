@@ -22,4 +22,9 @@ describe 'OoxmlParser::Coordinates' do
       OoxmlParser::Coordinates.parser_coordinates_range('!')
     end.to output(/Formulas consists from `!` only/).to_stderr
   end
+
+  it 'Coordinates.parser_coordinates_range not crash in formulas with alot of !' do
+    coordinates = OoxmlParser::Coordinates.parser_coordinates_range('!!!!Сроки!$A$1:$E$1')
+    expect(coordinates.length).to eq(5)
+  end
 end
