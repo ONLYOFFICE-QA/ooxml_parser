@@ -6,6 +6,8 @@ module OoxmlParser
     attr_accessor :properties, :text
     # @return [Text] text of run
     attr_reader :t
+    # @return [Tab] tab of paragraph
+    attr_reader :tab
 
     def initialize(properties = RunProperties.new, text = '', parent: nil)
       @properties = properties
@@ -24,6 +26,8 @@ module OoxmlParser
         when 't'
           @t = Text.new(parent: self).parse(node_child)
           @text = t.text
+        when 'tab'
+          @tab = Tab.new(parent: self).parse(node_child)
         end
       end
       self
