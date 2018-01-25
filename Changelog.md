@@ -32,6 +32,7 @@
 * Parsing `Font#vertical_alignment`
 * Parsing `Paragraph#hyperlink`
 * Parsing `Hyperlink#runs`
+* Parsing `ParagraphRun#t`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
