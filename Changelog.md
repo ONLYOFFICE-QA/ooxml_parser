@@ -33,6 +33,7 @@
 * Parsing `Paragraph#hyperlink`
 * Parsing `Hyperlink#runs`
 * Parsing `ParagraphRun#t`
+* Parsing `ParagraphRun#tab`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
