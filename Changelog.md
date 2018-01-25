@@ -30,6 +30,8 @@
 * Parsing Slide Notes
 * Parsing `SDTProperties#alias`, `SDTProperties#lock`, `SDTProperties#tag`
 * Parsing `Font#vertical_alignment`
+* Parsing `Paragraph#hyperlink`
+* Parsing `Hyperlink#runs`
 
 ### Refactor
 * Change interface of `XlsxDrawing#graphic_frame`
