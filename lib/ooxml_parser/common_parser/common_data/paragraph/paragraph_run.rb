@@ -1,8 +1,11 @@
 require_relative 'paragraph_run/run_properties'
+require_relative 'paragraph_run/text'
 module OoxmlParser
   # Class for parsing `r` tags
   class ParagraphRun < OOXMLDocumentObject
     attr_accessor :properties, :text
+    # @return [Text] text of run
+    attr_reader :t
 
     def initialize(properties = RunProperties.new, text = '', parent: nil)
       @properties = properties
@@ -19,7 +22,8 @@ module OoxmlParser
         when 'rPr'
           @properties = RunProperties.new(parent: self).parse(node_child)
         when 't'
-          @text = node_child.text
+          @t = Text.new(parent: self).parse(node_child)
+          @text = t.text
         end
       end
       self
