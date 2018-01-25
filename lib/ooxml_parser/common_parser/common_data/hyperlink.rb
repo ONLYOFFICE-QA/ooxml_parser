@@ -4,6 +4,8 @@ module OoxmlParser
     attr_accessor :url, :tooltip, :coordinates, :highlight_click, :action
     attr_accessor :action_link
     attr_accessor :id
+    # @return [Array<ParagraphRun>] run of paragraph
+    attr_reader :runs
 
     def initialize(link = nil,
                    tooltip = nil,
@@ -13,6 +15,7 @@ module OoxmlParser
       @tooltip = tooltip
       @coordinates = coordinates
       @parent = parent
+      @runs = []
     end
 
     alias link url
@@ -41,6 +44,14 @@ module OoxmlParser
           @highlight_click = attribute_enabled?(value)
         end
       end
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'r'
+          @runs << ParagraphRun.new(parent: self).parse(node_child)
+        end
+      end
+
       case @action_link
       when 'ppaction://hlinkshowjump?jump=previousslide'
         @action = :previous_slide

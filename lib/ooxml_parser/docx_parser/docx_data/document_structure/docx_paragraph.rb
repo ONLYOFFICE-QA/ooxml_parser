@@ -15,6 +15,8 @@ module OoxmlParser
                   :character_style_array, :horizontal_line, :page_break, :kinoku, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control, :frame_properties
+    # @return [Hyperlink] hyperlink in paragraph
+    attr_reader :hyperlink
     # @return [ParagraphProperties] Properties of current paragraph
     attr_accessor :paragraph_properties
     # @return [Inserted] data inserted by review
@@ -147,6 +149,7 @@ module OoxmlParser
           character_styles_array.last.shape = character_style.shape unless character_style.shape.nil?
           char_number += 1
         when 'hyperlink'
+          @hyperlink = Hyperlink.new(parent: self).parse(node_child)
           character_style = default_character_style.dup
           if !node_child.attribute('id').nil?
             character_style.link = Hyperlink.new(parent: character_style).parse(node_child)
