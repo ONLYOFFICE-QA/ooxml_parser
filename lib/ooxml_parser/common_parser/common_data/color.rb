@@ -134,7 +134,8 @@ module OoxmlParser
     alias to_int16 to_hex
 
     def none?
-      (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR)
+      (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR) ||
+        (style == :nil)
     end
 
     def any?
@@ -176,6 +177,7 @@ module OoxmlParser
       color_to_check = Color.parse(color_to_check.to_s) if color_to_check.is_a?(Symbol)
       color_to_check = Color.parse(color_to_check.value) if color_to_check.is_a?(DocxColor)
       return true if none? && color_to_check.nil?
+      return true if none? && color_to_check.none?
       return false if none? && color_to_check.any?
       return false if !none? && color_to_check.none?
       return true if self == color_to_check
