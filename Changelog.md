@@ -46,6 +46,7 @@
 * Redone parsing of `Slide` data
 * Remove `Color#parse_color_tag` in favor of `OoxmlColor#parse`
 * Redone parsing `DocumentBackground#fill`
+* Redone parsing and comparing `Color#style`
 
 ### Fixes
 * Fix `uninitialized constant OoxmlParser::Inserted::DateTime` while parsing `Inserted#date`
