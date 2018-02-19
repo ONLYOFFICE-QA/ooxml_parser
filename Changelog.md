@@ -1,6 +1,8 @@
 # Change log
 
 ## master (unreleased)
+
+## 0.3.0 (2018-02-19)
 ### New features
 * Add `to_hash` method to OOXMLDocumentObject. `to_json` also working
 * Parsing `OleObject` in `GraphicFrame`
