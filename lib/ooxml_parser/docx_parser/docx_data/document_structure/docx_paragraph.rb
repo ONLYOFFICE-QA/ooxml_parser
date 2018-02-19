@@ -63,6 +63,7 @@ module OoxmlParser
               !cur_run.alternate_content.nil? ||
               !cur_run.drawing.nil? ||
               !cur_run.object.nil? ||
+              !cur_run.shape.nil? ||
               !cur_run.footnote.nil? ||
               !cur_run.endnote.nil?
           )

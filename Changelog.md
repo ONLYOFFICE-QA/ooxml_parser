@@ -62,6 +62,7 @@
 * Fix crash on parsing Coordinates consist of `!`
 * Fix crash on `Delimeter`
 * Fix crash on parsing `Coordinates` with sheet name with `!`
+* Fix checking `DocxParagraph#nonempty_runs` for runs with `Shape`
 
 ## 0.2.0 (2017-03-25)
 ### New features
