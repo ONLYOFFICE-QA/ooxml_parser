@@ -1,14 +1,11 @@
 module OoxmlParser
   # Class for parsing `w:w:sdtContent` tags
   class SDTContent < OOXMLDocumentObject
-    # @return [Array, ParagraphRun] runs of sdt
-    attr_reader :runs
-    # @return [Array, ParagraphRun] paragraphs of sdt
-    attr_reader :paragraphs
+    # @return [Array <ParagraphRun, Table, ParagraphRun>] list of all elements in SDT
+    attr_reader :elements
 
     def initialize(parent: nil)
-      @runs = []
-      @paragraphs = []
+      @elements = []
       @parent = parent
     end
 
@@ -19,12 +16,29 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'p'
-          @paragraphs << DocxParagraph.new(parent: self).parse(node_child)
+          @elements << DocxParagraph.new(parent: self).parse(node_child)
         when 'r'
-          @runs << ParagraphRun.new(parent: self).parse(node_child)
+          @elements << ParagraphRun.new(parent: self).parse(node_child)
+        when 'tbl'
+          @elements << Table.new(parent: self).parse(node_child)
         end
       end
       self
+    end
+
+    # @return [Array<DocxParagraphs>] list of paragraphs
+    def paragraphs
+      @elements.select { |obj| obj.is_a?(OoxmlParser::DocxParagraph) }
+    end
+
+    # @return [Array<ParagraphRun>] list of runs
+    def runs
+      @elements.select { |obj| obj.is_a?(OoxmlParser::ParagraphRun) }
+    end
+
+    # @return [Array<Table>] list of tables
+    def tables
+      @elements.select { |obj| obj.is_a?(OoxmlParser::Table) }
     end
   end
 end
