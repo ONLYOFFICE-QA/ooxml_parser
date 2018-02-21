@@ -1,6 +1,8 @@
 # Change log
 
 ## master (unreleased)
+
+## 0.4.0 (2018-02-21)
 ### New features
 * Support `SDTContent#tables`
 
