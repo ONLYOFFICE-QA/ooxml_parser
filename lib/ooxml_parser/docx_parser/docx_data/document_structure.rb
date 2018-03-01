@@ -165,7 +165,7 @@ module OoxmlParser
               number += 1
               doc_structure.elements << table
             when 'sdt'
-              doc_structure.elements << StructuredDocumentTag.new(parent: self).parse(element)
+              doc_structure.elements << StructuredDocumentTag.new(parent: doc_structure).parse(element)
             end
           end
           body.xpath('w:sectPr').each do |sect_pr|
