@@ -1,6 +1,8 @@
 # Change log
 
 ## master (unreleased)
+### Fixes
+* Fix calling `StructuredDocumentTag#parent`
 
 ## 0.4.0 (2018-02-21)
 ### New features

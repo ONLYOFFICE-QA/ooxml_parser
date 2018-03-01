@@ -10,4 +10,9 @@ describe 'Sdt in document' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/sdt/sdt_with_table.docx')
     expect(docx.elements.first.sdt_content.elements.first).to be_a(OoxmlParser::Table)
   end
+
+  it 'sdt_element_parent.docx' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/sdt/std_element_parent.docx')
+    expect(docx.elements.first.sdt_content.parent.parent).to be_a(OoxmlParser::DocumentStructure)
+  end
 end
