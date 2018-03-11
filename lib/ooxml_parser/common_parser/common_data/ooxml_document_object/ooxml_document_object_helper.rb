@@ -51,6 +51,7 @@ module OoxmlDocumentObjectHelper
                            med: :medium,
                            sm: :small,
                            beneathText: :beneath_text,
+                           greaterThan: :greater_than,
                            pageBottom: :page_bottom,
                            sectEnd: :section_end,
                            docEnd: :document_end,
