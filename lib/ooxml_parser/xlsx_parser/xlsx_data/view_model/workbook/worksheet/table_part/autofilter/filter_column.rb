@@ -1,3 +1,4 @@
+require_relative 'filter_column/custom_filters'
 module OoxmlParser
   # Class for `filterColumn` data
   # The filterColumn collection identifies a particular
@@ -6,6 +7,8 @@ module OoxmlParser
   class FilterColumn < OOXMLDocumentObject
     # @return [True, False] Flag indicating whether the filter button is visible.
     attr_accessor :show_button
+    # @return [CustomFilters] list of filters
+    attr_reader :custom_filters
 
     def initialize(parent: nil)
       @show_button = true
@@ -20,6 +23,13 @@ module OoxmlParser
         case key
         when 'showButton'
           @show_button = attribute_enabled?(value)
+        end
+      end
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'customFilters'
+          @custom_filters = CustomFilters.new(parent: self).parse(node_child)
         end
       end
       self

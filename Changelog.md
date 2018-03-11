@@ -1,6 +1,8 @@
 # Change log
 
 ## master (unreleased)
+### New features
+* Parsing `FilterColumn#custom_filters`
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
