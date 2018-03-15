@@ -23,6 +23,8 @@ module OoxmlParser
     attr_accessor :inserted
     # @return [Integer] id of paragraph (for comment)
     attr_accessor :paragraph_id
+    # @return [MathParagraph] math paragraph
+    attr_reader :math_paragraph
     # @return [Integer] id of text (for comment)
     attr_accessor :text_id
     # @return [StructuredDocumentTag] structured document tag data
@@ -174,9 +176,8 @@ module OoxmlParser
             end
           end
         when 'oMathPara'
-          node_child.xpath('m:oMath').each do |o_math|
-            character_styles_array << DocxFormula.new(parent: self).parse(o_math)
-          end
+          @math_paragraph = MathParagraph.new(parent: self).parse(node_child)
+          character_styles_array << math_paragraph.math
         when 'commentRangeEnd'
           comments.each_with_index do |comment, index|
             if comment == node_child.attribute('id').value
