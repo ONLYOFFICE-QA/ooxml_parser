@@ -41,8 +41,13 @@ module OoxmlParser
       parent.page_numbering?
     end
 
+    def link
+      parent.parent.hyperlink
+    end
+
     extend Gem::Deprecate
     deprecate :instruction, 'parent.instruction', 2020, 1
     deprecate :page_number, 'parent.page_numbering?', 2020, 1
+    deprecate :link, 'parent.parent.hyperlink', 2020, 1
   end
 end

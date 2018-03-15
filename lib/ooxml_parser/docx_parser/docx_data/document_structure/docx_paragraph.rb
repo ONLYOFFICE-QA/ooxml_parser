@@ -160,15 +160,8 @@ module OoxmlParser
             char_number += 1
           end
           node_child.xpath('w:fldSimple').each do |simple_field|
-            instruction = simple_field.attribute('instr').to_s
-            @page_numbering = true if instruction.include?('PAGE')
-            simple_field.xpath('w:r').each do |r_tag|
-              character_style.parse(r_tag, char_number, parent: self)
-              character_style.page_number = @page_numbering
-              character_style.instruction = instruction
-              character_styles_array << character_style.dup
-              char_number += 1
-            end
+            hyperlink_field_simple = FieldSimple.new(parent: self).parse(simple_field)
+            character_styles_array += hyperlink_field_simple.runs
           end
         when 'oMathPara'
           @math_paragraph = MathParagraph.new(parent: self).parse(node_child)
