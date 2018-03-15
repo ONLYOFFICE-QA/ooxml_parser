@@ -32,5 +32,17 @@ module OoxmlParser
       end
       self
     end
+
+    def instruction
+      parent.instruction
+    end
+
+    def page_number
+      parent.page_numbering?
+    end
+
+    extend Gem::Deprecate
+    deprecate :instruction, 'parent.instruction', 2020, 1
+    deprecate :page_number, 'parent.page_numbering?', 2020, 1
   end
 end
