@@ -1,10 +1,10 @@
-$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift File.expand_path('lib', __dir__)
 require 'ooxml_parser/version'
 Gem::Specification.new do |s|
   s.name = 'ooxml_parser'
   s.version = OoxmlParser::Version::STRING
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 2.0'
+  s.required_ruby_version = '>= 2.1'
   s.authors = ['Pavel Lobashov', 'Roman Zagudaev']
   s.summary = 'OoxmlParser Gem'
   s.description = 'Parse OOXML files (docx, xlsx, pptx)'
