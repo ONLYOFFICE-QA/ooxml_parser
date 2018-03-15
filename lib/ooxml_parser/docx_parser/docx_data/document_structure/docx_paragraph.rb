@@ -135,6 +135,7 @@ module OoxmlParser
           comments << node_child.attribute('id').value
         when 'fldSimple'
           @field_simple = FieldSimple.new(parent: self).parse(node_child)
+          @page_numbering = true if field_simple.page_numbering?
           character_styles_array += field_simple.runs
         when 'r'
           character_style = custom_character_style.dup
@@ -261,5 +262,8 @@ module OoxmlParser
         break
       end
     end
+
+    extend Gem::Deprecate
+    deprecate :page_numbering, 'field_simple.page_numbering?', 2020, 1
   end
 end
