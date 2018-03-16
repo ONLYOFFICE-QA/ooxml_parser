@@ -51,12 +51,12 @@ module OoxmlParser
     # @return [True, False] is current run empty
     def empty?
       text.empty? &&
-        alternate_content.nil? &&
-        drawing.nil? &&
-        object.nil? &&
-        shape.nil? &&
-        footnote.nil? &&
-        endnote.nil?
+        !alternate_content &&
+        !drawing &&
+        !object &&
+        !shape &&
+        !footnote &&
+        !endnote
     end
 
     def ==(other)
