@@ -32,5 +32,27 @@ module OoxmlParser
       end
       self
     end
+
+    # @return [True, False] is current run empty
+    def empty?
+      text.empty?
+    end
+
+    def instruction
+      parent.instruction
+    end
+
+    def page_number
+      parent.page_numbering?
+    end
+
+    def link
+      parent.parent.hyperlink
+    end
+
+    extend Gem::Deprecate
+    deprecate :instruction, 'parent.instruction', 2020, 1
+    deprecate :page_number, 'parent.page_numbering?', 2020, 1
+    deprecate :link, 'parent.parent.hyperlink', 2020, 1
   end
 end

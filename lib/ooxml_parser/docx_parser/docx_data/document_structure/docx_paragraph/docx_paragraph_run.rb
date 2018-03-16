@@ -48,6 +48,17 @@ module OoxmlParser
       @drawings.empty? ? nil : drawings.first
     end
 
+    # @return [True, False] is current run empty
+    def empty?
+      text.empty? &&
+        !alternate_content &&
+        !drawing &&
+        !object &&
+        !shape &&
+        !footnote &&
+        !endnote
+    end
+
     def ==(other)
       ignored_attributes = %i[@number @parent]
       all_instance_variables = instance_variables

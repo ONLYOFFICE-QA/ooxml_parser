@@ -2,6 +2,7 @@
 require_relative 'docx_paragraph/bookmark'
 require_relative 'docx_paragraph/docx_paragraph_helper'
 require_relative 'docx_paragraph/docx_paragraph_run'
+require_relative 'docx_paragraph/field_simple'
 require_relative 'docx_paragraph/indents'
 require_relative 'docx_paragraph/inserted'
 require_relative 'docx_paragraph/structured_document_tag'
@@ -21,6 +22,8 @@ module OoxmlParser
     attr_accessor :paragraph_properties
     # @return [Inserted] data inserted by review
     attr_accessor :inserted
+    # @return [FieldSimple] field simple
+    attr_reader :field_simple
     # @return [Integer] id of paragraph (for comment)
     attr_accessor :paragraph_id
     # @return [MathParagraph] math paragraph
@@ -60,15 +63,8 @@ module OoxmlParser
 
     def nonempty_runs
       @character_style_array.select do |cur_run|
-        if cur_run.is_a?(DocxParagraphRun)
-          (!cur_run.text.empty? ||
-              !cur_run.alternate_content.nil? ||
-              !cur_run.drawing.nil? ||
-              !cur_run.object.nil? ||
-              !cur_run.shape.nil? ||
-              !cur_run.footnote.nil? ||
-              !cur_run.endnote.nil?
-          )
+        if cur_run.is_a?(DocxParagraphRun) || cur_run.is_a?(ParagraphRun)
+          !cur_run.empty?
         elsif cur_run.is_a?(DocxFormula)
           true
         end
@@ -131,16 +127,9 @@ module OoxmlParser
         when 'commentRangeStart'
           comments << node_child.attribute('id').value
         when 'fldSimple'
-          instruction = node_child.attribute('instr').to_s
-          @page_numbering = true if instruction.include?('PAGE')
-          node_child.xpath('w:r').each do |r_tag|
-            character_style = default_character_style.dup
-            character_style.parse(r_tag, char_number, parent: parent)
-            character_style.page_number = @page_numbering
-            character_style.instruction = instruction
-            character_styles_array << character_style.dup
-            char_number += 1
-          end
+          @field_simple = FieldSimple.new(parent: self).parse(node_child)
+          @page_numbering = true if field_simple.page_numbering?
+          character_styles_array += field_simple.runs
         when 'r'
           character_style = custom_character_style.dup
           node_child.xpath('w:instrText').each do |insrt_text|
@@ -165,15 +154,8 @@ module OoxmlParser
             char_number += 1
           end
           node_child.xpath('w:fldSimple').each do |simple_field|
-            instruction = simple_field.attribute('instr').to_s
-            @page_numbering = true if instruction.include?('PAGE')
-            simple_field.xpath('w:r').each do |r_tag|
-              character_style.parse(r_tag, char_number, parent: self)
-              character_style.page_number = @page_numbering
-              character_style.instruction = instruction
-              character_styles_array << character_style.dup
-              char_number += 1
-            end
+            hyperlink_field_simple = FieldSimple.new(parent: self).parse(simple_field)
+            character_styles_array += hyperlink_field_simple.runs
           end
         when 'oMathPara'
           @math_paragraph = MathParagraph.new(parent: self).parse(node_child)
@@ -273,5 +255,8 @@ module OoxmlParser
         break
       end
     end
+
+    extend Gem::Deprecate
+    deprecate :page_numbering, 'field_simple.page_numbering?', 2020, 1
   end
 end
