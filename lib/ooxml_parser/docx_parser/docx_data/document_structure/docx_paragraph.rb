@@ -23,7 +23,7 @@ module OoxmlParser
     # @return [Inserted] data inserted by review
     attr_accessor :inserted
     # @return [FieldSimple] field simple
-    attr_accessor :field_simple
+    attr_reader :field_simple
     # @return [Integer] id of paragraph (for comment)
     attr_accessor :paragraph_id
     # @return [MathParagraph] math paragraph
