@@ -33,6 +33,11 @@ module OoxmlParser
       self
     end
 
+    # @return [True, False] is current run empty
+    def empty?
+      text.empty?
+    end
+
     def instruction
       parent.instruction
     end

@@ -64,14 +64,7 @@ module OoxmlParser
     def nonempty_runs
       @character_style_array.select do |cur_run|
         if cur_run.is_a?(DocxParagraphRun) || cur_run.is_a?(ParagraphRun)
-          (!cur_run.text.empty? ||
-              !cur_run.alternate_content.nil? ||
-              !cur_run.drawing.nil? ||
-              !cur_run.object.nil? ||
-              !cur_run.shape.nil? ||
-              !cur_run.footnote.nil? ||
-              !cur_run.endnote.nil?
-          )
+          !cur_run.empty?
         elsif cur_run.is_a?(DocxFormula)
           true
         end
