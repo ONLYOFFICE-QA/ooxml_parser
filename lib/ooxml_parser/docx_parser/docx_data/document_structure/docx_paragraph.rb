@@ -13,7 +13,7 @@ module OoxmlParser
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
-                  :character_style_array, :horizontal_line, :page_break, :borders, :keep_lines,
+                  :character_style_array, :horizontal_line, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control
     # @return [Hyperlink] hyperlink in paragraph
@@ -40,7 +40,6 @@ module OoxmlParser
       @ind = Indents.new
       @character_style_array = []
       @horizontal_line = false
-      @page_break = false
       @borders = Borders.new
       @keep_lines = false
       @contextual_spacing = false
@@ -180,8 +179,6 @@ module OoxmlParser
     def parse_paragraph_style(node, default_char_style = DocxParagraphRun.new)
       node.xpath('*').each do |node_child|
         case node_child.name
-        when 'pageBreakBefore'
-          @page_break = true if node_child.attribute('val').nil? || node_child.attribute('val').value != 'false'
         when 'pBdr'
           @borders = ParagraphBorders.new(parent: self).parse(node_child)
         when 'keepLines'
@@ -265,5 +262,11 @@ module OoxmlParser
       paragraph_properties.frame_properties
     end
     deprecate :frame_properties, 'paragraph_properties.frame_properties', 2020, 1
+
+    # @return [Boolean] is page break before
+    def page_break
+      paragraph_properties.page_break_before
+    end
+    deprecate :page_break, 'paragraph_properties.page_break_before', 2020, 1
   end
 end
