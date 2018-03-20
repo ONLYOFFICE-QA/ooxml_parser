@@ -14,8 +14,6 @@ module OoxmlParser
     attr_accessor :run_properties
     # @return [Borders] borders of paragraph
     attr_accessor :paragraph_borders
-    # @return [Boolean] is before paragraph page break
-    attr_reader :page_break_before
     # @return [True, False] Specifies that the paragraph
     # (or at least part of it) should be rendered on
     # the same page as the next paragraph when possible
@@ -81,8 +79,6 @@ module OoxmlParser
           @indent = Indents.new(parent: self).parse(node_child)
         when 'rPr'
           @run_properties = RunProperties.new(parent: self).parse(node_child)
-        when 'pageBreakBefore'
-          @page_break_before = option_enabled?(node_child)
         when 'pBdr'
           @paragraph_borders = ParagraphBorders.new(parent: self).parse(node_child)
         when 'keepNext'
