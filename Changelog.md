@@ -7,7 +7,6 @@
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
 * Deprecation warning for `DocxParagraph#frame_properties`
-* Deprecation warning for `DocxParagraph#page_break`
 * Remove unused and probably not real `DocxParagraph#kinoku`
 
 ## 0.4.1 (2018-03-01)
