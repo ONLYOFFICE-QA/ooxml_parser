@@ -30,8 +30,6 @@ module OoxmlParser
     attr_reader :math_paragraph
     # @return [Integer] id of text (for comment)
     attr_accessor :text_id
-    # @return [StructuredDocumentTag] structured document tag data
-    attr_accessor :sdt
 
     def initialize(parent: nil)
       @number = 0
@@ -65,7 +63,7 @@ module OoxmlParser
       @character_style_array.select do |cur_run|
         if cur_run.is_a?(DocxParagraphRun) || cur_run.is_a?(ParagraphRun)
           !cur_run.empty?
-        elsif cur_run.is_a?(DocxFormula)
+        elsif cur_run.is_a?(DocxFormula) || cur_run.is_a?(StructuredDocumentTag)
           true
         end
       end
@@ -170,7 +168,7 @@ module OoxmlParser
         when 'ins'
           @inserted = Inserted.new(parent: self).parse(node_child)
         when 'sdt'
-          @sdt = StructuredDocumentTag.new(parent: self).parse(node_child)
+          character_styles_array << StructuredDocumentTag.new(parent: self).parse(node_child)
         end
       end
       @number = par_number
@@ -258,5 +256,13 @@ module OoxmlParser
 
     extend Gem::Deprecate
     deprecate :page_numbering, 'field_simple.page_numbering?', 2020, 1
+
+    # @return [OoxmlParser::StructuredDocumentTag] Return first sdt element
+    def sdt
+      @character_style_array.each do |cur_element|
+        return cur_element if cur_element.is_a?(StructuredDocumentTag)
+      end
+    end
+    deprecate :sdt, 'nonempty_runs[i]', 2020, 1
   end
 end

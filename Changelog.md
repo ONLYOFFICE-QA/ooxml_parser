@@ -4,6 +4,9 @@
 ### New features
 * Parsing `FilterColumn#custom_filters`
 
+### Refactor
+* Store `sdt` as `DocxParagraph#character_styles_array` element
+
 ## 0.4.1 (2018-03-01)
 ### Fixes
 * Fix calling `StructuredDocumentTag#parent`
