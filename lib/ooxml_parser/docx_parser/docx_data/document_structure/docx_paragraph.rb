@@ -13,7 +13,7 @@ module OoxmlParser
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
-                  :character_style_array, :horizontal_line, :page_break, :kinoku, :borders, :keep_lines,
+                  :character_style_array, :horizontal_line, :page_break, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control
     # @return [Hyperlink] hyperlink in paragraph
@@ -38,7 +38,6 @@ module OoxmlParser
       @align = 'left'
       @spacing = Spacing.new
       @ind = Indents.new
-      @kinoku = false
       @character_style_array = []
       @horizontal_line = false
       @page_break = false
@@ -205,8 +204,6 @@ module OoxmlParser
           DocxParagraph.parse_paragraph_style_xml(node_child.attribute('val').value, self, default_char_style)
         when 'ind'
           @ind = DocumentStructure.default_paragraph_style.ind.dup.parse(node_child)
-        when 'kinoku'
-          @kinoku = true
         when 'numPr'
           @numbering = NumberingProperties.new(parent: self).parse(node_child)
         when 'jc'
