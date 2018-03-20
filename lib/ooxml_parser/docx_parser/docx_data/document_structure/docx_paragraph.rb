@@ -15,7 +15,7 @@ module OoxmlParser
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
                   :character_style_array, :horizontal_line, :page_break, :kinoku, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
-                  :orphan_control, :frame_properties
+                  :orphan_control
     # @return [Hyperlink] hyperlink in paragraph
     attr_reader :hyperlink
     # @return [ParagraphProperties] Properties of current paragraph
@@ -207,8 +207,6 @@ module OoxmlParser
           @ind = DocumentStructure.default_paragraph_style.ind.dup.parse(node_child)
         when 'kinoku'
           @kinoku = true
-        when 'framePr'
-          @frame_properties = FrameProperties.new(parent: self).parse(node_child)
         when 'numPr'
           @numbering = NumberingProperties.new(parent: self).parse(node_child)
         when 'jc'
@@ -264,5 +262,11 @@ module OoxmlParser
       end
     end
     deprecate :sdt, 'nonempty_runs[i]', 2020, 1
+
+    # @return [OoxmlParser::FrameProperties] Return frame properties
+    def frame_properties
+      paragraph_properties.frame_properties
+    end
+    deprecate :frame_properties, 'paragraph_properties.frame_properties', 2020, 1
   end
 end
