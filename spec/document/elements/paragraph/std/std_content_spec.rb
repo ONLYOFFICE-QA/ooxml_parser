@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe 'StdContent' do
+  it 'doc_without_sdt' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/std/std_content/doc_without_sdt.docx')
+    expect(docx.elements.first.sdt).to be_nil
+  end
+
   it 'check std_content_text' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/std/std_content/sdt_content_text.docx')
     expect(docx.elements.first.sdt.sdt_content.runs.first.text).to eq('Simple Test Text')

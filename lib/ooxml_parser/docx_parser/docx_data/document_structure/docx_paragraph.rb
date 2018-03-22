@@ -257,6 +257,7 @@ module OoxmlParser
       @character_style_array.each do |cur_element|
         return cur_element if cur_element.is_a?(StructuredDocumentTag)
       end
+      nil
     end
     deprecate :sdt, 'nonempty_runs[i]', 2020, 1
 
