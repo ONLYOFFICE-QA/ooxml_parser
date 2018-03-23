@@ -1,4 +1,3 @@
-require_relative 'series/order'
 require_relative 'series/series_index'
 require_relative 'series/series_text'
 module OoxmlParser
@@ -6,8 +5,8 @@ module OoxmlParser
   class Series < OOXMLDocumentObject
     # @return [Index] index of chart
     attr_accessor :index
-    # @return [Order] order of chart
-    attr_accessor :order
+    # @return [ValuedChild] order of chart
+    attr_reader :order
     # @return [SeriesText] text of series
     attr_accessor :text
     # @return [Categories] categories of chart
@@ -24,7 +23,7 @@ module OoxmlParser
         when 'idx'
           @index = SeriesIndex.new(parent: self).parse(node_child)
         when 'order'
-          @order = Order.new(parent: self).parse(node_child)
+          @order = ValuedChild.new(:integer, parent: self).parse(node_child)
         when 'tx'
           @text = SeriesText.new(parent: self).parse(node_child)
         when 'cat'
