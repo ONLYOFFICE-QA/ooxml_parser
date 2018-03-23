@@ -1,7 +1,6 @@
 require_relative 'numbering_level/level_justification'
 require_relative 'numbering_level/level_text'
 require_relative 'numbering_level/numbering_format'
-require_relative 'numbering_level/start'
 require_relative 'numbering_level/suffix'
 module OoxmlParser
   # This element specifies the appearance and behavior of a numbering level
@@ -43,7 +42,7 @@ module OoxmlParser
       node.xpath('*').each do |num_level_child|
         case num_level_child.name
         when 'start'
-          @start = Start.new(parent: self).parse(num_level_child)
+          @start = ValuedChild.new(:integer, parent: self).parse(num_level_child)
         when 'numFmt'
           @numbering_format = NumberingFormat.new(parent: self).parse(num_level_child)
         when 'lvlText'
