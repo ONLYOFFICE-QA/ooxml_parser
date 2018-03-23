@@ -9,7 +9,8 @@
 * Deprecation warning for `DocxParagraph#frame_properties`
 * Remove unused and probably not real `DocxParagraph#kinoku`
 * Remove redundant `PresetColor`, `AbstractNumberingId`, 
-  `Start`, `VerticalMerge`, `Order`, `SeriesIndex`, `PointCount`
+  `Start`, `VerticalMerge`, `Order`, `SeriesIndex`, `PointCount`,
+  `Language`
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
