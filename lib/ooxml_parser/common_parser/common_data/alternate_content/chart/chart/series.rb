@@ -1,10 +1,9 @@
-require_relative 'series/series_index'
 require_relative 'series/series_text'
 module OoxmlParser
   # Class for parsing `c:ser` object
   class Series < OOXMLDocumentObject
     # @return [Index] index of chart
-    attr_accessor :index
+    attr_reader :index
     # @return [ValuedChild] order of chart
     attr_reader :order
     # @return [SeriesText] text of series
@@ -21,7 +20,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'idx'
-          @index = SeriesIndex.new(parent: self).parse(node_child)
+          @index = ValuedChild.new(:integer, parent: self).parse(node_child)
         when 'order'
           @order = ValuedChild.new(:integer, parent: self).parse(node_child)
         when 'tx'
