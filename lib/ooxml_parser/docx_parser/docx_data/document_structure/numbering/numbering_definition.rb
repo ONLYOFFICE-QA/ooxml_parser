@@ -1,11 +1,10 @@
-require_relative 'numbering_definition/abstract_numbering_id'
 module OoxmlParser
   # This element specifies a unique instance of numbering information that can be referenced by zero or more
   # paragraphs within the parent WordprocessingML document.
   class NumberingDefinition < OOXMLDocumentObject
     # @return [Integer] num id
     attr_accessor :id
-    # @return [AbstractNumberingId] abstract numbering id
+    # @return [ValuedChild] abstract numbering id
     attr_accessor :abstract_numbering_id
 
     # Parse NumberingDefinition data
@@ -22,7 +21,7 @@ module OoxmlParser
       node.xpath('*').each do |numbering_child_node|
         case numbering_child_node.name
         when 'abstractNumId'
-          @abstract_numbering_id = AbstractNumberingId.new(parent: self).parse(numbering_child_node)
+          @abstract_numbering_id = ValuedChild.new(:integer, parent: self).parse(numbering_child_node)
         end
       end
       self
