@@ -1,4 +1,3 @@
-require_relative 'cell_properties/vertical_merge'
 require_relative 'merge'
 module OoxmlParser
   # Class for parsing 'w:tcPr' element
@@ -32,7 +31,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'vMerge'
-          @vertical_merge = VerticalMerge.new.parse(node_child)
+          @vertical_merge = ValuedChild.new(:symbol, parent: self).parse(node_child)
         when 'vAlign'
           @vertical_align = node_child.attribute('val').value.to_sym
         when 'gridSpan'
