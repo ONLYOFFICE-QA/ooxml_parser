@@ -1,4 +1,3 @@
-require_relative 'gradient_stop/preset_color'
 module OoxmlParser
   class GradientStop < OOXMLDocumentObject
     attr_accessor :position, :color
@@ -17,7 +16,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         @color = case node_child.name
                  when 'prstClr'
-                   PresetColor.new(parent: self).parse(node_child)
+                   ValuedChild.new(:string, parent: self).parse(node_child)
                  else
                    Color.parse_color(node_child)
                  end
