@@ -1,4 +1,3 @@
-require_relative 'run_properties/language'
 require_relative 'run_properties/outline'
 require_relative 'run_properties/position'
 require_relative 'run_properties/size'
@@ -20,8 +19,8 @@ module OoxmlParser
     attr_accessor :spacing
     # @return [RunSpacing] get color
     attr_accessor :color
-    # @return [Language] language property
-    attr_accessor :language
+    # @return [ValuedChild] language property
+    attr_reader :language
     # @return [Position] position property
     attr_accessor :position
     # @return [Shade] shade property
@@ -113,7 +112,7 @@ module OoxmlParser
         when 'ln'
           @outline = Outline.new(parent: self).parse(node_child)
         when 'lang'
-          @language = Language.new(parent: self).parse(node_child)
+          @language = ValuedChild.new(:string, parent: self).parse(node_child)
         when 'position'
           @position = Position.new(parent: self).parse(node_child)
         when 'shd'
