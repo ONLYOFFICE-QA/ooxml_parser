@@ -8,7 +8,8 @@
 * Store `sdt` as `DocxParagraph#character_styles_array` element
 * Deprecation warning for `DocxParagraph#frame_properties`
 * Remove unused and probably not real `DocxParagraph#kinoku`
-* Remove redundant `PresetColor`, `AbstractNumberingId`, `Start`, `VerticalMerge`
+* Remove redundant `PresetColor`, `AbstractNumberingId`, 
+  `Start`, `VerticalMerge`, `Order`
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
