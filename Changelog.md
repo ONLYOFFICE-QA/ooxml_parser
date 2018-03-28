@@ -3,6 +3,7 @@
 ## master (unreleased)
 ### New features
 * Parsing `FilterColumn#custom_filters`
+* Parsing `Series#XYValues`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element

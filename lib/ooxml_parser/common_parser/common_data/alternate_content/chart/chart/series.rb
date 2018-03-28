@@ -1,4 +1,5 @@
 require_relative 'series/series_text'
+require_relative 'series/x_y_values'
 module OoxmlParser
   # Class for parsing `c:ser` object
   class Series < OOXMLDocumentObject
@@ -12,6 +13,10 @@ module OoxmlParser
     attr_accessor :categories
     # @return [DisplayLabelsProperties]
     attr_accessor :display_labels
+    # @return [XYValues] values of x
+    attr_reader :x_values
+    # @return [XYValues] values of y
+    attr_reader :y_values
 
     # Parse Series
     # @param [Nokogiri::XML:Node] node with Series
@@ -29,6 +34,10 @@ module OoxmlParser
           @categories = Categories.new(parent: self).parse(node_child)
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.new(parent: self).parse(node_child)
+        when 'xVal'
+          @x_values = XYValues.new(parent: self).parse(node_child)
+        when 'yVal'
+          @y_values = XYValues.new(parent: self).parse(node_child)
         end
       end
       self
