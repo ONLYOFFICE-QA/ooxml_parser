@@ -1,8 +1,8 @@
-require_relative 'series_text/string_reference'
+require_relative 'series_text/number_string_reference'
 module OoxmlParser
   # Class for parsing `c:tx` object
   class SeriesText < OOXMLDocumentObject
-    # @return [StringReference] String reference of series
+    # @return [NumberStringReference] String reference of series
     attr_accessor :string
 
     # Parse Order
@@ -12,7 +12,7 @@ module OoxmlParser
       node.xpath('*').each do |series_child|
         case series_child.name
         when 'strRef'
-          @string = StringReference.new(parent: self).parse(series_child)
+          @string = NumberStringReference.new(parent: self).parse(series_child)
         end
       end
       self

@@ -46,6 +46,9 @@ module OoxmlParser
       end
     end
 
+    extend Gem::Deprecate
+    deprecate :data, 'series points interface', 2020, 1
+
     def self.parse
       chart = Chart.new
       chart_xml = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
