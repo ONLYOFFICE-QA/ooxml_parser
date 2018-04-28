@@ -12,6 +12,9 @@
 * Remove redundant `PresetColor`, `AbstractNumberingId`, 
   `Start`, `VerticalMerge`, `Order`, `SeriesIndex`, `PointCount`,
   `Language`
+  
+### Fixes
+* Fix crash on empty coordinates list of chart
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
