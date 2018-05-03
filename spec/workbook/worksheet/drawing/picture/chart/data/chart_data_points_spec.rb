@@ -12,4 +12,10 @@ describe 'My behaviour' do
     drawing = xlsx.worksheets[0].drawings[0]
     expect(drawing.graphic_frame.graphic_data.first.data.first.points.first.value).to eq(200.55)
   end
+
+  it 'chart_data_points_empty' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/data/points/chart_data_points_empty.xlsx')
+    drawing = xlsx.worksheets[0].drawings[0]
+    expect(drawing.graphic_frame.graphic_data.first.data).to be_empty
+  end
 end
