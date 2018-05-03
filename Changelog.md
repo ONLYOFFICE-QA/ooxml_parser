@@ -4,6 +4,7 @@
 ### New features
 * Parsing `FilterColumn#custom_filters`
 * Parsing `Series#XYValues`
+* Parsing `StructuredDocumentTag` as `TableCell#elements`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element

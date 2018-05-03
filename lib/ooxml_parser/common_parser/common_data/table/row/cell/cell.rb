@@ -38,6 +38,8 @@ module OoxmlParser
                                                                                  0,
                                                                                  DocumentStructure.default_table_run_style,
                                                                                  parent: self)
+        when 'sdt'
+          @elements << StructuredDocumentTag.new(parent: self).parse(node_child)
         when 'tbl'
           @elements << Table.new(parent: self).parse(node_child)
         end
