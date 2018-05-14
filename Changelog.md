@@ -5,6 +5,7 @@
 * Parsing `FilterColumn#custom_filters`
 * Parsing `Series#XYValues`
 * Parsing `StructuredDocumentTag` as `TableCell#elements`
+* Parsing `XlsxColumnProperties#hidden`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element

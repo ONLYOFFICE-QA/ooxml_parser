@@ -7,6 +7,9 @@ module OoxmlParser
     # @return [True, False] Flag indicating if the
     # specified column(s) is set to 'best fit'
     attr_accessor :best_fit
+    # @return [True, False] Flag indicating if the
+    # specified column(s) is hidden
+    attr_reader :hidden
 
     # Parse XlsxColumnProperties object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -26,6 +29,8 @@ module OoxmlParser
           @custom_width = option_enabled?(node, 'customWidth')
         when 'bestFit'
           @best_fit = attribute_enabled?(value)
+        when 'hidden'
+          @hidden = attribute_enabled?(value)
         end
       end
       self
