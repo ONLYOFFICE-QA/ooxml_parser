@@ -14,6 +14,7 @@
 * Remove redundant `PresetColor`, `AbstractNumberingId`, 
   `Start`, `VerticalMerge`, `Order`, `SeriesIndex`, `PointCount`,
   `Language`
+* Refactor parsing `Chart`. Ability to parser multichart charts
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
