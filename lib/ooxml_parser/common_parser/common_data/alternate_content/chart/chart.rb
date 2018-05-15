@@ -3,6 +3,7 @@ require_relative 'chart_cells_range'
 require_relative 'chart_legend'
 require_relative 'chart_point'
 require_relative 'display_labels_properties'
+require_relative 'chart/plot_area'
 require_relative 'chart/series'
 require_relative 'chart/view_3d'
 
@@ -11,6 +12,8 @@ module OoxmlParser
     attr_accessor :type, :data, :grouping, :title, :legend, :display_labels, :axises, :alternate_content, :shape_properties
     # @return [Array, Series] series of chart
     attr_accessor :series
+    # @return [PlotArea] plot area data
+    attr_accessor :plot_area
     # @return [View3D] properties of 3D view
     attr_accessor :view_3d
 
@@ -117,6 +120,7 @@ module OoxmlParser
                       chart.axises << ChartAxis.new(parent: chart).parse(plot_area_node_child)
                     end
                   end
+                  chart.plot_area = PlotArea.new(parent: chart).parse(chart_node_child)
                 when 'title'
                   chart.title = ChartAxisTitle.new(parent: chart).parse(chart_node_child)
                 when 'legend'
