@@ -7,6 +7,8 @@ module OoxmlParser
     # Parse Settings object
     # @return [DocumentSettings] result of parsing
     def parse
+      settings_path = OOXMLDocumentObject.path_to_folder + 'word/settings.xml'
+      return nil unless File.exist?(settings_path)
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/settings.xml'))
       doc.xpath('w:settings/*').each do |node_child|
         case node_child.name
