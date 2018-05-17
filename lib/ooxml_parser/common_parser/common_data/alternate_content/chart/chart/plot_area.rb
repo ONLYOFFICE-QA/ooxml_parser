@@ -52,7 +52,7 @@ module OoxmlParser
         when 'surface3DChart'
           @surface_3d_chart = CommonChartData.new(parent: self).parse(node_child)
         when 'line3DChart'
-          @surface_3d_chart = CommonChartData.new(parent: self).parse(node_child)
+          @line_3d_chart = CommonChartData.new(parent: self).parse(node_child)
         when 'bar3DChart'
           @bar_3d_chart = CommonChartData.new(parent: self).parse(node_child)
         when 'pie3DChart'
