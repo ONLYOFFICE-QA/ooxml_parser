@@ -16,6 +16,7 @@
   `Language`
 * Refactor parsing `Chart`. Ability to parser multichart charts
 * Refactor parsing `parse_scheme_color`, no class method
+* Rename inlogical check for `DocxShapeLine#nil?` to DocxShapeLine#invisible?`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
