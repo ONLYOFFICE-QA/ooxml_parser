@@ -15,7 +15,8 @@
   `Start`, `VerticalMerge`, `Order`, `SeriesIndex`, `PointCount`,
   `Language`
 * Refactor parsing `Chart`. Ability to parser multichart charts
-* Refactor parsing `parse_scheme_color`, no class method
+* Refactor parsing `Color#parse_scheme_color`, no class method
+* Refactor parsing `Color#parse_color_model`, no class method
 * Rename inlogical check for `DocxShapeLine#nil?` to DocxShapeLine#invisible?`
   
 ### Fixes
