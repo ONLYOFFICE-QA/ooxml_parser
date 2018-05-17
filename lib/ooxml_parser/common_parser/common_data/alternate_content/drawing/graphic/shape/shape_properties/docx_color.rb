@@ -25,7 +25,7 @@ module OoxmlParser
           end
         when 'solidFill'
           @type = :solid
-          @value = Color.parse_color_model(node_child)
+          @value = Color.new(parent: self).parse_color_model(node_child)
         when 'gradFill'
           @type = :gradient
           @value = GradientColor.new(parent: self).parse(node_child)

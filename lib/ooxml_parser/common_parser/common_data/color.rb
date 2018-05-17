@@ -226,6 +226,37 @@ module OoxmlParser
       self
     end
 
+    def parse_color_model(color_model_parent_node)
+      color = nil
+      tint = nil
+      color_model_parent_node.xpath('*').each do |color_model_node|
+        color_model_node.xpath('*').each do |color_mode_node_child|
+          case color_mode_node_child.name
+          when 'tint'
+            tint = color_mode_node_child.attribute('val').value.to_f / 100_000.0
+          end
+        end
+        case color_model_node.name
+        when 'scrgbClr'
+          color = Color.new(color_model_node.attribute('r').value.to_i, color_model_node.attribute('g').value.to_i, color_model_node.attribute('b').value.to_i)
+          color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
+        when 'srgbClr'
+          color = Color.new.parse_hex_string(color_model_node.attribute('val').value)
+          color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
+        when 'schemeClr'
+          color = Color.new(parent: self).parse_scheme_color(color_model_node)
+        end
+      end
+      return nil unless color
+      color.calculate_with_tint!(1.0 - tint) if tint
+      @red = color.red
+      @green = color.green
+      @blue = color.blue
+      @alpha_channel = color.alpha_channel
+      @scheme = color.scheme
+      self
+    end
+
     class << self
       def generate_random_color
         Color.new(rand(256), rand(256), rand(256))
@@ -285,32 +316,6 @@ module OoxmlParser
         else
           something
         end
-      end
-
-      def parse_color_model(color_model_parent_node)
-        color = nil
-        tint = nil
-        color_model_parent_node.xpath('*').each do |color_model_node|
-          color_model_node.xpath('*').each do |color_mode_node_child|
-            case color_mode_node_child.name
-            when 'tint'
-              tint = color_mode_node_child.attribute('val').value.to_f / 100_000.0
-            end
-          end
-          case color_model_node.name
-          when 'scrgbClr'
-            color = Color.new(color_model_node.attribute('r').value.to_i, color_model_node.attribute('g').value.to_i, color_model_node.attribute('b').value.to_i)
-            color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
-          when 'srgbClr'
-            color = Color.new.parse_hex_string(color_model_node.attribute('val').value)
-            color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
-          when 'schemeClr'
-            color = Color.new(parent: self).parse_scheme_color(color_model_node)
-          end
-        end
-        return nil unless color
-        color.calculate_with_tint!(1.0 - tint) if tint
-        color
       end
 
       def parse_color(color_node)
