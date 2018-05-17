@@ -17,7 +17,7 @@ module OoxmlParser
     # @return [View3D] properties of 3D view
     attr_accessor :view_3d
 
-    def initialize
+    def initialize(parent: nil)
       @type = ''
       @data = []
       @grouping = nil
@@ -25,6 +25,7 @@ module OoxmlParser
       @legend = nil
       @axises = []
       @series = []
+      @parent = parent
     end
 
     def parse_properties(chart_prop_node)
@@ -52,8 +53,8 @@ module OoxmlParser
     extend Gem::Deprecate
     deprecate :data, 'series points interface', 2020, 1
 
-    def self.parse
-      chart = Chart.new
+    def self.parse(parent: nil)
+      chart = Chart.new(parent: parent)
       chart_xml = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       chart_xml.xpath('*').each do |chart_node|
         case chart_node.name

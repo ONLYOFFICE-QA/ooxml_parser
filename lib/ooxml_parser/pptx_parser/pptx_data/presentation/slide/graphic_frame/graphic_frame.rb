@@ -5,8 +5,9 @@ module OoxmlParser
     # @return [NonVisualShapeProperties] non visual properties
     attr_accessor :non_visual_properties
 
-    def initialize(graphic_data = [])
+    def initialize(graphic_data = [], parent: nil)
       @graphic_data = graphic_data
+      @parent = parent
     end
 
     # Parse GraphicFrame object
@@ -28,7 +29,7 @@ module OoxmlParser
                   graphic_data << Table.new(parent: self).parse(graphic_node_child)
                 when 'chart'
                   OOXMLDocumentObject.add_to_xmls_stack(OOXMLDocumentObject.get_link_from_rels(graphic_node_child.attribute('id').value))
-                  graphic_data << Chart.parse
+                  graphic_data << Chart.parse(parent: self)
                   OOXMLDocumentObject.xmls_stack.pop
                 when 'oleObj'
                   graphic_data << OleObject.new(parent: self).parse(graphic_node_child)

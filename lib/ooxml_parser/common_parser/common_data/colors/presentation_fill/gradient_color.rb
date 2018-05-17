@@ -2,7 +2,7 @@ require_relative 'gradient_color/gradient_stop'
 require_relative 'gradient_color/linear_gradient'
 module OoxmlParser
   # Class for parsing `gradFill` tags
-  class GradientColor
+  class GradientColor < OOXMLDocumentObject
     attr_accessor :gradient_stops, :path
     # @return [LinearGradient] content of Linear Gradient
     attr_accessor :linear_gradient

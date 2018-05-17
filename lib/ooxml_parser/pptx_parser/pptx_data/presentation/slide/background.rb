@@ -6,8 +6,9 @@ module OoxmlParser
     # @return [BackgroundProperties] properties
     attr_accessor :properties
 
-    def initialize(type = nil)
+    def initialize(type = nil, parent: nil)
       @type = type
+      @parent = parent
     end
 
     # Parse Background object
