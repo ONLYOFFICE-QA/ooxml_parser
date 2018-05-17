@@ -46,7 +46,7 @@ module OoxmlParser
             when 'val'
               self.font_color = Color.new(parent: self).parse_hex_string(value.value)
             when 'themeColor'
-              unless ThemeColors.list[value.value.to_sym].nil?
+              if ThemeColors.list && !ThemeColors.list[value.value.to_sym].nil
                 break if value.value == 'text2' || value.value == 'background2' || value.value.include?('accent') # Don't know why. Just works
                 self.font_color = ThemeColors.list[value.value.to_sym].dup
               end

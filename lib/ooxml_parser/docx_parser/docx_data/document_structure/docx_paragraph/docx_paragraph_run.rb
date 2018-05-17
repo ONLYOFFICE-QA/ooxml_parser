@@ -128,7 +128,9 @@ module OoxmlParser
     end
 
     def self.parse_font_by_theme(theme)
-      doc = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/theme/theme1.xml"))
+      theme_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/theme/theme1.xml"
+      return nil unless File.exist?(theme_file)
+      doc = Nokogiri::XML(File.open(theme_file))
       doc.search('//a:fontScheme').each do |font_scheme|
         if theme.include?('major')
           font_scheme.xpath('a:majorFont').each do |major_font|
