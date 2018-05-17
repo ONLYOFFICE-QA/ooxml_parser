@@ -22,7 +22,8 @@ module OoxmlParser
       end
     end
 
-    def nil?
+    # @return [True, False] is line invisible
+    def invisible?
       stroke_size.zero? && cap.nil?
     end
 

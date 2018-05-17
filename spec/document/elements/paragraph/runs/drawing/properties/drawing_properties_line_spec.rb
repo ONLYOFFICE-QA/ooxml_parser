@@ -4,7 +4,7 @@ describe OoxmlParser::DocxShapeLine do
   it 'LinePropertiesDefault' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/properties/line/line_properties_default.docx')
     expect(docx.elements[0].nonempty_runs.first.alternate_content.office2010_content
-               .graphic.data.properties.line).to be_nil
+               .graphic.data.properties.line).to be_invisible
   end
 
   it 'ShapeLineEnding' do
