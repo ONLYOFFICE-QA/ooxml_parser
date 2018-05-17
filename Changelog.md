@@ -20,6 +20,7 @@
 * Refactor parsing `Color#parse_color`, no class method
 * Refactor parsing `Borders#parse_from_style`, no class method
 * Rename inlogical check for `DocxShapeLine#nil?` to DocxShapeLine#invisible?`
+* Remove usage of `ThemeColors.list`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart

@@ -122,7 +122,7 @@ module OoxmlParser
       OOXMLDocumentObject.xmls_stack = []
       @comments = []
       DocumentStructure.default_paragraph_style = DocxParagraph.new
-      DocumentStructure.default_run_style = DocxParagraphRun.new
+      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure)
       doc_structure.theme_colors = PresentationTheme.parse('word/theme/theme1.xml')
       OOXMLDocumentObject.add_to_xmls_stack('word/styles.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
@@ -133,7 +133,7 @@ module OoxmlParser
         end
         doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
           r_pr_defaults.xpath('w:rPr').each do |r_pr|
-            DocumentStructure.default_run_style = DocxParagraphRun.new.parse_properties(r_pr)
+            DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure).parse_properties(r_pr)
           end
         end
       end
