@@ -17,7 +17,7 @@ module OoxmlParser
           @color = GradientColor.new(parent: self).parse(node_child)
         when 'solidFill'
           @type = :solid
-          @color = Color.parse_color(node_child.xpath('*').first)
+          @color = Color.new(parent: self).parse_color(node_child.xpath('*').first)
         when 'blipFill'
           @type = :image
           @image = ImageFill.new(parent: self).parse(node_child)

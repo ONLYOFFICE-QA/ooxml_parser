@@ -17,9 +17,9 @@ module OoxmlParser
       node.xpath('*').each do |color_node|
         case color_node.name
         when 'fgClr'
-          @foreground_color = Color.parse_color(color_node.xpath('*').first)
+          @foreground_color = Color.new(parent: self).parse_color(color_node.xpath('*').first)
         when 'bgClr'
-          @background_color = Color.parse_color(color_node.xpath('*').first)
+          @background_color = Color.new(parent: self).parse_color(color_node.xpath('*').first)
         end
       end
       self

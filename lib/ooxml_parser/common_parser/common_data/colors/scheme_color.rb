@@ -2,9 +2,10 @@ module OoxmlParser
   class SchemeColor
     attr_accessor :value, :properties, :converted_color
 
-    def initialize(value = nil, converted_color = 0)
+    def initialize(value = nil, converted_color = 0, parent: nil)
       @value = value
       @converted_color = converted_color
+      @parent = parent
     end
 
     def to_s

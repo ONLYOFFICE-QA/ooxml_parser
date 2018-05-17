@@ -90,7 +90,7 @@ module OoxmlParser
         when 'color'
           @color = OoxmlColor.new(parent: self).parse(node_child)
         when 'solidFill'
-          @font_color = Color.parse_color(node_child.xpath('*').first)
+          @font_color = Color.new(parent: self).parse_color(node_child.xpath('*').first)
         when 'latin'
           @font_name = node_child.attribute('typeface').value
         when 'b'
