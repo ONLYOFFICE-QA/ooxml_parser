@@ -15,6 +15,7 @@
   `Start`, `VerticalMerge`, `Order`, `SeriesIndex`, `PointCount`,
   `Language`
 * Refactor parsing `Chart`. Ability to parser multichart charts
+* Refactor parsing `parse_scheme_color`, no class method
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
