@@ -257,6 +257,22 @@ module OoxmlParser
       self
     end
 
+    def parse_color(color_node)
+      case color_node.name
+      when 'srgbClr'
+        color = parse_hex_string(color_node.attribute('val').value)
+        color.properties = ColorProperties.new(parent: color).parse(color_node)
+        color
+      when 'schemeClr'
+        color = SchemeColor.new(parent: parent)
+        color.value = ThemeColors.list[color_node.attribute('val').value.to_sym]
+        color.properties = ColorProperties.new(parent: color).parse(color_node)
+        color.converted_color = Color.new(parent: self).parse_scheme_color(color_node)
+        color.value.calculate_with_tint!(1.0 - color.properties.tint) if color.properties.tint
+        color
+      end
+    end
+
     class << self
       def generate_random_color
         Color.new(rand(256), rand(256), rand(256))
@@ -315,22 +331,6 @@ module OoxmlParser
           Color.parse(something.value)
         else
           something
-        end
-      end
-
-      def parse_color(color_node)
-        case color_node.name
-        when 'srgbClr'
-          color = Color.new.parse_hex_string(color_node.attribute('val').value)
-          color.properties = ColorProperties.new(parent: color).parse(color_node)
-          color
-        when 'schemeClr'
-          color = SchemeColor.new
-          color.value = ThemeColors.list[color_node.attribute('val').value.to_sym]
-          color.properties = ColorProperties.new(parent: color).parse(color_node)
-          color.converted_color = Color.new(parent: self).parse_scheme_color(color_node)
-          color.value.calculate_with_tint!(1.0 - color.properties.tint) if color.properties.tint
-          color
         end
       end
     end

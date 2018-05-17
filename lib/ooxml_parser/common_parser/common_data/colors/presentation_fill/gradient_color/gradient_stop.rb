@@ -18,7 +18,7 @@ module OoxmlParser
                  when 'prstClr'
                    ValuedChild.new(:string, parent: self).parse(node_child)
                  else
-                   Color.parse_color(node_child)
+                   Color.new(parent: self).parse_color(node_child)
                  end
       end
       self
