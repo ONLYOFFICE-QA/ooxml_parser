@@ -27,7 +27,7 @@ module OoxmlParser
         when 'srgbClr'
           @color = Color.new(parent: self).parse_hex_string(node_child.attribute('val').value)
         when 'schemeClr'
-          @color = Color.parse_scheme_color(node_child)
+          @color = Color.new(parent: self).parse_scheme_color(node_child)
         end
       end
       self

@@ -199,6 +199,33 @@ module OoxmlParser
       @blue = (@blue * shade.to_f).to_i
     end
 
+    def parse_scheme_color(scheme_color_node)
+      color = ThemeColors.list[scheme_color_node.attribute('val').value.to_sym]
+      hls = HSLColor.rgb_to_hsl(color)
+      scheme_name = nil
+      scheme_color_node.xpath('*').each do |scheme_color_node_child|
+        case scheme_color_node_child.name
+        when 'lumMod'
+          hls.l = hls.l * (scheme_color_node_child.attribute('val').value.to_f / 100_000.0)
+        when 'lumOff'
+          hls.l = hls.l + (scheme_color_node_child.attribute('val').value.to_f / 100_000.0)
+        end
+      end
+      scheme_color_node.attributes.each do |key, value|
+        case key
+        when 'val'
+          scheme_name = value.to_s
+        end
+      end
+      color = hls.to_rgb
+      @red = color.red
+      @green = color.green
+      @blue = color.blue
+      @alpha_channel = ColorAlphaChannel.parse(scheme_color_node)
+      @scheme = scheme_name
+      self
+    end
+
     class << self
       def generate_random_color
         Color.new(rand(256), rand(256), rand(256))
@@ -260,30 +287,6 @@ module OoxmlParser
         end
       end
 
-      def parse_scheme_color(scheme_color_node)
-        color = ThemeColors.list[scheme_color_node.attribute('val').value.to_sym]
-        hls = HSLColor.rgb_to_hsl(color)
-        scheme_name = nil
-        scheme_color_node.xpath('*').each do |scheme_color_node_child|
-          case scheme_color_node_child.name
-          when 'lumMod'
-            hls.l = hls.l * (scheme_color_node_child.attribute('val').value.to_f / 100_000.0)
-          when 'lumOff'
-            hls.l = hls.l + (scheme_color_node_child.attribute('val').value.to_f / 100_000.0)
-          end
-        end
-        scheme_color_node.attributes.each do |key, value|
-          case key
-          when 'val'
-            scheme_name = value.to_s
-          end
-        end
-        color = hls.to_rgb
-        color.alpha_channel = ColorAlphaChannel.parse(scheme_color_node)
-        color.scheme = scheme_name
-        color
-      end
-
       def parse_color_model(color_model_parent_node)
         color = nil
         tint = nil
@@ -302,7 +305,7 @@ module OoxmlParser
             color = Color.new.parse_hex_string(color_model_node.attribute('val').value)
             color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
           when 'schemeClr'
-            color = parse_scheme_color(color_model_node)
+            color = Color.new(parent: self).parse_scheme_color(color_model_node)
           end
         end
         return nil unless color
@@ -320,7 +323,7 @@ module OoxmlParser
           color = SchemeColor.new
           color.value = ThemeColors.list[color_node.attribute('val').value.to_sym]
           color.properties = ColorProperties.new(parent: color).parse(color_node)
-          color.converted_color = parse_scheme_color(color_node)
+          color.converted_color = Color.new(parent: self).parse_scheme_color(color_node)
           color.value.calculate_with_tint!(1.0 - color.properties.tint) if color.properties.tint
           color
         end
