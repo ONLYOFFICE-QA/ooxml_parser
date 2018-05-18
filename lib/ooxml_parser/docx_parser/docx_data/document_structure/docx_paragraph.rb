@@ -147,7 +147,7 @@ module OoxmlParser
             character_style.link = node_child.attribute('anchor').value unless node_child.attribute('anchor').nil?
           end
           node_child.xpath('w:r').each do |r_tag|
-            character_style.parse(r_tag, char_number, parent: parent)
+            character_style.parse(r_tag, char_number, parent: self)
             character_styles_array << character_style.dup
             char_number += 1
           end

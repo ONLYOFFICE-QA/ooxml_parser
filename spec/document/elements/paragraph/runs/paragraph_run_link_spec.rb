@@ -29,4 +29,9 @@ describe OoxmlParser::Hyperlink do
     expect(docx.elements.first.character_style_array[0].link.link).to eq('http://www.yandex.ru')
     expect(docx.elements.first.character_style_array[0].link.tooltip).to eq('go to www.yandex.ru')
   end
+
+  it 'hyperlink_with_run_into_it' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/link/hyperlink_with_run_into_it.docx')
+    expect(docx).to be_with_data
+  end
 end
