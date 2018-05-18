@@ -114,7 +114,7 @@ module OoxmlParser
 
     def calculate_values
       @font = root_object.style_sheet.fonts[@font_id]
-      @borders = Borders.parse_from_style(@border_id) if @apply_border
+      @borders = Borders.new(parent: self).parse_from_style(@border_id) if @apply_border
       @fill_color = root_object.style_sheet.fills[@fill_id] if @apply_fill
       return unless @apply_number_format
       format = root_object.style_sheet.number_formats.format_by_id(@number_format_id)

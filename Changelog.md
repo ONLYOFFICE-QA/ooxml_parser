@@ -18,6 +18,7 @@
 * Refactor parsing `Color#parse_scheme_color`, no class method
 * Refactor parsing `Color#parse_color_model`, no class method
 * Refactor parsing `Color#parse_color`, no class method
+* Refactor parsing `Borders#parse_from_style`, no class method
 * Rename inlogical check for `DocxShapeLine#nil?` to DocxShapeLine#invisible?`
   
 ### Fixes
