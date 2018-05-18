@@ -16,4 +16,4 @@ addons:
   apt_packages:
     libmagic-dev
 script:
-  - bundle exec parallel_rspec spec
+  - bundle exec rake

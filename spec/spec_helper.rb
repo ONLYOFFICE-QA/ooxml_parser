@@ -6,3 +6,5 @@ if ENV['CI'] == 'true'
 end
 
 require 'ooxml_parser'
+
+RSpec.configure { |c| c.fail_fast = true }
