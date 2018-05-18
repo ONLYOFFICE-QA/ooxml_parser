@@ -23,7 +23,7 @@ module OoxmlParser
     attr_accessor :numbering
     # @return [Styles] styles of document
     attr_accessor :styles
-    attr_accessor :theme_colors
+    attr_accessor :theme
     # @return [DocumentSettings] settings
     attr_accessor :settings
     # @return [CommentsExtended] extended comments
@@ -36,6 +36,8 @@ module OoxmlParser
       @comments = []
       @document_styles = []
     end
+
+    alias theme_colors theme
 
     def ==(other)
       @elements == other.elements &&
@@ -122,8 +124,8 @@ module OoxmlParser
       OOXMLDocumentObject.xmls_stack = []
       @comments = []
       DocumentStructure.default_paragraph_style = DocxParagraph.new
-      DocumentStructure.default_run_style = DocxParagraphRun.new
-      doc_structure.theme_colors = PresentationTheme.parse('word/theme/theme1.xml')
+      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure)
+      doc_structure.theme = PresentationTheme.parse('word/theme/theme1.xml')
       OOXMLDocumentObject.add_to_xmls_stack('word/styles.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
@@ -133,7 +135,7 @@ module OoxmlParser
         end
         doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
           r_pr_defaults.xpath('w:rPr').each do |r_pr|
-            DocumentStructure.default_run_style = DocxParagraphRun.new.parse_properties(r_pr)
+            DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure).parse_properties(r_pr)
           end
         end
       end

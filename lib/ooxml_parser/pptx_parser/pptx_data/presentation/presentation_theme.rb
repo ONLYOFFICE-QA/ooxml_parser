@@ -36,8 +36,6 @@ module OoxmlParser
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
-      ThemeColors.list = {}
-      OOXMLDocumentObject.theme.color_scheme.each { |key, value| ThemeColors.list[key] = value.color }
       OOXMLDocumentObject.theme
     end
   end

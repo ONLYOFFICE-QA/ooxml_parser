@@ -200,7 +200,7 @@ module OoxmlParser
     end
 
     def parse_scheme_color(scheme_color_node)
-      color = ThemeColors.list[scheme_color_node.attribute('val').value.to_sym]
+      color = root_object.theme.color_scheme[scheme_color_node.attribute('val').value.to_sym].color
       hls = HSLColor.rgb_to_hsl(color)
       scheme_name = nil
       scheme_color_node.xpath('*').each do |scheme_color_node_child|
@@ -265,7 +265,7 @@ module OoxmlParser
         color
       when 'schemeClr'
         color = SchemeColor.new(parent: parent)
-        color.value = ThemeColors.list[color_node.attribute('val').value.to_sym]
+        color.value = root_object.theme.color_scheme[color_node.attribute('val').value.to_sym].color
         color.properties = ColorProperties.new(parent: color).parse(color_node)
         color.converted_color = Color.new(parent: self).parse_scheme_color(color_node)
         color.value.calculate_with_tint!(1.0 - color.properties.tint) if color.properties.tint

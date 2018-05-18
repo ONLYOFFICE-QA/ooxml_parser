@@ -20,7 +20,7 @@ module OoxmlParser
     # @return [RunObject] object of run
     attr_accessor :object
 
-    def initialize
+    def initialize(parent: nil)
       @number = 0
       @font = 'Arial'
       @vertical_align = :baseline
@@ -35,6 +35,7 @@ module OoxmlParser
       @break = false
       @comments = []
       @page_number = false
+      @parent = parent
     end
 
     def initialize_copy(source)

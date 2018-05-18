@@ -66,7 +66,7 @@ module OoxmlParser
         when 'next'
           @next_style = subnode.attribute('val').value
         when 'rPr'
-          @run_properties = DocxParagraphRun.new.parse_properties(subnode)
+          @run_properties = DocxParagraphRun.new(parent: self).parse_properties(subnode)
         when 'pPr'
           @paragraph_properties = ParagraphProperties.new(parent: self).parse(subnode)
         when 'tblPr'

@@ -93,10 +93,11 @@ module OoxmlParser
     end
 
     def parse(node, par_number = 0, default_character = DocxParagraphRun.new, parent: nil)
-      @parent = parent
+      @parent ||= parent
       default_character_style = default_character.dup
       character_styles_array = []
       custom_character_style = default_character_style.dup
+      custom_character_style.parent = self
       char_number = 0
       comments = []
       node.attributes.each do |key, value|
@@ -177,7 +178,7 @@ module OoxmlParser
       self
     end
 
-    def parse_paragraph_style(node, default_char_style = DocxParagraphRun.new)
+    def parse_paragraph_style(node, default_char_style = DocxParagraphRun.new(parent: self))
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'pageBreakBefore'

@@ -46,9 +46,9 @@ module OoxmlParser
             when 'val'
               self.font_color = Color.new(parent: self).parse_hex_string(value.value)
             when 'themeColor'
-              if ThemeColors.list && !ThemeColors.list[value.value.to_sym].nil?
+              if root_object.theme && root_object.theme.color_scheme[value.value.to_sym]
                 break if value.value == 'text2' || value.value == 'background2' || value.value.include?('accent') # Don't know why. Just works
-                self.font_color = ThemeColors.list[value.value.to_sym].dup
+                self.font_color = root_object.theme.color_scheme[value.value.to_sym].color.dup
               end
             when 'themeShade'
               font_color.calculate_with_shade!(value.value.hex.to_f / 255.0)
