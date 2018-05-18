@@ -43,7 +43,7 @@ module OoxmlParser
           @position = value_to_symbol(node_child.attribute('val'))
         end
       end
-      @display = false if @title.nil?
+      @display = false unless @title.visible?
       self
     end
   end

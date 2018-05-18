@@ -10,7 +10,7 @@ describe 'My behaviour' do
   it 'Insert Chart Window | Check Set Not Display X Axis' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/axises/axis_not_display_x.xlsx')
     drawing = xlsx.worksheets[0].drawings[0]
-    expect(drawing.graphic_frame.graphic_data.first.axises.first.title).to be_nil
+    expect(drawing.graphic_frame.graphic_data.first.axises.first.title).not_to be_visible
   end
 
   describe 'Axises' do

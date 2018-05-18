@@ -20,6 +20,7 @@
 * Refactor parsing `Color#parse_color`, no class method
 * Refactor parsing `Borders#parse_from_style`, no class method
 * Rename inlogical check for `DocxShapeLine#nil?` to DocxShapeLine#invisible?`
+* Rename inlogical check for `ChartAxisTitle#nil?` to DocxShapeLine#visible?`
 * Remove usage of `ThemeColors.list`
   
 ### Fixes

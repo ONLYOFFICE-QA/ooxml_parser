@@ -8,8 +8,9 @@ module OoxmlParser
       @parent = parent
     end
 
-    def nil?
-      @layout.nil? && @overlay.nil? && @elements.empty?
+    # @return [Boolean] if chart title is visible
+    def visible?
+      @layout || @overlay || !@elements.empty?
     end
 
     # Parse ChartAxisTitle object
