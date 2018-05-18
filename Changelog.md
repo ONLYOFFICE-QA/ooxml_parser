@@ -27,6 +27,7 @@
 * Fix crash on empty coordinates list of chart
 * Fix crash on docx with no `settings.xml`
 * Fix crash on docx with no `theme.xml`
+* Fix parsing hyperlinks with empty `id`
 
 ## 0.4.1 (2018-03-01)
 ### Fixes

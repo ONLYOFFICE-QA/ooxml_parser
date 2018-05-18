@@ -7,4 +7,9 @@ describe 'My behaviour' do
     expect(xlsx.worksheets[0].rows[0].cells.first.text).to eq('yandex')
     expect(xlsx.worksheets[0].hyperlinks[0].tooltip).to eq('go to www.yandex.ru')
   end
+
+  it 'hyperlink_empty_id.xlsx' do
+    xlsx = OoxmlParser::Parser.parse('spec/workbook/hyperlinks/hyperlink_empty_id.xlsx')
+    expect(xlsx.worksheets[1].drawings.first.shape.non_visual_properties.common_properties.on_click_hyperlink.id).to be_empty
+  end
 end
