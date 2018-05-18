@@ -33,7 +33,7 @@ module OoxmlParser
           @url = Coordinates.parse_coordinates_from_string(value.value)
         when 'id'
           @id = value.value
-          @url = OOXMLDocumentObject.get_link_from_rels(@id)
+          @url = OOXMLDocumentObject.get_link_from_rels(@id) unless @id.empty?
         when 'tooltip'
           @tooltip = value.value
         when 'ref'
@@ -65,7 +65,7 @@ module OoxmlParser
         @action = :slide
         @url = OOXMLDocumentObject.get_link_from_rels(@id).scan(/\d+/).join('').to_i
       else
-        unless @id.nil?
+        if @id && !@id.empty?
           @action = :external_link
           @url = OOXMLDocumentObject.get_link_from_rels(@id)
         end
