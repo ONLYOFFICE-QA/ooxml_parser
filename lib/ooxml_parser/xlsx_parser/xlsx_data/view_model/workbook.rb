@@ -82,7 +82,7 @@ module OoxmlParser
       doc = Nokogiri::XML.parse(File.open(OOXMLDocumentObject.current_xml))
       XLSXWorkbook.styles_node = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml"))
       workbook.theme = PresentationTheme.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
-      workbook.style_sheet = StyleSheet.new(parent: self).parse
+      workbook.style_sheet = StyleSheet.new(parent: workbook).parse
       doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
         file = workbook.relationships.target_by_id(sheet.attribute('id').value)
         if file.start_with?('worksheets')

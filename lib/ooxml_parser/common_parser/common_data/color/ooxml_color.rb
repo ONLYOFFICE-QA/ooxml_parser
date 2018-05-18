@@ -18,7 +18,7 @@ module OoxmlParser
 
     def to_color
       return Color.get_rgb_by_color_index(indexed) if indexed
-      return ThemeColors.parse_color_theme(theme, tint) if theme
+      return ThemeColors.new(parent: self).parse_color_theme(theme, tint) if theme
       return rgb if rgb
       value
     end
