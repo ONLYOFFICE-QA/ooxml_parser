@@ -29,7 +29,7 @@ module OoxmlParser
         when 'hlinkClick'
           @on_click_hyperlink = Hyperlink.new(parent: self).parse(node_child)
         when 'hlinkHover'
-          @hyperlink_for_hover = HyperlinkForHover.new(parent: self).parse(node_child)
+          @hyperlink_for_hover = Hyperlink.new(parent: self).parse(node_child)
         end
       end
       self
