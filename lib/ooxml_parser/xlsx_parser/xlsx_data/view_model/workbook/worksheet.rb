@@ -105,7 +105,7 @@ module OoxmlParser
         when 'oleObjects'
           worksheet.ole_objects = OleObjects.new(parent: worksheet).parse(worksheet_node_child)
         when 'extLst'
-          worksheet.extension_list = ExtensionList.new(parent: self).parse(worksheet_node_child)
+          worksheet.extension_list = ExtensionList.new(parent: worksheet).parse(worksheet_node_child)
         end
       end
       worksheet.comments = ExcelComments.parse_file(File.basename(path_to_xml_file), OOXMLDocumentObject.path_to_folder)

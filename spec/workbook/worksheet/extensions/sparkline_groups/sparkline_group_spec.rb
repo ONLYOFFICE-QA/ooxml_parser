@@ -50,4 +50,9 @@ describe 'Sparkline group' do
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].max_axis_type).to eq(:group)
     expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].manual_min).to eq(5)
   end
+
+  it 'sparkline_color_object.xlsx' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/extensions/sparkline_groups/sparkline_group/sparkline_color_object.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].sparkline_groups[0].color_series.to_color).to be_a(OoxmlParser::Color)
+  end
 end
