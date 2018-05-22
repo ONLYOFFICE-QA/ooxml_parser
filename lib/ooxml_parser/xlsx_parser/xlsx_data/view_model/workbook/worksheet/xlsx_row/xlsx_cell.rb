@@ -19,7 +19,7 @@ module OoxmlParser
     # @return [XlsxCell] result of parsing
     def parse(node)
       text_string_id = nil
-      text_string_id = node.attribute('s').value unless node.attribute('s').nil?
+      text_string_id = node.attribute('s').value if node.attribute('s')
       @style = CellStyle.new(parent: self).parse(text_string_id)
       if node.attribute('t').nil?
         @raw_text = node.xpath('xmlns:v').text

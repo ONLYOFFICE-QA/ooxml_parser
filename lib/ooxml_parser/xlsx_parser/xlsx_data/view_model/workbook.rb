@@ -15,7 +15,7 @@ module OoxmlParser
     # @return [StyleSheet] styles of book
     attr_accessor :style_sheet
     # @return [SharedStringTable] styles of book
-    attr_accessor :shared_strings_table
+    attr_reader :shared_strings_table
 
     def initialize(worksheets = [])
       @worksheets = worksheets
