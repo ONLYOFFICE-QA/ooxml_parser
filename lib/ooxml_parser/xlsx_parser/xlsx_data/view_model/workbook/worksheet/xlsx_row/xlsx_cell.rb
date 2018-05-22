@@ -27,7 +27,7 @@ module OoxmlParser
         @raw_text = node.xpath('xmlns:v').text
       end
       @formula = node.xpath('xmlns:f').text unless node.xpath('xmlns:f').text == ''
-      @text = @raw_text.dup unless @raw_text.nil?
+      @text = @raw_text.dup if @raw_text
       @text.insert(0, "'") if @style.quote_prefix
       self
     end
