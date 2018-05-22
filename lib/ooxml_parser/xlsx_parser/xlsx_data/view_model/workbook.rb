@@ -1,4 +1,5 @@
 require_relative 'workbook/chartsheet'
+require_relative 'workbook/shared_string_table'
 require_relative 'workbook/style_sheet'
 require_relative 'workbook/worksheet'
 require_relative 'workbook/workbook_helpers'
@@ -13,6 +14,8 @@ module OoxmlParser
     attr_accessor :relationships
     # @return [StyleSheet] styles of book
     attr_accessor :style_sheet
+    # @return [StyleSheet] styles of book
+    attr_accessor :shared_strings_table
 
     def initialize(worksheets = [])
       @worksheets = worksheets
@@ -75,6 +78,7 @@ module OoxmlParser
     def self.parse
       workbook = XLSXWorkbook.new
       workbook.relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
+      workbook.shared_strings_table = SharedStringTable.new(parent: workbook).parse
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.root_subfolder = 'xl/'
       self.shared_strings = nil
