@@ -79,7 +79,7 @@ module OoxmlParser
     def parse_shared_strings
       shared_strings_target = relationships.target_by_type('sharedString')
       return unless shared_strings_target
-      shared_string_file = "#{OOXMLDocumentObject.path_to_folder}/xl/#{relationships.target_by_type('sharedString')}"
+      shared_string_file = "#{OOXMLDocumentObject.path_to_folder}/xl/#{shared_strings_target}"
       @shared_strings_table = SharedStringTable.new(parent: self).parse(shared_string_file)
     end
 
