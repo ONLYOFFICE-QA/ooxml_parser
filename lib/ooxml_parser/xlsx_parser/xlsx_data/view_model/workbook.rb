@@ -81,7 +81,6 @@ module OoxmlParser
       workbook.shared_strings_table = SharedStringTable.new(parent: workbook).parse
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.root_subfolder = 'xl/'
-      self.shared_strings = nil
       OOXMLDocumentObject.add_to_xmls_stack('xl/workbook.xml')
       doc = Nokogiri::XML.parse(File.open(OOXMLDocumentObject.current_xml))
       XLSXWorkbook.styles_node = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml"))
@@ -101,18 +100,7 @@ module OoxmlParser
     end
 
     class << self
-      # @return [Array, Nokogiri::XML::Eelement] list of shared strings
-      attr_writer :shared_strings
       attr_accessor :styles_node
-
-      # Accessor for shared string. Initialization for this array
-      def shared_strings
-        if @shared_strings.nil?
-          shared_strings_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/sharedStrings.xml"
-          @shared_strings = Nokogiri::XML(File.open(shared_strings_file)).xpath('//xmlns:si') if File.exist?(shared_strings_file)
-        end
-        @shared_strings
-      end
 
       def link_to_theme_xml
         file = File.open(OOXMLDocumentObject.path_to_folder + 'xl/_rels/workbook.xml.rels')
