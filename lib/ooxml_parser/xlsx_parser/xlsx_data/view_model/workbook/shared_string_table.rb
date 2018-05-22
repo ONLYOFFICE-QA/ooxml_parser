@@ -17,7 +17,7 @@ module OoxmlParser
     # Parse Shared string table file
     # @param file [String] path to file
     # @return [SharedStringTable]
-    def parse(file = "#{OOXMLDocumentObject.path_to_folder}xl/sharedStrings.xml")
+    def parse(file)
       return nil unless File.exist?(file)
       document = Nokogiri::XML(File.open(file))
       node = document.xpath('*').first

@@ -78,7 +78,8 @@ module OoxmlParser
     def self.parse
       workbook = XLSXWorkbook.new
       workbook.relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
-      workbook.shared_strings_table = SharedStringTable.new(parent: workbook).parse
+      shared_string_file = "#{OOXMLDocumentObject.path_to_folder}/xl/#{workbook.relationships.target_by_type('sharedString')}"
+      workbook.shared_strings_table = SharedStringTable.new(parent: workbook).parse(shared_string_file)
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.root_subfolder = 'xl/'
       OOXMLDocumentObject.add_to_xmls_stack('xl/workbook.xml')

@@ -6,6 +6,7 @@
 * Parsing `Series#XYValues`
 * Parsing `StructuredDocumentTag` as `TableCell#elements`
 * Parsing `XlsxColumnProperties#hidden`
+* Ability to parse shared strings in custom named file
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
