@@ -22,6 +22,7 @@
 * Rename inlogical check for `DocxShapeLine#nil?` to DocxShapeLine#invisible?`
 * Rename inlogical check for `ChartAxisTitle#nil?` to DocxShapeLine#visible?`
 * Remove usage of `ThemeColors.list`
+* Redone parsing shared string
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
