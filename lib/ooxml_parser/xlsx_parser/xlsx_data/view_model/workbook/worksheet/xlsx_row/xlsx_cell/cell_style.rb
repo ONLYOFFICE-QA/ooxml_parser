@@ -2,48 +2,55 @@ require_relative 'cell_style/alignment'
 module OoxmlParser
   # Class for parsing cell style
   class CellStyle < OOXMLDocumentObject
-    ALL_FORMAT_VALUE = %w|0 0.00 #,##0 #,##0.00 $#,##0_);($#,##0) $#,##0_);[Red]($#,##0) $#,##0.00_);($#,##0.00)
-                          $#,##0.00_);[Red]($#,##0.00)
-                          0.00% 0.00%
-                          0.00E+00
-                          #\ ?/?
-                          #\ ??/??
-                          m/d/yyyy
-                          d-mmm-yy
-                          d-mmm
-                          mmm-yy
-                          h:mm AM/PM
-                          h:mm:ss AM/PM
-                          h:mm
-                          h:mm:ss
-                          m/d/yyyy h:mm
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          0
-                          #,##0_);(#,##0)
-                          #,##0_);[Red](#,##0)
-                          #,##0.00_);(#,##0.00)
-                          #,##0.00_);[Red](#,##0.00)
-                          0
-                          0
-                          0
-                          0
-                          mm:ss
-                          General
-                          mm:ss.0
-                          ##0.0E+0
-                          @|.freeze
+    ALL_FORMAT_VALUE = ['General',
+                        '0',
+                        '0.00',
+                        '#,##0',
+                        '#,##0.00',
+                        '$#,##0_);($#,##0)',
+                        '$#,##0_);[Red]($#,##0)',
+                        '$#,##0.00_);($#,##0.00)',
+                        '$#,##0.00_);[Red]($#,##0.00)',
+                        '0%', '0.00%',
+                        '0.00E+00',
+                        '# ?/?',
+                        '# ??/??',
+                        'm/d/yyyy',
+                        'd-mmm-yy',
+                        'd-mmm',
+                        'mmm-yy',
+                        'h:mm AM/PM',
+                        'h:mm:ss AM/PM',
+                        'h:mm',
+                        'h:mm:ss',
+                        'm/d/yyyy h:mm',
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        '#,##0_);(#,##0)',
+                        '#,##0_);[Red](#,##0)',
+                        '#,##0.00_);(#,##0.00)',
+                        '#,##0.00_);[Red](#,##0.00)',
+                        nil,
+                        nil,
+                        nil,
+                        nil,
+                        'mm:ss',
+                        '[h]:mm:ss',
+                        'mm:ss.0',
+                        '##0.0E+0',
+                        '@'].freeze
 
     attr_accessor :font, :borders, :fill_color, :numerical_format, :alignment
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string
@@ -121,7 +128,7 @@ module OoxmlParser
       @numerical_format = if format
                             format.format_code
                           else
-                            CellStyle::ALL_FORMAT_VALUE[@number_format_id - 1]
+                            CellStyle::ALL_FORMAT_VALUE[@number_format_id]
                           end
     end
   end
