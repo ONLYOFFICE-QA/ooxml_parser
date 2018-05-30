@@ -24,6 +24,7 @@
 * Rename inlogical check for `ChartAxisTitle#nil?` to DocxShapeLine#visible?`
 * Remove usage of `ThemeColors.list`
 * Redone parsing shared string
+* Change `Worksheet.parse` to instance method `Worksheet#parse`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart

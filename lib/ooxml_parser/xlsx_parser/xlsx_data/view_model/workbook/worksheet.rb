@@ -20,7 +20,7 @@ module OoxmlParser
     # @return [ExtensionList] list of extensions
     attr_accessor :extension_list
 
-    def initialize
+    def initialize(parent: nil)
       @columns = []
       @name = ''
       @rows = []
@@ -30,6 +30,7 @@ module OoxmlParser
       @drawings = []
       @sheet_views = []
       @table_parts = []
+      @parent = parent
     end
 
     def parse_relationships
@@ -56,11 +57,9 @@ module OoxmlParser
       end
     end
 
-    def self.parse(path_to_xml_file, parent: nil)
-      worksheet = Worksheet.new
-      worksheet.xml_name = File.basename path_to_xml_file
-      worksheet.parse_relationships
-      worksheet.parent = parent
+    def parse(path_to_xml_file)
+      @xml_name = File.basename path_to_xml_file
+      parse_relationships
       OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/#{File.basename(path_to_xml_file)}")
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       sheet = doc.search('//xmlns:worksheet').first
@@ -68,49 +67,49 @@ module OoxmlParser
         case worksheet_node_child.name
         when 'sheetData'
           worksheet_node_child.xpath('xmlns:row').each do |row_node|
-            worksheet.rows[row_node.attribute('r').value.to_i - 1] = XlsxRow.new(parent: worksheet).parse(row_node)
-            worksheet.rows[row_node.attribute('r').value.to_i - 1].style = CellStyle.new(parent: worksheet).parse(row_node.attribute('s').value) unless row_node.attribute('s').nil?
+            @rows[row_node.attribute('r').value.to_i - 1] = XlsxRow.new(parent: self).parse(row_node)
+            @rows[row_node.attribute('r').value.to_i - 1].style = CellStyle.new(parent: self).parse(row_node.attribute('s').value) unless row_node.attribute('s').nil?
           end
         when 'sheetFormatPr'
           if !worksheet_node_child.attribute('defaultColWidth').nil? && !worksheet_node_child.attribute('defaultRowHeight').nil?
-            worksheet.sheet_format_properties = SheetFormatProperties.new(parent: worksheet).parse(worksheet_node_child)
+            @sheet_format_properties = SheetFormatProperties.new(parent: self).parse(worksheet_node_child)
           end
         when 'mergeCells'
           worksheet_node_child.xpath('xmlns:mergeCell').each do |merge_node|
-            worksheet.merge << merge_node.attribute('ref').value.to_s
+            @merge << merge_node.attribute('ref').value.to_s
           end
         when 'drawing'
           path_to_drawing = OOXMLDocumentObject.get_link_from_rels(worksheet_node_child.attribute('id').value)
           unless path_to_drawing.nil?
             OOXMLDocumentObject.add_to_xmls_stack(path_to_drawing)
-            worksheet.parse_drawing
+            parse_drawing
             OOXMLDocumentObject.xmls_stack.pop
           end
         when 'hyperlinks'
           worksheet_node_child.xpath('xmlns:hyperlink').each do |hyperlink_node|
-            worksheet.hyperlinks << Hyperlink.new(parent: worksheet).parse(hyperlink_node).dup
+            @hyperlinks << Hyperlink.new(parent: self).parse(hyperlink_node).dup
           end
         when 'cols'
-          worksheet.columns = XlsxColumnProperties.parse_list(worksheet_node_child, parent: worksheet)
+          @columns = XlsxColumnProperties.parse_list(worksheet_node_child, parent: self)
         when 'autoFilter'
-          worksheet.autofilter = Autofilter.new(parent: self).parse(worksheet_node_child)
+          @autofilter = Autofilter.new(parent: self).parse(worksheet_node_child)
         when 'tableParts'
           worksheet_node_child.xpath('*').each do |part_node|
-            worksheet.table_parts << TablePart.new(parent: worksheet).parse(part_node)
+            @table_parts << TablePart.new(parent: self).parse(part_node)
           end
         when 'sheetViews'
           worksheet_node_child.xpath('*').each do |view_child|
-            worksheet.sheet_views << SheetView.new(parent: worksheet).parse(view_child)
+            @sheet_views << SheetView.new(parent: self).parse(view_child)
           end
         when 'oleObjects'
-          worksheet.ole_objects = OleObjects.new(parent: worksheet).parse(worksheet_node_child)
+          @ole_objects = OleObjects.new(parent: self).parse(worksheet_node_child)
         when 'extLst'
-          worksheet.extension_list = ExtensionList.new(parent: worksheet).parse(worksheet_node_child)
+          @extension_list = ExtensionList.new(parent: self).parse(worksheet_node_child)
         end
       end
-      worksheet.comments = ExcelComments.parse_file(File.basename(path_to_xml_file), OOXMLDocumentObject.path_to_folder)
+      @comments = ExcelComments.parse_file(File.basename(path_to_xml_file), OOXMLDocumentObject.path_to_folder)
       OOXMLDocumentObject.xmls_stack.pop
-      worksheet
+      self
     end
   end
 end
