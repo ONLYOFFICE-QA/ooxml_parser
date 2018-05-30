@@ -1,3 +1,4 @@
+require_relative 'style_sheet/cell_xfs'
 require_relative 'style_sheet/fills'
 require_relative 'style_sheet/fonts'
 require_relative 'style_sheet/number_formats'
@@ -10,6 +11,8 @@ module OoxmlParser
     attr_accessor :fonts
     # @return [Fills] fills
     attr_accessor :fills
+    # @return [CellXfs] Cell XFs
+    attr_accessor :cell_xfs
 
     def initialize(parent: nil)
       @number_formats = NumberFormats.new(parent: self)
@@ -28,6 +31,8 @@ module OoxmlParser
           @fonts.parse(node_child)
         when 'fills'
           @fills.parse(node_child)
+        when 'cellXfs'
+          @cell_xfs = CellXfs.new(parent: self).parse(node_child)
         end
       end
       self
