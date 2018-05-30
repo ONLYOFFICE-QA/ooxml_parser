@@ -83,28 +83,27 @@ module OoxmlParser
       @shared_strings_table = SharedStringTable.new(parent: self).parse(shared_string_file)
     end
 
-    def self.parse
-      workbook = XLSXWorkbook.new
-      workbook.relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
-      workbook.parse_shared_strings
+    def parse
+      @relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
+      parse_shared_strings
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.root_subfolder = 'xl/'
       OOXMLDocumentObject.add_to_xmls_stack('xl/workbook.xml')
       doc = Nokogiri::XML.parse(File.open(OOXMLDocumentObject.current_xml))
       XLSXWorkbook.styles_node = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml"))
-      workbook.theme = PresentationTheme.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
-      workbook.style_sheet = StyleSheet.new(parent: workbook).parse
+      @theme = PresentationTheme.parse("xl/#{XLSXWorkbook.link_to_theme_xml}") if XLSXWorkbook.link_to_theme_xml
+      @style_sheet = StyleSheet.new(parent: self).parse
       doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
-        file = workbook.relationships.target_by_id(sheet.attribute('id').value)
+        file = @relationships.target_by_id(sheet.attribute('id').value)
         if file.start_with?('worksheets')
-          workbook.worksheets << Worksheet.new(parent: workbook).parse(file)
-          workbook.worksheets.last.name = sheet.attribute('name').value
+          @worksheets << Worksheet.new(parent: self).parse(file)
+          @worksheets.last.name = sheet.attribute('name').value
         elsif file.start_with?('chartsheets')
-          workbook.worksheets << Chartsheet.new(parent: workbook).parse(file)
+          @worksheets << Chartsheet.new(parent: self).parse(file)
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
-      workbook
+      self
     end
 
     class << self

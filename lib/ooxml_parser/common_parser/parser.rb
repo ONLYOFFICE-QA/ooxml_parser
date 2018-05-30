@@ -24,7 +24,7 @@ module OoxmlParser
         when :docx
           DocumentStructure.parse
         when :xlsx
-          XLSXWorkbook.parse
+          XLSXWorkbook.new.parse
         when :pptx
           Presentation.parse
         else
