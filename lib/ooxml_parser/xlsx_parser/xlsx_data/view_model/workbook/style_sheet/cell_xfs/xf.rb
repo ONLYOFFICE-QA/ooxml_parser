@@ -1,3 +1,4 @@
+require_relative 'cell_style/alignment'
 module OoxmlParser
   # Class for parsing `xf` object
   class Xf < OOXMLDocumentObject

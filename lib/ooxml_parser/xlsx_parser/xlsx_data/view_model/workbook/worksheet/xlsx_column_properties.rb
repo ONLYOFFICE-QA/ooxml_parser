@@ -22,7 +22,7 @@ module OoxmlParser
         when 'max'
           @to = value.value.to_i
         when 'style'
-          @style = CellStyle.new(parent: self).parse(value.value)
+          @style = root_object.style_sheet.cell_xfs.xf_array[value.value.to_i].calculate_values
         when 'width'
           @width = value.value.to_f - 0.7109375
         when 'customWidth'
