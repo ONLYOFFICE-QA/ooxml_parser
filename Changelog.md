@@ -25,6 +25,7 @@
 * Remove usage of `ThemeColors.list`
 * Redone parsing shared string
 * Change `Worksheet.parse` to instance method `Worksheet#parse`
+* Change `XLSXWorkbook.parse` to instance method `XLSXWorkbook#parse`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
