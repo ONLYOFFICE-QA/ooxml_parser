@@ -52,27 +52,27 @@ module OoxmlParser
                         '##0.0E+0',
                         '@'].freeze
 
-    attr_accessor :font, :borders, :fill_color, :numerical_format, :alignment
+    attr_reader :font, :borders, :fill_color, :numerical_format, :alignment
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string
-    attr_accessor :quote_prefix
+    attr_reader :quote_prefix
     # @return [True, False] is font applied
-    attr_accessor :apply_font
+    attr_reader :apply_font
     # @return [True, False] is border applied
-    attr_accessor :apply_border
+    attr_reader :apply_border
     # @return [True, False] is fill applied
-    attr_accessor :apply_fill
+    attr_reader :apply_fill
     # @return [True, False] is number format applied
-    attr_accessor :apply_number_format
+    attr_reader :apply_number_format
     # @return [True, False] is alignment applied
-    attr_accessor :apply_alignment
+    attr_reader :apply_alignment
     # @return [Integer] id of font
-    attr_accessor :font_id
+    attr_reader :font_id
     # @return [Integer] id of border
-    attr_accessor :border_id
+    attr_reader :border_id
     # @return [Integer] id of fill
-    attr_accessor :fill_id
+    attr_reader :fill_id
     # @return [Integer] id of number format
-    attr_accessor :number_format_id
+    attr_reader :number_format_id
 
     def initialize(parent: nil)
       @numerical_format = 'General'

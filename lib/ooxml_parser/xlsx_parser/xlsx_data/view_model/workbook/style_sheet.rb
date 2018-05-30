@@ -12,7 +12,7 @@ module OoxmlParser
     # @return [Fills] fills
     attr_accessor :fills
     # @return [CellXfs] Cell XFs
-    attr_accessor :cell_xfs
+    attr_reader :cell_xfs
 
     def initialize(parent: nil)
       @number_formats = NumberFormats.new(parent: self)
