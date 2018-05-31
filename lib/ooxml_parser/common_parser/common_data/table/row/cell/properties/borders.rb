@@ -86,22 +86,5 @@ module OoxmlParser
       end
       self
     end
-
-    def parse_from_style(style_number)
-      node = XLSXWorkbook.styles_node.xpath('//xmlns:border')[style_number.to_i]
-      node.xpath('*').each do |node_child|
-        case node_child.name
-        when 'bottom'
-          @bottom = Border.new(parent: self).parse(node_child)
-        when 'top'
-          @top = Border.new(parent: self).parse(node_child)
-        when 'right'
-          @right = Border.new(parent: self).parse(node_child)
-        when 'left'
-          @left = Border.new(parent: self).parse(node_child)
-        end
-      end
-      self
-    end
   end
 end
