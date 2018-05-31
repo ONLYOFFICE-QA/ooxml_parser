@@ -29,6 +29,7 @@
 * Remove class method `XLSXWorkbook.link_to_theme_xml`
 * Remove class method `XLSXWorkbook.styles_node`
 * Remove class `CellStyle`, replace with call of `style_sheet` 
+* Reorganize code for remove `Xf#calcualte_values` method
   
 ### Fixes
 * Fix crash on empty coordinates list of chart

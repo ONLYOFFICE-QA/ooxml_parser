@@ -52,7 +52,7 @@ module OoxmlParser
                         '##0.0E+0',
                         '@'].freeze
 
-    attr_reader :font, :borders, :fill_color, :numerical_format, :alignment
+    attr_reader :alignment
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string
     attr_reader :quote_prefix
     # @return [True, False] is font applied
@@ -117,18 +117,26 @@ module OoxmlParser
       self
     end
 
-    def calculate_values
-      @font = root_object.style_sheet.fonts[@font_id]
-      @borders = root_object.style_sheet.borders.borders_array[@border_id] if @apply_border
-      @fill_color = root_object.style_sheet.fills[@fill_id] if @apply_fill
-      return self unless @apply_number_format
+    def font
+      root_object.style_sheet.fonts[@font_id]
+    end
+
+    def borders
+      root_object.style_sheet.borders.borders_array[@border_id] if @apply_border
+    end
+
+    def fill_color
+      root_object.style_sheet.fills[@fill_id] if @apply_fill
+    end
+
+    def numerical_format
+      return nil unless @apply_number_format
       format = root_object.style_sheet.number_formats.format_by_id(@number_format_id)
-      @numerical_format = if format
-                            format.format_code
-                          else
-                            ALL_FORMAT_VALUE[@number_format_id]
-                          end
-      self
+      if format
+        format.format_code
+      else
+        ALL_FORMAT_VALUE[@number_format_id]
+      end
     end
   end
 end

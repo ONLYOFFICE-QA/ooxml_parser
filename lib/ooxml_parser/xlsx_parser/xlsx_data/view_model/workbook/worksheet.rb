@@ -68,7 +68,7 @@ module OoxmlParser
         when 'sheetData'
           worksheet_node_child.xpath('xmlns:row').each do |row_node|
             @rows[row_node.attribute('r').value.to_i - 1] = XlsxRow.new(parent: self).parse(row_node)
-            @rows[row_node.attribute('r').value.to_i - 1].style = root_object.style_sheet.cell_xfs.xf_array[row_node.attribute('s').value.to_i].calculate_values unless row_node.attribute('s').nil?
+            @rows[row_node.attribute('r').value.to_i - 1].style = root_object.style_sheet.cell_xfs.xf_array[row_node.attribute('s').value.to_i] if row_node.attribute('s')
           end
         when 'sheetFormatPr'
           if !worksheet_node_child.attribute('defaultColWidth').nil? && !worksheet_node_child.attribute('defaultRowHeight').nil?
