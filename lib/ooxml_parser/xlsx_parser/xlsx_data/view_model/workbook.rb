@@ -111,9 +111,5 @@ module OoxmlParser
     def link_to_theme_xml
       relationships.target_by_type('theme')
     end
-
-    class << self
-      attr_accessor :styles_node
-    end
   end
 end
