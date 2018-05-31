@@ -15,4 +15,9 @@ describe 'My behaviour' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/rows/cells/style/cell_format.xlsx')
     expect(xlsx.worksheets[0].rows[0].cells[0].style.numerical_format).to eq('$#,##0.00')
   end
+
+  it 'cell_numerical_general' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/rows/cells/style/cell_numerical_general.xlsx')
+    expect(xlsx.worksheets.first.rows[1].cells[0].style.numerical_format).to eq('General')
+  end
 end

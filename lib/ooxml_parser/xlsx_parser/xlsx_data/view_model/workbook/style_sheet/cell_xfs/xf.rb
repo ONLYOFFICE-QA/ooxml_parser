@@ -130,7 +130,7 @@ module OoxmlParser
     end
 
     def numerical_format
-      return nil unless @apply_number_format
+      return @numerical_format unless @apply_number_format
       format = root_object.style_sheet.number_formats.format_by_id(@number_format_id)
       if format
         format.format_code
