@@ -1,4 +1,3 @@
-require_relative 'xlsx_cell/cell_style'
 # Single Cell of XLSX
 module OoxmlParser
   class XlsxCell < OOXMLDocumentObject
@@ -20,7 +19,7 @@ module OoxmlParser
     def parse(node)
       text_string_id = nil
       text_string_id = node.attribute('s').value if node.attribute('s')
-      @style = CellStyle.new(parent: self).parse(text_string_id)
+      @style = root_object.style_sheet.cell_xfs.xf_array[text_string_id.to_i].calculate_values
       if node.attribute('t')
         node.attribute('t').value == 's' ? get_shared_string(node.xpath('xmlns:v').text) : @raw_text = node.xpath('xmlns:v').text
       else

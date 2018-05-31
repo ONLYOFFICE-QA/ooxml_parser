@@ -1,7 +1,7 @@
 require_relative 'cell_style/alignment'
 module OoxmlParser
-  # Class for parsing cell style
-  class CellStyle < OOXMLDocumentObject
+  # Class for parsing `xf` object
+  class Xf < OOXMLDocumentObject
     ALL_FORMAT_VALUE = ['General',
                         '0',
                         '0.00',
@@ -52,27 +52,27 @@ module OoxmlParser
                         '##0.0E+0',
                         '@'].freeze
 
-    attr_accessor :font, :borders, :fill_color, :numerical_format, :alignment
+    attr_reader :font, :borders, :fill_color, :numerical_format, :alignment
     # @return [True, False] check if style should add QuotePrefix (' symbol) to start of the string
-    attr_accessor :quote_prefix
+    attr_reader :quote_prefix
     # @return [True, False] is font applied
-    attr_accessor :apply_font
+    attr_reader :apply_font
     # @return [True, False] is border applied
-    attr_accessor :apply_border
+    attr_reader :apply_border
     # @return [True, False] is fill applied
-    attr_accessor :apply_fill
+    attr_reader :apply_fill
     # @return [True, False] is number format applied
-    attr_accessor :apply_number_format
+    attr_reader :apply_number_format
     # @return [True, False] is alignment applied
-    attr_accessor :apply_alignment
+    attr_reader :apply_alignment
     # @return [Integer] id of font
-    attr_accessor :font_id
+    attr_reader :font_id
     # @return [Integer] id of border
-    attr_accessor :border_id
+    attr_reader :border_id
     # @return [Integer] id of fill
-    attr_accessor :fill_id
+    attr_reader :fill_id
     # @return [Integer] id of number format
-    attr_accessor :number_format_id
+    attr_reader :number_format_id
 
     def initialize(parent: nil)
       @numerical_format = 'General'
@@ -80,12 +80,11 @@ module OoxmlParser
       @parent = parent
     end
 
-    # Parse CellStyle object
+    # Parse Xf object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [CellStyle] result of parsing
+    # @return [Xf] result of parsing
     def parse(node)
-      style_node = XLSXWorkbook.styles_node.xpath('//xmlns:cellXfs/xmlns:xf')[node.to_i]
-      style_node.attributes.each do |key, value|
+      node.attributes.each do |key, value|
         case key
         when 'applyFont'
           @apply_font = attribute_enabled?(value)
@@ -109,13 +108,12 @@ module OoxmlParser
           @quote_prefix = attribute_enabled?(value)
         end
       end
-      style_node.xpath('*').each do |node_child|
+      node.xpath('*').each do |node_child|
         case node_child.name
         when 'alignment'
           @alignment.parse(node_child) if @apply_alignment
         end
       end
-      calculate_values
       self
     end
 
@@ -123,13 +121,14 @@ module OoxmlParser
       @font = root_object.style_sheet.fonts[@font_id]
       @borders = Borders.new(parent: self).parse_from_style(@border_id) if @apply_border
       @fill_color = root_object.style_sheet.fills[@fill_id] if @apply_fill
-      return unless @apply_number_format
+      return self unless @apply_number_format
       format = root_object.style_sheet.number_formats.format_by_id(@number_format_id)
       @numerical_format = if format
                             format.format_code
                           else
-                            CellStyle::ALL_FORMAT_VALUE[@number_format_id]
+                            ALL_FORMAT_VALUE[@number_format_id]
                           end
+      self
     end
   end
 end

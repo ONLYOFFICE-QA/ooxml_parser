@@ -27,6 +27,7 @@
 * Change `Worksheet.parse` to instance method `Worksheet#parse`
 * Change `XLSXWorkbook.parse` to instance method `XLSXWorkbook#parse`
 * Remove class method `XLSXWorkbook.link_to_theme_xml`
+* Remove class `CellStyle`, replace with call of `style_sheet` 
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
