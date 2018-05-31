@@ -32,6 +32,7 @@
 * Reorganize code for remove `Xf#calcualte_values` method
 * Remove class methods during parsing excel comments
 * Change `Presentation.default_font_size` to instance method `Presentation#default_font_size`
+* Change `Presentation.default_font_typeface` to instance method `Presentation#default_font_typeface`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
