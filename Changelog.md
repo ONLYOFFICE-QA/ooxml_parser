@@ -31,6 +31,7 @@
 * Remove class `CellStyle`, replace with call of `style_sheet` 
 * Reorganize code for remove `Xf#calcualte_values` method
 * Remove class methods during parsing excel comments
+* Change `Presentation.default_font_size` to instance method `Presentation#default_font_size`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart

@@ -9,11 +9,14 @@ module OoxmlParser
     attr_accessor :slides, :theme, :slide_size, :comments
     # @return [Relationships] relationships of presentation
     attr_accessor :relationships
+    # @return [Integer] default_font_typeface
+    attr_reader :default_font_size
 
-    def initialize(slides = [], theme = nil, comments = [])
+    def initialize(slides = [], theme = nil, comments = [], params = {})
       @slides = slides
       @theme = theme
       @comments = comments
+      @default_font_size = params.fetch(:default_font_size, 18)
     end
 
     def self.parse
@@ -56,11 +59,6 @@ module OoxmlParser
       # @return [String] default_font_typeface
       def default_font_typeface
         'Arial'
-      end
-
-      # @return [FixNum] default_font_typeface
-      def default_font_size
-        18
       end
     end
   end
