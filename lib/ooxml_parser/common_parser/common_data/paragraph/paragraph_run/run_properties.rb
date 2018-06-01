@@ -122,8 +122,8 @@ module OoxmlParser
         end
       end
       @font_color = DocxColorScheme.new(parent: self).parse(node)
-      @font_name = Presentation.default_font_typeface if @font_name.empty?
-      @font_size = Presentation.default_font_size if @font_size.nil?
+      @font_name = root_object.default_font_typeface if @font_name.empty?
+      @font_size ||= root_object.default_font_size
       self
     end
   end

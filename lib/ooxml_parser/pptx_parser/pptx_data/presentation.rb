@@ -10,10 +10,10 @@ module OoxmlParser
     # @return [Relationships] relationships of presentation
     attr_accessor :relationships
 
-    def initialize(slides = [], theme = nil, comments = [])
-      @slides = slides
-      @theme = theme
-      @comments = comments
+    def initialize(params = {})
+      @slides = []
+      @comments = []
+      super
     end
 
     def self.parse
@@ -51,16 +51,6 @@ module OoxmlParser
       def current_font_style
         @current_font_style = FontStyle.new if @current_font_style.nil?
         @current_font_style
-      end
-
-      # @return [String] default_font_typeface
-      def default_font_typeface
-        'Arial'
-      end
-
-      # @return [FixNum] default_font_typeface
-      def default_font_size
-        18
       end
     end
   end

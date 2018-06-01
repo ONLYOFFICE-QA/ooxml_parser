@@ -17,8 +17,9 @@ module OoxmlParser
     # @return [SharedStringTable] styles of book
     attr_accessor :shared_strings_table
 
-    def initialize(worksheets = [])
-      @worksheets = worksheets
+    def initialize(params = {})
+      @worksheets = []
+      super
     end
 
     def cell(column, row, sheet = 0)
