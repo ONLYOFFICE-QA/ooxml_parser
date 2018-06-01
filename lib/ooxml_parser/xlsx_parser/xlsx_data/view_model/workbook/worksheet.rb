@@ -114,7 +114,7 @@ module OoxmlParser
 
     private
 
-    # Do work for parsing shared strings file
+    # Do work for parsing shared comments file
     def parse_comments
       return unless relationships
       comments_target = relationships.target_by_type('comment')
