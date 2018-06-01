@@ -107,9 +107,20 @@ module OoxmlParser
           @extension_list = ExtensionList.new(parent: self).parse(worksheet_node_child)
         end
       end
-      @comments = ExcelComments.parse_file(File.basename(path_to_xml_file), OOXMLDocumentObject.path_to_folder)
+      parse_comments
       OOXMLDocumentObject.xmls_stack.pop
       self
+    end
+
+    private
+
+    # Do work for parsing shared comments file
+    def parse_comments
+      return unless relationships
+      comments_target = relationships.target_by_type('comment')
+      return unless comments_target
+      comments_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/#{comments_target.gsub('..', '')}"
+      @comments = ExcelComments.new(parent: self).parse(comments_file)
     end
   end
 end
