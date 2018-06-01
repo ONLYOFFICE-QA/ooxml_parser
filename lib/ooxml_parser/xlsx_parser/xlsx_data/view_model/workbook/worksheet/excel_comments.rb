@@ -34,15 +34,5 @@ module OoxmlParser
       end
       self
     end
-
-    def self.parse_file(file_name, path_to_folder)
-      file = path_to_folder + "xl/worksheets/_rels/#{file_name}.rels"
-      return nil unless File.exist?(file)
-      relationships = Relationships.parse_rels(file)
-      target = relationships.target_by_type('comment')
-      return if target.nil?
-      comment_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/#{target.gsub('..', '')}"
-      ExcelComments.new.parse(comment_file)
-    end
   end
 end
