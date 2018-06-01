@@ -141,6 +141,7 @@ module OoxmlParser
         when 'hyperlink'
           @hyperlink = Hyperlink.new(parent: self).parse(node_child)
           character_style = default_character_style.dup
+          character_style.parent = self
           if !node_child.attribute('id').nil?
             character_style.link = Hyperlink.new(parent: character_style).parse(node_child)
           else
