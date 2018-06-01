@@ -132,7 +132,7 @@ module OoxmlParser
       # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
       doc.search('//w:docDefaults').each do |doc_defaults|
         doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
-          DocumentStructure.default_paragraph_style = DocxParagraph.new.parse(p_pr_defaults, 0)
+          DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: doc_structure).parse(p_pr_defaults, 0)
         end
         doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
           r_pr_defaults.xpath('w:rPr').each do |r_pr|
