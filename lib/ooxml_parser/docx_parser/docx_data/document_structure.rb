@@ -35,6 +35,7 @@ module OoxmlParser
       @document_properties = DocumentProperties.new
       @comments = []
       @document_styles = []
+      super
     end
 
     alias theme_colors theme
