@@ -30,6 +30,7 @@
 * Remove class method `XLSXWorkbook.styles_node`
 * Remove class `CellStyle`, replace with call of `style_sheet` 
 * Reorganize code for remove `Xf#calcualte_values` method
+* Remove class methods during parsing excel comments
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
