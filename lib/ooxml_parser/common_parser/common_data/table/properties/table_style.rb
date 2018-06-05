@@ -7,12 +7,19 @@ module OoxmlParser
                   :northwest_cell
 
     # Parse TableStyle object
-    # @param style_id [String] id to parse
+    # @param node [Nokogiri::XML:Element] node to parse
     # @return [TableStyle] result of parsing
-    def parse(style_id: nil)
-      nodes = get_style_node(style_id)
-      return nil unless nodes
-      nodes.xpath('*').each do |style_node_child|
+    def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'styleId'
+          @id = value.value.to_s
+        when 'styleName'
+          @name = value.value.to_s
+        end
+      end
+
+      node.xpath('*').each do |style_node_child|
         case style_node_child.name
         when 'wholeTbl'
           @whole_table = TableElement.new(parent: self).parse(style_node_child)
@@ -42,18 +49,7 @@ module OoxmlParser
           @northwest_cell = TableElement.new(parent: self).parse(style_node_child)
         end
       end
-      @id = style_id
       self
-    end
-
-    def get_style_node(style_id)
-      begin
-        doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'ppt/tableStyles.xml'))
-      rescue StandardError
-        raise 'Can\'t find tableStyles.xml in ' + OOXMLDocumentObject.path_to_folder.to_s + '/ppt folder'
-      end
-      doc.xpath('a:tblStyleLst/a:tblStyle').each { |table_style_node| return table_style_node if table_style_node.attribute('styleId').value == style_id }
-      nil
     end
   end
 end

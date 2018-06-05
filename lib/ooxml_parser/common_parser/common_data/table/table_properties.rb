@@ -11,7 +11,9 @@ module OoxmlParser
   # Class for parsing `w:tblPr` tags
   class TableProperties < OOXMLDocumentObject
     attr_accessor :jc, :table_width, :table_borders, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
-                  :column_banding_size, :table_look, :grid_column, :style
+                  :column_banding_size, :table_look, :grid_column
+    # @return [String] id of table style
+    attr_reader :table_style_id
     # @return [TableStyleColumnBandSize] table style column band size
     attr_accessor :table_style_column_band_size
     # @return [TableStyleRowBandSize] table style row band size
@@ -42,7 +44,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'tableStyleId'
-          @style = TableStyle.new(parent: self).parse(style_id: node_child.text)
+          @table_style_id = node_child.text
         when 'tblBorders'
           @table_borders = TableBorders.new(parent: self).parse(node_child)
         when 'tblStyle'
@@ -77,6 +79,11 @@ module OoxmlParser
       end
       @table_look = TableLook.new(parent: self).parse(node) if @table_look.nil?
       self
+    end
+
+    # @return [TableStyle] style of table
+    def style
+      root_object.table_styles.style_by_id(table_style_id)
     end
   end
 end
