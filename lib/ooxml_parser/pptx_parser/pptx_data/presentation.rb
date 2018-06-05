@@ -3,12 +3,15 @@ require_relative 'presentation/presentation_helpers'
 require_relative 'presentation/presentation_theme'
 require_relative 'presentation/slide'
 require_relative 'presentation/slide_size'
+require_relative 'presentation/table_styles'
 module OoxmlParser
   class Presentation < CommonDocumentStructure
     include PresentationHelpers
     attr_accessor :slides, :theme, :slide_size, :comments
     # @return [Relationships] relationships of presentation
     attr_accessor :relationships
+    # @return [TableStyles] table styles data
+    attr_accessor :table_styles
 
     def initialize(params = {})
       @slides = []
@@ -23,6 +26,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       presentation = Presentation.new
       presentation.theme = PresentationTheme.parse('ppt/theme/theme1.xml')
+      presentation.table_styles = TableStyles.new(parent: presentation).parse
       presentation_node = doc.search('//p:presentation').first
       presentation_node.xpath('*').each do |presentation_node_child|
         case presentation_node_child.name
