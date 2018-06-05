@@ -1,27 +1,20 @@
----
-engines:
+version: "2"
+plugins:
   duplication:
     enabled: true
     config:
       languages:
       - ruby
       - javascript
-      - python
-      - php
   fixme:
+    enabled: true
+  markdownlint:
     enabled: true
   rubocop:
     enabled: true
   reek:
     enabled: true
-ratings:
-  paths:
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
-  - "**.rb"
-exclude_paths:
+  shellcheck:
+    enabled: true
+exclude_patterns:
 - spec/
