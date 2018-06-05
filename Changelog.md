@@ -7,6 +7,7 @@
 * Parsing `StructuredDocumentTag` as `TableCell#elements`
 * Parsing `XlsxColumnProperties#hidden`
 * Ability to parse shared strings in custom named file
+* Parsing `CellProperties#borders_properties` for `tcBdr` tag
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
