@@ -19,33 +19,32 @@ module OoxmlParser
       super
     end
 
-    def self.parse
+    def parse
       OOXMLDocumentObject.root_subfolder = 'ppt/'
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.add_to_xmls_stack('ppt/presentation.xml')
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
-      presentation = Presentation.new
-      presentation.theme = PresentationTheme.parse('ppt/theme/theme1.xml')
-      presentation.table_styles = TableStyles.new(parent: presentation).parse
+      @theme = PresentationTheme.parse('ppt/theme/theme1.xml')
+      @table_styles = TableStyles.new(parent: self).parse
       presentation_node = doc.search('//p:presentation').first
       presentation_node.xpath('*').each do |presentation_node_child|
         case presentation_node_child.name
         when 'sldSz'
-          presentation.slide_size = SlideSize.new(parent: presentation).parse(presentation_node_child)
+          @slide_size = SlideSize.new(parent: self).parse(presentation_node_child)
         when 'sldIdLst'
           presentation_node_child.xpath('p:sldId').each do |silde_id_node|
             id = nil
             silde_id_node.attribute_nodes.select { |node| id = node.to_s if node.namespace && node.namespace.prefix == 'r' }
-            presentation.slides << Slide.new(parent: presentation,
-                                             xml_path: "#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(id)}")
-                                        .parse
+            @slides << Slide.new(parent: self,
+                                 xml_path: "#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(id)}")
+                            .parse
           end
         end
       end
-      presentation.comments = PresentationComment.parse_list
+      @comments = PresentationComment.parse_list
       OOXMLDocumentObject.xmls_stack.pop
-      presentation.relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
-      presentation
+      @relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
+      self
     end
   end
 end

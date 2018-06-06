@@ -4,7 +4,7 @@ module OoxmlParser
   class PptxParser
     def self.parse_pptx(path_to_file)
       Parser.parse_format(path_to_file) do
-        Presentation.parse
+        Presentation.new.parse
       end
     end
   end

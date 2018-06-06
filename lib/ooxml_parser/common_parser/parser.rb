@@ -26,7 +26,7 @@ module OoxmlParser
         when :xlsx
           XLSXWorkbook.new.parse
         when :pptx
-          Presentation.parse
+          Presentation.new.parse
         else
           warn "#{path_to_file} is a simple zip file without OOXML content"
         end
