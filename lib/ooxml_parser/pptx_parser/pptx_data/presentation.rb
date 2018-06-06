@@ -47,15 +47,5 @@ module OoxmlParser
       presentation.relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
       presentation
     end
-
-    class << self
-      # @return [FontStyle] current font_style
-      attr_writer :current_font_style
-
-      def current_font_style
-        @current_font_style = FontStyle.new if @current_font_style.nil?
-        @current_font_style
-      end
-    end
   end
 end

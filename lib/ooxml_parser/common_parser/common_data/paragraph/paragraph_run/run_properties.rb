@@ -43,7 +43,7 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [RunProperties] result of parsing
     def parse(node)
-      @font_style = Presentation.current_font_style.dup
+      @font_style = root_object.default_font_style.dup
       node.attributes.each do |key, value|
         case key
         when 'sz'

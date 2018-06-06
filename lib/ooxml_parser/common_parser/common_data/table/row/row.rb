@@ -15,7 +15,7 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [TableRow] result of parsing
     def parse(node)
-      Presentation.current_font_style = FontStyle.new(true) # TODO: Add correct parsing of TableStyle.xml file and use it
+      root_object.default_font_style = FontStyle.new(true) # TODO: Add correct parsing of TableStyle.xml file and use it
       node.attributes.each do |key, value|
         case key
         when 'h'
@@ -30,7 +30,7 @@ module OoxmlParser
           @cells << TableCell.new(parent: self).parse(node_child)
         end
       end
-      Presentation.current_font_style = FontStyle.new
+      root_object.default_font_style = FontStyle.new
       self
     end
   end
