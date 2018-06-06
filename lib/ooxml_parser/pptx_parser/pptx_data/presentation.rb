@@ -8,6 +8,8 @@ module OoxmlParser
   class Presentation < CommonDocumentStructure
     include PresentationHelpers
     attr_accessor :slides, :theme, :slide_size, :comments
+    # @return [FontStyle] Default font style of presentation
+    attr_accessor :default_font_style
     # @return [Relationships] relationships of presentation
     attr_accessor :relationships
     # @return [TableStyles] table styles data
@@ -16,6 +18,7 @@ module OoxmlParser
     def initialize(params = {})
       @slides = []
       @comments = []
+      @default_font_style = FontStyle.new
       super
     end
 
@@ -46,16 +49,6 @@ module OoxmlParser
       OOXMLDocumentObject.xmls_stack.pop
       presentation.relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
       presentation
-    end
-
-    class << self
-      # @return [FontStyle] current font_style
-      attr_writer :current_font_style
-
-      def current_font_style
-        @current_font_style = FontStyle.new if @current_font_style.nil?
-        @current_font_style
-      end
     end
   end
 end

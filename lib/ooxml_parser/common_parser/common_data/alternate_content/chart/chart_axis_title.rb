@@ -23,9 +23,9 @@ module OoxmlParser
           node_child.xpath('c:rich/*').each do |rich_node_child|
             case rich_node_child.name
             when 'p'
-              Presentation.current_font_style = FontStyle.new(true) # Default font style for chart title always bold
+              root_object.default_font_style = FontStyle.new(true) # Default font style for chart title always bold
               @elements << Paragraph.new(parent: self).parse(rich_node_child)
-              Presentation.current_font_style = FontStyle.new
+              root_object.default_font_style = FontStyle.new
             end
           end
         when 'layout'
