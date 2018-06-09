@@ -12,18 +12,10 @@ module OoxmlParser
         when 'evt'
           @event = value.value
         when 'delay'
-          @delay = value.value
+          @delay = value_to_symbol(value)
         end
       end
       self
-    end
-
-    def self.parse_list(conditions_list_node)
-      conditions = []
-      conditions_list_node.xpath('p:cond').each do |condition_node|
-        conditions << Condition.new(parent: conditions).parse(condition_node)
-      end
-      conditions
     end
   end
 end
