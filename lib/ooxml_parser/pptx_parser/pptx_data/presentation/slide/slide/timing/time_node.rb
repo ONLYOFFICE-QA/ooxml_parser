@@ -22,7 +22,7 @@ module OoxmlParser
         when 'cTn'
           @common_time_node = CommonTiming.new(parent: self).parse(node_child)
         when 'prevCondLst'
-          @previous_conditions_list = Condition.parse_list(node_child)
+          @previous_conditions_list = ConditionList.new(parent: self).parse(node_child)
         end
       end
       self

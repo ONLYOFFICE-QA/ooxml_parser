@@ -1,4 +1,4 @@
-require_relative 'common_timing/condition'
+require_relative 'common_timing/condition_list'
 module OoxmlParser
   class CommonTiming
     attr_accessor :id, :duration, :restart, :children, :start_conditions, :end_conditions
@@ -28,9 +28,9 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'stCondLst'
-          @start_conditions = Condition.parse_list(node_child)
+          @start_conditions = ConditionList.new(parent: self).parse(node_child)
         when 'endCondLst'
-          @end_conditions = Condition.parse_list(node_child)
+          @end_conditions = ConditionList.new(parent: self).parse(node_child)
         when 'childTnLst'
           @children = TimeNode.parse_list(node_child)
         end

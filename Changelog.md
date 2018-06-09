@@ -37,6 +37,7 @@
 * Change parsing of table styles - move to `TableStyles` class
 * Remove `Presentation.current_font_style`, use instance method instead
 * Replace `Presentation.parse` and `Presentation#parse`
+* Remove `Condition.parse_list`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
