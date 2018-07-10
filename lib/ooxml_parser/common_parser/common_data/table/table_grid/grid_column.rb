@@ -11,7 +11,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'w'
-          @width = OoxmlSize.new(value.value.to_f)
+          @width = OoxmlSize.new(value.value.to_f, :emu)
         end
       end
       self
