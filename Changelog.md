@@ -46,6 +46,7 @@
 * Fix parsing hyperlinks with empty `id`
 * Fix crashing on hover hyperlink in PPTX
 * Fix incorrect values of Cell Number Format
+* Fix `GridColumn#width` emu value
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
