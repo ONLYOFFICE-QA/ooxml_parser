@@ -80,11 +80,6 @@ Style/DateTime:
 Style/Documentation:
   Enabled: false
 
-# Offense count: 2
-Style/MultipleComparison:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/ooxml_document_object/ooxml_document_object_helper.rb'
-
 # Offense count: 1737
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
