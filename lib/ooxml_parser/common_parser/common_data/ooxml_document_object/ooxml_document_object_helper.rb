@@ -108,7 +108,7 @@ module OoxmlDocumentObjectHelper
     return false if node.to_s == '0'
     return false if node.attribute(attribute_name).nil?
     status = node.attribute(attribute_name).value
-    !(status == 'false' || status == 'off' || status == '0')
+    !%w[false off 0].include?(status)
   end
 
   def attribute_enabled?(node, attribute_name = 'val')
@@ -116,7 +116,7 @@ module OoxmlDocumentObjectHelper
     return false if node.to_s == '0'
     return false if node.attribute(attribute_name).nil?
     status = node.attribute(attribute_name).value
-    status == 'true' || status == 'on' || status == '1'
+    %w[true on 1].include?(status)
   end
 
   def root_object
