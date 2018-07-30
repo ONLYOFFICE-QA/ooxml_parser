@@ -8,6 +8,7 @@
 * Parsing `XlsxColumnProperties#hidden`
 * Ability to parse shared strings in custom named file
 * Parsing `CellProperties#borders_properties` for `tcBdr` tag
+* Add detailed parsing of formulas in xlsx
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
