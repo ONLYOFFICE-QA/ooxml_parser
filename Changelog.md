@@ -9,6 +9,7 @@
 * Ability to parse shared strings in custom named file
 * Parsing `CellProperties#borders_properties` for `tcBdr` tag
 * Add detailed parsing of formulas in xlsx
+* Redone parsing Bookmarks, since it part of `DocxParagraph` elements and order is important
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element

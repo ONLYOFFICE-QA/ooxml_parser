@@ -1,5 +1,6 @@
 # noinspection RubyTooManyInstanceVariablesInspection
-require_relative 'docx_paragraph/bookmark'
+require_relative 'docx_paragraph/bookmark_start'
+require_relative 'docx_paragraph/bookmark_end'
 require_relative 'docx_paragraph/docx_paragraph_helper'
 require_relative 'docx_paragraph/docx_paragraph_run'
 require_relative 'docx_paragraph/field_simple'
@@ -49,6 +50,8 @@ module OoxmlParser
       @orphan_control = true
       @parent = parent
     end
+
+    alias elements character_style_array
 
     def initialize_copy(source)
       super
@@ -111,9 +114,9 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'bookmarkStart'
-          @bookmark_start << Bookmark.new(parent: self).parse(node_child)
+          character_styles_array << BookmarkStart.new(parent: self).parse(node_child)
         when 'bookmarkEnd'
-          @bookmark_end << Bookmark.new(parent: self).parse(node_child)
+          character_styles_array << BookmarkEnd.new(parent: self).parse(node_child)
         when 'pPr'
           parse_paragraph_style(node_child, custom_character_style)
           node.xpath('w:pict').each do |pict|
