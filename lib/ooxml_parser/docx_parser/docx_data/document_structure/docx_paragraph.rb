@@ -65,7 +65,7 @@ module OoxmlParser
       @character_style_array.select do |cur_run|
         if cur_run.is_a?(DocxParagraphRun) || cur_run.is_a?(ParagraphRun)
           !cur_run.empty?
-        elsif cur_run.is_a?(DocxFormula) || cur_run.is_a?(StructuredDocumentTag)
+        elsif cur_run.is_a?(DocxFormula) || cur_run.is_a?(StructuredDocumentTag) || cur_run.is_a?(BookmarkStart) || cur_run.is_a?(BookmarkEnd)
           true
         end
       end
