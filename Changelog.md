@@ -10,6 +10,7 @@
 * Parsing `CellProperties#borders_properties` for `tcBdr` tag
 * Add detailed parsing of formulas in xlsx
 * Redone parsing Bookmarks, since it part of `DocxParagraph` elements and order is important
+* `BookmarkStart` and `BookmarkEnd` count as nonempty_run
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
