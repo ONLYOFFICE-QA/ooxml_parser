@@ -39,11 +39,7 @@ module OoxmlParser
           @value = TextValue.new(parent: self).parse(node_child)
         end
       end
-      if @type && @value
-        node.attribute('t').value == 's' ? get_shared_string(value.value) : @raw_text = value.value
-      elsif @value
-        @raw_text = value.value if @value
-      end
+      parse_text_data
       self
     end
 
@@ -61,6 +57,15 @@ module OoxmlParser
     end
 
     private
+
+    # @return [Nothing] parse text data
+    def parse_text_data
+      if @type && @value
+        type == 's' ? get_shared_string(value.value) : @raw_text = value.value
+      elsif @value
+        @raw_text = value.value if @value
+      end
+    end
 
     # Get shared string by it's number
     # @return [Nothing]
