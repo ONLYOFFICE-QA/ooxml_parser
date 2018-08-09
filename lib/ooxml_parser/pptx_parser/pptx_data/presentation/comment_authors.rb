@@ -26,5 +26,11 @@ module OoxmlParser
       end
       self
     end
+
+    # @param id [Integer] id of author
+    # @return [CommentAuthor] author by id
+    def author_by_id(id)
+      list.detect { |author| author.id == id }
+    end
   end
 end
