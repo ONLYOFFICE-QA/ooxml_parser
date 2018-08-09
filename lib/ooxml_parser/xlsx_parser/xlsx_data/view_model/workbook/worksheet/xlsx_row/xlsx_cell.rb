@@ -8,6 +8,10 @@ module OoxmlParser
     attr_accessor :raw_text
     # @return [Integer] index of style
     attr_reader :style_index
+    # @return [String] value of cell
+    attr_reader :value
+    # @return [String] type of string
+    attr_reader :type
 
     def initialize(parent: nil)
       @style_index = 0 # default style is zero
@@ -29,12 +33,16 @@ module OoxmlParser
         case key
         when 's'
           @style_index = value.value.to_i
+        when 't'
+          @type = value.value.to_s
         end
       end
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'f'
           @formula = Formula.new(parent: self).parse(node_child)
+        when 'v'
+          @value = TextValue.new(parent: self).parse(node_child)
         end
       end
       @text = @raw_text.dup if @raw_text
@@ -51,7 +59,6 @@ module OoxmlParser
     private
 
     # Get shared string by it's number
-    # @param [String] value number of shared string
     # @return [Nothing]
     def get_shared_string(value)
       return '' if value == ''
