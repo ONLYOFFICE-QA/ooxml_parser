@@ -2,7 +2,7 @@ require_relative 'xlsx_cell/formula'
 # Single Cell of XLSX
 module OoxmlParser
   class XlsxCell < OOXMLDocumentObject
-    attr_accessor :text, :formula, :character
+    attr_accessor :formula, :character
 
     # @return [String] text without applying any style modificators, like quote_prefix
     attr_accessor :raw_text
@@ -15,7 +15,6 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @style_index = 0 # default style is zero
-      @text = ''
       @raw_text = ''
       @parent = parent
     end
@@ -45,8 +44,6 @@ module OoxmlParser
       elsif @value
         @raw_text = value.value if @value
       end
-      @text = @raw_text.dup if @raw_text
-      @text.insert(0, "'") if style.quote_prefix
       self
     end
 
@@ -54,6 +51,13 @@ module OoxmlParser
     def style
       return nil unless @style_index
       root_object.style_sheet.cell_xfs.xf_array[@style_index]
+    end
+
+    # @return [String] text with modifiers
+    def text
+      return '' unless @raw_text
+      return @raw_text.dup.insert(0, "'") if style.quote_prefix
+      @raw_text
     end
 
     private
