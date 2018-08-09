@@ -1,4 +1,5 @@
-require_relative 'presentation/presentation_comment'
+require_relative 'presentation/comment_authors'
+require_relative 'presentation/presentation_comments'
 require_relative 'presentation/presentation_helpers'
 require_relative 'presentation/presentation_theme'
 require_relative 'presentation/slide'
@@ -7,11 +8,15 @@ require_relative 'presentation/table_styles'
 module OoxmlParser
   class Presentation < CommonDocumentStructure
     include PresentationHelpers
-    attr_accessor :slides, :theme, :slide_size, :comments
+    attr_accessor :slides, :theme, :slide_size
     # @return [Relationships] relationships of presentation
     attr_accessor :relationships
     # @return [TableStyles] table styles data
     attr_accessor :table_styles
+    # @return [CommentAuthors] authors of presentation
+    attr_reader :comment_authors
+    # @return [PresentationComments] comments of presentation
+    attr_reader :comments
 
     def initialize(params = {})
       @slides = []
@@ -26,6 +31,8 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       @theme = PresentationTheme.parse('ppt/theme/theme1.xml')
       @table_styles = TableStyles.new(parent: self).parse
+      @comment_authors = CommentAuthors.new(parent: self).parse
+      @comments = PresentationComments.new(parent: self).parse
       presentation_node = doc.search('//p:presentation').first
       presentation_node.xpath('*').each do |presentation_node_child|
         case presentation_node_child.name
@@ -41,7 +48,6 @@ module OoxmlParser
           end
         end
       end
-      @comments = PresentationComment.parse_list
       OOXMLDocumentObject.xmls_stack.pop
       @relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
       self

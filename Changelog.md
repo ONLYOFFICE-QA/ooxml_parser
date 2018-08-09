@@ -42,6 +42,7 @@
 * Replace `Presentation.parse` and `Presentation#parse`
 * Remove `Condition.parse_list`
 * Redone parsing `XlsxCell`
+* Redone parsing `CommenAuthors`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
