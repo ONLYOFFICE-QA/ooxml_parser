@@ -1,3 +1,4 @@
+require_relative 'presentation/comment_authors'
 require_relative 'presentation/presentation_comment'
 require_relative 'presentation/presentation_helpers'
 require_relative 'presentation/presentation_theme'
@@ -12,6 +13,8 @@ module OoxmlParser
     attr_accessor :relationships
     # @return [TableStyles] table styles data
     attr_accessor :table_styles
+    # @return [CommentAuthors]
+    attr_reader :comment_authors
 
     def initialize(params = {})
       @slides = []
@@ -26,6 +29,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
       @theme = PresentationTheme.parse('ppt/theme/theme1.xml')
       @table_styles = TableStyles.new(parent: self).parse
+      @comment_authors = CommentAuthors.new(parent: self).parse
       presentation_node = doc.search('//p:presentation').first
       presentation_node.xpath('*').each do |presentation_node_child|
         case presentation_node_child.name
