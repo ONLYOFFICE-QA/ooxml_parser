@@ -24,11 +24,6 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [XlsxCell] result of parsing
     def parse(node)
-      if node.attribute('t')
-        node.attribute('t').value == 's' ? get_shared_string(node.xpath('xmlns:v').text) : @raw_text = node.xpath('xmlns:v').text
-      else
-        @raw_text = node.xpath('xmlns:v').text
-      end
       node.attributes.each do |key, value|
         case key
         when 's'
@@ -44,6 +39,11 @@ module OoxmlParser
         when 'v'
           @value = TextValue.new(parent: self).parse(node_child)
         end
+      end
+      if @type && @value
+        node.attribute('t').value == 's' ? get_shared_string(value.value) : @raw_text = value.value
+      elsif @value
+        @raw_text = value.value if @value
       end
       @text = @raw_text.dup if @raw_text
       @text.insert(0, "'") if style.quote_prefix
