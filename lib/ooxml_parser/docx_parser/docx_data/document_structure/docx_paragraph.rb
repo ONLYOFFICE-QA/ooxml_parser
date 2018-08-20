@@ -1,6 +1,8 @@
 # noinspection RubyTooManyInstanceVariablesInspection
 require_relative 'docx_paragraph/bookmark_start'
 require_relative 'docx_paragraph/bookmark_end'
+require_relative 'docx_paragraph/comment_range_end'
+require_relative 'docx_paragraph/comment_range_start'
 require_relative 'docx_paragraph/docx_paragraph_helper'
 require_relative 'docx_paragraph/docx_paragraph_run'
 require_relative 'docx_paragraph/field_simple'
@@ -65,7 +67,12 @@ module OoxmlParser
       @character_style_array.select do |cur_run|
         if cur_run.is_a?(DocxParagraphRun) || cur_run.is_a?(ParagraphRun)
           !cur_run.empty?
-        elsif cur_run.is_a?(DocxFormula) || cur_run.is_a?(StructuredDocumentTag) || cur_run.is_a?(BookmarkStart) || cur_run.is_a?(BookmarkEnd)
+        elsif cur_run.is_a?(DocxFormula) ||
+              cur_run.is_a?(StructuredDocumentTag) ||
+              cur_run.is_a?(BookmarkStart) ||
+              cur_run.is_a?(BookmarkEnd) ||
+              cur_run.is_a?(CommentRangeStart) ||
+              cur_run.is_a?(CommentRangeEnd)
           true
         end
       end
@@ -126,7 +133,9 @@ module OoxmlParser
           end
           @paragraph_properties = ParagraphProperties.new(parent: self).parse(node_child)
         when 'commentRangeStart'
-          comments << node_child.attribute('id').value
+          character_styles_array << CommentRangeStart.new(parent: self).parse(node_child)
+        when 'commentRangeEnd'
+          character_styles_array << CommentRangeEnd.new(parent: self).parse(node_child)
         when 'fldSimple'
           @field_simple = FieldSimple.new(parent: self).parse(node_child)
           @page_numbering = true if field_simple.page_numbering?
@@ -162,13 +171,6 @@ module OoxmlParser
         when 'oMathPara'
           @math_paragraph = MathParagraph.new(parent: self).parse(node_child)
           character_styles_array << math_paragraph.math
-        when 'commentRangeEnd'
-          comments.each_with_index do |comment, index|
-            if comment == node_child.attribute('id').value
-              comments.delete_at(index)
-              break
-            end
-          end
         when 'ins'
           @inserted = Inserted.new(parent: self).parse(node_child)
         when 'sdt'

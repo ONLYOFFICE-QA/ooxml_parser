@@ -11,6 +11,7 @@
 * Add detailed parsing of formulas in xlsx
 * Redone parsing Bookmarks, since it part of `DocxParagraph` elements and order is important
 * `BookmarkStart` and `BookmarkEnd` count as nonempty_run
+* Add parsing of `CommentRangeStart` and `CommentRangeEnd`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
