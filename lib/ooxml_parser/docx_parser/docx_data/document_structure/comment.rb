@@ -15,7 +15,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(comments_filename))
       doc.search('//w:comments').each do |document|
         document.xpath('w:comment').each do |comment_tag|
-          comment = Comment.new(comment_tag.attribute('id').value)
+          comment = Comment.new(comment_tag.attribute('id').value.to_i)
           comment_tag.xpath('w:p').each_with_index do |p, index|
             comment.paragraphs << DocxParagraph.new.parse(p, index, parent: parent)
           end
