@@ -16,6 +16,7 @@
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
 * Deprecation warning for `DocxParagraph#frame_properties`
+* Deprecation warning for `Point#text`
 * Remove unused and probably not real `DocxParagraph#kinoku`
 * Remove redundant `PresetColor`, `AbstractNumberingId`, 
   `Start`, `VerticalMerge`, `Order`, `SeriesIndex`, `PointCount`,
