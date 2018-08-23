@@ -13,6 +13,8 @@ module OoxmlParser
     attr_accessor :categories
     # @return [DisplayLabelsProperties]
     attr_accessor :display_labels
+    # @return [XYValues] values of series
+    attr_reader :values
     # @return [XYValues] values of x
     attr_reader :x_values
     # @return [XYValues] values of y
@@ -34,6 +36,8 @@ module OoxmlParser
           @categories = Categories.new(parent: self).parse(node_child)
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.new(parent: self).parse(node_child)
+        when 'val'
+          @values = XYValues.new(parent: self).parse(node_child)
         when 'xVal'
           @x_values = XYValues.new(parent: self).parse(node_child)
         when 'yVal'
