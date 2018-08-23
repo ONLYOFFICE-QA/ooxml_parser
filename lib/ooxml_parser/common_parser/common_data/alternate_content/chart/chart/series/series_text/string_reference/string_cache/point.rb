@@ -5,7 +5,12 @@ module OoxmlParser
     # @return [Integer] index of point
     attr_accessor :index
     # @return [TextValue] value of text
-    attr_accessor :text
+    attr_reader :value
+
+    alias text value
+
+    extend Gem::Deprecate
+    deprecate :text, 'OoxmlParser::Point#value', 2020, 1
 
     # Parse PointCount
     # @param [Nokogiri::XML:Node] node with PointCount
@@ -21,7 +26,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'v'
-          @text = TextValue.new(parent: self).parse(node_child)
+          @value = TextValue.new(parent: self).parse(node_child)
         end
       end
 
