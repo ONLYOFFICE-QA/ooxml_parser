@@ -4,6 +4,9 @@ module OoxmlParser
   class DocumentStyle < OOXMLDocumentObject
     include TableStylePropertiesHelper
     include DocumentStyleHelper
+
+    # @return [True, False] is style default
+    attr_reader :default
     # @return [Symbol] Type of style (+:paragraph+ or +:table+)
     attr_accessor :type
     # @return [FixNum] number of style
@@ -55,6 +58,8 @@ module OoxmlParser
           @type = value.value.to_sym
         when 'styleId'
           @style_id = value.value
+        when 'default'
+          @default = attribute_enabled?(value.value)
         end
       end
       node.xpath('*').each do |subnode|

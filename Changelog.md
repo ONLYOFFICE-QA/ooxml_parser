@@ -13,6 +13,7 @@
 * `BookmarkStart` and `BookmarkEnd` count as nonempty_run
 * Add parsing of `CommentRangeStart` and `CommentRangeEnd`
 * Add parsing of `Series#values`
+* Add parsing of `DocumentStyle#default`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
