@@ -3,16 +3,16 @@ module OoxmlParser
   class OOXMLCoordinates
     attr_accessor :x, :y
 
-    def initialize(x, y)
-      @x = if x.is_a?(OoxmlSize)
-             x
+    def initialize(x_value, y_value)
+      @x = if x_value.is_a?(OoxmlSize)
+             x_value
            else
-             OoxmlSize.new(x)
+             OoxmlSize.new(x_value)
            end
-      @y = if y.is_a?(OoxmlSize)
-             y
+      @y = if y_value.is_a?(OoxmlSize)
+             y_value
            else
-             OoxmlSize.new(y)
+             OoxmlSize.new(y_value)
            end
     end
 

@@ -61,13 +61,6 @@ Naming/AccessorMethodName:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/coordinates.rb'
 
-# Offense count: 3
-# Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
-# AllowedNames: io, id, to, by, on, in, at, ip, db
-Naming/UncommunicativeMethodParamName:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/drawing_properties/ooxml_coordinates.rb'
-
 # Offense count: 76
 Style/Documentation:
   Enabled: false
