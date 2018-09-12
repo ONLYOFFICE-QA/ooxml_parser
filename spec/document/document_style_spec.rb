@@ -46,4 +46,10 @@ describe 'document style' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/document_style_based_on_style.docx')
     expect(docx.document_style_by_name('CustomTableStyle').based_on_style.name).to eq('Bordered - Accent 5')
   end
+
+  it 'document_style_default' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/document_style_default.docx')
+    expect(docx.document_style_by_name('Default Paragraph Font').default).to be_truthy
+    expect(docx.document_style_by_name('Title').default).to be_falsey
+  end
 end
