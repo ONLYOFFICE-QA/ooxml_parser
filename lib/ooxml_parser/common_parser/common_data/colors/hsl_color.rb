@@ -2,14 +2,16 @@
 # HSL stands for hue, saturation, and lightness, and is often also called HLS.
 module OoxmlParser
   class HSLColor
-    attr_accessor :a, :h, :s, :l
+    attr_accessor :h, :s, :l
+    # @return [Integer] alpha channel value
+    attr_accessor :alpha_channel
 
     # Hue - The "attribute of a visual sensation according to which an area appears to be similar to one of
     # the perceived colors: red, yellow, green, and blue, or to a combination of two of them".
     # Saturation - The "colorfulness of a stimulus relative to its own brightness".
     # Lightness - The "brightness relative to the brightness of a similarly illuminated white".
-    def initialize(hue = 0, saturation = 0, lightness = 0, a = nil)
-      @a = a
+    def initialize(hue = 0, saturation = 0, lightness = 0, alpha_channel = nil)
+      @alpha_channel = alpha_channel
       @h = hue
       @s = saturation
       @l = lightness
@@ -26,7 +28,7 @@ module OoxmlParser
 
       delta = (max - min).to_f
       hls_color.l = (min + max) / 255.0 / 2.0
-      hls_color.a = rgb_color.alpha_channel.to_f / 255.0
+      hls_color.alpha_channel = rgb_color.alpha_channel.to_f / 255.0
 
       unless max == min
         hls_color.s = delta / (255.0 - (255.0 - max - min).abs)

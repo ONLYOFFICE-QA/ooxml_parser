@@ -28,6 +28,7 @@ module OoxmlParser
       if StringHelper.numeric?(sheet.to_s)
         row = @worksheets[sheet].rows[row.to_i - 1]
         return nil if row.nil?
+
         return row.cells[column.to_i - 1]
       elsif sheet.is_a?(String)
         @worksheets.each do |worksheet|
@@ -51,11 +52,14 @@ module OoxmlParser
       formulas = []
       worksheets.each do |c_sheet|
         next unless c_sheet
+
         c_sheet.rows.each do |c_row|
           next unless c_row
+
           c_row.cells.each do |c_cell|
             next unless c_cell
             next unless c_cell.formula
+
             text = c_cell.raw_text
             if StringHelper.numeric?(text)
               text = text.to_f.round(10).to_s[0..precision]
@@ -80,6 +84,7 @@ module OoxmlParser
     def parse_shared_strings
       shared_strings_target = relationships.target_by_type('sharedString')
       return unless shared_strings_target
+
       shared_string_file = "#{OOXMLDocumentObject.path_to_folder}/xl/#{shared_strings_target}"
       @shared_strings_table = SharedStringTable.new(parent: self).parse(shared_string_file)
     end

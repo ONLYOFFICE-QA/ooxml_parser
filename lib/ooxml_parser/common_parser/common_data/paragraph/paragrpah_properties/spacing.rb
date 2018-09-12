@@ -25,6 +25,7 @@ module OoxmlParser
       other.line_rule = :multiple if other.line_rule == :auto
       if self.class == NilClass || other.class == NilClass
         return true if self.class == NilClass && other.class == NilClass
+
         return false
       else
         self.line_rule = line_rule.to_sym if line_rule.instance_of?(String)

@@ -20,12 +20,14 @@ module OoxmlParser
       return Color.get_rgb_by_color_index(indexed) if indexed
       return ThemeColors.new(parent: self).parse_color_theme(theme, tint) if theme
       return rgb if rgb
+
       value
     end
 
     def ==(other)
       return to_color == other if other.is_a?(Color)
       return to_color == other if other.is_a?(Symbol)
+
       super
     end
 

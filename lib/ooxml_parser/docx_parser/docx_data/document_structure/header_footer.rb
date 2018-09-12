@@ -44,6 +44,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + xml_path))
       doc.search(xpath_for_search).each do |footnote|
         next unless footnote.attribute('id').value.to_i == @id
+
         paragraph_number = 0
         footnote.xpath('w:p').each do |paragraph|
           @elements << DocumentStructure.default_paragraph_style.dup.parse(paragraph, paragraph_number, DocumentStructure.default_run_style, parent: self)

@@ -35,6 +35,7 @@ module OoxmlParser
           style_exist = true if existing_style.type == current_table_style
         end
         next if style_exist
+
         @table_style_properties_list << TableStyleProperties.new(type: current_table_style)
       end
     end

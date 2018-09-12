@@ -43,6 +43,7 @@ module OoxmlParser
           end
           next unless val
           next if val.xpath('c:numRef').empty?
+
           @data << ChartCellsRange.new(parent: self).parse(val.xpath('c:numRef').first).dup
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.new(parent: self).parse(chart_props_node_child)
@@ -71,6 +72,7 @@ module OoxmlParser
                 when 'plotArea'
                   chart_node_child.xpath('*').each do |plot_area_node_child|
                     next unless chart.type.empty?
+
                     case plot_area_node_child.name
                     when 'barChart'
                       chart.type = :bar

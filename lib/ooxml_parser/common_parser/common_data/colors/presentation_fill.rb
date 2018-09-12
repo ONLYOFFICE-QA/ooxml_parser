@@ -10,6 +10,7 @@ module OoxmlParser
     # @return [PresentationFill] result of parsing
     def parse(node)
       return nil if node.xpath('*').empty?
+
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'gradFill'
@@ -30,6 +31,7 @@ module OoxmlParser
         end
       end
       return nil if @type.nil?
+
       self
     end
   end

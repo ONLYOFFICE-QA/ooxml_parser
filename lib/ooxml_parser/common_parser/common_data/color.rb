@@ -181,6 +181,7 @@ module OoxmlParser
       return false if none? && color_to_check.any?
       return false if !none? && color_to_check.none?
       return true if self == color_to_check
+
       red = color_to_check.red
       green = color_to_check.green
       blue = color_to_check.blue
@@ -248,6 +249,7 @@ module OoxmlParser
         end
       end
       return nil unless color
+
       color.calculate_with_tint!(1.0 - tint) if tint
       @red = color.red
       @green = color.green
@@ -290,12 +292,14 @@ module OoxmlParser
       def get_rgb_by_color_index(index)
         color_by_index = COLOR_INDEXED[index]
         return :unknown if color_by_index.nil?
+
         color_by_index == 'n/a' ? Color.new : Color.new.parse_hex_string(color_by_index)
       end
 
       def parse_string(str)
         return str if str.is_a?(Color)
         return Color.new(VALUE_FOR_NONE_COLOR, VALUE_FOR_NONE_COLOR, VALUE_FOR_NONE_COLOR) if str == 'none' || str == '' || str == 'transparent' || str.nil?
+
         split = if str.include?('RGB (') || str.include?('rgb(')
                   str.gsub(/[(RGBrgb\(\) )]/, '').split(',')
                 elsif str.include?('RGB ') || str.include?('rgb')

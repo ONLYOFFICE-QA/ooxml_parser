@@ -5,6 +5,7 @@ module OoxmlParser
     def with_data?
       return true if @worksheets.length > 1
       return true if @worksheets.first.with_data?
+
       false
     end
   end

@@ -14,6 +14,7 @@ module OoxmlParser
     # @return [TableStyles] result of parsing
     def parse(file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/tableStyles.xml")
       return nil unless File.exist?(file)
+
       document = Nokogiri::XML(File.open(file))
       node = document.xpath('*').first
 

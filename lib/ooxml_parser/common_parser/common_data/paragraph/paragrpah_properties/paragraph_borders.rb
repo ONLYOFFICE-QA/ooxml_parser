@@ -24,6 +24,7 @@ module OoxmlParser
       return :none if result == []
       return :all if result == %i[left right top bottom inner]
       return :outer if result == %i[left right top bottom]
+
       result.first if result.size == 1
     end
 

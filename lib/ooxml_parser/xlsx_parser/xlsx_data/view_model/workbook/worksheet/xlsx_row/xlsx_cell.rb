@@ -46,6 +46,7 @@ module OoxmlParser
     # @return [Xf] style of cell
     def style
       return nil unless @style_index
+
       root_object.style_sheet.cell_xfs.xf_array[@style_index]
     end
 
@@ -53,6 +54,7 @@ module OoxmlParser
     def text
       return '' unless @raw_text
       return @raw_text.dup.insert(0, "'") if style.quote_prefix
+
       @raw_text
     end
 
@@ -71,6 +73,7 @@ module OoxmlParser
     # @return [Nothing]
     def get_shared_string(value)
       return '' if value == ''
+
       string = root_object.shared_strings_table.string_indexes[value.to_i]
       @character = string.run
       @raw_text = string.text

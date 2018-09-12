@@ -23,12 +23,16 @@ describe 'My behaviour' do
 
   it 'Check shape with text' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/text/shape_with_text.docx')
-    expect(docx.elements.first.nonempty_runs.first.alternate_content.office2007_content.data.text_box.first.character_style_array.first.text).to eq('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'\
-                                                                                                                                                    ' Integer consequat faucibus eros, sed mattis tortor consectetur '\
-                                                                                                                                                    'cursus. Mauris non eros odio. Curabitur velit metus, placerat sit '\
-                                                                                                                                                    'amet tempus cursus, pulvinar sed enim. Vivamus odio arcu, volutpat '\
-                                                                                                                                                    'gravida imperdiet vitae, mollis eget augue. Sed ultricies viverra '\
-                                                                                                                                                    'convallis. Fusce pharetra mi eget')
+    expect(docx.elements.first.nonempty_runs
+               .first.alternate_content.office2007_content
+               .data.text_box.first
+               .character_style_array.first.text)
+      .to eq('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'\
+             ' Integer consequat faucibus eros, sed mattis tortor consectetur '\
+             'cursus. Mauris non eros odio. Curabitur velit metus, placerat sit '\
+             'amet tempus cursus, pulvinar sed enim. Vivamus odio arcu, volutpat '\
+             'gravida imperdiet vitae, mollis eget augue. Sed ultricies viverra '\
+             'convallis. Fusce pharetra mi eget')
   end
 
   it 'Check ParagraphLineBreak' do
