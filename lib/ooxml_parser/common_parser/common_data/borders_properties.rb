@@ -1,30 +1,38 @@
 # Border Properties Data
 module OoxmlParser
   class BordersProperties < OOXMLDocumentObject
-    attr_accessor :color, :space, :sz, :val, :shadow, :frame, :side
+    attr_accessor :color, :space, :val, :shadow, :frame, :side
+    # @return [OoxmlSize] size of border
+    attr_reader :size
 
-    def initialize(color = :auto, sz = 0, val = :none, space = 0, parent: nil)
+    def initialize(color = :auto, size = 0, val = :none, space = 0, parent: nil)
       @color = color
-      @sz = sz
+      @size = size
       @val = val
       @space = space
       @parent = parent
     end
 
-    alias size sz
+    # @return [OoxmlSize] alias for sz
+    def sz
+      size
+    end
+
+    extend Gem::Deprecate
+    deprecate :sz, 'size', 2020, 1
 
     def nil?
-      @sz.zero? && val == :none
+      size.zero? && val == :none
     end
 
     def to_s
       return '' if nil?
 
-      "borders color: #{@color}, size: #{@sz}, space: #{@space}, value: #{@val}"
+      "borders color: #{@color}, size: #{size}, space: #{@space}, value: #{@val}"
     end
 
     def copy
-      BordersProperties.new(@color, @sz, @val, @space)
+      BordersProperties.new(@color, size, @val, @space)
     end
 
     def visible?
@@ -44,7 +52,7 @@ module OoxmlParser
         when 'val'
           @val = value.value.to_sym
         when 'sz'
-          @sz = OoxmlSize.new(value.value.to_f, :one_eighth_point)
+          @size = OoxmlSize.new(value.value.to_f, :one_eighth_point)
         when 'space'
           @space = OoxmlSize.new(value.value.to_f, :point)
         when 'color'

@@ -67,7 +67,6 @@ Naming/AccessorMethodName:
 Naming/UncommunicativeMethodParamName:
   Exclude:
     - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/drawing_properties/ooxml_coordinates.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/borders_properties.rb'
 
 # Offense count: 76
 Style/Documentation:
