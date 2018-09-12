@@ -28,6 +28,7 @@ module OoxmlParser
 
     def with_data?
       return true unless background.nil?
+
       elements.each do |current_element|
         return true if current_element.with_data?
       end
@@ -72,6 +73,7 @@ module OoxmlParser
     def parse_note
       notes_target = @relationships.target_by_type('notes')
       return nil unless notes_target
+
       @note = PresentationNotes.new(parent: self).parse("#{OOXMLDocumentObject.path_to_folder}#{File.dirname(@xml_path)}/#{notes_target}")
     end
   end

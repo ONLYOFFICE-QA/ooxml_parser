@@ -30,6 +30,7 @@ module OoxmlParser
         return parse_coordinates_array(arguments_string) if arguments_string.include?(',')
         return warn "Formulas with # is unsupported: #{arguments_string}" if arguments_string.include?('#')
         return warn 'Formulas consists from `!` only' if arguments_string == '!'
+
         sheet_name = 'Sheet1'
 
         if arguments_string.include?('!')

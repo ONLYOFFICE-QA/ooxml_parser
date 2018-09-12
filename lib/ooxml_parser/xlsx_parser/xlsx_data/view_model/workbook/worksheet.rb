@@ -46,6 +46,7 @@ module OoxmlParser
       return true unless @drawings.empty?
       return true unless @charts.empty?
       return true unless @hyperlinks.empty?
+
       false
     end
 
@@ -117,8 +118,10 @@ module OoxmlParser
     # Do work for parsing shared comments file
     def parse_comments
       return unless relationships
+
       comments_target = relationships.target_by_type('comment')
       return unless comments_target
+
       comments_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/#{comments_target.gsub('..', '')}"
       @comments = ExcelComments.new(parent: self).parse(comments_file)
     end

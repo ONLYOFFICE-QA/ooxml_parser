@@ -33,6 +33,7 @@ module OoxmlParser
       return 'ROC 16K' if same_dimensions?(PageSize.new(OoxmlSize.new(27.3, :centimeter), OoxmlSize.new(19.68, :centimeter)))
       return 'Envelope Choukei 3' if same_dimensions?(PageSize.new(OoxmlSize.new(23.49, :centimeter), OoxmlSize.new(11.99, :centimeter)))
       return 'Super B/A3' if same_dimensions?(PageSize.new(OoxmlSize.new(48.25, :centimeter), OoxmlSize.new(33.02, :centimeter)))
+
       "Unknown page size: Height #{@height} Width #{@width}"
     end
 

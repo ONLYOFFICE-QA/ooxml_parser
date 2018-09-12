@@ -32,6 +32,7 @@ module OoxmlParser
       return :left if transform.offset.x.zero?
       return :center if OoxmlSize.new((slide_size.width.value / 2) - (transform.extents.x.value / 2)) == OoxmlSize.new(transform.offset.x.value)
       return :right if OoxmlSize.new((slide_size.width.value - transform.extents.x.value)) == OoxmlSize.new(transform.offset.x.value)
+
       :unknown
     end
 
@@ -40,6 +41,7 @@ module OoxmlParser
       return :top if transform.offset.y.zero?
       return :middle if OoxmlSize.new((slide_size.height.value / 2) - (transform.extents.y.value / 2)) == OoxmlSize.new(transform.offset.y.value)
       return :bottom if OoxmlSize.new(slide_size.height.value - transform.extents.y.value) == OoxmlSize.new(transform.offset.y.value)
+
       :unknown
     end
 

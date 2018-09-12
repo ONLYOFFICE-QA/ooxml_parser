@@ -191,6 +191,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
       doc.search('//w:style').each do |style|
         next if style.attribute('default').nil?
+
         if (style.attribute('default').value == '1' || style.attribute('default').value == 'on' || style.attribute('default').value == 'true') && style.attribute('type').value == 'paragraph'
           style.xpath('w:pPr').each do |paragraph_pr_tag|
             DocumentStructure.default_paragraph_style = DocxParagraph.new.parse_paragraph_style(paragraph_pr_tag, DocumentStructure.default_run_style)
@@ -210,6 +211,7 @@ module OoxmlParser
       doc.search('//w:style').each do |style|
         next if style.attribute('default').nil?
         next unless (style.attribute('default').value == '1' || style.attribute('default').value == 'on' || style.attribute('default').value == 'true') && style.attribute('type').value == 'table'
+
         style.xpath('w:rPr').each do |table_character_pr_tag|
           DocumentStructure.default_table_run_style.parse_properties(table_character_pr_tag, DocumentStructure.default_run_style)
         end

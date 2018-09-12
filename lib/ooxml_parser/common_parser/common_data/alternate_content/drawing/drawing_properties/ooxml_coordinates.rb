@@ -35,6 +35,7 @@ module OoxmlParser
     # @return [OOXMLCoordinates] result of parsing
     def self.parse(position_node, x_attr: 'x', y_attr: 'y', unit: :dxa)
       return if position_node.attribute(x_attr).nil? || position_node.attribute(y_attr).nil?
+
       OOXMLCoordinates.new(OoxmlSize.new(position_node.attribute(x_attr).value.to_f, unit),
                            OoxmlSize.new(position_node.attribute(y_attr).value.to_f, unit))
     end

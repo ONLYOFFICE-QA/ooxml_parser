@@ -18,6 +18,7 @@ module OoxmlParser
     def parse(node)
       blip_node = node.xpath('a:blip', 'xmlns:a' => 'http://schemas.openxmlformats.org/drawingml/2006/main').first
       return self if blip_node.nil?
+
       @file_reference = FileReference.new(parent: self).parse(blip_node)
       self
     end

@@ -17,6 +17,7 @@ module OoxmlParser
     # @return [Symbol] overlay and position type
     def position_with_overlay
       return "#{@position}_overlay".to_sym if overlay
+
       @position
     end
 

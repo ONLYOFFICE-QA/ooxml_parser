@@ -66,6 +66,7 @@ module OoxmlParser
         end
       end
       return nil if @formula_run.empty?
+
       self
     end
   end

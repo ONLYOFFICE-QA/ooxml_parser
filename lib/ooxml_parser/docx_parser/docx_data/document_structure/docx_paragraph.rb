@@ -245,6 +245,7 @@ module OoxmlParser
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
       doc.search('//w:style').each do |style|
         next unless style.attribute('styleId').value == id
+
         style.xpath('w:pPr').each do |p_pr|
           paragraph_style.parse_paragraph_style(p_pr, character_style)
           paragraph_style.style = StyleParametres.new(parent: paragraph_style).parse(style)

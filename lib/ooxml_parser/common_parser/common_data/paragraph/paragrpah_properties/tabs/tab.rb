@@ -33,6 +33,7 @@ module OoxmlParser
     # @return [Symbol] type of size unit
     def position_unit(node)
       return :emu if node.namespace.prefix == 'a'
+
       :dxa
     end
   end

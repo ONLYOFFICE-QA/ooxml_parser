@@ -13,11 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'ooxml_parser.gemspec'
 
-# Offense count: 74
-# Cop supports --auto-correct.
-Layout/EmptyLineAfterGuardClause:
-  Enabled: false
-
 # Offense count: 128
 Metrics/AbcSize:
   Max: 130

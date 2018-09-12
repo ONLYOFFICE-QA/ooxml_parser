@@ -16,6 +16,7 @@ module OoxmlParser
       @list = node.xpath('c:f')[0].text.split('!').first
       coordinates = Coordinates.parser_coordinates_range(node.xpath('c:f')[0].text) # .split('!')[1].gsub('$', ''))
       return self unless coordinates
+
       node.xpath('c:numCache/c:pt').each_with_index do |point_node, index|
         point = ChartPoint.new(coordinates[index])
         point.value = point_node.xpath('c:v').first.text.to_f unless point_node.xpath('c:v').first.nil?

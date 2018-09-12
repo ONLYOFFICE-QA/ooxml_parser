@@ -6,8 +6,10 @@ module OoxmlDocumentObjectHelper
     result_hash = {}
     instance_variables.each do |current_attribute|
       next if current_attribute == :@parent
+
       attribute_value = instance_variable_get(current_attribute)
       next unless attribute_value
+
       if attribute_value.is_a?(Array)
         attribute_value.each_with_index do |object_element, index|
           result_hash["#{current_attribute}_#{index}".to_sym] = object_element.to_hash
@@ -99,6 +101,7 @@ module OoxmlDocumentObjectHelper
   def value_to_symbol(value)
     symbol = VALUE_TO_SYMBOL_HASH[value.value.to_sym]
     return value.value.to_sym if symbol.nil?
+
     symbol
   end
 
@@ -107,6 +110,7 @@ module OoxmlDocumentObjectHelper
     return true if node.to_s == '1'
     return false if node.to_s == '0'
     return false if node.attribute(attribute_name).nil?
+
     status = node.attribute(attribute_name).value
     !%w[false off 0].include?(status)
   end
@@ -115,6 +119,7 @@ module OoxmlDocumentObjectHelper
     return true if node.to_s == '1'
     return false if node.to_s == '0'
     return false if node.attribute(attribute_name).nil?
+
     status = node.attribute(attribute_name).value
     %w[true on 1].include?(status)
   end

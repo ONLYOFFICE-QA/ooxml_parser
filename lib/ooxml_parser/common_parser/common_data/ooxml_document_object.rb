@@ -56,6 +56,7 @@ module OoxmlParser
         FileUtils.rm_rf(tmp_folder) if File.directory?(tmp_folder)
         FileUtils.mkdir_p(tmp_folder)
         raise "Cannot find file by path #{path}" unless File.exist?(path)
+
         FileUtils.cp path, tmp_folder
         file_path
       end
@@ -64,6 +65,7 @@ module OoxmlParser
         Zip.warn_invalid_date = false
         Zip::File.open(path_to_file) do |zip_file|
           raise LoadError, "There is no files in zip #{path_to_file}" if zip_file.entries.empty?
+
           zip_file.each do |file|
             file_path = File.join(destination, file.name)
             FileUtils.mkdir_p(File.dirname(file_path))
@@ -93,6 +95,7 @@ module OoxmlParser
       def get_link_from_rels(id)
         rels_path = dir + "_rels/#{File.basename(OOXMLDocumentObject.xmls_stack.last)}.rels"
         raise LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)
+
         relationships = Relationships.parse_rels(rels_path)
         relationships.target_by_id(id)
       end

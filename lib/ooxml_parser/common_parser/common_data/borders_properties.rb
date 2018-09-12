@@ -19,6 +19,7 @@ module OoxmlParser
 
     def to_s
       return '' if nil?
+
       "borders color: #{@color}, size: #{@sz}, space: #{@space}, value: #{@val}"
     end
 
@@ -28,6 +29,7 @@ module OoxmlParser
 
     def visible?
       return false if nil?
+
       val != 'none'
     end
 
@@ -36,6 +38,7 @@ module OoxmlParser
     # @return [BordersProperties] value of BordersProperties
     def parse(node)
       return nil if node.attribute('val').value == 'nil'
+
       node.attributes.each do |key, value|
         case key
         when 'val'
