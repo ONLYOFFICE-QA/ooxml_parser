@@ -33,11 +33,19 @@ describe 'My behaviour' do
 
   it 'gradient_fill.xlsx' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/shape/text_body/paragraphs/runs/properties/gradient_fill.xlsx')
-    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.font_color.type).to eq(:gradient)
-    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.font_color.color.gradient_stops.first.color.converted_color).to eq(OoxmlParser::Color.new(179, 162, 199))
-    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.font_color.color.gradient_stops.first.position).to eq(0)
-    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.font_color.color.gradient_stops[1].color.converted_color).to eq(OoxmlParser::Color.new(250, 192, 144))
-    expect(xlsx.worksheets[0].drawings.first.shape.text_body.paragraphs.first.runs.first.properties.font_color.color.gradient_stops[1].position).to eq(100)
+    font_color = xlsx.worksheets[0].drawings
+                     .first.shape.text_body
+                     .paragraphs.first.runs
+                     .first.properties.font_color
+    expect(font_color.type).to eq(:gradient)
+    expect(font_color.color.gradient_stops
+               .first.color.converted_color)
+      .to eq(OoxmlParser::Color.new(179, 162, 199))
+    expect(font_color.color.gradient_stops.first.position).to eq(0)
+    expect(font_color.color.gradient_stops[1]
+               .color.converted_color)
+      .to eq(OoxmlParser::Color.new(250, 192, 144))
+    expect(font_color.color.gradient_stops[1].position).to eq(100)
   end
 
   it 'linear_gradient_no_scaled' do
