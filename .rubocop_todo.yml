@@ -56,11 +56,6 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 22
 
-# Offense count: 1
-Naming/AccessorMethodName:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/coordinates.rb'
-
 # Offense count: 76
 Style/Documentation:
   Enabled: false

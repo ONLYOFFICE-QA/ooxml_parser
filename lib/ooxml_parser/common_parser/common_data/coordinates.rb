@@ -109,11 +109,15 @@ module OoxmlParser
     # @return [Integer] number of column
     # This method takes @column string
     # and converts into integer
-    def get_column_number
+    def column_number
       @column.reverse.each_char.reduce(0) do |result, char|
         result + (char.downcase.ord - 96) * (26**@column.reverse.index(char))
       end
     end
+
+    alias get_column_number column_number
+    extend Gem::Deprecate
+    deprecate :get_column_number, 'column_number', 2020, 1
 
     # Compares rows of two cells
     # @param [Coordinates] other_cell other cell coordinates
