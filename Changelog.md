@@ -14,6 +14,7 @@
 * Add parsing of `CommentRangeStart` and `CommentRangeEnd`
 * Add parsing of `Series#values`
 * Add parsing of `DocumentStyle#default`
+* Add parsing of `Worksheet#page_setup`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
