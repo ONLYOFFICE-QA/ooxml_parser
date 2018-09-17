@@ -15,6 +15,7 @@
 * Add parsing of `Series#values`
 * Add parsing of `DocumentStyle#default`
 * Add parsing of `Worksheet#page_setup`
+* Add parsing of `Worksheet#page_margins`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element

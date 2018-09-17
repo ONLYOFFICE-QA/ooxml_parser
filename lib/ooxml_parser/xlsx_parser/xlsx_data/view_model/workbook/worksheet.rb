@@ -18,6 +18,8 @@ module OoxmlParser
     attr_accessor :relationships
     # @return [Relationships] array of ole objects
     attr_accessor :ole_objects
+    # @return [PageMargins] page margins settings
+    attr_reader :page_margins
     # @return [PageSetup] page setup settings
     attr_reader :page_setup
     # @return [ExtensionList] list of extensions
@@ -107,6 +109,8 @@ module OoxmlParser
           end
         when 'oleObjects'
           @ole_objects = OleObjects.new(parent: self).parse(worksheet_node_child)
+        when 'pageMargins'
+          @page_margins = PageMargins.new(parent: self).parse(worksheet_node_child)
         when 'pageSetup'
           @page_setup = PageSetup.new(parent: self).parse(worksheet_node_child)
         when 'extLst'
