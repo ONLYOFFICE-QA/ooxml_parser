@@ -1,5 +1,6 @@
 require_relative 'worksheet/excel_comments'
 require_relative 'worksheet/ole_objects'
+require_relative 'worksheet/page_setup'
 require_relative 'worksheet/sheet_format_properties'
 require_relative 'worksheet/sheet_view'
 require_relative 'worksheet/table_part'
@@ -17,6 +18,8 @@ module OoxmlParser
     attr_accessor :relationships
     # @return [Relationships] array of ole objects
     attr_accessor :ole_objects
+    # @return [PageSetup] page setup settings
+    attr_reader :page_setup
     # @return [ExtensionList] list of extensions
     attr_accessor :extension_list
 
@@ -104,6 +107,8 @@ module OoxmlParser
           end
         when 'oleObjects'
           @ole_objects = OleObjects.new(parent: self).parse(worksheet_node_child)
+        when 'pageSetup'
+          @page_setup = PageSetup.new(parent: self).parse(worksheet_node_child)
         when 'extLst'
           @extension_list = ExtensionList.new(parent: self).parse(worksheet_node_child)
         end
