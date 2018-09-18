@@ -110,7 +110,7 @@ module OoxmlParser
         when 'oleObjects'
           @ole_objects = OleObjects.new(parent: self).parse(worksheet_node_child)
         when 'pageMargins'
-          @page_margins = PageMargins.new(parent: self).parse(worksheet_node_child)
+          @page_margins = PageMargins.new(parent: self).parse(worksheet_node_child, :inch)
         when 'pageSetup'
           @page_setup = PageSetup.new(parent: self).parse(worksheet_node_child)
         when 'extLst'

@@ -7,6 +7,10 @@ describe OoxmlParser::PageMargins do
     expect(xlsx.worksheets.first.page_margins.top.value).to eq(0.75196850393700787)
   end
 
+  it 'PageMargins#top is in inches' do
+    expect(xlsx.worksheets.first.page_margins.top.unit).to eq(:inch)
+  end
+
   it 'PageMargins#bottom' do
     expect(xlsx.worksheets.first.page_margins.bottom.value).to eq(0.75196850393700787)
   end
