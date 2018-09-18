@@ -17,23 +17,23 @@ module OoxmlParser
     # Parse BordersProperties
     # @param [Nokogiri::XML:Element] node with PageMargins
     # @return [PageMargins] value of PageMargins
-    def parse(node)
+    def parse(node, unit = :dxa)
       node.attributes.each do |key, value|
         case key
         when 'top'
-          @top = OoxmlSize.new(value.value.to_f)
+          @top = OoxmlSize.new(value.value.to_f, unit)
         when 'left'
-          @left = OoxmlSize.new(value.value.to_f)
+          @left = OoxmlSize.new(value.value.to_f, unit)
         when 'right'
-          @right = OoxmlSize.new(value.value.to_f)
+          @right = OoxmlSize.new(value.value.to_f, unit)
         when 'bottom'
-          @bottom = OoxmlSize.new(value.value.to_f)
+          @bottom = OoxmlSize.new(value.value.to_f, unit)
         when 'header'
-          @header = OoxmlSize.new(value.value.to_f)
+          @header = OoxmlSize.new(value.value.to_f, unit)
         when 'footer'
-          @footer = OoxmlSize.new(value.value.to_f)
+          @footer = OoxmlSize.new(value.value.to_f, unit)
         when 'gutter'
-          @gutter = OoxmlSize.new(value.value.to_f)
+          @gutter = OoxmlSize.new(value.value.to_f, unit)
         end
       end
       self
