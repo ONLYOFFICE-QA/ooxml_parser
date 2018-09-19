@@ -7,6 +7,10 @@ describe OoxmlParser::PageSetup do
     expect(xlsx.worksheets.first.page_setup.paper_size).to eq(11)
   end
 
+  it 'PageSetup#paper_size_name' do
+    expect(xlsx.worksheets.first.page_setup.paper_size_name).to eq('A5')
+  end
+
   it 'PageSetup#orientation' do
     expect(xlsx.worksheets.first.page_setup.orientation).to eq(:portrait)
   end
