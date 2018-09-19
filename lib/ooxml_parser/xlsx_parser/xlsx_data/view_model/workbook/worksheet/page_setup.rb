@@ -32,7 +32,7 @@ module OoxmlParser
     # https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.pagesetup.aspx
     def paper_size_names_list
       ['Default',
-       'US letter',
+       'US Letter',
        'US Letter small',
        'Tabloid',
        'Ledger',
