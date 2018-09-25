@@ -57,7 +57,8 @@ module OoxmlParser
         !object &&
         !shape &&
         !footnote &&
-        !endnote
+        !endnote &&
+        !@break
     end
 
     def ==(other)

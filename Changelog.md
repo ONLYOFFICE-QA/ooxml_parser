@@ -59,6 +59,7 @@
 * Fix crashing on hover hyperlink in PPTX
 * Fix incorrect values of Cell Number Format
 * Fix `GridColumn#width` emu value
+* Fix `DocumentStructure#with_data?` for docs with several empty paragraphs
 
 ## 0.4.1 (2018-03-01)
 ### Fixes

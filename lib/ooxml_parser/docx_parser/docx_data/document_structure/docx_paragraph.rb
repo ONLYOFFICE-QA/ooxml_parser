@@ -82,7 +82,7 @@ module OoxmlParser
 
     # @return [True, false] if structure contain any user data
     def with_data?
-      !nonempty_runs.empty?
+      !nonempty_runs.empty? || paragraph_properties.section_properties
     end
 
     def remove_empty_runs
