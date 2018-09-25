@@ -6,6 +6,11 @@ describe 'with_data' do
     expect(docx).not_to be_with_data
   end
 
+  it 'several_empty_paragraphs' do
+    docx = OoxmlParser::Parser.parse('spec/document/with_data/several_empty_paragraphs.docx')
+    expect(docx).not_to be_with_data
+  end
+
   it 'text_in_paragraph' do
     docx = OoxmlParser::Parser.parse('spec/document/with_data/text_in_paragraph.docx')
     expect(docx).to be_with_data
