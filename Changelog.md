@@ -17,6 +17,7 @@
 * Add parsing of `Worksheet#page_setup`
 * Add parsing of `Worksheet#page_margins`
 * Add parsing of `PageSetup#paper_size_name`
+* Add parsing `TableProperties#fill`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
