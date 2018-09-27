@@ -28,6 +28,8 @@ module OoxmlParser
     attr_accessor :caption
     # @return [ValuedChild] description of table
     attr_accessor :description
+    # @return [Color] fill type
+    attr_reader :fill
 
     alias table_properties table_positon
 
@@ -55,6 +57,8 @@ module OoxmlParser
           @jc = node_child.attribute('val').text.to_sym
         when 'shd'
           @shade = Shade.new(parent: self).parse(node_child)
+        when 'solidFill'
+          @fill = PresentationFill.new(parent: self).parse(node)
         when 'tblLook'
           @table_look = TableLook.new(parent: self).parse(node_child)
         when 'tblInd'
