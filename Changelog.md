@@ -51,6 +51,7 @@
 * Remove `Condition.parse_list`
 * Redone parsing `XlsxCell`
 * Redone parsing `CommenAuthors`
+* Remove usage of deprecated `Coordinates#get_column_number`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart

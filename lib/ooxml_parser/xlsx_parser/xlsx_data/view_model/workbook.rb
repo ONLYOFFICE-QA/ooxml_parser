@@ -23,7 +23,7 @@ module OoxmlParser
     end
 
     def cell(column, row, sheet = 0)
-      column = Coordinates.new(row, column).get_column_number unless StringHelper.numeric?(column.to_s)
+      column = Coordinates.new(row, column).column_number unless StringHelper.numeric?(column.to_s)
 
       if StringHelper.numeric?(sheet.to_s)
         row = @worksheets[sheet].rows[row.to_i - 1]
