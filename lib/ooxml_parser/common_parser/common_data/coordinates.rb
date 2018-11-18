@@ -105,7 +105,6 @@ module OoxmlParser
       end
     end
 
-    # get_column_number -> integer
     # @return [Integer] number of column
     # This method takes @column string
     # and converts into integer
@@ -130,7 +129,7 @@ module OoxmlParser
     # @param [Coordinates] other_cell other cell coordinates
     # @return [true, false] true, if column greater, than other row
     def column_greater_that_other?(other_cell)
-      get_column_number > other_cell.get_column_number
+      column_number > other_cell.column_number
     end
 
     def to_s
