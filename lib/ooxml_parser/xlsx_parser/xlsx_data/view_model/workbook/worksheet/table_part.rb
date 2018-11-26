@@ -9,7 +9,7 @@ module OoxmlParser
     # @return [ExtensionList] list of extensions
     attr_accessor :extension_list
     # @return [TableColumns] list of table columns
-    attr_accessor :table_columns
+    attr_reader :table_columns
     # @return [TableStyleInfo] describe style of table
     attr_accessor :table_style_info
 
