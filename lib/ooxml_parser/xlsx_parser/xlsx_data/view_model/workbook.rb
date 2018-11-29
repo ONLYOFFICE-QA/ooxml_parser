@@ -90,7 +90,7 @@ module OoxmlParser
     end
 
     def parse
-      @relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
+      @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
       parse_shared_strings
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.root_subfolder = 'xl/'

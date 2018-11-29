@@ -96,7 +96,7 @@ module OoxmlParser
         rels_path = dir + "_rels/#{File.basename(OOXMLDocumentObject.xmls_stack.last)}.rels"
         raise LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)
 
-        relationships = Relationships.parse_rels(rels_path)
+        relationships = Relationships.new.parse_file(rels_path)
         relationships.target_by_id(id)
       end
     end

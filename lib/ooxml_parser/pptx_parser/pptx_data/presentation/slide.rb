@@ -62,7 +62,7 @@ module OoxmlParser
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
-      @relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}#{File.dirname(@xml_path)}/_rels/#{@name}.xml.rels")
+      @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}#{File.dirname(@xml_path)}/_rels/#{@name}.xml.rels")
       parse_note
       self
     end
