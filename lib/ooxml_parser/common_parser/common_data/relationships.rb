@@ -5,8 +5,9 @@ module OoxmlParser
     # @return [Array, Relationship] array of relationships
     attr_accessor :relationship
 
-    def initialize
+    def initialize(parent: nil)
       @relationship = []
+      @parent = parent
     end
 
     # @return [Array, Column] accessor for relationship
@@ -22,6 +23,20 @@ module OoxmlParser
         case node_children.name
         when 'Relationship'
           @relationship << Relationship.new(parent: self).parse(node_children)
+        end
+      end
+      self
+    end
+
+    # Parse .rels file
+    # @param file_path [String] path to file
+    # @return [Relationships]
+    def parse_file(file_path)
+      node = Nokogiri::XML(File.open(file_path))
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'Relationships'
+          parse(node_child)
         end
       end
       self
@@ -45,19 +60,6 @@ module OoxmlParser
         return cur_rels.target if cur_rels.type.include?(type)
       end
       nil
-    end
-
-    # Parse .rels file
-    # @param file_path [String] path to file
-    # @return [Relationships]
-    def self.parse_rels(file_path)
-      node = Nokogiri::XML(File.open(file_path))
-      node.xpath('*').each do |node_child|
-        case node_child.name
-        when 'Relationships'
-          return Relationships.new.parse(node_child)
-        end
-      end
     end
   end
 end

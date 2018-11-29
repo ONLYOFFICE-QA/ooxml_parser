@@ -53,6 +53,7 @@
 * Redone parsing `XlsxCell`
 * Redone parsing `CommenAuthors`
 * Remove usage of deprecated `Coordinates#get_column_number`
+* Use instance method `Relationships#parse_file` instead of class method `Relationships.parse_rels`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart

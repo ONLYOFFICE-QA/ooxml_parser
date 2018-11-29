@@ -49,7 +49,7 @@ module OoxmlParser
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
-      @relationships = Relationships.parse_rels("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
+      @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
       self
     end
   end
