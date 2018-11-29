@@ -128,27 +128,5 @@ module OoxmlParser
       end
       @number = char_number
     end
-
-    def self.parse_font_by_theme(theme)
-      theme_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/theme/theme1.xml"
-      return nil unless File.exist?(theme_file)
-
-      doc = Nokogiri::XML(File.open(theme_file))
-      doc.search('//a:fontScheme').each do |font_scheme|
-        if theme.include?('major')
-          font_scheme.xpath('a:majorFont').each do |major_font|
-            major_font.xpath('a:latin').each do |latin|
-              return latin.attribute('typeface').value
-            end
-          end
-        elsif theme.include?('minor')
-          font_scheme.xpath('a:minorFont').each do |minor_font|
-            minor_font.xpath('a:latin').each do |latin|
-              return latin.attribute('typeface').value
-            end
-          end
-        end
-      end
-    end
   end
 end

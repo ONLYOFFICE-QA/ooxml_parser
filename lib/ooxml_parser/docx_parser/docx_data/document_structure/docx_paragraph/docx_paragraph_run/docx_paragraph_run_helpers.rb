@@ -8,7 +8,9 @@ module OoxmlParser
           node_child.attributes.each do |font_attribute, value|
             case font_attribute
             when 'asciiTheme'
-              self.font = DocxParagraphRun.parse_font_by_theme(node_child.attribute('asciiTheme').value)
+              theme = node_child.attribute('asciiTheme').value
+              self.font = root_object.theme.font_scheme.major_font.latin.typeface if theme.include?('major')
+              self.font = root_object.theme.font_scheme.minor_font.latin.typeface if theme.include?('minor')
             when 'ascii'
               self.font = value.value
               break
