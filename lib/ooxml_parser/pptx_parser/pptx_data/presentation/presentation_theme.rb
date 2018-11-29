@@ -1,7 +1,10 @@
+require_relative 'presentation_theme/font_scheme'
 require_relative 'presentation_theme/theme_color'
 module OoxmlParser
   class PresentationTheme < OOXMLDocumentObject
     attr_accessor :name, :color_scheme
+    # @return [FontScheme] font scheme
+    attr_accessor :font_scheme
 
     def initialize(name = '', color_scheme = {})
       @name = name
@@ -32,6 +35,8 @@ module OoxmlParser
             OOXMLDocumentObject.theme.color_scheme[:text2] = OOXMLDocumentObject.theme.color_scheme[:dk2]
             OOXMLDocumentObject.theme.color_scheme[:tx1] = OOXMLDocumentObject.theme.color_scheme[:dk1]
             OOXMLDocumentObject.theme.color_scheme[:tx2] = OOXMLDocumentObject.theme.color_scheme[:dk2]
+          when 'fontScheme'
+            OOXMLDocumentObject.theme.font_scheme = FontScheme.new(parent: self).parse(theme_element_node)
           end
         end
       end
