@@ -9,6 +9,8 @@ module OoxmlParser
             case font_attribute
             when 'asciiTheme'
               theme = node_child.attribute('asciiTheme').value
+              next unless root_object.theme
+
               self.font = root_object.theme.font_scheme.major_font.latin.typeface if theme.include?('major')
               self.font = root_object.theme.font_scheme.minor_font.latin.typeface if theme.include?('minor')
             when 'ascii'
