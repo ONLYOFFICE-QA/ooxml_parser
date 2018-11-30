@@ -18,7 +18,7 @@ module OoxmlParser
     end
 
     def comment
-      root_object.comments.detect { |comment| comment.id == id }
+      root_object.comments.comments_array.detect { |comment| comment.id == id }
     end
   end
 end
