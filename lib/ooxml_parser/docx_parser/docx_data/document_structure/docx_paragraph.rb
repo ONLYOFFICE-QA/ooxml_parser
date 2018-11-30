@@ -208,7 +208,7 @@ module OoxmlParser
           @background_color = Color.new(parent: self).parse_hex_string(background_color_string)
           @background_color.set_style(node_child.attribute('val').value.to_sym) unless node_child.attribute('val').nil?
         when 'pStyle'
-          DocxParagraph.parse_paragraph_style_xml(node_child.attribute('val').value, self, default_char_style)
+          parse_paragraph_style_xml(node_child.attribute('val').value, default_char_style)
         when 'ind'
           @ind = DocumentStructure.default_paragraph_style.ind.dup.parse(node_child)
         when 'numPr'
@@ -241,14 +241,14 @@ module OoxmlParser
       self
     end
 
-    def self.parse_paragraph_style_xml(id, paragraph_style, character_style)
+    def parse_paragraph_style_xml(id, character_style)
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
       doc.search('//w:style').each do |style|
         next unless style.attribute('styleId').value == id
 
         style.xpath('w:pPr').each do |p_pr|
-          paragraph_style.parse_paragraph_style(p_pr, character_style)
-          paragraph_style.style = StyleParametres.new(parent: paragraph_style).parse(style)
+          parse_paragraph_style(p_pr, character_style)
+          @style = StyleParametres.new(parent: self).parse(style)
         end
         style.xpath('w:rPr').each do |r_pr|
           character_style.parse_properties(r_pr, DocumentStructure.default_run_style)
