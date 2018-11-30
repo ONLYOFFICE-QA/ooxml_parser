@@ -10,7 +10,7 @@ require_relative 'table_properties/table_borders'
 module OoxmlParser
   # Class for parsing `w:tblPr` tags
   class TableProperties < OOXMLDocumentObject
-    attr_accessor :jc, :table_width, :table_borders, :table_positon, :table_cell_margin, :table_indent, :stretching, :table_style, :row_banding_size,
+    attr_accessor :jc, :table_width, :table_borders, :table_positon, :table_cell_margin, :table_indent, :stretching, :row_banding_size,
                   :column_banding_size, :table_look, :grid_column
     # @return [String] id of table style
     attr_reader :table_style_id
@@ -30,6 +30,8 @@ module OoxmlParser
     attr_accessor :description
     # @return [Color] fill type
     attr_reader :fill
+    # @return [TableStyle] element of table style
+    attr_reader :table_style_element
 
     alias table_properties table_positon
 
@@ -50,7 +52,8 @@ module OoxmlParser
         when 'tblBorders'
           @table_borders = TableBorders.new(parent: self).parse(node_child)
         when 'tblStyle'
-          @table_style = root_object.document_style_by_id(node_child.attribute('val').value)
+          # TODO: Incorrect but to keep compatibility
+          @table_style_element = TableStyle.new(parent: self).parse(node_child)
         when 'tblW'
           @table_width = OoxmlSize.new.parse(node_child)
         when 'jc'
@@ -88,6 +91,12 @@ module OoxmlParser
     # @return [TableStyle] style of table
     def style
       root_object.table_styles.style_by_id(table_style_id)
+    end
+
+    # For compatibility reasons
+    # @return [DocumentStyle] table style of table
+    def table_style
+      root_object.document_style_by_id(table_style_element.value)
     end
   end
 end
