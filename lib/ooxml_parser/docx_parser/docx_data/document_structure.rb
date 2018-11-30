@@ -140,7 +140,7 @@ module OoxmlParser
           end
         end
       end
-      parse_default_style
+      doc_structure.parse_default_style
       doc_structure.numbering = Numbering.new(parent: doc_structure).parse
       doc_structure.document_styles = DocumentStyle.parse_list(doc_structure)
       doc_structure.styles = Styles.new(parent: doc_structure).parse
@@ -187,7 +187,7 @@ module OoxmlParser
       doc_structure
     end
 
-    def self.parse_default_style
+    def parse_default_style
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
       doc.search('//w:style').each do |style|
         next if style.attribute('default').nil?
