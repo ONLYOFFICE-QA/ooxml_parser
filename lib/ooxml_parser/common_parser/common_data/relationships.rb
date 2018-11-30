@@ -1,7 +1,7 @@
 require_relative 'relationships/relationship'
 module OoxmlParser
   # Class for describing list of relationships
-  class Relationships
+  class Relationships < OOXMLDocumentObject
     # @return [Array, Relationship] array of relationships
     attr_accessor :relationship
 
