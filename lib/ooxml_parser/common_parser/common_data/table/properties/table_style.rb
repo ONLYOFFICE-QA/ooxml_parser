@@ -5,6 +5,8 @@ module OoxmlParser
     attr_accessor :id, :name, :whole_table, :banding_1_horizontal, :banding_2_horizontal, :banding_1_vertical, :banding_2_vertical,
                   :last_column, :first_column, :last_row, :first_row, :southeast_cell, :southwest_cell, :northeast_cell,
                   :northwest_cell
+    # @return [String] value of table style
+    attr_reader :value
 
     # Parse TableStyle object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -16,6 +18,8 @@ module OoxmlParser
           @id = value.value.to_s
         when 'styleName'
           @name = value.value.to_s
+        when 'val'
+          @value = value.value.to_s
         end
       end
 
