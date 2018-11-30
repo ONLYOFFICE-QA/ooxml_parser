@@ -242,7 +242,7 @@ module OoxmlParser
     end
 
     def parse_paragraph_style_xml(id, character_style)
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
+      doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
       doc.search('//w:style').each do |style|
         next unless style.attribute('styleId').value == id
 

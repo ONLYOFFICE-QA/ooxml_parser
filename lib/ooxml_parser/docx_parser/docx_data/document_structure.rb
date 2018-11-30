@@ -189,7 +189,7 @@ module OoxmlParser
     end
 
     def parse_default_style
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
+      doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
       doc.search('//w:style').each do |style|
         next if style.attribute('default').nil?
 
