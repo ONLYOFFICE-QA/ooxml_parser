@@ -17,8 +17,6 @@ module OoxmlParser
     include DocumentStructureHelpers
     attr_accessor :elements, :page_properties, :notes, :background, :document_properties, :comments
 
-    # @return [Array, DocumentStyle] array of document styles in current document
-    attr_accessor :document_styles
     # @return [Numbering] store numbering data
     attr_accessor :numbering
     # @return [Styles] styles of document
@@ -34,7 +32,6 @@ module OoxmlParser
       @notes = []
       @document_properties = DocumentProperties.new
       @comments = []
-      @document_styles = []
       super
     end
 
@@ -119,6 +116,11 @@ module OoxmlParser
       set
     end
 
+    # @return [Array<DocumentStyle>] style of documents
+    def document_styles
+      styles.styles
+    end
+
     def self.parse
       doc_structure = DocumentStructure.new
       OOXMLDocumentObject.root_subfolder = 'word/'
@@ -142,7 +144,6 @@ module OoxmlParser
       end
       doc_structure.parse_default_style
       doc_structure.numbering = Numbering.new(parent: doc_structure).parse
-      doc_structure.document_styles = DocumentStyle.parse_list(doc_structure)
       doc_structure.styles = Styles.new(parent: doc_structure).parse
       number = 0
       OOXMLDocumentObject.add_to_xmls_stack('word/document.xml')

@@ -4,6 +4,13 @@ module OoxmlParser
   class Styles < OOXMLDocumentObject
     # @return [DocumentDefaults] defaults of document
     attr_accessor :document_defaults
+    # @return [Array<DocumentStyle>] array of document styles
+    attr_reader :styles
+
+    def initialize(parent: nil)
+      @styles = []
+      @parent = parent
+    end
 
     def parse
       doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
@@ -11,6 +18,8 @@ module OoxmlParser
         case node_child.name
         when 'docDefaults'
           @document_defaults = DocumentDefaults.new(parent: self).parse(node_child)
+        when 'style'
+          @styles << DocumentStyle.new(parent: self).parse(node_child)
         end
       end
       self
