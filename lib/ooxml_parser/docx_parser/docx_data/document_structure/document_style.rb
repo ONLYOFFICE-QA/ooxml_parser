@@ -89,16 +89,5 @@ module OoxmlParser
       fill_empty_table_styles
       self
     end
-
-    # Parse all document style list
-    # @return [Array, DocumentStyle]
-    def self.parse_list(parent)
-      styles_array = []
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
-      doc.search('//w:style').each do |style|
-        styles_array << DocumentStyle.new(parent: parent).parse(style)
-      end
-      styles_array
-    end
   end
 end
