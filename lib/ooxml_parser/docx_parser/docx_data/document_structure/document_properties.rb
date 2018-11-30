@@ -11,7 +11,7 @@ module OoxmlParser
         warn "There is no 'docProps/app.xml' in docx. It may be some problem with it"
         return self
       end
-      node = Nokogiri::XML(File.open(properties_file))
+      node = parse_xml(properties_file)
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'Properties'

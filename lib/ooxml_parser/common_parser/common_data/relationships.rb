@@ -32,7 +32,7 @@ module OoxmlParser
     # @param file_path [String] path to file
     # @return [Relationships]
     def parse_file(file_path)
-      node = Nokogiri::XML(File.open(file_path))
+      node = parse_xml(file_path)
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'Relationships'

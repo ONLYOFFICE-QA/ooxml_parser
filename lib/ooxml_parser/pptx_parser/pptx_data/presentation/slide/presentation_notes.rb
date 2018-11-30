@@ -8,7 +8,7 @@ module OoxmlParser
     # @param file [String] file to parse
     # @return [PresentationNotes] result of parsing
     def parse(file)
-      node = Nokogiri::XML(File.open(file))
+      node = parse_xml(file)
       node.xpath('p:notes/*').each do |node_child|
         case node_child.name
         when 'cSld'

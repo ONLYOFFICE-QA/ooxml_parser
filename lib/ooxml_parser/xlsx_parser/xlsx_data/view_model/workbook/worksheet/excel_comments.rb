@@ -22,7 +22,7 @@ module OoxmlParser
     deprecate :comments, 'comment_list.comments', 2020, 1
 
     def parse(file)
-      doc = Nokogiri::XML(File.open(file))
+      doc = parse_xml(file)
       node = doc.xpath('*').first
       node.xpath('*').each do |node_child|
         case node_child.name

@@ -28,7 +28,7 @@ module OoxmlParser
       OOXMLDocumentObject.root_subfolder = 'ppt/'
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.add_to_xmls_stack('ppt/presentation.xml')
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      doc = parse_xml(OOXMLDocumentObject.current_xml)
       @theme = PresentationTheme.parse('ppt/theme/theme1.xml')
       @table_styles = TableStyles.new(parent: self).parse
       @comment_authors = CommentAuthors.new(parent: self).parse

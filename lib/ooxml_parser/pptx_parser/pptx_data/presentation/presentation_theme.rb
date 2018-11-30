@@ -18,7 +18,7 @@ module OoxmlParser
         OOXMLDocumentObject.xmls_stack.pop
         return
       end
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      doc = OOXMLDocumentObject.theme.parse_xml(OOXMLDocumentObject.current_xml)
       doc.xpath('a:theme').each do |theme_node|
         OOXMLDocumentObject.theme.name = theme_node.attribute('name').value if theme_node.attribute('name')
         theme_node.xpath('a:themeElements/*').each do |theme_element_node|

@@ -11,7 +11,7 @@ module OoxmlParser
 
     def parse(file)
       OOXMLDocumentObject.add_to_xmls_stack(OOXMLDocumentObject.root_subfolder + file)
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      doc = parse_xml(OOXMLDocumentObject.current_xml)
       node = doc.xpath('//xmlns:chartsheet').first
       node.xpath('*').each do |node_child|
         case node_child.name

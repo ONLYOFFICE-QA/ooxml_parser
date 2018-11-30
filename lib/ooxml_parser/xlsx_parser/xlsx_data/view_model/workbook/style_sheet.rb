@@ -25,7 +25,7 @@ module OoxmlParser
     end
 
     def parse
-      doc = Nokogiri::XML(File.open("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml"))
+      doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml")
       doc.root.xpath('*').each do |node_child|
         case node_child.name
         when 'numFmts'

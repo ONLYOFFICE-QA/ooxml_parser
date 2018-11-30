@@ -57,7 +57,7 @@ module OoxmlParser
 
     # Parse list of drawings in file
     def parse_drawing
-      drawing_node = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      drawing_node = parse_xml(OOXMLDocumentObject.current_xml)
       drawing_node.xpath('xdr:wsDr/*').each do |drawing_node_child|
         @drawings << XlsxDrawing.new(parent: self).parse(drawing_node_child)
       end
@@ -67,7 +67,7 @@ module OoxmlParser
       @xml_name = File.basename path_to_xml_file
       parse_relationships
       OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/#{File.basename(path_to_xml_file)}")
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      doc = parse_xml(OOXMLDocumentObject.current_xml)
       sheet = doc.search('//xmlns:worksheet').first
       sheet.xpath('*').each do |worksheet_node_child|
         case worksheet_node_child.name

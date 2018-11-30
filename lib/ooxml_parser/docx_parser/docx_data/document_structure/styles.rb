@@ -13,7 +13,7 @@ module OoxmlParser
     end
 
     def parse
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
+      doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
       doc.xpath('w:styles/*').each do |node_child|
         case node_child.name
         when 'docDefaults'

@@ -18,7 +18,7 @@ module OoxmlParser
     # @return [TablePart] result of parsing
     def parse(node)
       link_to_table_part_xml = OOXMLDocumentObject.get_link_from_rels(node.attribute('id').value)
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + link_to_table_part_xml.gsub('..', 'xl')))
+      doc = parse_xml(OOXMLDocumentObject.path_to_folder + link_to_table_part_xml.gsub('..', 'xl'))
       table_node = doc.xpath('xmlns:table').first
       table_node.attributes.each do |key, value|
         case key

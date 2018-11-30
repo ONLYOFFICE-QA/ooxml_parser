@@ -99,6 +99,11 @@ module OoxmlParser
         relationships = Relationships.new.parse_file(rels_path)
         relationships.target_by_id(id)
       end
+
+      # @return [Nokogiri::XML::Document] result of parsing xml via nokogiri
+      def parse_xml(xml_path)
+        Nokogiri::XML(File.open(xml_path))
+      end
     end
   end
 end
