@@ -57,6 +57,7 @@
 * Use instance method `Relationships#parse_file` instead of class method `Relationships.parse_rels`
 * Simplify parsing `DocxParagraphRun#font` for `asciiTheme`
 * Redone parsing of `DocxStructure#comments`
+* Change `DocxStructure#parse_default_style` to instance method
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
