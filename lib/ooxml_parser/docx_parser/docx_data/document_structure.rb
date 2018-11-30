@@ -1,5 +1,5 @@
 # noinspection RubyInstanceMethodNamingConvention
-require_relative 'document_structure/comment'
+require_relative 'document_structure/comments'
 require_relative 'document_structure/comments_extended'
 require_relative 'document_structure/docx_paragraph'
 require_relative 'document_structure/document_background'
@@ -181,7 +181,7 @@ module OoxmlParser
       end
       OOXMLDocumentObject.xmls_stack.pop
       doc_structure.document_properties = DocumentProperties.new(parent: doc_structure).parse
-      doc_structure.comments = Comment.parse_list(parent: doc_structure)
+      doc_structure.comments = Comments.new(parent: doc_structure).parse
       doc_structure.comments_extended = CommentsExtended.new(parent: doc_structure).parse
       doc_structure.settings = DocumentSettings.new(parent: doc_structure).parse
       doc_structure
