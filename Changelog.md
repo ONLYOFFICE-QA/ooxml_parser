@@ -20,6 +20,7 @@
 * Add parsing `TableProperties#fill`
 * Add parsing `TablePart#TableColumns`
 * Add parsing `Theme#fontScheme`
+* Force strict parsing of XML to catch errors
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element

@@ -29,7 +29,7 @@ module OoxmlParser
 
     # @return [Nokogiri::XML::Document] result of parsing xml via nokogiri
     def parse_xml(xml_path)
-      Nokogiri::XML(File.open(xml_path))
+      Nokogiri::XML(File.open(xml_path), &:strict)
     end
 
     class << self
