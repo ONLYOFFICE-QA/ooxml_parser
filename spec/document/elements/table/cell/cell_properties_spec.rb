@@ -7,8 +7,8 @@ describe OoxmlParser::CellProperties do
   end
 
   it 'shade_nil' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/cell/properties/shade_nil.docx')
-    expect(docx.elements.first.rows.first.cells.first.properties.shade.value).to eq(:nil)
+    expect { OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/cell/properties/shade_nil.docx') }
+      .to raise_error(Nokogiri::XML::SyntaxError)
   end
 
   it 'table_custom_cell_margin.docx' do
