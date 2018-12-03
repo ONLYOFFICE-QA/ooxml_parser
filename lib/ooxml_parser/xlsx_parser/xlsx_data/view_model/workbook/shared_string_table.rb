@@ -20,7 +20,7 @@ module OoxmlParser
     def parse(file)
       return nil unless File.exist?(file)
 
-      document = Nokogiri::XML(File.open(file))
+      document = parse_xml(file)
       node = document.xpath('*').first
 
       node.attributes.each do |key, value|

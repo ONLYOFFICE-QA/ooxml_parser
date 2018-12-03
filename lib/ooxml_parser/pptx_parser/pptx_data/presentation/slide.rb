@@ -48,7 +48,7 @@ module OoxmlParser
     def parse
       OOXMLDocumentObject.add_to_xmls_stack(@xml_path)
       @name = File.basename(@xml_path, '.*')
-      node = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      node = parse_xml(OOXMLDocumentObject.current_xml)
       node.xpath('//p:sld/*').each do |node_child|
         case node_child.name
         when 'cSld'

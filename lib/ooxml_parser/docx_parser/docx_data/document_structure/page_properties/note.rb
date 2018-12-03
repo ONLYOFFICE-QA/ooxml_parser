@@ -11,7 +11,7 @@ module OoxmlParser
       note.type = params[:type]
       note.assigned_to = params[:assigned_to]
       note.parent = params[:parent]
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + "word/#{params[:target]}"))
+      doc = note.parse_xml(OOXMLDocumentObject.path_to_folder + "word/#{params[:target]}")
       if note.type.include?('footer')
         xpath_note = '//w:ftr'
       elsif note.type.include?('header')

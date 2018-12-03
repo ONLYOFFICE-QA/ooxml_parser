@@ -41,7 +41,7 @@ module OoxmlParser
     def parse(node)
       @id = node.attribute('id').value.to_i
       parse_type(node)
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + xml_path))
+      doc = parse_xml(OOXMLDocumentObject.path_to_folder + xml_path)
       doc.search(xpath_for_search).each do |footnote|
         next unless footnote.attribute('id').value.to_i == @id
 

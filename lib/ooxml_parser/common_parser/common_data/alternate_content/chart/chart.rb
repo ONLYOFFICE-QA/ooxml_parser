@@ -56,7 +56,7 @@ module OoxmlParser
 
     def self.parse(parent: nil)
       chart = Chart.new(parent: parent)
-      chart_xml = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      chart_xml = chart.parse_xml(OOXMLDocumentObject.current_xml)
       chart_xml.xpath('*').each do |chart_node|
         case chart_node.name
         when 'chartSpace'

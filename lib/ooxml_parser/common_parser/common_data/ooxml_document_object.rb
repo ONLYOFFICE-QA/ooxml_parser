@@ -27,6 +27,11 @@ module OoxmlParser
       true
     end
 
+    # @return [Nokogiri::XML::Document] result of parsing xml via nokogiri
+    def parse_xml(xml_path)
+      Nokogiri::XML(File.open(xml_path))
+    end
+
     class << self
       attr_accessor :root_subfolder
       attr_accessor :theme

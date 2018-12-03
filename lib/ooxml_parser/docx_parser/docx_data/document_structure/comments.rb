@@ -21,7 +21,7 @@ module OoxmlParser
       file_to_parse = OOXMLDocumentObject.path_to_folder + 'word/comments.xml'
       return nil unless File.exist?(file_to_parse)
 
-      doc = Nokogiri::XML(File.open(file_to_parse))
+      doc = parse_xml(file_to_parse)
       doc.xpath('w:comments/*').each do |node_child|
         case node_child.name
         when 'comment'

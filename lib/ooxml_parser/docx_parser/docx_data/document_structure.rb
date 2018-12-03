@@ -130,7 +130,7 @@ module OoxmlParser
       DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure)
       doc_structure.theme = PresentationTheme.parse('word/theme/theme1.xml')
       OOXMLDocumentObject.add_to_xmls_stack('word/styles.xml')
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      doc = doc_structure.parse_xml(OOXMLDocumentObject.current_xml)
       # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
       doc.search('//w:docDefaults').each do |doc_defaults|
         doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
@@ -147,7 +147,7 @@ module OoxmlParser
       doc_structure.styles = Styles.new(parent: doc_structure).parse
       number = 0
       OOXMLDocumentObject.add_to_xmls_stack('word/document.xml')
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.current_xml))
+      doc = doc_structure.parse_xml(OOXMLDocumentObject.current_xml)
       doc.search('//w:document').each do |document|
         document.xpath('w:background').each do |background|
           doc_structure.background = DocumentBackground.new(parent: doc_structure).parse(background)
@@ -189,7 +189,7 @@ module OoxmlParser
     end
 
     def parse_default_style
-      doc = Nokogiri::XML(File.open(OOXMLDocumentObject.path_to_folder + 'word/styles.xml'))
+      doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
       doc.search('//w:style').each do |style|
         next if style.attribute('default').nil?
 

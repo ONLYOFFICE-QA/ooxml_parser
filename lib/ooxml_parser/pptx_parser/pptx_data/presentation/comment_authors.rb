@@ -16,7 +16,7 @@ module OoxmlParser
     def parse(file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/commentAuthors.xml")
       return nil unless File.exist?(file)
 
-      document = Nokogiri::XML(File.open(file))
+      document = parse_xml(File.open(file))
       node = document.xpath('*').first
 
       node.xpath('*').each do |node_child|
