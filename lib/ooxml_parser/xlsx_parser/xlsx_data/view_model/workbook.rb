@@ -83,9 +83,9 @@ module OoxmlParser
     # Do work for parsing shared strings file
     def parse_shared_strings
       shared_strings_target = relationships.target_by_type('sharedString')
-      return unless shared_strings_target
+      return if shared_strings_target.empty?
 
-      shared_string_file = "#{OOXMLDocumentObject.path_to_folder}/xl/#{shared_strings_target}"
+      shared_string_file = "#{OOXMLDocumentObject.path_to_folder}/xl/#{shared_strings_target.first}"
       @shared_strings_table = SharedStringTable.new(parent: self).parse(shared_string_file)
     end
 
@@ -114,7 +114,7 @@ module OoxmlParser
     private
 
     def link_to_theme_xml
-      relationships.target_by_type('theme')
+      relationships.target_by_type('theme').first
     end
   end
 end

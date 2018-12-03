@@ -72,9 +72,9 @@ module OoxmlParser
     # Parse slide notes if present
     def parse_note
       notes_target = @relationships.target_by_type('notes')
-      return nil unless notes_target
+      return nil if notes_target.empty?
 
-      @note = PresentationNotes.new(parent: self).parse("#{OOXMLDocumentObject.path_to_folder}#{File.dirname(@xml_path)}/#{notes_target}")
+      @note = PresentationNotes.new(parent: self).parse("#{OOXMLDocumentObject.path_to_folder}#{File.dirname(@xml_path)}/#{notes_target.first}")
     end
   end
 end

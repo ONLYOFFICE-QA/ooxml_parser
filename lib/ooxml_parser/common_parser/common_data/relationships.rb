@@ -52,14 +52,15 @@ module OoxmlParser
       nil
     end
 
-    # Get target name by type
+    # Get target names by type
     # @param type [String] type of target
-    # @return [String] target name
+    # @return [Array<String>] target names
     def target_by_type(type)
+      result = []
       @relationship.each do |cur_rels|
-        return cur_rels.target if cur_rels.type.include?(type)
+        result << cur_rels.target if cur_rels.type.include?(type)
       end
-      nil
+      result
     end
   end
 end

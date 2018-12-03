@@ -129,9 +129,9 @@ module OoxmlParser
       return unless relationships
 
       comments_target = relationships.target_by_type('comment')
-      return unless comments_target
+      return if comments_target.empty?
 
-      comments_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/#{comments_target.gsub('..', '')}"
+      comments_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/#{comments_target.first.gsub('..', '')}"
       @comments = ExcelComments.new(parent: self).parse(comments_file)
     end
   end
