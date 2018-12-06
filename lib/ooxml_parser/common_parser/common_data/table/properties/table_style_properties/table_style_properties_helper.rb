@@ -4,7 +4,7 @@ module OoxmlParser
     TABLE_STYLES_NAMES_HASH = { first_column: :firstCol,
                                 last_column: :lastCol,
                                 whole_table: :wholeTbl,
-                                banding_1_horizontal:  :band1Horz,
+                                banding_1_horizontal: :band1Horz,
                                 banding_2_horizontal: :band2Horz,
                                 banding_1_vertical: :band1Vert,
                                 banding_2_vertical: :band2Vert,
