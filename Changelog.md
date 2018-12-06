@@ -21,6 +21,7 @@
 * Add parsing `TablePart#TableColumns`
 * Add parsing `Theme#fontScheme`
 * Force strict parsing of XML to catch errors
+* Add parsing `Chart#pivot_formats`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
