@@ -6,6 +6,8 @@ module OoxmlParser
     attr_accessor :show_category_name
     # @return [True, False] is series name shown
     attr_accessor :show_series_name
+    # @return [True, False] is label is deleted
+    attr_reader :delete
 
     def initialize(show_legend_key = false, show_values = false, parent: nil)
       @show_legend_key = show_legend_key
@@ -29,6 +31,8 @@ module OoxmlParser
           @show_category_name = option_enabled?(node_child)
         when 'showSerName'
           @show_series_name = option_enabled?(node_child)
+        when 'delete'
+          @delete = option_enabled?(node_child)
         end
       end
       self

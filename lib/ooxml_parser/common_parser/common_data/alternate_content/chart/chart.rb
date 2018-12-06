@@ -3,6 +3,7 @@ require_relative 'chart_cells_range'
 require_relative 'chart_legend'
 require_relative 'chart_point'
 require_relative 'display_labels_properties'
+require_relative 'chart/pivot_formats'
 require_relative 'chart/plot_area'
 require_relative 'chart/series'
 require_relative 'chart/view_3d'
@@ -12,6 +13,8 @@ module OoxmlParser
     attr_accessor :type, :data, :grouping, :title, :legend, :display_labels, :axises, :alternate_content, :shape_properties
     # @return [Array, Series] series of chart
     attr_accessor :series
+    # @return [PivotFormats] list of pivot formats
+    attr_accessor :pivot_formats
     # @return [PlotArea] plot area data
     attr_accessor :plot_area
     # @return [View3D] properties of 3D view
@@ -130,6 +133,8 @@ module OoxmlParser
                   chart.legend = ChartLegend.new(parent: chart).parse(chart_node_child)
                 when 'view3D'
                   chart.view_3d = View3D.new(parent: chart).parse(chart_node_child)
+                when 'pivotFmts'
+                  chart.pivot_formats = PivotFormats.new(parent: chart).parse(chart_node_child)
                 end
               end
             end
