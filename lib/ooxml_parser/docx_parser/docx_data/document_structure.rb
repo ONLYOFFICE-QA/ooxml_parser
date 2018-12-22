@@ -123,6 +123,7 @@ module OoxmlParser
 
     def self.parse
       doc_structure = DocumentStructure.new
+      doc_structure.content_types = ContentTypes.new(parent: doc_structure).parse
       OOXMLDocumentObject.root_subfolder = 'word/'
       OOXMLDocumentObject.xmls_stack = []
       @comments = []

@@ -25,6 +25,7 @@ module OoxmlParser
     end
 
     def parse
+      @content_types = ContentTypes.new(parent: self).parse
       OOXMLDocumentObject.root_subfolder = 'ppt/'
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.add_to_xmls_stack('ppt/presentation.xml')
