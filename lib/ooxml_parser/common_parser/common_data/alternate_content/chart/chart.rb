@@ -19,6 +19,10 @@ module OoxmlParser
     attr_accessor :pivot_formats
     # @return [PlotArea] plot area data
     attr_accessor :plot_area
+    # @return [True, False] This element specifies that
+    # each data marker in the series has a different color.
+    # ECMA-376 (5th Edition). 21.2.2.227
+    attr_reader :vary_colors
     # @return [View3D] properties of 3D view
     attr_accessor :view_3d
 
@@ -55,6 +59,8 @@ module OoxmlParser
           @data << ChartCellsRange.new(parent: self).parse(val.xpath('c:numRef').first).dup
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.new(parent: self).parse(chart_props_node_child)
+        when 'varyColors'
+          @vary_colors = option_enabled?(chart_props_node_child)
         end
       end
     end

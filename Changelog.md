@@ -24,6 +24,7 @@
 * Add parsing `Chart#pivot_formats`
 * Add parsing of `CommonDocumentStructure#ContentTypes`
 * Add parsing `Chart#axis_ids`
+* Add parsing `Chart#vary_colors`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
