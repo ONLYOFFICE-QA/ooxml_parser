@@ -11,6 +11,8 @@ require_relative 'chart/view_3d'
 module OoxmlParser
   class Chart < OOXMLDocumentObject
     attr_accessor :type, :data, :grouping, :title, :legend, :display_labels, :axises, :alternate_content, :shape_properties
+    # @return [Array, ValuedChild] array axis id
+    attr_reader :axis_ids
     # @return [Array, Series] series of chart
     attr_accessor :series
     # @return [PivotFormats] list of pivot formats
@@ -21,6 +23,7 @@ module OoxmlParser
     attr_accessor :view_3d
 
     def initialize(parent: nil)
+      @axis_ids = []
       @type = ''
       @data = []
       @grouping = nil
@@ -34,6 +37,8 @@ module OoxmlParser
     def parse_properties(chart_prop_node)
       chart_prop_node.xpath('*').each do |chart_props_node_child|
         case chart_props_node_child.name
+        when 'axId'
+          @axis_ids << ValuedChild.new(:integer, parent: self).parse(chart_props_node_child)
         when 'grouping'
           @grouping = chart_props_node_child.attribute('val').value.to_sym
         when 'ser'
