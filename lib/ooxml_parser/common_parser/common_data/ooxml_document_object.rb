@@ -3,10 +3,12 @@ require 'securerandom'
 require 'nokogiri'
 require 'zip'
 require_relative 'ooxml_document_object/ooxml_document_object_helper'
+require_relative 'ooxml_document_object/ooxml_object_attribute_helper'
 
 module OoxmlParser
   class OOXMLDocumentObject
     include OoxmlDocumentObjectHelper
+    include OoxmlObjectAttributeHelper
     # @return [OOXMLDocumentObject] object which hold current object
     attr_accessor :parent
 
