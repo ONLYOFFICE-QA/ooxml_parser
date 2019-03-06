@@ -22,6 +22,8 @@ module OoxmlParser
     # @return [Styles] styles of document
     attr_accessor :styles
     attr_accessor :theme
+    # @return [Relationships] relationships
+    attr_accessor :relationships
     # @return [DocumentSettings] settings
     attr_accessor :settings
     # @return [CommentsExtended] extended comments
@@ -130,6 +132,7 @@ module OoxmlParser
       DocumentStructure.default_paragraph_style = DocxParagraph.new
       DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure)
       doc_structure.theme = PresentationTheme.parse('word/theme/theme1.xml')
+      doc_structure.relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}word/_rels/document.xml.rels")
       OOXMLDocumentObject.add_to_xmls_stack('word/styles.xml')
       doc = doc_structure.parse_xml(OOXMLDocumentObject.current_xml)
       # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
