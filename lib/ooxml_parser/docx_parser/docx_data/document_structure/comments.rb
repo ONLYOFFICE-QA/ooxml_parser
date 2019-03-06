@@ -5,9 +5,10 @@ module OoxmlParser
     # @return [Array<Comment>] list of comments
     attr_reader :comments_array
 
-    def initialize(parent: nil)
+    def initialize(params = {})
       @comments_array = []
-      @parent = parent
+      @parent = params[:parent]
+      @file = params.fetch(:file, OOXMLDocumentObject.path_to_folder + 'word/comments.xml')
     end
 
     # @return [Array, Comments] accessor
@@ -18,10 +19,9 @@ module OoxmlParser
     # Parse CommentsExtended object
     # @return [Comments] result of parsing
     def parse
-      file_to_parse = OOXMLDocumentObject.path_to_folder + 'word/comments.xml'
-      return nil unless File.exist?(file_to_parse)
+      return nil unless File.file?(@file)
 
-      doc = parse_xml(file_to_parse)
+      doc = parse_xml(@file)
       doc.xpath('w:comments/*').each do |node_child|
         case node_child.name
         when 'comment'

@@ -26,6 +26,8 @@ module OoxmlParser
     attr_accessor :relationships
     # @return [DocumentSettings] settings
     attr_accessor :settings
+    # @return [CommentsDocument] comments of whole document
+    attr_accessor :comments_document
     # @return [CommentsExtended] extended comments
     attr_accessor :comments_extended
 
@@ -188,6 +190,9 @@ module OoxmlParser
       doc_structure.document_properties = DocumentProperties.new(parent: doc_structure).parse
       doc_structure.comments = Comments.new(parent: doc_structure).parse
       doc_structure.comments_extended = CommentsExtended.new(parent: doc_structure).parse
+      doc_structure.comments_document = Comments.new(parent: doc_structure,
+                                                     file: "#{OOXMLDocumentObject.path_to_folder}word/#{doc_structure.relationships.target_by_type('commentsDocument').first}")
+                                                .parse
       doc_structure.settings = DocumentSettings.new(parent: doc_structure).parse
       doc_structure
     end
