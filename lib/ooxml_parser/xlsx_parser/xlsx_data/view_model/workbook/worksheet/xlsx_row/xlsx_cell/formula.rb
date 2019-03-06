@@ -31,7 +31,7 @@ module OoxmlParser
 
     # @return [True, False] check if formula empty
     def empty?
-      !(@reference || @string_index || @type || @value)
+      !(reference || string_index || type || value)
     end
   end
 end
