@@ -19,7 +19,7 @@ module OoxmlParser
     # Parse CommentsExtended object
     # @return [Comments] result of parsing
     def parse
-      return nil unless File.exist?(@file)
+      return nil unless File.file?(@file)
 
       doc = parse_xml(@file)
       doc.xpath('w:comments/*').each do |node_child|
