@@ -59,7 +59,7 @@ module OoxmlParser
           c_row.cells.each do |c_cell|
             next unless c_cell
             next unless c_cell.formula
-            next unless c_cell.formula.value
+            next if c_cell.formula.empty?
 
             text = c_cell.raw_text
             if StringHelper.numeric?(text)
