@@ -25,6 +25,7 @@
 * Add parsing of `CommonDocumentStructure#ContentTypes`
 * Add parsing `Chart#axis_ids`
 * Add parsing `Chart#vary_colors`
+* Add parsing `DocumentStructure#relationships`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
