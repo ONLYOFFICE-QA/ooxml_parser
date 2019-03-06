@@ -28,5 +28,10 @@ module OoxmlParser
       @value = node.text unless node.text.empty?
       self
     end
+
+    # @return [True, False] check if formula empty
+    def empty?
+      !(reference || string_index || type || value)
+    end
   end
 end

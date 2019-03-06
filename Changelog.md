@@ -74,6 +74,7 @@
 * Fix incorrect values of Cell Number Format
 * Fix `GridColumn#width` emu value
 * Fix `DocumentStructure#with_data?` for docs with several empty paragraphs
+* Fix `XLSXWorkbook#all_formula_values` for formulas without value
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
