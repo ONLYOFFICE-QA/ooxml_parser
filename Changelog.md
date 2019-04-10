@@ -77,6 +77,8 @@
 * Fix `GridColumn#width` emu value
 * Fix `DocumentStructure#with_data?` for docs with several empty paragraphs
 * Fix `XLSXWorkbook#all_formula_values` for formulas without value
+* Values of `DocxShapeSize#flip_horizontal` and 
+`DocxShapeSize#flip_vertical` are Boolean
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
