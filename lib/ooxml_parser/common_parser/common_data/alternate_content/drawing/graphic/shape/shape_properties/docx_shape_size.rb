@@ -1,9 +1,13 @@
 # Docx Shape Size
 module OoxmlParser
   class DocxShapeSize < OOXMLDocumentObject
-    attr_accessor :rotation, :flip_horizontal, :flip_vertical, :offset, :extent
+    attr_accessor :rotation, :offset, :extent
     attr_accessor :child_offset
     attr_accessor :child_extent
+    # @return [True, False] is image flipped horizontally
+    attr_reader :flip_horizontal
+    # @return [True, False] is image flipped vertically
+    attr_reader :flip_vertical
 
     alias extents extent
 
@@ -16,9 +20,9 @@ module OoxmlParser
         when 'rot'
           @rotation = value.value.to_f
         when 'flipH'
-          @flip_horizontal = value.value.to_f
+          @flip_horizontal = attribute_enabled?(value)
         when 'flipV'
-          @flip_vertical = value.value.to_f
+          @flip_vertical = attribute_enabled?(value)
         end
       end
       node.xpath('*').each do |node_child|
