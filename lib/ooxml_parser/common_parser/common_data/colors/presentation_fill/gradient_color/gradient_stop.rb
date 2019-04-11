@@ -15,7 +15,7 @@ module OoxmlParser
 
       node.xpath('*').each do |node_child|
         @color = case node_child.name
-                 when 'prstClr', 'schemeClr'
+                 when 'prstClr'
                    ValuedChild.new(:string, parent: self).parse(node_child)
                  else
                    Color.new(parent: self).parse_color(node_child)
