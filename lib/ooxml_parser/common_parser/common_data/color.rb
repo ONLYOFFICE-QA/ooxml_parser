@@ -267,6 +267,8 @@ module OoxmlParser
         color
       when 'schemeClr'
         color = SchemeColor.new(parent: parent)
+        return ValuedChild.new(:string, parent: parent).parse(color_node) unless root_object.theme
+
         color.value = root_object.theme.color_scheme[color_node.attribute('val').value.to_sym].color
         color.properties = ColorProperties.new(parent: color).parse(color_node)
         color.converted_color = Color.new(parent: self).parse_scheme_color(color_node)

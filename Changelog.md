@@ -79,6 +79,7 @@
 * Fix `XLSXWorkbook#all_formula_values` for formulas without value
 * Values of `DocxShapeSize#flip_horizontal` and 
 `DocxShapeSize#flip_vertical` are Boolean
+* Fix crash on gradient stop with unknown SchemeColor ([ooxml_parser#571](https://github.com/ONLYOFFICE/ooxml_parser/issues/571))
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
