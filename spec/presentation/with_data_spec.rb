@@ -41,4 +41,9 @@ describe 'Presentation#with_data?' do
     pptx.with_data?
     expect(pptx).to be_with_data
   end
+
+  it 'shape_with_preset_geometry' do
+    pptx = OoxmlParser::Parser.parse('spec/presentation/with_data/shape_with_preset_geometry.pptx')
+    expect(pptx).to be_with_data
+  end
 end

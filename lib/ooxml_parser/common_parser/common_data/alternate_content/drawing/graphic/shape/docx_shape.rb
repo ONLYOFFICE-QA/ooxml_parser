@@ -15,6 +15,7 @@ module OoxmlParser
       return true if @text_body.nil?
       return true if @text_body.paragraphs.length > 1
       return true unless @text_body.paragraphs.first.runs.empty?
+      return true if properties.preset_geometry
 
       false
     end
