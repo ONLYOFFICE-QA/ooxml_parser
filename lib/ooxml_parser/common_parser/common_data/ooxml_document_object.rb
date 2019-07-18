@@ -1,4 +1,4 @@
-require 'filemagic'
+require 'filemagic' unless Gem.win_platform?
 require 'securerandom'
 require 'nokogiri'
 require 'zip'
@@ -43,6 +43,10 @@ module OoxmlParser
       # @param path_to_file [String] file
       # @return [True, False] Check if file is protected by password on open
       def encrypted_file?(path_to_file)
+        if Gem.win_platform?
+          warn 'FileMagic and checking file for encryption is not supported on Windows'
+          return false
+        end
         file_result = FileMagic.new(:mime).file(path_to_file)
         # Support of Encrtypted status in `file` util was introduced in file v5.20
         # but LTS version of ubuntu before 16.04 uses older `file` and it return `Composite Document`

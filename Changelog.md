@@ -2,6 +2,7 @@
 
 ## master (unreleased)
 ### New features
+* Do not use FileMagic on windows
 * Parsing `FilterColumn#custom_filters`
 * Parsing `Series#XYValues`
 * Parsing `StructuredDocumentTag` as `TableCell#elements`
