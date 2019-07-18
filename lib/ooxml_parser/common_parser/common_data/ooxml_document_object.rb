@@ -1,4 +1,4 @@
-require 'filemagic'
+require 'filemagic' unless Gem.win_platform?
 require 'securerandom'
 require 'nokogiri'
 require 'zip'
