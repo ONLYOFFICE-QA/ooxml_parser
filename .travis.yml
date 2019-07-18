@@ -5,7 +5,9 @@ rvm:
   - 2.5.1
   - 2.4.4
   - 2.3.7
-
+matrix:
+  allow_failures:
+  - rvm: ruby-head
 before_install:
   - gem update --system
 install:
