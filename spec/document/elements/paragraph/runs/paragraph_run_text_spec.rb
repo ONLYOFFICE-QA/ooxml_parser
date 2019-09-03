@@ -25,7 +25,8 @@ describe 'My behaviour' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/text/shape_with_text.docx')
     expect(docx.elements.first.nonempty_runs
                .first.alternate_content.office2007_content
-               .data.text_box.first
+               .data.text_box.text_box_content
+               .elements.first
                .character_style_array.first.text)
       .to eq('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'\
              ' Integer consequat faucibus eros, sed mattis tortor consectetur '\
@@ -57,6 +58,9 @@ describe 'My behaviour' do
 
   it 'text_box_list' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/text/text_box_list.docx')
-    expect(docx.elements[160].character_style_array.first.shape.elements.first.character_style_array.first.text).to include('Guidelines')
+    expect(docx.elements[160].character_style_array
+               .first.shape.text_box.text_box_content
+               .elements.first.character_style_array
+               .first.text).to include('Guidelines')
   end
 end
