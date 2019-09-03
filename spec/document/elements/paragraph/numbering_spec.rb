@@ -32,8 +32,11 @@ describe OoxmlParser::Numbering do
 
   it 'numbering_in_shape.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_in_shape.docx')
-    expect(docx.elements[0].nonempty_runs.first.alternate_content.office2007_content
-               .data.text_box.first.numbering.abstruct_numbering
+    expect(docx.elements[0].nonempty_runs.first
+               .alternate_content.office2007_content
+               .data.text_box.text_box_content.elements.first
+               .properties.numbering_properties
+               .abstruct_numbering
                .level_list.first.text.value).to eq('Ø')
   end
 

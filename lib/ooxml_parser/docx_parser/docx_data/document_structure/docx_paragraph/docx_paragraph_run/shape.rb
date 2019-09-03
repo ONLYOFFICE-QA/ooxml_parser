@@ -3,6 +3,8 @@ module OoxmlParser
   # Class for parsing `shape`, `rect`, `oval` tags
   class Shape < OOXMLDocumentObject
     attr_accessor :type, :properties, :elements
+    # @return [TextBox] text box
+    attr_reader :text_box
 
     def initialize(type = nil,
                    properties = ShapeProperties.new,
@@ -36,10 +38,16 @@ module OoxmlParser
           @properties.position = property.split(':').last
         end
       end
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'textbox'
+          @text_box = TextBox.new(parent: self).parse(node_child)
+        end
+      end
       @properties.fill_color = Color.new(parent: self).parse_hex_string(node.attribute('fillcolor').value.to_s.sub('#', '').split(' ').first) unless node.attribute('fillcolor').nil?
       @properties.stroke.weight = node.attribute('strokeweight').value unless node.attribute('strokeweight').nil?
       @properties.stroke.color = Color.new(parent: self).parse_hex_string(node.attribute('strokecolor').value.to_s.sub('#', '').split(' ').first) unless node.attribute('strokecolor').nil?
-      @elements = TextBox.parse_list(node.xpath('v:textbox').first, parent: self) unless node.xpath('v:textbox').first.nil?
       self
     end
   end

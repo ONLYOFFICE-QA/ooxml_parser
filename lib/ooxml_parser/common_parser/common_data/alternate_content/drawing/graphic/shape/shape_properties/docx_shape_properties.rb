@@ -32,7 +32,7 @@ module OoxmlParser
         when 'prstGeom'
           @preset_geometry = PresetGeometry.new(parent: self).parse(node_child)
         when 'txbx'
-          @text_box = TextBox.parse_list(node_child)
+          @text_box = TextBox.new(parent: self).parse(node_child)
         when 'ln'
           @line = DocxShapeLine.new(parent: self).parse(node_child)
         when 'blipFill'

@@ -27,9 +27,11 @@ module OoxmlParser
     attr_accessor :contextual_spacing
     # @return [Symbol] The alignment or justification to be applied to a paragraph
     attr_accessor :justification
+    # @return [NumberingProperties] properties of numbering
+    attr_accessor :numbering_properties
 
-    def initialize(numbering = NumberingProperties.new, parent: nil)
-      @numbering = numbering
+    def initialize(parent: nil)
+      @numbering = NumberingProperties.new(parent: self)
       @spacing = Spacing.new(OoxmlSize.new(0),
                              OoxmlSize.new(0),
                              OoxmlSize.new(1, :centimeter),
@@ -91,6 +93,8 @@ module OoxmlParser
           @justification = value_to_symbol(node_child.attribute('val'))
         when 'contextualSpacing'
           @contextual_spacing = option_enabled?(node_child)
+        when 'numPr'
+          @numbering_properties = NumberingProperties.new(parent: self).parse(node_child)
         end
       end
       self
