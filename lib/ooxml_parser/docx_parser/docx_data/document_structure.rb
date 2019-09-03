@@ -63,7 +63,7 @@ module OoxmlParser
         when :docx_paragraph, :simple, :paragraph
           elements
         when :shape
-          elements[0].nonempty_runs.first.alternate_content.office2007_content.data.text_box
+          elements[0].nonempty_runs.first.alternate_content.office2007_content.data.text_box.text_box_content.elements
         else
           raise 'Wrong location(Need One of ":table", ":paragraph", ":shape")'
         end
