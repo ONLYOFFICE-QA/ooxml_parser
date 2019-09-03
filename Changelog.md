@@ -28,6 +28,7 @@
 * Add parsing `Chart#vary_colors`
 * Add parsing `DocumentStructure#relationships`
 * Add parsing `DocumentStructure#comments_document`
+* Add parsing `ExcelComment#text`
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
