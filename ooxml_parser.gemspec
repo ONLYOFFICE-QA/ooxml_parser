@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.files = `git ls-files lib LICENSE.txt README.md`.split($RS)
   s.add_runtime_dependency('nokogiri', '~> 1.6')
   s.add_runtime_dependency('ruby-filemagic', '~> 0.1') unless Gem.win_platform?
-  s.add_runtime_dependency('rubyzip', '~> 1.1')
+  s.add_runtime_dependency('rubyzip', '>= 1.1', '< 3.0')
   s.homepage = 'http://rubygems.org/gems/ooxml_parser'
   s.license = 'AGPL-3.0'
 end
