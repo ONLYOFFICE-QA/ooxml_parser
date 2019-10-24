@@ -18,6 +18,13 @@ module OoxmlParser
       @parent = parent
     end
 
+    # @return [String] text representation
+    def to_s
+      "Value: `#{value}`, "\
+      "Color: `#{color}`, "\
+      "Fill: `#{fill}`"
+    end
+
     # Parse Shade
     # @param [Nokogiri::XML:Node] node with Shade
     # @return [Shade] result of parsing
