@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'presentation/comment_authors'
 require_relative 'presentation/presentation_comments'
 require_relative 'presentation/presentation_helpers'

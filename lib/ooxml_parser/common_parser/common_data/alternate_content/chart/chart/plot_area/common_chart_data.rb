@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Parsing common chart data
   class CommonChartData < OOXMLDocumentObject

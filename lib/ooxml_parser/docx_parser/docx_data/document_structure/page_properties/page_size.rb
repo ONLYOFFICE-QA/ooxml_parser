@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class PageSize < OOXMLDocumentObject
     attr_accessor :height, :width, :orientation

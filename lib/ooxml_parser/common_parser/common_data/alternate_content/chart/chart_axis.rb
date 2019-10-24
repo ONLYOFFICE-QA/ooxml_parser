@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'chart_axis/scaling'
 require_relative 'chart_axis_title'
 module OoxmlParser

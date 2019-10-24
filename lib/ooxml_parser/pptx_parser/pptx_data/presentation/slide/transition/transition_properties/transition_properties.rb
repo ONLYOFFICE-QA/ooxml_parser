@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class TransitionProperties < OOXMLDocumentObject
     attr_accessor :type, :through_black, :direction, :orientation, :spokes

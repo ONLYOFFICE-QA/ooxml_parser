@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'docx_formula/accent'
 require_relative 'docx_formula/argument_properties'
 require_relative 'docx_formula/bar'

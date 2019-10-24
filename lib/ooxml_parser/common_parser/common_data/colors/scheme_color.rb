@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class SchemeColor
     attr_accessor :value, :properties, :converted_color

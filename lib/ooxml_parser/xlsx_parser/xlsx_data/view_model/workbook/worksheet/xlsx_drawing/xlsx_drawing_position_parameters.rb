@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing offset of drawing `xdr:from`, `xdr:to`
   class XlsxDrawingPositionParameters < OOXMLDocumentObject

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class FrameProperties < OOXMLDocumentObject
     attr_accessor :drop_cap, :lines, :wrap, :vertical_anchor, :horizontal_anchor, :width, :height, :height_rule,

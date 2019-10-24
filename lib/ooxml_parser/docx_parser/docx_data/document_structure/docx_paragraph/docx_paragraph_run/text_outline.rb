@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class for parsing text outline and its properties
 module OoxmlParser
   # Class for parsing `w:textOutline`

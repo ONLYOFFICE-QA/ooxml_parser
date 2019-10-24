@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class Configuration
     # @return [Integer] accuracy of digits in fraction part

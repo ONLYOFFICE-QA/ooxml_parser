@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Single Chart Point
 module OoxmlParser
   class ChartPoint

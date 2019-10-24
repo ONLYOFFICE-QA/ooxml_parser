@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class for working with strings
 module OoxmlParser
   class StringHelper

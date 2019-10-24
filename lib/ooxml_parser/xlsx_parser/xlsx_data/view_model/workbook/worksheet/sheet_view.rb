@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'sheet_view/pane'
 module OoxmlParser
   # Class for `sheetView` data

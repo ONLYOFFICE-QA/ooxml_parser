@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class GridSpan
     attr_accessor :type, :count_of_merged_cells, :value

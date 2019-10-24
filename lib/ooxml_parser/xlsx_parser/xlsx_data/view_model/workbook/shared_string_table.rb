@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'shared_string_table/string_index'
 module OoxmlParser
   # Class for parsing shared string table

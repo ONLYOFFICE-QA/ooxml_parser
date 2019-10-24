@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'styles/document_defaults'
 module OoxmlParser
   # Class for parsing `styles.xml` file

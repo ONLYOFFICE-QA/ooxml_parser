@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'series_text/number_string_reference'
 module OoxmlParser
   # Class for parsing `c:tx` object

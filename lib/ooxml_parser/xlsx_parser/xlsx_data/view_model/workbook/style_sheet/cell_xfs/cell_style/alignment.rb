@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Character Alignment in XLSX
   class XlsxAlignment < OOXMLDocumentObject

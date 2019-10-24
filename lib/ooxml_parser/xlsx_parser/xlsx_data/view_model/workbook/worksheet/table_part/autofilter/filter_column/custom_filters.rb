@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'custom_filters/custom_filter'
 module OoxmlParser
   # Class for `CustomFilters` data

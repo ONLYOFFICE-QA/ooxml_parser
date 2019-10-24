@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'filter_column/custom_filters'
 module OoxmlParser
   # Class for `filterColumn` data

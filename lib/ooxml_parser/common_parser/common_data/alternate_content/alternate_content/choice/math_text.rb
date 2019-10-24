@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'math_text/math_paragraph'
 module OoxmlParser
   # Class for storing math text

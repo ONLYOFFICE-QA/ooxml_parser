@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'object/ole_object'
 module OoxmlParser
   # Class for parsing `w:object`

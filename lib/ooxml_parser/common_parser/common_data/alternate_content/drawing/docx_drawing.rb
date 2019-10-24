@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'docx_drawing/doc_properties'
 require_relative 'drawing_properties/docx_drawing_properties'
 require_relative 'drawing_properties/size_relative_horizontal'

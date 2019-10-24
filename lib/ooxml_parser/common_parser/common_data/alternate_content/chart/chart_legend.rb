@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Legend of Chart `legend` tag
   class ChartLegend < OOXMLDocumentObject

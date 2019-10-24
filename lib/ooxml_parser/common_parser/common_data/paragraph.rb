@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'paragraph/paragraph_properties'
 require_relative 'paragraph/paragraph_run'
 require_relative 'paragraph/text_field'

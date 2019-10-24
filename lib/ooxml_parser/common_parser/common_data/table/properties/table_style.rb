@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'table_element'
 # Style of Table
 module OoxmlParser

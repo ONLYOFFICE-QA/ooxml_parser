@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `w:tblLayout` object
   # Whether a table uses a fixed width or autofit method for laying out the table

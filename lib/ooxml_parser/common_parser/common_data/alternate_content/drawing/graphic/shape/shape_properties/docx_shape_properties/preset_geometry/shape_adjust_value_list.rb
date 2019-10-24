@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'shape_adjust_value_list/shape_guide'
 module OoxmlParser
   # Class for describing List of Shape Adjust Values

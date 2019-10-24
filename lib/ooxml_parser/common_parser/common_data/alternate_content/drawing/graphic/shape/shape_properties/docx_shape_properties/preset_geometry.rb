@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'preset_geometry/shape_adjust_value_list'
 module OoxmlParser
   # Class for describing Preset Geometry

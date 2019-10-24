@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'filemagic' unless Gem.win_platform?
 require 'securerandom'
 require 'nokogiri'

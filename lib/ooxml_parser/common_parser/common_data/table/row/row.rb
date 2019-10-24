@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'cell/cell'
 require_relative 'row/table_row_properties'
 module OoxmlParser

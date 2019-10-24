@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'fill/pattern_fill'
 module OoxmlParser
   # Parsing `fill` tag

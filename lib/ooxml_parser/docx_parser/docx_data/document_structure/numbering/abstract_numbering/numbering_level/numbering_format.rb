@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for storing Numbering Format data, `numFmt` tag
   class NumberingFormat < OOXMLDocumentObject

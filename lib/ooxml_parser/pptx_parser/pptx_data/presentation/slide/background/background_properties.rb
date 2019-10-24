@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'background_properties/stretch'
 module OoxmlParser
   # Class for parsing `bgPr` tag

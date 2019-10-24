@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # DOCX Color Scheme
   class DocxColorScheme < OOXMLDocumentObject

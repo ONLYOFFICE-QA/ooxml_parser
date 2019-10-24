@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for storing Level Justification, `lvlJc` tag
   class LevelJustification < OOXMLDocumentObject

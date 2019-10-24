@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for storing data of chartsheets files
   class Chartsheet < OOXMLDocumentObject

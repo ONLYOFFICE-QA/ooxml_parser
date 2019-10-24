@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'docx_shape/ooxml_text_box'
 require_relative 'docx_shape/non_visual_shape_properties'
 require_relative 'docx_shape/text_body'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'shape/docx_shape'
 require_relative 'picture/docx_picture'
 module OoxmlParser

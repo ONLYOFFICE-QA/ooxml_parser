@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'table_row_properties/table_row_height'
 module OoxmlParser
   # Class for describing Table Row Properties

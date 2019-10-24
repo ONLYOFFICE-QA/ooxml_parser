@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'fonts/font'
 module OoxmlParser
   # Parsing `fonts` tag

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'old_docx_shape_properties'
 module OoxmlParser
   # Fallback DOCX shape data

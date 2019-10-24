@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `a:latin`, `a:ea`, `a:cs` tag
   class TextFont < OOXMLDocumentObject

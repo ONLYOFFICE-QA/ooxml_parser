@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Single Comment of XLSX
   class ExcelComment < OOXMLDocumentObject

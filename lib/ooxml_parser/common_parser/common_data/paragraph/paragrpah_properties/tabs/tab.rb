@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for storing `w:tab`, `a:tab` data
   class Tab < OOXMLDocumentObject

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Parsing Chart 3D view tag 'view3D'
   class View3D < OOXMLDocumentObject

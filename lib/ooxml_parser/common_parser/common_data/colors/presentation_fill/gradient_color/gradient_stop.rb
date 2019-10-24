@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class GradientStop < OOXMLDocumentObject
     attr_accessor :position, :color

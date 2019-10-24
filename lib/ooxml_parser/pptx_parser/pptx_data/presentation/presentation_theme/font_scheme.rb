@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'font_scheme/font_collection'
 module OoxmlParser
   # Class for parsing `fontScheme` tag

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'color/docx_color_scheme'
 require_relative 'line/line_end'
 # Docx Shape Line

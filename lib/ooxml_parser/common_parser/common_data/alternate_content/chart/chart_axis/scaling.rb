@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Parsing Scaling tag 'scaling'
   class Scaling < OOXMLDocumentObject

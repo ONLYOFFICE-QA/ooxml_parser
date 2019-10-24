@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'size_relative/picture_dimension'
 module OoxmlParser
   # Class for parsing `wp14:sizeRelH` object

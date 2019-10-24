@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'table_style_properties/table_style_properties_helper'
 module OoxmlParser
   # Class for parsing `w:tblStylePr`

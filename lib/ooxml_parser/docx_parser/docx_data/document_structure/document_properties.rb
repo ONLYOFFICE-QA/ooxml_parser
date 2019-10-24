@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Document Properties
   class DocumentProperties < OOXMLDocumentObject

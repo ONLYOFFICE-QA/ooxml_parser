@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'table_cell_line'
 module OoxmlParser
   # Border Data

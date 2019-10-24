@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Style Parameter Data
 module OoxmlParser
   class StyleParametres < OOXMLDocumentObject

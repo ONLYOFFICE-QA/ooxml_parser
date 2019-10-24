@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'underline'
 # @author Pavel.Lobashov
 # Class for working with font styles (bold,italic,underlined,strike)

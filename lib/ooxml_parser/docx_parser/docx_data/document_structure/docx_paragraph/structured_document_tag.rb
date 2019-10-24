@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'sdt/sdt_content'
 require_relative 'sdt/sdt_properties'
 module OoxmlParser

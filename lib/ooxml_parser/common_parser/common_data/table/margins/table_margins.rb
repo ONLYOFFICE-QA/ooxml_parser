@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class TableMargins < OOXMLDocumentObject
     attr_accessor :is_default, :top, :bottom, :left, :right

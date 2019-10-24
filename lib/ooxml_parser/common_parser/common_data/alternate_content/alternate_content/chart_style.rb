@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Chart Style
   class ChartStyle < OOXMLDocumentObject

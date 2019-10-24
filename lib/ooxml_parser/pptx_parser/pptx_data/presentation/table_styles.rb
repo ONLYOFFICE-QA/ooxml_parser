@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `tableStyles.xml` file
   class TableStyles < OOXMLDocumentObject

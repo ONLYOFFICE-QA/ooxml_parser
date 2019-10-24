@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Docx Shape Size
 module OoxmlParser
   class DocxShapeSize < OOXMLDocumentObject

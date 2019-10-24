@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'document_grid'
 require_relative 'footnote_properties'
 require_relative 'page_size'

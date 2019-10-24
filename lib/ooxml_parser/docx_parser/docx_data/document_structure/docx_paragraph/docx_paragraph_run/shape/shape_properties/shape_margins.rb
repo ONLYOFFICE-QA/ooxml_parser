@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class ShapeMargins
     attr_accessor :left, :right, :top

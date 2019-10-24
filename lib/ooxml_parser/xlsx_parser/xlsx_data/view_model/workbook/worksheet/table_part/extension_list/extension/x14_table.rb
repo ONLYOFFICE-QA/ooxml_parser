@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for `x14:table` data
   class X14Table < OOXMLDocumentObject

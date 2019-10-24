@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'xlsx_row/xlsx_cell'
 module OoxmlParser
   # Single Row of XLSX

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'background/background_properties'
 module OoxmlParser
   # Class for parsing `bg` tag

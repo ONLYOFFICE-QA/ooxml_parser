@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'matrix/matrix_row'
 module OoxmlParser
   # Class for 'm' data

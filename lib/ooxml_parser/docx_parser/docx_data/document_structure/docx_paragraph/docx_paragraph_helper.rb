@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Stuff for help working with paragraph
 module DocxParagraphHelper
   # @return [Nil, CommentExtended] extended data for this comment

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'slide/presentation_alternate_content'
 require_relative 'slide/background'
 require_relative 'slide/common_slide_data'

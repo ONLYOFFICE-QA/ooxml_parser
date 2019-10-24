@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'nary/nary_properties'
 module OoxmlParser
   # Class for parsing `m:nary` object

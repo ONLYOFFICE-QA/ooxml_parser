@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'common_timing/condition_list'
 module OoxmlParser
   class CommonTiming

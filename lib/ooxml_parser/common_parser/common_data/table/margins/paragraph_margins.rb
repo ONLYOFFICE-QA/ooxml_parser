@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class ParagraphMargins < TableMargins
     def initialize(top = OoxmlSize.new(0),

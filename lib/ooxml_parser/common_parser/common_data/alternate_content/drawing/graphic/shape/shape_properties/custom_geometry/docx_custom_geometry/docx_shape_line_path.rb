@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'docx_shape_line_path/docx_shape_line_element'
 module OoxmlParser
   # Docx Shape Line Path

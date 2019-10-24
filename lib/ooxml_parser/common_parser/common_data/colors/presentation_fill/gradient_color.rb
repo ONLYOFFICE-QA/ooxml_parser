@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'gradient_color/gradient_stop'
 require_relative 'gradient_color/linear_gradient'
 module OoxmlParser

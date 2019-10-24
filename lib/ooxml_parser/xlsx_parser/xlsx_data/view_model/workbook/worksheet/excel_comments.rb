@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'excel_comments/author'
 require_relative 'excel_comments/comment_list'
 require_relative 'excel_comments/excel_comment'

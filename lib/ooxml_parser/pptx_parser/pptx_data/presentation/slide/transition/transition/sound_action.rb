@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'sound_action/sound'
 module OoxmlParser
   # Class for parsing SoundAction

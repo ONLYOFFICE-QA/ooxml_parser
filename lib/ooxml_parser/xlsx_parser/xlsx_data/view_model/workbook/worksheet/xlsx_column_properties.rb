@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Properties of XLSX column
   class XlsxColumnProperties < OOXMLDocumentObject

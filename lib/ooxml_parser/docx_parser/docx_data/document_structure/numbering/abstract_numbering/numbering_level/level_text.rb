@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for storing Level Text, `lvlText` tag
   class LevelText < OOXMLDocumentObject

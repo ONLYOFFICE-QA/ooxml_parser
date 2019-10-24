@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class Coordinates
     attr_accessor :row, :column, :list
@@ -101,7 +103,7 @@ module OoxmlParser
       #    StringHelper.get_column_name('45')  #=> "AS"
       #    StringHelper.get_column_name('287')  #=> "KA"
       def get_column_name(number)
-        (number.to_i > 0 ? ('A'..'Z').to_a[(number.to_i - 1) % 26] + get_column_name((number.to_i - 1) / 26).reverse : '').reverse
+        (number.to_i.positive? ? ('A'..'Z').to_a[(number.to_i - 1) % 26] + get_column_name((number.to_i - 1) / 26).reverse : '').reverse
       end
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'font_collection/text_font'
 module OoxmlParser
   # Class for parsing `a:majorFont`, `a:minorFont` tag

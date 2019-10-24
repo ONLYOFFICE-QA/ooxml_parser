@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # @author Pavel.Lobashov
 
 # Class to describe spacing

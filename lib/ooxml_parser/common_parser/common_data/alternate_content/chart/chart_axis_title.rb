@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Chart Axis Title `title` node
   class ChartAxisTitle < OOXMLDocumentObject

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'shape_properties/shape_margins'
 require_relative 'shape_properties/shape_size'
 require_relative 'shape_properties/stroke'

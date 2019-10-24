@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Parsing chart `c:pivotFmt`
   class PivotFormat < OOXMLDocumentObject

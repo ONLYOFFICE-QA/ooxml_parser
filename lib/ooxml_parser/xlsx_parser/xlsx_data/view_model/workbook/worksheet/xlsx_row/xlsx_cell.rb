@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'xlsx_cell/formula'
 # Single Cell of XLSX
 module OoxmlParser

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'cell_xfs/xf'
 module OoxmlParser
   # Class for parsing `cellXfs`

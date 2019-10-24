@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # This element specifies a unique instance of numbering information that can be referenced by zero or more
   # paragraphs within the parent WordprocessingML document.

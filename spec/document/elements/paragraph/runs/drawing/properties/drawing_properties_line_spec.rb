@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe OoxmlParser::DocxShapeLine do
@@ -31,21 +33,34 @@ describe OoxmlParser::DocxShapeLine do
   end
 
   it 'ShapeLinePoints' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/properties/line/shape_line_points.docx')
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/'\
+                                                        'runs/drawing/properties/line/'\
+                                                        'shape_line_points.docx')
     alternate_content = docx.elements.first.nonempty_runs.first.alternate_content
     expect(alternate_content.office2010_content.graphic.data
-               .properties.custom_geometry.paths_list.first.elements.first.points.first).to eq(OoxmlParser::OOXMLCoordinates.new(5_440, 16_475))
+               .properties.custom_geometry.paths_list.first.elements.first.points.first)
+      .to eq(OoxmlParser::OOXMLCoordinates.new(5_440, 16_475))
   end
 
   it 'ShapeLineObjectSize' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/properties/line/shape_line_object_size.docx')
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph'\
+                                              '/runs/drawing/properties/line/'\
+                                              'shape_line_object_size.docx')
     alternate_content = docx.elements.first.nonempty_runs.first.alternate_content
-    expect(alternate_content.office2010_content.properties.object_size).to eq(OoxmlParser::OOXMLCoordinates.new(OoxmlParser::OoxmlSize.new(11.03, :centimeter),
-                                                                                                                OoxmlParser::OoxmlSize.new(12.54, :centimeter)))
+    expect(alternate_content.office2010_content.properties.object_size)
+      .to eq(OoxmlParser::OOXMLCoordinates.new(OoxmlParser::OoxmlSize.new(11.03, :centimeter),
+                                               OoxmlParser::OoxmlSize.new(12.54, :centimeter)))
   end
 
   it 'adjust_values' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/properties/line/adjust_values.docx')
-    expect(docx.notes.first.elements.first.nonempty_runs.first.alternate_content.office2010_content.graphic.data.properties.preset_geometry.adjust_values_list[0].formula).to eq('val 16667')
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/'\
+                                              'runs/drawing/properties/line/'\
+                                              'adjust_values.docx')
+    expect(docx.notes.first.elements.first
+               .nonempty_runs.first.alternate_content
+               .office2010_content.graphic.data
+               .properties.preset_geometry
+               .adjust_values_list[0]
+               .formula).to eq('val 16667')
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'nary_properties/nary_grow'
 require_relative 'nary_properties/nary_limit_location'
 module OoxmlParser

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'image_fill'
 require_relative 'presentation_fill/gradient_color'
 require_relative 'presentation_fill/presentation_pattern'

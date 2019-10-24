@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Describe single table element
 module OoxmlParser
   class TableElement < OOXMLDocumentObject

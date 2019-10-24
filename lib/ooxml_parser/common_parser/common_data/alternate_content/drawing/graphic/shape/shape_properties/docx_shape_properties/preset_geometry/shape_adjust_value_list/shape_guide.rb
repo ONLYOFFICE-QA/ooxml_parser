@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for describing Shape Guide
   class ShapeGuide < OOXMLDocumentObject

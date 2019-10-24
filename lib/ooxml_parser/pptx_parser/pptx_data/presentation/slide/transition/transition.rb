@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'transition/sound_action'
 require_relative 'transition_properties/transition_properties'
 module OoxmlParser

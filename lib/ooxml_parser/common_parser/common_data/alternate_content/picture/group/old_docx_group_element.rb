@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Fallback DOCX Gropu Element data
 module OoxmlParser
   class OldDocxGroupElement

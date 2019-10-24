@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'document_style/document_style_helper'
 module OoxmlParser
   # Class for describing styles containing in +styles.xml+

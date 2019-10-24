@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'autofilter/filter_column'
 module OoxmlParser
   # Class for `autoFilter` data
