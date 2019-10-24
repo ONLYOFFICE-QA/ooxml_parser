@@ -62,16 +62,6 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, EnforcedStyle, IgnoredMethods.
-# SupportedStyles: predicate, comparison
-Style/NumericPredicate:
-  Exclude:
-    - 'spec/**/*'
-    - 'lib/ooxml_parser/common_parser/common_data/colors/hsl_color.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/coordinates.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, Whitelist.

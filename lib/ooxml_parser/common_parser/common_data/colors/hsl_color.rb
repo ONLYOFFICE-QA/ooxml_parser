@@ -55,7 +55,7 @@ module OoxmlParser
 
       rgb = if @h.zero?
               Color.new(0, 0, 0)
-            elsif @h > 0 && @h < 60
+            elsif @h.positive? && @h < 60
               Color.new(chroma, x, 0)
             elsif @h > 60 && @h < 120
               Color.new(x, chroma, 0)
@@ -75,7 +75,7 @@ module OoxmlParser
       if tint.nil?
         lum
       else
-        tint < 0 ? lum * (1.0 + tint) : lum * (1.0 - tint) + (255 - 255 * (1.0 - tint))
+        tint.negative? ? lum * (1.0 + tint) : lum * (1.0 - tint) + (255 - 255 * (1.0 - tint))
       end
     end
 
