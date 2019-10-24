@@ -20,11 +20,24 @@ describe 'My behaviour' do
   end
 
   it 'several_paragraphs_font_style.pptx' do
-    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/font_style/several_paragraphs_font_style.pptx')
-    expect(pptx.slides.first.elements.first.text_body.paragraphs[0].runs.first.properties.font_style).to eq(OoxmlParser::FontStyle.new(false, false, OoxmlParser::Underline.new(:single), :none))
-    expect(pptx.slides.first.elements.first.text_body.paragraphs[1].runs.first.properties.font_style).to eq(OoxmlParser::FontStyle.new(true))
-    expect(pptx.slides.first.elements.first.text_body.paragraphs[2].runs.first.properties.font_style).to eq(OoxmlParser::FontStyle.new(false, false, OoxmlParser::Underline.new(:single), :none))
-    expect(pptx.slides.first.elements.first.text_body.paragraphs[3].runs.first.properties.font_style).to eq(OoxmlParser::FontStyle.new(true))
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/'\
+                                              'text_body/paragraphs/runs/properties/'\
+                                              'font_style/several_paragraphs_font_style.pptx')
+    paragraphs = pptx.slides.first.elements.first.text_body.paragraphs
+    expect(paragraphs[0].runs.first.properties.font_style)
+      .to eq(OoxmlParser::FontStyle.new(false,
+                                        false,
+                                        OoxmlParser::Underline.new(:single),
+                                        :none))
+    expect(paragraphs[1].runs.first.properties.font_style)
+      .to eq(OoxmlParser::FontStyle.new(true))
+    expect(paragraphs[2].runs.first.properties.font_style)
+      .to eq(OoxmlParser::FontStyle.new(false,
+                                        false,
+                                        OoxmlParser::Underline.new(:single),
+                                        :none))
+    expect(paragraphs[3].runs.first.properties.font_style)
+      .to eq(OoxmlParser::FontStyle.new(true))
   end
 
   it 'copy_style_in_table_with_bold.pptx' do
@@ -38,9 +51,17 @@ describe 'My behaviour' do
   end
 
   it 'copy_style_in_table_with_bold_2_cell_with_bold_text_too.pptx' do
-    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/font_style/copy_style_in_table_with_bold_2_cell_with_bold_text_too.pptx')
-    expect(pptx.slides[0].elements.last.graphic_data.first.rows.first.cells.first.text_body.paragraphs.first.runs.first.properties.font_style.bold).to be_truthy
-    expect(pptx.slides[0].elements.last.graphic_data.first.rows[1].cells.first.text_body.paragraphs.first.runs.first.properties.font_style.bold).to be_truthy
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/'\
+                                                        'shape/text_body/paragraphs/runs/'\
+                                                        'properties/font_style/'\
+                                                        'copy_style_in_table_with_bold_2_cell_with_bold_text_too.pptx')
+    rows = pptx.slides[0].elements.last.graphic_data.first.rows
+    expect(rows[0].cells.first.text_body
+               .paragraphs.first.runs.first
+               .properties.font_style.bold).to be_truthy
+    expect(rows[1].cells.first.text_body
+               .paragraphs.first.runs.first
+               .properties.font_style.bold).to be_truthy
   end
 
   it 'chart_title_bold.pptx' do

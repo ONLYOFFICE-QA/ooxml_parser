@@ -38,9 +38,18 @@ module OoxmlParser
           @properties.position = property.split(':').last
         end
       end
-      @properties.fill_color = Color.new(parent: self).parse_hex_string(node.attribute('fillcolor').value.to_s.sub('#', '').split(' ').first) unless node.attribute('fillcolor').nil?
+      unless node.attribute('fillcolor').nil?
+        @properties.fill_color = Color.new(parent: self).parse_hex_string(node.attribute('fillcolor').value.to_s.sub('#', '').split(' ').first)
+      end
       @properties.stroke.weight = node.attribute('strokeweight').value unless node.attribute('strokeweight').nil?
-      @properties.stroke.color = Color.new(parent: self).parse_hex_string(node.attribute('strokecolor').value.to_s.sub('#', '').split(' ').first) unless node.attribute('strokecolor').nil?
+      unless node.attribute('strokecolor').nil?
+        @properties.stroke.color = Color.new(parent: self)
+                                        .parse_hex_string(node.attribute('strokecolor')
+                                                              .value
+                                                              .to_s
+                                                              .sub('#', '')
+                                                              .split(' ').first)
+      end
       @elements = TextBox.parse_list(node.xpath('v:textbox').first, parent: self) unless node.xpath('v:textbox').first.nil?
       self
     end

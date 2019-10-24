@@ -7,7 +7,12 @@ module OoxmlParser
                   :horizontal_align_from_anchor
 
     def to_s
-      'Table position left: ' + @left.to_s + ', right: ' + @right.to_s + ', top: ' + @top.to_s + ', bottom: ' + @bottom.to_s + 'position x: ' + position_x.to_s + 'position y: ' + position_x.to_s
+      "Table position left: #{left}, "\
+      "right: #{right}, "\
+      "top: #{top}, "\
+      "bottom #{bottom}, "\
+      "position x: #{position_x}, "\
+      "position y: #{position_y}"
     end
 
     # Parse TablePosition object
