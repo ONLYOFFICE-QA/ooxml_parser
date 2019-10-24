@@ -14,14 +14,6 @@ module OoxmlParser
       @parent = parent
     end
 
-    def round(count_of_digits = 1)
-      top = @top.round(count_of_digits)
-      bottom = @bottom.round(count_of_digits)
-      left = @left.round(count_of_digits)
-      right = @right.round(count_of_digits)
-      ParagraphMargins.new(top, bottom, left, right)
-    end
-
     def parse(text_body_props_node)
       text_body_props_node.attributes.each do |key, value|
         case key
