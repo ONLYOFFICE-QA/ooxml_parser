@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'docx_custom_geometry/docx_shape_line_path'
 # Docx Custom Geometry
 module OoxmlParser

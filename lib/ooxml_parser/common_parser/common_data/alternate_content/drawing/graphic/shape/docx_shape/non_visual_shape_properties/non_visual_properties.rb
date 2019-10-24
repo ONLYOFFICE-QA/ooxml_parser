@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'non_visual_properties/shape_placeholder'
 module OoxmlParser
   # Class for parsing `nvPr` object

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # method to help to work with DocumentStructure
   module DocumentStructureHelpers

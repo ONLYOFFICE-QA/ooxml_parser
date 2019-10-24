@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'tabs/tab'
 module OoxmlParser
   # Class for working with `w:tabs`

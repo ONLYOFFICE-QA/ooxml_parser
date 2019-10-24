@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # noinspection RubyTooManyInstanceVariablesInspection
 require_relative 'docx_paragraph/bookmark_start'
 require_relative 'docx_paragraph/bookmark_end'

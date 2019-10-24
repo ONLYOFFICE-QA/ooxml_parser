@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'table/row/row'
 require_relative 'table/table_properties'
 require_relative 'table/table_grid'

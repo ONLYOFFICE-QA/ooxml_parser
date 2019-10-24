@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'ooxml_parser/common_parser/common_data/ooxml_document_object'
 require_relative 'ooxml_parser/common_parser/common_data/color'
 require_relative 'ooxml_parser/common_parser/common_data/coordinates'

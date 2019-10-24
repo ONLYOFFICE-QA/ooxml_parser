@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `footnotePr` tags
   class FootnoteProperties < OOXMLDocumentObject

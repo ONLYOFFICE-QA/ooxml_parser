@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Data about `textFill` object
   class TextFill < OOXMLDocumentObject

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'series/series_text'
 require_relative 'series/x_y_values'
 module OoxmlParser

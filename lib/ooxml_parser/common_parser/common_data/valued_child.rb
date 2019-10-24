@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for working with any tag contained only value
   class ValuedChild < OOXMLDocumentObject

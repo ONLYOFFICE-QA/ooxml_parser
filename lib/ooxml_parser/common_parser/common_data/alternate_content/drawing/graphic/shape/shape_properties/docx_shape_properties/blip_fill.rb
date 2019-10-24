@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'blip_fill/blip'
 module OoxmlParser
   # Class for parsing `a:blipFill` tag

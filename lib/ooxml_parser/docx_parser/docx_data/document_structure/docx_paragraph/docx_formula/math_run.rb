@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'math_run/math_run_properties'
 module OoxmlParser
   # Class for parsing `m:r` object

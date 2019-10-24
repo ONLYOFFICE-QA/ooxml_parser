@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for 'sSubSup', 'sSup', 'sSub' data
   class Index < OOXMLDocumentObject

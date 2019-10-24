@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'abstract_numbering/multilevel_type'
 require_relative 'abstract_numbering/numbering_level'
 module OoxmlParser

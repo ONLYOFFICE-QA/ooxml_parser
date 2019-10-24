@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Helper methods for color
 module ColorHelper
   # Parse string in hex

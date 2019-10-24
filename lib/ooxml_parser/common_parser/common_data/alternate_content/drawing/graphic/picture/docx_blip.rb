@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'docx_blip/file_reference'
 module OoxmlParser
   # Class for parsing `blipFill`

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Cell Range of Chart
   class ChartCellsRange < OOXMLDocumentObject

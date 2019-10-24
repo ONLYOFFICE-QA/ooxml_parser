@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'color/docx_pattern_fill'
 module OoxmlParser
   # Color inside DOCX

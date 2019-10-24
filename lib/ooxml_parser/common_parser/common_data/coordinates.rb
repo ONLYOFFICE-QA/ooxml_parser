@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class Coordinates
     attr_accessor :row, :column, :list

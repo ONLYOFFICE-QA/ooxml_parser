@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'string_reference/number_string_cache'
 module OoxmlParser
   # Class for parsing `c:strRef` object

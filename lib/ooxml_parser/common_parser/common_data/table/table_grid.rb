@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'table_grid/grid_column'
 module OoxmlParser
   # Class for parsing `w:tblGrid` object

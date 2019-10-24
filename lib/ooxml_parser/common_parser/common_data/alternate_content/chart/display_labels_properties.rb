@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Chart Label Properties, parse tag `dLbls`
   class DisplayLabelsProperties < OOXMLDocumentObject

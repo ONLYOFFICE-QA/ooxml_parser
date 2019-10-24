@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'xlsx_data/view_model/workbook'
 
 module OoxmlParser

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for `tableStyleInfo` data
   # https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.tablestyleinfo.aspx

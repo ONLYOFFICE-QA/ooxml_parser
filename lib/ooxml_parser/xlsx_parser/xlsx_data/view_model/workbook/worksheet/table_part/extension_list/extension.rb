@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'extension/sparkline_groups'
 require_relative 'extension/x14_table'
 module OoxmlParser

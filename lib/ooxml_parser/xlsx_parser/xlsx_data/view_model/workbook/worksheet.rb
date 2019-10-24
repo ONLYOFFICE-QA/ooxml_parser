@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'worksheet/excel_comments'
 require_relative 'worksheet/ole_objects'
 require_relative 'worksheet/page_setup'

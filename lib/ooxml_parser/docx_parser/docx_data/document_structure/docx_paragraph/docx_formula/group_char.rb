@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for `groupChr` data
   class GroupChar < OOXMLDocumentObject

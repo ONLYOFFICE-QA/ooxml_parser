@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class LineJoin < OOXMLDocumentObject
     attr_accessor :type, :limit

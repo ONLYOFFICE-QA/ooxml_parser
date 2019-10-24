@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Docx Drawing Distance From Text
   class DocxDrawingDistanceFromText < OOXMLDocumentObject

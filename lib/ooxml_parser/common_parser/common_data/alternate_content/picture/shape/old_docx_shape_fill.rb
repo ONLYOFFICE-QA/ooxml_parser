@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Fallback DOCX shape fill properties
   class OldDocxShapeFill < OOXMLDocumentObject

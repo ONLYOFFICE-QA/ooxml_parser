@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Docx Coordinates
 module OoxmlParser
   class OOXMLCoordinates

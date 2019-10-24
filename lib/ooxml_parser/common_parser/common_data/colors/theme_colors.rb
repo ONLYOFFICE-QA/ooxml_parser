@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class for hold ThemeColors list
 module OoxmlParser
   class ThemeColors < OOXMLDocumentObject

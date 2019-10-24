@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'non_visual_shape_properties/common_non_visual_properties'
 require_relative 'non_visual_shape_properties/non_visual_properties'
 module OoxmlParser

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `lin` tags
   class LinearGradient < OOXMLDocumentObject

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # This element specifies the type of numbering defined by a given abstract numbering type
   class MultilevelType < OOXMLDocumentObject

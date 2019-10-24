@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'old_docx_group_properties'
 require_relative 'old_docx_group_element'
 # Fallback DOCX group data

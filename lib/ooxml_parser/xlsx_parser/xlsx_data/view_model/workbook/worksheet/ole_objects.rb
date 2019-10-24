@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `oleObjects`
   class OleObjects < OOXMLDocumentObject

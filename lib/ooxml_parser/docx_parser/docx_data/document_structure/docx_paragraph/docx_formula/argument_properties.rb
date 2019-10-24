@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'argument_properties/argument_size'
 module OoxmlParser
   # Class for parsing `m:argPr` object

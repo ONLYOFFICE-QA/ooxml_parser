@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'ooxml_shape_body_properties/preset_text_warp'
 
 module OoxmlParser

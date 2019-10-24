@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class for parsing Run Outline properties
 module OoxmlParser
   # Class for parsing `w:ln` tags

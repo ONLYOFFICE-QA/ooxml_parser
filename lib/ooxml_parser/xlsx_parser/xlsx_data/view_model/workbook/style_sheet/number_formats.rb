@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'number_formats/number_format'
 module OoxmlParser
   # Parsing `numFmts` tag

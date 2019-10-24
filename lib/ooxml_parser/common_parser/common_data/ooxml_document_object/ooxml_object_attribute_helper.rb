@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Module for stroing some attribute helpers for objects
   module OoxmlObjectAttributeHelper

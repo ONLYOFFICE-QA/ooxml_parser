@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # noinspection RubyInstanceMethodNamingConvention
 require_relative 'document_structure/comments'
 require_relative 'document_structure/comments_extended'

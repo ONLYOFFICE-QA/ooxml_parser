@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'point/text_value'
 module OoxmlParser
   # Class for parsing `c:pt` object

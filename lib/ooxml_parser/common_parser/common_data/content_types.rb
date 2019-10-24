@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'content_types/content_type_default'
 require_relative 'content_types/content_type_override'
 module OoxmlParser

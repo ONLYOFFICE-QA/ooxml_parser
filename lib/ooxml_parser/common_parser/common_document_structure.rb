@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'common_data/content_types'
 module OoxmlParser
   # Common document structure for DOCX, XLSX, PPTX file

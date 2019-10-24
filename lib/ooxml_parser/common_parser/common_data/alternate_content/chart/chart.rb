@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'chart_axis'
 require_relative 'chart_cells_range'
 require_relative 'chart_legend'

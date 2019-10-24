@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class Parser
     # Base method to yield parse document of any type

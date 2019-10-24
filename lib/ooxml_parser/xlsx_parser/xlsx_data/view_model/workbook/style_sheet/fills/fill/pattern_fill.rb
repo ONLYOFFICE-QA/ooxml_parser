@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Parsing `patternFill` tag
   class PatternFill < OOXMLDocumentObject

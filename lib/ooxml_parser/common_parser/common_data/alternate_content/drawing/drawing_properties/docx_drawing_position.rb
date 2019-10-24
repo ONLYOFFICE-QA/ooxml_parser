@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Docx Drawing Position
   class DocxDrawingPosition < OOXMLDocumentObject

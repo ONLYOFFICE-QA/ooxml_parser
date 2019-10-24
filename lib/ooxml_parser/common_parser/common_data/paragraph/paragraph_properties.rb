@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'paragrpah_properties/numbering_properties'
 require_relative 'paragrpah_properties/paragraph_borders'
 require_relative 'paragrpah_properties/paragraph_spacing'

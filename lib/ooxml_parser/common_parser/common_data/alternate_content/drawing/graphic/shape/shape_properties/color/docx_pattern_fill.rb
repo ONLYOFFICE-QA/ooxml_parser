@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Docx Pattern Fill Data
   class DocxPatternFill < OOXMLDocumentObject

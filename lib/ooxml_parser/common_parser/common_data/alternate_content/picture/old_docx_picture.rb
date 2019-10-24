@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'shape/old_docx_shape'
 require_relative 'shape/old_docx_shape_fill'
 require_relative 'group/old_docx_group'

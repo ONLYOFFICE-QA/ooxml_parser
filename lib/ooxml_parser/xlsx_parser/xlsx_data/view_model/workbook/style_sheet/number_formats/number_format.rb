@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Parsing `numFmt` tag
   class NumberFormat < OOXMLDocumentObject

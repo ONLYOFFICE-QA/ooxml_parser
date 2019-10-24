@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'alternate_content/choice'
 require_relative 'alternate_content/chart_style'
 require_relative 'chart/chart'

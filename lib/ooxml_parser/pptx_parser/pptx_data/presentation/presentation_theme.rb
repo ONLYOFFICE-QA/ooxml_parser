@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'presentation_theme/font_scheme'
 require_relative 'presentation_theme/theme_color'
 module OoxmlParser

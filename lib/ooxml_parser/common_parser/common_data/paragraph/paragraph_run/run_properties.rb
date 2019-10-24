@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'run_properties/outline'
 require_relative 'run_properties/position'
 require_relative 'run_properties/size'

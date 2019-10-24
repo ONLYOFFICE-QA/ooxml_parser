@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'numbering_level/level_justification'
 require_relative 'numbering_level/level_text'
 require_relative 'numbering_level/numbering_format'

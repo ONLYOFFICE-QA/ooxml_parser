@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'numbering/abstract_numbering'
 require_relative 'numbering/numbering_definition'
 

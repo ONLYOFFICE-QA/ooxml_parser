@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'style_sheet/cell_xfs'
 require_relative 'style_sheet/fills'
 require_relative 'style_sheet/fonts'

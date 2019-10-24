@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'shape/shape_properties'
 module OoxmlParser
   # Class for parsing `shape`, `rect`, `oval` tags

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'pivot_formats/pivot_format'
 module OoxmlParser
   # Parsing chart `c:pivotFmts`

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'sparkline_groups/sparkline_group'
 module OoxmlParser
   # Class for `sparklineGroups` data

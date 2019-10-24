@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'merge'
 module OoxmlParser
   # Class for parsing 'w:tcPr' element

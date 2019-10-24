@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class ShapeSize
     attr_accessor :width, :height

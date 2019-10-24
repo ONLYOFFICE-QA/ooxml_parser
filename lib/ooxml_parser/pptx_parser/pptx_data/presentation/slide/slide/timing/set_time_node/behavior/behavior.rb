@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'target_element'
 module OoxmlParser
   class Behavior < OOXMLDocumentObject

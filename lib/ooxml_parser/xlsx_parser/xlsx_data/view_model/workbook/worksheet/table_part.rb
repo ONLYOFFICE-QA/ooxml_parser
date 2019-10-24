@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'table_part/autofilter'
 require_relative 'table_part/extension_list'
 require_relative 'table_part/table_style_info'

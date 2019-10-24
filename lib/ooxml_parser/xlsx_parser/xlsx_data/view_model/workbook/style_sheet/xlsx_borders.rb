@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'xlsx_borders/xlsx_border'
 module OoxmlParser
   # Class for parsing `borders`

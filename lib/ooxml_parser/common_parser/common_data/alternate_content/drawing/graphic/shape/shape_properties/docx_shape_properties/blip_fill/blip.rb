@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'blip/alpha_mod_fix'
 
 module OoxmlParser

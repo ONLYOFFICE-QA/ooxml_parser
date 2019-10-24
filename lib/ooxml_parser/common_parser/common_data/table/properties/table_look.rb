@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Describe look of table, parsed `w:tblLook`
   class TableLook < OOXMLDocumentObject

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'document_defaults/paragraph_properties_default'
 require_relative 'document_defaults/run_properties_default'
 module OoxmlParser

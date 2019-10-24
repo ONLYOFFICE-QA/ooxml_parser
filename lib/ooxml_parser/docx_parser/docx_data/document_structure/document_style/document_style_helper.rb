@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Helper methods for working with Style List
   module DocumentStyleHelper

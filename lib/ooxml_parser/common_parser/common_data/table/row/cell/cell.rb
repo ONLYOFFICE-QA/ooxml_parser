@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'properties/borders'
 require_relative 'cell_properties'
 module OoxmlParser

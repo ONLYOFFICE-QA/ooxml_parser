@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Table Properties Data
 require_relative 'properties/table_layout'
 require_relative 'properties/table_look'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `w:gridCol` object
   class GridColumn < OOXMLDocumentObject

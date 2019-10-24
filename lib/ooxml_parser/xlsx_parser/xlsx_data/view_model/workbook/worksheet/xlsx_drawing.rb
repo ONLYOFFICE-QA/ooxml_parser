@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'xlsx_drawing/xlsx_drawing_position_parameters'
 module OoxmlParser
   class XlsxDrawing < OOXMLDocumentObject

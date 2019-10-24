@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'time_node/common_timing'
 require_relative 'animation_effect/animation_effect'
 require_relative 'set_time_node/set_time_node'

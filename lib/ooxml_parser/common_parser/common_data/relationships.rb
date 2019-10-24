@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'relationships/relationship'
 module OoxmlParser
   # Class for describing list of relationships

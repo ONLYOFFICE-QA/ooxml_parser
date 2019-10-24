@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'choice/math_text'
 module OoxmlParser
   # Class for storing choice (for office 2014 and newer)

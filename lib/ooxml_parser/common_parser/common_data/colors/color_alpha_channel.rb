@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Class for working with AlphaChannel
 module OoxmlParser
   class ColorAlphaChannel

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'plot_area/common_chart_data'
 module OoxmlParser
   # Parsing Plot Area tag 'plotArea'

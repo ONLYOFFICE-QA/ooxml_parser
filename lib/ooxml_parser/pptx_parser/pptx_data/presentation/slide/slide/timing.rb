@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'timing/time_node'
 module OoxmlParser
   # Class for parsing `timing`

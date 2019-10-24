@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Docx Wrap Drawing
   class DocxWrapDrawing < OOXMLDocumentObject

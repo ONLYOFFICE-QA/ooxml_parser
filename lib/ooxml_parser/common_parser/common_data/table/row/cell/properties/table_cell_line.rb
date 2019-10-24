@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'table_cell_line/line_join'
 module OoxmlParser
   # Class for parsing Table Cell Lines

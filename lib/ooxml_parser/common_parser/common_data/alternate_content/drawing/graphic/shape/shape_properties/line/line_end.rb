@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   class LineEnd < OOXMLDocumentObject
     attr_accessor :type, :length, :width

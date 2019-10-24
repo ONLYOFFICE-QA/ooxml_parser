@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'codition_list/condition'
 module OoxmlParser
   # Class for parsing `stCondLst` tags

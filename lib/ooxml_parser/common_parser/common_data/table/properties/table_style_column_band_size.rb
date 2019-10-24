@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `w:tblStyleColBandSize` object
   # When a style specifies the format for a band of columns in a

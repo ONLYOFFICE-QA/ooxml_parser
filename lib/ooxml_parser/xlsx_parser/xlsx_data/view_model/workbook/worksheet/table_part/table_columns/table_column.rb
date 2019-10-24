@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for `tableColumn` tag data
   class TableColumn < OOXMLDocumentObject

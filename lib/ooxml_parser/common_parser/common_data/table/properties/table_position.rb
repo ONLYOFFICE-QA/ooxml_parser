@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Table Position Data
 module OoxmlParser
   class TablePosition < OOXMLDocumentObject

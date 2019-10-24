@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'workbook/chartsheet'
 require_relative 'workbook/shared_string_table'
 require_relative 'workbook/style_sheet'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'comments_extended/comment_extended'
 module OoxmlParser
   # Class for parsing `commentsExtended.xml` file

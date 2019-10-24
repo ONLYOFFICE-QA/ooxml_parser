@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OoxmlParser
   # Class for parsing `wp14:pctWidth`, `wp14:pctHeight` object
   class PictureDimension < OOXMLDocumentObject
