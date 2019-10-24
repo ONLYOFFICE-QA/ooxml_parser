@@ -8,7 +8,7 @@ module OoxmlParser
 
     # Parse BookmarkStart object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [BookmarkStart] result of parsing
+    # @return [BookmarkEnd] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

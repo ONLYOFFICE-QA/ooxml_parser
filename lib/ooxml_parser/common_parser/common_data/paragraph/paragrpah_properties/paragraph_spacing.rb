@@ -12,9 +12,9 @@ module OoxmlParser
     # @return [Symbol] value of line rule style
     attr_accessor :line_rule
 
-    # Parse Position
-    # @param [Nokogiri::XML:Node] node with Position
-    # @return [Position] result of parsing
+    # Parse ParagraphSpacing
+    # @param [Nokogiri::XML:Node] node with ParagraphSpacing
+    # @return [ParagraphSpacing] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

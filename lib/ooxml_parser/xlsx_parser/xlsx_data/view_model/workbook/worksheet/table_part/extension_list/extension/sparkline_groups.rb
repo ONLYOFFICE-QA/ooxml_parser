@@ -12,7 +12,7 @@ module OoxmlParser
       @parent = parent
     end
 
-    # @return [Array, SparklineGroups] accessor
+    # @return [SparklineGroup] accessor
     def [](key)
       sparklines_groups[key]
     end

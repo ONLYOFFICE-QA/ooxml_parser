@@ -33,9 +33,9 @@ module OoxmlParser
       super
     end
 
-    # Parse Hyperlink object
+    # Parse OoxmlColor object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [Hyperlink] result of parsing
+    # @return [OoxmlColor] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

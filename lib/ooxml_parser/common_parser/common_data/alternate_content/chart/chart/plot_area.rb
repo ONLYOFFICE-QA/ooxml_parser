@@ -27,9 +27,9 @@ module OoxmlParser
     # @return [CommonChartData] pie 3D chart
     attr_reader :pie_3d_chart
 
-    # Parse View3D object
+    # Parse PlotArea object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [View3D] result of parsing
+    # @return [PlotArea] result of parsing
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name

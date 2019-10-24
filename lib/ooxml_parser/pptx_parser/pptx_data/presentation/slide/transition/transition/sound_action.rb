@@ -6,9 +6,9 @@ module OoxmlParser
   class SoundAction < OOXMLDocumentObject
     attr_accessor :start_sound, :end_sound
 
-    # Parse HyperlinkForHover
+    # Parse SoundAction
     # @param [Nokogiri::XML:Node] node with NumberingProperties
-    # @return [HyperlinkForHover] result of parsing
+    # @return [SoundAction] result of parsing
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name

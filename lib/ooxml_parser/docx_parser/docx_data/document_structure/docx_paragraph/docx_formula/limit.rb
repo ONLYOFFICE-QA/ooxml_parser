@@ -10,9 +10,9 @@ module OoxmlParser
       @parent = parent
     end
 
-    # Parse Accent object
+    # Parse Limit object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [Accent] result of parsing
+    # @return [Limit] result of parsing
     def parse(node)
       @type = :lower if node.name == 'limLow'
       node.xpath('*').each do |node_child|

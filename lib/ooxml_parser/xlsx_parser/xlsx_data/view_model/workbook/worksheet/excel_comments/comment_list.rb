@@ -12,7 +12,7 @@ module OoxmlParser
 
     # Parse Author object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [Author] result of parsing
+    # @return [CommentList] result of parsing
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name
