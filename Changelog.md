@@ -30,6 +30,7 @@
 * Add parsing `DocumentStructure#comments_document`
 * Add parsing `ExcelComment#text`
 * Add `Shade#to_s`
+* Drop support of Ruby < 2.3
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element

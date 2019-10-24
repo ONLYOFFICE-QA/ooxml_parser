@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name = 'ooxml_parser'
   s.version = OoxmlParser::Version::STRING
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 2.1'
+  s.required_ruby_version = '>= 2.3'
   s.authors = ['Pavel Lobashov', 'Roman Zagudaev']
   s.summary = 'OoxmlParser Gem'
   s.description = 'Parse OOXML files (docx, xlsx, pptx)'
