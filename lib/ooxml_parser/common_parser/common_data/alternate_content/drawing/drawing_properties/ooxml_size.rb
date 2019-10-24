@@ -55,7 +55,7 @@ module OoxmlParser
       when :one_240th_cm
         OoxmlSize.new(@value * 1500)
       when :dxa, :twip
-        return OoxmlSize.new(@value * 635, :emu)
+        OoxmlSize.new(@value * 635, :emu)
       when :inch
         OoxmlSize.new(@value * 914_400, :emu)
       when :spacing_point

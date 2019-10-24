@@ -74,13 +74,6 @@ Style/NumericPredicate:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/drawing_properties/ooxml_size.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
 # Configuration parameters: ConvertCodeThatCanStartToReturnNil, Whitelist.
 # Whitelist: present?, blank?, presence, try, try!
 Style/SafeNavigation:
