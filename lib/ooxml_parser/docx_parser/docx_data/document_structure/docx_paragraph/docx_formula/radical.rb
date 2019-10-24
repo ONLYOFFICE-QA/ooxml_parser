@@ -10,9 +10,9 @@ module OoxmlParser
       @parent = parent
     end
 
-    # Parse Function object
+    # Parse Radical object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [Function] result of parsing
+    # @return [Radical] result of parsing
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name

@@ -13,7 +13,7 @@ module OoxmlParser
       @file = params.fetch(:file, OOXMLDocumentObject.path_to_folder + 'word/comments.xml')
     end
 
-    # @return [Array, Comments] accessor
+    # @return [Comment] accessor
     def [](key)
       @comments_array[key]
     end

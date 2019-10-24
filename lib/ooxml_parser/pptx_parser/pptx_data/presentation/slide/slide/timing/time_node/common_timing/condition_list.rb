@@ -11,9 +11,9 @@ module OoxmlParser
       @parent = parent
     end
 
-    # Parse CommonTiming object
+    # Parse ConditionList object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [CommonTiming] result of parsing
+    # @return [ConditionList] result of parsing
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name

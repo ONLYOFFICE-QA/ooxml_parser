@@ -12,14 +12,14 @@ module OoxmlParser
       @parent = parent
     end
 
-    # @return [Array, Font] accessor
+    # @return [Array<Font>] accessor
     def [](key)
       @fonts_array[key]
     end
 
-    # Parse NumberFormats data
+    # Parse Fonts data
     # @param [Nokogiri::XML:Element] node with NumberFormats data
-    # @return [NumberFormats] value of NumberFormats data
+    # @return [Fonts] value of NumberFormats data
     def parse(node)
       node.attributes.each do |key, value|
         case key

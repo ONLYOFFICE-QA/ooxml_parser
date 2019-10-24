@@ -21,7 +21,7 @@ module OoxmlParser
 
     # Parse Table Columns data
     # @param [Nokogiri::XML:Element] node with TableColumns data
-    # @return [ExtensionList] value of TableColumns data
+    # @return [TableColumns] value of TableColumns data
     def parse(node)
       node.attributes.each do |key, value|
         case key

@@ -11,7 +11,7 @@ module OoxmlParser
 
     # Parse TableStyleRowBandSize
     # @param [Nokogiri::XML:Node] node with TableStyleRowBandSize
-    # @return [TableStyleColumnBandSize] result of parsing
+    # @return [TableStyleRowBandSize] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

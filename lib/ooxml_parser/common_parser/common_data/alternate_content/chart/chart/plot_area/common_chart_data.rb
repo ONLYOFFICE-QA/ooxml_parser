@@ -13,9 +13,9 @@ module OoxmlParser
       @parent = parent
     end
 
-    # Parse View3D object
+    # Parse CommonChartData object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [View3D] result of parsing
+    # @return [CommonChartData] result of parsing
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name

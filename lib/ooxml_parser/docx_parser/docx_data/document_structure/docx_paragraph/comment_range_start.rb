@@ -8,7 +8,7 @@ module OoxmlParser
 
     # Parse CommentRangeStart object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [BookmarkStart] result of parsing
+    # @return [CommentRangeStart] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

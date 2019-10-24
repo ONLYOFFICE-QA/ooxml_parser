@@ -25,16 +25,16 @@ module OoxmlParser
     # Parse ThemeColor
     # @param node [Nokogiri::XML::Element] node to parse
     # @return [ThemeColor] result of parsing
-    def parse(color_node)
-      color_node.xpath('*').each do |color_node_child|
-        case color_node_child.name
+    def parse(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'sysClr'
           @type = :system
-          @value = color_node_child.attribute('val').value
-          @color = Color.new(parent: self).parse_hex_string(color_node_child.attribute('lastClr').value.to_s) unless color_node_child.attribute('lastClr').nil?
+          @value = node_child.attribute('val').value
+          @color = Color.new(parent: self).parse_hex_string(node_child.attribute('lastClr').value.to_s) unless node_child.attribute('lastClr').nil?
         when 'srgbClr'
           @type = :rgb
-          @color = Color.new(parent: self).parse_hex_string(color_node_child.attribute('val').value.to_s)
+          @color = Color.new(parent: self).parse_hex_string(node_child.attribute('val').value.to_s)
         end
       end
       self
