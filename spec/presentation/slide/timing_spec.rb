@@ -26,5 +26,15 @@ describe 'My behaviour' do
                    .common_time_node.children.first.common_time_node.start_conditions.list.first.delay).to eq(:indefinite)
       end
     end
+
+    it 'Audio time node' do
+      pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/'\
+                                                          'timing/time_node/'\
+                                                          'time_node_audio.pptx')
+      expect(pptx.slides.first.timing
+                 .time_node_list.first
+                 .common_time_node
+                 .children[1].type).to eq(:audio)
+    end
   end
 end

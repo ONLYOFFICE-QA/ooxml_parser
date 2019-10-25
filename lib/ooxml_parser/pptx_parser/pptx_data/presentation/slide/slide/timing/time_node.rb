@@ -47,7 +47,7 @@ module OoxmlParser
         when 'video'
           timings << :video
         when 'audio'
-          timings << :audio
+          timings << TimeNode.new(:audio, parent: timings).parse(time_node)
         end
       end
       timings
