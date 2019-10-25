@@ -20,7 +20,7 @@ module OoxmlParser
       when 'split'
         @direction = value_to_symbol(node.attribute('dir')) if node.attribute('dir')
         @orientation = node.attribute('orient').value.to_sym if node.attribute('orient')
-      when 'wheel', 'wheelReverse'
+      when 'wheel'
         @wheel = Wheel.new(parent: self).parse(node)
       end
       self
