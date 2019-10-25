@@ -30,17 +30,6 @@ module OoxmlParser
           elsif sub_element.name == 'tbl'
             note.elements << Table.new(parent: note).parse(sub_element, number)
             number += 1
-          elsif sub_element.name == 'std'
-            sub_element.xpath('w:p').each do |p|
-              note.elements << params[:default_paragraph].copy.parse(p, number, params[:default_character])
-              number += 1
-            end
-            sub_element.xpath('w:sdtContent').each do |sdt_content|
-              sdt_content.xpath('w:p').each do |p|
-                note.elements << params[:default_paragraph].copy.parse(p, number, params[:default_character])
-                number += 1
-              end
-            end
           end
         end
       end
