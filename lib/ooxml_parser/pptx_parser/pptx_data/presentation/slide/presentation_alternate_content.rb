@@ -21,8 +21,6 @@ module OoxmlParser
           @timing = Timing.new(parent: self).parse(node_child)
         when 'transition'
           @transition = Transition.new(parent: self).parse(node_child)
-        when 'sp'
-          @elements << DocxShape.new(parent: self).parse(node_child)
         end
       end
       self
