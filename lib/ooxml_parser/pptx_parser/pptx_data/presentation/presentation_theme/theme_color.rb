@@ -5,8 +5,8 @@ module OoxmlParser
   class ThemeColor < OOXMLDocumentObject
     attr_accessor :type, :value, :color
 
-    def initialize(parent: nil)
-      @type = ''
+    def initialize(type = '', parent: nil)
+      @type = type
       @parent = parent
     end
 
