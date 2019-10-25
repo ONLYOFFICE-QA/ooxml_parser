@@ -43,10 +43,6 @@ module OoxmlParser
       raise "Error. Wrong sheet value: #{sheet}"
     end
 
-    def difference(other)
-      Hash.object_to_hash(self).diff(Hash.object_to_hash(other))
-    end
-
     # Get all values of formulas.
     # @param [Fixnum] precision of formulas counting
     # @return [Array, String] all formulas
