@@ -87,13 +87,6 @@ module OoxmlParser
       !nonempty_runs.empty? || paragraph_properties.section_properties
     end
 
-    def remove_empty_runs
-      nonempty = nonempty_runs
-      @character_style_array.each do |cur_run|
-        @character_style_array.delete(cur_run) unless nonempty.include?(cur_run)
-      end
-    end
-
     def ==(other)
       ignored_attributes = %i[@number @parent]
       all_instance_variables = instance_variables
