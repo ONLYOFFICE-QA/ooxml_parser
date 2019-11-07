@@ -217,8 +217,6 @@ module OoxmlParser
           @section_break = case @sector_properties.type
                            when 'oddPage'
                              'Odd page'
-                           when 'evenPage'
-                             'Even page'
                            when 'continuous'
                              'Current Page'
                            else
