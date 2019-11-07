@@ -4,7 +4,7 @@ require_relative 'border'
 module OoxmlParser
   class Borders < ParagraphBorders
     attr_accessor :left, :right, :top, :bottom, :inner_vertical, :inner_horizontal, :display, :between, :bar,
-                  :top_left_to_bottom_right, :top_right_to_bottom_left, :offset_from
+                  :offset_from
 
     def initialize(parent: nil)
       @left = BordersProperties.new
@@ -77,10 +77,6 @@ module OoxmlParser
           @top = TableCellLine.new(parent: self).parse(node_child)
         when 'lnB', 'bottom'
           @bottom = TableCellLine.new(parent: self).parse(node_child)
-        when 'lnTlToBr', 'tl2br'
-          @top_left_to_bottom_right = TableCellLine.new(parent: self).parse(node_child)
-        when 'lnBlToTr', 'tr2bl'
-          @top_right_to_bottom_left = TableCellLine.new(parent: self).parse(node_child)
         when 'insideV'
           @inner_vertical = TableCellLine.new(parent: self).parse(node_child)
         when 'insideH'
