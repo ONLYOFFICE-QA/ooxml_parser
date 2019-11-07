@@ -18,7 +18,7 @@ module OoxmlParser
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
-                  :character_style_array, :horizontal_line, :page_break, :borders, :keep_lines,
+                  :character_style_array, :page_break, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control
     # @return [Hyperlink] hyperlink in paragraph
@@ -44,7 +44,6 @@ module OoxmlParser
       @spacing = Spacing.new
       @ind = Indents.new
       @character_style_array = []
-      @horizontal_line = false
       @page_break = false
       @borders = Borders.new
       @keep_lines = false
@@ -121,11 +120,6 @@ module OoxmlParser
           character_styles_array << BookmarkEnd.new(parent: self).parse(node_child)
         when 'pPr'
           parse_paragraph_style(node_child, custom_character_style)
-          node.xpath('w:pict').each do |pict|
-            pict.xpath('v:rect').each do
-              @horizontal_line = true
-            end
-          end
           @paragraph_properties = ParagraphProperties.new(parent: self).parse(node_child)
         when 'commentRangeStart'
           character_styles_array << CommentRangeStart.new(parent: self).parse(node_child)
