@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::DocumentStructure do
+  let(:numbering) { OoxmlParser::Parser.parse('spec/document/document_structure/numbering.docx') }
   let(:table_header_footer) { OoxmlParser::Parser.parse('spec/document/document_structure/table_header_footer.docx') }
   let(:shape_header_footer) { OoxmlParser::Parser.parse('spec/document/document_structure/shape_header_footer.docx') }
 
@@ -61,6 +62,26 @@ describe OoxmlParser::DocumentStructure do
                                                         type: :shape)
                  .first.nonempty_runs
                  .last.text).to eq('shape_footer')
+    end
+  end
+
+  describe 'DocumentStructure#note_by_description' do
+    it 'Raise error on unknown note type' do
+      expect do
+        table_header_footer.note_by_description(:error)
+      end.to raise_error(/There isn't this type of the note/)
+    end
+  end
+
+  describe 'DocumentStructure#recognize_numbering' do
+    it 'able to recognize basic numbering' do
+      expect(numbering.recognize_numbering.first).to eq('decimal')
+    end
+  end
+
+  describe 'DocumentStructure#outline' do
+    it 'able to recognize basic outline' do
+      expect(numbering.outline.first).to eq('decimal')
     end
   end
 end
