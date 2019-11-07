@@ -52,10 +52,6 @@ module OoxmlParser
         @comments == other.comments
     end
 
-    def difference(other)
-      Hash.object_to_hash(self).diff(Hash.object_to_hash(other))
-    end
-
     def element_by_description(location: :canvas, type: :docx_paragraph)
       case location
       when :canvas
