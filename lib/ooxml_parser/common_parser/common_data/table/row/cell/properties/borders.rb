@@ -6,22 +6,23 @@ module OoxmlParser
     attr_accessor :left, :right, :top, :bottom, :inner_vertical, :inner_horizontal, :display, :between, :bar,
                   :top_left_to_bottom_right, :top_right_to_bottom_left, :offset_from
 
-    def initialize(left = BordersProperties.new,
-                   right = BordersProperties.new,
-                   top = BordersProperties.new,
-                   bottom = BordersProperties.new,
-                   between = BordersProperties.new,
-                   parent: nil)
-      @left = left
-      @right = right
-      @top = top
-      @bottom = bottom
-      @between = between
+    def initialize(parent: nil)
+      @left = BordersProperties.new
+      @right = BordersProperties.new
+      @top = BordersProperties.new
+      @bottom = BordersProperties.new
+      @between = BordersProperties.new
+      @inner_horizontal = BordersProperties.new
+      @inner_vertical = BordersProperties.new
       @parent = parent
     end
 
     def copy
-      new_borders = Borders.new(@left, @right, @top, @bottom)
+      new_borders = Borders.new
+      new_borders.left = @left unless @inner_vertical.nil?
+      new_borders.right = @right unless @right.nil?
+      new_borders.top = @top unless @top.nil?
+      new_borders.bottom = @bottom unless @bottom.nil?
       new_borders.inner_vertical = @inner_vertical unless @inner_vertical.nil?
       new_borders.inner_horizontal = @inner_horizontal unless @inner_horizontal.nil?
       new_borders.between = @between unless @between.nil?
