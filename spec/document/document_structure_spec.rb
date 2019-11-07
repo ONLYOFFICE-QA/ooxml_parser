@@ -7,6 +7,34 @@ describe OoxmlParser::DocumentStructure do
   let(:shape_header_footer) { OoxmlParser::Parser.parse('spec/document/document_structure/shape_header_footer.docx') }
 
   describe 'DocumentStructure#element_by_description' do
+    it 'element_by_description for incorrect location' do
+      expect do
+        table_header_footer.element_by_description(location: :error,
+                                                   type: :table)
+      end.to raise_error(/Wrong global location/)
+    end
+
+    it 'element_by_description for incorrect canvas type' do
+      expect do
+        table_header_footer.element_by_description(location: :canvas,
+                                                   type: :error)
+      end.to raise_error(/Wrong location/)
+    end
+
+    it 'element_by_description for incorrect header type' do
+      expect do
+        table_header_footer.element_by_description(location: :header,
+                                                   type: :error)
+      end.to raise_error(/Wrong location/)
+    end
+
+    it 'element_by_description for incorrect footer type' do
+      expect do
+        table_header_footer.element_by_description(location: :footer,
+                                                   type: :error)
+      end.to raise_error(/Wrong location/)
+    end
+
     it 'element_by_description for table in header' do
       expect(table_header_footer.element_by_description(location: :header,
                                                         type: :table)
