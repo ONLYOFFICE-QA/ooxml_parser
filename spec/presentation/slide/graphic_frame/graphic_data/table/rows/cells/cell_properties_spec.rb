@@ -54,5 +54,17 @@ describe 'My behaviour' do
                  .first.graphic_data.first
                  .rows.first.cells.first.grid_span).to eq(2)
     end
+
+    it 'horizontal_merge is correct' do
+      expect(merged_cells.slides.first.graphic_frames
+                 .first.graphic_data.first
+                 .rows.first.cells[1].horizontal_merge).to eq(1)
+    end
+
+    it 'vertical_merge is correct' do
+      expect(merged_cells.slides.first.graphic_frames
+                 .first.graphic_data.first
+                 .rows[2].cells[0].vertical_merge).to eq(1)
+    end
   end
 end
