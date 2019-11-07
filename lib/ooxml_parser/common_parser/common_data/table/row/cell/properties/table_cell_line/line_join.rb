@@ -2,7 +2,7 @@
 
 module OoxmlParser
   class LineJoin < OOXMLDocumentObject
-    attr_accessor :type, :limit
+    attr_accessor :type
 
     # Parse LineJoin object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -12,9 +12,6 @@ module OoxmlParser
         case node_child.name
         when 'round', 'bevel'
           @type = node_child.name.to_sym
-        when 'miter'
-          @type = :miter
-          @limit = node_child.attribute('lim').value.to_f
         end
       end
       self

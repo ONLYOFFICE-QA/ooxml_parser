@@ -4,7 +4,7 @@ require_relative 'border'
 module OoxmlParser
   class Borders < ParagraphBorders
     attr_accessor :left, :right, :top, :bottom, :inner_vertical, :inner_horizontal, :display, :between, :bar,
-                  :offset_from
+                  :top_left_to_bottom_right, :top_right_to_bottom_left, :offset_from
 
     def initialize(parent: nil)
       @left = BordersProperties.new
