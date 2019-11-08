@@ -86,6 +86,7 @@
 `DocxShapeSize#flip_vertical` are Boolean
 * Fix crash on gradient stop with unknown SchemeColor ([ooxml_parser#571](https://github.com/ONLYOFFICE/ooxml_parser/issues/571))
 * Fix `Presentation.with_data?` for shape with preset geometry ([ooxml_parser#573](https://github.com/ONLYOFFICE/ooxml_parser/issues/573))
+* Fix crash on parsing files without `styles.xml`
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
