@@ -19,7 +19,7 @@ module OoxmlParser
 
     def copy
       new_borders = Borders.new
-      new_borders.left = @left unless @inner_vertical.nil?
+      new_borders.left = @left unless @left.nil?
       new_borders.right = @right unless @right.nil?
       new_borders.top = @top unless @top.nil?
       new_borders.bottom = @bottom unless @bottom.nil?
