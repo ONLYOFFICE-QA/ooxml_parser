@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # Class for describing `gridSpan` tag
   class GridSpan < OOXMLDocumentObject
     # @return [String] type of grid span
     attr_reader :type
     # @return [String] value of grid span merged cells
-    attr_reader :value
+    attr_reader :valueru
 
     def initialize(parent: nil)
       @type = 'horizontal'
