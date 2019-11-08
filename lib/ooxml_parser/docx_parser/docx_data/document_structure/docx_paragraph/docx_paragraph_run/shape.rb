@@ -21,7 +21,34 @@ module OoxmlParser
     # @return [Shape] result of parsing
     def parse(node, type)
       @type = type
-      node.attribute('style').value.to_s.split(';').each do |property|
+      node.attributes.each do |key, value|
+        case key
+        when 'fillcolor'
+          @properties.fill_color = Color.new(parent: self)
+                                        .parse_hex_string(value_to_hex(value))
+        when 'strokecolor'
+          @properties.stroke.color = Color.new(parent: self)
+                                          .parse_hex_string(value_to_hex(value))
+        when 'strokeweight'
+          @properties.stroke.weight = value.value
+        when 'style'
+          parse_style(value.value)
+        end
+      end
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'textbox'
+          @elements = TextBox.parse_list(node_child, parent: self)
+        end
+      end
+      self
+    end
+
+    private
+
+    # @param style [String] value to parse
+    def parse_style(style)
+      style.split(';').each do |property|
         if property.include?('margin-top')
           @properties.margins.top = property.split(':').last
         elsif property.include?('margin-left')
@@ -38,20 +65,15 @@ module OoxmlParser
           @properties.position = property.split(':').last
         end
       end
-      unless node.attribute('fillcolor').nil?
-        @properties.fill_color = Color.new(parent: self).parse_hex_string(node.attribute('fillcolor').value.to_s.sub('#', '').split(' ').first)
-      end
-      @properties.stroke.weight = node.attribute('strokeweight').value unless node.attribute('strokeweight').nil?
-      unless node.attribute('strokecolor').nil?
-        @properties.stroke.color = Color.new(parent: self)
-                                        .parse_hex_string(node.attribute('strokecolor')
-                                                              .value
-                                                              .to_s
-                                                              .sub('#', '')
-                                                              .split(' ').first)
-      end
-      @elements = TextBox.parse_list(node.xpath('v:textbox').first, parent: self) unless node.xpath('v:textbox').first.nil?
-      self
+    end
+
+    # @param value [String] value to extract hex string
+    # @return [String] hex string value
+    def value_to_hex(value)
+      value.to_s
+           .sub('#', '')
+           .split(' ')
+           .first
     end
   end
 end
