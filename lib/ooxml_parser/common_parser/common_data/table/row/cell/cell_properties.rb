@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'merge'
+require_relative 'grid_span'
 module OoxmlParser
   # Class for parsing 'w:tcPr' element
   class CellProperties < OOXMLDocumentObject
@@ -37,7 +37,7 @@ module OoxmlParser
         when 'vAlign'
           @vertical_align = node_child.attribute('val').value.to_sym
         when 'gridSpan'
-          @grid_span = GridSpan.new.parse(node_child)
+          @grid_span = GridSpan.new(parent: self).parse(node_child)
         when 'tcW'
           @table_cell_width = OoxmlSize.new(node_child.attribute('w').value.to_f)
         when 'tcMar'
