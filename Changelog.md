@@ -71,6 +71,7 @@
 * Change `DocxStructure#parse_default_style` to instance method
 * Change `DocxStructure#parse_paragraph_style_xml` to instance method
 * Redone parsing `Shape`
+* Remove deprecated `GridSpan#type` and `GridSpan#count_of_merged_cells`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
