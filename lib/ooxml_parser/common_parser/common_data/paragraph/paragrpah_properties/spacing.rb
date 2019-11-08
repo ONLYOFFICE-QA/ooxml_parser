@@ -104,8 +104,6 @@ module OoxmlParser
           return :multiple
         when 'spcPts'
           return :exact
-        else
-          return :at_least
         end
       end
     end
