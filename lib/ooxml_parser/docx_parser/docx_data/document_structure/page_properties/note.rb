@@ -13,7 +13,7 @@ module OoxmlParser
       note.type = params[:type]
       note.assigned_to = params[:assigned_to]
       note.parent = params[:parent]
-      doc = note.parse_xml(OOXMLDocumentObject.path_to_folder + "word/#{params[:target]}")
+      doc = note.parse_xml(note.file_path(params[:target]))
       if note.type.include?('footer')
         xpath_note = '//w:ftr'
       elsif note.type.include?('header')
@@ -45,6 +45,15 @@ module OoxmlParser
         end
       end
       note
+    end
+
+    # @param target [String] name of target
+    # @return [String] path to note xml file
+    def file_path(target)
+      file = "#{OOXMLDocumentObject.path_to_folder}word/#{target}"
+      return file if File.exist?(file)
+
+      "#{OOXMLDocumentObject.path_to_folder}#{target}" unless File.exist?(file)
     end
   end
 end

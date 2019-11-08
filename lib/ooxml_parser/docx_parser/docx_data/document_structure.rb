@@ -137,22 +137,7 @@ module OoxmlParser
       DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure)
       doc_structure.theme = PresentationTheme.parse('word/theme/theme1.xml')
       doc_structure.relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}word/_rels/document.xml.rels")
-      OOXMLDocumentObject.add_to_xmls_stack('word/styles.xml')
-      doc = doc_structure.parse_xml(OOXMLDocumentObject.current_xml)
-      # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
-      doc.search('//w:docDefaults').each do |doc_defaults|
-        doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
-          DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: doc_structure).parse(p_pr_defaults, 0)
-        end
-        doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
-          r_pr_defaults.xpath('w:rPr').each do |r_pr|
-            DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure).parse_properties(r_pr)
-          end
-        end
-      end
-      doc_structure.parse_default_style
-      doc_structure.numbering = Numbering.new(parent: doc_structure).parse
-      doc_structure.styles = Styles.new(parent: doc_structure).parse
+      doc_structure.parse_styles
       number = 0
       OOXMLDocumentObject.add_to_xmls_stack('word/document.xml')
       doc = doc_structure.parse_xml(OOXMLDocumentObject.current_xml)
@@ -237,6 +222,33 @@ module OoxmlParser
           DocumentStructure.default_table_run_style.parse_properties(table_character_pr_tag, DocumentStructure.default_run_style)
         end
       end
+    end
+
+    # Perform parsing styles.xml
+    def parse_styles
+      file = "#{OOXMLDocumentObject.path_to_folder}/word/styles.xml"
+      DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self)
+      DocumentStructure.default_table_paragraph_style = DocxParagraph.new(parent: self)
+      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
+      DocumentStructure.default_table_run_style = DocxParagraphRun.new(parent: self)
+
+      return unless File.exist?(file)
+
+      doc = parse_xml(file)
+      # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
+      doc.search('//w:docDefaults').each do |doc_defaults|
+        doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
+          DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self).parse(p_pr_defaults, 0)
+        end
+        doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
+          r_pr_defaults.xpath('w:rPr').each do |r_pr|
+            DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self).parse_properties(r_pr)
+          end
+        end
+      end
+      parse_default_style
+      @numbering = Numbering.new(parent: self).parse
+      @styles = Styles.new(parent: self).parse
     end
 
     class << self

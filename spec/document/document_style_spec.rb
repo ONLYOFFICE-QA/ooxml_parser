@@ -3,6 +3,11 @@
 require 'spec_helper'
 
 describe 'document style' do
+  it 'Do not crash if there is no styles.xml' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/no_styles_xml.docx')
+    expect(docx).to be_with_data
+  end
+
   it 'New Paragraph Document Style' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/new_paragraph_style.docx')
     expect(docx.document_styles.last.name).to eq('NewParagraphStyle')
