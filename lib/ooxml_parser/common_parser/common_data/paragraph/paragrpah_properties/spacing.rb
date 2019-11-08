@@ -56,10 +56,6 @@ module OoxmlParser
       Spacing.new(@before, @after, @line, @line_rule)
     end
 
-    def self.default_spacing_canvas(line_spacing = 1.15)
-      Spacing.new(0.0, 0.35277777777777775, line_spacing)
-    end
-
     def round(count_of_digits = 1)
       before = @before.to_f.round(count_of_digits)
       after = @after.to_f.round(count_of_digits)
