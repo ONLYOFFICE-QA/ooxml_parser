@@ -6,7 +6,7 @@ module OoxmlParser
     # @return [String] type of grid span
     attr_reader :type
     # @return [String] value of grid span merged cells
-    attr_reader :valueru
+    attr_reader :value
 
     def initialize(parent: nil)
       @type = 'horizontal'
