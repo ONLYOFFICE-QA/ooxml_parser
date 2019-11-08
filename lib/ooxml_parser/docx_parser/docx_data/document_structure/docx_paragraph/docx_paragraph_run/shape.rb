@@ -50,7 +50,12 @@ module OoxmlParser
                                                               .sub('#', '')
                                                               .split(' ').first)
       end
-      @elements = TextBox.parse_list(node.xpath('v:textbox').first, parent: self) unless node.xpath('v:textbox').first.nil?
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'textbox'
+          @elements = TextBox.parse_list(node_child, parent: self)
+        end
+      end
       self
     end
   end

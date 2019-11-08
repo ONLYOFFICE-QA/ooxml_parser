@@ -70,6 +70,7 @@
 * Redone parsing of `DocxStructure#comments`
 * Change `DocxStructure#parse_default_style` to instance method
 * Change `DocxStructure#parse_paragraph_style_xml` to instance method
+* Redone parsing `Shape#textbox`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
