@@ -52,10 +52,6 @@ module OoxmlParser
         @comments == other.comments
     end
 
-    def difference(other)
-      Hash.object_to_hash(self).diff(Hash.object_to_hash(other))
-    end
-
     def element_by_description(location: :canvas, type: :docx_paragraph)
       case location
       when :canvas
@@ -72,7 +68,7 @@ module OoxmlParser
       when :footer
         case type
         when :table
-          note_by_description(:footer1).elements[1].rows[0].cells[0].elements
+          note_by_description(:footer1).elements[0].rows[0].cells[0].elements
         when :docx_paragraph, :simple, :paragraph
           note_by_description(:footer1).elements
         when :shape
@@ -83,7 +79,7 @@ module OoxmlParser
       when :header
         case type
         when :table
-          note_by_description(:header1).elements[1].rows[0].cells[0].elements
+          note_by_description(:header1).elements[0].rows[0].cells[0].elements
         when :docx_paragraph, :simple, :paragraph
           note_by_description(:header1).elements
         when :shape

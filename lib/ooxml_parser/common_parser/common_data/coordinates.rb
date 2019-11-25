@@ -71,8 +71,6 @@ module OoxmlParser
               end
             end
           end
-        else
-          raise 'Wrong arguments format'
         end
         arguments_array
       end

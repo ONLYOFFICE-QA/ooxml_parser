@@ -12,11 +12,6 @@ module OoxmlParser
       @parent = parent
     end
 
-    # @return [Array, NumberFormats] accessor
-    def [](key)
-      @number_formats_array[key]
-    end
-
     # Parse NumberFormats data
     # @param [Nokogiri::XML:Element] node with NumberFormats data
     # @return [NumberFormats] value of NumberFormats data

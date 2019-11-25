@@ -18,7 +18,7 @@ module OoxmlParser
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
-                  :character_style_array, :horizontal_line, :page_break, :borders, :keep_lines,
+                  :character_style_array, :page_break, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control
     # @return [Hyperlink] hyperlink in paragraph
@@ -44,7 +44,6 @@ module OoxmlParser
       @spacing = Spacing.new
       @ind = Indents.new
       @character_style_array = []
-      @horizontal_line = false
       @page_break = false
       @borders = Borders.new
       @keep_lines = false
@@ -87,13 +86,6 @@ module OoxmlParser
       !nonempty_runs.empty? || paragraph_properties.section_properties
     end
 
-    def remove_empty_runs
-      nonempty = nonempty_runs
-      @character_style_array.each do |cur_run|
-        @character_style_array.delete(cur_run) unless nonempty.include?(cur_run)
-      end
-    end
-
     def ==(other)
       ignored_attributes = %i[@number @parent]
       all_instance_variables = instance_variables
@@ -128,11 +120,6 @@ module OoxmlParser
           character_styles_array << BookmarkEnd.new(parent: self).parse(node_child)
         when 'pPr'
           parse_paragraph_style(node_child, custom_character_style)
-          node.xpath('w:pict').each do |pict|
-            pict.xpath('v:rect').each do
-              @horizontal_line = true
-            end
-          end
           @paragraph_properties = ParagraphProperties.new(parent: self).parse(node_child)
         when 'commentRangeStart'
           character_styles_array << CommentRangeStart.new(parent: self).parse(node_child)
@@ -230,8 +217,6 @@ module OoxmlParser
           @section_break = case @sector_properties.type
                            when 'oddPage'
                              'Odd page'
-                           when 'evenPage'
-                             'Even page'
                            when 'continuous'
                              'Current Page'
                            else

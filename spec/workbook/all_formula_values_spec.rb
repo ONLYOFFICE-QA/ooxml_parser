@@ -17,4 +17,9 @@ describe 'Workbook#all_formula_values' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/all_formula_values_spec/empty_formulas.xlsx')
     expect(xlsx.all_formula_values).to eq(['1.0'])
   end
+
+  it 'all_formulas_values correct for complex numbers' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/all_formula_values_spec/complex_formula_valuse.xlsx')
+    expect(xlsx.all_formula_values).to eq(['3.0+4.0i', '3.0+4.0i', '0.0+1.0i', '1.0'])
+  end
 end

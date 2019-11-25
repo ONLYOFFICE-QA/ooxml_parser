@@ -38,8 +38,6 @@ module OoxmlParser
           timings << TimeNode.new(:parallel, parent: timings).parse(time_node)
         when 'seq'
           timings << TimeNode.new(:sequence, parent: timings).parse(time_node)
-        when 'excl'
-          timings << TimeNode.new(:exclusive, parent: timings).parse(time_node)
         when 'anim'
           timings << TimeNode.new(:animate, parent: timings).parse(time_node)
         when 'set'
@@ -49,7 +47,7 @@ module OoxmlParser
         when 'video'
           timings << :video
         when 'audio'
-          timings << :audio
+          timings << TimeNode.new(:audio, parent: timings).parse(time_node)
         end
       end
       timings

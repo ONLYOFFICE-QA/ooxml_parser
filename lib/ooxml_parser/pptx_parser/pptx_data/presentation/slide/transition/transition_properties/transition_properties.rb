@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'transition_properties/wheel'
 module OoxmlParser
   class TransitionProperties < OOXMLDocumentObject
     attr_accessor :type, :through_black, :direction, :orientation, :spokes
+    # @return [Wheel] Wheel Slide Transition
+    attr_reader :wheel
 
     # Parse TransitionProperties object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -17,8 +20,8 @@ module OoxmlParser
       when 'split'
         @direction = value_to_symbol(node.attribute('dir')) if node.attribute('dir')
         @orientation = node.attribute('orient').value.to_sym if node.attribute('orient')
-      when 'wheel', 'wheelReverse'
-        @spokes = option_enabled?(node, 'spokes')
+      when 'wheel'
+        @wheel = Wheel.new(parent: self).parse(node)
       end
       self
     end

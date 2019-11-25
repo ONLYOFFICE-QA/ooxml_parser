@@ -72,6 +72,8 @@
 * Change `DocxStructure#parse_paragraph_style_xml` to instance method
 * Redone parsing `Shape`
 * Remove deprecated `GridSpan#type` and `GridSpan#count_of_merged_cells`
+* Remove unused `ParagraphMargins#round`
+* Remove unused `Spacing.default_spacing_canvas`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
@@ -88,6 +90,7 @@
 * Fix crash on gradient stop with unknown SchemeColor ([ooxml_parser#571](https://github.com/ONLYOFFICE/ooxml_parser/issues/571))
 * Fix `Presentation.with_data?` for shape with preset geometry ([ooxml_parser#573](https://github.com/ONLYOFFICE/ooxml_parser/issues/573))
 * Fix crash on parsing files without `styles.xml`
+* Fix parsing audio `TimeNode`
 
 ## 0.4.1 (2018-03-01)
 ### Fixes

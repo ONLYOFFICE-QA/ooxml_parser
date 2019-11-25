@@ -3,6 +3,12 @@
 require 'spec_helper'
 
 describe 'My behaviour' do
+  let(:merged_cells) do
+    OoxmlParser::Parser.parse('spec/presentation/slide/graphic_frame'\
+                                                           '/graphic_data/table/rows/cells/'\
+                                                           'properties/merged_cells.pptx')
+  end
+
   it 'TableStyleBackgroundColor' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/graphic_frame/graphic_data/table/rows/cells/properties/table_style_background_color.pptx')
     table = pptx.slides.first.elements.last.graphic_data.first
@@ -40,5 +46,25 @@ describe 'My behaviour' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/graphic_frame/graphic_data/table/rows/cells/properties/table_background_color.pptx')
     table = pptx.slides.first.graphic_frames.first.graphic_data.first
     expect(OoxmlParser::Color.to_color(table.rows.first.cells.first.properties.color)).to eq(OoxmlParser::Color.new(70, 93, 73))
+  end
+
+  describe 'Merge properties' do
+    it 'grid span is correct' do
+      expect(merged_cells.slides.first.graphic_frames
+                 .first.graphic_data.first
+                 .rows.first.cells.first.grid_span).to eq(2)
+    end
+
+    it 'horizontal_merge is correct' do
+      expect(merged_cells.slides.first.graphic_frames
+                 .first.graphic_data.first
+                 .rows.first.cells[1].horizontal_merge).to eq(1)
+    end
+
+    it 'vertical_merge is correct' do
+      expect(merged_cells.slides.first.graphic_frames
+                 .first.graphic_data.first
+                 .rows[2].cells[0].vertical_merge).to eq(1)
+    end
   end
 end
