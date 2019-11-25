@@ -19,15 +19,15 @@ module OoxmlParser
 
     def copy
       new_borders = Borders.new
-      new_borders.left = @left unless @left.nil?
-      new_borders.right = @right unless @right.nil?
-      new_borders.top = @top unless @top.nil?
-      new_borders.bottom = @bottom unless @bottom.nil?
-      new_borders.inner_vertical = @inner_vertical unless @inner_vertical.nil?
-      new_borders.inner_horizontal = @inner_horizontal unless @inner_horizontal.nil?
-      new_borders.between = @between unless @between.nil?
-      new_borders.display = @display unless @display.nil?
-      new_borders.bar = @bar unless bar.nil?
+      new_borders.left = @left if @left
+      new_borders.right = @right if @right
+      new_borders.top = @top if @top
+      new_borders.bottom = @bottom if @bottom
+      new_borders.inner_vertical = @inner_vertical if @inner_vertical
+      new_borders.inner_horizontal = @inner_horizontal if @inner_horizontal
+      new_borders.between = @between if @between
+      new_borders.display = @display if @display
+      new_borders.bar = @bar if @bar
       new_borders
     end
 

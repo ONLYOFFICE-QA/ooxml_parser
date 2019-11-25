@@ -13,7 +13,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'stSnd'
-          @start_sound = Sound.new(parent: self).parse(node_child.xpath('p:snd').first) unless node_child.xpath('p:snd').first.nil?
+          @start_sound = Sound.new(parent: self).parse(node_child.xpath('p:snd').first) if node_child.xpath('p:snd').first
         end
       end
       self
