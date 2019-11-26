@@ -6,7 +6,7 @@ module OoxmlParser
     # @return [ValuedChild] spacing percent
     attr_reader :spacing_percent
     # @return [ValuedChild] spacing point
-    attr_reader :@pacing_points
+    attr_reader :spacing_points
 
     # Parse LineSpacing object
     # @param node [Nokogiri::XML:Element] node to parse
