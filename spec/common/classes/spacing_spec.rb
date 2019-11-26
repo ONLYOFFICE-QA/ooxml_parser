@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe OoxmlParser::Spacing do
   let(:spacing) do
-    OoxmlParser::Spacing.new(1.05, 2.10, 3.15, :at_least)
+    described_class.new(1.05, 2.10, 3.15, :at_least)
   end
 
   describe 'Equality' do
@@ -13,7 +13,7 @@ describe OoxmlParser::Spacing do
     end
 
     it 'Spacing is not equal with some other spacing' do
-      expect(spacing).not_to eq(OoxmlParser::Spacing.new)
+      expect(spacing).not_to eq(described_class.new)
     end
   end
 
@@ -22,6 +22,6 @@ describe OoxmlParser::Spacing do
   end
 
   it 'Spacing is correct after round' do
-    expect(spacing.round(1)).to eq(OoxmlParser::Spacing.new(1.1, 2.1, 3.2, :at_least))
+    expect(spacing.round(1)).to eq(described_class.new(1.1, 2.1, 3.2, :at_least))
   end
 end

@@ -6,7 +6,7 @@ describe OoxmlParser::Fill do
   let(:fill) do
     pattern = OoxmlParser::PatternFill.new
     pattern.foreground_color = OoxmlParser::Color.new(1, 2, 3)
-    fill = OoxmlParser::Fill.new
+    fill = described_class.new
     fill.pattern_fill = pattern
     fill
   end

@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe OoxmlParser::PageSize do
   let(:page_size) do
-    OoxmlParser::PageSize.new(5, 10, :portrait)
+    described_class.new(5, 10, :portrait)
   end
 
   it 'PageSize#to_s is correct' do

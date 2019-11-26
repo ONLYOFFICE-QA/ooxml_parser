@@ -4,9 +4,9 @@ require 'spec_helper'
 
 describe OoxmlParser::Shade do
   let(:shade) do
-    OoxmlParser::Shade.new(value: :clear,
-                           color: :auto,
-                           fill: OoxmlParser::Color.new(1, 2, 3))
+    described_class.new(value: :clear,
+                        color: :auto,
+                        fill: OoxmlParser::Color.new(1, 2, 3))
   end
 
   it 'OoxmlParser::Shade#to_s include fill color' do
