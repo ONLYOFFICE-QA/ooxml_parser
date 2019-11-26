@@ -114,11 +114,6 @@ RSpec/RepeatedDescription:
     - 'spec/workbook/tables/extensions/x14_table_alternate_text_spec.rb'
     - 'spec/workbook/worksheet/drawing/picture/chart/chart_labels_spec.rb'
 
-# Offense count: 2
-RSpec/RepeatedExample:
-  Exclude:
-    - 'spec/document/elements/paragraph/runs/drawing/graphic/text_art_spec.rb'
-
 # Offense count: 1810
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.

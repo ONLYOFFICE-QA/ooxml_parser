@@ -90,10 +90,4 @@ describe 'Text Art' do
     expect(docx.elements.first.character_style_array.first.alternate_content.office2010_content.graphic
                .data.text_body.elements.first.character_style_array.first.text_outline.width).to be_zero
   end
-
-  it 'without_outline.docx - color outline check' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/graphic/text_art/without_outline_color.docx')
-    expect(docx.elements.first.character_style_array.first.alternate_content.office2010_content.graphic
-               .data.text_body.elements.first.character_style_array.first.text_outline.color_scheme.color).to eq(:none)
-  end
 end
