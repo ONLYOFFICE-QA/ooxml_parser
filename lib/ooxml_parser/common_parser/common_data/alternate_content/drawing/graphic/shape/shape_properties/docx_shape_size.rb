@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Docx Shape Size
 module OoxmlParser
+  # Docx Shape Size
   class DocxShapeSize < OOXMLDocumentObject
     attr_accessor :rotation, :offset, :extent
     attr_accessor :child_offset

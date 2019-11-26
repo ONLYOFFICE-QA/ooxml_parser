@@ -3,6 +3,7 @@
 require_relative 'transition/sound_action'
 require_relative 'transition_properties/transition_properties'
 module OoxmlParser
+  # Class for data of Transition
   class Transition < OOXMLDocumentObject
     attr_accessor :speed, :properties, :sound_action, :advance_on_click, :delay, :duration
 

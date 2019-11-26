@@ -15,6 +15,7 @@ require_relative 'docx_paragraph/frame_properties'
 require_relative 'docx_paragraph/docx_formula'
 require_relative 'docx_paragraph/style_parametres'
 module OoxmlParser
+  # Class for data of DocxParagraph
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,

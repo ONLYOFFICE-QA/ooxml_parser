@@ -3,8 +3,8 @@
 # @author Pavel.Lobashov
 
 require_relative 'spacing/line_spacing'
-# Class to describe spacing
 module OoxmlParser
+  # Class to describe spacing
   class Spacing
     # @return [Float] Spacing before paragraph
     attr_accessor :before

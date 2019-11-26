@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # Module for some helpers for ParagraphRun
   module DocxParagraphRunHelpers
     def parse_properties(node, _default_character = DocumentStructure.default_run_style)
       self.font_style = FontStyle.new

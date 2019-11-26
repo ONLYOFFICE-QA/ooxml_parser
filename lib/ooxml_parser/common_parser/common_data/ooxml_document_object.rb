@@ -8,6 +8,7 @@ require_relative 'ooxml_document_object/ooxml_document_object_helper'
 require_relative 'ooxml_document_object/ooxml_object_attribute_helper'
 
 module OoxmlParser
+  # Basic class for any OOXML Document Object
   class OOXMLDocumentObject
     include OoxmlDocumentObjectHelper
     include OoxmlObjectAttributeHelper

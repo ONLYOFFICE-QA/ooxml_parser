@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Fallback DOCX group properties
 module OoxmlParser
+  # Fallback DOCX group properties
   class OldDocxGroupProperties
     attr_accessor :wrap
   end

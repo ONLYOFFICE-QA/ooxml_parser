@@ -3,8 +3,8 @@
 require_relative 'excel_comments/author'
 require_relative 'excel_comments/comment_list'
 require_relative 'excel_comments/excel_comment'
-# All Comments of single XLSX
 module OoxmlParser
+  # All Comments of single XLSX
   class ExcelComments < OOXMLDocumentObject
     attr_accessor :authors
     # @return [CommentList] list of comments

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # LineJoin data
   class LineJoin < OOXMLDocumentObject
     attr_accessor :type
 

@@ -6,6 +6,7 @@ require_relative 'paragrpah_properties/paragraph_spacing'
 require_relative 'paragrpah_properties/spacing'
 require_relative 'paragrpah_properties/tabs'
 module OoxmlParser
+  # Class for data for ParagraphProperties
   class ParagraphProperties < OOXMLDocumentObject
     attr_accessor :align, :numbering, :level, :spacing, :spacing_before, :spacing_after, :indent, :margin_left, :margin_right
     # @return [FrameProperties] frame properties

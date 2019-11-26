@@ -7,6 +7,7 @@ require_relative 'page_margins'
 require_relative 'columns'
 require_relative 'note'
 module OoxmlParser
+  # Class for data of PageProperties
   class PageProperties < OOXMLDocumentObject
     attr_accessor :type, :size, :margins, :document_grid, :num_type, :form_prot, :text_direction, :page_borders, :columns,
                   :notes

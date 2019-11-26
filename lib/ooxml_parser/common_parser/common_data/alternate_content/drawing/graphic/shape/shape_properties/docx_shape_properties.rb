@@ -7,8 +7,8 @@ require_relative 'docx_shape_properties/blip_fill'
 require_relative 'docx_shape_properties/preset_geometry'
 require_relative 'docx_shape_properties/text_box'
 require_relative 'custom_geometry/ooxml_custom_geometry'
-# DOCX Shape Properties
 module OoxmlParser
+  # DOCX Shape Properties
   class DocxShapeProperties < OOXMLDocumentObject
     attr_accessor :shape_size, :preset_geometry, :fill_color, :text_box, :line, :custom_geometry
     attr_accessor :blip_fill

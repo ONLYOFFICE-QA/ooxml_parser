@@ -4,6 +4,7 @@ require_relative 'numbering/abstract_numbering'
 require_relative 'numbering/numbering_definition'
 
 module OoxmlParser
+  # Class for data of Numbering
   class Numbering < OOXMLDocumentObject
     # @return [Array, AbstractNumbering] abstract numbering list
     attr_accessor :abstract_numbering_list

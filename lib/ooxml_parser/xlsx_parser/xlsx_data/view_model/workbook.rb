@@ -5,8 +5,8 @@ require_relative 'workbook/shared_string_table'
 require_relative 'workbook/style_sheet'
 require_relative 'workbook/worksheet'
 require_relative 'workbook/workbook_helpers'
-# Class for storing XLSX Workbook
 module OoxmlParser
+  # Class for storing XLSX Workbook
   class XLSXWorkbook < CommonDocumentStructure
     include WorkbookHelpers
     attr_accessor :worksheets

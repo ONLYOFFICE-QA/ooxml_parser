@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Single Chart Point
 module OoxmlParser
+  # Single Chart Point
   class ChartPoint
     attr_accessor :coordinates, :value
 

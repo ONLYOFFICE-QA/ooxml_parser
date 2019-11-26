@@ -8,6 +8,7 @@ require_relative 'presentation/slide'
 require_relative 'presentation/slide_size'
 require_relative 'presentation/table_styles'
 module OoxmlParser
+  # Basic class for all parsed pptx data
   class Presentation < CommonDocumentStructure
     include PresentationHelpers
     attr_accessor :slides, :theme, :slide_size

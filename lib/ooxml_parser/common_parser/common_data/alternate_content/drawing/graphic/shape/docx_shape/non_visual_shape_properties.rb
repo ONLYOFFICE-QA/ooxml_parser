@@ -3,6 +3,7 @@
 require_relative 'non_visual_shape_properties/common_non_visual_properties'
 require_relative 'non_visual_shape_properties/non_visual_properties'
 module OoxmlParser
+  # Class for working with NonVisualShapeProperties
   class NonVisualShapeProperties < OOXMLDocumentObject
     attr_accessor :common_properties, :non_visual_properties
 

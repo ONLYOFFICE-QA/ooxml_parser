@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Class for working with strings
 module OoxmlParser
+  # Class for working with strings
   class StringHelper
     class << self
       # This method check if string contains numeric

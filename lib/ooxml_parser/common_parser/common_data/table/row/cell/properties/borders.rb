@@ -2,6 +2,7 @@
 
 require_relative 'border'
 module OoxmlParser
+  # Borders data
   class Borders < ParagraphBorders
     attr_accessor :left, :right, :top, :bottom, :inner_vertical, :inner_horizontal, :display, :between, :bar,
                   :top_left_to_bottom_right, :top_right_to_bottom_left, :offset_from

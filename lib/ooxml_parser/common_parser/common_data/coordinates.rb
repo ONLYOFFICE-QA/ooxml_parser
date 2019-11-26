@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # Class for working with coordinates
   class Coordinates
     attr_accessor :row, :column, :list
 

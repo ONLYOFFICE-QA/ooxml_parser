@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Class for hold ThemeColors list
 module OoxmlParser
+  # Class for hold ThemeColors list
   class ThemeColors < OOXMLDocumentObject
     # @return [Hash] list of colors
     attr_accessor :list

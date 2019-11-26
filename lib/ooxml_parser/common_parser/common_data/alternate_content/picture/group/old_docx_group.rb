@@ -2,8 +2,8 @@
 
 require_relative 'old_docx_group_properties'
 require_relative 'old_docx_group_element'
-# Fallback DOCX group data
 module OoxmlParser
+  # Fallback DOCX group data
   class OldDocxGroup < OOXMLDocumentObject
     attr_accessor :elements, :properties
 

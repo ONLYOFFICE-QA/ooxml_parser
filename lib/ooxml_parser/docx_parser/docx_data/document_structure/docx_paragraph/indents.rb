@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # Class for working with Indents data
   class Indents < OOXMLDocumentObject
     attr_accessor :first_line_indent, :left_indent, :right_indent, :hanging_indent
 

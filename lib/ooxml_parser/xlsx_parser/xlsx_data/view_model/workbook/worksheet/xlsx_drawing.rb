@@ -2,6 +2,7 @@
 
 require_relative 'xlsx_drawing/xlsx_drawing_position_parameters'
 module OoxmlParser
+  # Data of spreadsheet drawing
   class XlsxDrawing < OOXMLDocumentObject
     attr_accessor :picture, :shape, :grouping
     # @return [XlsxDrawingPositionParameters] position from

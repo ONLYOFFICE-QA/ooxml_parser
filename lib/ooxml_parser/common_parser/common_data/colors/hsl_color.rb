@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# HSL is one of the most common cylindrical-coordinate representations of points in an RGB color model.
-# HSL stands for hue, saturation, and lightness, and is often also called HLS.
 module OoxmlParser
+  # HSL is one of the most common cylindrical-coordinate representations of points in an RGB color model.
+  # HSL stands for hue, saturation, and lightness, and is often also called HLS.
   class HSLColor
     attr_accessor :h, :s, :l
     # @return [Integer] alpha channel value

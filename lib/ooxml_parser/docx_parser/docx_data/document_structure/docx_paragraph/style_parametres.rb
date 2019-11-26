@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Style Parameter Data
 module OoxmlParser
+  # Style Parameter Data
   class StyleParametres < OOXMLDocumentObject
     attr_accessor :q_format, :hidden, :name
 

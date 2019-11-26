@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Table Position Data
 module OoxmlParser
+  # Table Position Data
   class TablePosition < OOXMLDocumentObject
     attr_accessor :left, :right, :top, :bottom, :position_x, :position_y, :horizontal_anchor, :vertical_anchor, :vertical_align_from_anchor,
                   :horizontal_align_from_anchor
