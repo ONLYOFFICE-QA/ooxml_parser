@@ -8,13 +8,13 @@ describe OoxmlParser::Color do
   let(:init_color) { OoxmlParser::Color.new(100, 150, 200) }
 
   it 'Color looks like nil' do
-    expect(OoxmlParser::Color.new(nil, nil, nil).looks_like?(nil)).to be_truthy
+    expect(OoxmlParser::Color.new(nil, nil, nil)).to be_looks_like(nil)
   end
 
   it 'Color with style nil looks like color nil' do
     color = zero_color
     color.style = :nil
-    expect(no_init_color.looks_like?(color)).to be_truthy
+    expect(no_init_color).to be_looks_like(color)
   end
 
   it 'Default color to_s is none' do

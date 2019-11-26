@@ -96,18 +96,6 @@ RSpec/MultipleDescribes:
 RSpec/MultipleExpectations:
   Max: 10
 
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: Strict, EnforcedStyle.
-# SupportedStyles: inflected, explicit
-RSpec/PredicateMatcher:
-  Exclude:
-    - 'spec/common/classes/color_spec.rb'
-    - 'spec/common/classes/coordinates_spec.rb'
-    - 'spec/common/string_helper_spec.rb'
-    - 'spec/document/document_style_spec.rb'
-    - 'spec/document/elements/paragraph/runs/drawing_spec.rb'
-
 # Offense count: 1810
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.

@@ -73,7 +73,7 @@ describe 'drawing' do
 
     it 'chart_title_with_empty_paragraph' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/graphic/chart_title_with_empty_paragraph.docx')
-      expect(docx.elements.first.character_style_array.first.drawing.graphic.data.title.elements.first.characters.empty?).to be_falsey
+      expect(docx.elements.first.character_style_array.first.drawing.graphic.data.title.elements.first.characters).not_to be_empty
     end
   end
 

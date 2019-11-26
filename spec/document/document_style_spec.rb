@@ -21,12 +21,12 @@ describe 'document style' do
 
   it 'New Paragraph Document Style: method "style_exist?"' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/style_exists.docx')
-    expect(docx.style_exist?('NewParagraphStyle')).to be_truthy
+    expect(docx).to be_style_exist('NewParagraphStyle')
   end
 
   it 'New Paragraph Document Style: method "style_exist?", negative' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/style_exists.docx')
-    expect(docx.style_exist?('ThisStyleIsNotExist')).to be_falsey
+    expect(docx).not_to be_style_exist('ThisStyleIsNotExist')
   end
 
   it 'paragraph_style_id_word' do
