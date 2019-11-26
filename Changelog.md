@@ -92,6 +92,7 @@
 * Fix `Presentation.with_data?` for shape with preset geometry ([ooxml_parser#573](https://github.com/ONLYOFFICE/ooxml_parser/issues/573))
 * Fix crash on parsing files without `styles.xml`
 * Fix parsing audio `TimeNode`
+* Fix class documentation issues
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
