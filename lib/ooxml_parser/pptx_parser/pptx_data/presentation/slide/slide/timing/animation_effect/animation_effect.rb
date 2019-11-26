@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # Class for data for animation effect
   class AnimationEffect < OOXMLDocumentObject
     attr_accessor :transition, :filter, :behavior
 

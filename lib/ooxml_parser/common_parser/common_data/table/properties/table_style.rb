@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'table_element'
-# Style of Table
 module OoxmlParser
+  # Style of Table
   class TableStyle < OOXMLDocumentObject
     attr_accessor :id, :name, :whole_table, :banding_1_horizontal, :banding_2_horizontal, :banding_1_vertical, :banding_2_vertical,
                   :last_column, :first_column, :last_row, :first_row, :southeast_cell, :southwest_cell, :northeast_cell,

@@ -2,9 +2,8 @@
 
 require_relative 'underline'
 # @author Pavel.Lobashov
-# Class for working with font styles (bold,italic,underlined,strike)
-# noinspection RubyClassMethodNamingConvention
 module OoxmlParser
+  # Class for working with font styles (bold,italic,underlined,strike)
   class FontStyle
     # @return [false,true] is bold?
     attr_accessor :bold

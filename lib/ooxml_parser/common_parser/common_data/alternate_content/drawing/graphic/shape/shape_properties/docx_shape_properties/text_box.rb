@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Class for working with TextBox (w:txbxContent)
 module OoxmlParser
+  # Class for working with TextBox (w:txbxContent)
   class TextBox
     # Parse TextBox List
     # @param [Nokogiri::XML:Node] node with TextBox

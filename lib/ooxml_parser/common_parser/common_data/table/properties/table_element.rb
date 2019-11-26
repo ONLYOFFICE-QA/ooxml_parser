@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Describe single table element
 module OoxmlParser
+  # Describe single table element
   class TableElement < OOXMLDocumentObject
     attr_accessor :cell_style
 

@@ -2,6 +2,7 @@
 
 require_relative 'transition_properties/wheel'
 module OoxmlParser
+  # Class for data for TransitionProperties
   class TransitionProperties < OOXMLDocumentObject
     attr_accessor :type, :through_black, :direction, :orientation, :spokes
     # @return [Wheel] Wheel Slide Transition

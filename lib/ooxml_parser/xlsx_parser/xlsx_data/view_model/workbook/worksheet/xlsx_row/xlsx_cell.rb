@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'xlsx_cell/formula'
-# Single Cell of XLSX
 module OoxmlParser
+  # Single Cell of XLSX
   class XlsxCell < OOXMLDocumentObject
     attr_accessor :formula, :character
 

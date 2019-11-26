@@ -19,6 +19,7 @@ require_relative 'ooxml_parser/docx_parser/docx_parser'
 require_relative 'ooxml_parser/xlsx_parser/xlsx_parser'
 require_relative 'ooxml_parser/pptx_parser/pptx_parser'
 
+# Basic class for all parser stuff
 module OoxmlParser
   class << self
     attr_writer :configuration

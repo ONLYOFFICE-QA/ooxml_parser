@@ -3,6 +3,7 @@
 require_relative 'behavior/behavior'
 
 module OoxmlParser
+  # Class for data for Set Time Node
   class SetTimeNode < OOXMLDocumentObject
     attr_accessor :behavior, :to
 

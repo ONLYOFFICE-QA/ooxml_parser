@@ -2,6 +2,7 @@
 
 require_relative 'target_element'
 module OoxmlParser
+  # Class for data for Behavior
   class Behavior < OOXMLDocumentObject
     attr_accessor :common_time_node, :attribute_name_list, :target
 

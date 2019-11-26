@@ -11,6 +11,7 @@ require_relative 'chart/series'
 require_relative 'chart/view_3d'
 
 module OoxmlParser
+  # Class for working with Chart data
   class Chart < OOXMLDocumentObject
     attr_accessor :type, :data, :grouping, :title, :legend, :display_labels, :axises, :alternate_content, :shape_properties
     # @return [Array, ValuedChild] array axis id

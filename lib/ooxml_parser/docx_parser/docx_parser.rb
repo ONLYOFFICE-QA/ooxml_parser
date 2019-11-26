@@ -5,6 +5,7 @@ require_relative '../common_parser/common_data/valued_child'
 require_relative 'docx_data/document_structure'
 
 module OoxmlParser
+  # Basic class for DocxParser
   class DocxParser
     def self.parse_docx(path_to_file)
       Parser.parse_format(path_to_file) do

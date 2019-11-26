@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # Class with data of Note
   class Note < OOXMLDocumentObject
     attr_accessor :type, :elements, :assigned_to
 

@@ -9,8 +9,8 @@ require_relative 'worksheet/table_part'
 require_relative 'worksheet/xlsx_column_properties'
 require_relative 'worksheet/xlsx_drawing'
 require_relative 'worksheet/xlsx_row'
-# Properties of worksheet
 module OoxmlParser
+  # Properties of worksheet
   class Worksheet < OOXMLDocumentObject
     attr_accessor :name, :rows, :merge, :charts, :hyperlinks, :drawings, :comments, :columns, :sheet_format_properties,
                   :autofilter, :table_parts, :sheet_views

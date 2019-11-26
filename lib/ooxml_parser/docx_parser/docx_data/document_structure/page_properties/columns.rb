@@ -2,6 +2,7 @@
 
 require_relative 'columns/column'
 module OoxmlParser
+  # Class for data of Columns
   class Columns < OOXMLDocumentObject
     attr_accessor :separator
     attr_accessor :count

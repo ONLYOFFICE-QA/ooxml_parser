@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Border Properties Data
 module OoxmlParser
+  # Border Properties Data
   class BordersProperties < OOXMLDocumentObject
     attr_accessor :color, :space, :val, :shadow, :frame, :side
     # @return [OoxmlSize] size of border

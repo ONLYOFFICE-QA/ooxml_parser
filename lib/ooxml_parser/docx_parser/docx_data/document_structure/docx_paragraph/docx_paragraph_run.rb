@@ -8,6 +8,7 @@ require_relative 'docx_paragraph_run/text_fill'
 require_relative 'docx_paragraph_run/shape'
 
 module OoxmlParser
+  # Class for working with DocxParagraphRun
   class DocxParagraphRun < OOXMLDocumentObject
     include DocxParagraphRunHelpers
     attr_accessor :number, :font, :vertical_align, :size, :font_color, :background_color, :font_style, :text, :drawings,

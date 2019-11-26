@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Fallback DOCX Gropu Element data
 module OoxmlParser
+  # Fallback DOCX group element data
   class OldDocxGroupElement
     attr_accessor :type, :object
 

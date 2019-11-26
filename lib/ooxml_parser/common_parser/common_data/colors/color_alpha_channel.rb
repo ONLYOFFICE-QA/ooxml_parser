@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Class for working with AlphaChannel
 module OoxmlParser
+  # Class for working with AlphaChannel
   class ColorAlphaChannel
     # Parse AlphaChannel value
     # @param node [Nokogiri::XML::Element] node to parse

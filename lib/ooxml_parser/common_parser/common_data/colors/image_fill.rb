@@ -2,6 +2,7 @@
 
 require_relative 'tile'
 module OoxmlParser
+  # Class for working with Image Fill
   class ImageFill < OOXMLDocumentObject
     attr_accessor :stretch, :tile, :properties
     # @return [FileReference] image structure

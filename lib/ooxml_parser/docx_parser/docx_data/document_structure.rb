@@ -14,6 +14,7 @@ require_relative 'document_structure/page_properties/page_properties'
 require_relative 'document_structure/document_settings'
 require_relative 'document_structure/styles'
 module OoxmlParser
+  # Basic class for DocumentStructure
   class DocumentStructure < CommonDocumentStructure
     include DocumentStyleHelper
     include DocumentStructureHelpers

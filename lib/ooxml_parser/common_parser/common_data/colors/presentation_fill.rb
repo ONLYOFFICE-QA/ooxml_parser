@@ -4,6 +4,7 @@ require_relative 'image_fill'
 require_relative 'presentation_fill/gradient_color'
 require_relative 'presentation_fill/presentation_pattern'
 module OoxmlParser
+  # Class for working with PresentationFill
   class PresentationFill < OOXMLDocumentObject
     attr_accessor :type, :image, :color, :pattern
 

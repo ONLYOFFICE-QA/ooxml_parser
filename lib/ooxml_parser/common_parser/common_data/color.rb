@@ -8,8 +8,8 @@ require_relative 'colors/scheme_color'
 require_relative 'colors/color_properties'
 require_relative 'colors/theme_colors'
 # @author Pavel.Lobashov
-# Class for Color in RGB
 module OoxmlParser
+  # Class for Color in RGB
   class Color < OOXMLDocumentObject
     include ColorHelper
     # @return [Array] Deprecated Indexed colors

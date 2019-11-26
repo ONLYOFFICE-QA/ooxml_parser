@@ -3,6 +3,7 @@
 require_relative 'cell/cell'
 require_relative 'row/table_row_properties'
 module OoxmlParser
+  # Class for data of TableRow
   class TableRow < OOXMLDocumentObject
     attr_accessor :height, :cells, :table_row_properties
 

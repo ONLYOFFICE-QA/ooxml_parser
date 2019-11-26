@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # Class for data for Target Element
   class TargetElement < OOXMLDocumentObject
     attr_accessor :type, :id, :name, :built_in
 

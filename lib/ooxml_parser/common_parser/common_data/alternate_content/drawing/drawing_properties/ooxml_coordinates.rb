@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Docx Coordinates
 module OoxmlParser
+  # Docx Coordinates
   class OOXMLCoordinates
     attr_accessor :x, :y
 

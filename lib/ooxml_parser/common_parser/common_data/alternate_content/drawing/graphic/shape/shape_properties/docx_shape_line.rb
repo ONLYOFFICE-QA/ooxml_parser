@@ -2,8 +2,8 @@
 
 require_relative 'color/docx_color_scheme'
 require_relative 'line/line_end'
-# Docx Shape Line
 module OoxmlParser
+  # Docx Shape Line
   class DocxShapeLine < OOXMLDocumentObject
     attr_accessor :width, :color_scheme, :cap, :head_end, :tail_end, :fill
     # @return [ValuedChild] dash properties

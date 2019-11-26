@@ -3,6 +3,7 @@
 require_relative 'presentation_theme/font_scheme'
 require_relative 'presentation_theme/theme_color'
 module OoxmlParser
+  # Class for data for PresentationTheme
   class PresentationTheme < OOXMLDocumentObject
     attr_accessor :name, :color_scheme
     # @return [FontScheme] font scheme

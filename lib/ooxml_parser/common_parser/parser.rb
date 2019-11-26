@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module OoxmlParser
+  # Basic class for OoxmlParser
   class Parser
     # Base method to yield parse document of any type
     # @param path_to_file [String] file

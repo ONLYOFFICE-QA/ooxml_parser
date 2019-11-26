@@ -2,6 +2,7 @@
 
 require_relative 'common_timing/condition_list'
 module OoxmlParser
+  # Class for data of CommonTiming
   class CommonTiming
     attr_accessor :id, :duration, :restart, :children, :start_conditions, :end_conditions
 
