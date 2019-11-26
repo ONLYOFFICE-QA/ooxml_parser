@@ -2,6 +2,7 @@
 
 # @author Pavel.Lobashov
 
+require_relative 'spacing/line_spacing'
 # Class to describe spacing
 module OoxmlParser
   class Spacing
@@ -13,6 +14,8 @@ module OoxmlParser
     attr_accessor :line
     # @return [String] Spacing line rule
     attr_accessor :line_rule
+    # @return [LineSpacing] line spacing data
+    attr_reader :line_spacing
 
     def initialize(before = nil, after = 0.35, line = nil, line_rule = nil)
       @before = before
@@ -71,7 +74,8 @@ module OoxmlParser
         case spacing_node_child.name
         when 'lnSpc'
           self.line = Spacing.parse_spacing_value(spacing_node_child)
-          self.line_rule = Spacing.parse_spacing_rule(spacing_node_child)
+          @line_spacing = LineSpacing.new(parent: self).parse(spacing_node_child)
+          self.line_rule = @line_spacing.rule
         when 'spcBef'
           self.before = Spacing.parse_spacing_value(spacing_node_child)
         when 'spcAft'
@@ -90,20 +94,6 @@ module OoxmlParser
           return OoxmlSize.new(spacing_node_child.attribute('val').value.to_f, :one_1000th_percent)
         when 'spcPts'
           return OoxmlSize.new(spacing_node_child.attribute('val').value.to_f, :spacing_point)
-        end
-      end
-    end
-
-    # Parse spacing rule
-    # @param [Nokogiri::XML:Element] node with Spacing
-    # @return [Symbol] type of spacing rule
-    def self.parse_spacing_rule(node)
-      node.xpath('*').each do |spacing_node_child|
-        case spacing_node_child.name
-        when 'spcPct'
-          return :multiple
-        when 'spcPts'
-          return :exact
         end
       end
     end

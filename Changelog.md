@@ -74,6 +74,7 @@
 * Remove deprecated `GridSpan#type` and `GridSpan#count_of_merged_cells`
 * Remove unused `ParagraphMargins#round`
 * Remove unused `Spacing.default_spacing_canvas`
+* Simplify `Spacing.parse_spacing_rule` into `LineSpacing` class
   
 ### Fixes
 * Fix crash on empty coordinates list of chart
