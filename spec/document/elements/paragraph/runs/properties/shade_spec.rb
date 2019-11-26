@@ -9,7 +9,7 @@ describe OoxmlParser::Shade do
                                   fill: OoxmlParser::Color.new(127, 127, 127))).to be_a(OoxmlParser::Shade)
   end
 
-  it 'should do something' do
+  it 'shade_clear' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/properties/shade/shade_clear.docx')
     expect(docx.elements.first.nonempty_runs[1].run_properties.shade.value).to eq(:clear)
     expect(docx.elements.first.nonempty_runs[1].run_properties.shade.color).to eq(:auto)

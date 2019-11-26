@@ -66,14 +66,6 @@ RSpec/EmptyLineAfterFinalLet:
 RSpec/ExampleLength:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: CustomTransform, IgnoredWords.
-RSpec/ExampleWording:
-  Exclude:
-    - 'spec/document/elements/paragraph/properties/keep_next_spec.rb'
-    - 'spec/document/elements/paragraph/runs/properties/shade_spec.rb'
-
 # Offense count: 50
 # Configuration parameters: CustomTransform, IgnoreMethods.
 RSpec/FilePath:
