@@ -79,13 +79,6 @@ RSpec/ExampleWording:
 RSpec/FilePath:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-RSpec/HooksBeforeExamples:
-  Exclude:
-    - 'spec/document/elements/paragraph/runs/alternate_content/office2010_content/properties/vertical_position/offset_spec.rb'
-    - 'spec/document/elements/paragraph/runs/drawing/properties/shape_size/extent_spec.rb'
-
 # Offense count: 106
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:
