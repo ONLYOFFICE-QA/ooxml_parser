@@ -9,6 +9,7 @@ describe OoxmlParser::ThemeColor do
                                                               150,
                                                               200))
   end
+
   describe 'ThemeColor equality' do
     it 'ThemeColor is equal to same theme color' do
       expect(system_color).to eq(system_color)

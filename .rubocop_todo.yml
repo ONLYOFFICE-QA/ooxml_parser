@@ -55,12 +55,6 @@ RSpec/DescribeClass:
 RSpec/DescribedClass:
   Enabled: false
 
-# Offense count: 1
-# Cop supports --auto-correct.
-RSpec/EmptyLineAfterFinalLet:
-  Exclude:
-    - 'spec/common/classes/theme_color_spec.rb'
-
 # Offense count: 38
 # Configuration parameters: Max.
 RSpec/ExampleLength:
