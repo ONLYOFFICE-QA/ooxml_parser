@@ -48,13 +48,6 @@ Metrics/PerceivedComplexity:
 RSpec/DescribeClass:
   Enabled: false
 
-# Offense count: 37
-# Cop supports --auto-correct.
-# Configuration parameters: SkipBlocks, EnforcedStyle.
-# SupportedStyles: described_class, explicit
-RSpec/DescribedClass:
-  Enabled: false
-
 # Offense count: 38
 # Configuration parameters: Max.
 RSpec/ExampleLength:

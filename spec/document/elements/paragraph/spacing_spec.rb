@@ -5,22 +5,22 @@ require 'spec_helper'
 describe OoxmlParser::Spacing do
   it 'ShapeParagraphSpacing_1' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/shape_paragraph_spacing_1.docx')
-    expect(docx.element_by_description(location: :canvas, type: :shape).first.spacing).to eq(OoxmlParser::Spacing.new(0.0, 0.35, 1.0, :auto))
+    expect(docx.element_by_description(location: :canvas, type: :shape).first.spacing).to eq(described_class.new(0.0, 0.35, 1.0, :auto))
   end
 
   it 'ShapeParagraphSpacing_2' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/shape_paragraph_spacing_2.docx')
-    expect(docx.element_by_description(location: :canvas, type: :shape).first.spacing).to eq(OoxmlParser::Spacing.new(10.0, 0.35, 1.0, :auto))
+    expect(docx.element_by_description(location: :canvas, type: :shape).first.spacing).to eq(described_class.new(10.0, 0.35, 1.0, :auto))
   end
 
   it 'ShapeParagrpaphSpacing_3' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/shape_paragraph_spacing_3.docx')
-    expect(docx.element_by_description(location: :canvas, type: :shape).first.spacing).to eq(OoxmlParser::Spacing.new(0, 0.35, 1.5, :auto))
+    expect(docx.element_by_description(location: :canvas, type: :shape).first.spacing).to eq(described_class.new(0, 0.35, 1.5, :auto))
   end
 
   it 'ShapeDefaultSpacing' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/space_default_spacing.docx')
-    expect(docx.element_by_description(location: :canvas, type: :shape).first.spacing).to eq(OoxmlParser::Spacing.new(0, 0.35, 1.15, :auto))
+    expect(docx.element_by_description(location: :canvas, type: :shape).first.spacing).to eq(described_class.new(0, 0.35, 1.15, :auto))
   end
 
   it 'TableLineSpacing' do
@@ -30,7 +30,7 @@ describe OoxmlParser::Spacing do
 
   it 'Parse default spacing' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/default_spacing.docx')
-    expect(docx.elements.first.spacing).to eq(OoxmlParser::Spacing.new(0, 0.35, 1.15, :auto))
+    expect(docx.elements.first.spacing).to eq(described_class.new(0, 0.35, 1.15, :auto))
   end
 
   it 'Parsing line rule' do

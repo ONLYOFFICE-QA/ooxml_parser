@@ -3,12 +3,12 @@
 require 'spec_helper'
 
 describe OoxmlParser::Color do
-  let(:no_init_color) { OoxmlParser::Color.new }
-  let(:zero_color) { OoxmlParser::Color.new(0, 0, 0) }
-  let(:init_color) { OoxmlParser::Color.new(100, 150, 200) }
+  let(:no_init_color) { described_class.new }
+  let(:zero_color) { described_class.new(0, 0, 0) }
+  let(:init_color) { described_class.new(100, 150, 200) }
 
   it 'Color looks like nil' do
-    expect(OoxmlParser::Color.new(nil, nil, nil)).to be_looks_like(nil)
+    expect(described_class.new(nil, nil, nil)).to be_looks_like(nil)
   end
 
   it 'Color with style nil looks like color nil' do

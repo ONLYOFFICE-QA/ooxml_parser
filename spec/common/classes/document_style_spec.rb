@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe OoxmlParser::DocumentStyle do
   let(:style) do
-    OoxmlParser::DocumentStyle.new
+    described_class.new
   end
 
   it 'DocumentStyle#to_s is correct' do

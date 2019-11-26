@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::BordersProperties do
-  let(:default_property) { OoxmlParser::BordersProperties.new }
-  let(:init_property) { OoxmlParser::BordersProperties.new(:auto, 1) }
+  let(:default_property) { described_class.new }
+  let(:init_property) { described_class.new(:auto, 1) }
 
   describe 'BordersProperties#to_s' do
     it 'default_property to_s is empty' do

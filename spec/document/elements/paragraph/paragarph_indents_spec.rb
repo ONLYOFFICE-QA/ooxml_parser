@@ -11,9 +11,9 @@ describe OoxmlParser::Indents do
 
   it 'indents_comparasion' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/indents/indents_comparasion.docx')
-    expect(docx.element_by_description.first.ind).to eq(OoxmlParser::Indents.new(OoxmlParser::OoxmlSize.new(0, :centimeter),
-                                                                                 OoxmlParser::OoxmlSize.new(1.27, :centimeter),
-                                                                                 OoxmlParser::OoxmlSize.new(0, :centimeter),
-                                                                                 OoxmlParser::OoxmlSize.new(0, :centimeter)))
+    expect(docx.element_by_description.first.ind).to eq(described_class.new(OoxmlParser::OoxmlSize.new(0, :centimeter),
+                                                                            OoxmlParser::OoxmlSize.new(1.27, :centimeter),
+                                                                            OoxmlParser::OoxmlSize.new(0, :centimeter),
+                                                                            OoxmlParser::OoxmlSize.new(0, :centimeter)))
   end
 end

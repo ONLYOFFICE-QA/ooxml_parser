@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::Coordinates do
-  let(:first_coord) { OoxmlParser::Coordinates.new(1, 'A') }
-  let(:second_coord) { OoxmlParser::Coordinates.new(2, 'B') }
+  let(:first_coord) { described_class.new(1, 'A') }
+  let(:second_coord) { described_class.new(2, 'B') }
 
   it 'Coordinates#row_greater_that_other?' do
     expect(first_coord).not_to be_row_greater_that_other(second_coord)

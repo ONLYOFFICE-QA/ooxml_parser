@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::Borders do
-  let(:default_borders) { OoxmlParser::Borders.new }
+  let(:default_borders) { described_class.new }
 
   describe 'Borders#copy' do
     it 'Borders#copy result same as original' do

@@ -4,9 +4,9 @@ require 'spec_helper'
 
 describe OoxmlParser::Shade do
   it 'shade should be able to have all arguments set by constructor' do
-    expect(OoxmlParser::Shade.new(color: :auto,
-                                  value: :clear,
-                                  fill: OoxmlParser::Color.new(127, 127, 127))).to be_a(OoxmlParser::Shade)
+    expect(described_class.new(color: :auto,
+                               value: :clear,
+                               fill: OoxmlParser::Color.new(127, 127, 127))).to be_a(described_class)
   end
 
   it 'shade_clear' do
