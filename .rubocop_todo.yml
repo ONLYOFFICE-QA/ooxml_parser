@@ -86,11 +86,6 @@ RSpec/HooksBeforeExamples:
     - 'spec/document/elements/paragraph/runs/alternate_content/office2010_content/properties/vertical_position/offset_spec.rb'
     - 'spec/document/elements/paragraph/runs/drawing/properties/shape_size/extent_spec.rb'
 
-# Offense count: 1
-RSpec/MultipleDescribes:
-  Exclude:
-    - 'spec/document/page_properties/page_size_spec.rb'
-
 # Offense count: 106
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:
