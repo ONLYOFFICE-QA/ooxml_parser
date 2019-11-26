@@ -13,7 +13,7 @@ describe 'My behaviour' do
     expect(xlsx.worksheets[0].drawings[0].graphic_frame.graphic_data.first.display_labels.show_category_name).to be_truthy
   end
 
-  it 'legend_show_category_name.xlsx' do
+  it 'legend_show_series_name.xlsx' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/legend/legend_show_series_name.xlsx')
     expect(xlsx.worksheets[0].drawings[0].graphic_frame.graphic_data.first.display_labels.show_series_name).to be_truthy
   end

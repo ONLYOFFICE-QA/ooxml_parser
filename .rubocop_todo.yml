@@ -108,12 +108,6 @@ RSpec/PredicateMatcher:
     - 'spec/document/document_style_spec.rb'
     - 'spec/document/elements/paragraph/runs/drawing_spec.rb'
 
-# Offense count: 4
-RSpec/RepeatedDescription:
-  Exclude:
-    - 'spec/workbook/tables/extensions/x14_table_alternate_text_spec.rb'
-    - 'spec/workbook/worksheet/drawing/picture/chart/chart_labels_spec.rb'
-
 # Offense count: 1810
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
