@@ -75,6 +75,8 @@
 * Remove unused `ParagraphMargins#round`
 * Remove unused `Spacing.default_spacing_canvas`
 * Simplify `Spacing.parse_spacing_rule` into `LineSpacing` class
+* `DocxShapeSize#rotation` now use OoxmlSize
+* `OoxmlSize` support `one_60000th_degree` and `degree`
   
 ### Fixes
 * Fix crash on empty coordinates list of chart

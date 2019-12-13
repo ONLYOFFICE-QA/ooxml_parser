@@ -68,6 +68,10 @@ module OoxmlParser
         OoxmlSize.new(@value * 100_000 / 50, :one_100000th_percent)
       when :one_1000th_percent
         OoxmlSize.new(@value * 100, :one_100000th_percent)
+      when :one_60000th_degree
+        OoxmlSize.new(@value, :one_60000th_degree)
+      when :degree
+        OoxmlSize.new(@value * 60_000, :one_60000th_degree)
       else
         self
       end
