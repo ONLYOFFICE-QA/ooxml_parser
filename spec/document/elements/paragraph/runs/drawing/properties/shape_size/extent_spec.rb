@@ -25,9 +25,9 @@ describe 'My behaviour' do
 
   it 'extent_rotate' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/'\
-                                                        'paragraph/runs/drawing/'\
-                                                        'properties/shape_size/'\
-                                                        'extent/extent_rotate.docx')
+                                              'paragraph/runs/drawing/'\
+                                              'properties/shape_size/'\
+                                              'extent/extent_rotate.docx')
     elements = docx.element_by_description(location: :canvas, type: :paragraph)
     expect(elements[0].character_style_array[0]
                .alternate_content.office2010_content
