@@ -20,7 +20,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'rot'
-          @rotation = value.value.to_f
+          @rotation = OoxmlSize.new(value.value.to_f, :one_60000th_degree)
         when 'flipH'
           @flip_horizontal = attribute_enabled?(value)
         when 'flipV'

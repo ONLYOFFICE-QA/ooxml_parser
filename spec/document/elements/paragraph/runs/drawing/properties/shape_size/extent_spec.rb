@@ -22,4 +22,17 @@ describe 'My behaviour' do
     elements = docx.element_by_description(location: :canvas, type: :paragraph)
     expect(elements[0].character_style_array[0].drawing.graphic.data.properties.shape_size.extent.x).to eq(OoxmlParser::OoxmlSize.new(16.501, :centimeter))
   end
+
+  it 'extent_rotate' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/'\
+                                              'paragraph/runs/drawing/'\
+                                              'properties/shape_size/'\
+                                              'extent/extent_rotate.docx')
+    elements = docx.element_by_description(location: :canvas, type: :paragraph)
+    expect(elements[0].character_style_array[0]
+                      .alternate_content.office2010_content
+                      .graphic
+                      .data.properties
+                      .shape_size.rotation).to eq(OoxmlParser::OoxmlSize.new(90, :degree))
+  end
 end
