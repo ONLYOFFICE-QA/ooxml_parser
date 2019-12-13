@@ -30,9 +30,9 @@ describe 'My behaviour' do
                                               'extent/extent_rotate.docx')
     elements = docx.element_by_description(location: :canvas, type: :paragraph)
     expect(elements[0].character_style_array[0]
-               .alternate_content.office2010_content
-               .graphic
-               .data.properties
-               .shape_size.rotation).to eq(OoxmlParser::OoxmlSize.new(90, :degree))
+                      .alternate_content.office2010_content
+                      .graphic
+                      .data.properties
+                      .shape_size.rotation).to eq(OoxmlParser::OoxmlSize.new(90, :degree))
   end
 end
