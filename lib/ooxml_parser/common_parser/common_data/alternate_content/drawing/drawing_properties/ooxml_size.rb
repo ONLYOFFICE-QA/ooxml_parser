@@ -83,27 +83,27 @@ module OoxmlParser
       base_unit = to_base_unit
       case output_unit
       when :centimeter
-        return OoxmlSize.new((base_unit.value / 360_000).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / 360_000).round(OoxmlParser.configuration.accuracy), output_unit)
       when :point
-        return OoxmlSize.new((base_unit.value / 12_700).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / 12_700).round(OoxmlParser.configuration.accuracy), output_unit)
       when :half_point
-        return OoxmlSize.new((base_unit.value / (12_700 * 2)).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / (12_700 * 2)).round(OoxmlParser.configuration.accuracy), output_unit)
       when :one_eighth_point
-        return OoxmlSize.new((base_unit.value / (12_700 * 8)).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / (12_700 * 8)).round(OoxmlParser.configuration.accuracy), output_unit)
       when :one_100th_point
-        return OoxmlSize.new((base_unit.value / (12_700 / 100)).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / (12_700 / 100)).round(OoxmlParser.configuration.accuracy), output_unit)
       when :one_240th_cm
-        return OoxmlSize.new((base_unit.value / 1500).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / 1500).round(OoxmlParser.configuration.accuracy), output_unit)
       when :dxa, :twip
-        return OoxmlSize.new((base_unit.value / 635).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / 635).round(OoxmlParser.configuration.accuracy), output_unit)
       when :inch
-        return OoxmlSize.new((base_unit.value / 914_400).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / 914_400).round(OoxmlParser.configuration.accuracy), output_unit)
       when :percent
-        return OoxmlSize.new((base_unit.value / 50).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / 50).round(OoxmlParser.configuration.accuracy), output_unit)
       when :spacing_point
-        return OoxmlSize.new((base_unit.value / (12_700 * 100)).round(OoxmlParser.configuration.accuracy), output_unit)
+        OoxmlSize.new((base_unit.value / (12_700 * 100)).round(OoxmlParser.configuration.accuracy), output_unit)
       else
-        return base_unit
+        base_unit
       end
     end
   end

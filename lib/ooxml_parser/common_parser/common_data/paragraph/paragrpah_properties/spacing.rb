@@ -31,7 +31,7 @@ module OoxmlParser
       if self.class == NilClass || other.class == NilClass
         return true if self.class == NilClass && other.class == NilClass
 
-        return false
+        false
       else
         self.line_rule = line_rule.to_sym if line_rule.instance_of?(String)
 
@@ -39,9 +39,9 @@ module OoxmlParser
            @after == other.after &&
            @line == other.line &&
            @line_rule.to_s == other.line_rule.to_s
-          return true
+          true
         else
-          return false
+          false
         end
       end
     end

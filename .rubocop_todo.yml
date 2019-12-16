@@ -63,14 +63,6 @@ RSpec/FilePath:
 RSpec/MultipleExpectations:
   Max: 10
 
-# Offense count: 14
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/drawing_properties/ooxml_size.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/paragraph/paragrpah_properties/spacing.rb'
-
 # Offense count: 1807
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
