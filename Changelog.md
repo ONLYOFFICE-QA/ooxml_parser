@@ -77,6 +77,7 @@
 * Simplify `Spacing.parse_spacing_rule` into `LineSpacing` class
 * `DocxShapeSize#rotation` now use OoxmlSize
 * `OoxmlSize` support `one_60000th_degree` and `degree`
+* `Columns#separator` is boolean
   
 ### Fixes
 * Fix crash on empty coordinates list of chart

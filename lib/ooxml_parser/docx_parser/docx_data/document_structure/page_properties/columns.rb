@@ -4,11 +4,12 @@ require_relative 'columns/column'
 module OoxmlParser
   # Class for data of Columns
   class Columns < OOXMLDocumentObject
-    attr_accessor :separator
     attr_accessor :count
     attr_accessor :equal_width
     alias equal_width? equal_width
     attr_accessor :column_array
+    # @return [Boolean] Draw Line Between Columns
+    attr_reader :separator
     # @return [OoxmlSize] space between columns
     attr_accessor :space
 
@@ -31,7 +32,7 @@ module OoxmlParser
         when 'num'
           @count = value.value.to_i
         when 'sep'
-          @separator = value.value
+          @separator = option_enabled?(node, 'sep')
         when 'equalWidth'
           @equal_width = option_enabled?(node, 'equalWidth')
         when 'space'
