@@ -13,7 +13,8 @@ matrix:
 install:
   - bundle install --without development
 addons:
-  apt_packages:
-    libmagic-dev
+  apt:
+    packages:
+      - libmagic-dev
 script:
   - bundle exec parallel_rspec spec
