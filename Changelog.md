@@ -96,6 +96,7 @@
 * Fix crash on parsing files without `styles.xml`
 * Fix parsing audio `TimeNode`
 * Fix class documentation issues
+* Fix `Worksheet#with_data?` for columns without custom width
 
 ## 0.4.1 (2018-03-01)
 ### Fixes
