@@ -6,12 +6,14 @@ require_relative 'worksheet/page_setup'
 require_relative 'worksheet/sheet_format_properties'
 require_relative 'worksheet/sheet_view'
 require_relative 'worksheet/table_part'
+require_relative 'worksheet/worksheet_helper'
 require_relative 'worksheet/xlsx_column_properties'
 require_relative 'worksheet/xlsx_drawing'
 require_relative 'worksheet/xlsx_row'
 module OoxmlParser
   # Properties of worksheet
   class Worksheet < OOXMLDocumentObject
+    include WorksheetHelper
     attr_accessor :name, :rows, :merge, :charts, :hyperlinks, :drawings, :comments, :columns, :sheet_format_properties,
                   :autofilter, :table_parts, :sheet_views
     # @return [String] xml name of sheet
@@ -49,7 +51,7 @@ module OoxmlParser
     # @return [True, false] if structure contain any user data
     def with_data?
       return true unless @rows.empty?
-      return true unless @columns.empty?
+      return true unless default_columns?
       return true unless @drawings.empty?
       return true unless @charts.empty?
       return true unless @hyperlinks.empty?
