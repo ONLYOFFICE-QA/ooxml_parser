@@ -75,7 +75,7 @@ describe 'OoxmlSize' do
 
   describe 'OoxmlSize#to_s' do
     it 'to_s return value in centimeters' do
-      expect(size.to_s).to eq('176 centimeter')
+      expect(size.to_s).to match(/176.*centimeter/)
     end
   end
 end
