@@ -31,6 +31,7 @@
 * Add parsing `ExcelComment#text`
 * Add `Shade#to_s`
 * Drop support of Ruby < 2.3
+* `OoxmlSize#to_s` can output in different unit
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element

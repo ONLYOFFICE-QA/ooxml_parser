@@ -72,4 +72,10 @@ describe 'OoxmlSize' do
       expect(size.to_unit(:spacing_point)).to eq(OoxmlParser::OoxmlSize.new(50, :spacing_point))
     end
   end
+
+  describe 'OoxmlSize#to_s' do
+    it 'to_s return value in centimeters' do
+      expect(size.to_s).to match(/176.*centimeter/)
+    end
+  end
 end
