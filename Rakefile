@@ -17,3 +17,12 @@ task :parse_files, [:dir] do |_, args|
     OoxmlParser::Parser.parse(file)
   end
 end
+
+desc 'Release gem '
+task :release_github_rubygems do
+  Rake::Task['release'].invoke
+  gem_name = "pkg/#{OoxmlParser::Name::STRING}-"\
+              "#{OoxmlParser::Version::STRING}.gem"
+  `gem push --key github \
+   --host https://rubygems.pkg.github.com/onlyoffice #{gem_name}`
+end

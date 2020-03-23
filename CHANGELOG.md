@@ -32,6 +32,7 @@
 * Add `Shade#to_s`
 * Drop support of Ruby < 2.3
 * `OoxmlSize#to_s` can output in different unit
+* New rake task for release gem on github and rubygems
 
 ### Refactor
 * Store `sdt` as `DocxParagraph#character_styles_array` element
