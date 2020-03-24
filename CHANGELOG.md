@@ -1,7 +1,9 @@
 # Change log
 
 ## master (unreleased)
+
 ### New features
+
 * Do not use FileMagic on windows
 * Parsing `FilterColumn#custom_filters`
 * Parsing `Series#XYValues`
@@ -10,7 +12,8 @@
 * Ability to parse shared strings in custom named file
 * Parsing `CellProperties#borders_properties` for `tcBdr` tag
 * Add detailed parsing of formulas in xlsx
-* Redone parsing Bookmarks, since it part of `DocxParagraph` elements and order is important
+* Redone parsing Bookmarks, since it part of
+  `DocxParagraph` elements and order is important
 * `BookmarkStart` and `BookmarkEnd` count as nonempty_run
 * Add parsing of `CommentRangeStart` and `CommentRangeEnd`
 * Add parsing of `Series#values`
@@ -35,11 +38,12 @@
 * New rake task for release gem on github and rubygems
 
 ### Refactor
+
 * Store `sdt` as `DocxParagraph#character_styles_array` element
 * Deprecation warning for `DocxParagraph#frame_properties`
 * Deprecation warning for `Point#text`
 * Remove unused and probably not real `DocxParagraph#kinoku`
-* Remove redundant `PresetColor`, `AbstractNumberingId`, 
+* Remove redundant `PresetColor`, `AbstractNumberingId`,
   `Start`, `VerticalMerge`, `Order`, `SeriesIndex`, `PointCount`,
   `Language`
 * Refactor parsing `Chart`. Ability to parser multichart charts
@@ -55,7 +59,7 @@
 * Change `XLSXWorkbook.parse` to instance method `XLSXWorkbook#parse`
 * Remove class method `XLSXWorkbook.link_to_theme_xml`
 * Remove class method `XLSXWorkbook.styles_node`
-* Remove class `CellStyle`, replace with call of `style_sheet` 
+* Remove class `CellStyle`, replace with call of `style_sheet`
 * Reorganize code for remove `Xf#calcualte_values` method
 * Remove class methods during parsing excel comments
 * Change `Presentation.default_font_size` to instance method `Presentation#default_font_size`
@@ -82,6 +86,7 @@
 * `Columns#separator` is boolean
   
 ### Fixes
+
 * Fix crash on empty coordinates list of chart
 * Fix crash on docx with no `settings.xml`
 * Fix crash on docx with no `theme.xml`
@@ -91,8 +96,8 @@
 * Fix `GridColumn#width` emu value
 * Fix `DocumentStructure#with_data?` for docs with several empty paragraphs
 * Fix `XLSXWorkbook#all_formula_values` for formulas without value
-* Values of `DocxShapeSize#flip_horizontal` and 
-`DocxShapeSize#flip_vertical` are Boolean
+* Values of `DocxShapeSize#flip_horizontal` and
+  `DocxShapeSize#flip_vertical` are Boolean
 * Fix crash on gradient stop with unknown SchemeColor ([ooxml_parser#571](https://github.com/ONLYOFFICE/ooxml_parser/issues/571))
 * Fix `Presentation.with_data?` for shape with preset geometry ([ooxml_parser#573](https://github.com/ONLYOFFICE/ooxml_parser/issues/573))
 * Fix crash on parsing files without `styles.xml`
@@ -101,15 +106,21 @@
 * Fix `Worksheet#with_data?` for columns without custom width
 
 ## 0.4.1 (2018-03-01)
+
 ### Fixes
+
 * Fix calling `StructuredDocumentTag#parent`
 
 ## 0.4.0 (2018-02-21)
+
 ### New features
+
 * Support `SDTContent#tables`
 
 ## 0.3.0 (2018-02-19)
+
 ### New features
+
 * Add `to_hash` method to OOXMLDocumentObject. `to_json` also working
 * Parsing `OleObject` in `GraphicFrame`
 * Parsing `CommentsExtended`
@@ -125,15 +136,16 @@
 * Parsing `DocumentStructure#sdt`
 * Parsing `Presentation#relationships`
 * Parsing `Extension#sparkline_groups`
-* Parsing `SparklineGroup#type`, `SparklineGroup#line_weight`, `SparklineGroup` show points,
-`SparklineGroup` points colors, `SparklineGroup#display_empty_cells_as`,
-`SparklineGroup#display_hidden`, `SparklineGroup#display_x_axis`, 
-`SparklineGroup#right_to_left`, SparklineGroup max and min axis type and value
+* Parsing `SparklineGroup#type`, `SparklineGroup#line_weight`,
+  `SparklineGroup` show points,
+  `SparklineGroup` points colors, `SparklineGroup#display_empty_cells_as`,
+  `SparklineGroup#display_hidden`, `SparklineGroup#display_x_axis`,
+  `SparklineGroup#right_to_left`, SparklineGroup max and min axis type and value
 * Parsing `PageProperties#title_page`
 * Parsing `TableStyleProperties#table_row_properties`
 * Parsing `ChartAxis#tick_label_position`
 * Parsing `ChartAxis#scaling`
-* Parsing `ConnectionShape` in `ShapesGrouping` 
+* Parsing `ConnectionShape` in `ShapesGrouping`
 * Parsing `Tab#leader`
 * Parsing Slide Notes
 * Parsing `SDTProperties#alias`, `SDTProperties#lock`, `SDTProperties#tag`
@@ -144,19 +156,20 @@
 * Parsing `ParagraphRun#tab`
 
 ### Refactor
+
 * Change interface of `XlsxDrawing#graphic_frame`
 * Remove duplicate classes for `Tabs`
 * Refactor `Table#autofilter`
-* Simplification of `DocxParagraph#dup` 
-* Simplification of `DocxParagraphRun#new` 
-* Simplification of `DocxParagraphRun#dup` 
-* Simplification of `TableProperties#dup` 
+* Simplification of `DocxParagraph#dup`
+* Simplification of `DocxParagraphRun#dup`
+* Simplification of `TableProperties#dup`
 * Redone parsing of `Slide` data
 * Remove `Color#parse_color_tag` in favor of `OoxmlColor#parse`
 * Redone parsing `DocumentBackground#fill`
 * Redone parsing and comparing `Color#style`
 
 ### Fixes
+
 * Fix `uninitialized constant OoxmlParser::Inserted::DateTime` while parsing `Inserted#date`
 * Fix detecting password protected files on old `FileMagic`
 * `pct` OoxmlSize values actually is 1/50 of percent
@@ -173,7 +186,9 @@
 * Fix checking `DocxParagraph#nonempty_runs` for runs with `Shape`
 
 ## 0.2.0 (2017-03-25)
+
 ### New features
+
 * Ability to set units of measurement to each value, not to all via config
 * Add twips (same as dxa), one_eighth_point unit of measurement
 * Add configuration to set accuracy of fraction part of digit
@@ -184,7 +199,8 @@
 * Add parsing math formula run properties (and redone some math model for it)
 * Add parsing math formula argument size property
 * Add a whole lot new properties to parse in charts
-* Remove usage of Linux `file` command in favor of `ruby-filemagick` gem. Better cross-platform support
+* Remove usage of Linux `file` command in favor of
+  `ruby-filemagick` gem. Better cross-platform support
 * Use ruby method to create tmp folder instead of calling Linux methods
 * Add method `OoxmlParser::Parser.parse` to parse any OOXML format with auto recognition
 * Add storing color scheme name in color class
@@ -199,7 +215,8 @@
 * Parsing of Columns spacing
 * Redone parsing `gridSpan` and `vMerge`
 * Add ability to get style on which style is based
-* Parsing `TableStyleColumnBandSize`, `TableStyleRowBandSize`, `TableLayout`, table cell spacing for TableProperties
+* Parsing `TableStyleColumnBandSize`, `TableStyleRowBandSize`,
+  `TableLayout`, table cell spacing for TableProperties
 * Correct parsing `Margins` for `tcPr`
 * OoxmlSize support a whole lot formats
 * Correct handling unsupported OoxmlSize format
@@ -218,7 +235,8 @@
 * Add parsing `TableRowProperties#table_header` (fix #264)
 * Add parsing `XlsxColumnProperties#custom_width`, `XlsxColumnProperties#best_fit`
 * Add parsing `DocxParagraphRun#object` and `Object#ole_object`
-* New way to parse default RunProperties and ParagraphProperties. Old way is still there
+* New way to parse default RunProperties and
+  ParagraphProperties. Old way is still there
 * Add parsing `RunStyle`. Implement #140
 * Add parsing `Chart#view3D`
 * Add parsing math data in xlsx files
@@ -243,20 +261,26 @@
 * Add parsing `X14Table`
 
 ### Fixes
+
 * Fix parsing document style id - it can be string, not only digit
-* Fix misplaced `dxa` and `emu` units of measurements and also fix calculation `dxa` unit
+* Fix misplaced `dxa` and `emu` units of measurements and
+  also fix calculation `dxa` unit
 * Redone parsing of `nary` in formulas
 * Fix parsing gradient color linear values
 * Fix parsing Footnote and Endnote reference in runs
-* Fix calculating position offset values, distance from text in different units of measurements
+* Fix calculating position offset values, distance from
+  text in different units of measurements
 * Fix parsing table style in text box
-* Fix problem with parsing absolute file path in Windows 
+* Fix problem with parsing absolute file path in Windows
 * Parse `keep_next` in paragraph properties
 * `TransformEffect`, `BordersProperties#size` in correct `OoxmlSize` unit
-* `Indents`, `TableProperties#table_indent`, `ParagraphProperties#margin_left`, 
-`ParagraphProperties#margin_right`, `ParagraphProperties#indent`, `DocxShapeLine#width`, 
-`TextOutline#width`, `Outline#width`, `TableCellLine#width`, `XlsxDrawingPositionParameters` use `OoxmlSize`
-* `TableMargins`, `TablePosition`, `FrameProperties`, `CellProperties#able_cell_width`, `TableRow#height` use `OoxmlSize`
+* `Indents`, `TableProperties#table_indent`, `ParagraphProperties#margin_left`,
+  `ParagraphProperties#margin_right`, `ParagraphProperties#indent`,
+  `DocxShapeLine#width`,
+  `TextOutline#width`, `Outline#width`, `TableCellLine#width`,
+  `XlsxDrawingPositionParameters` use `OoxmlSize`
+* `TableMargins`, `TablePosition`, `FrameProperties`,
+  `CellProperties#able_cell_width`, `TableRow#height` use `OoxmlSize`
 * `TableProperties`, `TableCellProperties` use `Shade` class
 * `ParagraphMargins` parse size in correct units
 * `ParagraphProperties` parse `PageProperties`
@@ -281,6 +305,7 @@
 * Fix comparing docx's with shapes
 
 ### Refactor
+
 * Redone parsing images - store in structure, instead of copying file to filesystem
 * Move parsing Columns inside class
 * Move parsing TableGrid inside class
@@ -289,24 +314,25 @@
 * Parsing DocxParagraphRun properties
 * Move some slide methods to helper
 * Rename `Size` class to `PageSize` and `RunSize` to `Size`
-* Simplify code for parsing `CellProperties`, `PageProperties`, 
-`DocxParagraph`, `Bookmark`, `TableLook`, `ChartAxisTitle`, 
-`NonVisualProperties`, `ShapePlaceholder`, `RunProperties`, 
-`TableProperties`, `FrameProperties`, `Background`, `Transition`,
-`TransitionProperties`, `XlsxRow`, `XlsxColumnProperties`, `CellStyle`,
-`DisplayLabelsProperties`, `ParagraphProperties`, 
-`ChartAxis`, `ChartLegend`, `SizeRelativeHorizontal`,
-`SizeRelativeVertical`, `OOXMLShapeBodyProperties`, `Tile`,
-`NaryLimitLocation`, `MultilevelType`, `CellProperties`, `FileReference`, `OldDocxPicture`,
-`OldDocxShapeFill`, `ShapeGuide`, `ShapeAdjustValueList`,
-`PresetGeometry`, `DocxShapeSize`, `DocxShapeLinePath`,
-`DocxShapeLineElement`, `OOXMLCustomGeometry`, `DocxShapeProperties`, 
-`LineEnd`, `CommonTiming`, `AnimationEffect`, `TargetElement`,
-`Behavior`, `SetTimeNode`, `Column`, `TableBorders`, `GridColumn`,
-`TableElement`, `XlsxAlignment`, `NaryProperties`, `NaryLimitLocation`,
-`NaryGrow`, `Nary`, `OOXMLFont`, `ExcelComment`, `SheetView`, `Pane`,
-`TablePart`
-* Replace usage `Alignment.parse` on `OOXMLDocumentObject#value_to_symbol` method
+* Simplify code for parsing `CellProperties`, `PageProperties`,
+  `DocxParagraph`, `Bookmark`, `TableLook`, `ChartAxisTitle`,
+  `NonVisualProperties`, `ShapePlaceholder`, `RunProperties`,
+  `TableProperties`, `FrameProperties`, `Background`, `Transition`,
+  `TransitionProperties`, `XlsxRow`, `XlsxColumnProperties`, `CellStyle`,
+  `DisplayLabelsProperties`, `ParagraphProperties`,
+  `ChartAxis`, `ChartLegend`, `SizeRelativeHorizontal`,
+  `SizeRelativeVertical`, `OOXMLShapeBodyProperties`, `Tile`,
+  `NaryLimitLocation`, `MultilevelType`, `CellProperties`, `FileReference`, `OldDocxPicture`,
+  `OldDocxShapeFill`, `ShapeGuide`, `ShapeAdjustValueList`,
+  `PresetGeometry`, `DocxShapeSize`, `DocxShapeLinePath`,
+  `DocxShapeLineElement`, `OOXMLCustomGeometry`, `DocxShapeProperties`,
+  `LineEnd`, `CommonTiming`, `AnimationEffect`, `TargetElement`,
+  `Behavior`, `SetTimeNode`, `Column`, `TableBorders`, `GridColumn`,
+  `TableElement`, `XlsxAlignment`, `NaryProperties`, `NaryLimitLocation`,
+  `NaryGrow`, `Nary`, `OOXMLFont`, `ExcelComment`, `SheetView`, `Pane`,
+  `TablePart`
+* Replace usage `Alignment.parse` on
+  `OOXMLDocumentObject#value_to_symbol` method
 * Refactor `Color.from_int16` to `Color#parse_hex_string` method
 * Move `table_cell_spacing` to `TableRowProperties` and use OoxmlSize
 * Simplify `XlsxRow` parsing.
@@ -318,6 +344,7 @@
 * Redone parsing of `AlphaModFix` and blips
 
 ### Removal
+
 * Remove unused method `PageSize.get_name_by_size`
 * Remove unused class `TableStyleElement`
 * Remove `OoxmlShift` - use `OoxmlCoordinates` instead
@@ -330,6 +357,7 @@
 ## 0.1.2 (2016-06-07)
 
 ### New features
+
 * Correct `==` method for DocxStructure.
 * Correctly handle and warn if docx file do not contain `docProps/app.xml`
 * Extract GradientColor parsing to Class
@@ -338,7 +366,9 @@
 * Add parsing Table relationships
 
 ### Fixes
+
 #### `DocxParser`
+
 * Fix crash while parsing `page_borders`
 * Fix parsing nil borders
 * Fix parsing document background and background image
@@ -356,6 +386,7 @@
 * Fix parsing Table Border style
 
 #### `XlsxParser`
+
 * Fix parsing default underline style for cell
 * Fix parsing TextField in Paragraph
 * Fix parsing Chart data if there is no `numRef`
@@ -365,6 +396,7 @@
 * Fix parsing fill color nil
 
 #### `PptxParser`
+
 * Fix parsing Condition event and delay nil values
 * Fix parsing Transition Direction, Orientation nil
 * Fix parsing Sound transaction
@@ -376,6 +408,7 @@
 ## 0.1.1 (2016-05-17)
 
 ### New features
+
 * Add ability to configure units of measurements
 * Add support of `line_3d`, `bar3DChart`, `pie3DChart` charts
 * Add parsing text direction in table cell
@@ -390,7 +423,9 @@
 * Add variable to store original file path in all parsers
 
 ### Fixes
+
 * Fix parsing shape in paragraph run
 
 ## 0.1.0
+
 * Initial release of `ooxml_parser` gem
