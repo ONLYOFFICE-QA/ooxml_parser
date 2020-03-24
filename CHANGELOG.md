@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.5.0 (2020-03-24)
+
 ### New features
 
 * Do not use FileMagic on windows
