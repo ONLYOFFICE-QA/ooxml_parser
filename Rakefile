@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'lib/ooxml_parser'
+require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)

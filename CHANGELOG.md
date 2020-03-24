@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+## 0.5.1 (2020-03-24)
+
+* Fix rake task for releasing gem
+
 ## 0.5.0 (2020-03-24)
 
 ### New features
