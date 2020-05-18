@@ -14,11 +14,11 @@ Gem::Specification.new do |s|
   s.description = 'Parse OOXML files (docx, xlsx, pptx)'
   s.homepage = "https://github.com/onlyoffice/#{s.name}"
   s.metadata = {
-      'bug_tracker_uri' => "#{s.homepage}/issues",
-      'changelog_uri' => "#{s.homepage}/blob/master/CHANGELOG.md",
-      'documentation_uri' => "https://www.rubydoc.info/gems/#{s.name}",
-      'homepage_uri' => s.homepage,
-      'source_code_uri' => s.homepage
+    'bug_tracker_uri' => "#{s.homepage}/issues",
+    'changelog_uri' => "#{s.homepage}/blob/master/CHANGELOG.md",
+    'documentation_uri' => "https://www.rubydoc.info/gems/#{s.name}",
+    'homepage_uri' => s.homepage,
+    'source_code_uri' => s.homepage
   }
   s.files = Dir['lib/**/*']
   s.license = 'AGPL-3.0'

@@ -93,12 +93,14 @@ module OoxmlParser
     attr_accessor :blue
     # @return [String] Value of Color Style
     attr_accessor :style
+
     alias set_style style=
     # @return [String] color scheme of color
     attr_accessor :scheme
 
     # @return [Integer] Value of alpha-channel
     attr_accessor :alpha_channel
+
     alias set_alpha_channel alpha_channel=
 
     attr_accessor :position

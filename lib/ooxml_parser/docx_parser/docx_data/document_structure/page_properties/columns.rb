@@ -6,6 +6,7 @@ module OoxmlParser
   class Columns < OOXMLDocumentObject
     attr_accessor :count
     attr_accessor :equal_width
+
     alias equal_width? equal_width
     attr_accessor :column_array
     # @return [Boolean] Draw Line Between Columns

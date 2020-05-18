@@ -4,6 +4,7 @@ module OoxmlParser
   # Class for storing math paragraph
   class MathParagraph < OOXMLDocumentObject
     attr_accessor :math
+
     # Parse MathParagraph object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [MathParagraph] result of parsing

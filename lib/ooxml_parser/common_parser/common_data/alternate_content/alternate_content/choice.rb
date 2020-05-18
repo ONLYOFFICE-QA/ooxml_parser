@@ -6,6 +6,7 @@ module OoxmlParser
   # graphic data
   class Choice < OOXMLDocumentObject
     attr_accessor :math_text
+
     # Parse Choice object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [Choice] result of parsing

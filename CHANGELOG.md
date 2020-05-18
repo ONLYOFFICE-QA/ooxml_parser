@@ -2,6 +2,14 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add support of `rubocop-performance`
+
+### Changes
+
+* Support of rubocop v0.83.0
+
 ## 0.5.1 (2020-03-24)
 
 * Fix rake task for releasing gem
