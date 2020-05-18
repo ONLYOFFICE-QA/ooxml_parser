@@ -5,6 +5,7 @@ module OoxmlParser
   # Class for storing math text
   class MathText < OOXMLDocumentObject
     attr_accessor :math_paragraph
+
     # Parse MathText object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [MathText] result of parsing

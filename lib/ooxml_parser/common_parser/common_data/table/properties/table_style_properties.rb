@@ -16,6 +16,7 @@ module OoxmlParser
     attr_reader :table_row_properties
     # @return [ParagraphProperties] properties of paragraph
     attr_accessor :paragraph_properties
+
     alias cell_properties table_cell_properties
 
     def initialize(type: nil, parent: nil)

@@ -13,18 +13,6 @@ Gemspec/RequiredRubyVersion:
   Exclude:
     - 'ooxml_parser.gemspec'
 
-# Offense count: 8
-# Cop supports --auto-correct.
-Layout/EmptyLinesAroundAttributeAccessor:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/alternate_content/choice.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/alternate_content/choice/math_text.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/alternate_content/choice/math_text/math_paragraph.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/table/properties/table_style_properties.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/document_style.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/page_properties/columns.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, IndentationWidth.
