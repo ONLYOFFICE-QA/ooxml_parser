@@ -10,6 +10,10 @@
 
 * Support of rubocop v0.83.0
 
+### Fixes
+
+* Fix coverage report on non-CI environments
+
 ## 0.5.1 (2020-03-24)
 
 * Fix rake task for releasing gem
