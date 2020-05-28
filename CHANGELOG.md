@@ -5,6 +5,7 @@
 ### New Features
 
 * Add support of `rubocop-performance`
+* Add parsing `DocxShape#style` and it's child nodes
 
 ### Changes
 

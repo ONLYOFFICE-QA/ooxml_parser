@@ -2,6 +2,7 @@
 
 require_relative 'docx_shape/ooxml_text_box'
 require_relative 'docx_shape/non_visual_shape_properties'
+require_relative 'docx_shape/shape_style'
 require_relative 'docx_shape/text_body'
 require_relative 'shape_properties/docx_shape_properties'
 require_relative 'shape_body_properties/ooxml_shape_body_properties'
@@ -32,6 +33,8 @@ module OoxmlParser
           @non_visual_properties = NonVisualShapeProperties.new(parent: self).parse(node_child)
         when 'spPr'
           @properties = DocxShapeProperties.new(parent: self).parse(node_child)
+        when 'style'
+          @style = ShapeStyle.new(parent: self).parse(node_child)
         when 'txbx'
           @text_body = OOXMLTextBox.new(parent: self).parse(node_child)
         when 'txBody'
