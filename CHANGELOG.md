@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.6.0 (2020-05-29)
+
 ### New Features
 
 * Add support of `rubocop-performance`
