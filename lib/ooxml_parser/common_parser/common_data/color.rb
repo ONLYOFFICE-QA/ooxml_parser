@@ -156,9 +156,7 @@ module OoxmlParser
 
     def ==(other)
       if other.is_a?(Color)
-        if nil?
-          false
-        elsif (@red == other.red) && (@green == other.green) && (@blue == other.blue)
+        if (@red == other.red) && (@green == other.green) && (@blue == other.blue)
           true
         elsif (none? && other.white?) || (white? && other.none?)
           true
