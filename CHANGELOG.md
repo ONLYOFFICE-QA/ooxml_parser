@@ -7,6 +7,7 @@
 * Add support of `rubocop-performance`
 * Add parsing `DocxShape#style` and it's child nodes
 * Increase code coverage
+* Simplify `Color#==`
 
 ### Changes
 
