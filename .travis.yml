@@ -1,4 +1,5 @@
 language: ruby
+node_js: 12
 
 rvm:
   - ruby-head
