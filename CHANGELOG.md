@@ -8,6 +8,7 @@
 * Add parsing `DocxShape#style` and it's child nodes
 * Increase code coverage
 * Simplify `Color#==`
+* Support of `markdownlint` in CI
 
 ### Changes
 

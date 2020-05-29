@@ -17,4 +17,6 @@ addons:
     packages:
       - libmagic-dev
 script:
+  - npm install -g markdownlint-cli
+  - markdownlint *.md
   - bundle exec parallel_rspec spec
