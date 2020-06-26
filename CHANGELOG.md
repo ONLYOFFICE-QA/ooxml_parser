@@ -2,6 +2,11 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add basic support of parsing Pivot data (`PivotCache`,
+  `PivotCacheDefinition`, `CacheSource`, `WorksheetSource`)
+
 ## 0.6.0 (2020-05-29)
 
 ### New Features

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'workbook/chartsheet'
+require_relative 'workbook/pivot_cache'
 require_relative 'workbook/shared_string_table'
 require_relative 'workbook/style_sheet'
 require_relative 'workbook/worksheet'
@@ -18,9 +19,12 @@ module OoxmlParser
     attr_accessor :style_sheet
     # @return [SharedStringTable] styles of book
     attr_accessor :shared_strings_table
+    # @return [Array<PivotCache>] list of pivot caches
+    attr_accessor :pivot_caches
 
     def initialize(params = {})
       @worksheets = []
+      @pivot_caches = []
       super
     end
 
@@ -95,10 +99,10 @@ module OoxmlParser
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.root_subfolder = 'xl/'
       OOXMLDocumentObject.add_to_xmls_stack('xl/workbook.xml')
-      doc = Nokogiri::XML.parse(File.open(OOXMLDocumentObject.current_xml))
+      @doc = Nokogiri::XML.parse(File.open(OOXMLDocumentObject.current_xml))
       @theme = PresentationTheme.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
       @style_sheet = StyleSheet.new(parent: self).parse
-      doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
+      @doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
         file = @relationships.target_by_id(sheet.attribute('id').value)
         if file.start_with?('worksheets')
           @worksheets << Worksheet.new(parent: self).parse(file)
@@ -107,6 +111,7 @@ module OoxmlParser
           @worksheets << Chartsheet.new(parent: self).parse(file)
         end
       end
+      parse_pivot_cache
       OOXMLDocumentObject.xmls_stack.pop
       self
     end
@@ -115,6 +120,13 @@ module OoxmlParser
 
     def link_to_theme_xml
       relationships.target_by_type('theme').first
+    end
+
+    # Perform parsing of pivot cache
+    def parse_pivot_cache
+      @doc.xpath('xmlns:workbook/xmlns:pivotCaches/xmlns:pivotCache').each do |pivot_cache|
+        @pivot_caches << PivotCache.new(parent: self).parse(pivot_cache)
+      end
     end
   end
 end
