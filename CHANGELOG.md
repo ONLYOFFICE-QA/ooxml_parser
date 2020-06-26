@@ -4,8 +4,8 @@
 
 ### New Features
 
-* Add parsing of `PivotCache` list
-* Add parsing `PivotCacheDefinition`, `CacheSource`
+* Add basic support of parsing Pivot data (`PivotCache`,
+  `PivotCacheDefinition`, `CacheSource`, `WorksheetSource`)
 
 ## 0.6.0 (2020-05-29)
 
