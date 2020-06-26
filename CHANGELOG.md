@@ -5,6 +5,7 @@
 ### New Features
 
 * Add parsing of `PivotCache` list
+* Add parsing `PivotCacheDefinition`, `CacheSource`
 
 ## 0.6.0 (2020-05-29)
 
