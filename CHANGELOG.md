@@ -6,6 +6,10 @@
 
 * Add basic support of parsing Pivot data (`PivotCache`,
   `PivotCacheDefinition`, `CacheSource`, `WorksheetSource`)
+  
+### Fixes
+
+* Do not raise waring if `FileReference#path` is correct url
 
 ## 0.6.0 (2020-05-29)
 
