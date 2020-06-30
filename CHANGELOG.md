@@ -11,6 +11,10 @@
 
 * Do not raise waring if `FileReference#path` is correct url
 
+### Changes
+
+* Drop support of ruby 2.3
+
 ## 0.6.0 (2020-05-29)
 
 ### New Features

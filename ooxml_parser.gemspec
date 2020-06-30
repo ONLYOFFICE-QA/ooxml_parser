@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name = OoxmlParser::Name::STRING
   s.version = OoxmlParser::Version::STRING
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 2.3'
+  s.required_ruby_version = '>= 2.4'
   s.authors = ['ONLYOFFICE', 'Pavel Lobashov', 'Roman Zagudaev']
   s.email = %w[shockwavenn@gmail.com rzagudaev@gmail.com]
   s.summary = 'OoxmlParser Gem'
