@@ -6,6 +6,7 @@
 
 * Add basic support of parsing Pivot data (`PivotCache`,
   `PivotCacheDefinition`, `CacheSource`, `WorksheetSource`)
+* Increase project test coverage
   
 ### Fixes
 
