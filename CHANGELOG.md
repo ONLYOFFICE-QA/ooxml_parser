@@ -23,6 +23,7 @@
 * Remove `CellProperties#anchor_center` as unused
 * Remove `CellProperties#horizontal_overflow` as unused
 * Remove `OldDocxPicture#style_number` as unused
+* Remove `DocxShapeLineElement#type = quadratic_bezier` as unused
 
 ## 0.6.0 (2020-05-29)
 
