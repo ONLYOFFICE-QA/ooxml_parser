@@ -6,7 +6,7 @@ describe 'My behaviour' do
   it 'picture_exists.pptx' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/picture/picture_exists.pptx')
     expect(pptx.slides.first.elements.size).to be >= 3
-    expect(pptx.slides.first.elements.last).to be_a_kind_of OoxmlParser::Picture
+    expect(pptx.slides.first.elements.last).to be_a_kind_of OoxmlParser::DocxPicture
     expect(pptx.slides.first.elements.last.image.file_reference.content.length).to be > 1000
   end
 

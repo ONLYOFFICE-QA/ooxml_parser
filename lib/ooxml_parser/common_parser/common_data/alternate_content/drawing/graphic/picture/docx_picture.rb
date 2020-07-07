@@ -28,6 +28,4 @@ module OoxmlParser
       self
     end
   end
-
-  Picture = DocxPicture
 end
