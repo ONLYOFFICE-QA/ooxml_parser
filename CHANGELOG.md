@@ -22,6 +22,7 @@
 * Remove `OldDocxShapeProperties#opacity` as unused
 * Remove `CellProperties#anchor_center` as unused
 * Remove `CellProperties#horizontal_overflow` as unused
+* Remove `OldDocxPicture#style_number` as unused
 
 ## 0.6.0 (2020-05-29)
 
