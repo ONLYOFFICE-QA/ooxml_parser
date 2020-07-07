@@ -4,7 +4,7 @@ require_relative 'grid_span'
 module OoxmlParser
   # Class for parsing 'w:tcPr' element
   class CellProperties < OOXMLDocumentObject
-    attr_accessor :fill, :color, :borders, :text_direction, :anchor, :anchor_center, :horizontal_overflow, :table_cell_width, :borders_properties, :vertical_align
+    attr_accessor :fill, :color, :borders, :text_direction, :anchor, :table_cell_width, :borders_properties, :vertical_align
     # @return [GridSpan] data about grid span
     attr_accessor :grid_span
     # @return [TableMargins] margins
@@ -74,14 +74,8 @@ module OoxmlParser
 
       node.attributes.each do |key, value|
         case key
-        when 'vert'
-          @text_direction = value.value.to_sym
         when 'anchor'
           @anchor = value_to_symbol(value)
-        when 'anchorCtr'
-          @anchor_center = value.value
-        when 'horzOverflow'
-          @horizontal_overflow = value.value.to_sym
         end
       end
       self

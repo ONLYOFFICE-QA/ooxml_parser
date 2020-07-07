@@ -20,6 +20,8 @@
 * Remove `Picture` class alias to `DocxPicture`
 * Simplify `TableStylePropertiesHelper` dynamic methods generation
 * Remove `OldDocxShapeProperties#opacity` as unused
+* Remove `CellProperties#anchor_center` as unused
+* Remove `CellProperties#horizontal_overflow` as unused
 
 ## 0.6.0 (2020-05-29)
 
