@@ -14,6 +14,7 @@
 ### Changes
 
 * Drop support of ruby 2.3
+* Remove `Picture` class alias to `DocxPicture`
 
 ## 0.6.0 (2020-05-29)
 

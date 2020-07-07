@@ -17,7 +17,7 @@ module OoxmlParser
     def transform_of_object(object)
       case object
       when :image
-        elements.find { |e| e.is_a? Picture }.properties.transform
+        elements.find { |e| e.is_a? DocxPicture }.properties.transform
       when :chart
         elements.find { |e| e.is_a? GraphicFrame }.transform
       when :table
