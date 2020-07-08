@@ -7,6 +7,7 @@
 * Add basic support of parsing Pivot data (`PivotCache`,
   `PivotCacheDefinition`, `CacheSource`, `WorksheetSource`)
 * Increase project test coverage
+* New `OOXMLDocumentObject.encrypted_file?` param to ignore host-os
   
 ### Fixes
 
