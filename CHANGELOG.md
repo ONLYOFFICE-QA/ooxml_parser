@@ -27,6 +27,7 @@
 * Remove `OOXMLTextBox#properties` as unused
 * Remove redundant comparing `Spacing` to `nil`
 * Remove `DocxShapeProperties#text_box` as unused
+* Remove parsing `Color#parse_color_model - scrgbClr` as unused
 
 ## 0.6.0 (2020-05-29)
 
