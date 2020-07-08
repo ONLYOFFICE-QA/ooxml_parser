@@ -10,6 +10,7 @@
 ### Fixes
 
 * Do not raise waring if `FileReference#path` is correct url
+* Fix comparing two child of `OOXMLDocumentObject` with different classes
 
 ### Changes
 
