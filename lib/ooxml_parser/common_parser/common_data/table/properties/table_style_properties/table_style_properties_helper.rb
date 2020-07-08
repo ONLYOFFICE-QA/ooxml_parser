@@ -17,12 +17,11 @@ module OoxmlParser
                                 first_row: :firstRow,
                                 last_row: :lastRow }.freeze
 
-    TABLE_STYLES_NAMES_HASH.each_key do |table_style_name|
-      define_method(table_style_name) do
+    TABLE_STYLES_NAMES_HASH.each do |key, value|
+      define_method(key) do
         @table_style_properties_list.each do |table_style|
-          return table_style if table_style.type == TABLE_STYLES_NAMES_HASH[table_style_name]
+          return table_style if table_style.type == value
         end
-        nil
       end
     end
 
