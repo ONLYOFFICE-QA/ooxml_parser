@@ -32,6 +32,7 @@
 * Remove `Shape#margin - right` as unused
 * Remove `RunProperties#font_size_complex` as unused
 * Remove `RunProperties#baseline - superscript` as unused
+* Remove warning on `HeaderFooter#parse_type` on unknown type as unused
 
 ## 0.6.0 (2020-05-29)
 
