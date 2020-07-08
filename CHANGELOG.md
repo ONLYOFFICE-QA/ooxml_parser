@@ -25,6 +25,7 @@
 * Remove `OldDocxPicture#style_number` as unused
 * Remove `DocxShapeLineElement#type = quadratic_bezier` as unused
 * Remove `OOXMLTextBox#properties` as unused
+* Remove redundant comparing `Spacing` to `nil`
 
 ## 0.6.0 (2020-05-29)
 
