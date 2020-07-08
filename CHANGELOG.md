@@ -16,6 +16,7 @@
 
 * Drop support of ruby 2.3
 * Remove `Picture` class alias to `DocxPicture`
+* Simplify `TableStylePropertiesHelper` dynamic methods generation
 
 ## 0.6.0 (2020-05-29)
 
