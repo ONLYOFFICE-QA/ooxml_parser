@@ -53,8 +53,6 @@ module OoxmlParser
           @properties.margins.top = property.split(':').last
         elsif property.include?('margin-left')
           @properties.margins.left = property.split(':').last
-        elsif property.include?('margin-right')
-          @properties.margins.right = property.split(':').last
         elsif property.include?('width')
           @properties.size.width = property.split(':').last
         elsif property.include?('height')
