@@ -20,6 +20,8 @@ module OoxmlParser
     end
 
     def ==(other)
+      return false if self.class != other.class
+
       instance_variables.each do |current_attribute|
         next if current_attribute == :@parent
         return false unless instance_variable_get(current_attribute) == other.instance_variable_get(current_attribute)
