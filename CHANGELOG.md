@@ -11,6 +11,7 @@
 
 * Do not raise waring if `FileReference#path` is correct url
 * Fix comparing two child of `OOXMLDocumentObject` with different classes
+* Fix `OoxmlSize#to_s` to output same result on all supported ruby-version
 
 ### Changes
 
