@@ -33,9 +33,11 @@ _ooxml_parser_ is a Ooxml files (docx, xlsx, pptx) parser written in Ruby.
 
 Parse a docx file
 
-    require 'ooxml_parser'
-    docx = OoxmlParser::Parser.parse('spec/document/document_properties/page_count.docx')
-    p docx.document_properties.pages # 2
+```ruby
+require 'ooxml_parser'
+docx = OoxmlParser::Parser.parse('spec/document/document_properties/page_count.docx')
+p docx.document_properties.pages # 2
+```
 
 ## Configuration
 
@@ -44,6 +46,7 @@ Parse a docx file
 Accuracy of digits in fraction part
 Default is 2 digits in fraction part
 
-    OoxmlParser.configure do |config|
-      config.accuracy = 3
-    end
+```ruby
+OoxmlParser.configure do |config|
+  config.accuracy = 3
+end
