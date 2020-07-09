@@ -14,6 +14,9 @@ module OoxmlParser
       @color_scheme = color_scheme
     end
 
+    # Parse PresentationTheme
+    # @param file [String] path to file to parse
+    # @return [PresentationTheme] result of parsing
     def self.parse(file)
       OOXMLDocumentObject.theme = PresentationTheme.new
       OOXMLDocumentObject.add_to_xmls_stack(file)
