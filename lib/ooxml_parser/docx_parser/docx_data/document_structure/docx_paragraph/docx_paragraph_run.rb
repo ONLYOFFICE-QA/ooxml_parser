@@ -79,7 +79,7 @@ module OoxmlParser
       r_tag.xpath('*').each do |node_child|
         case node_child.name
         when 'rPr'
-          parse_properties(node_child, DocumentStructure.default_run_style)
+          parse_properties(node_child)
           @run_properties = RunProperties.new(parent: self).parse(node_child)
         when 'instrText'
           if node_child.text.include?('HYPERLINK')
