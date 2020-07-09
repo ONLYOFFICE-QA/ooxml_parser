@@ -13,6 +13,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Parse Font object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Font] result of parsing
     def parse(node)
       @font_style = FontStyle.new
       node.xpath('*').each do |node_child|

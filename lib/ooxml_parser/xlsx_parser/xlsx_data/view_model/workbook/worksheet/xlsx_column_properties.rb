@@ -38,6 +38,10 @@ module OoxmlParser
       self
     end
 
+    # Parse list of XlsxColumnProperties
+    # @param columns_width_node [Nokogiri::XML:Element] node to parse
+    # @param parent [OOXMLDocumentObject] parent of result objects
+    # @return [Array<XlsxColumnProperties>] list of XlsxColumnProperties
     def self.parse_list(columns_width_node, parent: nil)
       columns = []
       columns_width_node.xpath('xmlns:col').each do |col_node|

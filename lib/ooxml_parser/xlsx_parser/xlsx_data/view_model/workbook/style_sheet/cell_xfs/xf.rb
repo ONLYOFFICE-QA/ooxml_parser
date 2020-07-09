@@ -4,6 +4,7 @@ require_relative 'cell_style/alignment'
 module OoxmlParser
   # Class for parsing `xf` object
   class Xf < OOXMLDocumentObject
+    # [Array<String,nil>] list of predefined format values
     ALL_FORMAT_VALUE = ['General',
                         '0',
                         '0.00',
@@ -119,18 +120,22 @@ module OoxmlParser
       self
     end
 
+    # @return [Font] font of object
     def font
       root_object.style_sheet.fonts[@font_id]
     end
 
+    # @return [XlsxBorder] border of object
     def borders
       root_object.style_sheet.borders.borders_array[@border_id] if @apply_border
     end
 
+    # @return [Fill] fill color of object
     def fill_color
       root_object.style_sheet.fills[@fill_id] if @apply_fill
     end
 
+    # @return [String] numerical format of object
     def numerical_format
       return @numerical_format unless @apply_number_format
 

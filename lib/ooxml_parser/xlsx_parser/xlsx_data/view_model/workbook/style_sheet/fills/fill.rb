@@ -40,6 +40,8 @@ module OoxmlParser
       self
     end
 
+    # Convert Fill to color
+    # @return [OoxmlColor] result
     def to_color
       pattern_fill.foreground_color
     end

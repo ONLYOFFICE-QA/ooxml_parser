@@ -12,6 +12,7 @@
 * Add `markdownlint` support in GitHub Actions
 * Add `rubocop` support in GitHub Actions
 * Add support of `rubocop-rake`
+* Add missing documentation
   
 ### Fixes
 
