@@ -40,7 +40,7 @@ module OoxmlParser
     # @return [String] string representation of size
     def to_s(unit = :centimeter)
       converted = to_unit(unit)
-      "#{converted.value} #{converted.unit}"
+      "#{converted.value.to_f} #{converted.unit}"
     end
 
     # Convert all values to one same base unit
