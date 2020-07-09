@@ -1,0 +1,26 @@
+name: Ruby
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.allow-failures }}
+    strategy:
+      matrix:
+        ruby: [2.4, 2.5, 2.6, 2.7]
+        allow-failures: [false]
+        include:
+          - ruby: head
+            allow-failures: true
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby ${{ matrix.ruby }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+    - name: Build and test with Rake
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bundle exec parallel_rspec spec
+    - name: Check `simplecov` result coverage
+      run: cat coverage/.last_run.json | jq '.result.covered_percent' | grep -q '100'

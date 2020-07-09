@@ -8,6 +8,7 @@
   `PivotCacheDefinition`, `CacheSource`, `WorksheetSource`)
 * Increase project test coverage
 * New `OOXMLDocumentObject.encrypted_file?` param to ignore host-os
+* Use GitHub Actions instead of Travis CI
   
 ### Fixes
 
@@ -34,6 +35,7 @@
 * Remove `RunProperties#font_size_complex` as unused
 * Remove `RunProperties#baseline - superscript` as unused
 * Remove warning on `HeaderFooter#parse_type` on unknown type as unused
+* Remove usage of `codecov` gem
 
 ## 0.6.0 (2020-05-29)
 
