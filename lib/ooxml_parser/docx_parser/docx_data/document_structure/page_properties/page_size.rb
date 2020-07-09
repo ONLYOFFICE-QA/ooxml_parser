@@ -11,6 +11,7 @@ module OoxmlParser
       @orientation = orientation
     end
 
+    # @return [String] convert to string
     def to_s
       'Height: ' + @height.to_s + ' Width: ' + @width.to_s + ' Orientation: ' + @orientation.to_s
     end

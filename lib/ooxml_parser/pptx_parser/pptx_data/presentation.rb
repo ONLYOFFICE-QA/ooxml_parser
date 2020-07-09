@@ -27,6 +27,8 @@ module OoxmlParser
       super
     end
 
+    # Parse data of presentation
+    # @return [Presentation] parsed presentation
     def parse
       @content_types = ContentTypes.new(parent: self).parse
       OOXMLDocumentObject.root_subfolder = 'ppt/'

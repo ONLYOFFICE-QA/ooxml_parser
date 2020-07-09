@@ -9,6 +9,9 @@ module OoxmlParser
       @elements = []
     end
 
+    # Parse note data
+    # @param params [Hash] data to parse
+    # @return [Note] result of parsing
     def self.parse(params)
       note = Note.new
       note.type = params[:type]
