@@ -17,7 +17,7 @@ describe 'document properties' do
     expect do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_properties/no_app_xml_file.docx')
       expect(docx.document_properties.pages).to be_nil
-    end.to output(%r{no 'docProps\/app.xml'}).to_stderr
+    end.to output(%r{no 'docProps/app.xml'}).to_stderr
   end
 
   it 'no_word_statistic' do

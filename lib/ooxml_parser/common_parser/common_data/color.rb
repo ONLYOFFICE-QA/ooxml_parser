@@ -302,7 +302,7 @@ module OoxmlParser
         return Color.new(VALUE_FOR_NONE_COLOR, VALUE_FOR_NONE_COLOR, VALUE_FOR_NONE_COLOR) if str == 'none' || str == '' || str == 'transparent' || str.nil?
 
         split = if str.include?('RGB (') || str.include?('rgb(')
-                  str.gsub(/[(RGBrgb\(\) )]/, '').split(',')
+                  str.gsub(/[(RGBrgb() )]/, '').split(',')
                 elsif str.include?('RGB ') || str.include?('rgb')
                   str.gsub(/RGB |rgb/, '').split(', ')
                 else

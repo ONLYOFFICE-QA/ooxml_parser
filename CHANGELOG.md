@@ -10,6 +10,8 @@
 * New `OOXMLDocumentObject.encrypted_file?` param to ignore host-os
 * Use GitHub Actions instead of Travis CI
 * Add `markdownlint` support in GitHub Actions
+* Add `rubocop` support in GitHub Actions
+* Add support of `rubocop-rake`
   
 ### Fixes
 
@@ -38,6 +40,7 @@
 * Remove warning on `HeaderFooter#parse_type` on unknown type as unused
 * Remove usage of `codecov` gem
 * Remove codeclimate.com support
+* Move `rubocop` dependencies in `gemspec` file
 
 ## 0.6.0 (2020-05-29)
 
