@@ -72,13 +72,6 @@ RSpec/MultipleExpectations:
 Style/AccessorGrouping:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/RedundantRegexpEscape:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-    - 'spec/document/document_properties_spec.rb'
-
 # Offense count: 538
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
