@@ -3,10 +3,12 @@
 module OoxmlParser
   # Methods to help working with slide data
   module SlideHelper
+    # @return [Array] list of not empty element on slide
     def nonempty_elements
       elements.reject { |cur_shape| cur_shape.text_body.paragraphs.first.characters.empty? }
     end
 
+    # @return [Array<GraphicFrame>] list GraphicFrame elements on slide
     def graphic_frames
       elements.select { |cur_element| cur_element.is_a?(GraphicFrame) }
     end
@@ -29,6 +31,10 @@ module OoxmlParser
       end
     end
 
+    # Get horizontal align of object on slide
+    # @param object [Symbol] object to get
+    # @param slide_size [SlideSize] size of slide
+    # @return [Symbol] type of align
     def content_horizontal_align(object, slide_size)
       transform = transform_of_object(object)
       return :left if transform.offset.x.zero?
@@ -38,6 +44,10 @@ module OoxmlParser
       :unknown
     end
 
+    # Get vertical align of object on slide
+    # @param object [Symbol] object to get
+    # @param slide_size [SlideSize] size of slide
+    # @return [Symbol] type of align
     def content_vertical_align(object, slide_size)
       transform = transform_of_object(object)
       return :top if transform.offset.y.zero?
@@ -47,6 +57,10 @@ module OoxmlParser
       :unknown
     end
 
+    # Get content distribution of object
+    # @param object [Symbol] object to get
+    # @param slide_size [SlideSize] size of slide
+    # @return [Array<Symbol>] type of align
     def content_distribute(object, slide_size)
       return %i[horizontally vertically] if content_horizontal_align(object, slide_size) == :center && content_vertical_align(object, slide_size) == :middle
       return [:horizontally] if content_horizontal_align(object, slide_size) == :center

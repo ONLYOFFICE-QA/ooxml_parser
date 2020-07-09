@@ -30,6 +30,9 @@ module OoxmlParser
       self
     end
 
+    # Parse list of timing nodes
+    # @param timing_list_node [Nokogiri::XML::Element] node to parse
+    # @return [Array<TimeNode>] list of nodes
     def self.parse_list(timing_list_node)
       timings = []
       timing_list_node.xpath('*').each do |time_node|

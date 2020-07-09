@@ -28,6 +28,11 @@ module OoxmlParser
       super
     end
 
+    # Return cell by coordinates
+    # @param column [String, Integer] number or numeric digit of column
+    # @param row [Integer] row to find
+    # @param sheet [Integer] number of sheet
+    # @return [XlsxCell] result
     def cell(column, row, sheet = 0)
       column = Coordinates.new(row, column).column_number unless StringHelper.numeric?(column.to_s)
 
@@ -92,6 +97,8 @@ module OoxmlParser
       @shared_strings_table = SharedStringTable.new(parent: self).parse(shared_string_file)
     end
 
+    # Parse content of Workbook
+    # @return [XLSXWorkbook]
     def parse
       @content_types = ContentTypes.new(parent: self).parse
       @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
