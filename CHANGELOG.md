@@ -6,6 +6,8 @@
 
 * Add basic support of parsing Pivot data (`PivotCache`,
   `PivotCacheDefinition`, `CacheSource`, `WorksheetSource`)
+* Increase project test coverage
+* New `OOXMLDocumentObject.encrypted_file?` param to ignore host-os
   
 ### Fixes
 
@@ -18,6 +20,20 @@
 * Drop support of ruby 2.3
 * Remove `Picture` class alias to `DocxPicture`
 * Simplify `TableStylePropertiesHelper` dynamic methods generation
+* Remove `OldDocxShapeProperties#opacity` as unused
+* Remove `CellProperties#anchor_center` as unused
+* Remove `CellProperties#horizontal_overflow` as unused
+* Remove `OldDocxPicture#style_number` as unused
+* Remove `DocxShapeLineElement#type = quadratic_bezier` as unused
+* Remove `OOXMLTextBox#properties` as unused
+* Remove redundant comparing `Spacing` to `nil`
+* Remove `DocxShapeProperties#text_box` as unused
+* Remove parsing `Color#parse_color_model - scrgbClr` as unused
+* Remove `DocxParagraphRun#shape - oval` as unused
+* Remove `Shape#margin - right` as unused
+* Remove `RunProperties#font_size_complex` as unused
+* Remove `RunProperties#baseline - superscript` as unused
+* Remove warning on `HeaderFooter#parse_type` on unknown type as unused
 
 ## 0.6.0 (2020-05-29)
 

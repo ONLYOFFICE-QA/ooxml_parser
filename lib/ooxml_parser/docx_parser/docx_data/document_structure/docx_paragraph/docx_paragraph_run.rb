@@ -121,8 +121,6 @@ module OoxmlParser
               @shape = Shape.new(parent: self).parse(pict_node_child, :shape)
             when 'rect'
               @shape = Shape.new(parent: self).parse(pict_node_child, :rectangle)
-            when 'oval'
-              @shape = Shape.new(parent: self).parse(pict_node_child, :oval)
             end
           end
         when 'object'

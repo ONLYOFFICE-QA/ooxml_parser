@@ -23,8 +23,6 @@ module OoxmlParser
         @type = :arc
       when 'cubicBezTo'
         @type = :cubic_bezier
-      when 'quadBezTo'
-        @type = :quadratic_bezier
       when 'close'
         @type = :close
       end

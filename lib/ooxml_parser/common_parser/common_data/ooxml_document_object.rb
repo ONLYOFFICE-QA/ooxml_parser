@@ -46,9 +46,11 @@ module OoxmlParser
       attr_accessor :path_to_folder
 
       # @param path_to_file [String] file
+      # @param ignore_system [True, False] should host system be ignored, since
+      #   this method is OS-dependent
       # @return [True, False] Check if file is protected by password on open
-      def encrypted_file?(path_to_file)
-        if Gem.win_platform?
+      def encrypted_file?(path_to_file, ignore_system: false)
+        if Gem.win_platform? || ignore_system
           warn 'FileMagic and checking file for encryption is not supported on Windows'
           return false
         end

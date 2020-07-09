@@ -28,21 +28,15 @@ module OoxmlParser
       self.line_rule = :at_least if line_rule == 'atLeast'
       self.line_rule = :multiple if line_rule == :auto
       other.line_rule = :multiple if other.line_rule == :auto
-      if self.class == NilClass || other.class == NilClass
-        return true if self.class == NilClass && other.class == NilClass
+      self.line_rule = line_rule.to_sym if line_rule.instance_of?(String)
 
-        false
+      if @before == other.before &&
+         @after == other.after &&
+         @line == other.line &&
+         @line_rule.to_s == other.line_rule.to_s
+        true
       else
-        self.line_rule = line_rule.to_sym if line_rule.instance_of?(String)
-
-        if @before == other.before &&
-           @after == other.after &&
-           @line == other.line &&
-           @line_rule.to_s == other.line_rule.to_s
-          true
-        else
-          false
-        end
+        false
       end
     end
 

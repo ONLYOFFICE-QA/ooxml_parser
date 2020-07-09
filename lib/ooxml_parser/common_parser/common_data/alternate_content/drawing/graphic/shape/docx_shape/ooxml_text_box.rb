@@ -3,7 +3,7 @@
 module OoxmlParser
   # Class for parsing `txbx` tags
   class OOXMLTextBox < OOXMLDocumentObject
-    attr_accessor :properties, :elements
+    attr_accessor :elements
 
     def initialize(parent: nil)
       @elements = []
@@ -21,8 +21,6 @@ module OoxmlParser
           @elements << DocxParagraph.new(parent: self).parse(node_child, index)
         when 'tbl'
           @elements << Table.new(parent: self).parse(node_child, index)
-        when 'bodyPr'
-          @properties = OOXMLShapeBodyProperties.new(parent: self).parse(node_child)
         end
       end
       self

@@ -29,10 +29,6 @@ module OoxmlParser
     attr_accessor :shade
     # @return [RunStyle] run style
     attr_accessor :run_style
-    # @return [Float]
-    # This element specifies the font size which shall be applied to all
-    # complex script characters in the contents of this run when displayed
-    attr_accessor :font_size_complex
 
     def initialize(parent: nil)
       @font_name = ''
@@ -50,8 +46,6 @@ module OoxmlParser
         case key
         when 'sz'
           @font_size = value.value.to_f / 100.0
-        when 'szCs'
-          @font_size_complex = node.attribute('val').value.to_i / 2.0
         when 'spc'
           @space = OoxmlSize.new(value.value.to_f, :one_100th_point)
         when 'b'
@@ -66,8 +60,6 @@ module OoxmlParser
           case value.value.to_i
           when -25_000, -30_000
             @baseline = :subscript
-          when 30_000
-            @baseline = :superscript
           when 0
             @baseline = :baseline
           end

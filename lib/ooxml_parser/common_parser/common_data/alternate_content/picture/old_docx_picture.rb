@@ -6,7 +6,7 @@ require_relative 'group/old_docx_group'
 module OoxmlParser
   # Fallback DOCX Picture
   class OldDocxPicture < OOXMLDocumentObject
-    attr_accessor :data, :type, :style_number
+    attr_accessor :data, :type
 
     # Parse OldDocxPicture object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -20,8 +20,6 @@ module OoxmlParser
         when 'group'
           @type = :group
           @data = OldDocxGroup.new(parent: self).parse(node_child)
-        when 'style'
-          @style_number = node_child.attribute('val').value.to_i
         end
       end
       self

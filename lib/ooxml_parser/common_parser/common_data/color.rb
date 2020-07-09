@@ -240,9 +240,6 @@ module OoxmlParser
           end
         end
         case color_model_node.name
-        when 'scrgbClr'
-          color = Color.new(color_model_node.attribute('r').value.to_i, color_model_node.attribute('g').value.to_i, color_model_node.attribute('b').value.to_i)
-          color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
         when 'srgbClr'
           color = Color.new.parse_hex_string(color_model_node.attribute('val').value)
           color.alpha_channel = ColorAlphaChannel.parse(color_model_node)

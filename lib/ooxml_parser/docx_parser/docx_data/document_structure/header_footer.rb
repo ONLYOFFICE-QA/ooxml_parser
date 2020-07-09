@@ -32,8 +32,6 @@ module OoxmlParser
       when 'endnoteReference'
         @path_suffix = 'endnote'
         @type = :footer
-      else
-        warn "Unknown HeaderFooter type: #{node.name}"
       end
     end
 
