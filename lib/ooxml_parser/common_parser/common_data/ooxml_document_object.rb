@@ -70,6 +70,9 @@ module OoxmlParser
         false
       end
 
+      # Copy this file and rename to zip
+      # @param path [String] path to file
+      # @return [String] path to result zip
       def copy_file_and_rename_to_zip(path)
         file_name = File.basename(path)
         tmp_folder = Dir.mktmpdir('ruby-ooxml-parser')

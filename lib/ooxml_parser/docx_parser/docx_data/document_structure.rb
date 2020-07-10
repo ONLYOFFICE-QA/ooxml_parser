@@ -56,6 +56,10 @@ module OoxmlParser
         @comments == other.comments
     end
 
+    # Get element by it's type
+    # @param location [Symbol] location of object
+    # @param type [Symbol] type of object
+    # @return [OOXMLDocumentObject]
     def element_by_description(location: :canvas, type: :docx_paragraph)
       case location
       when :canvas
@@ -98,6 +102,9 @@ module OoxmlParser
       end
     end
 
+    # Get note by it's description
+    # @param type [Symbol] note type
+    # @return [Note]
     def note_by_description(type)
       notes.each do |note|
         return note if note.type.to_sym == type
@@ -105,6 +112,11 @@ module OoxmlParser
       raise 'There isn\'t this type of the note'
     end
 
+    # Detect numbering type
+    # @param location [Symbol] location of object
+    # @param type [Symbol] type of object
+    # @param paragraph_number [Integer] number of object
+    # @return [Array<String,String>] type of numbering
     def recognize_numbering(location: :canvas, type: :simple, paragraph_number: 0)
       elements = element_by_description(location: location, type: type)
       lvl_text = elements[paragraph_number].numbering.abstruct_numbering.level_list[0].text.value
@@ -112,6 +124,11 @@ module OoxmlParser
       [num_format, lvl_text]
     end
 
+    # Return outline type
+    # @param location [Symbol] location of object
+    # @param type [Symbol] type of object
+    # @param levels_count [Integer] count of levels to detect
+    # @return [Array<String,String>] type of outline
     def outline(location: :canvas, type: :simple, levels_count: 1)
       elements = element_by_description(location: location, type: type)
       set = []
@@ -127,6 +144,8 @@ module OoxmlParser
       styles.styles
     end
 
+    # Parse docx file
+    # @return [DocumentStructure] parsed structure
     def self.parse
       doc_structure = DocumentStructure.new
       doc_structure.content_types = ContentTypes.new(parent: doc_structure).parse
@@ -184,6 +203,8 @@ module OoxmlParser
       doc_structure
     end
 
+    # Parse default style
+    # @return [void]
     def parse_default_style
       doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
       doc.search('//w:style').each do |style|

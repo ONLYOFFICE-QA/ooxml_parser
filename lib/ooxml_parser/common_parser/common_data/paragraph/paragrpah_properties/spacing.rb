@@ -53,6 +53,8 @@ module OoxmlParser
       result_string
     end
 
+    # Method to copy object
+    # @return [Spacing] copied object
     def copy
       Spacing.new(@before, @after, @line, @line_rule)
     end

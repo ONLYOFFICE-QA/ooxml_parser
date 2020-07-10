@@ -18,6 +18,8 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Method to copy object
+    # @return [Borders] copied object
     def copy
       new_borders = Borders.new
       new_borders.left = @left if @left

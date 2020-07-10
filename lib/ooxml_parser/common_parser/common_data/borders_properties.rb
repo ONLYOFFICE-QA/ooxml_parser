@@ -34,6 +34,8 @@ module OoxmlParser
       "borders color: #{@color}, size: #{size}, space: #{@space}, value: #{@val}"
     end
 
+    # Method to copy object
+    # @return [BordersProperties] copied object
     def copy
       BordersProperties.new(@color, size, @val, @space)
     end

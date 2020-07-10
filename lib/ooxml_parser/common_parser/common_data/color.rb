@@ -152,6 +152,8 @@ module OoxmlParser
       (@red == 255) && (@green == 255) && (@blue == 255)
     end
 
+    # Method to copy object
+    # @return [Color] copied object
     def copy
       Color.new(@red, @green, @blue)
     end
