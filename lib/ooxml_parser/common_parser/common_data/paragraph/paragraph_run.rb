@@ -40,14 +40,17 @@ module OoxmlParser
       text.empty?
     end
 
+    # @return [String] instruction applied to paragraph
     def instruction
       parent.instruction
     end
 
+    # @return [True, False] is page number applyed
     def page_number
       parent.page_numbering?
     end
 
+    # @return [Hyperlink] link of run
     def link
       parent.parent.hyperlink
     end

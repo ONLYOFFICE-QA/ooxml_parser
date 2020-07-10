@@ -29,6 +29,9 @@ module OoxmlParser
         coordinates
       end
 
+      # Parse range of coordinates
+      # @param arguments_string [String] data to parse
+      # @return [Array] result
       def parser_coordinates_range(arguments_string)
         return parse_coordinates_array(arguments_string) if arguments_string.include?(',')
         return warn "Formulas with # is unsupported: #{arguments_string}" if arguments_string.include?('#')

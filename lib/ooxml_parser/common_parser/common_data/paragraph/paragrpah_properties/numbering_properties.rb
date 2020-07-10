@@ -10,6 +10,7 @@ module OoxmlParser
       @parent = parent
     end
 
+    # @return [AbstractNumbering] AbstractNumbering of current properties
     def abstruct_numbering
       root_object.numbering.properties_by_num_id(@numbering_properties)
     end
@@ -29,6 +30,7 @@ module OoxmlParser
       self
     end
 
+    # @return [AbstractNumbering] level list of current numbering
     def numbering_level_current
       abstruct_numbering.level_list.each do |current_ilvl|
         return current_ilvl if current_ilvl.ilvl == @ilvl

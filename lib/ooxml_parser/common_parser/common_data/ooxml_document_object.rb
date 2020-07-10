@@ -85,6 +85,10 @@ module OoxmlParser
         file_path
       end
 
+      # Unzip specified file
+      # @param path_to_file [String] path to zip file
+      # @param destination [String] folder to extract
+      # @return [void]
       def unzip_file(path_to_file, destination)
         Zip.warn_invalid_date = false
         Zip::File.open(path_to_file) do |zip_file|
@@ -98,14 +102,19 @@ module OoxmlParser
         end
       end
 
+      # @return [String] dir to base of file
       def dir
         OOXMLDocumentObject.path_to_folder + File.dirname(OOXMLDocumentObject.xmls_stack.last) + '/'
       end
 
+      # @return [String] path to current xml file
       def current_xml
         OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.xmls_stack.last
       end
 
+      # Add file to parsing stack
+      # @param path [String] path of file to add to stack
+      # @return [void]
       def add_to_xmls_stack(path)
         OOXMLDocumentObject.xmls_stack << if path.include?('..')
                                             "#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/#{path}"
@@ -116,6 +125,9 @@ module OoxmlParser
                                           end
       end
 
+      # Get link to file from rels file
+      # @param id [String] file to get
+      # @return [String] result
       def get_link_from_rels(id)
         rels_path = dir + "_rels/#{File.basename(OOXMLDocumentObject.xmls_stack.last)}.rels"
         raise LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)

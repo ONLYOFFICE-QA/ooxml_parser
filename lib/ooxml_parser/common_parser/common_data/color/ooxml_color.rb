@@ -18,6 +18,8 @@ module OoxmlParser
     # @return [Color] rgb color
     attr_reader :rgb
 
+    # Convert OoxmlColor to other color type
+    # @return [Object] result of conversion
     def to_color
       return Color.get_rgb_by_color_index(indexed) if indexed
       return ThemeColors.new(parent: self).parse_color_theme(theme, tint) if theme

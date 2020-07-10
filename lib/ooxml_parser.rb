@@ -29,6 +29,7 @@ module OoxmlParser
     @configuration ||= Configuration.new
   end
 
+  # Reset settings to default
   def self.reset
     @configuration = Configuration.new
   end

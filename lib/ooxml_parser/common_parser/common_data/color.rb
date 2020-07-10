@@ -133,21 +133,25 @@ module OoxmlParser
       to_s
     end
 
+    # @return [String] color in hex value
     def to_hex
       (@red.to_s(16).rjust(2, '0') + @green.to_s(16).rjust(2, '0') + @blue.to_s(16).rjust(2, '0')).upcase
     end
 
     alias to_int16 to_hex
 
+    # @return [True, False] is color default
     def none?
       (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR) ||
         (style == :nil)
     end
 
+    # @return [True, False] is color not default
     def any?
       !none?
     end
 
+    # @return [True, False] is color white
     def white?
       (@red == 255) && (@green == 255) && (@blue == 255)
     end
@@ -197,18 +201,27 @@ module OoxmlParser
       (self.red - red).abs < delta && (self.green - green).abs < delta && (self.blue - blue).abs < delta ? true : false
     end
 
+    # Apply tint to color
+    # @param tint [Integer] tint to apply
+    # @return [void]
     def calculate_with_tint!(tint)
       @red += (tint.to_f * (255 - @red)).to_i
       @green += (tint.to_f * (255 - @green)).to_i
       @blue += (tint.to_f * (255 - @blue)).to_i
     end
 
+    # Apply shade to color
+    # @param shade [Integer] shade to apply
+    # @return [void]
     def calculate_with_shade!(shade)
       @red = (@red * shade.to_f).to_i
       @green = (@green * shade.to_f).to_i
       @blue = (@blue * shade.to_f).to_i
     end
 
+    # Parse color scheme data
+    # @param scheme_color_node [Nokogiri::XML:Element] node to parse
+    # @return [Color] result of parsing
     def parse_scheme_color(scheme_color_node)
       color = root_object.theme.color_scheme[scheme_color_node.attribute('val').value.to_sym].color
       hls = HSLColor.rgb_to_hsl(color)
@@ -236,6 +249,9 @@ module OoxmlParser
       self
     end
 
+    # Parse color model data
+    # @param color_model_parent_node [Nokogiri::XML:Element] node to parse
+    # @return [Color] result of parsing
     def parse_color_model(color_model_parent_node)
       color = nil
       tint = nil
@@ -265,6 +281,9 @@ module OoxmlParser
       self
     end
 
+    # Parse color data
+    # @param color_node [Nokogiri::XML:Element] node to parse
+    # @return [Color] result of parsing
     def parse_color(color_node)
       case color_node.name
       when 'srgbClr'
@@ -284,6 +303,7 @@ module OoxmlParser
     end
 
     class << self
+      # @return [Color] random color
       def generate_random_color
         Color.new(rand(256), rand(256), rand(256))
       end
@@ -297,6 +317,8 @@ module OoxmlParser
         const_array_name.map { |current_color| Color.parse_string(current_color) }
       end
 
+      # @param index [Integer] index to get
+      # @return [Color] color by it's index
       def get_rgb_by_color_index(index)
         color_by_index = COLOR_INDEXED[index]
         return :unknown if color_by_index.nil?
@@ -304,6 +326,9 @@ module OoxmlParser
         color_by_index == 'n/a' ? Color.new : Color.new.parse_hex_string(color_by_index)
       end
 
+      # Parse color from string
+      # @param str [String] string to parse
+      # @return [Color] result of parsing
       def parse_string(str)
         return str if str.is_a?(Color)
         return Color.new(VALUE_FOR_NONE_COLOR, VALUE_FOR_NONE_COLOR, VALUE_FOR_NONE_COLOR) if str == 'none' || str == '' || str == 'transparent' || str.nil?
@@ -321,6 +346,9 @@ module OoxmlParser
 
       alias parse parse_string
 
+      # Convert other object type to Color
+      # @param something [Object] object to convert
+      # @return [Color] result of conversion
       def to_color(something)
         case something
         when SchemeColor

@@ -59,6 +59,9 @@ module OoxmlParser
       Spacing.new(@before, @after, @line, @line_rule)
     end
 
+    # Round value of spacing
+    # @param count_of_digits [Integer] how digits to left
+    # @return [Spacing] result of round
     def round(count_of_digits = 1)
       before = @before.to_f.round(count_of_digits)
       after = @after.to_f.round(count_of_digits)

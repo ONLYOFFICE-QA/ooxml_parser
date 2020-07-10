@@ -5,6 +5,9 @@ module OoxmlParser
   class DocxDrawingDistanceFromText < OOXMLDocumentObject
     attr_accessor :top, :bottom, :left, :right
 
+    # Parse DocxDrawingDistanceFromText object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxDrawingDistanceFromText] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key
