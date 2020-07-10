@@ -239,7 +239,7 @@ module OoxmlParser
           @style = StyleParametres.new(parent: self).parse(style)
         end
         style.xpath('w:rPr').each do |r_pr|
-          character_style.parse_properties(r_pr, DocumentStructure.default_run_style)
+          character_style.parse_properties(r_pr)
         end
         break
       end

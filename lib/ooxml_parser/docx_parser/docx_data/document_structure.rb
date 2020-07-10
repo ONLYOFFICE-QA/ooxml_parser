@@ -194,14 +194,14 @@ module OoxmlParser
             DocumentStructure.default_paragraph_style = DocxParagraph.new.parse_paragraph_style(paragraph_pr_tag, DocumentStructure.default_run_style)
           end
           style.xpath('w:rPr').each do |character_pr_tag|
-            DocumentStructure.default_run_style.parse_properties(character_pr_tag, DocumentStructure.default_run_style)
+            DocumentStructure.default_run_style.parse_properties(character_pr_tag)
           end
         elsif (style.attribute('default').value == '1' ||
                style.attribute('default').value == 'on' ||
                style.attribute('default').value == 'true') &&
               style.attribute('type').value == 'character'
           style.xpath('w:rPr').each do |character_pr_tag|
-            DocumentStructure.default_run_style.parse_properties(character_pr_tag, DocumentStructure.default_run_style)
+            DocumentStructure.default_run_style.parse_properties(character_pr_tag)
           end
         end
       end
@@ -216,7 +216,7 @@ module OoxmlParser
                     style.attribute('type').value == 'table'
 
         style.xpath('w:rPr').each do |table_character_pr_tag|
-          DocumentStructure.default_table_run_style.parse_properties(table_character_pr_tag, DocumentStructure.default_run_style)
+          DocumentStructure.default_table_run_style.parse_properties(table_character_pr_tag)
         end
       end
     end

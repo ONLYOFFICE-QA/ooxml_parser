@@ -3,7 +3,7 @@
 module OoxmlParser
   # Module for some helpers for ParagraphRun
   module DocxParagraphRunHelpers
-    def parse_properties(node, _default_character = DocumentStructure.default_run_style)
+    def parse_properties(node)
       self.font_style = FontStyle.new
       node.xpath('*').each do |node_child|
         case node_child.name
