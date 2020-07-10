@@ -35,6 +35,7 @@ module OoxmlParser
       self
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       "Color: #{@color}, type: #{type}"
     end

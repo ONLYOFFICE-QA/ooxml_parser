@@ -18,6 +18,7 @@ module OoxmlParser
            end
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       '(' + @x.to_s + '; ' + @y.to_s + ')'
     end

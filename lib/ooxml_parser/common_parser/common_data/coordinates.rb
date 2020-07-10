@@ -133,6 +133,7 @@ module OoxmlParser
       column_number > other_cell.column_number
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       "#{@column}#{@row} #{@list ? "list: #{@list}" : ''}"
     end

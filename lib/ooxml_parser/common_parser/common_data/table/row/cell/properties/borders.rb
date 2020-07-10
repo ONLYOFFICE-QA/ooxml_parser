@@ -55,6 +55,7 @@ module OoxmlParser
       yield(top)
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       "Left border: #{left}, Right: #{right}, Top: #{top}, Bottom: #{bottom}"
     end

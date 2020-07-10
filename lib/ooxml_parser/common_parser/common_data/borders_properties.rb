@@ -27,6 +27,7 @@ module OoxmlParser
       size.zero? && val == :none
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       return '' if nil?
 

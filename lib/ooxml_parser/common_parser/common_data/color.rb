@@ -119,6 +119,7 @@ module OoxmlParser
       @parent = parent
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       if @red == VALUE_FOR_NONE_COLOR && @green == VALUE_FOR_NONE_COLOR && @blue == VALUE_FOR_NONE_COLOR
         'none'

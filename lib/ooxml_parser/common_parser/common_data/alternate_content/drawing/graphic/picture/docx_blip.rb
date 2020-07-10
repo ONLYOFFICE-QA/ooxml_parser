@@ -10,6 +10,7 @@ module OoxmlParser
 
     alias path path_to_media_file
 
+    # @return [String] result of convert of object to string
     def to_str
       path_to_media_file
     end

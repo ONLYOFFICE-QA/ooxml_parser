@@ -24,6 +24,7 @@ module OoxmlParser
       end
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       if @color.nil?
         @style.to_s

@@ -43,6 +43,7 @@ module OoxmlParser
       end
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       result_string = ''
       variables = instance_variables
