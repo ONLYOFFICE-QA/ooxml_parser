@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.7.0 (2020-07-10)
+
 ### New Features
 
 * Add basic support of parsing Pivot data (`PivotCache`,
