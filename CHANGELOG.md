@@ -42,7 +42,7 @@
 * Remove codeclimate.com support
 * Move `rubocop` dependencies in `gemspec` file
 * Remove unused param from `DocxParagraphRun#parse_properties`
-* Remove unused `Categories` alias for `SeriesText` 
+* Remove unused `Categories` alias for `SeriesText`
 
 ## 0.6.0 (2020-05-29)
 
