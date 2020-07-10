@@ -11,7 +11,7 @@ module OoxmlParser
     attr_reader :order
     # @return [SeriesText] text of series
     attr_accessor :text
-    # @return [Categories] categories of chart
+    # @return [SeriesText] categories of chart
     attr_accessor :categories
     # @return [DisplayLabelsProperties]
     attr_accessor :display_labels
@@ -35,7 +35,7 @@ module OoxmlParser
         when 'tx'
           @text = SeriesText.new(parent: self).parse(node_child)
         when 'cat'
-          @categories = Categories.new(parent: self).parse(node_child)
+          @categories = SeriesText.new(parent: self).parse(node_child)
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.new(parent: self).parse(node_child)
         when 'val'
