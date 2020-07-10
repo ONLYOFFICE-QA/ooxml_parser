@@ -2,6 +2,12 @@
 
 ## master (unreleased)
 
+## 0.7.2 (2020-07-10)
+
+### Fixes
+
+* Fix parsing `CellProperties#text_direction` value in pptx table
+
 ## 0.7.1 (2020-07-10)
 
 ### Fixes

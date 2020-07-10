@@ -77,6 +77,8 @@ module OoxmlParser
 
       node.attributes.each do |key, value|
         case key
+        when 'vert'
+          @text_direction = value.value.to_sym
         when 'anchor'
           @anchor = value_to_symbol(value)
         end

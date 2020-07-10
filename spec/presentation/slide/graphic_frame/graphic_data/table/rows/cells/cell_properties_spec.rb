@@ -48,6 +48,11 @@ describe 'My behaviour' do
     expect(OoxmlParser::Color.to_color(table.rows.first.cells.first.properties.color)).to eq(OoxmlParser::Color.new(70, 93, 73))
   end
 
+  it 'text_direction' do
+    pptx = OoxmlParser::Parser.parse('spec/presentation/slide/graphic_frame/graphic_data/table/rows/cells/properties/text_direction.pptx')
+    expect(pptx.slides.first.elements.last.graphic_data.first.rows.first.cells.first.properties.text_direction).to eq(:horz)
+  end
+
   describe 'Merge properties' do
     it 'grid span is correct' do
       expect(merged_cells.slides.first.graphic_frames
