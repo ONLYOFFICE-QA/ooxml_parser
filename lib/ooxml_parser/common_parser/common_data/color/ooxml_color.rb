@@ -26,6 +26,9 @@ module OoxmlParser
       value
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       return to_color == other if other.is_a?(Color)
       return to_color == other if other.is_a?(Symbol)

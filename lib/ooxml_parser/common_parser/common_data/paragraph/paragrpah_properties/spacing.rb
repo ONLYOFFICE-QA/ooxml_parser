@@ -24,6 +24,9 @@ module OoxmlParser
       @line_rule = line_rule
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       self.line_rule = :at_least if line_rule == 'atLeast'
       self.line_rule = :multiple if line_rule == :auto

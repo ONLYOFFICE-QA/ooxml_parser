@@ -41,12 +41,16 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Constructor for copy of object
+    # @param source [DocxParagraphRun] original object
+    # @return [void]
     def initialize_copy(source)
       super
       @drawings = source.drawings.clone
       @comments = source.comments.clone
     end
 
+    # @return [Array, nil] Drawings of Run
     def drawing
       # TODO: Rewrite all tests without this methos
       @drawings.empty? ? nil : drawings.first
@@ -64,6 +68,9 @@ module OoxmlParser
         !@break
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       ignored_attributes = %i[@number @parent]
       all_instance_variables = instance_variables
@@ -74,6 +81,11 @@ module OoxmlParser
       true
     end
 
+    # Parse object
+    # @param r_tag [Nokogiri::XML:Node] node with DocxParagraphRun
+    # @param char_number [Integer] number of run
+    # @param parent [OOXMLDocumentObject] parent of run
+    # @return [void]
     def parse(r_tag, char_number, parent: nil)
       @parent = parent
       r_tag.xpath('*').each do |node_child|

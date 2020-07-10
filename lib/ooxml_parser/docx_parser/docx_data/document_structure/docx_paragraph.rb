@@ -57,6 +57,9 @@ module OoxmlParser
 
     alias elements character_style_array
 
+    # Constructor for copy of object
+    # @param source [DocxParagraph] original object
+    # @return [void]
     def initialize_copy(source)
       super
       @bookmark_start = source.bookmark_start.clone
@@ -65,6 +68,7 @@ module OoxmlParser
       @spacing = source.spacing.clone
     end
 
+    # @return [Array<OOXMLDocumentObject>] array of child objects that contains data
     def nonempty_runs
       @character_style_array.select do |cur_run|
         if cur_run.is_a?(DocxParagraphRun) || cur_run.is_a?(ParagraphRun)
@@ -87,6 +91,9 @@ module OoxmlParser
       !nonempty_runs.empty? || paragraph_properties.section_properties
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       ignored_attributes = %i[@number @parent]
       all_instance_variables = instance_variables
@@ -97,6 +104,12 @@ module OoxmlParser
       true
     end
 
+    # Parse object
+    # @param node [Nokogiri::XML:Node] node with DocxParagraph
+    # @param par_number [Integer] number of paragraph
+    # @param default_character [DocxParagraphRun] style for paragraph
+    # @param parent [OOXMLDocumentObject] parent of run
+    # @return [DocxParagraph] result of parse
     def parse(node, par_number = 0, default_character = DocxParagraphRun.new, parent: nil)
       @parent ||= parent
       default_character_style = default_character.dup
@@ -174,6 +187,10 @@ module OoxmlParser
       self
     end
 
+    # Parse style
+    # @param node [Nokogiri::XML:Node] node with style
+    # @param default_char_style [DocxParagraphRun] style for paragraph
+    # @return [DocxParagraph] result of parse
     def parse_paragraph_style(node, default_char_style = DocxParagraphRun.new(parent: self))
       node.xpath('*').each do |node_child|
         case node_child.name
@@ -229,6 +246,10 @@ module OoxmlParser
       self
     end
 
+    # Parse style xml
+    # @param id [String] id of style to parse
+    # @param character_style [DocxParagraphRun] style to parse
+    # @return [void]
     def parse_paragraph_style_xml(id, character_style)
       doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
       doc.search('//w:style').each do |style|

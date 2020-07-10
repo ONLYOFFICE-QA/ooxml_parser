@@ -19,6 +19,7 @@ module OoxmlParser
       self
     end
 
+    # @return [Comment] object of current comment range
     def comment
       root_object.comments.comments_array.detect { |comment| comment.id == id }
     end

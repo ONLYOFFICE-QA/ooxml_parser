@@ -141,6 +141,9 @@ module OoxmlParser
       @column.nil? && @list.nil? && @row.nil?
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       other.is_a?(Coordinates) ? (@row == other.row && @column == other.column) : false
     end

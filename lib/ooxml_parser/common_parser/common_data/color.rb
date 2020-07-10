@@ -154,6 +154,9 @@ module OoxmlParser
       Color.new(@red, @green, @blue)
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       if other.is_a?(Color)
         if (@red == other.red) && (@green == other.green) && (@blue == other.blue)

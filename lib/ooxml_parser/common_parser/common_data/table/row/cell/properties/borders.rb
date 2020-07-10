@@ -32,6 +32,9 @@ module OoxmlParser
       new_borders
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       @left == other.left && @right == other.right && @top == other.top && @bottom == other.bottom if other.is_a?(Borders)
     end

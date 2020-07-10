@@ -19,6 +19,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       return false if self.class != other.class
 

@@ -15,6 +15,9 @@ module OoxmlParser
     end
 
     # TODO: Separate @is_default attribute and remove this method
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       instance_variables.each do |current_attribute|
         next if current_attribute == :@parent

@@ -44,6 +44,9 @@ module OoxmlParser
 
     alias theme_colors theme
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       @elements == other.elements &&
         @page_properties == other.page_properties &&

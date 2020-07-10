@@ -28,6 +28,9 @@ module OoxmlParser
       self
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       (to_base_unit.value - other.to_base_unit.value).abs < 10**(OoxmlParser.configuration.accuracy + 2)
     end
