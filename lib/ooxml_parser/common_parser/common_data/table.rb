@@ -22,6 +22,7 @@ module OoxmlParser
       "Rows: #{@rows.join(',')}"
     end
 
+    # @return [String] inspect of object for debug means
     def inspect
       to_s
     end

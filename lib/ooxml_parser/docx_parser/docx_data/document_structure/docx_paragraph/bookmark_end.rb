@@ -6,7 +6,7 @@ module OoxmlParser
     # @return [Integer] id of bookmark
     attr_reader :id
 
-    # Parse BookmarkStart object
+    # Parse BookmarkEnd object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [BookmarkEnd] result of parsing
     def parse(node)

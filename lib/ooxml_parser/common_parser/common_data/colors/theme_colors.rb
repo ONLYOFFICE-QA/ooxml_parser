@@ -6,6 +6,10 @@ module OoxmlParser
     # @return [Hash] list of colors
     attr_accessor :list
 
+    # Parse color theme
+    # @param theme [String] name of theme
+    # @param tint [Integer] tint of theme
+    # @return [Color] color of theme
     def parse_color_theme(theme, tint)
       themes_array = root_object.theme.color_scheme.values
       # TODO: if no swap performed - incorrect color parsing. But don't know why it needed

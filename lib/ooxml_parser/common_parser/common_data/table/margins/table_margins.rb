@@ -32,6 +32,9 @@ module OoxmlParser
       'Default: ' + is_default.to_s + ' top: ' + @top.to_s + ', bottom: ' + @bottom.to_s + ', left: ' + @left.to_s + ', right: ' + @right.to_s
     end
 
+    # Parse TableMargins object
+    # @param margin_node [Nokogiri::XML:Element] node to parse
+    # @return [TableMargins] result of parsing
     def parse(margin_node)
       margin_node.xpath('*').each do |cell_margin_node|
         case cell_margin_node.name

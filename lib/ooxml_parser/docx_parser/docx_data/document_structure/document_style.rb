@@ -49,6 +49,7 @@ module OoxmlParser
       "Table style properties list: #{@table_style_properties_list.join(',')}"
     end
 
+    # @return [String] inspect of object for debug means
     def inspect
       to_s
     end

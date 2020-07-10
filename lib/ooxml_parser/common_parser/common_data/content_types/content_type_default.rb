@@ -8,6 +8,9 @@ module OoxmlParser
     # @return [String] extension
     attr_reader :extension
 
+    # Parse ContentTypeDefault object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ContentTypeDefault] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

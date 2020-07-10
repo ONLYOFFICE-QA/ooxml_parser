@@ -128,6 +128,7 @@ module OoxmlParser
       end
     end
 
+    # @return [String] inspect of object for debug means
     def inspect
       to_s
     end

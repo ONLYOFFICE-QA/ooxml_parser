@@ -15,6 +15,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Parse ParagraphMargins object
+    # @param text_body_props_node [Nokogiri::XML:Element] node to parse
+    # @return [ParagraphMargins] result of parsing
     def parse(text_body_props_node)
       text_body_props_node.attributes.each do |key, value|
         case key
