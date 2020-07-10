@@ -46,6 +46,7 @@
 * Move `rubocop` dependencies in `gemspec` file
 * Remove unused param from `DocxParagraphRun#parse_properties`
 * Remove unused `Categories` alias for `SeriesText`
+* Use `sh` command in `rake release_github_rubygems`
 
 ## 0.6.0 (2020-05-29)
 
