@@ -14,6 +14,7 @@
 * Add support of `rubocop-rake`
 * Add missing documentation
 * Add GitHub action task to check 100% documented code
+* Add `yard` gem as development dependency
   
 ### Fixes
 
