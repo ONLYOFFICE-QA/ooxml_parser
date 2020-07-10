@@ -65,4 +65,9 @@ describe 'My behaviour' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/shape/text_body/paragraphs/runs/properties/baseline_subscript.xlsx')
     expect(xlsx.worksheets.first.drawings.first.shape.text_body.paragraphs.first.runs.first.properties.baseline).to eq(:subscript)
   end
+
+  it 'baseline_superscript' do
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/shape/text_body/paragraphs/runs/properties/baseline_superscript.xlsx')
+    expect(xlsx.worksheets.first.drawings.first.shape.text_body.paragraphs.first.runs.first.properties.baseline).to eq(:superscript)
+  end
 end

@@ -2,6 +2,12 @@
 
 ## master (unreleased)
 
+## 0.7.1 (2020-07-10)
+
+### Fixes
+
+* Fix parsing `RunProperties#baseline` value `superscript`
+
 ## 0.7.0 (2020-07-10)
 
 ### New Features
