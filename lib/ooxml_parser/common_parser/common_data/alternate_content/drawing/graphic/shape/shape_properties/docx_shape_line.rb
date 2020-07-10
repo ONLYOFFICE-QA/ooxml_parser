@@ -16,6 +16,7 @@ module OoxmlParser
       @parent = parent
     end
 
+    # @return [Integer] stroke size of object
     def stroke_size
       if @color_scheme.nil? || @color_scheme.color == :none
         0

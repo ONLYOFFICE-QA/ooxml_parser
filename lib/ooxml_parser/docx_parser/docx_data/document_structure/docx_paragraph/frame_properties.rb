@@ -7,6 +7,9 @@ module OoxmlParser
                   :horizontal_align, :vertical_align, :anchor_lock, :vertical_space, :horizontal_space,
                   :horizontal_position, :vertical_position
 
+    # Parse FrameProperties
+    # @param node [Nokogiri::XML:Element] with FrameProperties
+    # @return [FrameProperties] parsed result
     def parse(node)
       node.attributes.each do |key, value|
         case key

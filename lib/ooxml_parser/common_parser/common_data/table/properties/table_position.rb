@@ -6,6 +6,7 @@ module OoxmlParser
     attr_accessor :left, :right, :top, :bottom, :position_x, :position_y, :horizontal_anchor, :vertical_anchor, :vertical_align_from_anchor,
                   :horizontal_align_from_anchor
 
+    # @return [String] result of convert of object to string
     def to_s
       "Table position left: #{left}, "\
       "right: #{right}, "\

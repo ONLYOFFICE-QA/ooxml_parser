@@ -11,6 +11,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Compare ThemeColor with other object
+    # @param other [Object] object to compare
+    # @return [True, False] result of comparision
     def ==(other)
       if other.is_a?(Color)
         @color == other

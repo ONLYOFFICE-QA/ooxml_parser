@@ -3,6 +3,7 @@
 module OoxmlParser
   # Helper method for working with TableStyleProperties
   module TableStylePropertiesHelper
+    # [Hash] short names for table styles
     TABLE_STYLES_NAMES_HASH = { first_column: :firstCol,
                                 last_column: :lastCol,
                                 whole_table: :wholeTbl,

@@ -27,12 +27,15 @@ module OoxmlParser
       size.zero? && val == :none
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       return '' if nil?
 
       "borders color: #{@color}, size: #{size}, space: #{@space}, value: #{@val}"
     end
 
+    # Method to copy object
+    # @return [BordersProperties] copied object
     def copy
       BordersProperties.new(@color, size, @val, @space)
     end

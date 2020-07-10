@@ -11,6 +11,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Parse Chartsheet object
+    # @param file [String] file to parse
+    # @return [Chartsheet] result of parsing
     def parse(file)
       OOXMLDocumentObject.add_to_xmls_stack(OOXMLDocumentObject.root_subfolder + file)
       doc = parse_xml(OOXMLDocumentObject.current_xml)

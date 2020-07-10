@@ -10,6 +10,9 @@ module OoxmlParser
     # @return [String] content of file
     attr_accessor :content
 
+    # Parse FileReference object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [FileReference] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

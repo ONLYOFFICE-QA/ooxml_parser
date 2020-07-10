@@ -15,6 +15,9 @@ module OoxmlParser
     end
 
     # TODO: Separate @is_default attribute and remove this method
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       instance_variables.each do |current_attribute|
         next if current_attribute == :@parent
@@ -24,10 +27,14 @@ module OoxmlParser
       true
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       'Default: ' + is_default.to_s + ' top: ' + @top.to_s + ', bottom: ' + @bottom.to_s + ', left: ' + @left.to_s + ', right: ' + @right.to_s
     end
 
+    # Parse TableMargins object
+    # @param margin_node [Nokogiri::XML:Element] node to parse
+    # @return [TableMargins] result of parsing
     def parse(margin_node)
       margin_node.xpath('*').each do |cell_margin_node|
         case cell_margin_node.name

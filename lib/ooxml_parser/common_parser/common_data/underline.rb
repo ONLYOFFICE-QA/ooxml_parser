@@ -11,6 +11,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       if other.is_a? Underline
         @style.to_sym == other.style.to_sym && @color == other.color
@@ -21,6 +24,7 @@ module OoxmlParser
       end
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       if @color.nil?
         @style.to_s

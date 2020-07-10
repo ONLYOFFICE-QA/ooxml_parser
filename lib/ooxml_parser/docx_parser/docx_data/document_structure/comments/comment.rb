@@ -14,6 +14,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Parse Comment object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [Comment] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

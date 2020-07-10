@@ -8,6 +8,9 @@ module OoxmlParser
     # @return [String] part name
     attr_reader :part_name
 
+    # Parse ContentTypeOverride object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [ContentTypeOverride] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key

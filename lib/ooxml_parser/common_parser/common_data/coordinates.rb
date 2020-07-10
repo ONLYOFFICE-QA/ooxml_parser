@@ -29,6 +29,9 @@ module OoxmlParser
         coordinates
       end
 
+      # Parse range of coordinates
+      # @param arguments_string [String] data to parse
+      # @return [Array] result
       def parser_coordinates_range(arguments_string)
         return parse_coordinates_array(arguments_string) if arguments_string.include?(',')
         return warn "Formulas with # is unsupported: #{arguments_string}" if arguments_string.include?('#')
@@ -133,6 +136,7 @@ module OoxmlParser
       column_number > other_cell.column_number
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       "#{@column}#{@row} #{@list ? "list: #{@list}" : ''}"
     end
@@ -141,6 +145,9 @@ module OoxmlParser
       @column.nil? && @list.nil? && @row.nil?
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       other.is_a?(Coordinates) ? (@row == other.row && @column == other.column) : false
     end

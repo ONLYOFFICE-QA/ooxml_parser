@@ -28,6 +28,7 @@ module OoxmlParser
       @xml_path = xml_path
     end
 
+    # @return [True, False] is slide with data
     def with_data?
       return true unless background.nil?
 
@@ -37,10 +38,12 @@ module OoxmlParser
       false
     end
 
+    # @return <Array> List of elements on slide
     def elements
       @common_slide_data.shape_tree.elements
     end
 
+    # @return [Background] background of slide
     def background
       @common_slide_data.background
     end

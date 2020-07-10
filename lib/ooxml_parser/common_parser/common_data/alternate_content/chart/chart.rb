@@ -41,6 +41,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Parse properties of Chart
+    # @param chart_prop_node [Nokogiri::XML:Element] node to parse
+    # @return [void]
     def parse_properties(chart_prop_node)
       chart_prop_node.xpath('*').each do |chart_props_node_child|
         case chart_props_node_child.name
@@ -71,6 +74,9 @@ module OoxmlParser
     extend Gem::Deprecate
     deprecate :data, 'series points interface', 2020, 1
 
+    # Parse  Chart
+    # @param parent [OOOXMLDocumentObject] parent of chart
+    # @return [Chart] result of parsing
     def self.parse(parent: nil)
       chart = Chart.new(parent: parent)
       chart_xml = chart.parse_xml(OOXMLDocumentObject.current_xml)

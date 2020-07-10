@@ -17,6 +17,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Get properties by number id
+    # @param num_id [Integer] index of number id
+    # @return [nil, AbstractNumbering] result of search
     def properties_by_num_id(num_id)
       abstract_num_id = nil
       @numbering_definition_list.each do |num_def|
@@ -32,6 +35,8 @@ module OoxmlParser
       end
     end
 
+    # Parse Numbering data
+    # @return [Numbering] result of parse
     def parse
       numbering_xml = OOXMLDocumentObject.path_to_folder + 'word/numbering.xml'
       return nil unless File.exist?(numbering_xml)

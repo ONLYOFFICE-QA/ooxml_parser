@@ -25,6 +25,9 @@ module OoxmlParser
 
     alias table_cell_borders borders_properties
 
+    # Parse CellProperties object
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [CellProperties] result of parsing
     def parse(node)
       @borders_properties = Borders.new
       @margins = ParagraphMargins.new(parent: self).parse(node)

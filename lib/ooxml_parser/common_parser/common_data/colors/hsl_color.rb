@@ -19,6 +19,9 @@ module OoxmlParser
       @l = lightness
     end
 
+    # Convert rgb color to hsl
+    # @param rgb_color [Color] color to convert
+    # @return [HSLColor] result of convert
     def self.rgb_to_hsl(rgb_color)
       hls_color = HSLColor.new
       red = rgb_color.red.to_f # / 255.0
@@ -50,6 +53,7 @@ module OoxmlParser
     end
 
     # Chroma - The "colorfulness relative to the brightness of a similarly illuminated white".
+    # @return [Color] result
     def to_rgb
       chroma = (1 - (2 * @l - 1).abs) * @s
       x = chroma * (1 - ((@h / 60.0) % 2.0 - 1).abs)
@@ -73,6 +77,10 @@ module OoxmlParser
       Color.new(((rgb.red + m) * 255.0).round, ((rgb.green + m) * 255.0).round, ((rgb.blue + m) * 255.0).round)
     end
 
+    # Get lum value of color
+    # @param tint [Integer] tint to apply
+    # @param lum [Integer] lum without tint
+    # @return [Integer] result
     def calculate_lum_value(tint, lum)
       if tint.nil?
         lum
@@ -81,6 +89,9 @@ module OoxmlParser
       end
     end
 
+    # Convert to rgb with applied tint
+    # @param tint [Integer] tint to apply
+    # @return [Color] result of covert
     def calculate_rgb_with_tint(tint)
       self.l = calculate_lum_value(tint, @l * 255.0) / 255.0
       to_rgb

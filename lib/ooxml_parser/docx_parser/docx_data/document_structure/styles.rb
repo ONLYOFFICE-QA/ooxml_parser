@@ -14,6 +14,8 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Parse styles data
+    # @return [Styles] result of parsing
     def parse
       doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
       doc.xpath('w:styles/*').each do |node_child|

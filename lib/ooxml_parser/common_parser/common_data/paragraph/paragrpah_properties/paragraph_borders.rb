@@ -16,6 +16,7 @@ module OoxmlParser
     # @return [BordersProperties] bar properties
     attr_accessor :bar
 
+    # @return [Symbol] type of border in visual editor
     def border_visual_type
       result = []
       result << :left if @left.val == :single

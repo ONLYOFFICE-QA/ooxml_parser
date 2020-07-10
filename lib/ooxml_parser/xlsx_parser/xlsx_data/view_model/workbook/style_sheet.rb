@@ -26,6 +26,8 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Parse StyleSheet object
+    # @return [StyleSheet] result of parsing
     def parse
       doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml")
       doc.root.xpath('*').each do |node_child|

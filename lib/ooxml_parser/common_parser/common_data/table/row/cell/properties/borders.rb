@@ -18,6 +18,8 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Method to copy object
+    # @return [Borders] copied object
     def copy
       new_borders = Borders.new
       new_borders.left = @left if @left
@@ -32,6 +34,9 @@ module OoxmlParser
       new_borders
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       @left == other.left && @right == other.right && @top == other.top && @bottom == other.bottom if other.is_a?(Borders)
     end
@@ -52,6 +57,7 @@ module OoxmlParser
       yield(top)
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       "Left border: #{left}, Right: #{right}, Top: #{top}, Bottom: #{bottom}"
     end

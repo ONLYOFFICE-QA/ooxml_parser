@@ -42,6 +42,8 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Perform parsing of relationships
+    # @return [nil]
     def parse_relationships
       OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/_rels/#{@xml_name}.rels")
       @relationships = Relationships.new(parent: self).parse_file(OOXMLDocumentObject.current_xml) if File.exist?(OOXMLDocumentObject.current_xml)
@@ -67,6 +69,9 @@ module OoxmlParser
       end
     end
 
+    # Parse data of Worksheet
+    # @param path_to_xml_file [String] path to file to parse
+    # @return [Worksheet] parsed worksheet
     def parse(path_to_xml_file)
       @xml_name = File.basename path_to_xml_file
       parse_relationships

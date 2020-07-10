@@ -11,6 +11,7 @@ module OoxmlParser
       @parent = parent
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       @converted_color.to_s
     end

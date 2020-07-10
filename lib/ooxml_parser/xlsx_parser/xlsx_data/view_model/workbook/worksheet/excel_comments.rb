@@ -16,6 +16,7 @@ module OoxmlParser
       @parent = parent
     end
 
+    # @return [Array<ExcelComment>] list of comments
     def comments
       comment_list.comments
     end
@@ -23,6 +24,9 @@ module OoxmlParser
     extend Gem::Deprecate
     deprecate :comments, 'comment_list.comments', 2020, 1
 
+    # Parse file with ExcelComments
+    # @param file [String] file to parse
+    # @return [ExcelComments] object with data
     def parse(file)
       doc = parse_xml(file)
       node = doc.xpath('*').first

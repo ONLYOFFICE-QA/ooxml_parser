@@ -12,6 +12,9 @@ module OoxmlParser
       @parent = parent
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       @columns.each_with_index do |cur_column, index|
         return false unless cur_column == other.columns[index]

@@ -24,6 +24,9 @@ module OoxmlParser
       @line_rule = line_rule
     end
 
+    # Compare this object to other
+    # @param other [Object] any other object
+    # @return [True, False] result of comparision
     def ==(other)
       self.line_rule = :at_least if line_rule == 'atLeast'
       self.line_rule = :multiple if line_rule == :auto
@@ -40,6 +43,7 @@ module OoxmlParser
       end
     end
 
+    # @return [String] result of convert of object to string
     def to_s
       result_string = ''
       variables = instance_variables
@@ -49,10 +53,15 @@ module OoxmlParser
       result_string
     end
 
+    # Method to copy object
+    # @return [Spacing] copied object
     def copy
       Spacing.new(@before, @after, @line, @line_rule)
     end
 
+    # Round value of spacing
+    # @param count_of_digits [Integer] how digits to left
+    # @return [Spacing] result of round
     def round(count_of_digits = 1)
       before = @before.to_f.round(count_of_digits)
       after = @after.to_f.round(count_of_digits)

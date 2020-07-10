@@ -12,6 +12,9 @@ module OoxmlParser
     # @return [DocxFormula] base
     attr_accessor :base
 
+    # Parse PreSubSuperscript
+    # @param [Nokogiri::XML:Node] node with PreSubSuperscript
+    # @return [PreSubSuperscript] result of parsing
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name

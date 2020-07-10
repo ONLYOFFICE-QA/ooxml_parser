@@ -17,10 +17,12 @@ module OoxmlParser
 
     alias table_properties properties
 
+    # @return [String] result of convert of object to string
     def to_s
       "Rows: #{@rows.join(',')}"
     end
 
+    # @return [String] inspect of object for debug means
     def inspect
       to_s
     end

@@ -3,6 +3,9 @@
 module OoxmlParser
   # Module for some helpers for ParagraphRun
   module DocxParagraphRunHelpers
+    # Parse other properties
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [DocxParagraphRun] result of parse
     def parse_properties(node)
       self.font_style = FontStyle.new
       node.xpath('*').each do |node_child|
