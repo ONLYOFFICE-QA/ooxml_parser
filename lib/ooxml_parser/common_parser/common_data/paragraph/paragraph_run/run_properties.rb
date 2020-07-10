@@ -60,6 +60,8 @@ module OoxmlParser
           case value.value.to_i
           when -25_000, -30_000
             @baseline = :subscript
+          when 30_000
+            @baseline = :superscript
           when 0
             @baseline = :baseline
           end
