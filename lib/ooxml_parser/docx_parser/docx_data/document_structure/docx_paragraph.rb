@@ -71,14 +71,10 @@ module OoxmlParser
     # @return [Array<OOXMLDocumentObject>] array of child objects that contains data
     def nonempty_runs
       @character_style_array.select do |cur_run|
-        if cur_run.is_a?(DocxParagraphRun) || cur_run.is_a?(ParagraphRun)
+        case cur_run
+        when DocxParagraphRun, ParagraphRun
           !cur_run.empty?
-        elsif cur_run.is_a?(DocxFormula) ||
-              cur_run.is_a?(StructuredDocumentTag) ||
-              cur_run.is_a?(BookmarkStart) ||
-              cur_run.is_a?(BookmarkEnd) ||
-              cur_run.is_a?(CommentRangeStart) ||
-              cur_run.is_a?(CommentRangeEnd)
+        when DocxFormula, StructuredDocumentTag, BookmarkStart, BookmarkEnd, CommentRangeStart, CommentRangeEnd
           true
         end
       end

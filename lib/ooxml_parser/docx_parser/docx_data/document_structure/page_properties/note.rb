@@ -26,10 +26,11 @@ module OoxmlParser
       doc.search(xpath_note).each do |ftr|
         number = 0
         ftr.xpath('*').each do |sub_element|
-          if sub_element.name == 'p'
+          case sub_element.name
+          when 'p'
             note.elements << params[:default_paragraph].dup.parse(sub_element, number, params[:default_character], parent: note)
             number += 1
-          elsif sub_element.name == 'tbl'
+          when 'tbl'
             note.elements << Table.new(parent: note).parse(sub_element, number)
             number += 1
           end
