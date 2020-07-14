@@ -15,9 +15,10 @@ module OoxmlParser
     # @param other [Object] any other object
     # @return [True, False] result of comparision
     def ==(other)
-      if other.is_a? Underline
+      case other
+      when Underline
         @style.to_sym == other.style.to_sym && @color == other.color
-      elsif other.is_a? Symbol
+      when Symbol
         @style.to_sym == other
       else
         false
