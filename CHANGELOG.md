@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Fixes
+
+* `Indents#to_s` result is single line
+
 ## 0.7.2 (2020-07-10)
 
 ### Fixes
