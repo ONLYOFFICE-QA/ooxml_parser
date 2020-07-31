@@ -43,9 +43,13 @@ module OoxmlParser
     end
 
     class << self
+      # @return [String] path to root subfolder
       attr_accessor :root_subfolder
+      # @return [PresentationTheme] list of themes
       attr_accessor :theme
+      # @return [Array<String>] stack of xmls
       attr_accessor :xmls_stack
+      # @return [String] path to root folder
       attr_accessor :path_to_folder
 
       # @param path_to_file [String] file

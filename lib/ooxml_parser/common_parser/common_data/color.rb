@@ -12,79 +12,6 @@ module OoxmlParser
   # Class for Color in RGB
   class Color < OOXMLDocumentObject
     include ColorHelper
-    # @return [Array] Deprecated Indexed colors
-    # List of color duplicated from `OpenXML Sdk IndexedColors` class
-    # See https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.indexedcolors.aspx
-    COLOR_INDEXED =
-      %w[
-        000000
-        FFFFFF
-        FF0000
-        00FF00
-        0000FF
-        FFFF00
-        FF00FF
-        00FFFF
-        000000
-        FFFFFF
-        FF0000
-        00FF00
-        0000FF
-        FFFF00
-        FF00FF
-        00FFFF
-        800000
-        008000
-        000080
-        808000
-        800080
-        008080
-        C0C0C0
-        808080
-        9999FF
-        993366
-        FFFFCC
-        CCFFFF
-        660066
-        FF8080
-        0066CC
-        CCCCFF
-        000080
-        FF00FF
-        FFFF00
-        00FFFF
-        800080
-        800000
-        008080
-        0000FF
-        00CCFF
-        CCFFFF
-        CCFFCC
-        FFFF99
-        99CCFF
-        FF99CC
-        CC99FF
-        FFCC99
-        3366FF
-        33CCCC
-        99CC00
-        FFCC00
-        FF9900
-        FF6600
-        666699
-        969696
-        003366
-        339966
-        003300
-        333300
-        993300
-        993366
-        333399
-        333333
-        n/a
-        n/a
-      ].freeze
-
     # @return [Integer] Value of Red Part
     attr_accessor :red
     # @return [Integer] Value of Green Part
@@ -103,6 +30,7 @@ module OoxmlParser
 
     alias set_alpha_channel alpha_channel=
 
+    # @return [ColorProperties] properties of color
     attr_accessor :properties
 
     # Value of color if non selected
@@ -319,10 +247,17 @@ module OoxmlParser
       # @param index [Integer] index to get
       # @return [Color] color by it's index
       def get_rgb_by_color_index(index)
-        color_by_index = COLOR_INDEXED[index]
+        color_by_index = color_indexes[index]
         return :unknown if color_by_index.nil?
 
         color_by_index == 'n/a' ? Color.new : Color.new.parse_hex_string(color_by_index)
+      end
+
+      # @return [Array] Deprecated Indexed colors
+      #   List of color duplicated from `OpenXML Sdk IndexedColors` class
+      #   See https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.indexedcolors.aspx
+      def color_indexes
+        @color_indexes ||= File.readlines("#{__dir__}/color/color_indexes.list", chomp: true)
       end
 
       # Parse color from string

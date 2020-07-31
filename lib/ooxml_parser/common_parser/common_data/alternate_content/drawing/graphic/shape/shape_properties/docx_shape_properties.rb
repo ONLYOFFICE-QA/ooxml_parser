@@ -10,8 +10,18 @@ require_relative 'custom_geometry/ooxml_custom_geometry'
 module OoxmlParser
   # DOCX Shape Properties
   class DocxShapeProperties < OOXMLDocumentObject
-    attr_accessor :shape_size, :preset_geometry, :fill_color, :line, :custom_geometry
-    attr_accessor :blip_fill
+    # @return [DocxShapeSize] size of shape
+    attr_reader :shape_size
+    # @return [PresetGeometry] preset geometry of object
+    attr_reader :preset_geometry
+    # @return [DocxColor] color of object
+    attr_reader :fill_color
+    # @return [DocxShapeLine] line info
+    attr_reader :line
+    # @return [PresetGeometry] is some geometry custom
+    attr_reader :custom_geometry
+    # @return [BlipFill] BlipFill data
+    attr_reader :blip_fill
 
     alias transform shape_size
     alias fill fill_color

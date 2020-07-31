@@ -3,8 +3,14 @@
 module OoxmlParser
   # Class Header Footer classes
   class HeaderFooter < OOXMLDocumentObject
-    attr_accessor :id, :elements, :type
-    attr_accessor :path_suffix
+    # @return [Integer] id of header-footer
+    attr_reader :id
+    # @return [Array<OOXMLDocumentObject>] list of elements if object
+    attr_reader :elements
+    # @return [Symbol] `:header` or `:footer`
+    attr_reader :type
+    # @return [String] suffix for object files
+    attr_reader :path_suffix
 
     def initialize(type = :header, parent: nil)
       @type = type

@@ -4,10 +4,12 @@ require_relative 'columns/column'
 module OoxmlParser
   # Class for data of Columns
   class Columns < OOXMLDocumentObject
+    # @return [Integer] count of columns
     attr_accessor :count
+    # @return [True, False] is columns are equal width
     attr_accessor :equal_width
-
     alias equal_width? equal_width
+    # @return [Array<Column>] list of colujmns
     attr_accessor :column_array
     # @return [Boolean] Draw Line Between Columns
     attr_reader :separator
