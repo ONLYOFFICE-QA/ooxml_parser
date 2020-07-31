@@ -4,6 +4,6 @@ module OoxmlParser
   # This module holds the RuboCop version information.
   module Version
     # [String] Version of Gem
-    STRING = '0.7.2'
+    STRING = '0.8.0'
   end
 end
