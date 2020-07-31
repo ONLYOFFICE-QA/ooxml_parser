@@ -9,6 +9,7 @@
 ### Changes
 
 * Move parsing `DocxDrawingProperties` inside class method
+* Remove unused `Color#position` attr_accessor 
 
 ## 0.7.2 (2020-07-10)
 
