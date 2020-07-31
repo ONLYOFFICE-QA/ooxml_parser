@@ -3,8 +3,14 @@
 module OoxmlParser
   # Class for color transformations
   class ColorProperties < OOXMLDocumentObject
-    attr_accessor :alpha, :luminance_modulation, :luminance_offset
-    attr_accessor :tint
+    # @return [Integer] alpha value of color
+    attr_reader :alpha
+    # @return [Float] luminance modulation value
+    attr_reader :luminance_modulation
+    # @return [Float] luminance offset value
+    attr_reader :luminance_offset
+    # @return [Float] tint value
+    attr_reader :tint
 
     # Parse ColorProperties object
     # @param node [Nokogiri::XML:Element] node to parse

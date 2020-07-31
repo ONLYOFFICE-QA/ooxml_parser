@@ -3,9 +3,16 @@
 module OoxmlParser
   # Docx Shape Size
   class DocxShapeSize < OOXMLDocumentObject
-    attr_accessor :rotation, :offset, :extent
-    attr_accessor :child_offset
-    attr_accessor :child_extent
+    # @return [OoxmlSize] rotation info
+    attr_reader :rotation
+    # @return [OOXMLCoordinates] offset info
+    attr_reader :offset
+    # @return [OOXMLCoordinates] extent info
+    attr_reader :extent
+    # @return [OOXMLCoordinates] child offset
+    attr_reader :child_offset
+    # @return [OOXMLCoordinates] child extent
+    attr_reader :child_extent
     # @return [True, False] is image flipped horizontally
     attr_reader :flip_horizontal
     # @return [True, False] is image flipped vertically

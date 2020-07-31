@@ -4,8 +4,10 @@
 module OoxmlParser
   # Class for parsing `w:ln` tags
   class Outline < OOXMLDocumentObject
-    attr_accessor :width
-    attr_accessor :color_scheme
+    # @return [OoxmlSize] width of outline
+    attr_reader :width
+    # @return [DocxColorScheme] color of outline
+    attr_reader :color_scheme
 
     def initialize(parent: nil)
       @width = OoxmlSize.new(0)

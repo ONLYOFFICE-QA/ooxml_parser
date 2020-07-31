@@ -18,12 +18,23 @@ module OoxmlParser
   class DocumentStructure < CommonDocumentStructure
     include DocumentStyleHelper
     include DocumentStructureHelpers
-    attr_accessor :elements, :page_properties, :notes, :background, :document_properties, :comments
-
+    # @return [Array<OOXMLDocumentObject>] list of elements
+    attr_accessor :elements
+    # @return [PageProperties] properties of document
+    attr_accessor :page_properties
+    # @return [Note] notes of document
+    attr_accessor :notes
+    # @return [DocumentBackground] background of document
+    attr_accessor :background
+    # @return [DocumentProperties] properties of document
+    attr_accessor :document_properties
+    # @return [Comments] comment of document
+    attr_accessor :comments
     # @return [Numbering] store numbering data
     attr_accessor :numbering
     # @return [Styles] styles of document
     attr_accessor :styles
+    # @return [PresentationTheme] theme of docx
     attr_accessor :theme
     # @return [Relationships] relationships
     attr_accessor :relationships
@@ -273,10 +284,7 @@ module OoxmlParser
     end
 
     class << self
-      attr_accessor :default_table_run_style
-      attr_accessor :default_table_paragraph_style
-      attr_accessor :default_paragraph_style
-      attr_accessor :default_run_style
+      attr_accessor :default_table_run_style, :default_table_paragraph_style, :default_paragraph_style, :default_run_style
     end
   end
 end

@@ -3,9 +3,20 @@
 module OoxmlParser
   # Class for parsing `hlinkClick`, `hyperlink` tags
   class Hyperlink < OOXMLDocumentObject
-    attr_accessor :url, :tooltip, :coordinates, :highlight_click, :action
-    attr_accessor :action_link
-    attr_accessor :id
+    # @return [OOXMLDocumentObject] url of hyperlink
+    attr_accessor :url
+    # @return [String] tooltip value
+    attr_reader :tooltip
+    # @return [Coordinates] coordinates of link
+    attr_reader :coordinates
+    # @return [True, False] should click be highlighted
+    attr_reader :highlight_click
+    # @return [Symbol] type of action
+    attr_reader :action
+    # @return [String] value of action link
+    attr_reader :action_link
+    # @return [String] id of link
+    attr_reader :id
     # @return [Array<ParagraphRun>] run of paragraph
     attr_reader :runs
 

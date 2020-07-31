@@ -9,12 +9,34 @@ require_relative 'run_properties/shade'
 module OoxmlParser
   # Data about `rPr` object
   class RunProperties < OOXMLDocumentObject
-    attr_accessor :font_style, :font_color, :space, :font_name, :font_size, :baseline, :hyperlink, :caps,
-                  :vertical_align, :outline
-    attr_accessor :shadow
-    attr_accessor :emboss
-    attr_accessor :vanish
-    attr_accessor :rtl
+    # @return [FontStyle] font style of run
+    attr_accessor :font_style
+    # @return [Color, DocxColorScheme] color of run
+    attr_reader :font_color
+    # @return [OoxmlSize] space size
+    attr_reader :space
+    # @return [string] name of font
+    attr_reader :font_name
+    # @return [Float] font size
+    attr_reader :font_size
+    # @return [Symbol] baseline of run
+    attr_reader :baseline
+    # @return [Hyperlink] hyperlink of run
+    attr_reader :hyperlink
+    # @return [Symbol] caps data
+    attr_reader :caps
+    # @return [Symbol] vertical align data
+    attr_reader :vertical_align
+    # @return [Outline] outline data
+    attr_reader :outline
+    # @return [True, False] is text shadow
+    attr_reader :shadow
+    # @return [True, False] is text emboss
+    attr_reader :emboss
+    # @return [True, False] is text vanish
+    attr_reader :vanish
+    # @return [True, False] is text rtl
+    attr_reader :rtl
     # @return [Size] get run size
     attr_accessor :size
     # @return [RunSpacing] get run spacing
