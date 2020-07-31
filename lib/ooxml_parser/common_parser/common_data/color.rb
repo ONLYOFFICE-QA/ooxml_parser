@@ -103,7 +103,6 @@ module OoxmlParser
 
     alias set_alpha_channel alpha_channel=
 
-    attr_accessor :position
     attr_accessor :properties
 
     # Value of color if non selected
