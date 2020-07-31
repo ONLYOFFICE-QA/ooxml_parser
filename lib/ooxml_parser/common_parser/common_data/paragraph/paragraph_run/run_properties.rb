@@ -9,7 +9,7 @@ require_relative 'run_properties/shade'
 module OoxmlParser
   # Data about `rPr` object
   class RunProperties < OOXMLDocumentObject
-    attr_accessor :font_style, :font_color, :space, :dirty, :font_name, :font_size, :baseline, :hyperlink, :caps,
+    attr_accessor :font_style, :font_color, :space, :font_name, :font_size, :baseline, :hyperlink, :caps,
                   :vertical_align, :outline
     attr_accessor :shadow
     attr_accessor :emboss
