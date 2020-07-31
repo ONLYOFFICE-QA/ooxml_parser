@@ -6,6 +6,10 @@
 
 * `Indents#to_s` result is single line
 
+### Changes
+
+* Move parsing `DocxDrawingProperties` inside class method
+
 ## 0.7.2 (2020-07-10)
 
 ### Fixes

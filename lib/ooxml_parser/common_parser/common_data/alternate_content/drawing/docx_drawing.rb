@@ -30,34 +30,15 @@ module OoxmlParser
         when 'inline'
           @type = :inline
         end
-        @properties.distance_from_text = DocxDrawingDistanceFromText.new(parent: self).parse(node_child)
-        @properties.wrap = DocxWrapDrawing.new(parent: self).parse(node_child)
-        node_child.attributes.each do |key, value|
-          case key
-          when 'relativeHeight'
-            @properties.relative_height = value.value.to_i
-          end
-        end
         node_child.xpath('*').each do |content_node_child|
           case content_node_child.name
-          when 'simplePos'
-            @properties.simple_position = OOXMLCoordinates.parse(content_node_child)
-          when 'extent'
-            @properties.object_size = OOXMLCoordinates.parse(content_node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
           when 'graphic'
             @graphic = DocxGraphic.new(parent: self).parse(content_node_child)
-          when 'positionV'
-            @properties.vertical_position = DocxDrawingPosition.new(parent: self).parse(content_node_child)
-          when 'positionH'
-            @properties.horizontal_position = DocxDrawingPosition.new(parent: self).parse(content_node_child)
-          when 'sizeRelH'
-            @properties.size_relative_horizontal = SizeRelativeHorizontal.new(parent: self).parse(content_node_child)
-          when 'sizeRelV'
-            @properties.size_relative_vertical = SizeRelativeVertical.new(parent: self).parse(content_node_child)
           when 'docPr'
             @doc_properties = DocProperties.new(parent: self).parse(content_node_child)
           end
         end
+        @properties.parse(node_child)
       end
       self
     end
