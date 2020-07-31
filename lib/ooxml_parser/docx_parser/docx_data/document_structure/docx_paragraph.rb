@@ -5,6 +5,7 @@ require_relative 'docx_paragraph/bookmark_start'
 require_relative 'docx_paragraph/bookmark_end'
 require_relative 'docx_paragraph/comment_range_end'
 require_relative 'docx_paragraph/comment_range_start'
+require_relative 'docx_paragraph/docx_paragraph_accessors'
 require_relative 'docx_paragraph/docx_paragraph_helper'
 require_relative 'docx_paragraph/docx_paragraph_run'
 require_relative 'docx_paragraph/field_simple'
@@ -17,6 +18,7 @@ require_relative 'docx_paragraph/style_parametres'
 module OoxmlParser
   # Class for data of DocxParagraph
   class DocxParagraph < OOXMLDocumentObject
+    include DocxParagraphAccessors
     include DocxParagraphHelper
     attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
                   :character_style_array, :page_break, :borders, :keep_lines,
@@ -66,18 +68,6 @@ module OoxmlParser
       @bookmark_end = source.bookmark_end.clone
       @character_style_array = source.character_style_array.clone
       @spacing = source.spacing.clone
-    end
-
-    # @return [Array<OOXMLDocumentObject>] array of child objects that contains data
-    def nonempty_runs
-      @character_style_array.select do |cur_run|
-        case cur_run
-        when DocxParagraphRun, ParagraphRun
-          !cur_run.empty?
-        when DocxFormula, StructuredDocumentTag, BookmarkStart, BookmarkEnd, CommentRangeStart, CommentRangeEnd
-          true
-        end
-      end
     end
 
     alias runs character_style_array
@@ -261,23 +251,5 @@ module OoxmlParser
         break
       end
     end
-
-    extend Gem::Deprecate
-    deprecate :page_numbering, 'field_simple.page_numbering?', 2020, 1
-
-    # @return [OoxmlParser::StructuredDocumentTag] Return first sdt element
-    def sdt
-      @character_style_array.each do |cur_element|
-        return cur_element if cur_element.is_a?(StructuredDocumentTag)
-      end
-      nil
-    end
-    deprecate :sdt, 'nonempty_runs[i]', 2020, 1
-
-    # @return [OoxmlParser::FrameProperties] Return frame properties
-    def frame_properties
-      paragraph_properties.frame_properties
-    end
-    deprecate :frame_properties, 'paragraph_properties.frame_properties', 2020, 1
   end
 end
