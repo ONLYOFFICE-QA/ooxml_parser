@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* `RunProperties` can intialize `#font_name` in constructor
+
 ## 0.8.0 (2020-07-31)
 
 ### Fixes
