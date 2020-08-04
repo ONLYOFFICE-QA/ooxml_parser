@@ -52,11 +52,11 @@ module OoxmlParser
     # @return [RunStyle] run style
     attr_accessor :run_style
 
-    def initialize(parent: nil)
-      @font_name = ''
+    def initialize(params = {})
+      @font_name = params.fetch(:font_name, '')
       @font_style = FontStyle.new
       @baseline = :baseline
-      @parent = parent
+      @parent = params[:parent]
     end
 
     # Parse RunProperties object
