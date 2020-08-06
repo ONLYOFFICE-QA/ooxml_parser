@@ -5,6 +5,7 @@
 ### Changes
 
 * Remove unused `HyperlinkForHover` class
+* Replace `Chart.parse` method to `Chart#parse`
 
 ## 0.8.1 (2020-08-04)
 

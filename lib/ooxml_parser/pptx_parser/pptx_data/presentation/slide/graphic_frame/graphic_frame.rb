@@ -31,7 +31,7 @@ module OoxmlParser
                   graphic_data << Table.new(parent: self).parse(graphic_node_child)
                 when 'chart'
                   OOXMLDocumentObject.add_to_xmls_stack(OOXMLDocumentObject.get_link_from_rels(graphic_node_child.attribute('id').value))
-                  graphic_data << Chart.parse(parent: self)
+                  graphic_data << Chart.new(parent: self).parse
                   OOXMLDocumentObject.xmls_stack.pop
                 when 'oleObj'
                   graphic_data << OleObject.new(parent: self).parse(graphic_node_child)

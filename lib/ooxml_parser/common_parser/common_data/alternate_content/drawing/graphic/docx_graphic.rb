@@ -24,7 +24,7 @@ module OoxmlParser
         when 'chart'
           @type = :chart
           OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(node_child.attribute('id').value)}")
-          @data = Chart.parse(parent: self)
+          @data = Chart.new(parent: self).parse
           OOXMLDocumentObject.xmls_stack.pop
         when 'wgp'
           @type = :group
