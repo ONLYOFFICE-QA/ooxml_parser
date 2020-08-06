@@ -14,7 +14,7 @@ module OoxmlParser
     def initialize(params = {})
       @show_legend_key = params.fetch(:show_legend_key, false)
       @show_values = params.fetch(:show_values, false)
-      @parent = params[:parent]
+      super(parent: params[:parent])
     end
 
     # Parse DisplayLabelsProperties object

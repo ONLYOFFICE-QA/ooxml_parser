@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @attribute_name_list = []
-      @parent = parent
+      super
     end
 
     # Parse Behavior object

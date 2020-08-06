@@ -11,7 +11,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @xf_array = []
-      @parent = parent
+      super
     end
 
     # Parse CellXfs data

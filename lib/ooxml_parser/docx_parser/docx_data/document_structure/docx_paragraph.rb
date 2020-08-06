@@ -52,7 +52,7 @@ module OoxmlParser
       @page_numbering = false
       @keep_next = false
       @orphan_control = true
-      @parent = parent
+      super
     end
 
     alias elements character_style_array

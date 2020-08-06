@@ -10,7 +10,7 @@ module OoxmlParser
     def initialize(properties = OldDocxGroupProperties.new, parent: nil)
       @properties = properties
       @elements = []
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse OldDocxGroup object

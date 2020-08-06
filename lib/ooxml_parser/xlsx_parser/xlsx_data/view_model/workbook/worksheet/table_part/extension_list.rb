@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @extension_array = []
-      @parent = parent
+      super
     end
 
     # @return [Array, Extension] accessor

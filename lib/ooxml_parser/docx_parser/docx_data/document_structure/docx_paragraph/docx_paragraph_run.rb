@@ -38,7 +38,7 @@ module OoxmlParser
       @break = false
       @comments = []
       @page_number = false
-      @parent = parent
+      super
     end
 
     # Constructor for copy of object

@@ -15,7 +15,7 @@ module OoxmlParser
       @banding_column = false
       @no_horizontal_banding = false
       @no_horizontal_banding = false
-      @parent = parent
+      super
     end
 
     # Parse TableLook object

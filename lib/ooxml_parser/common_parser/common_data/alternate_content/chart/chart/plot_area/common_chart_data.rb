@@ -10,7 +10,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @series = []
-      @parent = parent
+      super
     end
 
     # Parse CommonChartData object

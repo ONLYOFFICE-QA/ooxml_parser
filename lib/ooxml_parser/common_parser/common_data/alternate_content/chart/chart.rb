@@ -38,7 +38,7 @@ module OoxmlParser
       @legend = nil
       @axises = []
       @series = []
-      @parent = parent
+      super
     end
 
     # Parse properties of Chart

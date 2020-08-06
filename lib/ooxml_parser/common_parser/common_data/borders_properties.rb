@@ -12,7 +12,7 @@ module OoxmlParser
       @size = size
       @val = val
       @space = space
-      @parent = parent
+      super(parent: parent)
     end
 
     # @return [OoxmlSize] alias for sz

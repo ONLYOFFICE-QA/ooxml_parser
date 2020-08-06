@@ -11,7 +11,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @borders_array = []
-      @parent = parent
+      super
     end
 
     # Parse XlsxBorders data

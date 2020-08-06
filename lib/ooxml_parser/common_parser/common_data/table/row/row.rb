@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(cells = [], parent: nil)
       @cells = cells
-      @parent = parent
+      super(parent: parent)
     end
 
     alias table_row_height height

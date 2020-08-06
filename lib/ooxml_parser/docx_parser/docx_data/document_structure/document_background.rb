@@ -12,7 +12,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @color1 = nil
       @type = 'simple'
-      @parent = parent
+      super
     end
 
     # Parse DocumentBackground object

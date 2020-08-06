@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @columns = []
-      @parent = parent
+      super
     end
 
     # Compare this object to other

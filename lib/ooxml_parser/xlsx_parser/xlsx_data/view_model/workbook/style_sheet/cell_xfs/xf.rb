@@ -80,7 +80,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @numerical_format = 'General'
       @alignment = XlsxAlignment.new
-      @parent = parent
+      super
     end
 
     # Parse Xf object

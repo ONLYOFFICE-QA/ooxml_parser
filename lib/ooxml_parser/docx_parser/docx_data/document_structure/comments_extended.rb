@@ -6,7 +6,7 @@ module OoxmlParser
   class CommentsExtended < OOXMLDocumentObject
     def initialize(parent: nil)
       @comments_extended_array = []
-      @parent = parent
+      super
     end
 
     # @return [Array, CommentsExtended] accessor

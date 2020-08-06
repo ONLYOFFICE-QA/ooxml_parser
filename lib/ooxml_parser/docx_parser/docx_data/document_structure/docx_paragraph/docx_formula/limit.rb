@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @type = :upper
-      @parent = parent
+      super
     end
 
     # Parse Limit object

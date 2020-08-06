@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @fills_array = []
-      @parent = parent
+      super
     end
 
     # @return [Array, Fill] accessor

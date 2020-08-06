@@ -29,7 +29,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @line = DocxShapeLine.new
-      @parent = parent
+      super
     end
 
     # Parse DocxShapeProperties object

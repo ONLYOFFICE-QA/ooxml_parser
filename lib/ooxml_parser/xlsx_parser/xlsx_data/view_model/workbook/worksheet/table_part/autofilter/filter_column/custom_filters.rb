@@ -11,7 +11,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @filters_array = []
-      @parent = parent
+      super
     end
 
     # @return [Array, CustomFilter] accessor

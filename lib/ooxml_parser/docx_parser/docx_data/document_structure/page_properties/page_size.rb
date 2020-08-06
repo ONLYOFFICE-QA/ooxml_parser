@@ -9,6 +9,7 @@ module OoxmlParser
       @height = height
       @width = width
       @orientation = orientation
+      super(parent: nil)
     end
 
     # @return [String] convert to string

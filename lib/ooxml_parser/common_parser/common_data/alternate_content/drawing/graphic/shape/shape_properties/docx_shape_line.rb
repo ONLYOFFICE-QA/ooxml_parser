@@ -13,7 +13,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @width = OoxmlSize.new(0)
-      @parent = parent
+      super
     end
 
     # @return [Integer] stroke size of object

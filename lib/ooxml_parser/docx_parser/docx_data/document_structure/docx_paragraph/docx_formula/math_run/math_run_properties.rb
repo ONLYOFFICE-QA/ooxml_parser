@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @break = false
-      @parent = parent
+      super
     end
 
     # Parse MathRunProperties

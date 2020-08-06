@@ -8,10 +8,6 @@ module OoxmlParser
     # @return [Color] scheme color of LineReference
     attr_reader :scheme_color
 
-    def initialize(parent: nil)
-      @parent = parent
-    end
-
     # Parse LineReference object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [LineReference] result of parsing

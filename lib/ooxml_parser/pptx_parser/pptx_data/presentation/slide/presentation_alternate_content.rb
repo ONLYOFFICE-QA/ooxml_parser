@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @elements = elements
-      @parent = parent
+      super
     end
 
     # Parse PresentationAlternateContent object

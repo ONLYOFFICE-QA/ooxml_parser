@@ -14,7 +14,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @show_button = true
-      @parent = parent
+      super
     end
 
     # Parse FilterColumn data

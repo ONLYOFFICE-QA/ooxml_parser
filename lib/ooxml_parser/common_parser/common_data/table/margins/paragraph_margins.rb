@@ -12,7 +12,7 @@ module OoxmlParser
       @bottom = bottom
       @left = left
       @right = right
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse ParagraphMargins object

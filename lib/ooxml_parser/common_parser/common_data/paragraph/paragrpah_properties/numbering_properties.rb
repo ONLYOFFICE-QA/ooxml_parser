@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(ilvl = 0, parent: nil)
       @ilvl = ilvl
-      @parent = parent
+      super(parent: parent)
     end
 
     # @return [AbstractNumbering] AbstractNumbering of current properties

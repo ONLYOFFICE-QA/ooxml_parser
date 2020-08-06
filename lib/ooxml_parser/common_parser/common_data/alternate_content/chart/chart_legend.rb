@@ -8,7 +8,7 @@ module OoxmlParser
     def initialize(params = {})
       @position = params.fetch(:position, :right)
       @overlay = params.fetch(:overlay, false)
-      @parent = params[:parent]
+      super(parent: params[:parent])
     end
 
     # Return combined data from @position and @overlay

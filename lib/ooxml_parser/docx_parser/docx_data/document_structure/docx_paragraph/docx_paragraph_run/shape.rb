@@ -13,7 +13,7 @@ module OoxmlParser
       @type = type
       @properties = properties
       @elements = elements
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse Shape object

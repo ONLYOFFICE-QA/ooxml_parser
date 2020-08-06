@@ -11,7 +11,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @styles = []
-      @parent = parent
+      super
     end
 
     # Parse styles data

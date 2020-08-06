@@ -11,7 +11,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @table_column_array = []
-      @parent = parent
+      super
     end
 
     # @return [Array, TableColumn] accessor

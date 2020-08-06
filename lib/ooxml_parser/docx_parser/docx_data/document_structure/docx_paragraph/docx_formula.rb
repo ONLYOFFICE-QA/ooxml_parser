@@ -24,7 +24,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @formula_run = []
-      @parent = parent
+      super
     end
 
     # Parse DocxFormula object

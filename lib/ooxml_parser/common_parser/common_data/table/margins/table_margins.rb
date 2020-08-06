@@ -11,7 +11,7 @@ module OoxmlParser
       @bottom = bottom
       @left = left
       @right = right
-      @parent = parent
+      super(parent: parent)
     end
 
     # TODO: Separate @is_default attribute and remove this method

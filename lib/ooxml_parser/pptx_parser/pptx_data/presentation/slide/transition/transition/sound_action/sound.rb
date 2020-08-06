@@ -10,7 +10,7 @@ module OoxmlParser
     def initialize(path = '', name = '', parent: nil)
       @path = path
       @name = name
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse Sound

@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @comments = []
-      @parent = parent
+      super
     end
 
     # Parse Author object

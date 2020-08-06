@@ -39,7 +39,7 @@ module OoxmlParser
                              :multiple)
       @keep_next = false
       @tabs = []
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse ParagraphProperties object

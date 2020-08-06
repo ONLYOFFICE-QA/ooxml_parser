@@ -9,7 +9,7 @@ module OoxmlParser
       @horizontal = params.fetch(:horizontal, :left)
       @vertical = params.fetch(:vertical, :bottom)
       @wrap_text = params.fetch(:wrap_text, false)
-      @parent = params[:parent]
+      super(parent: params[:parent])
     end
 
     # Parse XlsxAlignment object

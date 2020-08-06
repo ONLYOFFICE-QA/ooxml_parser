@@ -9,8 +9,8 @@ module OoxmlParser
     attr_accessor :content_types_list
 
     def initialize(parent: nil)
-      @parent = parent
       @content_types_list = []
+      super
     end
 
     # @return [Array] accessor

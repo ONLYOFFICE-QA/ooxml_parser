@@ -17,7 +17,7 @@ module OoxmlParser
       @value = value
       @color = color
       @fill = fill
-      @parent = parent
+      super(parent: parent)
     end
 
     # @return [String] text representation

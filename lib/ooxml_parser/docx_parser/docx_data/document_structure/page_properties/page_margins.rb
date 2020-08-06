@@ -14,6 +14,7 @@ module OoxmlParser
       @footer = params[:footer]
       @gutter = params[:gutter]
       @parent = params[:parent]
+      super(parent: nil)
     end
 
     # Parse BordersProperties

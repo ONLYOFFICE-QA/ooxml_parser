@@ -8,7 +8,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @list = ''
       @points = []
-      @parent = parent
+      super
     end
 
     # Parse ChartCellsRange object

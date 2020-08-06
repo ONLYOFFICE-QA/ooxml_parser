@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @shape_guides_list = []
-      @parent = parent
+      super
     end
 
     # @return [Array, Column] accessor for relationship

@@ -13,7 +13,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @string_indexes = []
-      @parent = parent
+      super
     end
 
     # Parse Shared string table file

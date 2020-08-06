@@ -16,7 +16,7 @@ module OoxmlParser
       @display = params.fetch(:display, true)
       @minor_grid_lines = params.fetch(:minor_grid_lines, false)
       @major_grid_lines = params.fetch(:major_grid_lines, false)
-      @parent = params[:parent]
+      super(parent: params[:parent])
     end
 
     # Parse ChartAxis object

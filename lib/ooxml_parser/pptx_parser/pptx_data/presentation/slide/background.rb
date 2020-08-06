@@ -10,7 +10,7 @@ module OoxmlParser
 
     def initialize(type = nil, parent: nil)
       @type = type
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse Background object

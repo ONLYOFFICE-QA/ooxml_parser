@@ -8,7 +8,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @begin_character = '('
       @end_character = ')'
-      @parent = parent
+      super
     end
 
     # Parse Delimiter object

@@ -14,7 +14,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @abstract_numbering_list = []
       @numbering_definition_list = []
-      @parent = parent
+      super
     end
 
     # Get properties by number id

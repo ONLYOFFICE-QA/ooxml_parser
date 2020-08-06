@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @number_formats_array = []
-      @parent = parent
+      super
     end
 
     # Parse NumberFormats data

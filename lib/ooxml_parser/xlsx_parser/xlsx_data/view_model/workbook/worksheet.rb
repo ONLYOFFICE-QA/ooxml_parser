@@ -39,7 +39,7 @@ module OoxmlParser
       @drawings = []
       @sheet_views = []
       @table_parts = []
-      @parent = parent
+      super
     end
 
     # Perform parsing of relationships

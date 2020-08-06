@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @tabs_array = []
-      @parent = parent
+      super
     end
 
     # @return [Array, Column] accessor

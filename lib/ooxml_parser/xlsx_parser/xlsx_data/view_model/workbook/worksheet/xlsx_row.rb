@@ -12,7 +12,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @cells = []
-      @parent = parent
+      super
     end
 
     # Parse XlsxRow object

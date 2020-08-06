@@ -18,7 +18,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @notes = []
-      @parent = parent
+      super
     end
 
     # Parse PageProperties data

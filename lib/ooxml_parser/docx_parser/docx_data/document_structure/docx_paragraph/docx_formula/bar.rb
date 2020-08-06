@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @position = :bottom
-      @parent = parent
+      super
     end
 
     # Parse Bar object

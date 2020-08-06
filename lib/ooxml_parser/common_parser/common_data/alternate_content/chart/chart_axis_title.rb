@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @elements = []
-      @parent = parent
+      super
     end
 
     # @return [Boolean] if chart title is visible

@@ -15,7 +15,7 @@ module OoxmlParser
       @between = BordersProperties.new
       @inner_horizontal = BordersProperties.new
       @inner_vertical = BordersProperties.new
-      @parent = parent
+      super
     end
 
     # Method to copy object

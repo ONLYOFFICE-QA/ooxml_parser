@@ -19,6 +19,7 @@ module OoxmlParser
       @default_font_size = params.fetch(:default_font_size, 18)
       @default_font_typeface = params.fetch(:default_font_typeface, 'Arial')
       @default_font_style = FontStyle.new
+      super(parent: nil)
     end
   end
 end

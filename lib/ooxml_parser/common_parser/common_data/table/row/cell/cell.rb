@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @elements = []
-      @parent = parent
+      super
     end
 
     alias cell_properties properties

@@ -8,7 +8,7 @@ module OoxmlParser
     def initialize(offset = nil, ratio = nil, parent: nil)
       @offset = offset
       @ratio = ratio
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse Tile object

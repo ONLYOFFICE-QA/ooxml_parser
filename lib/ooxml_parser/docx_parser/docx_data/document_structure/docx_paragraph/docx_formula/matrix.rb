@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @rows = []
-      @parent = parent
+      super
     end
 
     # Parse Matrix object

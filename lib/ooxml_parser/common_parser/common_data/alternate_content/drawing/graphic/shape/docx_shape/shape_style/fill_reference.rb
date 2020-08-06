@@ -8,10 +8,6 @@ module OoxmlParser
     # @return [Color] scheme color of FillReference
     attr_reader :scheme_color
 
-    def initialize(parent: nil)
-      @parent = parent
-    end
-
     # Parse FillReference object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [FillReference] result of parsing

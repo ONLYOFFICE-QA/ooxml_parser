@@ -12,7 +12,7 @@ module OoxmlParser
 
     def initialize(rows = [], parent: nil)
       @rows = rows
-      @parent = parent
+      super(parent: parent)
     end
 
     alias table_properties properties

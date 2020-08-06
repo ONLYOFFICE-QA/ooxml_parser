@@ -15,7 +15,7 @@ module OoxmlParser
     def initialize(type = :header, parent: nil)
       @type = type
       @elements = []
-      @parent = parent
+      super(parent: parent)
     end
 
     # @return [String] string for search of xpath

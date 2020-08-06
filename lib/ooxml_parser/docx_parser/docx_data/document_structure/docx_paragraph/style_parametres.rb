@@ -9,7 +9,7 @@ module OoxmlParser
       @name = params[:name]
       @q_format = params.fetch(:q_format, false)
       @hidden = params.fetch(:hidden, false)
-      @parent = params[:parent]
+      super(parent: params[:parent])
     end
 
     # Parse StyleParametres data
