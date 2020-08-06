@@ -138,12 +138,7 @@ module OoxmlParser
                       parse_properties(plot_area_node_child)
                     end
                   end
-                  chart_node_child.xpath('*').each do |plot_area_node_child|
-                    case plot_area_node_child.name
-                    when 'catAx', 'valAx'
-                      @axises << ChartAxis.new(parent: self).parse(plot_area_node_child)
-                    end
-                  end
+                  parse_axis(chart_node_child)
                   @plot_area = PlotArea.new(parent: self).parse(chart_node_child)
                 when 'title'
                   @title = ChartAxisTitle.new(parent: self).parse(chart_node_child)
@@ -160,6 +155,20 @@ module OoxmlParser
         end
       end
       self
+    end
+
+    private
+
+    # Perform parsing of axis info
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [void]
+    def parse_axis(node)
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'catAx', 'valAx'
+          @axises << ChartAxis.new(parent: self).parse(node_child)
+        end
+      end
     end
   end
 end
