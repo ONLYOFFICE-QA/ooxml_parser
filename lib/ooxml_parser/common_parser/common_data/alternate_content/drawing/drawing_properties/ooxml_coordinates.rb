@@ -20,7 +20,7 @@ module OoxmlParser
 
     # @return [String] result of convert of object to string
     def to_s
-      '(' + @x.to_s + '; ' + @y.to_s + ')'
+      "(#{@x}; #{@y})"
     end
 
     # Compare two OOXMLCoordinates objects

@@ -38,7 +38,7 @@ module OoxmlParser
     # Parse Numbering data
     # @return [Numbering] result of parse
     def parse
-      numbering_xml = OOXMLDocumentObject.path_to_folder + 'word/numbering.xml'
+      numbering_xml = "#{OOXMLDocumentObject.path_to_folder}word/numbering.xml"
       return nil unless File.exist?(numbering_xml)
 
       node = parse_xml(File.open(numbering_xml))

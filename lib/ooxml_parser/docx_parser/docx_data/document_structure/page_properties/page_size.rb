@@ -13,7 +13,7 @@ module OoxmlParser
 
     # @return [String] convert to string
     def to_s
-      'Height: ' + @height.to_s + ' Width: ' + @width.to_s + ' Orientation: ' + @orientation.to_s
+      "Height: #{@height} Width: #{@width} Orientation: #{@orientation}"
     end
 
     # @return [True, False] compare dimensions of size, ignoring orientation

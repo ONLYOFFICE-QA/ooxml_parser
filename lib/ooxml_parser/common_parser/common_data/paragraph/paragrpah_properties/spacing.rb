@@ -48,7 +48,7 @@ module OoxmlParser
       result_string = ''
       variables = instance_variables
       variables.each do |current_variable|
-        result_string += current_variable.to_s.sub('@', '') + ': ' + instance_variable_get(current_variable).to_s + "\n"
+        result_string += "#{current_variable.to_s.sub('@', '')}: #{instance_variable_get(current_variable)}\n"
       end
       result_string
     end

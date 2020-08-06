@@ -80,23 +80,6 @@ Style/OptionalBooleanParameter:
     - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/style_parametres.rb'
     - 'lib/ooxml_parser/xlsx_parser/xlsx_data/view_model/workbook/style_sheet/cell_xfs/cell_style/alignment.rb'
 
-# Offense count: 12
-# Cop supports --auto-correct.
-Style/StringConcatenation:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/drawing/drawing_properties/ooxml_coordinates.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/ooxml_document_object.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/paragraph/paragrpah_properties/spacing.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/table/margins/table_margins.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/comments.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/comments_extended.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/document_settings.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/numbering.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/page_properties/page_size.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/styles.rb'
-
 # Offense count: 538
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.

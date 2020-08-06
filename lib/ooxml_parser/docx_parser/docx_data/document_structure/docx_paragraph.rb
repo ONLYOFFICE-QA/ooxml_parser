@@ -247,7 +247,7 @@ module OoxmlParser
     # @param character_style [DocxParagraphRun] style to parse
     # @return [void]
     def parse_paragraph_style_xml(id, character_style)
-      doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
+      doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}word/styles.xml")
       doc.search('//w:style').each do |style|
         next unless style.attribute('styleId').value == id
 
