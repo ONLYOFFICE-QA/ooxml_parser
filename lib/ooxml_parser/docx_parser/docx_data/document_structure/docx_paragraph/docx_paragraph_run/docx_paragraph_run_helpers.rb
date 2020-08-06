@@ -51,33 +51,14 @@ module OoxmlParser
         when 'smallCaps'
           self.caps = :small_caps if option_enabled?(node_child)
         when 'color'
-          node_child.attributes.each do |key, value|
-            case key
-            when 'val'
-              self.font_color = Color.new(parent: self).parse_hex_string(value.value)
-            when 'themeColor'
-              if root_object.theme && root_object.theme.color_scheme[value.value.to_sym]
-                break if value.value == 'text2' || value.value == 'background2' || value.value.include?('accent') # Don't know why. Just works
-
-                self.font_color = root_object.theme.color_scheme[value.value.to_sym].color.dup
-              end
-            when 'themeShade'
-              font_color.calculate_with_shade!(value.value.hex.to_f / 255.0)
-            when 'themeTint'
-              font_color.calculate_with_tint!(1.0 - (value.value.hex.to_f / 255.0))
-            end
-          end
+          parse_color_tag(node_child)
         when 'shd'
           self.background_color = node_child.attribute('fill').value
           unless node_child.attribute('fill').value == 'auto' || node_child.attribute('fill').value == '' || node_child.attribute('fill').value == 'null'
             self.background_color = Color.new(parent: self).parse_hex_string(node_child.attribute('fill').value)
           end
         when 'u', 'uCs'
-          font_style.underlined = Underline.new
-          if option_enabled?(node_child)
-            font_style.underlined.style = node_child.attribute('val').value
-            font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(node_child.attribute('color').value) unless node_child.attribute('color').nil?
-          end
+          parse_underline(node_child)
         when 'strike'
           font_style.strike = :single if option_enabled?(node_child)
         when 'dstrike'
@@ -85,6 +66,42 @@ module OoxmlParser
         end
       end
       self
+    end
+
+    private
+
+    # Parse `color` tag
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [nil]
+    def parse_color_tag(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'val'
+          self.font_color = Color.new(parent: self).parse_hex_string(value.value)
+        when 'themeColor'
+          if root_object.theme && root_object.theme.color_scheme[value.value.to_sym]
+            break if value.value == 'text2' || value.value == 'background2' || value.value.include?('accent') # Don't know why. Just works
+
+            self.font_color = root_object.theme.color_scheme[value.value.to_sym].color.dup
+          end
+        when 'themeShade'
+          font_color.calculate_with_shade!(value.value.hex.to_f / 255.0)
+        when 'themeTint'
+          font_color.calculate_with_tint!(1.0 - (value.value.hex.to_f / 255.0))
+        end
+      end
+    end
+
+    # Parse `u` or `uCs` tag
+    # @param node [Nokogiri::XML:Element] node to parse
+    # @return [nil]
+    def parse_underline(node)
+      font_style.underlined = Underline.new
+
+      return unless option_enabled?(node)
+
+      font_style.underlined.style = node.attribute('val').value
+      font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(node.attribute('color').value) unless node.attribute('color').nil?
     end
   end
 end
