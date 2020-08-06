@@ -5,11 +5,11 @@ module OoxmlParser
   class XlsxAlignment < OOXMLDocumentObject
     attr_accessor :horizontal, :vertical, :wrap_text, :text_rotation
 
-    def initialize(horizontal = :left, vertical = :bottom, wrap_text = false, parent: nil)
-      @horizontal = horizontal
-      @vertical = vertical
-      @wrap_text = wrap_text
-      @parent = parent
+    def initialize(params = {})
+      @horizontal = params.fetch(:horizontal, :left)
+      @vertical = params.fetch(:vertical, :bottom)
+      @wrap_text = params.fetch(:wrap_text, false)
+      @parent = params[:parent]
     end
 
     # Parse XlsxAlignment object

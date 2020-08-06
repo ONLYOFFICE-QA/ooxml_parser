@@ -5,12 +5,10 @@ module OoxmlParser
   class ChartLegend < OOXMLDocumentObject
     attr_accessor :position, :overlay
 
-    def initialize(position = :right,
-                   overlay = false,
-                   parent: nil)
-      @position = position
-      @overlay = overlay
-      @parent = parent
+    def initialize(params = {})
+      @position = params.fetch(:position, :right)
+      @overlay = params.fetch(:overlay, false)
+      @parent = params[:parent]
     end
 
     # Return combined data from @position and @overlay
