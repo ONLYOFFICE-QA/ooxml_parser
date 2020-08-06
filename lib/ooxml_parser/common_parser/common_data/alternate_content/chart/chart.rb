@@ -74,94 +74,92 @@ module OoxmlParser
     extend Gem::Deprecate
     deprecate :data, 'series points interface', 2020, 1
 
-    # Parse  Chart
-    # @param parent [OOOXMLDocumentObject] parent of chart
+    # Parse Chart data
     # @return [Chart] result of parsing
-    def self.parse(parent: nil)
-      chart = Chart.new(parent: parent)
-      chart_xml = chart.parse_xml(OOXMLDocumentObject.current_xml)
+    def parse
+      chart_xml = parse_xml(OOXMLDocumentObject.current_xml)
       chart_xml.xpath('*').each do |chart_node|
         case chart_node.name
         when 'chartSpace'
           chart_node.xpath('*').each do |chart_space_node_child|
             case chart_space_node_child.name
             when 'AlternateContent'
-              chart.alternate_content = AlternateContent.new(parent: chart).parse(chart_space_node_child)
+              @alternate_content = AlternateContent.new(parent: self).parse(chart_space_node_child)
             when 'spPr'
-              chart.shape_properties = DocxShapeProperties.new(parent: chart).parse(chart_space_node_child)
+              @shape_properties = DocxShapeProperties.new(parent: self).parse(chart_space_node_child)
             when 'chart'
               chart_space_node_child.xpath('*').each do |chart_node_child|
                 case chart_node_child.name
                 when 'plotArea'
                   chart_node_child.xpath('*').each do |plot_area_node_child|
-                    next unless chart.type.empty?
+                    next unless type.empty?
 
                     case plot_area_node_child.name
                     when 'barChart'
-                      chart.type = :bar
+                      @type = :bar
                       bar_dir_node = plot_area_node_child.xpath('c:barDir')
-                      chart.type = :column if bar_dir_node.first.attribute('val').value == 'col'
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :column if bar_dir_node.first.attribute('val').value == 'col'
+                      parse_properties(plot_area_node_child)
                     when 'lineChart'
-                      chart.type = :line
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :line
+                      parse_properties(plot_area_node_child)
                     when 'areaChart'
-                      chart.type = :area
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :area
+                      parse_properties(plot_area_node_child)
                     when 'bubbleChart'
-                      chart.type = :bubble
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :bubble
+                      parse_properties(plot_area_node_child)
                     when 'doughnutChart'
-                      chart.type = :doughnut
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :doughnut
+                      parse_properties(plot_area_node_child)
                     when 'pieChart'
-                      chart.type = :pie
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :pie
+                      parse_properties(plot_area_node_child)
                     when 'scatterChart'
-                      chart.type = :point
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :point
+                      parse_properties(plot_area_node_child)
                     when 'radarChart'
-                      chart.type = :radar
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :radar
+                      parse_properties(plot_area_node_child)
                     when 'stockChart'
-                      chart.type = :stock
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :stock
+                      parse_properties(plot_area_node_child)
                     when 'surface3DChart'
-                      chart.type = :surface_3d
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :surface_3d
+                      parse_properties(plot_area_node_child)
                     when 'line3DChart'
-                      chart.type = :line_3d
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :line_3d
+                      parse_properties(plot_area_node_child)
                     when 'bar3DChart'
-                      chart.type = :bar_3d
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :bar_3d
+                      parse_properties(plot_area_node_child)
                     when 'pie3DChart'
-                      chart.type = :pie_3d
-                      chart.parse_properties(plot_area_node_child)
+                      @type = :pie_3d
+                      parse_properties(plot_area_node_child)
                     end
                   end
                   chart_node_child.xpath('*').each do |plot_area_node_child|
                     case plot_area_node_child.name
                     when 'catAx', 'valAx'
-                      chart.axises << ChartAxis.new(parent: chart).parse(plot_area_node_child)
+                      @axises << ChartAxis.new(parent: self).parse(plot_area_node_child)
                     end
                   end
-                  chart.plot_area = PlotArea.new(parent: chart).parse(chart_node_child)
+                  @plot_area = PlotArea.new(parent: self).parse(chart_node_child)
                 when 'title'
-                  chart.title = ChartAxisTitle.new(parent: chart).parse(chart_node_child)
+                  @title = ChartAxisTitle.new(parent: self).parse(chart_node_child)
                 when 'legend'
-                  chart.legend = ChartLegend.new(parent: chart).parse(chart_node_child)
+                  @legend = ChartLegend.new(parent: self).parse(chart_node_child)
                 when 'view3D'
-                  chart.view_3d = View3D.new(parent: chart).parse(chart_node_child)
+                  @view_3d = View3D.new(parent: self).parse(chart_node_child)
                 when 'pivotFmts'
-                  chart.pivot_formats = PivotFormats.new(parent: chart).parse(chart_node_child)
+                  @pivot_formats = PivotFormats.new(parent: self).parse(chart_node_child)
                 end
               end
             end
           end
         end
       end
-      chart
+      self
     end
   end
 end
