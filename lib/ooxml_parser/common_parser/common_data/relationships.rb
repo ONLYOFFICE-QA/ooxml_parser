@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @relationship = []
-      @parent = parent
+      super
     end
 
     # @return [Array, Column] accessor for relationship

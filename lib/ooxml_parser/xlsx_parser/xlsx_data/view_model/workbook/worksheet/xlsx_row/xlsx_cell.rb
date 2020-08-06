@@ -18,7 +18,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @style_index = 0 # default style is zero
       @raw_text = ''
-      @parent = parent
+      super
     end
 
     # Parse XlsxCell object

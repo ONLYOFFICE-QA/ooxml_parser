@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @list = []
-      @parent = parent
+      super
     end
 
     # Parse ConditionList object

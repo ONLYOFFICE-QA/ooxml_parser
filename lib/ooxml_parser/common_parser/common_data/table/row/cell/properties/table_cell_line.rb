@@ -9,7 +9,7 @@ module OoxmlParser
     def initialize(fill = nil, line_join = nil, parent: nil)
       @fill = fill
       @line_join = line_join
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse TableCellLine object

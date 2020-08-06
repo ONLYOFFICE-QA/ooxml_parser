@@ -108,7 +108,7 @@ module OoxmlParser
 
       # @return [String] dir to base of file
       def dir
-        OOXMLDocumentObject.path_to_folder + File.dirname(OOXMLDocumentObject.xmls_stack.last) + '/'
+        "#{OOXMLDocumentObject.path_to_folder}#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/"
       end
 
       # @return [String] path to current xml file

@@ -9,8 +9,8 @@ module OoxmlParser
     attr_reader :type
 
     def initialize(type = :string, parent: nil)
-      @parent = parent
       @type = type
+      super(parent: parent)
     end
 
     # Parse ValuedChild object

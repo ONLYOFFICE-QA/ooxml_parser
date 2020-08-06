@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @paragraphs = []
-      @parent = parent
+      super
     end
 
     # Parse TextBody object

@@ -12,6 +12,7 @@ module OoxmlParser
     def initialize(name = '', color_scheme = {})
       @name = name
       @color_scheme = color_scheme
+      super(parent: nil)
     end
 
     # Parse PresentationTheme

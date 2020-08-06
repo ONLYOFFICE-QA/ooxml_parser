@@ -8,7 +8,7 @@ module OoxmlParser
     def initialize(style = :none, color = nil, parent: nil)
       @style = style == 'single' ? :single : style
       @color = color
-      @parent = parent
+      super(parent: parent)
     end
 
     # Compare this object to other

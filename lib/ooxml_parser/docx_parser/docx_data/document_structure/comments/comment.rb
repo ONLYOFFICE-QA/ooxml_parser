@@ -11,7 +11,7 @@ module OoxmlParser
     def initialize(id = nil, paragraphs = [], parent: nil)
       @id = id
       @paragraphs = paragraphs
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse Comment object

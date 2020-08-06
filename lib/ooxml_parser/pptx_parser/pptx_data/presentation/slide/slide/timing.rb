@@ -10,7 +10,7 @@ module OoxmlParser
       @time_node_list = []
       @build_list = []
       @extension_list = []
-      @parent = parent
+      super
     end
 
     # Parse Timing object

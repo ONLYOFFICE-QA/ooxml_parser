@@ -16,7 +16,7 @@ module OoxmlParser
       @runs = runs
       @formulas = formulas
       @runs = []
-      @parent = parent
+      super(parent: parent)
     end
 
     alias characters runs

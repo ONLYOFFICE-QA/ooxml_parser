@@ -8,8 +8,8 @@ module OoxmlParser
     attr_reader :pivot_formats_list
 
     def initialize(parent: nil)
-      @parent = parent
       @pivot_formats_list = []
+      super
     end
 
     # @return [Array, PivotFormat] accessor

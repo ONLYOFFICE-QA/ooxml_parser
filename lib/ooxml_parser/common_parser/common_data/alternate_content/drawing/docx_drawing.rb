@@ -16,7 +16,7 @@ module OoxmlParser
 
     def initialize(properties = DocxDrawingProperties.new, parent: nil)
       @properties = properties
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse DocxDrawing

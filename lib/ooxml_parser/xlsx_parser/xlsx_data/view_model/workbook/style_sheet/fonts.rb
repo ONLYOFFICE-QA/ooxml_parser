@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @fonts_array = []
-      @parent = parent
+      super
     end
 
     # @return [Array<Font>] accessor

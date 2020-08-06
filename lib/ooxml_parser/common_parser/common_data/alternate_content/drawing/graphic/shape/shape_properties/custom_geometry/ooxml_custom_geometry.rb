@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(paths_list = [], parent: nil)
       @paths_list = paths_list
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse OOXMLCustomGeometry object

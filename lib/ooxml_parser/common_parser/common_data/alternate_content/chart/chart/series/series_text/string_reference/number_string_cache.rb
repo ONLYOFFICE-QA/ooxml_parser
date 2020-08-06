@@ -13,7 +13,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @points = []
-      @parent = parent
+      super
     end
 
     # Parse Order

@@ -23,7 +23,7 @@ module OoxmlParser
       @number_formats = NumberFormats.new(parent: self)
       @fonts = Fonts.new(parent: self)
       @fills = Fills.new(parent: self)
-      @parent = parent
+      super
     end
 
     # Parse StyleSheet object

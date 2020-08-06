@@ -11,9 +11,9 @@ module OoxmlParser
     attr_accessor :show_row_column_headers
 
     def initialize(parent: nil)
-      @parent = parent
       @show_gridlines = true
       @show_row_column_headers = true
+      super
     end
 
     # Parse SheetView object

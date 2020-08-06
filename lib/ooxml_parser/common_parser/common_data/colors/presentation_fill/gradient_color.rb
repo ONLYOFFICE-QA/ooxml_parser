@@ -11,7 +11,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @gradient_stops = []
-      @parent = parent
+      super
     end
 
     # Parse GradientColor object

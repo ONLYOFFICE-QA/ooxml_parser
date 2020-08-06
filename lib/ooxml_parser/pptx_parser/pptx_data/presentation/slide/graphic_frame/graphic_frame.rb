@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(graphic_data = [], parent: nil)
       @graphic_data = graphic_data
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse GraphicFrame object

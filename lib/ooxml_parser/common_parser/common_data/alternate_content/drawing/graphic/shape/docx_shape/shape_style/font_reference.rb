@@ -8,10 +8,6 @@ module OoxmlParser
     # @return [Color] scheme color of FontReference
     attr_reader :scheme_color
 
-    def initialize(parent: nil)
-      @parent = parent
-    end
-
     # Parse FontReference object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [FontReference] result of parsing

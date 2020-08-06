@@ -6,6 +6,7 @@
 
 * Remove unused `HyperlinkForHover` class
 * Replace `Chart.parse` method to `Chart#parse`
+* Fix new warnings from `rubocop` v0.89.0 update
 
 ## 0.8.1 (2020-08-04)
 

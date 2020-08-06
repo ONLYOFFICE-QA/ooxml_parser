@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @degree = 2
-      @parent = parent
+      super
     end
 
     # Parse Radical object

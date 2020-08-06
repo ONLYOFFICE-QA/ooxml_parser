@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(columns_count = 1, parent: nil)
       @columns = Array.new(columns_count)
-      @parent = parent
+      super(parent: parent)
     end
   end
 end

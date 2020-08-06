@@ -8,7 +8,7 @@ module OoxmlParser
     def initialize(type = '', id = '', parent: nil)
       @type = type
       @id = id
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse TargetElement object

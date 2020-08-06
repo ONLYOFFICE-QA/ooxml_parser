@@ -8,7 +8,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @color = Color.new
       @type = :unknown
-      @parent = parent
+      super
     end
 
     # Parse DocxColorScheme object

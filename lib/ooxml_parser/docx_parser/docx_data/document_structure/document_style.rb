@@ -41,7 +41,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @q_format = false
       @table_style_properties_list = []
-      @parent = parent
+      super
     end
 
     # @return [String] result of convert of object to string

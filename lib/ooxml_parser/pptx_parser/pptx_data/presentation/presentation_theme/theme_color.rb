@@ -8,7 +8,7 @@ module OoxmlParser
     def initialize(type: '', color: nil, parent: nil)
       @type = type
       @color = color
-      @parent = parent
+      super(parent: parent)
     end
 
     # Compare ThemeColor with other object

@@ -11,7 +11,7 @@ module OoxmlParser
       @bottom = bottom
       @left = left
       @right = right
-      @parent = parent
+      super(parent: parent)
     end
 
     # TODO: Separate @is_default attribute and remove this method
@@ -29,7 +29,7 @@ module OoxmlParser
 
     # @return [String] result of convert of object to string
     def to_s
-      'Default: ' + is_default.to_s + ' top: ' + @top.to_s + ', bottom: ' + @bottom.to_s + ', left: ' + @left.to_s + ', right: ' + @right.to_s
+      "Default: #{is_default} top: #{@top}, bottom: #{@bottom}, left: #{@left}, right: #{@right}"
     end
 
     # Parse TableMargins object

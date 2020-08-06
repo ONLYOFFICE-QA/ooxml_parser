@@ -9,7 +9,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @width = OoxmlSize.new(0)
       @color_scheme = :none
-      @parent = parent
+      super
     end
 
     # Parse TextOutline object

@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @sparklines_groups = []
-      @parent = parent
+      super
     end
 
     # @return [SparklineGroup] accessor

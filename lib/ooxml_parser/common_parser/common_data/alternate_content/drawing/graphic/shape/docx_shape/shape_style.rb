@@ -16,10 +16,6 @@ module OoxmlParser
     # @return [LineReference] line reference
     attr_reader :line_reference
 
-    def initialize(parent: nil)
-      @parent = parent
-    end
-
     # Parse ShapeStyle object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [ShapeStyle] result of parsing

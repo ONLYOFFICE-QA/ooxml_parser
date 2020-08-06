@@ -10,7 +10,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @runs = []
-      @parent = parent
+      super
     end
 
     # Parse FieldSimple object

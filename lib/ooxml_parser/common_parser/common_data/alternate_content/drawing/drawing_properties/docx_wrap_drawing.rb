@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @wrap_text = :none
-      @parent = parent
+      super
     end
 
     # Parse DocxWrapDrawing object

@@ -56,7 +56,7 @@ module OoxmlParser
       @font_name = params.fetch(:font_name, '')
       @font_style = FontStyle.new
       @baseline = :baseline
-      @parent = params[:parent]
+      super(parent: params[:parent])
     end
 
     # Parse RunProperties object

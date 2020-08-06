@@ -9,7 +9,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @characters = []
-      @parent = parent
+      super
     end
 
     # Parse ExcelComment object

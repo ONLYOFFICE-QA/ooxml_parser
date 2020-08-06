@@ -40,7 +40,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @jc = :left
       @table_borders = TableBorders.new
-      @parent = parent
+      super
     end
 
     # Parse TableProperties object

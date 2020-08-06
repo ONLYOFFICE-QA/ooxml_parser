@@ -217,7 +217,7 @@ module OoxmlParser
     # Parse default style
     # @return [void]
     def parse_default_style
-      doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
+      doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}word/styles.xml")
       doc.search('//w:style').each do |style|
         next if style.attribute('default').nil?
 

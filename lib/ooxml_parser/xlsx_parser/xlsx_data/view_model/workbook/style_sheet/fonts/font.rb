@@ -10,7 +10,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @name = 'Calibri'
       @size = 11
-      @parent = parent
+      super
     end
 
     # Parse Font object

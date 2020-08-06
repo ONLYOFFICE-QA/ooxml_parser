@@ -6,7 +6,7 @@ module OoxmlParser
   class CommentsExtended < OOXMLDocumentObject
     def initialize(parent: nil)
       @comments_extended_array = []
-      @parent = parent
+      super
     end
 
     # @return [Array, CommentsExtended] accessor
@@ -17,7 +17,7 @@ module OoxmlParser
     # Parse CommentsExtended object
     # @return [CommentsExtended] result of parsing
     def parse
-      file_to_parse = OOXMLDocumentObject.path_to_folder + 'word/commentsExtended.xml'
+      file_to_parse = "#{OOXMLDocumentObject.path_to_folder}word/commentsExtended.xml"
       return nil unless File.exist?(file_to_parse)
 
       doc = parse_xml(file_to_parse)

@@ -11,10 +11,10 @@ module OoxmlParser
     # @return [True, False] is label is deleted
     attr_reader :delete
 
-    def initialize(show_legend_key = false, show_values = false, parent: nil)
-      @show_legend_key = show_legend_key
-      @show_values = show_values
-      @parent = parent
+    def initialize(params = {})
+      @show_legend_key = params.fetch(:show_legend_key, false)
+      @show_values = params.fetch(:show_values, false)
+      super(parent: params[:parent])
     end
 
     # Parse DisplayLabelsProperties object

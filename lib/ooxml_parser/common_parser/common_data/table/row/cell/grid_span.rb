@@ -10,7 +10,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @type = 'horizontal'
-      @parent = parent
+      super
     end
 
     alias count_of_merged_cells value

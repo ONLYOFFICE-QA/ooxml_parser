@@ -10,7 +10,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @path = ''
-      @parent = parent
+      super
     end
 
     # Parse ImageFill object

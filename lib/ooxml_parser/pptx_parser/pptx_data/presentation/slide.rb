@@ -24,8 +24,8 @@ module OoxmlParser
     attr_reader :note
 
     def initialize(parent: nil, xml_path: nil)
-      @parent = parent
       @xml_path = xml_path
+      super(parent: parent)
     end
 
     # @return [True, False] is slide with data

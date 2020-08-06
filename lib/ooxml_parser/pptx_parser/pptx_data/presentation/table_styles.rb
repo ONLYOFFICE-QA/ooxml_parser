@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @table_style_list = []
-      @parent = parent
+      super
     end
 
     # Parse TableStyles object

@@ -27,8 +27,8 @@ module OoxmlParser
       @url = link
       @tooltip = tooltip
       @coordinates = coordinates
-      @parent = parent
       @runs = []
+      super(parent: parent)
     end
 
     alias link url

@@ -11,13 +11,13 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @styles = []
-      @parent = parent
+      super
     end
 
     # Parse styles data
     # @return [Styles] result of parsing
     def parse
-      doc = parse_xml(OOXMLDocumentObject.path_to_folder + 'word/styles.xml')
+      doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}word/styles.xml")
       doc.xpath('w:styles/*').each do |node_child|
         case node_child.name
         when 'docDefaults'

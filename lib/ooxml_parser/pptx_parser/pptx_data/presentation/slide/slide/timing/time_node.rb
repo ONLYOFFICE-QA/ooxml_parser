@@ -12,7 +12,7 @@ module OoxmlParser
       @type = type
       @previous_conditions_list = []
       @next_conditions_list = []
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse TimeNode

@@ -8,10 +8,6 @@ module OoxmlParser
     # @return [Color] scheme color of EffectReference
     attr_reader :scheme_color
 
-    def initialize(parent: nil)
-      @parent = parent
-    end
-
     # Parse EffectReference object
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [EffectReference] result of parsing

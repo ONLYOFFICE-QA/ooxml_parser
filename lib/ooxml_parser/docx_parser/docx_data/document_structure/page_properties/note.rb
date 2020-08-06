@@ -7,6 +7,7 @@ module OoxmlParser
 
     def initialize
       @elements = []
+      super(parent: nil)
     end
 
     # Parse note data

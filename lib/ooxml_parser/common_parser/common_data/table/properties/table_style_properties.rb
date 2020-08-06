@@ -23,7 +23,7 @@ module OoxmlParser
       @type = type
       @run_properties = nil
       @table_cell_properties = CellProperties.new
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse table style property

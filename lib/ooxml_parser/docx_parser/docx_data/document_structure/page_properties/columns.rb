@@ -19,6 +19,7 @@ module OoxmlParser
     def initialize(columns_count = 0)
       @count = columns_count
       @column_array = []
+      super(parent: nil)
     end
 
     # @return [Array, Column] accessor

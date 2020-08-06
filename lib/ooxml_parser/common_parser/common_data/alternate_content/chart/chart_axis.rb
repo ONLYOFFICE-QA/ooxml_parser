@@ -11,16 +11,12 @@ module OoxmlParser
     # @return [ValuedChild] the position of the tick labels
     attr_reader :tick_label_position
 
-    def initialize(title = ChartAxisTitle.new,
-                   display = true,
-                   major_grid_lines = false,
-                   minor_grid_lines = false,
-                   parent: nil)
-      @title = title
-      @display = display
-      @minor_grid_lines = minor_grid_lines
-      @major_grid_lines = major_grid_lines
-      @parent = parent
+    def initialize(params = {})
+      @title = params.fetch(:title, ChartAxisTitle.new)
+      @display = params.fetch(:display, true)
+      @minor_grid_lines = params.fetch(:minor_grid_lines, false)
+      @major_grid_lines = params.fetch(:major_grid_lines, false)
+      super(parent: params[:parent])
     end
 
     # Parse ChartAxis object

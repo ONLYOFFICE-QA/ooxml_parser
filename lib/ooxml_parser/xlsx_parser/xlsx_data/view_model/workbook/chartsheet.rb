@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @sheet_views = []
-      @parent = parent
+      super
     end
 
     # Parse Chartsheet object

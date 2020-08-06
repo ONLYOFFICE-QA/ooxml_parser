@@ -7,7 +7,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @borders = false
-      @parent = parent
+      super
     end
 
     # Parse Box object

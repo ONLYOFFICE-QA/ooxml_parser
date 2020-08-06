@@ -5,14 +5,11 @@ module OoxmlParser
   class StyleParametres < OOXMLDocumentObject
     attr_accessor :q_format, :hidden, :name
 
-    def initialize(name = nil,
-                   q_format = false,
-                   hidden = false,
-                   parent: nil)
-      @name = name
-      @q_format = q_format
-      @hidden = hidden
-      @parent = parent
+    def initialize(params = {})
+      @name = params[:name]
+      @q_format = params.fetch(:q_format, false)
+      @hidden = params.fetch(:hidden, false)
+      super(parent: params[:parent])
     end
 
     # Parse StyleParametres data

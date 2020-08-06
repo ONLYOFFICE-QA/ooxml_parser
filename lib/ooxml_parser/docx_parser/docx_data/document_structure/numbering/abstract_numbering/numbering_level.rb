@@ -26,8 +26,8 @@ module OoxmlParser
     attr_accessor :suffix
 
     def initialize(parent: nil)
-      @parent = parent
       @suffix = Suffix.new(parent: self)
+      super
     end
 
     # Parse Numbering Level data

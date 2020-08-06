@@ -14,7 +14,7 @@ module OoxmlParser
     def initialize(properties = RunProperties.new, text = '', parent: nil)
       @properties = properties
       @text = text
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse ParagraphRun object

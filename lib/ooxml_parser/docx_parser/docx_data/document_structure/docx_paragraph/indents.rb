@@ -14,7 +14,7 @@ module OoxmlParser
       @left_indent = left_indent
       @right_indent = right_indent
       @hanging_indent = hanging_indent
-      @parent = parent
+      super(parent: parent)
     end
 
     alias first_line first_line_indent

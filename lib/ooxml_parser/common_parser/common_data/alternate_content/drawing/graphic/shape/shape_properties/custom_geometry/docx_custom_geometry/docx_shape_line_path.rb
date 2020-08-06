@@ -8,7 +8,7 @@ module OoxmlParser
 
     def initialize(elements = [], parent: nil)
       @elements = elements
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse DocxShapeLinePath object

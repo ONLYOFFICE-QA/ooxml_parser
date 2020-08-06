@@ -43,7 +43,7 @@ module OoxmlParser
       @red = new_red
       @green = new_green
       @blue = new_blue
-      @parent = parent
+      super(parent: parent)
     end
 
     # @return [String] result of convert of object to string

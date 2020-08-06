@@ -14,7 +14,7 @@ module OoxmlParser
     def initialize(value = :tab,
                    parent: nil)
       @value = value
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse Suffix

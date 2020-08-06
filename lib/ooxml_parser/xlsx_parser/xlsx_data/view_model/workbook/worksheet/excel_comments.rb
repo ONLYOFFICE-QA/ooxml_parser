@@ -13,7 +13,7 @@ module OoxmlParser
     def initialize(parent: nil)
       @authors = []
       @comment_list = []
-      @parent = parent
+      super
     end
 
     # @return [Array<ExcelComment>] list of comments

@@ -16,7 +16,7 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @level_list = []
-      @parent = parent
+      super
     end
 
     # Parse Abstract Numbering data
