@@ -7,6 +7,7 @@
 * Remove unused `HyperlinkForHover` class
 * Replace `Chart.parse` method to `Chart#parse`
 * Fix new warnings from `rubocop` v0.89.0 update
+* Change `HslColor.rgb_to_hsl` to `Color#to_hsl`
 
 ## 0.8.1 (2020-08-04)
 
