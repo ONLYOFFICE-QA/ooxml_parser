@@ -68,7 +68,7 @@ module OoxmlParser
         if file_result.include?('encrypted') ||
            file_result.include?('Composite Document File V2 Document, No summary info') ||
            file_result.include?('application/CDFV2-corrupt')
-          warn("File #{path_to_file} is encrypted. Can't parse it")
+          warn("File #{path} is encrypted. Can't parse it")
           return true
         end
         false
