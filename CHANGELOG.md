@@ -10,6 +10,7 @@
 * Change `HslColor.rgb_to_hsl` to `Color#to_hsl`
 * Remove deprecated `GridSpan#count_of_merged_cells`
   and `GridSpan#type`
+* Change `OOXMLDocumentObject.encrypted_file?` to use keyword arguments
 
 ## 0.8.1 (2020-08-04)
 

@@ -52,16 +52,16 @@ module OoxmlParser
       # @return [String] path to root folder
       attr_accessor :path_to_folder
 
-      # @param path_to_file [String] file
+      # @param path [String] file path
       # @param ignore_system [True, False] should host system be ignored, since
       #   this method is OS-dependent
       # @return [True, False] Check if file is protected by password on open
-      def encrypted_file?(path_to_file, ignore_system: false)
+      def encrypted_file?(path: nil, ignore_system: false)
         if Gem.win_platform? || ignore_system
           warn 'FileMagic and checking file for encryption is not supported on Windows'
           return false
         end
-        file_result = FileMagic.new(:mime).file(path_to_file)
+        file_result = FileMagic.new(:mime).file(path)
         # Support of Encrtypted status in `file` util was introduced in file v5.20
         # but LTS version of ubuntu before 16.04 uses older `file` and it return `Composite Document`
         # https://github.com/file/file/blob/master/ChangeLog#L217

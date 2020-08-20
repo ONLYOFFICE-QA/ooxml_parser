@@ -12,7 +12,8 @@ describe OoxmlParser::OOXMLDocumentObject do
   describe 'Class methods' do
     describe 'OOXMLDocumentObject.encrypted_file?' do
       it 'OOXMLDocumentObject.encrypted_file?(path, ignore_system: true) always return false' do
-        expect(described_class).not_to be_encrypted_file(__FILE__, ignore_system: true)
+        expect(described_class).not_to be_encrypted_file(path: __FILE__,
+                                                         ignore_system: true)
       end
     end
   end
