@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+### 0.9.0 (2020-08-20)
+
 ### Changes
 
 * Remove unused `HyperlinkForHover` class
