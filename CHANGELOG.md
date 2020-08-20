@@ -9,6 +9,7 @@
 * Fix new warnings from `rubocop` v0.89.0 update
 * Change `HslColor.rgb_to_hsl` to `Color#to_hsl`
 * Remove deprecated `GridSpan#count_of_merged_cells`
+  and `GridSpan#type`
 
 ## 0.8.1 (2020-08-04)
 
