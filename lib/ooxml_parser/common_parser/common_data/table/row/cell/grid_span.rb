@@ -13,12 +13,6 @@ module OoxmlParser
       super
     end
 
-    alias count_of_merged_cells value
-
-    extend Gem::Deprecate
-    deprecate :type, 'GridSpan always horizontal', 2069, 1
-    deprecate :count_of_merged_cells, 'value', 2069, 1
-
     # Parse Grid Span data
     # @param [Nokogiri::XML:Element] node with GridSpan data
     # @return [GridSpan] value of GridSpan
