@@ -8,11 +8,7 @@ module OoxmlParser
                    left = OoxmlSize.new(0),
                    right = OoxmlSize.new(0),
                    parent: nil)
-      @top = top
-      @bottom = bottom
-      @left = left
-      @right = right
-      super(parent: parent)
+      super(true, top, bottom, left, right, parent: parent)
     end
 
     # Parse ParagraphMargins object
