@@ -43,9 +43,10 @@ module OoxmlParser
         return row.cells[column.to_i - 1]
       elsif sheet.is_a?(String)
         @worksheets.each do |worksheet|
-          if worksheet.name == sheet
-            return worksheet.rows[row.to_i - 1].cells[column.to_i - 1] unless worksheet.rows[row.to_i - 1].nil?
-          end
+          next unless worksheet.name == sheet
+          next unless worksheet.rows[row.to_i - 1]
+
+          return worksheet.rows[row.to_i - 1].cells[column.to_i - 1]
         end
         return nil
       end
