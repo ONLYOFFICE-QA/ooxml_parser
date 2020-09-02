@@ -6,13 +6,13 @@
 
 * Fix new warnings from `rubocop` v0.90.0 update
 
-### 0.9.1 (2020-08-21)
+## 0.9.1 (2020-08-21)
 
 ### Fixes
 
 * Fix `ParagraphMargins` side initialization in constructor
 
-### 0.9.0 (2020-08-20)
+## 0.9.0 (2020-08-20)
 
 ### Changes
 
