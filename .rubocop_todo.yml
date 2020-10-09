@@ -65,15 +65,6 @@ RSpec/FilePath:
 RSpec/MultipleExpectations:
   Max: 10
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: IgnoredMethods.
-# IgnoredMethods: ==, equal?, eql?
-Style/ClassEqualityComparison:
-  Exclude:
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph.rb'
-
 # Offense count: 3
 # Configuration parameters: AllowedMethods.
 # AllowedMethods: respond_to_missing?
