@@ -177,7 +177,7 @@ module OoxmlParser
         end
       end
       @number = par_number
-      character_styles_array.last.text = character_styles_array.last.text.rstrip if character_styles_array.last.class == DocxParagraphRun
+      character_styles_array.last.text = character_styles_array.last.text.rstrip if character_styles_array.last.instance_of?(DocxParagraphRun)
       @character_style_array = character_styles_array
       @parent = parent
       self

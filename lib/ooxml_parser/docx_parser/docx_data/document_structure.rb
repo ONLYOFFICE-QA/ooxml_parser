@@ -180,7 +180,7 @@ module OoxmlParser
             case element.name
             when 'p'
               child = element.child
-              unless child.nil? && doc_structure.elements.last.class == Table
+              unless child.nil? && doc_structure.elements.last.instance_of?(Table)
                 paragraph_style = DocumentStructure.default_paragraph_style.dup.parse(element, number, DocumentStructure.default_run_style, parent: doc_structure)
                 number += 1
                 doc_structure.elements << paragraph_style.dup
