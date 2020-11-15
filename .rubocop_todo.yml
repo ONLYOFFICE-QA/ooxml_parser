@@ -6,13 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 3
-Lint/DuplicateBranch:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/paragraph/paragraph_properties.rb'
-    - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide/slide_helper.rb'
-
 # Offense count: 112
 # Configuration parameters: IgnoredMethods.
 Metrics/AbcSize:

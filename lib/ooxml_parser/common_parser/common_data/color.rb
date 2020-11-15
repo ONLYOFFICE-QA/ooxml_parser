@@ -94,9 +94,9 @@ module OoxmlParser
     # @return [True, False] result of comparision
     def ==(other)
       if other.is_a?(Color)
-        if (@red == other.red) && (@green == other.green) && (@blue == other.blue)
-          true
-        elsif (none? && other.white?) || (white? && other.none?)
+        if ((@red == other.red) && (@green == other.green) && (@blue == other.blue)) ||
+           (none? && other.white?) ||
+           (white? && other.none?)
           true
         else
           false
