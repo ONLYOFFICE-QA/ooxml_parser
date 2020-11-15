@@ -26,8 +26,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('ruby-filemagic', '~> 0') unless Gem.win_platform?
   s.add_runtime_dependency('rubyzip', '~> 2')
   s.add_development_dependency('rake', '~> 13')
-  s.add_development_dependency('rubocop', '~> 0')
+  s.add_development_dependency('rubocop', '~> 1')
   s.add_development_dependency('rubocop-performance', '~> 1')
   s.add_development_dependency('rubocop-rake', '~> 0')
-  s.add_development_dependency('rubocop-rspec', '~> 1')
+  s.add_development_dependency('rubocop-rspec', '~> 2')
 end
