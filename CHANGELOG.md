@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.10.0 (2020-11-15)
+
 ### New Features
 
 * Add `dependabot` config
