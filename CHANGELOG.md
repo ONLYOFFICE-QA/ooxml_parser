@@ -8,7 +8,7 @@
 * `DocxParagraph#align` by default is
   symbol `:left`, not string `"left"`
 * Store dev dependencies in `Gemfile.lock`
-* Require ruby >= 2.5, since 2.4 EOLed 
+* Require ruby >= 2.5, since 2.4 EOLed
 
 ## 0.9.1 (2020-08-21)
 
