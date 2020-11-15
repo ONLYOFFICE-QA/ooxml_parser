@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.name = OoxmlParser::Name::STRING
   s.version = OoxmlParser::Version::STRING
   s.platform = Gem::Platform::RUBY
-  s.required_ruby_version = '>= 2.4'
+  s.required_ruby_version = '>= 2.5'
   s.authors = ['ONLYOFFICE', 'Pavel Lobashov', 'Roman Zagudaev']
   s.email = %w[shockwavenn@gmail.com rzagudaev@gmail.com]
   s.summary = 'OoxmlParser Gem'
@@ -22,12 +22,12 @@ Gem::Specification.new do |s|
   }
   s.files = Dir['lib/**/*']
   s.license = 'AGPL-3.0'
-  s.add_runtime_dependency('nokogiri', '~> 1.6')
-  s.add_runtime_dependency('ruby-filemagic', '~> 0.1') unless Gem.win_platform?
-  s.add_runtime_dependency('rubyzip', '>= 1.1', '< 3.0')
-  s.add_development_dependency('rake', '~> 13.0')
-  s.add_development_dependency('rubocop', '0.93.1')
-  s.add_development_dependency('rubocop-performance', '1.8.1')
-  s.add_development_dependency('rubocop-rake', '0.5.1')
-  s.add_development_dependency('rubocop-rspec', '1.44.1')
+  s.add_runtime_dependency('nokogiri', '~> 1')
+  s.add_runtime_dependency('ruby-filemagic', '~> 0') unless Gem.win_platform?
+  s.add_runtime_dependency('rubyzip', '~> 2')
+  s.add_development_dependency('rake', '~> 13')
+  s.add_development_dependency('rubocop', '~> 0')
+  s.add_development_dependency('rubocop-performance', '~> 1')
+  s.add_development_dependency('rubocop-rake', '~> 0')
+  s.add_development_dependency('rubocop-rspec', '~> 1')
 end

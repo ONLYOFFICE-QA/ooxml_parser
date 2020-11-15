@@ -1,0 +1,91 @@
+PATH
+  remote: .
+  specs:
+    ooxml_parser (0.9.1)
+      nokogiri (~> 1)
+      ruby-filemagic (~> 0)
+      rubyzip (~> 2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ast (2.4.1)
+    childprocess (4.0.0)
+    diff-lcs (1.4.4)
+    docile (1.3.2)
+    iniparse (1.5.0)
+    mini_portile2 (2.4.0)
+    nokogiri (1.10.10)
+      mini_portile2 (~> 2.4.0)
+    overcommit (0.57.0)
+      childprocess (>= 0.6.3, < 5)
+      iniparse (~> 1.4)
+    parallel (1.20.0)
+    parallel_tests (3.3.0)
+      parallel
+    parser (2.7.2.0)
+      ast (~> 2.4.1)
+    rainbow (3.0.0)
+    rake (13.0.1)
+    regexp_parser (1.8.2)
+    rexml (3.2.4)
+    rspec (3.10.0)
+      rspec-core (~> 3.10.0)
+      rspec-expectations (~> 3.10.0)
+      rspec-mocks (~> 3.10.0)
+    rspec-core (3.10.0)
+      rspec-support (~> 3.10.0)
+    rspec-expectations (3.10.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-mocks (3.10.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.10.0)
+    rspec-support (3.10.0)
+    rubocop (0.93.1)
+      parallel (~> 1.10)
+      parser (>= 2.7.1.5)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8)
+      rexml
+      rubocop-ast (>= 0.6.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 2.0)
+    rubocop-ast (1.1.1)
+      parser (>= 2.7.1.5)
+    rubocop-performance (1.8.1)
+      rubocop (>= 0.87.0)
+      rubocop-ast (>= 0.4.0)
+    rubocop-rake (0.5.1)
+      rubocop
+    rubocop-rspec (1.44.1)
+      rubocop (~> 0.87)
+      rubocop-ast (>= 0.7.1)
+    ruby-filemagic (0.7.2)
+    ruby-progressbar (1.10.1)
+    rubyzip (2.3.0)
+    simplecov (0.19.1)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+    simplecov-html (0.12.3)
+    unicode-display_width (1.7.0)
+    yard (0.9.25)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ooxml_parser!
+  overcommit
+  parallel_tests
+  rake (~> 13)
+  rspec
+  rubocop (~> 0)
+  rubocop-performance (~> 1)
+  rubocop-rake (~> 0)
+  rubocop-rspec (~> 1)
+  simplecov
+  yard
+
+BUNDLED WITH
+   2.1.4
