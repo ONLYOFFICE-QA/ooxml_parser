@@ -5,6 +5,8 @@
 ### Changes
 
 * Fix new warnings from `rubocop` v0.93.0 update
+* `DocxParagraph#align` by default is
+  symbol `:left`, not string `"left"`
 
 ## 0.9.1 (2020-08-21)
 

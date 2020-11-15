@@ -41,7 +41,7 @@ module OoxmlParser
       @number = 0
       @bookmark_start = []
       @bookmark_end = []
-      @align = 'left'
+      @align = :left
       @spacing = Spacing.new
       @ind = Indents.new
       @character_style_array = []
