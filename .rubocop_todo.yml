@@ -13,12 +13,6 @@ Lint/DuplicateBranch:
     - 'lib/ooxml_parser/common_parser/common_data/paragraph/paragraph_properties.rb'
     - 'lib/ooxml_parser/pptx_parser/pptx_data/presentation/slide/slide_helper.rb'
 
-# Offense count: 2
-# Cop supports --auto-correct.
-Lint/DuplicateRegexpCharacterClassElement:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-
 # Offense count: 112
 # Configuration parameters: IgnoredMethods.
 Metrics/AbcSize:
