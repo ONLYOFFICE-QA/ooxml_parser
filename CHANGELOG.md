@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add `dependabot` config
+
 ### Changes
 
 * Fix new warnings from `rubocop` v0.93.0 update
