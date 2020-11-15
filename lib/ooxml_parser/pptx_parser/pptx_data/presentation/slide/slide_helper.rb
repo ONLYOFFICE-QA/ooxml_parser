@@ -20,9 +20,7 @@ module OoxmlParser
       case object
       when :image
         elements.find { |e| e.is_a? DocxPicture }.properties.transform
-      when :chart
-        elements.find { |e| e.is_a? GraphicFrame }.transform
-      when :table
+      when :chart, :table
         elements.find { |e| e.is_a? GraphicFrame }.transform
       when :shape
         elements.find { |e| !e.shape_properties.preset.nil? }.shape_properties.transform

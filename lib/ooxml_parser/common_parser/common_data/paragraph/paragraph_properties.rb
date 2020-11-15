@@ -74,9 +74,7 @@ module OoxmlParser
           @numbering.start_at = node_child.attribute('startAt').value if node_child.attribute('startAt')
         when 'framePr'
           @frame_properties = FrameProperties.new(parent: self).parse(node_child)
-        when 'tabs'
-          @tabs = Tabs.new(parent: self).parse(node_child)
-        when 'tabLst'
+        when 'tabs', 'tabLst'
           @tabs = Tabs.new(parent: self).parse(node_child)
         when 'ind'
           @indent = Indents.new(parent: self).parse(node_child)

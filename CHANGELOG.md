@@ -8,7 +8,7 @@
 
 ### Changes
 
-* Fix new warnings from `rubocop` v0.93.0 update
+* Fix new warnings from `rubocop` v1.3.0 update
 * `DocxParagraph#align` by default is
   symbol `:left`, not string `"left"`
 * Store dev dependencies in `Gemfile.lock`
