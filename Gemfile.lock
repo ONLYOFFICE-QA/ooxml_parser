@@ -76,16 +76,16 @@ PLATFORMS
 
 DEPENDENCIES
   ooxml_parser!
-  overcommit
-  parallel_tests
+  overcommit (~> 0)
+  parallel_tests (~> 3)
   rake (~> 13)
-  rspec
+  rspec (~> 3)
   rubocop (~> 1)
   rubocop-performance (~> 1)
   rubocop-rake (~> 0)
   rubocop-rspec (~> 2)
-  simplecov
-  yard
+  simplecov (~> 0)
+  yard (>= 0.9.20)
 
 BUNDLED WITH
    2.1.4
