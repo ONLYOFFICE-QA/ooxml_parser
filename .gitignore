@@ -10,6 +10,5 @@ doc
 .idea
 .rake_tasks~
 coverage
-Gemfile.lock
 tags
 /tmp
