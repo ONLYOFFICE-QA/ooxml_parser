@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Changes from `rubocop` v1.4.0
+
 ## 0.10.0 (2020-11-15)
 
 ### New Features

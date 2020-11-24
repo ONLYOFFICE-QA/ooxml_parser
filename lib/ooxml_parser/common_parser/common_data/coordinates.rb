@@ -23,8 +23,8 @@ module OoxmlParser
         end
         string = string.split('!').last
         if coordinates?(string)
-          coordinates.row = string.scan(/[0-9]/).join('').to_i
-          coordinates.column = string.scan(/[A-Z]/).join('')
+          coordinates.row = string.scan(/[0-9]/).join.to_i
+          coordinates.column = string.scan(/[A-Z]/).join
         end
         coordinates
       end

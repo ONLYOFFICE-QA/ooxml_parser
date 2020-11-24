@@ -76,7 +76,7 @@ module OoxmlParser
         @action = :last_slide
       when 'ppaction://hlinksldjump'
         @action = :slide
-        @url = OOXMLDocumentObject.get_link_from_rels(@id).scan(/\d+/).join('').to_i
+        @url = OOXMLDocumentObject.get_link_from_rels(@id).scan(/\d+/).join.to_i
       else
         if @id && !@id.empty?
           @action = :external_link

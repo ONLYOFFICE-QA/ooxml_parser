@@ -70,7 +70,7 @@ module OoxmlParser
     def value_to_hex(value)
       value.to_s
            .sub('#', '')
-           .split(' ')
+           .split
            .first
     end
   end

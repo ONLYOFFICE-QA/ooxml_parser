@@ -22,7 +22,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'color2'
-          @color2 = Color.new(parent: self).parse_hex_string(value.value.split(' ').first.delete('#'))
+          @color2 = Color.new(parent: self).parse_hex_string(value.value.split.first.delete('#'))
         when 'id'
           @id = value.value.to_s
           @file = FileReference.new(parent: self).parse(node)
