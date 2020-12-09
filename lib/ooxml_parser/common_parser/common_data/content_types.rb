@@ -34,5 +34,12 @@ module OoxmlParser
       end
       self
     end
+
+    # Get content definition by type
+    # @param [String] type of definition
+    # @return [Object] resulting objects
+    def by_type(type)
+      @content_types_list.select { |item| item.content_type == type }
+    end
   end
 end

@@ -7,6 +7,7 @@
 * Add support of parsing `PivotCacheDefinition#cacheFields`
 * Add support of parsing `CacheFields#cache_field`
 * Add support of parsing `CacheField#shared_item`
+* Add support of parsing `PivotTableDefinition` properties
 
 ### Changes
 
