@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'pivot_cache_definition/cache_source'
+require_relative 'pivot_cache_definition/cache_fields'
+
 module OoxmlParser
   # Class for parsing <pivotCacheDefinition> file
   class PivotCacheDefinition < OOXMLDocumentObject
@@ -8,6 +10,8 @@ module OoxmlParser
     attr_reader :id
     # @return [CacheSource] source of pivot cache
     attr_reader :cache_source
+    # @return [CacheFields] fields of pivot cache
+    attr_reader :cache_fields
 
     # Parse PivotCacheDefinition file
     # @param file [String] path to file
@@ -29,6 +33,8 @@ module OoxmlParser
         case node_child.name
         when 'cacheSource'
           @cache_source = CacheSource.new(parent: self).parse(node_child)
+        when 'cacheFields'
+          @cache_fields = CacheFields.new(parent: self).parse(node_child)
         end
       end
       self

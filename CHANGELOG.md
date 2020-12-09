@@ -2,6 +2,11 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add support of parsing `PivotCacheDefinition#cacheFields`
+* Add support of parsing `CacheFields#cache_field`
+
 ### Changes
 
 * Changes from `rubocop` v1.4.0
