@@ -2,6 +2,7 @@
 
 require_relative 'workbook/chartsheet'
 require_relative 'workbook/pivot_cache'
+require_relative 'workbook/pivot_table_definition'
 require_relative 'workbook/shared_string_table'
 require_relative 'workbook/style_sheet'
 require_relative 'workbook/worksheet'
@@ -21,10 +22,13 @@ module OoxmlParser
     attr_accessor :shared_strings_table
     # @return [Array<PivotCache>] list of pivot caches
     attr_accessor :pivot_caches
+    # @return [Array<PivotTableDefintion>] list of pivot table defitions
+    attr_accessor :pivot_table_definitions
 
     def initialize(params = {})
       @worksheets = []
       @pivot_caches = []
+      @pivot_table_definitions = []
       super
     end
 
@@ -120,6 +124,7 @@ module OoxmlParser
         end
       end
       parse_pivot_cache
+      parse_pivot_table
       OOXMLDocumentObject.xmls_stack.pop
       self
     end
@@ -134,6 +139,14 @@ module OoxmlParser
     def parse_pivot_cache
       @doc.xpath('xmlns:workbook/xmlns:pivotCaches/xmlns:pivotCache').each do |pivot_cache|
         @pivot_caches << PivotCache.new(parent: self).parse(pivot_cache)
+      end
+    end
+
+    # Perform parsing of pivot table
+    def parse_pivot_table
+      files = @content_types.by_type('application/vnd.openxmlformats-officedocument.spreadsheetml.pivotTable+xml')
+      files.each do |file|
+        @pivot_table_definitions << PivotTableDefinition.new(parent: self).parse(file.part_name)
       end
     end
   end
