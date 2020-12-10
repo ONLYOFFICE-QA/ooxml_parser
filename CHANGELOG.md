@@ -11,6 +11,8 @@
 * Add support of parsing `PivotTableDefinition#location`
 * Add support of parsing `PivotTableDefinition#pivot_fields`
 * Add support of parsing `PivotField#item`
+* Add support of parsing `PivotTableDefinition#column_items`
+* Add support of parsing `PivotTableDefinition#row_items`
 
 ### Changes
 

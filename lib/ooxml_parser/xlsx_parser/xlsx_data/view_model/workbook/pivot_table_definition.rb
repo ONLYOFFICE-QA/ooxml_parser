@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'pivot_table_definition/column_row_items'
 require_relative 'pivot_table_definition/location'
 require_relative 'pivot_table_definition/pivot_fields'
 
@@ -42,6 +43,10 @@ module OoxmlParser
     attr_reader :location
     # @return [PivotFields] pivot fields
     attr_reader :pivot_fields
+    # @return [ColumnRowItems] column items
+    attr_reader :column_items
+    # @return [ColumnRowItems] row items
+    attr_reader :row_items
 
     # Parse PivotTableDefinition object
     # @param [String] file path
@@ -92,6 +97,10 @@ module OoxmlParser
           @location = Location.new(parent: self).parse(node_child)
         when 'pivotFields'
           @pivot_fields = PivotFields.new(parent: self).parse(node_child)
+        when 'rowItems'
+          @row_items = ColumnRowItems.new(parent: self).parse(node_child)
+        when 'colItems'
+          @column_items = ColumnRowItems.new(parent: self).parse(node_child)
         end
       end
       self
