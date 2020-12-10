@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'pivot_cache/pivot_cache_definition'
+require_relative 'pivot_table_definition/location'
 
 module OoxmlParser
   # Class for parsing <PivotTableDefinition> tag
@@ -37,6 +37,8 @@ module OoxmlParser
     attr_reader :outline_data
     # @return [True, False] is there multiple fields filters
     attr_reader :multiple_field_filters
+    # @return [Location] location data
+    attr_reader :location
 
     # Parse PivotTableDefinition object
     # @param [String] file path
@@ -78,6 +80,13 @@ module OoxmlParser
           @outline_data = attribute_enabled?(value)
         when 'multipleFieldFilters'
           @multiple_field_filters = attribute_enabled?(value)
+        end
+      end
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'location'
+          @location = Location.new(parent: self).parse(node_child)
         end
       end
       self
