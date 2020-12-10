@@ -10,6 +10,7 @@
 * Add support of parsing `PivotTableDefinition` properties
 * Add support of parsing `PivotTableDefinition#location`
 * Add support of parsing `PivotTableDefinition#pivot_fields`
+* Add support of parsing `PivotField#item`
 
 ### Changes
 
