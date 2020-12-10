@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'pivot_table_definition/location'
+require_relative 'pivot_table_definition/pivot_fields'
 
 module OoxmlParser
   # Class for parsing <PivotTableDefinition> tag
@@ -39,6 +40,8 @@ module OoxmlParser
     attr_reader :multiple_field_filters
     # @return [Location] location data
     attr_reader :location
+    # @return [PivotFields] pivot fields
+    attr_reader :pivot_fields
 
     # Parse PivotTableDefinition object
     # @param [String] file path
@@ -87,6 +90,8 @@ module OoxmlParser
         case node_child.name
         when 'location'
           @location = Location.new(parent: self).parse(node_child)
+        when 'pivotFields'
+          @pivot_fields = PivotFields.new(parent: self).parse(node_child)
         end
       end
       self

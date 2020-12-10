@@ -9,6 +9,8 @@
 * Add support of parsing `CacheField#shared_item`
 * Add support of parsing `PivotTableDefinition` properties
 * Add support of parsing `PivotTableDefinition#location`
+* Add support of parsing `PivotTableDefinition#pivot_fields`
+* Add support of parsing `PivotField#item`
 
 ### Changes
 
