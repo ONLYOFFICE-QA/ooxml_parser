@@ -13,6 +13,7 @@
 * Add support of parsing `PivotField#item`
 * Add support of parsing `PivotTableDefinition#column_items`
 * Add support of parsing `PivotTableDefinition#row_items`
+* Add support of parsing `PivotTableDefinition#style_info`
 
 ### Changes
 
