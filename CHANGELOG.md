@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.11.0 (2020-12-10)
+
 ### New Features
 
 * Add support of parsing `PivotCacheDefinition#cacheFields`
