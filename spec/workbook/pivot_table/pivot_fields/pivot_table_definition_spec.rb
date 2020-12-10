@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::PivotFields do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_fields/pivot_fields.xlsx') }
+  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_fields.xlsx') }
   let(:pivot_fields) { xlsx.pivot_table_definitions[0].pivot_fields }
 
   it 'pivot fields is two' do
