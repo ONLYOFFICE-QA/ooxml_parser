@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Add `ruby-3.0` in CI
+
 ## 0.11.0 (2020-12-10)
 
 ### New Features
