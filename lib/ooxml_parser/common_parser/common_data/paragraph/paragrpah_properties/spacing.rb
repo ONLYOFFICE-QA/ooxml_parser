@@ -33,14 +33,10 @@ module OoxmlParser
       other.line_rule = :multiple if other.line_rule == :auto
       self.line_rule = line_rule.to_sym if line_rule.instance_of?(String)
 
-      if @before == other.before &&
-         @after == other.after &&
-         @line == other.line &&
-         @line_rule.to_s == other.line_rule.to_s
-        true
-      else
-        false
-      end
+      @before == other.before &&
+        @after == other.after &&
+        @line == other.line &&
+        @line_rule.to_s == other.line_rule.to_s
     end
 
     # @return [String] result of convert of object to string

@@ -94,13 +94,9 @@ module OoxmlParser
     # @return [True, False] result of comparision
     def ==(other)
       if other.is_a?(Color)
-        if ((@red == other.red) && (@green == other.green) && (@blue == other.blue)) ||
-           (none? && other.white?) ||
-           (white? && other.none?)
-          true
-        else
-          false
-        end
+        ((@red == other.red) && (@green == other.green) && (@blue == other.blue)) ||
+          (none? && other.white?) ||
+          (white? && other.none?)
       else
         false
       end
@@ -125,7 +121,7 @@ module OoxmlParser
       red = color_to_check.red
       green = color_to_check.green
       blue = color_to_check.blue
-      (self.red - red).abs < delta && (self.green - green).abs < delta && (self.blue - blue).abs < delta ? true : false
+      (self.red - red).abs < delta && (self.green - green).abs < delta && (self.blue - blue).abs < delta
     end
 
     # Apply tint to color
