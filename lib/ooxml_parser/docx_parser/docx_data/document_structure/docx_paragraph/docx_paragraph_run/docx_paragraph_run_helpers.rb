@@ -65,6 +65,9 @@ module OoxmlParser
       self
     end
 
+    # Temp method to return background color
+    # Need to be compatible with older versions
+    # @return [OoxmlParser::Color]
     def background_color
       shade.to_background_color
     end
