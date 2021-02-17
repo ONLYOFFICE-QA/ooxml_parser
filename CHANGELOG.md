@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add parsing `ParagraphProperties#shade`
+
 ### Changes
 
 * Add `ruby-3.0` in CI
