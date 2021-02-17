@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.12.0 (2021-02-17)
+
 ### New Features
 
 * Add parsing `ParagraphProperties#shade`
