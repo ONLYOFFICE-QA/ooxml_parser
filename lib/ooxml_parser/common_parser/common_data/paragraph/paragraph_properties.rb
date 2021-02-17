@@ -30,6 +30,8 @@ module OoxmlParser
     attr_accessor :contextual_spacing
     # @return [Symbol] The alignment or justification to be applied to a paragraph
     attr_accessor :justification
+    # @return [Shade] Shade property
+    attr_accessor :shade
 
     def initialize(numbering = NumberingProperties.new, parent: nil)
       @numbering = numbering
@@ -86,6 +88,8 @@ module OoxmlParser
           @keep_next = true
         when 'sectPr'
           @section_properties = PageProperties.new(parent: self).parse(node_child, @parent, DocxParagraphRun.new)
+        when 'shd'
+          @shade = Shade.new(parent: self).parse(node_child)
         when 'spacing'
           @spacing = ParagraphSpacing.new(parent: self).parse(node_child)
         when 'jc'

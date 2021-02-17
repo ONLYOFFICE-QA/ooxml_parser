@@ -129,8 +129,8 @@ module OoxmlParser
         when 'bookmarkEnd'
           character_styles_array << BookmarkEnd.new(parent: self).parse(node_child)
         when 'pPr'
-          parse_paragraph_style(node_child, custom_character_style)
           @paragraph_properties = ParagraphProperties.new(parent: self).parse(node_child)
+          parse_paragraph_style(node_child, custom_character_style)
         when 'commentRangeStart'
           character_styles_array << CommentRangeStart.new(parent: self).parse(node_child)
         when 'commentRangeEnd'
