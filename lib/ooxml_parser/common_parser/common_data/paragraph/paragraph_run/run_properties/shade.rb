@@ -43,5 +43,16 @@ module OoxmlParser
       end
       self
     end
+
+    def to_background_color
+      return nil unless fill
+
+      background_color = fill
+      background_color.set_style(value) if value
+      background_color
+    end
+
+    extend Gem::Deprecate
+    deprecate :to_background_color, 'use shade direct methods', 2077, 1
   end
 end

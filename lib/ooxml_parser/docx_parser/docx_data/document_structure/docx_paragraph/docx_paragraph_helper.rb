@@ -9,5 +9,9 @@ module OoxmlParser
 
       root_object.comments_extended.by_id(@paragraph_id)
     end
+
+    def background_color
+      paragraph_properties.shade.to_background_color
+    end
   end
 end

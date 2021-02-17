@@ -9,6 +9,7 @@
 ### Changes
 
 * Add `ruby-3.0` in CI
+* Deprecated `DocxParagraph#background_color`
 
 ## 0.11.0 (2020-12-10)
 
