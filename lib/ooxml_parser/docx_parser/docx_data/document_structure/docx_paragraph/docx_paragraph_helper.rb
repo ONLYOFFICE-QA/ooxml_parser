@@ -9,5 +9,12 @@ module OoxmlParser
 
       root_object.comments_extended.by_id(@paragraph_id)
     end
+
+    # Temp method to return background color
+    # Need to be compatible with older versions
+    # @return [OoxmlParser::Color]
+    def background_color
+      paragraph_properties.shade.to_background_color
+    end
   end
 end

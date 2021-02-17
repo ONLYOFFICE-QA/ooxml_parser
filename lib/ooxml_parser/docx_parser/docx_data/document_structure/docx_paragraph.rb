@@ -18,7 +18,7 @@ module OoxmlParser
   # Class for data of DocxParagraph
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
-    attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :background_color, :ind, :numbering,
+    attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :ind, :numbering,
                   :character_style_array, :page_break, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control
@@ -206,10 +206,6 @@ module OoxmlParser
           @keep_next = true
         when 'contextualSpacing'
           @contextual_spacing = true
-        when 'shd'
-          background_color_string = node_child.attribute('fill').value
-          @background_color = Color.new(parent: self).parse_hex_string(background_color_string)
-          @background_color.set_style(node_child.attribute('val').value.to_sym) unless node_child.attribute('val').nil?
         when 'pStyle'
           parse_paragraph_style_xml(node_child.attribute('val').value, default_char_style)
         when 'ind'
