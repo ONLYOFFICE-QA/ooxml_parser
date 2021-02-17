@@ -44,6 +44,8 @@ module OoxmlParser
       self
     end
 
+    # Helper method to get background color
+    # @return [OoxmlParser::Color]
     def to_background_color
       return nil unless fill
 
