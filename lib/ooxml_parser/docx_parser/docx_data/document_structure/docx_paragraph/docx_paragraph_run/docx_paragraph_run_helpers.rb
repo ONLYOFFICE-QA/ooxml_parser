@@ -53,10 +53,7 @@ module OoxmlParser
         when 'color'
           parse_color_tag(node_child)
         when 'shd'
-          self.background_color = node_child.attribute('fill').value
-          unless node_child.attribute('fill').value == 'auto' || node_child.attribute('fill').value == '' || node_child.attribute('fill').value == 'null'
-            self.background_color = Color.new(parent: self).parse_hex_string(node_child.attribute('fill').value)
-          end
+          @shade = Shade.new(parent: self).parse(node_child)
         when 'u', 'uCs'
           parse_underline(node_child)
         when 'strike'
@@ -66,6 +63,10 @@ module OoxmlParser
         end
       end
       self
+    end
+
+    def background_color
+      shade.to_background_color
     end
 
     private

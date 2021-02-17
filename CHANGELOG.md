@@ -2,6 +2,12 @@
 
 ## master (unreleased)
 
+## 0.12.1 (2021-02-17)
+
+### New Features
+
+* Add parsing `RunProperties#shade`
+
 ## 0.12.0 (2021-02-17)
 
 ### New Features

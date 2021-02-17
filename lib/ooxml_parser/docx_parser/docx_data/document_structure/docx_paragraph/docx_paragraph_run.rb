@@ -11,7 +11,7 @@ module OoxmlParser
   # Class for working with DocxParagraphRun
   class DocxParagraphRun < OOXMLDocumentObject
     include DocxParagraphRunHelpers
-    attr_accessor :number, :font, :vertical_align, :size, :font_color, :background_color, :font_style, :text, :drawings,
+    attr_accessor :number, :font, :vertical_align, :size, :font_color, :font_style, :text, :drawings,
                   :link, :highlight, :effect, :caps, :w,
                   :position, :em, :spacing, :break, :touch, :shape, :footnote, :endnote, :fld_char, :style,
                   :comments, :alternate_content, :page_number, :text_outline, :text_fill
@@ -22,6 +22,8 @@ module OoxmlParser
     attr_accessor :run_properties
     # @return [RunObject] object of run
     attr_accessor :object
+    # @return [Shade] shade properties
+    attr_accessor :shade
 
     def initialize(parent: nil)
       @number = 0
