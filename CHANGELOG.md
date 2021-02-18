@@ -2,6 +2,12 @@
 
 ## master (unreleased)
 
+## 0.12.2 (2021-02-18)
+
+### New Features
+
+* Add parsing `ParagraphProperties#paragraph_style_ref`
+
 ## 0.12.1 (2021-02-17)
 
 ### New Features

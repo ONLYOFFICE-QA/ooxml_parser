@@ -3,6 +3,7 @@
 require_relative 'paragrpah_properties/numbering_properties'
 require_relative 'paragrpah_properties/paragraph_borders'
 require_relative 'paragrpah_properties/paragraph_spacing'
+require_relative 'paragrpah_properties/paragraph_stlye_ref'
 require_relative 'paragrpah_properties/spacing'
 require_relative 'paragrpah_properties/tabs'
 module OoxmlParser
@@ -17,6 +18,8 @@ module OoxmlParser
     attr_accessor :run_properties
     # @return [Borders] borders of paragraph
     attr_accessor :paragraph_borders
+    # @return [ParagraphStyleRef] Referenced Paragraph Style
+    attr_accessor :paragraph_style_ref
     # @return [True, False] Specifies that the paragraph
     # (or at least part of it) should be rendered on
     # the same page as the next paragraph when possible
@@ -84,6 +87,8 @@ module OoxmlParser
           @run_properties = RunProperties.new(parent: self).parse(node_child)
         when 'pBdr'
           @paragraph_borders = ParagraphBorders.new(parent: self).parse(node_child)
+        when 'pStyle'
+          @paragraph_style_ref = ParagraphStyleRef.new(parent: self).parse(node_child)
         when 'keepNext'
           @keep_next = true
         when 'sectPr'
