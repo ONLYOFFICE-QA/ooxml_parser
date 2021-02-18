@@ -10,5 +10,6 @@ doc
 .idea
 .rake_tasks~
 coverage
+pkg
 tags
 /tmp
