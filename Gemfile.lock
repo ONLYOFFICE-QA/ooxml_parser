@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ooxml_parser (0.12.1)
+    ooxml_parser (0.12.2)
       nokogiri (~> 1)
       ruby-filemagic (~> 0)
       rubyzip (~> 2)
