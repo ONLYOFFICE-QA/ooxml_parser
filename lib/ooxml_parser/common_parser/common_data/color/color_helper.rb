@@ -8,7 +8,7 @@ module OoxmlParser
     def parse_hex_string(hex_string)
       return self if %w[auto null].include?(hex_string)
 
-      char_array = hex_string.split(//)
+      char_array = hex_string.chars
       case char_array.length
       when 3
         @red = char_array[0].hex
