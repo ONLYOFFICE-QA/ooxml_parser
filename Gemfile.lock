@@ -15,7 +15,7 @@ GEM
     docile (1.3.5)
     iniparse (1.5.0)
     mini_portile2 (2.5.0)
-    nokogiri (1.11.2)
+    nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     overcommit (0.57.0)
