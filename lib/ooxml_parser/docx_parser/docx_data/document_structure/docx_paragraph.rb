@@ -269,11 +269,5 @@ module OoxmlParser
       nil
     end
     deprecate :sdt, 'nonempty_runs[i]', 2020, 1
-
-    # @return [OoxmlParser::FrameProperties] Return frame properties
-    def frame_properties
-      paragraph_properties.frame_properties
-    end
-    deprecate :frame_properties, 'paragraph_properties.frame_properties', 2020, 1
   end
 end

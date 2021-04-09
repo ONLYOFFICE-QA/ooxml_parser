@@ -6,6 +6,10 @@
 
 * Add `pkg` to `.gitignore`
 
+### Removal
+
+* Remove deprecated `DocxParagraph#frame_properties`
+
 ## 0.12.2 (2021-02-18)
 
 ### New Features
