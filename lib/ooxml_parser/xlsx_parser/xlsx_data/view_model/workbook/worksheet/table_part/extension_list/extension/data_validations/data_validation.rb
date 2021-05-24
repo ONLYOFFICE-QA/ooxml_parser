@@ -15,6 +15,8 @@ module OoxmlParser
     attr_reader :show_dropdown
     # @return [Symbol] Specifies whether to display the input prompt
     attr_reader :show_input_message
+    # @return [Symbol] Specifies whether to display error alert message
+    attr_reader :show_error_message
     # @return [Symbol] type of validation
     attr_reader :type
     # @return [String] uid of validation
@@ -40,6 +42,8 @@ module OoxmlParser
           @show_dropdown = attribute_enabled?(value)
         when 'showInputMessage'
           @show_input_message = attribute_enabled?(value)
+        when 'showErrorMessage'
+          @show_error_message = attribute_enabled?(value)
         when 'uid'
           @uid = value.value.to_s
         end
