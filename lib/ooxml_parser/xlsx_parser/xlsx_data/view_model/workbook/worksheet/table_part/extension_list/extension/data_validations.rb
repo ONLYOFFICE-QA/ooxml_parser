@@ -26,19 +26,19 @@ module OoxmlParser
     # @param [Nokogiri::XML:Element] node with DataValidations data
     # @return [DataValidations] value of DataValidations data
     def parse(node)
-      node.xpath('*').each do |column_node|
-        node.attributes.each do |key, value|
-          case key
-          when 'count'
-            @count = value.value.to_i
-          when 'disablePrompts'
-            @disable_prompts = attribute_enabled?(value)
-          end
+      node.attributes.each do |key, value|
+        case key
+        when 'count'
+          @count = value.value.to_i
+        when 'disablePrompts'
+          @disable_prompts = attribute_enabled?(value)
         end
+      end
 
-        case column_node.name
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'dataValidation'
-          @data_validations << DataValidation.new(parent: self).parse(column_node)
+          @data_validations << DataValidation.new(parent: self).parse(node_child)
         end
       end
       self
