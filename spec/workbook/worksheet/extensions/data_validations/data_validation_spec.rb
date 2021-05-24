@@ -45,4 +45,8 @@ describe OoxmlParser::DataValidation do
   it 'Has error_title' do
     expect(validation.error_title).to eq('Error')
   end
+
+  it 'Has error' do
+    expect(validation.error).to eq("Value doesn't match data validation rule")
+  end
 end

@@ -5,9 +5,11 @@ module OoxmlParser
   class DataValidation < OOXMLDocumentObject
     # @return [Boolean] should blank entries be valid
     attr_reader :allow_blank
+    # @return [String] specifies the message text of the error alert
+    attr_reader :error
     # @return [Symbol] type of error
     attr_reader :error_style
-    # @return [Symbol] the text of the title bar of the error alert
+    # @return [String] the text of the title bar of the error alert
     attr_reader :error_title
     # @return [Symbol] Input Method Editor (IME) mode
     attr_reader :ime_mode
@@ -32,6 +34,8 @@ module OoxmlParser
         case key
         when 'allowBlank'
           @allow_blank = attribute_enabled?(value)
+        when 'error'
+          @error = value.value.to_s
         when 'errorStyle'
           @error_style = value.value.to_sym
         when 'errorTitle'
