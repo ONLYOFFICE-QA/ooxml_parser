@@ -24,6 +24,8 @@ module OoxmlParser
     attr_reader :prompt
     # @return [String] Text of the title bar of the input prompt
     attr_reader :prompt_title
+    # @return [String] Ranges to which data validation is applied
+    attr_reader :reference_sequence
     # @return [Symbol] Specifies whether to display the drop-down combo box
     attr_reader :show_dropdown
     # @return [Symbol] Specifies whether to display the input prompt
@@ -76,6 +78,8 @@ module OoxmlParser
           @formula1 = DataValidationFormula.new(parent: self).parse(node_child)
         when 'formula2'
           @formula2 = DataValidationFormula.new(parent: self).parse(node_child)
+        when 'sqref'
+          @reference_sequence = node_child.text
         end
       end
       self

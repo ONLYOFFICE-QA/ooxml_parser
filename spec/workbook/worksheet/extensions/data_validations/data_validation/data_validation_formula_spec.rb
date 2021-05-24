@@ -13,4 +13,8 @@ describe OoxmlParser::DataValidation do
   it 'Formula2 contains some formula data' do
     expect(validation.formula2.formula.value).to eq('3')
   end
+
+  it 'Reference_sequence contains data' do
+    expect(validation.reference_sequence).to eq('A1')
+  end
 end
