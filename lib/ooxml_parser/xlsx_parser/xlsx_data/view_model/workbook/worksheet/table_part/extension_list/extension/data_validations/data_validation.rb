@@ -11,6 +11,10 @@ module OoxmlParser
     attr_reader :ime_mode
     # @return [Symbol] Relational operator used with this data validation
     attr_reader :operator
+    # @return [Symbol] Specifies whether to display the drop-down combo box
+    attr_reader :show_dropdown
+    # @return [Symbol] Specifies whether to display the input prompt
+    attr_reader :show_input_message
     # @return [Symbol] type of validation
     attr_reader :type
     # @return [String] uid of validation
@@ -32,6 +36,10 @@ module OoxmlParser
           @operator = value.value.to_sym
         when 'type'
           @type = value.value.to_sym
+        when 'showDropDown'
+          @show_dropdown = attribute_enabled?(value)
+        when 'showInputMessage'
+          @show_input_message = attribute_enabled?(value)
         when 'uid'
           @uid = value.value.to_s
         end

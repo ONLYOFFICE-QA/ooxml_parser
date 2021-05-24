@@ -29,4 +29,12 @@ describe OoxmlParser::DataValidation do
   it 'Has operator' do
     expect(validation.operator).to eq(:between)
   end
+
+  it 'Has show_dropdown' do
+    expect(validation.show_dropdown).to be_falsey
+  end
+
+  it 'Has show_input_message' do
+    expect(validation.show_input_message).to be_truthy
+  end
 end
