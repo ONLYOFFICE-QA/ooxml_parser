@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'data_validation/data_validation_formula'
 module OoxmlParser
   # Class for `dataValidation` data
   class DataValidation < OOXMLDocumentObject
@@ -11,6 +12,10 @@ module OoxmlParser
     attr_reader :error_style
     # @return [String] The text of the title bar of the error alert
     attr_reader :error_title
+    # @return [DataValidationFormula] first formula of data validation
+    attr_reader :formula1
+    # @return [DataValidationFormula] second formula of data validation
+    attr_reader :formula2
     # @return [Symbol] Input Method Editor (IME) mode
     attr_reader :ime_mode
     # @return [Symbol] Relational operator used with this data validation
@@ -62,6 +67,15 @@ module OoxmlParser
           @show_error_message = attribute_enabled?(value)
         when 'uid'
           @uid = value.value.to_s
+        end
+      end
+
+      node.xpath('*').each do |node_child|
+        case node_child.name
+        when 'formula1'
+          @formula1 = DataValidationFormula.new(parent: self).parse(node_child)
+        when 'formula2'
+          @formula2 = DataValidationFormula.new(parent: self).parse(node_child)
         end
       end
       self
