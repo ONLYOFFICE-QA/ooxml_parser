@@ -41,4 +41,8 @@ describe OoxmlParser::DataValidation do
   it 'Has show_error_message' do
     expect(validation.show_error_message).to be_truthy
   end
+
+  it 'Has error_title' do
+    expect(validation.error_title).to eq('Error')
+  end
 end

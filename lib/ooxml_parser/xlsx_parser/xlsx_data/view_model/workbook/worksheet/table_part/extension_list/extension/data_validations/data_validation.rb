@@ -7,6 +7,8 @@ module OoxmlParser
     attr_reader :allow_blank
     # @return [Symbol] type of error
     attr_reader :error_style
+    # @return [Symbol] the text of the title bar of the error alert
+    attr_reader :error_title
     # @return [Symbol] Input Method Editor (IME) mode
     attr_reader :ime_mode
     # @return [Symbol] Relational operator used with this data validation
@@ -32,6 +34,8 @@ module OoxmlParser
           @allow_blank = attribute_enabled?(value)
         when 'errorStyle'
           @error_style = value.value.to_sym
+        when 'errorTitle'
+          @error_title = value.value.to_s
         when 'imeMode'
           @ime_mode = value.value.to_sym
         when 'operator'
