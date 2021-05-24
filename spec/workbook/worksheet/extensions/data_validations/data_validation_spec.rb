@@ -49,4 +49,12 @@ describe OoxmlParser::DataValidation do
   it 'Has error' do
     expect(validation.error).to eq("Value doesn't match data validation rule")
   end
+
+  it 'Has prompt' do
+    expect(validation.prompt).to eq('Enter a whole number between 1 and 3')
+  end
+
+  it 'Has prompt_title' do
+    expect(validation.prompt_title).to eq('Message')
+  end
 end

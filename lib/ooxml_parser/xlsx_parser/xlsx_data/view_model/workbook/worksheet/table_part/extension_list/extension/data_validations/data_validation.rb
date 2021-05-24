@@ -5,25 +5,29 @@ module OoxmlParser
   class DataValidation < OOXMLDocumentObject
     # @return [Boolean] should blank entries be valid
     attr_reader :allow_blank
-    # @return [String] specifies the message text of the error alert
+    # @return [String] Specifies the message text of the error alert
     attr_reader :error
-    # @return [Symbol] type of error
+    # @return [Symbol] Type of error
     attr_reader :error_style
-    # @return [String] the text of the title bar of the error alert
+    # @return [String] The text of the title bar of the error alert
     attr_reader :error_title
     # @return [Symbol] Input Method Editor (IME) mode
     attr_reader :ime_mode
     # @return [Symbol] Relational operator used with this data validation
     attr_reader :operator
+    # @return [String] Message text of the input prompt
+    attr_reader :prompt
+    # @return [String] Text of the title bar of the input prompt
+    attr_reader :prompt_title
     # @return [Symbol] Specifies whether to display the drop-down combo box
     attr_reader :show_dropdown
     # @return [Symbol] Specifies whether to display the input prompt
     attr_reader :show_input_message
     # @return [Symbol] Specifies whether to display error alert message
     attr_reader :show_error_message
-    # @return [Symbol] type of validation
+    # @return [Symbol] Type of validation
     attr_reader :type
-    # @return [String] uid of validation
+    # @return [String] UID of validation
     attr_reader :uid
 
     # Parse DataValidation data
@@ -46,6 +50,10 @@ module OoxmlParser
           @operator = value.value.to_sym
         when 'type'
           @type = value.value.to_sym
+        when 'prompt'
+          @prompt = value.value.to_s
+        when 'promptTitle'
+          @prompt_title = value.value.to_s
         when 'showDropDown'
           @show_dropdown = attribute_enabled?(value)
         when 'showInputMessage'
