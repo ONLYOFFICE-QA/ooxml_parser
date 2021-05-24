@@ -21,4 +21,12 @@ describe OoxmlParser::DataValidation do
   it 'Has error_style' do
     expect(validation.error_style).to eq(:stop)
   end
+
+  it 'Has ime_mode' do
+    expect(validation.ime_mode).to eq(:noControl)
+  end
+
+  it 'Has operator' do
+    expect(validation.operator).to eq(:between)
+  end
 end
