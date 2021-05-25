@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Parsing `Data Validation` in xlsx
+
 ### Changes
 
 * Add `pkg` to `.gitignore`
