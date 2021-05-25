@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.13.0 (2021-05-25)
+
 ### New Features
 
 * Parsing `Data Validation` in xlsx
