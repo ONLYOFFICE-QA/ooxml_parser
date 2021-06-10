@@ -7,7 +7,8 @@ describe OoxmlParser::DocxParagraphRun do
 
   describe 'equality' do
     it 'Run is equal to itself' do
-      expect(run).to eq(run)
+      second_run = run.dup
+      expect(run).to eq(second_run)
     end
   end
 end
