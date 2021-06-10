@@ -12,7 +12,8 @@ describe OoxmlParser::ThemeColor do
 
   describe 'ThemeColor equality' do
     it 'ThemeColor is equal to same theme color' do
-      expect(system_color).to eq(system_color)
+      dub_color = system_color.dub
+      expect(system_color).to eq(dub_color)
     end
 
     it 'ThemeColor is not equal to same theme color' do
