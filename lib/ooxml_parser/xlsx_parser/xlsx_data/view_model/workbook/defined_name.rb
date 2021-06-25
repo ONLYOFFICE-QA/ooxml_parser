@@ -6,9 +6,9 @@ module OoxmlParser
     # @return [String] Ranges to which defined name refers
     attr_reader :range
     # @return [String] Name
-    attr_accessor :name
+    attr_reader :name
     # @return [String] Id of sheet
-    attr_accessor :local_sheet_id
+    attr_reader :local_sheet_id
     # @return [Symbol] Specifies whether defined name is hidden
     attr_reader :hidden
 

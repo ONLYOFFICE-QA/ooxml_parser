@@ -26,7 +26,7 @@ module OoxmlParser
     # @return [Array<PivotTableDefintion>] list of pivot table defitions
     attr_accessor :pivot_table_definitions
     # @return [Array<DefinedName>] list of defined names
-    attr_accessor :defined_names
+    attr_reader :defined_names
 
     def initialize(params = {})
       @worksheets = []
