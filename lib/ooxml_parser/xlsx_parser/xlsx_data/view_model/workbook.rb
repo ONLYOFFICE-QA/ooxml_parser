@@ -3,6 +3,7 @@
 require_relative 'workbook/chartsheet'
 require_relative 'workbook/pivot_cache'
 require_relative 'workbook/pivot_table_definition'
+require_relative 'workbook/defined_name'
 require_relative 'workbook/shared_string_table'
 require_relative 'workbook/style_sheet'
 require_relative 'workbook/worksheet'
@@ -24,11 +25,14 @@ module OoxmlParser
     attr_accessor :pivot_caches
     # @return [Array<PivotTableDefintion>] list of pivot table defitions
     attr_accessor :pivot_table_definitions
+    # @return [Array<DefinedName>] list of defined names
+    attr_reader :defined_names
 
     def initialize(params = {})
       @worksheets = []
       @pivot_caches = []
       @pivot_table_definitions = []
+      @defined_names = []
       super
     end
 
@@ -125,6 +129,7 @@ module OoxmlParser
       end
       parse_pivot_cache
       parse_pivot_table
+      parse_defined_names
       OOXMLDocumentObject.xmls_stack.pop
       self
     end
@@ -147,6 +152,13 @@ module OoxmlParser
       files = @content_types.by_type('application/vnd.openxmlformats-officedocument.spreadsheetml.pivotTable+xml')
       files.each do |file|
         @pivot_table_definitions << PivotTableDefinition.new(parent: self).parse(file.part_name)
+      end
+    end
+
+    # Perform parsing of defined names
+    def parse_defined_names
+      @doc.xpath('xmlns:workbook/xmlns:definedNames/xmlns:definedName').each do |defined_name|
+        @defined_names << DefinedName.new(parent: self).parse(defined_name)
       end
     end
   end
