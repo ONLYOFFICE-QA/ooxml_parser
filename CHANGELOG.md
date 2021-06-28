@@ -4,6 +4,7 @@
 
 ### New Features
 
+* Parsing `Header and Footer` in xlsx
 * Parsing `Defined Names` in xlsx
 
 ## 0.13.0 (2021-05-25)

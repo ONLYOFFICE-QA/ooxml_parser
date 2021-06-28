@@ -10,6 +10,7 @@ require_relative 'worksheet/worksheet_helper'
 require_relative 'worksheet/xlsx_column_properties'
 require_relative 'worksheet/xlsx_drawing'
 require_relative 'worksheet/xlsx_row'
+require_relative 'worksheet/xlsx_header_footer'
 module OoxmlParser
   # Properties of worksheet
   class Worksheet < OOXMLDocumentObject
@@ -28,6 +29,8 @@ module OoxmlParser
     attr_reader :page_setup
     # @return [ExtensionList] list of extensions
     attr_accessor :extension_list
+    # @return [XlsxHeaderFooter] header and footer
+    attr_reader :header_footer
 
     def initialize(parent: nil)
       @columns = []
@@ -124,6 +127,8 @@ module OoxmlParser
           @page_setup = PageSetup.new(parent: self).parse(worksheet_node_child)
         when 'extLst'
           @extension_list = ExtensionList.new(parent: self).parse(worksheet_node_child)
+        when 'headerFooter'
+          @header_footer = XlsxHeaderFooter.new(parent: self).parse(worksheet_node_child)
         end
       end
       parse_comments
