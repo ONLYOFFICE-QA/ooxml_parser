@@ -5,8 +5,8 @@ require 'spec_helper'
 describe 'DocxShape#style' do
   let(:files_dir) do
     'spec/document/elements/paragraph/'\
-    'runs/alternate_content/office2010_content/'\
-    'graphic/data/style'
+      'runs/alternate_content/office2010_content/'\
+      'graphic/data/style'
   end
 
   it 'style is nil for docx without style' do

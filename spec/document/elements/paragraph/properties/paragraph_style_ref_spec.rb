@@ -5,7 +5,7 @@ require 'spec_helper'
 describe 'ParagraphProperties#paragraph_style_ref' do
   let(:docx) do
     OoxmlParser::Parser.parse('spec/document/elements/paragraph/properties'\
-                                        '/paragraph_style_ref/paragraph_style_ref.docx')
+                              '/paragraph_style_ref/paragraph_style_ref.docx')
   end
 
   let(:style_ref) { docx.elements.first.paragraph_properties.paragraph_style_ref }

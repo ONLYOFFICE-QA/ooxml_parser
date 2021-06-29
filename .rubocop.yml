@@ -8,3 +8,9 @@ inherit_from:
 AllCops:
     NewCops: enable
     TargetRubyVersion: 2.5
+
+
+# This project contains link to README file on master branch
+# Also some of xml source also contain `master` word
+Naming/InclusiveLanguage:
+  Enabled: false

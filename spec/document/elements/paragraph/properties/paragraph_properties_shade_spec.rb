@@ -5,7 +5,7 @@ require 'spec_helper'
 describe 'ParagraphProperties#shade' do
   let(:docx) do
     OoxmlParser::Parser.parse('spec/document/elements/paragraph'\
-                                        '/properties/shade/simple_shade.docx')
+                              '/properties/shade/simple_shade.docx')
   end
 
   let(:shade) { docx.elements.first.paragraph_properties.shade }

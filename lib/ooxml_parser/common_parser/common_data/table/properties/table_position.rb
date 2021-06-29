@@ -9,11 +9,11 @@ module OoxmlParser
     # @return [String] result of convert of object to string
     def to_s
       "Table position left: #{left}, "\
-      "right: #{right}, "\
-      "top: #{top}, "\
-      "bottom #{bottom}, "\
-      "position x: #{position_x}, "\
-      "position y: #{position_y}"
+        "right: #{right}, "\
+        "top: #{top}, "\
+        "bottom #{bottom}, "\
+        "position x: #{position_x}, "\
+        "position y: #{position_y}"
     end
 
     # Parse TablePosition object
