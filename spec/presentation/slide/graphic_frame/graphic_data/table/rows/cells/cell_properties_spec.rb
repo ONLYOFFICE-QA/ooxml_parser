@@ -5,8 +5,8 @@ require 'spec_helper'
 describe 'My behaviour' do
   let(:merged_cells) do
     OoxmlParser::Parser.parse('spec/presentation/slide/graphic_frame'\
-                                                           '/graphic_data/table/rows/cells/'\
-                                                           'properties/merged_cells.pptx')
+                              '/graphic_data/table/rows/cells/'\
+                              'properties/merged_cells.pptx')
   end
 
   it 'TableStyleBackgroundColor' do

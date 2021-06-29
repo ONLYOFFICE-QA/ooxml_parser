@@ -5,8 +5,8 @@ require 'spec_helper'
 describe OoxmlParser::PlotArea do
   let(:plot_area) do
     OoxmlParser::Parser.parse('spec/workbook/worksheet/'\
-                                                        'drawing/picture/chart/'\
-                                                        'plot_area/plot_with_typese.xlsx')
+                              'drawing/picture/chart/'\
+                              'plot_area/plot_with_typese.xlsx')
   end
 
   it 'Check bubbleChart type' do

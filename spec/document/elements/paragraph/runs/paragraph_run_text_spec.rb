@@ -53,7 +53,7 @@ describe 'My behaviour' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/text/text_in_header_footer_section.docx')
     expect(docx.elements.first.sector_properties.notes.first.elements.first
                .character_style_array.first.text).to eq('Lorem ipsum dolor sit amet, consectetur '\
-                              'adipiscing elit. Integer consequat faucibus eros, sed mattis tortor...')
+                                                        'adipiscing elit. Integer consequat faucibus eros, sed mattis tortor...')
     expect(docx.notes.first.elements.first.character_style_array.first.text).to eq('Simple Test Text')
   end
 

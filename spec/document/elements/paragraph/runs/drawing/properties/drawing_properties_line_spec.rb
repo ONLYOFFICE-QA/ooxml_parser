@@ -34,8 +34,8 @@ describe OoxmlParser::DocxShapeLine do
 
   it 'ShapeLinePoints' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/'\
-                                                        'runs/drawing/properties/line/'\
-                                                        'shape_line_points.docx')
+                                              'runs/drawing/properties/line/'\
+                                              'shape_line_points.docx')
     alternate_content = docx.elements.first.nonempty_runs.first.alternate_content
     expect(alternate_content.office2010_content.graphic.data
                .properties.custom_geometry.paths_list.first.elements.first.points.first)

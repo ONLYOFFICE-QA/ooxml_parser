@@ -23,8 +23,8 @@ module OoxmlParser
     # @return [String] text representation
     def to_s
       "Value: `#{value}`, "\
-      "Color: `#{color}`, "\
-      "Fill: `#{fill}`"
+        "Color: `#{color}`, "\
+        "Fill: `#{fill}`"
     end
 
     # Parse Shade
