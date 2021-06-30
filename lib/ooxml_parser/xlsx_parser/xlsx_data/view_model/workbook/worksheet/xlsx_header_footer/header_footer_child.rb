@@ -8,9 +8,8 @@ module OoxmlParser
     # @return [String] raw text of header
     attr_reader :raw_string
 
-    def initialize(type: nil, raw_string: nil, parent: nil)
+    def initialize(type: nil, parent: nil)
       @type = type
-      @raw_string = raw_string
       super(parent: parent)
     end
 
