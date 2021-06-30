@@ -45,4 +45,16 @@ describe OoxmlParser::XlsxHeaderFooter do
   it 'Has first_footer' do
     expect(header_footer.first_footer.raw_string).to eq('&L&T&C&F&R&A')
   end
+
+  it 'odd_header has left part' do
+    expect(header_footer.odd_header.left).to eq('&"Arial"&14Confidential')
+  end
+
+  it 'odd_header has center part' do
+    expect(header_footer.odd_header.center).to eq('&"-,Bold"&Kff0000&D')
+  end
+
+  it 'odd_header has right part' do
+    expect(header_footer.odd_header.right).to eq('&"-,Italic"&UPage &P')
+  end
 end
