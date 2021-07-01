@@ -7,12 +7,6 @@ module OoxmlParser
     attr_reader :type
     # @return [String] raw text of header
     attr_reader :raw_string
-    # @return [String] left part of header
-    attr_reader :left
-    # @return [String] center part of header
-    attr_reader :center
-    # @return [String] right part of header
-    attr_reader :right
 
     def initialize(type: nil, raw_string: nil, parent: nil)
       @type = type
@@ -52,13 +46,11 @@ module OoxmlParser
     def left
       return @left if @left
 
-      split_right = @raw_string.split('&R')
-      return nil if split_right.first == ''
+      left = @raw_string.gsub("&R#{right}", '')
+      left = left.gsub("&C#{center}", '')
+      return nil if left == ''
 
-      left = split_right.first.split('&C').first.match(/&L(.+)/)
-      return nil unless left
-
-      @left = left[1]
+      left.gsub('&L', '')
     end
   end
 end
