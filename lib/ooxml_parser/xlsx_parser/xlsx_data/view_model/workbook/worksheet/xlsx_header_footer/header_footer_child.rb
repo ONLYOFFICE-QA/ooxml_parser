@@ -42,17 +42,14 @@ module OoxmlParser
       @center = center[1]
     end
 
-    # @return [String] left part of header
     def left
       return @left if @left
 
-      split_right = @raw_string.split('&R')
-      return nil if split_right.first == ''
+      left = @raw_string.gsub("&R#{right}", '')
+      left = left.gsub("&C#{center}", '')
+      return nil if left == ''
 
-      left = split_right.first.split('&C').first.match(/&L(.+)/)
-      return nil unless left
-
-      @left = left[1]
+      left.gsub('&L', '')
     end
   end
 end
