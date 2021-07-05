@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.14.0 (2021-07-05)
+
 ### New Features
 
 * Parsing `Header and Footer` in xlsx
