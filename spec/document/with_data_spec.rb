@@ -37,4 +37,9 @@ describe 'with_data' do
     docx = OoxmlParser::Parser.parse('spec/document/with_data/section_break.docx')
     expect(docx).to be_with_data
   end
+
+  it 'paragraph_without_paragraph_properties' do
+    docx = OoxmlParser::Parser.parse('spec/document/with_data/paragraph_without_paragraph_properties.docx')
+    expect(docx).to be_with_data
+  end
 end

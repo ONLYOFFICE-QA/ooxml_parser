@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Fixes
+
+* Fix `DocxParagraph#with_data?` failure on paragraph without properties
+
 ## 0.14.0 (2021-07-05)
 
 ### New Features
