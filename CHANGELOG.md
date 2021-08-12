@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Minor style fixes from `rubocop` v1.19.0
+
 ## 0.14.1 (2021-08-03)
 
 ### Fixes
