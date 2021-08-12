@@ -78,14 +78,6 @@ RSpec/FilePath:
 RSpec/MultipleExpectations:
   Max: 10
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SingleLineConditionsOnly, IncludeTernaryExpressions.
-# SupportedStyles: assign_to_condition, assign_inside_condition
-Style/ConditionalAssignment:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/alternate_content/chart/chart.rb'
-
 # Offense count: 3
 # Configuration parameters: AllowedMethods.
 # AllowedMethods: respond_to_missing?

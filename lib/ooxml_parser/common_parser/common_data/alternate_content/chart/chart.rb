@@ -53,12 +53,12 @@ module OoxmlParser
           @grouping = chart_props_node_child.attribute('val').value.to_sym
         when 'ser'
           @series << Series.new(parent: self).parse(chart_props_node_child)
-          case @type
-          when :point, :bubble
-            val = chart_props_node_child.xpath('c:yVal')[0]
-          else
-            val = chart_props_node_child.xpath('c:val')[0]
-          end
+          val = case @type
+                when :point, :bubble
+                  chart_props_node_child.xpath('c:yVal')[0]
+                else
+                  chart_props_node_child.xpath('c:val')[0]
+                end
           next unless val
           next if val.xpath('c:numRef').empty?
 
