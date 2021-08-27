@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New feature
+
+* Separate gem for Windows (`mingw32`) without `filemagic` dependency
+
 ### Changes
 
 * Minor style fixes from `rubocop` v1.19.0
