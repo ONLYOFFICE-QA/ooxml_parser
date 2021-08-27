@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.15.0 (2021-08-27)
+
 ### New feature
 
 * Separate gem for Windows (`mingw32`) without `filemagic` dependency
