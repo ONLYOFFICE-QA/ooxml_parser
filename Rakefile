@@ -32,12 +32,10 @@ task release_github_rubygems: :build_mingw_gem do
   Rake::Task['release'].invoke
   default_gem = "pkg/#{OoxmlParser::Name::STRING}-"\
                 "#{OoxmlParser::Version::STRING}.gem"
+  sh('gem push --key github '\
+     '--host https://rubygems.pkg.github.com/onlyoffice '\
+     "#{default_gem}")
   mingw_gem = "pkg/#{OoxmlParser::Name::STRING}-"\
               "#{OoxmlParser::Version::STRING}-mingw32.gem"
   `gem push #{mingw_gem}`
-  [default_gem, mingw_gem].each do |gem|
-    sh('gem push --key github '\
-       '--host https://rubygems.pkg.github.com/onlyoffice '\
-       "#{gem}")
-  end
 end
