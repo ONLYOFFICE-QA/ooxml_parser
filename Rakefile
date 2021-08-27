@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'lib/ooxml_parser'
-require 'bundler/gem_tasks'
+require 'bundler'
+Bundler::GemHelper.install_tasks(name: 'ooxml_parser')
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
@@ -19,12 +20,23 @@ task :parse_files, [:dir] do |_, args|
   end
 end
 
-desc 'Release gem '
-task :release_github_rubygems do
+desc 'Build windows gem'
+task :build_mingw_gem do
+  `gem build ooxml_parser-mingw32.gemspec`
+  `mkdir -pv pkg`
+  `mv *.gem pkg`
+end
+
+desc 'Release gem'
+task release_github_rubygems: :build_mingw_gem do
   Rake::Task['release'].invoke
-  gem_name = "pkg/#{OoxmlParser::Name::STRING}-"\
-             "#{OoxmlParser::Version::STRING}.gem"
-  sh('gem push --key github '\
-     '--host https://rubygems.pkg.github.com/onlyoffice '\
-     "#{gem_name}")
+  default_gem = "pkg/#{OoxmlParser::Name::STRING}-"\
+                "#{OoxmlParser::Version::STRING}.gem"
+  mingw_gem = "pkg/#{OoxmlParser::Name::STRING}-"\
+              "#{OoxmlParser::Version::STRING}-mingw32.gem"
+  [default_gem, mingw_gem].each do |gem|
+    sh('gem push --key github '\
+       '--host https://rubygems.pkg.github.com/onlyoffice '\
+       "#{gem}")
+  end
 end
