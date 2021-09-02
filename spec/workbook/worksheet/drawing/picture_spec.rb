@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'uri'
 
 describe 'My behaviour' do
   it 'ImageSize' do
