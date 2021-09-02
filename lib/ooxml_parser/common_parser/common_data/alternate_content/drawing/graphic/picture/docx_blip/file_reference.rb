@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'uri'
+
 module OoxmlParser
   # Class for storing image data
   class FileReference < OOXMLDocumentObject
@@ -29,7 +31,7 @@ module OoxmlParser
         return self
       end
       return self if @path == 'NULL'
-      return self if @path.match?(URI::DEFAULT_PARSER.make_regexp)
+      return self if @path.match?(::URI::DEFAULT_PARSER.make_regexp)
 
       full_path_to_file = OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.root_subfolder + @path.gsub('..', '')
       if File.exist?(full_path_to_file)
