@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'uri'
+
 module OoxmlParser
   # Class for storing image data
   class FileReference < OOXMLDocumentObject
