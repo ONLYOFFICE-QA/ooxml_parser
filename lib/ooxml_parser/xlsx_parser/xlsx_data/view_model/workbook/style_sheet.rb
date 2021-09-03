@@ -26,7 +26,6 @@ module OoxmlParser
       @number_formats = NumberFormats.new(parent: self)
       @fonts = Fonts.new(parent: self)
       @fills = Fills.new(parent: self)
-      @conditional_rule_formats = []
       super
     end
 
