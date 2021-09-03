@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.14.2 (2021-09-03)
+
 ### Fixes
 
 * Fix problem with no `require 'uri'` (Thanks [@545ch4](https://github.com/545ch4))
