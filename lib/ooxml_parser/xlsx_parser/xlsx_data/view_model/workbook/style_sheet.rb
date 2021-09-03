@@ -5,6 +5,7 @@ require_relative 'style_sheet/fills'
 require_relative 'style_sheet/fonts'
 require_relative 'style_sheet/number_formats'
 require_relative 'style_sheet/xlsx_borders'
+require_relative 'style_sheet/conditional_rule_formats'
 module OoxmlParser
   # Parsing file styles.xml
   class StyleSheet < OOXMLDocumentObject
@@ -18,11 +19,14 @@ module OoxmlParser
     attr_reader :cell_xfs
     # @return [XlsxBorders] Cell XFs
     attr_reader :borders
+    # @return [ConditionalRuleFormats] list of conditional rule formats
+    attr_accessor :conditional_rule_formats
 
     def initialize(parent: nil)
       @number_formats = NumberFormats.new(parent: self)
       @fonts = Fonts.new(parent: self)
       @fills = Fills.new(parent: self)
+      @conditional_rule_formats = []
       super
     end
 
@@ -42,6 +46,8 @@ module OoxmlParser
           @cell_xfs = CellXfs.new(parent: self).parse(node_child)
         when 'borders'
           @borders = XlsxBorders.new(parent: self).parse(node_child)
+        when 'dxfs'
+          @conditional_rule_formats = ConditionalRuleFormats.new(parent: self).parse(node_child)
         end
       end
       self

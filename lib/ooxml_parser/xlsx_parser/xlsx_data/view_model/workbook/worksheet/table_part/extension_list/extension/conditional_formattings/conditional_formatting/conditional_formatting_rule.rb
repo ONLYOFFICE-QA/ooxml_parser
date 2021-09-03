@@ -10,6 +10,8 @@ module OoxmlParser
     attr_reader :priority
     # @return [String] ID of rule
     attr_reader :id
+    # @return [Integer] index of format
+    attr_reader :format_index
     # @return [Symbol] Specifies whether rules with lower priority should be applied over this rule
     attr_reader :stop_if_true
     # @return [Symbol] Relational operator in value rule
@@ -44,6 +46,9 @@ module OoxmlParser
           @priority = value.value.to_i
         when 'id'
           @id = value.value.to_s
+        when 'dxfId'
+          @format_index = value.value.to_i
+          @format = root_object.style_sheet.conditional_rule_formats[@format_index]
         when 'stopIfTrue'
           @stop_if_true = attribute_enabled?(value)
         when 'operator'

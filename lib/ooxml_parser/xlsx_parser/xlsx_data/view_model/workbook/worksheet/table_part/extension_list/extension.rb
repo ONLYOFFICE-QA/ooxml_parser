@@ -3,13 +3,13 @@
 require_relative 'extension/data_validations'
 require_relative 'extension/sparkline_groups'
 require_relative 'extension/x14_table'
-require_relative 'extension/conditional_formatting'
+require_relative 'extension/conditional_formattings'
 module OoxmlParser
   # Class for `ext` data
   class Extension < OOXMLDocumentObject
     # @return [DataValidations] list of data validations
     attr_accessor :data_validations
-    # @return [Array, ConditionalFormatting] array of conditional formattings
+    # @return [ConditionalFormattings] list of conditional formattings
     attr_reader :conditional_formattings
     # @return [X14Table] table data in x14 namespace
     attr_accessor :table
@@ -30,9 +30,7 @@ module OoxmlParser
         when 'dataValidations'
           @data_validations = DataValidations.new(parent: self).parse(column_node)
         when 'conditionalFormattings'
-          column_node.xpath('*').each do |conditional_formatting_node|
-            @conditional_formattings << ConditionalFormatting.new(parent: self).parse(conditional_formatting_node)
-          end
+          @conditional_formattings = ConditionalFormattings.new(parent: self).parse(column_node)
         when 'table'
           @table = X14Table.new(parent: self).parse(column_node)
         when 'sparklineGroups'
