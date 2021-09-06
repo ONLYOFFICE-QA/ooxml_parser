@@ -74,10 +74,12 @@ module OoxmlParser
       self
     end
 
+    # @return [DifferentialFormattingRecord] format of rule
     def format
       return @rule_format if @rule_format
+      return nil unless @format_index
 
-      root_object.style_sheet.differential_formatting_records[@format_index] if @format_index
+      root_object.style_sheet.differential_formatting_records[@format_index]
     end
   end
 end
