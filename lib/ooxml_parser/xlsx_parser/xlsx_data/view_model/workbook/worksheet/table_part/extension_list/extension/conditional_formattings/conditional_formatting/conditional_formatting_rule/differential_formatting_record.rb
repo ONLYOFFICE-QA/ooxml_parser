@@ -2,7 +2,7 @@
 
 module OoxmlParser
   # Class for `dxf` data
-  class ConditionalRuleFormat < OOXMLDocumentObject
+  class DifferentialFormattingRecord < OOXMLDocumentObject
     # @return [Font] Font
     attr_reader :font
     # @return [NumberFormat] Number format
@@ -17,9 +17,9 @@ module OoxmlParser
       super
     end
 
-    # Parse ConditionalRuleFormat data
-    # @param [Nokogiri::XML:Element] node with ConditionalRuleFormat data
-    # @return [DataValidation] value of ConditionalRuleFormat data
+    # Parse DifferentialFormattingRecord data
+    # @param [Nokogiri::XML:Element] node with DifferentialFormattingRecord data
+    # @return [DifferentialFormattingRecord] value of DifferentialFormattingRecord data
     def parse(node)
       node.xpath('*').each do |node_child|
         case node_child.name

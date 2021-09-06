@@ -16,11 +16,6 @@ module OoxmlParser
     # @return [SparklineGroups] list of groups
     attr_reader :sparkline_groups
 
-    def initialize(parent: nil)
-      @conditional_formattings = []
-      super
-    end
-
     # Parse Extension data
     # @param [Nokogiri::XML:Element] node with Extension data
     # @return [Extension] value of Extension data

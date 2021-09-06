@@ -32,7 +32,7 @@ module OoxmlParser
     # @return [XlsxHeaderFooter] header and footer
     attr_reader :header_footer
     # @return [Array<ConditionalFormatting>] list of conditional formattings
-    attr_reader :conditional_formattings_list
+    attr_reader :conditional_formattings
 
     def initialize(parent: nil)
       @columns = []
@@ -44,7 +44,7 @@ module OoxmlParser
       @drawings = []
       @sheet_views = []
       @table_parts = []
-      @conditional_formattings_list = []
+      @conditional_formattings = []
       super
     end
 
@@ -133,7 +133,7 @@ module OoxmlParser
         when 'headerFooter'
           @header_footer = XlsxHeaderFooter.new(parent: self).parse(worksheet_node_child)
         when 'conditionalFormatting'
-          @conditional_formattings_list << ConditionalFormatting.new(parent: self).parse(worksheet_node_child)
+          @conditional_formattings << ConditionalFormatting.new(parent: self).parse(worksheet_node_child)
         end
       end
       parse_comments

@@ -12,6 +12,11 @@ module OoxmlParser
       super
     end
 
+    # @return [Array, ConditionalFormatting] accessor
+    def [](key)
+      @conditional_formattings_list[key]
+    end
+
     # Parse ConditionalFormattings data
     # @param [Nokogiri::XML:Element] node with ConditionalFormattings data
     # @return [ConditionalFormattings] value of ConditionalFormattings data

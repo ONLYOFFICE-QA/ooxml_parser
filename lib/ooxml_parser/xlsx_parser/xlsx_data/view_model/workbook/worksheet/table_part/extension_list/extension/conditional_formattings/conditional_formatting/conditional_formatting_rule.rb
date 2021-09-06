@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'conditional_formatting_rule/conditional_rule_format'
+require_relative 'conditional_formatting_rule/differential_formatting_record'
 module OoxmlParser
   # Class for `cfRule` data
   class ConditionalFormattingRule < OOXMLDocumentObject
@@ -26,7 +26,7 @@ module OoxmlParser
     attr_reader :text
     # @return [Array, Formula] Formulas to determine condition
     attr_reader :formulas
-    # @return [ConditionalRuleFormat] Format
+    # @return [DifferentialFormattingRecord] Format
     attr_reader :format
 
     def initialize(parent: nil)
@@ -48,7 +48,7 @@ module OoxmlParser
           @id = value.value.to_s
         when 'dxfId'
           @format_index = value.value.to_i
-          @format = root_object.style_sheet.conditional_rule_formats[@format_index]
+          @format = root_object.style_sheet.differential_formatting_records[@format_index]
         when 'stopIfTrue'
           @stop_if_true = attribute_enabled?(value)
         when 'operator'
@@ -69,7 +69,7 @@ module OoxmlParser
         when 'f'
           @formulas << Formula.new(parent: self).parse(node_child)
         when 'dxf'
-          @format = ConditionalRuleFormat.new(parent: self).parse(node_child)
+          @format = DifferentialFormattingRecord.new(parent: self).parse(node_child)
         end
       end
       self
