@@ -27,7 +27,7 @@ module OoxmlParser
     # @return [Array, Formula] Formulas to determine condition
     attr_reader :formulas
     # @return [DifferentialFormattingRecord] Format
-    attr_reader :format
+    attr_reader :rule_format
 
     def initialize(parent: nil)
       @formulas = []
@@ -48,7 +48,6 @@ module OoxmlParser
           @id = value.value.to_s
         when 'dxfId'
           @format_index = value.value.to_i
-          @format = root_object.style_sheet.differential_formatting_records[@format_index]
         when 'stopIfTrue'
           @stop_if_true = attribute_enabled?(value)
         when 'operator'
@@ -69,10 +68,16 @@ module OoxmlParser
         when 'f'
           @formulas << Formula.new(parent: self).parse(node_child)
         when 'dxf'
-          @format = DifferentialFormattingRecord.new(parent: self).parse(node_child)
+          @rule_format = DifferentialFormattingRecord.new(parent: self).parse(node_child)
         end
       end
       self
+    end
+
+    def format
+      return @rule_format if @rule_format
+
+      root_object.style_sheet.differential_formatting_records[@format_index] if @format_index
     end
   end
 end

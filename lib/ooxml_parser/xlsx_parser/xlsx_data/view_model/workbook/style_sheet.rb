@@ -20,7 +20,7 @@ module OoxmlParser
     # @return [XlsxBorders] Cell XFs
     attr_reader :borders
     # @return [DifferentialFormattingRecords] list of differential formatting records
-    attr_accessor :differential_formatting_records
+    attr_reader :differential_formatting_records
 
     def initialize(parent: nil)
       @number_formats = NumberFormats.new(parent: self)
