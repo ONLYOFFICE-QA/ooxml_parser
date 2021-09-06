@@ -5,6 +5,7 @@ require_relative 'style_sheet/fills'
 require_relative 'style_sheet/fonts'
 require_relative 'style_sheet/number_formats'
 require_relative 'style_sheet/xlsx_borders'
+require_relative 'style_sheet/differential_formatting_records'
 module OoxmlParser
   # Parsing file styles.xml
   class StyleSheet < OOXMLDocumentObject
@@ -18,6 +19,8 @@ module OoxmlParser
     attr_reader :cell_xfs
     # @return [XlsxBorders] Cell XFs
     attr_reader :borders
+    # @return [DifferentialFormattingRecords] list of differential formatting records
+    attr_reader :differential_formatting_records
 
     def initialize(parent: nil)
       @number_formats = NumberFormats.new(parent: self)
@@ -42,6 +45,8 @@ module OoxmlParser
           @cell_xfs = CellXfs.new(parent: self).parse(node_child)
         when 'borders'
           @borders = XlsxBorders.new(parent: self).parse(node_child)
+        when 'dxfs'
+          @differential_formatting_records = DifferentialFormattingRecords.new(parent: self).parse(node_child)
         end
       end
       self
