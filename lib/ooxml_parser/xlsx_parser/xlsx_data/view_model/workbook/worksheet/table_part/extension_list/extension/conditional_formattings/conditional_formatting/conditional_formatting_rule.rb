@@ -74,7 +74,7 @@ module OoxmlParser
       self
     end
 
-    # @return [DifferentialFormattingRecord] format of rule
+    # @return [nil, DifferentialFormattingRecord] format of rule
     def format
       return @rule_format if @rule_format
       return nil unless @format_index
