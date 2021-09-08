@@ -12,11 +12,6 @@ module OoxmlParser
     # @return [Borders] Borders
     attr_reader :borders
 
-    def initialize(parent: nil)
-      @formula = []
-      super
-    end
-
     # Parse DifferentialFormattingRecord data
     # @param [Nokogiri::XML:Element] node with DifferentialFormattingRecord data
     # @return [DifferentialFormattingRecord] value of DifferentialFormattingRecord data

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'conditional_formatting_rule/differential_formatting_record'
+require_relative 'conditional_formatting_rule/data_bar'
 module OoxmlParser
   # Class for `cfRule` data
   class ConditionalFormattingRule < OOXMLDocumentObject
@@ -28,6 +29,8 @@ module OoxmlParser
     attr_reader :formulas
     # @return [DifferentialFormattingRecord] Format
     attr_reader :rule_format
+    # @return [DataBar] data bar formatting
+    attr_reader :data_bar
 
     def initialize(parent: nil)
       @formulas = []
@@ -69,6 +72,8 @@ module OoxmlParser
           @formulas << Formula.new(parent: self).parse(node_child)
         when 'dxf'
           @rule_format = DifferentialFormattingRecord.new(parent: self).parse(node_child)
+        when 'dataBar'
+          @data_bar = DataBar.new(parent: self).parse(node_child)
         end
       end
       self
