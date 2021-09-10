@@ -3,9 +3,9 @@
 module OoxmlParser
   # Class for `colorScale` data
   class ColorScale < OOXMLDocumentObject
-    # @return [Array, ConditionalFormatValueObject] list of values
+    # @return [Array<ConditionalFormatValueObject>] list of values
     attr_reader :values
-    # @return [Array, Color] list of colors
+    # @return [Array<OoxmlColor>] list of colors
     attr_reader :colors
 
     def initialize(parent: nil)

@@ -12,9 +12,9 @@ module OoxmlParser
     attr_reader :show_value
     # @return [Symbol] Specifies whether icon set is custom
     attr_reader :custom
-    # @return [Array, ConditionalFormatValueObject] list of values
+    # @return [Array<ConditionalFormatValueObject>] list of values
     attr_reader :values
-    # @return [Array, ConditionalFormattingIcon] list of icons for custom sets
+    # @return [Array<ConditionalFormattingIcon>] list of icons for custom sets
     attr_reader :icons
 
     def initialize(parent: nil)
