@@ -3,10 +3,19 @@
 module OoxmlParser
   # Class for `cfvo` data
   class ConditionalFormatValueObject < OOXMLDocumentObject
-    # @return [Symbol] Specifies whether value is shown in a cell
+    # @return [Symbol] Value type
     attr_reader :type
-    # @return [Formula] formula
+    # @return [String] Value
+    attr_reader :value
+    # @return [Symbol] Specifies whether value uses greater than or equal to operator
+    attr_reader :greater_or_equal
+    # @return [Formula] Formula
     attr_reader :formula
+
+    def initialize(parent: nil)
+      @greater_or_equal = true
+      super
+    end
 
     # Parse ConditionalFormatValueObject data
     # @param [Nokogiri::XML:Element] node with ConditionalFormatValueObject data
@@ -16,6 +25,10 @@ module OoxmlParser
         case key
         when 'type'
           @type = value.value.to_sym
+        when 'val'
+          @value = value.value.to_s
+        when 'gte'
+          @greater_or_equal = attribute_enabled?(value)
         end
       end
 
