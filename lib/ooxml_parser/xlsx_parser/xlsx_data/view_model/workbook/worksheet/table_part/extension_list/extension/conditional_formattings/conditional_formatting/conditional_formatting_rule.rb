@@ -2,6 +2,8 @@
 
 require_relative 'conditional_formatting_rule/differential_formatting_record'
 require_relative 'conditional_formatting_rule/data_bar'
+require_relative 'conditional_formatting_rule/color_scale'
+require_relative 'conditional_formatting_rule/icon_set'
 module OoxmlParser
   # Class for `cfRule` data
   class ConditionalFormattingRule < OOXMLDocumentObject
@@ -31,6 +33,10 @@ module OoxmlParser
     attr_reader :rule_format
     # @return [DataBar] data bar formatting
     attr_reader :data_bar
+    # @return [ColorScale] color scale formatting
+    attr_reader :color_scale
+    # @return [IconSet] icon set formatting
+    attr_reader :icon_set
 
     def initialize(parent: nil)
       @formulas = []
@@ -74,6 +80,10 @@ module OoxmlParser
           @rule_format = DifferentialFormattingRecord.new(parent: self).parse(node_child)
         when 'dataBar'
           @data_bar = DataBar.new(parent: self).parse(node_child)
+        when 'colorScale'
+          @color_scale = ColorScale.new(parent: self).parse(node_child)
+        when 'iconSet'
+          @icon_set = IconSet.new(parent: self).parse(node_child)
         end
       end
       self
