@@ -69,7 +69,7 @@ module OoxmlParser
 
     # @return [True, False] is color default
     def none?
-      (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR) ||
+      ((@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR)) ||
         (style == :nil)
     end
 

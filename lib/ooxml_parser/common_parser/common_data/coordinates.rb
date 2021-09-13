@@ -114,7 +114,7 @@ module OoxmlParser
     # and converts into integer
     def column_number
       @column.reverse.each_char.reduce(0) do |result, char|
-        result + (char.downcase.ord - 96) * (26**@column.reverse.index(char))
+        result + ((char.downcase.ord - 96) * (26**@column.reverse.index(char)))
       end
     end
 

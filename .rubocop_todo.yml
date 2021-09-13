@@ -6,17 +6,6 @@
 # Note that changes in the inspected code, or installation of new
 # versions of RuboCop, may require this file to be generated again.
 
-# Offense count: 13
-# Cop supports --auto-correct.
-Lint/AmbiguousOperatorPrecedence:
-  Exclude:
-    - 'lib/ooxml_parser/common_parser/common_data/color.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/color/color_helper.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/colors/hsl_color.rb'
-    - 'lib/ooxml_parser/common_parser/common_data/coordinates.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/docx_paragraph/docx_paragraph_run/docx_paragraph_run_helpers.rb'
-    - 'lib/ooxml_parser/docx_parser/docx_data/document_structure/page_properties/page_size.rb'
-
 # Offense count: 120
 # Configuration parameters: IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
