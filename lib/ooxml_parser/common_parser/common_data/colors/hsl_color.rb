@@ -22,9 +22,9 @@ module OoxmlParser
     # Chroma - The "colorfulness relative to the brightness of a similarly illuminated white".
     # @return [Color] result
     def to_rgb
-      chroma = (1 - (2 * @l - 1).abs) * @s
-      x = chroma * (1 - ((@h / 60.0) % 2.0 - 1).abs)
-      m = @l - chroma / 2.0
+      chroma = (1 - ((2 * @l) - 1).abs) * @s
+      x = chroma * (1 - (((@h / 60.0) % 2.0) - 1).abs)
+      m = @l - (chroma / 2.0)
 
       rgb = if @h.zero?
               Color.new(0, 0, 0)
@@ -52,7 +52,7 @@ module OoxmlParser
       if tint.nil?
         lum
       else
-        tint.negative? ? lum * (1.0 + tint) : lum * (1.0 - tint) + (255 - 255 * (1.0 - tint))
+        tint.negative? ? lum * (1.0 + tint) : (lum * (1.0 - tint)) + (255 - (255 * (1.0 - tint)))
       end
     end
 

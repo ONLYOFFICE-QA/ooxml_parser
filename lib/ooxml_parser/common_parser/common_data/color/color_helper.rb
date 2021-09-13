@@ -45,11 +45,11 @@ module OoxmlParser
         hls_color.h = if max == red && green >= blue
                         60.0 * (green - blue) / delta
                       elsif max == red && green < blue
-                        60.0 * (green - blue) / delta + 360.0
+                        (60.0 * (green - blue) / delta) + 360.0
                       elsif max == green
-                        60.0 * (blue - red) / delta + 120.0
+                        (60.0 * (blue - red) / delta) + 120.0
                       else
-                        60.0 * (red - green) / delta + 240.0
+                        (60.0 * (red - green) / delta) + 240.0
                       end
       end
 

@@ -5,6 +5,7 @@
 ### Changes
 
 * Minor refactoring in parsing Paragraph spacing
+* Minor style fixes from `rubocop` v1.21.0
 
 ## 0.15.0 (2021-09-13)
 

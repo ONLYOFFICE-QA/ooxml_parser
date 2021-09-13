@@ -48,7 +48,7 @@ module OoxmlParser
 
     # @return [String] result of convert of object to string
     def to_s
-      if @red == VALUE_FOR_NONE_COLOR && @green == VALUE_FOR_NONE_COLOR && @blue == VALUE_FOR_NONE_COLOR
+      if primary_colors_none?
         'none'
       else
         "RGB (#{@red}, #{@green}, #{@blue})"
@@ -69,8 +69,8 @@ module OoxmlParser
 
     # @return [True, False] is color default
     def none?
-      (@red == VALUE_FOR_NONE_COLOR) && (@green == VALUE_FOR_NONE_COLOR) && (@blue == VALUE_FOR_NONE_COLOR) ||
-        (style == :nil)
+      primary_colors_none? ||
+        style == :nil
     end
 
     # @return [True, False] is color not default
@@ -81,6 +81,14 @@ module OoxmlParser
     # @return [True, False] is color white
     def white?
       (@red == 255) && (@green == 255) && (@blue == 255)
+    end
+
+    # Check if all three primary colors are none
+    # @return [Boolean]
+    def primary_colors_none?
+      @red == VALUE_FOR_NONE_COLOR &&
+        @green == VALUE_FOR_NONE_COLOR &&
+        @blue == VALUE_FOR_NONE_COLOR
     end
 
     # Method to copy object
