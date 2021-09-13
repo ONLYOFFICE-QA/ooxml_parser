@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.15.0 (2021-09-13)
+
 ### New Features
 
 * Parsing `Conditional Formatting` in xlsx
