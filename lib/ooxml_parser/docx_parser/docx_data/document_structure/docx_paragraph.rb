@@ -216,12 +216,8 @@ module OoxmlParser
           @align = node_child.attribute('val').value.to_sym unless node_child.attribute('val').nil?
           @align = :justify if node_child.attribute('val').value == 'both'
         when 'spacing'
-          @spacing.before = (node_child.attribute('before').value.to_f / 566.9).round(2) unless node_child.attribute('before').nil?
-          @spacing.after = (node_child.attribute('after').value.to_f / 566.9).round(2) unless node_child.attribute('after').nil?
-          @spacing.line_rule = node_child.attribute('lineRule').value.sub('atLeast', 'at_least').to_sym unless node_child.attribute('lineRule').nil?
-          unless node_child.attribute('line').nil?
-            @spacing.line = (@spacing.line_rule == :auto ? (node_child.attribute('line').value.to_f / 240.0).round(2) : (node_child.attribute('line').value.to_f / 566.9).round(2))
-          end
+          @valued_spacing = ParagraphSpacing.new(parent: self).parse(node_child)
+          @spacing = @spacing.fetch_from_valued_spacing(@valued_spacing)
         when 'sectPr'
           @sector_properties = PageProperties.new(parent: self).parse(node_child, self, default_char_style)
           @section_break = case @sector_properties.type

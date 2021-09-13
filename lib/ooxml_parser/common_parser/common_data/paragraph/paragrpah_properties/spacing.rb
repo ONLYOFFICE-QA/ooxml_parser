@@ -96,5 +96,17 @@ module OoxmlParser
         end
       end
     end
+
+    # Fetch data from `ParagraphSpacing`
+    # Which have values with parameters
+    # @param valued_spacing [ParagraphSpacing] spacing to get params
+    # @return [Spacing]
+    def fetch_from_valued_spacing(valued_spacing)
+      @before = valued_spacing.before.to_unit(:centimeter).value if valued_spacing.before
+      @after = valued_spacing.after.to_unit(:centimeter).value if valued_spacing.after
+      @line = valued_spacing.line.to_unit(:centimeter).value if valued_spacing.line
+      @line_rule = valued_spacing.line_rule if valued_spacing.line_rule
+      self
+    end
   end
 end
