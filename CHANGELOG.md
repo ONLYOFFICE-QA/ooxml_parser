@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Minor refactoring in parsing Paragraph spacing
+
 ## 0.15.0 (2021-09-13)
 
 ### New Features
