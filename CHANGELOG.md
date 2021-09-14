@@ -2,6 +2,11 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add parsing `ConditionalFormattingRule#bottom`
+* Add parsing `ConditionalFormattingRule#time_period`
+
 ### Changes
 
 * Minor refactoring in parsing Paragraph spacing

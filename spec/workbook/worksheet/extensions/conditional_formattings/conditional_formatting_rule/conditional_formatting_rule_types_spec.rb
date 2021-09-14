@@ -14,6 +14,11 @@ describe 'Conditional formatting rule types' do
     expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].formulas[1].value).to eq('5')
   end
 
+  it 'Top10 has bottom' do
+    xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/conditional_formattings/conditional_formatting_top_10.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].bottom).to be_truthy
+  end
+
   it 'Top10 has percent' do
     xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/conditional_formattings/conditional_formatting_top_10.xlsx')
     expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].percent).to be_truthy
@@ -32,6 +37,11 @@ describe 'Conditional formatting rule types' do
   it 'Text rule has text' do
     xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/conditional_formattings/conditional_formatting_text.xlsx')
     expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].text).to eq('a')
+  end
+
+  it 'Date has time_period' do
+    xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/conditional_formattings/conditional_formatting_date.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].time_period).to eq(:last7Days)
   end
 
   it 'Stop if true' do
