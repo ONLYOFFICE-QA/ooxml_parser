@@ -19,15 +19,19 @@ module OoxmlParser
     attr_reader :stop_if_true
     # @return [Symbol] Relational operator in value rule
     attr_reader :operator
+    # @return [Symbol] Specifies whether top/bottom rule highlights bottom values
+    attr_reader :bottom
     # @return [Symbol] Specifies whether percent is used in top/bottom rule
     attr_reader :percent
     # @return [Integer] Number of items in top/bottom rule
     attr_reader :rank
     # @return [Integer] Number of standard deviations in above/below average rule
     attr_reader :standard_deviation
-    # @return [String] text value in text rule
+    # @return [String] Text value in text rule
     attr_reader :text
-    # @return [Array, Formula] Formulas to determine condition
+    # @return [Symbol] Time period in date rule
+    attr_reader :time_period
+    # @return [Array<Formula>] Formulas to determine condition
     attr_reader :formulas
     # @return [DifferentialFormattingRecord] Format
     attr_reader :rule_format
@@ -61,6 +65,8 @@ module OoxmlParser
           @stop_if_true = attribute_enabled?(value)
         when 'operator'
           @operator = value.value.to_sym
+        when 'bottom'
+          @bottom = attribute_enabled?(value)
         when 'percent'
           @percent = attribute_enabled?(value)
         when 'rank'
@@ -69,6 +75,8 @@ module OoxmlParser
           @standard_deviation = value.value.to_i
         when 'text'
           @text = value.text.to_s
+        when 'timePeriod'
+          @time_period = value.value.to_sym
         end
       end
 
