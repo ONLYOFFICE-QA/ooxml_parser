@@ -29,9 +29,19 @@ describe 'Conditional formatting rule types' do
     expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].rank).to eq(10)
   end
 
-  it 'Above average has standard deviation' do
-    xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/conditional_formattings/conditional_formatting_above_average.xlsx')
-    expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].standard_deviation).to eq(1)
+  it 'Average has above_average' do
+    xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/conditional_formattings/conditional_formatting_average.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].above_average).to be_falsey
+  end
+
+  it 'Average has equal_average' do
+    xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/conditional_formattings/conditional_formatting_average.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].equal_average).to be_truthy
+  end
+
+  it 'Average has standard deviation' do
+    xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/conditional_formattings/conditional_formatting_average.xlsx')
+    expect(xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].standard_deviation).to eq(0)
   end
 
   it 'Text rule has text' do
