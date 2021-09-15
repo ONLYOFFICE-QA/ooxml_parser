@@ -25,6 +25,10 @@ module OoxmlParser
     attr_reader :percent
     # @return [Integer] Number of items in top/bottom rule
     attr_reader :rank
+    # @return [Boolean] Specifies whether rule highlights values above average
+    attr_reader :above_average
+    # @return [Boolean] Specifies whether rule highlights values equal to average
+    attr_reader :equal_average
     # @return [Integer] Number of standard deviations in above/below average rule
     attr_reader :standard_deviation
     # @return [String] Text value in text rule
@@ -43,6 +47,7 @@ module OoxmlParser
     attr_reader :icon_set
 
     def initialize(parent: nil)
+      @above_average = true
       @formulas = []
       super
     end
@@ -71,6 +76,10 @@ module OoxmlParser
           @percent = attribute_enabled?(value)
         when 'rank'
           @rank = value.value.to_i
+        when 'aboveAverage'
+          @above_average = attribute_enabled?(value)
+        when 'equalAverage'
+          @equal_average = attribute_enabled?(value)
         when 'stdDev'
           @standard_deviation = value.value.to_i
         when 'text'
