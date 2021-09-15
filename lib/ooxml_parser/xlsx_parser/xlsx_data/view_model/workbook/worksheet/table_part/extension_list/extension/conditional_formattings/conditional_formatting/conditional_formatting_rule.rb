@@ -25,9 +25,9 @@ module OoxmlParser
     attr_reader :percent
     # @return [Integer] Number of items in top/bottom rule
     attr_reader :rank
-    # @return [Symbol] Specifies whether rule highlights values above average
+    # @return [Boolean] Specifies whether rule highlights values above average
     attr_reader :above_average
-    # @return [Symbol] Specifies whether rule highlights values equal to average
+    # @return [Boolean] Specifies whether rule highlights values equal to average
     attr_reader :equal_average
     # @return [Integer] Number of standard deviations in above/below average rule
     attr_reader :standard_deviation
