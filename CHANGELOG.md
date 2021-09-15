@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.17.0 (2021-09-15)
+
 ### New Features
 
 * Add parsing `ConditionalFormattingRule#above_average`
