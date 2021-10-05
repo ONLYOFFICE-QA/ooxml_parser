@@ -75,14 +75,7 @@ module OoxmlParser
         when 'strike'
           @font_style.strike = value_to_symbol(value)
         when 'baseline'
-          case value.value.to_i
-          when -25_000, -30_000
-            @baseline = :subscript
-          when 30_000
-            @baseline = :superscript
-          when 0
-            @baseline = :baseline
-          end
+          @baseline = parse_baseline(value)
         when 'cap'
           @caps = value.value.to_sym
         end
@@ -147,6 +140,23 @@ module OoxmlParser
       return @font_name unless @font_name.empty?
 
       root_object.default_font_typeface
+    end
+
+    private
+
+    # @param value [Nokogiri::XML::Attr] nokogiri parameter to parse
+    # @return [Symbol] baseline value depending of type
+    def parse_baseline(value)
+      case value.value.to_i
+      when -25_000, -30_000
+        :subscript
+      when 30_000
+        :superscript
+      when 0
+        :baseline
+      else
+        :unknown
+      end
     end
   end
 end
