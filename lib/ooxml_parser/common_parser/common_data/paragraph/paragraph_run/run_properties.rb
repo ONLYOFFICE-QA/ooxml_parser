@@ -154,8 +154,6 @@ module OoxmlParser
         :superscript
       when 0
         :baseline
-      else
-        :unknown
       end
     end
   end
