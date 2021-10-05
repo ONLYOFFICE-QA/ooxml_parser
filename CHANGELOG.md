@@ -2,6 +2,11 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Minor refactoring of `RunProperties`. 
+  Decrease Rubocop metrics
+
 ## 0.17.0 (2021-09-15)
 
 ### New Features
