@@ -4,7 +4,7 @@
 
 ### Changes
 
-* Minor refactoring of `RunProperties`. 
+* Minor refactoring of `RunProperties`.
   Decrease Rubocop metrics
 
 ## 0.17.0 (2021-09-15)
