@@ -15,10 +15,6 @@ module OoxmlParser
     attr_reader :font_color
     # @return [OoxmlSize] space size
     attr_reader :space
-    # @return [string] name of font
-    attr_reader :font_name
-    # @return [Float] font size
-    attr_reader :font_size
     # @return [Symbol] baseline of run
     attr_reader :baseline
     # @return [Hyperlink] hyperlink of run
@@ -79,14 +75,7 @@ module OoxmlParser
         when 'strike'
           @font_style.strike = value_to_symbol(value)
         when 'baseline'
-          case value.value.to_i
-          when -25_000, -30_000
-            @baseline = :subscript
-          when 30_000
-            @baseline = :superscript
-          when 0
-            @baseline = :baseline
-          end
+          @baseline = parse_baseline(value)
         when 'cap'
           @caps = value.value.to_sym
         end
@@ -107,8 +96,6 @@ module OoxmlParser
           @spacing = RunSpacing.new(parent: self).parse(node_child)
         when 'color'
           @color = OoxmlColor.new(parent: self).parse(node_child)
-        when 'solidFill'
-          @font_color = Color.new(parent: self).parse_color(node_child.xpath('*').first)
         when 'latin'
           @font_name = node_child.attribute('typeface').value
         when 'b'
@@ -140,9 +127,34 @@ module OoxmlParser
         end
       end
       @font_color = DocxColorScheme.new(parent: self).parse(node)
-      @font_name = root_object.default_font_typeface if @font_name.empty?
-      @font_size ||= root_object.default_font_size
       self
+    end
+
+    # @return [Float] font size
+    def font_size
+      @font_size ||= root_object.default_font_size
+    end
+
+    # @return [String] name of font
+    def font_name
+      return @font_name unless @font_name.empty?
+
+      root_object.default_font_typeface
+    end
+
+    private
+
+    # @param value [Nokogiri::XML::Attr] nokogiri parameter to parse
+    # @return [Symbol] baseline value depending of type
+    def parse_baseline(value)
+      case value.value.to_i
+      when -25_000, -30_000
+        :subscript
+      when 30_000
+        :superscript
+      when 0
+        :baseline
+      end
     end
   end
 end
