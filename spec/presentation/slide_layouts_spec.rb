@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'My behaviour' do
-  let(:pptx) { OoxmlParser::PptxParser.parse_pptx('/home/lobashov/temp/tweb_redacted.pptx') }
+  let(:pptx) { OoxmlParser::PptxParser.parse_pptx('spec/presentation/_files/empty_file.pptx') }
 
   it 'slide_layouts is an array' do
     expect(pptx.slide_layouts).to be_a(Array)
