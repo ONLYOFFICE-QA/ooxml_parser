@@ -5,6 +5,8 @@
 ### New Features
 
 * Add `CodeQL` check in CI
+* Add parsing `Presentation#slide_master`
+* Add parsing `Presentation#slide_layouts`
 
 ### Changes
 
