@@ -10,7 +10,7 @@ describe 'My behaviour' do
   end
 
   it 'slide_masters element is SlideMaster' do
-    expect(pptx.slide_masters[0]).to be_a(OoxmlParser::SlideMaster)
+    expect(pptx.slide_masters[0]).to be_a(OoxmlParser::SlideMasterFile)
   end
 
   it 'slide_master element contains common_slide_data' do

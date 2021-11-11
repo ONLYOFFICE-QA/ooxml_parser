@@ -13,7 +13,7 @@ module OoxmlParser
     # Parse slide masters file
     def parse_slide_masters
       slide_masters_files.each do |file|
-        @slide_masters << SlideMaster.new(parent: self).parse(file)
+        @slide_masters << SlideMasterFile.new(parent: self).parse(file)
       end
     end
   end

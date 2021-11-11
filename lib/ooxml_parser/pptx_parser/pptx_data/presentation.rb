@@ -5,7 +5,7 @@ require_relative 'presentation/presentation_comments'
 require_relative 'presentation/presentation_helpers'
 require_relative 'presentation/presentation_theme'
 require_relative 'presentation/slide'
-require_relative 'presentation/slide_master'
+require_relative 'presentation/slide_master_file'
 require_relative 'presentation/slide_masters_helper'
 require_relative 'presentation/slide_layout_file'
 require_relative 'presentation/slide_layouts_helper'
@@ -26,7 +26,7 @@ module OoxmlParser
     attr_reader :comment_authors
     # @return [PresentationComments] comments of presentation
     attr_reader :comments
-    # @return [Array<SlideMaster>] list of slide master
+    # @return [Array<SlideMasterFile>] list of slide master
     attr_reader :slide_masters
     # @return [Array<SlideLayout>] list of slide layouts
     attr_reader :slide_layouts
