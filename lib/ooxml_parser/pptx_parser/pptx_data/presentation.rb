@@ -5,12 +5,15 @@ require_relative 'presentation/presentation_comments'
 require_relative 'presentation/presentation_helpers'
 require_relative 'presentation/presentation_theme'
 require_relative 'presentation/slide'
+require_relative 'presentation/slide_master'
+require_relative 'presentation/slide_masters_helper'
 require_relative 'presentation/slide_size'
 require_relative 'presentation/table_styles'
 module OoxmlParser
   # Basic class for all parsed pptx data
   class Presentation < CommonDocumentStructure
     include PresentationHelpers
+    include SlideMastersHelper
     attr_accessor :slides, :theme, :slide_size
     # @return [Relationships] relationships of presentation
     attr_accessor :relationships
@@ -20,10 +23,13 @@ module OoxmlParser
     attr_reader :comment_authors
     # @return [PresentationComments] comments of presentation
     attr_reader :comments
+    # @return [Array<SlideMaster] list of slide master
+    attr_reader :slide_masters
 
     def initialize(params = {})
       @slides = []
       @comments = []
+      @slide_masters = []
       super
     end
 
@@ -56,6 +62,7 @@ module OoxmlParser
       end
       OOXMLDocumentObject.xmls_stack.pop
       @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
+      parse_slide_masters
       self
     end
   end
