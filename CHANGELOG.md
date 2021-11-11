@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add `CodeQL` check in CI
+
 ### Changes
 
 * Minor refactoring of `RunProperties`.
