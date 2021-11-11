@@ -7,6 +7,7 @@
 * Add `CodeQL` check in CI
 * Add parsing `Presentation#slide_master`
 * Add parsing `Presentation#slide_layouts`
+* Fail if `nokogiri` found any error in file
 
 ### Changes
 

@@ -4,6 +4,7 @@ require 'filemagic' unless Gem.win_platform?
 require 'securerandom'
 require 'nokogiri'
 require 'zip'
+require_relative 'ooxml_document_object/nokogiri_parsing_exception'
 require_relative 'ooxml_document_object/ooxml_document_object_helper'
 require_relative 'ooxml_document_object/ooxml_object_attribute_helper'
 
@@ -39,7 +40,12 @@ module OoxmlParser
 
     # @return [Nokogiri::XML::Document] result of parsing xml via nokogiri
     def parse_xml(xml_path)
-      Nokogiri::XML(File.open(xml_path), &:strict)
+      xml = Nokogiri::XML(File.open(xml_path), &:strict)
+      unless xml.errors.empty?
+        raise NokogiriParsingException,
+              "Nokogiri found errors in file: #{xml_path}. Errors: #{xml.errors}"
+      end
+      xml
     end
 
     class << self
