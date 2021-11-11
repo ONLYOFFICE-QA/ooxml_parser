@@ -2,6 +2,12 @@
 
 ## master (unreleased)
 
+## 0.18.1 (2021-11-11)
+
+### Fixes
+
+* Fix failure if `Sound` class has no `name`
+
 ## 0.18.0 (2021-11-11)
 
 ### New Features
