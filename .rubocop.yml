@@ -14,4 +14,4 @@ AllCops:
 # of files are unit and should describe classes
 RSpec/DescribeClass:
   Include:
-      - '/home/lobashov/sources/ooxml_parser/spec/common/classes/**/*'
+      - 'spec/common/classes/**/*'
