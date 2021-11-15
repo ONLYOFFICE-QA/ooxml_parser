@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Require `mfa` for releasing gem
+
 ## 0.18.1 (2021-11-11)
 
 ### Fixes
