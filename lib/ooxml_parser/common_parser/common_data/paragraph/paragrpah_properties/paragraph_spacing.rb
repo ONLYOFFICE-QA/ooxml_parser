@@ -16,7 +16,7 @@ module OoxmlParser
     # @param [Nokogiri::XML:Node] node with ParagraphSpacing
     # @return [ParagraphSpacing] result of parsing
     def parse(node)
-      node.attributes.each do |key, value|
+      sorted_attributes(node).each do |key, value|
         case key
         when 'before'
           @before = OoxmlSize.new(value.value.to_f)
@@ -33,6 +33,18 @@ module OoxmlParser
         end
       end
       self
+    end
+
+    private
+
+    # This is dirty workaround for situations
+    # Then @line_rule parsed after @line so getting
+    # @line value is totally screwed up
+    # @param [Nokogiri::XML:Node] node with ParagraphSpacing
+    # @return [Hash] hash with sorted values
+    # TODO: Totally redone parsing of spacing to remove this workaround
+    def sorted_attributes(node)
+      node.attributes.sort.reverse.to_h
     end
   end
 end
