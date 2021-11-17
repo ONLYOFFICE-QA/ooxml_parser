@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Fixes
+
+* Fix `ParargraphSpacing#line` parsing if different order of attributes
+
 ### Changes
 
 * Require `mfa` for releasing gem
