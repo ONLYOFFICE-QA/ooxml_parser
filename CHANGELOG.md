@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.19.0 (2021-11-17)
+
 ### Fixes
 
 * Fix `ParargraphSpacing#line` parsing if different order of attributes
