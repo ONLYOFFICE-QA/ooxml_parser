@@ -76,14 +76,29 @@ module OoxmlParser
         @action = :last_slide
       when 'ppaction://hlinksldjump'
         @action = :slide
-        @url = OOXMLDocumentObject.get_link_from_rels(@id).scan(/\d+/).join.to_i
+        parse_url_for_slide_link
       else
-        if @id && !@id.empty?
+        if meaningful_id?
           @action = :external_link
           @url = OOXMLDocumentObject.get_link_from_rels(@id)
         end
       end
       self
+    end
+
+    private
+
+    # Check if id parameter has any information in it
+    # @return [Boolean] Can id be used
+    def meaningful_id?
+      @id && !@id.empty?
+    end
+
+    # Parse url for slide link
+    def parse_url_for_slide_link
+      return unless meaningful_id?
+
+      @url = OOXMLDocumentObject.get_link_from_rels(@id).scan(/\d+/).join.to_i
     end
   end
 end
