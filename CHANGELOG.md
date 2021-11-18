@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.20.0 (2021-11-18)
+
 ### Fixes
 
 * Fix crash if `Hyperlink` for slide has no `id`
