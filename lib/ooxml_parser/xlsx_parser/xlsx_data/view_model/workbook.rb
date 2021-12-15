@@ -7,12 +7,15 @@ require_relative 'workbook/defined_name'
 require_relative 'workbook/shared_string_table'
 require_relative 'workbook/style_sheet'
 require_relative 'workbook/worksheet'
+require_relative 'workbook/sheet'
 require_relative 'workbook/workbook_helpers'
 module OoxmlParser
   # Class for storing XLSX Workbook
   class XLSXWorkbook < CommonDocumentStructure
     include WorkbookHelpers
     attr_accessor :worksheets
+    # @return [Array<Sheet>] list of sheets
+    attr_reader :sheets
     # @return [PresentationTheme] theme of Workbook
     attr_accessor :theme
     # @return [Relationships] rels of book
@@ -30,6 +33,7 @@ module OoxmlParser
 
     def initialize(params = {})
       @worksheets = []
+      @sheets = []
       @pivot_caches = []
       @pivot_table_definitions = []
       @defined_names = []
@@ -119,10 +123,11 @@ module OoxmlParser
       @theme = PresentationTheme.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
       @style_sheet = StyleSheet.new(parent: self).parse
       @doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
+        @sheets << Sheet.new(parent: self).parse(sheet)
         file = @relationships.target_by_id(sheet.attribute('id').value)
         if file.start_with?('worksheets')
           @worksheets << Worksheet.new(parent: self).parse(file)
-          @worksheets.last.name = sheet.attribute('name').value
+          @worksheets.last.name = @sheets.last.name
         elsif file.start_with?('chartsheets')
           @worksheets << Chartsheet.new(parent: self).parse(file)
         end

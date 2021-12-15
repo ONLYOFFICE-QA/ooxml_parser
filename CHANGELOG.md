@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add parsing `sheets` in xlsx
+
 ## 0.20.0 (2021-11-18)
 
 ### Fixes
