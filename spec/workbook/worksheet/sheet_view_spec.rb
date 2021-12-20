@@ -2,9 +2,19 @@
 
 require 'spec_helper'
 
-describe OoxmlParser::Pane do
-  it 'freeze_panes.xlsx' do
-    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/sheet_view/freeze_panes.xlsx')
-    expect(xlsx.worksheets.first.sheet_views.first.pane.top_left_cell).to eq(OoxmlParser::Coordinates.new(3, 'B'))
+describe OoxmlParser::SheetView do
+  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/worksheet/sheet_view/sheet_view.xlsx') }
+  let(:sheet_view) { xlsx.worksheets.first.sheet_views.first }
+
+  it 'Has top_left_cell' do
+    expect(sheet_view.top_left_cell).to eq(OoxmlParser::Coordinates.new(1, 'C'))
+  end
+
+  it 'Has workbook_view_id' do
+    expect(sheet_view.workbook_view_id).to eq(0)
+  end
+
+  it 'Has zoom_scale' do
+    expect(sheet_view.zoom_scale).to eq(100)
   end
 end

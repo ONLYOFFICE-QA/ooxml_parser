@@ -5,6 +5,8 @@
 ### New Features
 
 * Add parsing `sheets` in xlsx
+* Add parsing `sheetView` attributes in xlsx
+* Add parsing `selection` in xlsx
 
 ## 0.20.0 (2021-11-18)
 
