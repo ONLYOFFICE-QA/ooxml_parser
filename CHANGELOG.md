@@ -2,6 +2,14 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add `ruby-3.1` in CI
+
+### Changes
+
+* Remove `ruby-2.5` from CI since it's EOLed
+
 ## 0.21.0 (2021-12-20)
 
 ### New Features
