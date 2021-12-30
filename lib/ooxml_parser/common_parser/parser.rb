@@ -21,7 +21,8 @@ module OoxmlParser
     # Base method to parse document of any type
     # @param path_to_file [String] file
     # @return [CommonDocumentStructure] structure of doc
-    def self.parse(path_to_file)
+    def self.parse(path_to_file, password: nil)
+      path_to_file = OOXMLDocumentObject.decrypt_file(path_to_file, password) if password
       Parser.parse_format(path_to_file) do
         format = Parser.recognize_folder_format
         case format
