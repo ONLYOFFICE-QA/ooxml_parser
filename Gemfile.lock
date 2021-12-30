@@ -3,6 +3,7 @@ PATH
   specs:
     ooxml_parser (0.21.0)
       nokogiri (~> 1)
+      ooxml_decrypt (~> 1)
       ruby-filemagic (~> 0)
       rubyzip (~> 2)
 
@@ -18,6 +19,9 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
+    ooxml_decrypt (1.0.0)
+      nokogiri (~> 1.10)
+      ruby-ole (~> 1.2)
     overcommit (0.58.0)
       childprocess (>= 0.6.3, < 5)
       iniparse (~> 1.4)
@@ -64,6 +68,7 @@ GEM
     rubocop-rspec (2.7.0)
       rubocop (~> 1.19)
     ruby-filemagic (0.7.2)
+    ruby-ole (1.2.12.2)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
     simplecov (0.21.2)

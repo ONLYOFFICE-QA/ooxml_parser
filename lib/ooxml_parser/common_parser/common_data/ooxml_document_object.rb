@@ -4,6 +4,7 @@ require 'filemagic' unless Gem.win_platform?
 require 'securerandom'
 require 'nokogiri'
 require 'zip'
+require 'ooxml_decrypt'
 require_relative 'ooxml_document_object/nokogiri_parsing_exception'
 require_relative 'ooxml_document_object/ooxml_document_object_helper'
 require_relative 'ooxml_document_object/ooxml_object_attribute_helper'
@@ -93,6 +94,20 @@ module OoxmlParser
 
         FileUtils.cp path, tmp_folder
         file_path
+      end
+
+      # Decrypt file protected with password
+      # @param path [String] path to file
+      # @param password [String] password to file
+      # @return [String] path to decrypted file
+      def decrypt_file(path, password)
+        file_name = File.basename(path)
+        tmp_folder = Dir.mktmpdir('ruby-ooxml-parser')
+        decrypted_path = "#{tmp_folder}/#{file_name}"
+        binary_password = password.encode('utf-16le').bytes.pack('c*').encode('binary')
+        OoxmlDecrypt::EncryptedFile.decrypt_to_file(path, binary_password, decrypted_path)
+
+        decrypted_path
       end
 
       # Unzip specified file
