@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.files = Dir['lib/**/*']
   s.license = 'AGPL-3.0'
   s.add_runtime_dependency('nokogiri', '~> 1')
+  s.add_runtime_dependency('ooxml_decrypt', '~> 1')
   s.add_runtime_dependency('ruby-filemagic', '~> 0') unless Gem.win_platform?
   s.add_runtime_dependency('rubyzip', '~> 2')
   s.add_development_dependency('overcommit', '~> 0')

@@ -3,6 +3,7 @@ PATH
   specs:
     ooxml_parser (0.21.0)
       nokogiri (~> 1)
+      ooxml_decrypt (~> 1)
       ruby-filemagic (~> 0)
       rubyzip (~> 2)
 
@@ -85,7 +86,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ooxml_decrypt
   ooxml_parser!
   overcommit (~> 0)
   parallel_tests (~> 3)
