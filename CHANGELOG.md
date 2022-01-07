@@ -7,6 +7,7 @@
 * Add `ruby-3.1` in CI
 * Add parsing `workbookProtection` in xlsx
 * Add parsing password protected files
+* Add parsing `sheetProtection` in xlsx
 
 ### Changes
 

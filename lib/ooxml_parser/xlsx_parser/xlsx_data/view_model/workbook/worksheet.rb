@@ -11,6 +11,7 @@ require_relative 'worksheet/xlsx_column_properties'
 require_relative 'worksheet/xlsx_drawing'
 require_relative 'worksheet/xlsx_row'
 require_relative 'worksheet/xlsx_header_footer'
+require_relative 'worksheet/sheet_protection'
 module OoxmlParser
   # Properties of worksheet
   class Worksheet < OOXMLDocumentObject
@@ -33,6 +34,8 @@ module OoxmlParser
     attr_reader :header_footer
     # @return [Array<ConditionalFormatting>] list of conditional formattings
     attr_reader :conditional_formattings
+    # @return [SheetProtection] protection of sheet
+    attr_reader :sheet_protection
 
     def initialize(parent: nil)
       @columns = []
@@ -134,6 +137,8 @@ module OoxmlParser
           @header_footer = XlsxHeaderFooter.new(parent: self).parse(worksheet_node_child)
         when 'conditionalFormatting'
           @conditional_formattings << ConditionalFormatting.new(parent: self).parse(worksheet_node_child)
+        when 'sheetProtection'
+          @sheet_protection = SheetProtection.new(parent: self).parse(worksheet_node_child)
         end
       end
       parse_comments
