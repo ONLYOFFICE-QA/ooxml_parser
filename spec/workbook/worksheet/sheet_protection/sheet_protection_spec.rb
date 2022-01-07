@@ -11,12 +11,12 @@ describe OoxmlParser::SheetProtection do
 
   it 'Has hash_value' do
     expect(xlsx.worksheets[0].sheet_protection.hash_value)
-      .to eq('ic0GkFgBQ9JNSpXqrsbVpBomduOYBIjRFeFZZ867E7WE6TEuCPZmkPvHIYXYml6FulxWLA1NFCNR3p5TzwaW4g==')
+      .to eq('wMxBe458QCWfvSWEYERodFWQqswJLuCw+stPYx77U8cAnV7eekeJqmN8BIs2RDx0gLzmJkN3JUpVB5G5TEVq5A==')
   end
 
   it 'Has salt_value' do
     expect(xlsx.worksheets[0].sheet_protection.salt_value)
-      .to eq('fWjzrxdFYIv7mGfBWqGu2Q==')
+      .to eq('6Qt4cSsj16OrftfH7PM1/g==')
   end
 
   it 'Has spin_count' do
@@ -29,15 +29,15 @@ describe OoxmlParser::SheetProtection do
   end
 
   it 'Has auto_filter' do
-    expect(xlsx.worksheets[0].sheet_protection.auto_filter).to be_truthy
+    expect(xlsx.worksheets[0].sheet_protection.auto_filter).to be_falsey
   end
 
   it 'Has delete_columns' do
-    expect(xlsx.worksheets[0].sheet_protection.delete_columns).to be_truthy
+    expect(xlsx.worksheets[0].sheet_protection.delete_columns).to be_falsey
   end
 
   it 'Has delete_rows' do
-    expect(xlsx.worksheets[0].sheet_protection.delete_rows).to be_truthy
+    expect(xlsx.worksheets[0].sheet_protection.delete_rows).to be_falsey
   end
 
   it 'Has format_cells' do
@@ -53,15 +53,15 @@ describe OoxmlParser::SheetProtection do
   end
 
   it 'Has insert_columns' do
-    expect(xlsx.worksheets[0].sheet_protection.insert_columns).to be_truthy
+    expect(xlsx.worksheets[0].sheet_protection.insert_columns).to be_falsey
   end
 
   it 'Has insert_rows' do
-    expect(xlsx.worksheets[0].sheet_protection.insert_rows).to be_truthy
+    expect(xlsx.worksheets[0].sheet_protection.insert_rows).to be_falsey
   end
 
   it 'Has insert_hyperlinks' do
-    expect(xlsx.worksheets[0].sheet_protection.insert_hyperlinks).to be_truthy
+    expect(xlsx.worksheets[0].sheet_protection.insert_hyperlinks).to be_falsey
   end
 
   it 'Has objects' do
@@ -69,7 +69,7 @@ describe OoxmlParser::SheetProtection do
   end
 
   it 'Has pivot_tables' do
-    expect(xlsx.worksheets[0].sheet_protection.pivot_tables).to be_truthy
+    expect(xlsx.worksheets[0].sheet_protection.pivot_tables).to be_falsey
   end
 
   it 'Has scenarios' do
@@ -77,14 +77,14 @@ describe OoxmlParser::SheetProtection do
   end
 
   it 'Has select_locked_cells' do
-    expect(xlsx.worksheets[0].sheet_protection.select_locked_cells).to be_falsey
+    expect(xlsx.worksheets[0].sheet_protection.select_locked_cells).to be_truthy
   end
 
   it 'Has select_unlocked_cells' do
-    expect(xlsx.worksheets[0].sheet_protection.select_unlocked_cells).to be_falsey
+    expect(xlsx.worksheets[0].sheet_protection.select_unlocked_cells).to be_truthy
   end
 
   it 'Has sort' do
-    expect(xlsx.worksheets[0].sheet_protection.sort).to be_truthy
+    expect(xlsx.worksheets[0].sheet_protection.sort).to be_falsey
   end
 end
