@@ -12,6 +12,7 @@ require_relative 'worksheet/xlsx_drawing'
 require_relative 'worksheet/xlsx_row'
 require_relative 'worksheet/xlsx_header_footer'
 require_relative 'worksheet/sheet_protection'
+require_relative 'worksheet/protected_range'
 module OoxmlParser
   # Properties of worksheet
   class Worksheet < OOXMLDocumentObject
@@ -36,6 +37,8 @@ module OoxmlParser
     attr_reader :conditional_formattings
     # @return [SheetProtection] protection of sheet
     attr_reader :sheet_protection
+    # @return [Array<ProtectedRange>] list of protected ranges
+    attr_reader :protected_ranges
 
     def initialize(parent: nil)
       @columns = []
@@ -48,6 +51,7 @@ module OoxmlParser
       @sheet_views = []
       @table_parts = []
       @conditional_formattings = []
+      @protected_ranges = []
       super
     end
 
@@ -139,6 +143,10 @@ module OoxmlParser
           @conditional_formattings << ConditionalFormatting.new(parent: self).parse(worksheet_node_child)
         when 'sheetProtection'
           @sheet_protection = SheetProtection.new(parent: self).parse(worksheet_node_child)
+        when 'protectedRanges'
+          worksheet_node_child.xpath('*').each do |protected_range_node|
+            @protected_ranges << ProtectedRange.new(parent: self).parse(protected_range_node)
+          end
         end
       end
       parse_comments

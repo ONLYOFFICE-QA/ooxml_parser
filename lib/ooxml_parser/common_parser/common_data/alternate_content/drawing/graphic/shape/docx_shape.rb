@@ -10,8 +10,15 @@ module OoxmlParser
   # Class for parsing `sp`, `wsp` tags
   class DocxShape < OOXMLDocumentObject
     attr_accessor :non_visual_properties, :properties, :style, :body_properties, :text_body
+    # @return [True, False] Specifies if text in shape is locked when sheet is protected
+    attr_reader :locks_text
 
     alias shape_properties properties
+
+    def initialize(parent: nil)
+      @locks_text = true
+      super
+    end
 
     # @return [True, false] if structure contain any user data
     def with_data?
@@ -27,6 +34,13 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [DocxShape] result of parsing
     def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'fLocksText'
+          @locks_text = attribute_enabled?(value)
+        end
+      end
+
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'nvSpPr'
