@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'xlsx_drawing/xlsx_drawing_position_parameters'
+require_relative 'xlsx_drawing/client_data'
 module OoxmlParser
   # Data of spreadsheet drawing
   class XlsxDrawing < OOXMLDocumentObject
@@ -11,6 +12,8 @@ module OoxmlParser
     attr_accessor :to
     # @return [GraphicFrame] graphic frame
     attr_accessor :graphic_frame
+    # @return [ClientData] client data
+    attr_accessor :client_data
 
     # Parse XlsxDrawing object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -32,6 +35,8 @@ module OoxmlParser
           @graphic_frame = GraphicFrame.new(parent: self).parse(child_node)
         when 'cxnSp'
           @shape = ConnectionShape.new(parent: self).parse(child_node)
+        when 'clientData'
+          @client_data = ClientData.new(parent: self).parse(child_node)
         end
       end
       self

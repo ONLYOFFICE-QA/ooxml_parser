@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'cell_style/alignment'
+require_relative 'cell_style/protection'
 module OoxmlParser
   # Class for parsing `xf` object
   class Xf < OOXMLDocumentObject
@@ -76,6 +77,8 @@ module OoxmlParser
     attr_reader :fill_id
     # @return [Integer] id of number format
     attr_reader :number_format_id
+    # @return [Protection] Settings of cell protection
+    attr_reader :protection
 
     def initialize(parent: nil)
       @numerical_format = 'General'
@@ -115,6 +118,8 @@ module OoxmlParser
         case node_child.name
         when 'alignment'
           @alignment.parse(node_child) if @apply_alignment
+        when 'protection'
+          @protection = Protection.new(parent: self).parse(node_child)
         end
       end
       self

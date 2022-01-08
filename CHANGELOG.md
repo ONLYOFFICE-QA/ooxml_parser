@@ -8,6 +8,10 @@
 * Add parsing `workbookProtection` in xlsx
 * Add parsing password protected files
 * Add parsing `sheetProtection` in xlsx
+* Add parsing `protectedRange` in xlsx
+* Add parsing `Xf#protection`
+* Add parsing `DocxShape#locks_text`
+* Add parsing `XlsxDrawing#client_data`
 
 ### Changes
 
