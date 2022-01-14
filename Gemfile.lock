@@ -16,7 +16,7 @@ GEM
     docile (1.4.0)
     iniparse (1.5.0)
     mini_portile2 (2.7.1)
-    nokogiri (1.13.0)
+    nokogiri (1.13.1)
       mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
     ooxml_decrypt (1.0.0)
