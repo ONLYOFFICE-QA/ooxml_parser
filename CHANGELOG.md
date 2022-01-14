@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Drop `ruby-2.5` support since `nokogiri` v1.13.0 dropped it
+
 ## 0.22.0 (2022-01-10)
 
 ### New Features
