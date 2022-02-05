@@ -13,5 +13,5 @@ AllCops:
 # But uses end-user tests, so only small margin
 # of files are unit and should describe classes
 RSpec/DescribeClass:
-  Include:
-      - 'spec/common/classes/**/*'
+Include:
+    - 'spec/common/classes/**/*'

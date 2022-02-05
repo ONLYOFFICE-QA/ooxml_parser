@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+## New Features
+
+* Add `yamllint` check in CI
+
 ### Changes
 
 * Drop `ruby-2.5` support since `nokogiri` v1.13.0 dropped it
