@@ -25,6 +25,8 @@ jobs:
     - name: Check `simplecov` line coverage
       run: cat coverage/.last_run.json | jq '.result.line' | grep -q '100'
     - uses: actions/setup-node@v1
+      with:
+        node-version: '16'
     - name: Check markdown files using `markdownlint`
       run: |
         npm install -g markdownlint-cli
