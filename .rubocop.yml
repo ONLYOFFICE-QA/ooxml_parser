@@ -1,17 +1,17 @@
 require:
-    - rubocop-performance
-    - rubocop-rspec
+  - rubocop-performance
+  - rubocop-rspec
 
 inherit_from:
-    - .rubocop_todo.yml
+  - .rubocop_todo.yml
 
 AllCops:
-    NewCops: enable
-    TargetRubyVersion: 2.6
+  NewCops: enable
+  TargetRubyVersion: 2.6
 
 # Most of code in this project to not use Unit test
 # But uses end-user tests, so only small margin
 # of files are unit and should describe classes
 RSpec/DescribeClass:
-    Include:
-        - 'spec/common/classes/**/*'
+  Include:
+    - 'spec/common/classes/**/*'
