@@ -26,6 +26,6 @@ jobs:
       - name: Check that code 100% documented
         run: yardoc . | grep -q '100.00% documented'
       - name: Test with Rake
-        run:  bundle exec parallel_rspec spec
+        run: bundle exec parallel_rspec spec
       - name: Check `simplecov` line coverage
         run: cat coverage/.last_run.json | jq '.result.line' | grep -q '100'
