@@ -6,7 +6,7 @@ jobs:
     continue-on-error: ${{ matrix.allow-failures }}
     strategy:
       matrix:
-        ruby: [2.6, 2.7, '3.0', 3.1]
+        ruby: ['2.6', '2.7', '3.0', '3.1']
         allow-failures: [false]
         include:
           - ruby: head
@@ -17,21 +17,15 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-      - name: Build and test with Rake
+      - name: Install gem dependencies
         run: |
           gem install bundler
           bundle install --jobs 4 --retry 3
-          bundle exec parallel_rspec spec
-      - name: Check `simplecov` line coverage
-        run: cat coverage/.last_run.json | jq '.result.line' | grep -q '100'
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-      - name: Check markdown files using `markdownlint`
-        run: |
-          npm install -g markdownlint-cli
-          markdownlint *.md
       - name: Check source files using `rubocop`
         run: rubocop
       - name: Check that code 100% documented
         run: yardoc . | grep -q '100.00% documented'
+      - name: Test with Rake
+          bundle exec parallel_rspec spec
+      - name: Check `simplecov` line coverage
+        run: cat coverage/.last_run.json | jq '.result.line' | grep -q '100'
