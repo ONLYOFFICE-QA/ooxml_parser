@@ -6,12 +6,12 @@ describe OoxmlParser::TableProperties do
   it 'TableLook' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/properties/table_look.docx')
     table_look = docx.elements[1].table_properties.table_look
-    expect(table_look.first_column).to eq(false)
-    expect(table_look.first_row).to eq(false)
-    expect(table_look.last_column).to eq(false)
-    expect(table_look.last_row).to eq(false)
-    expect(table_look.no_horizontal_banding).to eq(true)
-    expect(table_look.no_vertical_banding).to eq(true)
+    expect(table_look.first_column).to be(false)
+    expect(table_look.first_row).to be(false)
+    expect(table_look.last_column).to be(false)
+    expect(table_look.last_row).to be(false)
+    expect(table_look.no_horizontal_banding).to be(true)
+    expect(table_look.no_vertical_banding).to be(true)
   end
 
   it 'table_properties_position_x_nil' do

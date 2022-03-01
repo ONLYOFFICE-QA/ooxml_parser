@@ -7,13 +7,13 @@ describe 'My behaviour' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/legend/legend_left_position.xlsx')
     drawing = xlsx.worksheets[0].drawings[0]
     expect(drawing.graphic_frame.graphic_data.first.legend.position).to eq(:left)
-    expect(drawing.graphic_frame.graphic_data.first.legend.overlay).to eq(false)
+    expect(drawing.graphic_frame.graphic_data.first.legend.overlay).to be(false)
   end
 
   it 'Insert Chart Window | Check Legend Left Position with Overlay' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/legend/left_position_with_overlay.xlsx')
     drawing = xlsx.worksheets[0].drawings[0]
-    expect(drawing.graphic_frame.graphic_data.first.legend.overlay).to eq(true)
+    expect(drawing.graphic_frame.graphic_data.first.legend.overlay).to be(true)
   end
 
   describe 'Legend position' do

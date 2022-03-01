@@ -11,7 +11,7 @@ describe OoxmlParser::DataValidations do
   end
 
   it 'Got disable_promts value' do
-    expect(validations.disable_prompts).to eq(false)
+    expect(validations.disable_prompts).to be(false)
   end
 
   it 'Contains list of array of DataValidation' do

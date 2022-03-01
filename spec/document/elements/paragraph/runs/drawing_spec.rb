@@ -24,8 +24,8 @@ describe 'drawing' do
     it 'chart_grid_lines_for_x' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/graphic/chart_grid_lines_for_x.docx')
       drawing = docx.elements.first.character_style_array.first.drawing
-      expect(drawing.graphic.data.axises.first.major_grid_lines).to eq(false)
-      expect(drawing.graphic.data.axises.first.minor_grid_lines).to eq(false)
+      expect(drawing.graphic.data.axises.first.major_grid_lines).to be(false)
+      expect(drawing.graphic.data.axises.first.minor_grid_lines).to be(false)
     end
 
     it 'chart_in_header' do
@@ -43,8 +43,8 @@ describe 'drawing' do
     it 'chart_minor_gridline' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/graphic/chart_minor_gridline.docx')
       drawing = docx.elements.first.character_style_array.first.drawing
-      expect(drawing.graphic.data.axises[1].major_grid_lines).to eq(false)
-      expect(drawing.graphic.data.axises[1].minor_grid_lines).to eq(true)
+      expect(drawing.graphic.data.axises[1].major_grid_lines).to be(false)
+      expect(drawing.graphic.data.axises[1].minor_grid_lines).to be(true)
     end
 
     it 'chart_point_1' do
