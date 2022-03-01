@@ -23,27 +23,27 @@ describe OoxmlParser::PivotTableDefinition do
   end
 
   it 'pivot table apply number formats' do
-    expect(first_table.apply_number_formats).to eq(false)
+    expect(first_table.apply_number_formats).to be(false)
   end
 
   it 'pivot table apply border formats' do
-    expect(first_table.apply_border_formats).to eq(false)
+    expect(first_table.apply_border_formats).to be(false)
   end
 
   it 'pivot table apply font format' do
-    expect(first_table.apply_font_formats).to eq(false)
+    expect(first_table.apply_font_formats).to be(false)
   end
 
   it 'pivot table apply pattern format' do
-    expect(first_table.apply_pattern_formats).to eq(false)
+    expect(first_table.apply_pattern_formats).to be(false)
   end
 
   it 'pivot table apply alignment format' do
-    expect(first_table.apply_alignment_formats).to eq(false)
+    expect(first_table.apply_alignment_formats).to be(false)
   end
 
   it 'pivot table apply width height formats' do
-    expect(first_table.apply_width_height_formats).to eq(true)
+    expect(first_table.apply_width_height_formats).to be(true)
   end
 
   it 'pivot table data caption' do
@@ -51,11 +51,11 @@ describe OoxmlParser::PivotTableDefinition do
   end
 
   it 'pivot table use auto formatting' do
-    expect(first_table.use_auto_formatting).to eq(true)
+    expect(first_table.use_auto_formatting).to be(true)
   end
 
   it 'pivot table item print titles' do
-    expect(first_table.item_print_titles).to eq(true)
+    expect(first_table.item_print_titles).to be(true)
   end
 
   it 'pivot table created version' do
@@ -67,14 +67,14 @@ describe OoxmlParser::PivotTableDefinition do
   end
 
   it 'pivot table outline' do
-    expect(first_table.outline).to eq(true)
+    expect(first_table.outline).to be(true)
   end
 
   it 'pivot table outline data' do
-    expect(first_table.outline_data).to eq(true)
+    expect(first_table.outline_data).to be(true)
   end
 
   it 'pivot table multiple field filters' do
-    expect(first_table.multiple_field_filters).to eq(false)
+    expect(first_table.multiple_field_filters).to be(false)
   end
 end

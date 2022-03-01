@@ -5,22 +5,22 @@ require 'spec_helper'
 describe OoxmlParser::DocxParagraph do
   it 'Check Page Break Before' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/page_break_before.docx')
-    expect(docx.elements.first.page_break).to eq(true)
+    expect(docx.elements.first.page_break).to be(true)
   end
 
   it 'Check Keep Lines Together' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/keep_lines_together.docx')
-    expect(docx.elements.first.keep_lines).to eq(true)
+    expect(docx.elements.first.keep_lines).to be(true)
   end
 
   it 'Check Keep Next True' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/keep_next.docx')
-    expect(docx.elements.first.keep_next).to eq(true)
+    expect(docx.elements.first.keep_next).to be(true)
   end
 
   it 'Check Keep Next False' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/keep_lines_together.docx')
-    expect(docx.elements.first.keep_next).to eq(false)
+    expect(docx.elements.first.keep_next).to be(false)
   end
 
   it 'Apply paragraph style for several paragraphs' do
@@ -51,13 +51,13 @@ describe OoxmlParser::DocxParagraph do
   it 'instruction_type' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/instruction_type.docx')
     expect(docx.elements.first.nonempty_runs.first.instruction).to eq('MERGEFIELD a')
-    expect(docx.element_by_description.first.page_numbering).to eq(false)
+    expect(docx.element_by_description.first.page_numbering).to be(false)
   end
 
   it 'page_numbering' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/page_numbering.docx')
-    expect(docx.element_by_description.first.page_numbering).to eq(true)
+    expect(docx.element_by_description.first.page_numbering).to be(true)
     expect(docx.element_by_description.first.character_style_array[1].text).to eq('1')
-    expect(docx.element_by_description.first.character_style_array[1].page_number).to eq(true)
+    expect(docx.element_by_description.first.character_style_array[1].page_number).to be(true)
   end
 end

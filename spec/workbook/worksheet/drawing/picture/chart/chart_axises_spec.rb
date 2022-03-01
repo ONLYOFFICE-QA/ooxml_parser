@@ -19,13 +19,13 @@ describe 'My behaviour' do
     it 'Chart - Axises - axis_display_none.xlsx' do
       xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/axises/axis_display_none.xlsx')
       drawing = xlsx.worksheets[0].drawings[0]
-      expect(drawing.graphic_frame.graphic_data.first.axises[1].display).to eq(false)
+      expect(drawing.graphic_frame.graphic_data.first.axises[1].display).to be(false)
     end
 
     it 'Chart - Axises - axis_display_overlay.xlsx' do
       xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/chart/axises/axis_display_overlay.xlsx')
       drawing = xlsx.worksheets[0].drawings[0]
-      expect(drawing.graphic_frame.graphic_data.first.axises[1].display).to eq(true)
+      expect(drawing.graphic_frame.graphic_data.first.axises[1].display).to be(true)
     end
 
     it 'Chart - Axises - axis_position.xlsx' do

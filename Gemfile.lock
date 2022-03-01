@@ -65,7 +65,7 @@ GEM
       rubocop-ast (>= 0.4.0)
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
-    rubocop-rspec (2.8.0)
+    rubocop-rspec (2.9.0)
       rubocop (~> 1.19)
     ruby-filemagic (0.7.3)
     ruby-ole (1.2.12.2)
@@ -99,4 +99,4 @@ DEPENDENCIES
   yard (>= 0.9.20)
 
 BUNDLED WITH
-   2.3.4
+   2.3.8

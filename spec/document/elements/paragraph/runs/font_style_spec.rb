@@ -9,7 +9,7 @@ describe OoxmlParser::FontStyle do
 
   it 'paragraph_style_second_paragraph' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/font_style/paragraph_style_second_paragraph.docx')
-    expect(docx.element_by_description[1].character_style_array[0].font_style.italic).to eq(false)
+    expect(docx.element_by_description[1].character_style_array[0].font_style.italic).to be(false)
   end
 
   it 'font_style_copied_paragraph' do

@@ -67,13 +67,13 @@ describe 'My behaviour' do
   it 'chart_title_bold.pptx' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/font_style/chart_title_bold.pptx')
     drawing = pptx.slides[0].elements.last
-    expect(drawing.graphic_data.first.title.elements.first.runs.first.properties.font_style.bold).to eq(true)
+    expect(drawing.graphic_data.first.title.elements.first.runs.first.properties.font_style.bold).to be(true)
   end
 
   it 'chart_title_without_bold.pptx' do
     pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/runs/properties/font_style/chart_title_without_bold.pptx')
     drawing = pptx.slides[0].elements.last
-    expect(drawing.graphic_data.first.title.elements.first.runs.first.properties.font_style.bold).to eq(false)
+    expect(drawing.graphic_data.first.title.elements.first.runs.first.properties.font_style.bold).to be(false)
   end
 
   it 'strike_style_no_strike' do

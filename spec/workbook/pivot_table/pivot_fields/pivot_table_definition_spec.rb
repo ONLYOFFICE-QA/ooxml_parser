@@ -19,6 +19,6 @@ describe OoxmlParser::PivotFields do
   end
 
   it 'pivot field has show all property' do
-    expect(pivot_fields[0].show_all).to eq(false)
+    expect(pivot_fields[0].show_all).to be(false)
   end
 end
