@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'parser/encryption_checker'
+
 module OoxmlParser
   # Basic class for OoxmlParser
   class Parser
@@ -7,7 +9,7 @@ module OoxmlParser
     # @param path_to_file [String] file
     # @return [CommonDocumentStructure] structure of doc
     def self.parse_format(path_to_file)
-      return nil if OOXMLDocumentObject.encrypted_file?(path_to_file)
+      return nil if EncryptionChecker.new(path_to_file).encrypted?
 
       path_to_zip_file = OOXMLDocumentObject.copy_file_and_rename_to_zip(path_to_file)
       OOXMLDocumentObject.path_to_folder = path_to_zip_file.sub(File.basename(path_to_zip_file), '')

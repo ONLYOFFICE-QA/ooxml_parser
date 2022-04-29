@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'filemagic' unless Gem.win_platform?
 require 'securerandom'
 require 'nokogiri'
 require 'zip'
@@ -58,28 +57,6 @@ module OoxmlParser
       attr_accessor :xmls_stack
       # @return [String] path to root folder
       attr_accessor :path_to_folder
-
-      # @param path_to_file [String] file
-      # @param ignore_system [True, False] should host system be ignored, since
-      #   this method is OS-dependent
-      # @return [True, False] Check if file is protected by password on open
-      def encrypted_file?(path_to_file, ignore_system: false)
-        if Gem.win_platform? || ignore_system
-          warn 'FileMagic and checking file for encryption is not supported on Windows'
-          return false
-        end
-        file_result = FileMagic.new(:mime).file(path_to_file)
-        # Support of Encrtypted status in `file` util was introduced in file v5.20
-        # but LTS version of ubuntu before 16.04 uses older `file` and it return `Composite Document`
-        # https://github.com/file/file/blob/master/ChangeLog#L217
-        if file_result.include?('encrypted') ||
-           file_result.include?('Composite Document File V2 Document, No summary info') ||
-           file_result.include?('application/CDFV2-corrupt')
-          warn("File #{path_to_file} is encrypted. Can't parse it")
-          return true
-        end
-        false
-      end
 
       # Copy this file and rename to zip
       # @param path [String] path to file
