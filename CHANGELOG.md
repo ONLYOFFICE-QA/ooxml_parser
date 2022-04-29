@@ -14,6 +14,7 @@
 * Check `dependabot` at 8:00 Moscow time daily
 * Changes from `rubocop-rspec` update to 2.9.0
 * Remove `ruby-filemagick` dependency
+* Remove `Coordinates#list` since it's not actually part of coordinates
 
 ## 0.22.0 (2022-01-10)
 

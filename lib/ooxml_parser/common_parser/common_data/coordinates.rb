@@ -3,12 +3,11 @@
 module OoxmlParser
   # Class for working with coordinates
   class Coordinates
-    attr_accessor :row, :column, :list
+    attr_accessor :row, :column
 
-    def initialize(row = nil, column = nil, list = nil)
+    def initialize(row = nil, column = nil)
       @row = row.nil? ? row : row.to_i
       @column = column
-      @list = list
     end
 
     class << self
@@ -16,11 +15,6 @@ module OoxmlParser
       # @return [Coordinates]
       def parse_coordinates_from_string(string)
         coordinates = Coordinates.new
-        begin
-          coordinates.list = string.match(/'\w+'/)[0].delete("''")
-        rescue StandardError
-          'Raise Exception'
-        end
         string = string.split('!').last
         if coordinates?(string)
           coordinates.row = string.scan(/[0-9]/).join.to_i
@@ -138,11 +132,11 @@ module OoxmlParser
 
     # @return [String] result of convert of object to string
     def to_s
-      "#{@column}#{@row} #{@list ? "list: #{@list}" : ''}"
+      "#{@column}#{@row}}"
     end
 
     def nil?
-      @column.nil? && @list.nil? && @row.nil?
+      @column.nil? && @row.nil?
     end
 
     # Compare this object to other
