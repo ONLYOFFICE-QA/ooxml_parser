@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'shape_style/effect_reference'
-require_relative 'shape_style/fill_reference'
+require_relative 'shape_style/style_matrix_reference'
 require_relative 'shape_style/font_reference'
-require_relative 'shape_style/line_reference'
 module OoxmlParser
   # Class for parsing `wps:style` tags
   class ShapeStyle < OOXMLDocumentObject
@@ -23,13 +21,13 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'effectRef'
-          @effect_reference = EffectReference.new(parent: self).parse(node_child)
+          @effect_reference = StyleMatrixReference.new(parent: self).parse(node_child)
         when 'fillRef'
-          @fill_reference = FillReference.new(parent: self).parse(node_child)
+          @fill_reference = StyleMatrixReference.new(parent: self).parse(node_child)
         when 'fontRef'
           @font_reference = FontReference.new(parent: self).parse(node_child)
         when 'lnRef'
-          @line_reference = LineReference.new(parent: self).parse(node_child)
+          @line_reference = StyleMatrixReference.new(parent: self).parse(node_child)
         end
       end
       self
