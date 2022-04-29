@@ -4,7 +4,6 @@ PATH
     ooxml_parser (0.22.0)
       nokogiri (~> 1)
       ooxml_decrypt (~> 1)
-      ruby-filemagic (~> 0)
       rubyzip (~> 2)
 
 GEM
@@ -67,7 +66,6 @@ GEM
       rubocop (~> 1.0)
     rubocop-rspec (2.10.0)
       rubocop (~> 1.19)
-    ruby-filemagic (0.7.3)
     ruby-ole (1.2.12.2)
     ruby-progressbar (1.11.0)
     rubyzip (2.3.2)
