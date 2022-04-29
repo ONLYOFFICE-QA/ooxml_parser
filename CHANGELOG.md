@@ -5,6 +5,7 @@
 ## New Features
 
 * Add `yamllint` check in CI
+* New `StyleMatrixReference` class, replacing similar ones
 
 ### Changes
 

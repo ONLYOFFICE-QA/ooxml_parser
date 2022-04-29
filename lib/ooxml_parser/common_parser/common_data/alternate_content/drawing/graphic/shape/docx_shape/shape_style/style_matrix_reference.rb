@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 module OoxmlParser
-  # Class for parsing `a:lnRef` tags
-  class LineReference < OOXMLDocumentObject
+  # Class for parsing `a:fillRef`, `a:effectRef`, `a:lnRef` tags
+  class StyleMatrixReference < OOXMLDocumentObject
     # @return [Integer] Style Matrix Index
     attr_reader :index
-    # @return [Color] scheme color of LineReference
+    # @return [Color] scheme color of EffectReference
     attr_reader :scheme_color
 
-    # Parse LineReference object
+    # Parse StyleMatrixReference object
     # @param node [Nokogiri::XML:Element] node to parse
-    # @return [LineReference] result of parsing
+    # @return [StyleMatrixReference] result of parsing
     def parse(node)
       node.attributes.each do |key, value|
         case key
