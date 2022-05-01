@@ -12,23 +12,6 @@ module OoxmlParser
     end
 
     class << self
-      # @param [String] string to parse
-      # @return [Coordinates]
-      def parse_coordinates_from_string(string)
-        coordinates = Coordinates.new
-        begin
-          coordinates.list = string.match(/'\w+'/)[0].delete("''")
-        rescue StandardError
-          'Raise Exception'
-        end
-        string = string.split('!').last
-        if coordinates?(string)
-          coordinates.row = string.scan(/[0-9]/).join.to_i
-          coordinates.column = string.scan(/[A-Z]/).join
-        end
-        coordinates
-      end
-
       # Parse range of coordinates
       # @param arguments_string [String] data to parse
       # @return [Array] result
@@ -109,6 +92,18 @@ module OoxmlParser
       end
     end
 
+    # Parse string to coordinates
+    # @param [String] string to parse
+    # @return [Coordinates] result
+    def parse_string(string)
+      string = extract_list_from_string(string) if list_name_in_string?(string)
+      if Coordinates.coordinates?(string)
+        @row = string.scan(/\d/).join.to_i
+        @column = string.scan(/[A-Z]/).join
+      end
+      self
+    end
+
     # @return [Integer] number of column
     # This method takes @column string
     # and converts into integer
@@ -146,6 +141,24 @@ module OoxmlParser
     # @return [True, False] result of comparision
     def ==(other)
       other.is_a?(Coordinates) ? (@row == other.row && @column == other.column) : false
+    end
+
+    private
+
+    # Check if there is list name in string
+    # @param [String] string to check
+    # @return [Boolean] result
+    def list_name_in_string?(string)
+      string.include?('!')
+    end
+
+    # Extract list name and leave coordinates
+    # @param [String] string to parse
+    # @return [String] coordinates string without list
+    def extract_list_from_string(string)
+      split = string.split('!')
+      @list = split[0...-1].join('!')
+      split[-1]
     end
   end
 end

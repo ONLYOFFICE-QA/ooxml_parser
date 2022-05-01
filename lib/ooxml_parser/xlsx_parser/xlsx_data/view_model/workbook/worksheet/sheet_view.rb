@@ -36,7 +36,7 @@ module OoxmlParser
         when 'showRowColHeaders'
           @show_row_column_headers = attribute_enabled?(value)
         when 'topLeftCell'
-          @top_left_cell = Coordinates.parse_coordinates_from_string(value.value)
+          @top_left_cell = Coordinates.new.parse_string(value.value)
         when 'workbookViewId'
           @workbook_view_id = value.value.to_i
         when 'zoomScale'
