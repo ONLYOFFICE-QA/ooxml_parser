@@ -15,6 +15,8 @@
 * Changes from `rubocop-rspec` update to 2.9.0
 * Remove `ruby-filemagick` dependency
 * Remove deprecated `Coordinates#get_column_number` method
+* Refactor `Coordinates.parse_coordinates_from_string`
+  to `Coordinates#parse_string`
 
 ## 0.22.0 (2022-01-10)
 

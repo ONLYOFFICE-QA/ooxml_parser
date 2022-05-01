@@ -14,7 +14,7 @@ module OoxmlParser
         when 'state'
           @state = value.value.to_sym
         when 'topLeftCell'
-          @top_left_cell = Coordinates.parse_coordinates_from_string(value.value)
+          @top_left_cell = Coordinates.new.parse_string(value.value)
         when 'xSplit'
           @x_split = value.value
         when 'ySplit'

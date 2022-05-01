@@ -21,4 +21,14 @@ describe OoxmlParser::Coordinates do
   it 'Coordinates#nil?' do
     expect(first_coord).not_to be_nil
   end
+
+  describe '#parse_string' do
+    it 'parses string with list name' do
+      expect(described_class.new.parse_string('!!!!List!A1').list).to eq('!!!!List')
+    end
+
+    it 'parses string without list name' do
+      expect(described_class.new.parse_string('A1').column).to eq('A')
+    end
+  end
 end

@@ -43,14 +43,14 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'location'
-          @url = Coordinates.parse_coordinates_from_string(value.value)
+          @url = Coordinates.new.parse_string(value.value)
         when 'id'
           @id = value.value
           @url = OOXMLDocumentObject.get_link_from_rels(@id) unless @id.empty?
         when 'tooltip'
           @tooltip = value.value
         when 'ref'
-          @coordinates = Coordinates.parse_coordinates_from_string(value.value)
+          @coordinates = Coordinates.new.parse_string(value.value)
         when 'action'
           @action_link = value.value
         when 'highlightClick'

@@ -17,7 +17,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'activeCell'
-          @active_cell = Coordinates.parse_coordinates_from_string(value.value)
+          @active_cell = Coordinates.new.parse_string(value.value)
         when 'activeCellId'
           @active_cell_id = value.value.to_i
         when 'sqref'
