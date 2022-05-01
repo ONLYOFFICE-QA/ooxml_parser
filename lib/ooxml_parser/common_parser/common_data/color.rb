@@ -271,9 +271,9 @@ module OoxmlParser
         return str if str.is_a?(Color)
         return Color.new(VALUE_FOR_NONE_COLOR, VALUE_FOR_NONE_COLOR, VALUE_FOR_NONE_COLOR) if str == 'none' || str == '' || str == 'transparent' || str.nil?
 
-        split = if str.include?('RGB (') || str.include?('rgb(')
+        split = if str.downcase.include?('rgb (')
                   str.gsub(/[(RGBrgb) ]/, '').split(',')
-                elsif str.include?('RGB ') || str.include?('rgb')
+                elsif str.downcase.include?('rgb ')
                   str.gsub(/RGB |rgb/, '').split(', ')
                 else
                   raise "Incorrect data for color to parse: '#{str}'"
