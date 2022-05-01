@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.23.0 (2022-05-01)
+
 ## New Features
 
 * Add `yamllint` check in CI
