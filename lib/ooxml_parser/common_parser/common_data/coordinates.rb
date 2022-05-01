@@ -118,10 +118,6 @@ module OoxmlParser
       end
     end
 
-    alias get_column_number column_number
-    extend Gem::Deprecate
-    deprecate :get_column_number, 'column_number', 2020, 1
-
     # Compares rows of two cells
     # @param [Coordinates] other_cell other cell coordinates
     # @return [true, false] true, if row greater, than other row
