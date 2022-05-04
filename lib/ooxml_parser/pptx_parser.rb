@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'pptx_data/presentation'
+require_relative 'pptx_parser/presentation'
 
 module OoxmlParser
   # Basic class for parsing pptx

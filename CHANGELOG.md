@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Minor refactor of project directory structure
+
 ## 0.23.0 (2022-05-01)
 
 ## New Features
