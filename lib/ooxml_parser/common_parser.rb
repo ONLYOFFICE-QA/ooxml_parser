@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+require_relative 'common_parser/common_data/ooxml_document_object'
+require_relative 'common_parser/common_data/color'
+require_relative 'common_parser/common_data/coordinates'
+require_relative 'common_parser/common_data/font_style'
+require_relative 'common_parser/common_data/borders_properties'
+require_relative 'common_parser/common_data/hyperlink'
+require_relative 'common_parser/common_data/paragraph'
+require_relative 'common_parser/common_data/alternate_content/alternate_content'
+require_relative 'common_parser/common_data/colors/presentation_fill'
+require_relative 'common_parser/common_data/table'
+require_relative 'common_parser/common_data/relationships'
+require_relative 'common_parser/parser'
+require_relative 'common_parser/common_document_structure'

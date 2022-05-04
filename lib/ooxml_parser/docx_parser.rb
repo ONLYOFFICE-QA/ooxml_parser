@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../common_parser/common_data/ooxml_document_object'
-require_relative '../common_parser/common_data/valued_child'
-require_relative 'docx_data/document_structure'
+require_relative 'common_parser/common_data/valued_child'
+require_relative 'docx_parser/document_structure'
 
 module OoxmlParser
   # Basic class for DocxParser

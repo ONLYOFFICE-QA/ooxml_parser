@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'xlsx_data/view_model/workbook'
+require_relative 'xlsx_parser/workbook'
 
 module OoxmlParser
   # Basic class for parsing xlsx
