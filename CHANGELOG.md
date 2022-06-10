@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+## New Features
+
+* Add parsing `sparklines` in xlsx
+
 ### Changes
 
 * Minor refactor of project directory structure
