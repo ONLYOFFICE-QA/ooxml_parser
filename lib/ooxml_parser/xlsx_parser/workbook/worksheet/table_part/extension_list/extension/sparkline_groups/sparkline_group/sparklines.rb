@@ -2,7 +2,7 @@
 
 require_relative 'sparklines/sparkline'
 module OoxmlParser
-  # Class for `sparklineGroups` data
+  # Class for `sparklines` data
   class Sparklines < OOXMLDocumentObject
     # @return [Array<Sparkline>] list of sparklines
     attr_reader :sparklines
