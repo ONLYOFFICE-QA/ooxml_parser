@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'sparkline_group/sparklines'
 module OoxmlParser
   # Class for `sparklineGroup` data
   class SparklineGroup < OOXMLDocumentObject
@@ -49,6 +50,8 @@ module OoxmlParser
     attr_reader :color_negative
     # @return [OoxmlColor] markers color
     attr_reader :color_markers
+    # @return [Sparklines] sparklines
+    attr_reader :sparklines
 
     # Parse SparklineGroup
     # @param [Nokogiri::XML:Node] node with SparklineGroup
@@ -107,6 +110,8 @@ module OoxmlParser
           @color_negative = OoxmlColor.new(parent: self).parse(node_child)
         when 'colorMarkers'
           @color_markers = OoxmlColor.new(parent: self).parse(node_child)
+        when 'sparklines'
+          @sparklines = Sparklines.new(parent: self).parse(node_child)
         end
       end
       self
