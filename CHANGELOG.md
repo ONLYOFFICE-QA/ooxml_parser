@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.24.0 (2022-06-10)
+
 ### New Features
 
 * Add parsing `sparklines` in xlsx
