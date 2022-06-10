@@ -2,7 +2,7 @@
 
 ## master (unreleased)
 
-## New Features
+### New Features
 
 * Add parsing `sparklines` in xlsx
 
@@ -12,7 +12,7 @@
 
 ## 0.23.0 (2022-05-01)
 
-## New Features
+### New Features
 
 * Add `yamllint` check in CI
 * New `StyleMatrixReference` class, replacing similar ones
