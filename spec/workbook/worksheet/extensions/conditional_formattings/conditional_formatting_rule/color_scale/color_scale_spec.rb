@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe OoxmlParser::ColorScale do
   let(:xlsx) do
-    OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions'\
+    OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
                               '/conditional_formattings/conditional_formatting_rule/color_scale/color_scale.xlsx')
   end
   let(:color_scale) { xlsx.worksheets.first.conditional_formattings[0].rules[0].color_scale }

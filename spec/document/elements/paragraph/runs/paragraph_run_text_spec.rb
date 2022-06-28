@@ -29,11 +29,11 @@ describe 'My behaviour' do
                .first.alternate_content.office2007_content
                .data.text_box.first
                .character_style_array.first.text)
-      .to eq('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'\
-             ' Integer consequat faucibus eros, sed mattis tortor consectetur '\
-             'cursus. Mauris non eros odio. Curabitur velit metus, placerat sit '\
-             'amet tempus cursus, pulvinar sed enim. Vivamus odio arcu, volutpat '\
-             'gravida imperdiet vitae, mollis eget augue. Sed ultricies viverra '\
+      .to eq('Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' \
+             'Integer consequat faucibus eros, sed mattis tortor consectetur ' \
+             'cursus. Mauris non eros odio. Curabitur velit metus, placerat sit ' \
+             'amet tempus cursus, pulvinar sed enim. Vivamus odio arcu, volutpat ' \
+             'gravida imperdiet vitae, mollis eget augue. Sed ultricies viverra ' \
              'convallis. Fusce pharetra mi eget')
   end
 
@@ -52,7 +52,7 @@ describe 'My behaviour' do
   it 'HeaderFooterSection' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/text/text_in_header_footer_section.docx')
     expect(docx.elements.first.sector_properties.notes.first.elements.first
-               .character_style_array.first.text).to eq('Lorem ipsum dolor sit amet, consectetur '\
+               .character_style_array.first.text).to eq('Lorem ipsum dolor sit amet, consectetur ' \
                                                         'adipiscing elit. Integer consequat faucibus eros, sed mattis tortor...')
     expect(docx.notes.first.elements.first.character_style_array.first.text).to eq('Simple Test Text')
   end

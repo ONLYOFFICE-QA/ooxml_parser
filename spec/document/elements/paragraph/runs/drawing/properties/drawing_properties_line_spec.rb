@@ -33,8 +33,8 @@ describe OoxmlParser::DocxShapeLine do
   end
 
   it 'ShapeLinePoints' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/'\
-                                              'runs/drawing/properties/line/'\
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/' \
+                                              'runs/drawing/properties/line/' \
                                               'shape_line_points.docx')
     alternate_content = docx.elements.first.nonempty_runs.first.alternate_content
     expect(alternate_content.office2010_content.graphic.data
@@ -43,8 +43,8 @@ describe OoxmlParser::DocxShapeLine do
   end
 
   it 'ShapeLineObjectSize' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph'\
-                                              '/runs/drawing/properties/line/'\
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph' \
+                                              '/runs/drawing/properties/line/' \
                                               'shape_line_object_size.docx')
     alternate_content = docx.elements.first.nonempty_runs.first.alternate_content
     expect(alternate_content.office2010_content.properties.object_size)
@@ -53,8 +53,8 @@ describe OoxmlParser::DocxShapeLine do
   end
 
   it 'adjust_values' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/'\
-                                              'runs/drawing/properties/line/'\
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/' \
+                                              'runs/drawing/properties/line/' \
                                               'adjust_values.docx')
     expect(docx.notes.first.elements.first
                .nonempty_runs.first.alternate_content

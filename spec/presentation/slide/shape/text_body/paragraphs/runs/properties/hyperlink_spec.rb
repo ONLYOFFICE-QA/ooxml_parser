@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'My behaviour' do
-  files_dir = 'spec/presentation/slide/shape/text_body/'\
+  files_dir = 'spec/presentation/slide/shape/text_body/' \
               'paragraphs/runs/properties/hyperlink'
 
   it 'HyperlinkToSlide' do

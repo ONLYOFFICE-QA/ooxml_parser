@@ -28,8 +28,8 @@ describe 'My behaviour' do
     end
 
     it 'Audio time node' do
-      pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/'\
-                                                'timing/time_node/'\
+      pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/' \
+                                                'timing/time_node/' \
                                                 'time_node_audio.pptx')
       expect(pptx.slides.first.timing
                  .time_node_list.first

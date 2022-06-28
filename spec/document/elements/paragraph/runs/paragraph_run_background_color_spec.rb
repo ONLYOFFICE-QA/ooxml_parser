@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe 'ParagraphRun#background_color' do
   let(:docx) do
-    OoxmlParser::Parser.parse('spec/document/elements/paragraph/'\
+    OoxmlParser::Parser.parse('spec/document/elements/paragraph/' \
                               'runs/background_color/background_color.docx')
   end
 

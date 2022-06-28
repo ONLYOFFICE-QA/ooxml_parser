@@ -4,8 +4,8 @@ require 'spec_helper'
 
 describe OoxmlParser::X14Table do
   let(:xlsx) do
-    OoxmlParser::Parser.parse('spec/workbook/tables/'\
-                              'extensions/x14_table/'\
+    OoxmlParser::Parser.parse('spec/workbook/tables/' \
+                              'extensions/x14_table/' \
                               'x14_table_alternative_text.xlsx')
   end
 
