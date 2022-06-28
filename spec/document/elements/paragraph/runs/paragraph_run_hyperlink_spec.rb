@@ -4,9 +4,9 @@ require 'spec_helper'
 
 describe 'DocxParagraphRun#hyperlink' do
   let(:hyperlink_file) do
-    OoxmlParser::Parser.parse('spec/document/elements/'\
-                              'paragraph/runs/'\
-                              'pararga_run_hyperlink/'\
+    OoxmlParser::Parser.parse('spec/document/elements/' \
+                              'paragraph/runs/' \
+                              'pararga_run_hyperlink/' \
                               'paragraph_run_hyperlink.docx')
   end
 

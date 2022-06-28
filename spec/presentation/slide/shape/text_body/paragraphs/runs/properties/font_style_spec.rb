@@ -20,8 +20,8 @@ describe 'My behaviour' do
   end
 
   it 'several_paragraphs_font_style.pptx' do
-    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/'\
-                                              'text_body/paragraphs/runs/properties/'\
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/' \
+                                              'text_body/paragraphs/runs/properties/' \
                                               'font_style/several_paragraphs_font_style.pptx')
     paragraphs = pptx.slides.first.elements.first.text_body.paragraphs
     expect(paragraphs[0].runs.first.properties.font_style)
@@ -51,9 +51,9 @@ describe 'My behaviour' do
   end
 
   it 'copy_style_in_table_with_bold_2_cell_with_bold_text_too.pptx' do
-    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/'\
-                                              'shape/text_body/paragraphs/runs/'\
-                                              'properties/font_style/'\
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/' \
+                                              'shape/text_body/paragraphs/runs/' \
+                                              'properties/font_style/' \
                                               'copy_style_in_table_with_bold_2_cell_with_bold_text_too.pptx')
     rows = pptx.slides[0].elements.last.graphic_data.first.rows
     expect(rows[0].cells.first.text_body

@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe OoxmlParser::ConditionalFormattings do
   let(:xlsx) do
-    OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions'\
+    OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
                               '/conditional_formattings/conditional_formatting_value_is.xlsx')
   end
   let(:conditional_formattings) { xlsx.worksheets.first.extension_list[0].conditional_formattings }

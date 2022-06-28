@@ -25,7 +25,7 @@ module OoxmlParser
     # Convert to string
     # @return [String] result of conversion
     def to_s
-      "first line indent: #{@first_line_indent}, left indent: #{@left_indent}, "\
+      "first line indent: #{@first_line_indent}, left indent: #{@left_indent}, " \
         "right indent: #{@right_indent}, hanging indent: #{@hanging_indent}"
     end
 

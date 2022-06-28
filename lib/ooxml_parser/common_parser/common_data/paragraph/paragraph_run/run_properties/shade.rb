@@ -22,8 +22,8 @@ module OoxmlParser
 
     # @return [String] text representation
     def to_s
-      "Value: `#{value}`, "\
-        "Color: `#{color}`, "\
+      "Value: `#{value}`, " \
+        "Color: `#{color}`, " \
         "Fill: `#{fill}`"
     end
 
