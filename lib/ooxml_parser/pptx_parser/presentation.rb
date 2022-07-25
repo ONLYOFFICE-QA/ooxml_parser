@@ -58,10 +58,9 @@ module OoxmlParser
           @slide_size = SlideSize.new(parent: self).parse(presentation_node_child)
         when 'sldIdLst'
           presentation_node_child.xpath('p:sldId').each do |silde_id_node|
-            id = nil
-            silde_id_node.attribute_nodes.select { |node| id = node.to_s if node.namespace && node.namespace.prefix == 'r' }
+            slide_id = silde_id_node.attr('r:id')
             @slides << Slide.new(parent: self,
-                                 xml_path: "#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(id)}")
+                                 xml_path: "#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(slide_id)}")
                             .parse
           end
         end

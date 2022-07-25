@@ -2,6 +2,11 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Minor change in `Presentation` parsing to remove deprecated `Nokogiri`
+  method `XML::Reader#attribute_nodes`
+
 ## 0.24.0 (2022-06-10)
 
 ### New Features
