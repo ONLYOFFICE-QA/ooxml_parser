@@ -6,6 +6,8 @@
 
 * Minor change in `Presentation` parsing to remove deprecated `Nokogiri`
   method `XML::Reader#attribute_nodes`
+* Removed unused `DocxParagraph#bookmark_start` and
+  `DocxParagraph#bookmark_end` attributes
 
 ## 0.24.0 (2022-06-10)
 
