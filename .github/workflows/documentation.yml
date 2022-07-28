@@ -8,7 +8,7 @@ jobs:
       - name: Set up latest ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.1
+          ruby-version: ruby
       - name: Install gem dependencies
         run: |
           gem install bundler
