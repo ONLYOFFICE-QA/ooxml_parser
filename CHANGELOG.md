@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* `spec` speedup by decreasing files size
+
 ## 0.25.0 (2022-07-28)
 
 ### New Features
