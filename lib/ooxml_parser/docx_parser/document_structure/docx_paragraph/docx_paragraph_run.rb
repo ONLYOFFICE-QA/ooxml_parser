@@ -2,6 +2,7 @@
 
 # noinspection RubyTooManyInstanceVariablesInspection
 require_relative 'docx_paragraph_run/docx_paragraph_run_helpers'
+require_relative 'docx_paragraph_run/instruction_text'
 require_relative 'docx_paragraph_run/object'
 require_relative 'docx_paragraph_run/text_outline'
 require_relative 'docx_paragraph_run/text_fill'
@@ -15,9 +16,9 @@ module OoxmlParser
                   :link, :highlight, :effect, :caps, :w,
                   :position, :em, :spacing, :break, :touch, :shape, :footnote, :endnote, :fld_char, :style,
                   :comments, :alternate_content, :page_number, :text_outline, :text_fill
-    # @return [String] type of instruction used for upper level of run
-    # http://officeopenxml.com/WPfieldInstructions.php
-    attr_accessor :instruction
+    # @return [InstructionText] text of instruction
+    #   See ECMA-376, 17.16.23 instrText (Field Code)
+    attr_reader :instruction_text
     # @return [RunProperties] properties of run
     attr_accessor :run_properties
     # @return [RunObject] object of run
@@ -96,10 +97,10 @@ module OoxmlParser
           parse_properties(node_child)
           @run_properties = RunProperties.new(parent: self).parse(node_child)
         when 'instrText'
-          if node_child.text.include?('HYPERLINK')
-            hyperlink = Hyperlink.new(node_child.text.sub('HYPERLINK ', '').split(' \\o ').first, node_child.text.sub('HYPERLINK', '').split(' \\o ').last)
-            @link = hyperlink
-          elsif node_child.text[/PAGE\s+\\\*/]
+          @instruction_text = InstructionText.new(parent: self).parse(node_child)
+          if @instruction_text.hyperlink?
+            @link = @instruction_text.to_hyperlink
+          elsif @instruction_text.page_number?
             @text = '*PAGE NUMBER*'
           end
         when 'fldChar'

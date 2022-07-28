@@ -5,6 +5,7 @@
 ### New Features
 
 * New CI task to check that documentation is correct.
+* Correct parsing of `DocxParagraphRun#instruction_text`
 
 ### Changes
 
