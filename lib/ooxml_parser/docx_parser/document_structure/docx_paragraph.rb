@@ -18,7 +18,7 @@ module OoxmlParser
   # Class for data of DocxParagraph
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
-    attr_accessor :number, :bookmark_start, :bookmark_end, :align, :spacing, :ind, :numbering,
+    attr_accessor :number, :align, :spacing, :ind, :numbering,
                   :character_style_array, :page_break, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control
@@ -39,8 +39,6 @@ module OoxmlParser
 
     def initialize(parent: nil)
       @number = 0
-      @bookmark_start = []
-      @bookmark_end = []
       @align = :left
       @spacing = Spacing.new
       @ind = Indents.new
@@ -62,8 +60,6 @@ module OoxmlParser
     # @return [void]
     def initialize_copy(source)
       super
-      @bookmark_start = source.bookmark_start.clone
-      @bookmark_end = source.bookmark_end.clone
       @character_style_array = source.character_style_array.clone
       @spacing = source.spacing.clone
     end
