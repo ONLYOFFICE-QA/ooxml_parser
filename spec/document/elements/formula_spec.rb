@@ -17,6 +17,11 @@ describe 'formula' do
         expect(docx.elements.first.nonempty_runs.first.formula_run.first.properties.break).to be_truthy
         expect(docx.elements.first.nonempty_runs.first.formula_run.first.text).to eq('±')
       end
+
+      it 'formula_with_bottom_index.docx' do
+        docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/formula/run/run_properties/formula_with_bottom_index.docx')
+        expect(docx.elements.first.nonempty_runs.first.formula_run.first.bottom_index).to be_a(OoxmlParser::DocxFormula)
+      end
     end
   end
 
