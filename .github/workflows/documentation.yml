@@ -1,0 +1,19 @@
+name: Documentation
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up latest ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ruby
+      - name: Install gem dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+      - name: Check that yardoc is correct
+        run: yardoc . --fail-on-warning > yardoc.log
+      - name: Check that code 100% documented
+        run: cat yardoc.log | grep -q '100.00% documented'

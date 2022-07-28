@@ -38,8 +38,8 @@ module OoxmlParser
     private
 
     # This is dirty workaround for situations
-    # Then @line_rule parsed after @line so getting
-    # @line value is totally screwed up
+    # Then `@line_rule` parsed after `@line` so getting
+    # `@line` value is totally screwed up
     # @param [Nokogiri::XML:Node] node with ParagraphSpacing
     # @return [Hash] hash with sorted values
     # TODO: Totally redone parsing of spacing to remove this workaround
