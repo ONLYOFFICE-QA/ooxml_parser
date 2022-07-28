@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.25.0 (2022-07-28)
+
 ### New Features
 
 * New CI task to check that documentation is correct.
