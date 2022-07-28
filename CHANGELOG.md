@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* New CI task to check that documentation is correct.
+
 ### Changes
 
 * Minor change in `Presentation` parsing to remove deprecated `Nokogiri`
