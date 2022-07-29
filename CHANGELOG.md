@@ -5,12 +5,14 @@
 ### New Features
 
 * New `XlsxColumnProperties#width_raw` field
+* New `XlsxRow#cells_raw` field
 
 ### Changes
 
 * `spec` speedup by decreasing files size
 * Rename `XlsxColumnProperties#from/to` to `XlsxColumnProperties#min/max` for
   better code consistency. Deprecated old methods
+* Redone parsing `XlsxRow#cells` for better readability
 
 ## 0.25.0 (2022-07-28)
 
