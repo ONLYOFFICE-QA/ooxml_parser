@@ -12,6 +12,8 @@ module OoxmlParser
     attr_reader :style_index
     # @return [String] value of cell
     attr_reader :value
+    # @return [String] An A-1 style reference to a cell.
+    attr_reader :reference
     # @return [String] type of string
     attr_reader :type
 
@@ -31,6 +33,8 @@ module OoxmlParser
           @style_index = value.value.to_i
         when 't'
           @type = value.value.to_s
+        when 'r'
+          @reference = value.value.to_s
         end
       end
       node.xpath('*').each do |node_child|
@@ -58,6 +62,11 @@ module OoxmlParser
       return @raw_text.dup.insert(0, "'") if style.quote_prefix
 
       @raw_text
+    end
+
+    # @return [Coordinates] coordinates of cell
+    def coordinates
+      @coordinates ||= Coordinates.new.parse_string(@reference)
     end
 
     private
