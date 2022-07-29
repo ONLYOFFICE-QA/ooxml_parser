@@ -30,7 +30,7 @@ module OoxmlParser
         when 'min'
           @min = value.value.to_i
         when 'max'
-          @to = value.value.to_i
+          @max = value.value.to_i
         when 'style'
           @style = root_object.style_sheet.cell_xfs.xf_array[value.value.to_i]
         when 'width'
