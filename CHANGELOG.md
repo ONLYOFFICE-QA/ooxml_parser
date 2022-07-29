@@ -2,9 +2,15 @@
 
 ## master (unreleased)
 
+### New Features
+
+* New `XlsxColumnProperties#width_raw` field
+
 ### Changes
 
 * `spec` speedup by decreasing files size
+* Rename `XlsxColumnProperties#from/to` to `XlsxColumnProperties#min/max` for
+  better code consistency. Deprecated old methods
 
 ## 0.25.0 (2022-07-28)
 
