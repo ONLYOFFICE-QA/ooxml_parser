@@ -13,6 +13,7 @@
 * Rename `XlsxColumnProperties#from/to` to `XlsxColumnProperties#min/max` for
   better code consistency. Deprecated old methods
 * Redone parsing `XlsxRow#cells` for better readability
+* Minor refactoring in parsing `DocxWrapDrawing#wrap_text`
 
 ## 0.25.0 (2022-07-28)
 
