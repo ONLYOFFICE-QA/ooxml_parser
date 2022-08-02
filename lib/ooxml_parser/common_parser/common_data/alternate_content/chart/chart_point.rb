@@ -5,9 +5,13 @@ module OoxmlParser
   class ChartPoint
     attr_accessor :coordinates, :value
 
-    def initialize(coordinates = nil, value = nil)
+    # @return [String] data format for the given point
+    attr_accessor :format
+
+    def initialize(coordinates = nil, value = nil, format = nil)
       @coordinates = coordinates
       @value = value
+      @format = format
     end
   end
 end

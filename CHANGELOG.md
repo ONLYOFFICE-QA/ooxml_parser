@@ -4,6 +4,7 @@
 
 ### New Features
 
+* Add `@format` field for Chart point obj
 * New `XlsxColumnProperties#width_raw` field
 * New `XlsxRow#cells_raw` field
 

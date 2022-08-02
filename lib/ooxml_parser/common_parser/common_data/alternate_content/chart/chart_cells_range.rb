@@ -22,6 +22,7 @@ module OoxmlParser
       node.xpath('c:numCache/c:pt').each_with_index do |point_node, index|
         point = ChartPoint.new(coordinates[index])
         point.value = point_node.xpath('c:v').first.text.to_f unless point_node.xpath('c:v').first.nil?
+        point.format = point_node.parent.xpath('c:formatCode').first.text unless point_node.parent.xpath('c:formatCode').first.nil?
         @points << point
       end
       self
