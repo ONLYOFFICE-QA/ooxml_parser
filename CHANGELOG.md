@@ -14,6 +14,7 @@
   better code consistency. Deprecated old methods
 * Redone parsing `XlsxRow#cells` for better readability
 * Minor refactoring in parsing `DocxWrapDrawing#wrap_text`
+* Remove old comments from `RubyMine` code inspection
 
 ## 0.25.0 (2022-07-28)
 
