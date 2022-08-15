@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# noinspection RubyTooManyInstanceVariablesInspection
 require_relative 'docx_paragraph_run/docx_paragraph_run_helpers'
 require_relative 'docx_paragraph_run/instruction_text'
 require_relative 'docx_paragraph_run/object'
