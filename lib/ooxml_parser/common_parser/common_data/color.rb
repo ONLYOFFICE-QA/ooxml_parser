@@ -60,8 +60,10 @@ module OoxmlParser
       to_s
     end
 
-    # @return [String] color in hex value
+    # @return [String, nil] color in hex value or `nil` if color is not defined
     def to_hex
+      return nil if none?
+
       (@red.to_s(16).rjust(2, '0') + @green.to_s(16).rjust(2, '0') + @blue.to_s(16).rjust(2, '0')).upcase
     end
 

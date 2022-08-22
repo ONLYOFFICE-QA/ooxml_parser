@@ -22,6 +22,10 @@ describe OoxmlParser::Color do
   end
 
   describe 'Color#to_hex' do
+    it 'Default color to hex return something' do
+      expect(no_init_color.to_hex).to be_nil
+    end
+
     it 'Zero color ho hex is correct' do
       expect(zero_color.to_hex).to eq('000000')
     end

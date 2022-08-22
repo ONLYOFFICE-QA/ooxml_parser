@@ -16,6 +16,10 @@
 * Minor refactoring in parsing `DocxWrapDrawing#wrap_text`
 * Remove old comments from `RubyMine` code inspection
 
+### Fixes
+
+* Fix `Color#to_hex` if color is not initialized
+
 ## 0.25.0 (2022-07-28)
 
 ### New Features
