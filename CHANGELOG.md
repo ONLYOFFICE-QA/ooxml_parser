@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.26.0 (2022-09-22)
+
 ### New Features
 
 * New `XlsxColumnProperties#width_raw` field
