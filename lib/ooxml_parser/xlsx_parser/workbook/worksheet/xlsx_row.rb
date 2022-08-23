@@ -4,7 +4,7 @@ require_relative 'xlsx_row/xlsx_cell'
 module OoxmlParser
   # Single Row of XLSX
   class XlsxRow < OOXMLDocumentObject
-    attr_accessor :height, :style, :hidden
+    attr_accessor :height, :hidden
     # @return [True, False] true if the row height has been manually set.
     attr_accessor :custom_height
     # @return [Integer] Indicates to which row in the sheet
@@ -12,6 +12,8 @@ module OoxmlParser
     attr_accessor :index
     # @return [Array<Cells>] cells of row, as in xml structure
     attr_reader :cells_raw
+    # @return [Integer] index of style of row
+    attr_reader :style_index
 
     def initialize(parent: nil)
       @cells_raw = []
@@ -33,6 +35,8 @@ module OoxmlParser
           @hidden = option_enabled?(node, 'hidden')
         when 'r'
           @index = value.value.to_i
+        when 's'
+          @style_index = value.value.to_i
         end
       end
       node.xpath('*').each do |node_child|
@@ -54,6 +58,13 @@ module OoxmlParser
       end
 
       @cells
+    end
+
+    # @return [Xf, nil] style of row or `nil` if not applied
+    def style
+      return nil unless @style_index
+
+      root_object.style_sheet.cell_xfs.xf_array[@style_index]
     end
   end
 end

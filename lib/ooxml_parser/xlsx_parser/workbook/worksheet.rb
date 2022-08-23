@@ -17,7 +17,7 @@ module OoxmlParser
   # Properties of worksheet
   class Worksheet < OOXMLDocumentObject
     include WorksheetHelper
-    attr_accessor :name, :rows, :merge, :charts, :hyperlinks, :drawings, :comments, :columns, :sheet_format_properties,
+    attr_accessor :name, :merge, :charts, :hyperlinks, :drawings, :comments, :columns, :sheet_format_properties,
                   :autofilter, :table_parts, :sheet_views
     # @return [String] xml name of sheet
     attr_accessor :xml_name
@@ -39,11 +39,14 @@ module OoxmlParser
     attr_reader :sheet_protection
     # @return [Array<ProtectedRange>] list of protected ranges
     attr_reader :protected_ranges
+    # @return [Array<Row>] rows in sheet, as in xml structure
+    attr_reader :rows_raw
 
     def initialize(parent: nil)
       @columns = []
       @name = ''
       @rows = []
+      @rows_raw = []
       @merge = []
       @charts = []
       @hyperlinks = []
@@ -65,7 +68,7 @@ module OoxmlParser
 
     # @return [True, false] if structure contain any user data
     def with_data?
-      return true unless @rows.empty?
+      return true unless @rows_raw.empty?
       return true unless default_columns?
       return true unless @drawings.empty?
       return true unless @charts.empty?
@@ -95,13 +98,10 @@ module OoxmlParser
         case worksheet_node_child.name
         when 'sheetData'
           worksheet_node_child.xpath('xmlns:row').each do |row_node|
-            @rows[row_node.attribute('r').value.to_i - 1] = XlsxRow.new(parent: self).parse(row_node)
-            @rows[row_node.attribute('r').value.to_i - 1].style = root_object.style_sheet.cell_xfs.xf_array[row_node.attribute('s').value.to_i] if row_node.attribute('s')
+            @rows_raw << XlsxRow.new(parent: self).parse(row_node)
           end
         when 'sheetFormatPr'
-          if !worksheet_node_child.attribute('defaultColWidth').nil? && !worksheet_node_child.attribute('defaultRowHeight').nil?
-            @sheet_format_properties = SheetFormatProperties.new(parent: self).parse(worksheet_node_child)
-          end
+          @sheet_format_properties = SheetFormatProperties.new(parent: self).parse(worksheet_node_child)
         when 'mergeCells'
           worksheet_node_child.xpath('xmlns:mergeCell').each do |merge_node|
             @merge << merge_node.attribute('ref').value.to_s
@@ -152,6 +152,18 @@ module OoxmlParser
       parse_comments
       OOXMLDocumentObject.xmls_stack.pop
       self
+    end
+
+    # @return [Array<XlsxRow, nil>] list of rows, with nil,
+    #   if row data is not stored in xml
+    def rows
+      return @rows if @rows.any?
+
+      rows_raw.each do |row|
+        @rows[row.index - 1] = row
+      end
+
+      @rows
     end
 
     private
