@@ -28,6 +28,8 @@ module OoxmlParser
     attr_reader :vary_colors
     # @return [View3D] properties of 3D view
     attr_accessor :view_3d
+    # @return [Relationships] relationships of chart
+    attr_reader :relationships
 
     def initialize(parent: nil)
       @axis_ids = []
@@ -154,6 +156,7 @@ module OoxmlParser
           end
         end
       end
+      parse_relationships
       self
     end
 
@@ -169,6 +172,19 @@ module OoxmlParser
           @axises << ChartAxis.new(parent: self).parse(node_child)
         end
       end
+    end
+
+    # Parse relationship of chart
+    def parse_relationships
+      file_name = File.basename(OOXMLDocumentObject.current_xml)
+      relationship_file = "#{OOXMLDocumentObject.path_to_folder}" \
+                          '/word/charts/' \
+                          "_rels/#{file_name}.rels"
+
+      return unless File.exist?(relationship_file)
+
+      @relationships = Relationships.new(parent: self)
+                                    .parse_file(relationship_file)
     end
   end
 end
