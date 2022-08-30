@@ -6,6 +6,7 @@
 
 * Parsing of `XlsxRow#style_index`
 * New `Worksheet#rows_raw` field
+* Add parsing `Chart#relationships`
 
 ### Changes
 
