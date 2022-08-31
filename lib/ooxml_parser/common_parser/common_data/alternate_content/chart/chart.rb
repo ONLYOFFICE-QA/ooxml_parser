@@ -5,6 +5,7 @@ require_relative 'chart_cells_range'
 require_relative 'chart_legend'
 require_relative 'chart_point'
 require_relative 'display_labels_properties'
+require_relative 'chart/chart_style_file'
 require_relative 'chart/pivot_formats'
 require_relative 'chart/plot_area'
 require_relative 'chart/series'
@@ -28,6 +29,8 @@ module OoxmlParser
     attr_reader :vary_colors
     # @return [View3D] properties of 3D view
     attr_accessor :view_3d
+    # @return [ChartStyle] style of current chart
+    attr_reader :style
     # @return [Relationships] relationships of chart
     attr_reader :relationships
 
@@ -157,6 +160,7 @@ module OoxmlParser
         end
       end
       parse_relationships
+      parse_style
       self
     end
 
@@ -185,6 +189,14 @@ module OoxmlParser
 
       @relationships = Relationships.new(parent: self)
                                     .parse_file(relationship_file)
+    end
+
+    def parse_style
+      chart_style_file = @relationships.target_by_type('chartStyle').first
+      style_file = "#{OOXMLDocumentObject.path_to_folder}" \
+                   "/word/charts/#{chart_style_file}"
+
+      @style = ChartStyleFile.new(parent: self).parse(style_file)
     end
   end
 end
