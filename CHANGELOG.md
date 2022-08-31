@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.27.0 (2022-08-31)
+
 ### New Features
 
 * Parsing of `XlsxRow#style_index`
@@ -13,7 +15,7 @@
 
 * Simplify code for `Worksheet` parsing.
 
-## 0.26.0 (2022-09-22)
+## 0.26.0 (2022-08-22)
 
 ### New Features
 
