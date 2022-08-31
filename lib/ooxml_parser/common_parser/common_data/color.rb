@@ -156,7 +156,10 @@ module OoxmlParser
     # @param scheme_color_node [Nokogiri::XML:Element] node to parse
     # @return [Color] result of parsing
     def parse_scheme_color(scheme_color_node)
-      color = root_object.theme.color_scheme[scheme_color_node.attribute('val').value.to_sym].color
+      color_scheme_color = root_object.theme.color_scheme[scheme_color_node.attribute('val').value.to_sym]
+      return unless color_scheme_color
+
+      color = color_scheme_color.color
       hls = color.to_hsl
       scheme_name = nil
       scheme_color_node.xpath('*').each do |scheme_color_node_child|
