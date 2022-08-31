@@ -192,7 +192,12 @@ module OoxmlParser
     end
 
     def parse_style
-      chart_style_file = @relationships.target_by_type('chartStyle').first
+      return unless @relationships
+
+      chart_relationship = @relationships.target_by_type('chartStyle')
+      return if chart_relationship.empty?
+
+      chart_style_file = chart_relationship.first
       style_file = "#{OOXMLDocumentObject.path_to_folder}" \
                    "/word/charts/#{chart_style_file}"
 

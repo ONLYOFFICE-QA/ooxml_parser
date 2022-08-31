@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'chart_style_file/chart_style_entry'
+require_relative 'chart_style_file/marker_layout'
 module OoxmlParser
   # Class for parsing Chart Style data from file
   class ChartStyleFile < OOXMLDocumentObject
@@ -22,6 +23,8 @@ module OoxmlParser
     attr_reader :data_point_line
     # @return [ChartStyleEntry] data point marker entry
     attr_reader :data_point_marker
+    # @return [ChartStyleEntry] data point marker layout entry
+    attr_reader :data_point_marker_layout
     # @return [ChartStyleEntry] data point wireframe entry
     attr_reader :data_point_wireframe
     # @return [ChartStyleEntry] data table entry
@@ -90,7 +93,7 @@ module OoxmlParser
         when 'dataPointMarker'
           @data_point_marker = ChartStyleEntry.new(parent: self).parse(chart_node)
         when 'dataPointMarkerLayout'
-          # TODO
+          @data_point_marker_layout = MarkerLayout.new(parent: self).parse(chart_node)
         when 'dataPointWireframe'
           @data_point_wireframe = ChartStyleEntry.new(parent: self).parse(chart_node)
         when 'dataTable'
@@ -101,8 +104,6 @@ module OoxmlParser
           @drop_line = ChartStyleEntry.new(parent: self).parse(chart_node)
         when 'errorBar'
           @error_bar = ChartStyleEntry.new(parent: self).parse(chart_node)
-        when 'extLst'
-          # TODO
         when 'floor'
           @floor = ChartStyleEntry.new(parent: self).parse(chart_node)
         when 'gridlineMajor'
