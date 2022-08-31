@@ -69,7 +69,7 @@ module OoxmlParser
     attr_reader :wall
 
     # Parse Chart style file
-    # @return [ChartStyle] result of parsing
+    # @return [ChartStyleFile] result of parsing
     def parse(file)
       xml = parse_xml(file)
       xml.xpath('cs:chartStyle/*').each do |chart_node|

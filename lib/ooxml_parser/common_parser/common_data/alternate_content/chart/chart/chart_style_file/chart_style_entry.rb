@@ -5,6 +5,8 @@ module OoxmlParser
   class ChartStyleEntry < OOXMLDocumentObject
     # @return [OOXMLShapeBodyProperties] body properties
     attr_reader :body_properties
+    # @return [RunProperties] default run properties
+    attr_reader :default_run_properties
     # @return [FillReference] effect reference
     attr_reader :effect_reference
     # @return [FillReference] fill reference
@@ -25,7 +27,7 @@ module OoxmlParser
         when 'bodyPr'
           @body_properties = OOXMLShapeBodyProperties.new(parent: self).parse(node_child)
         when 'defRPr'
-          # TODO
+          @default_run_properties = RunProperties.new(parent: self).parse(node_child)
         when 'effectRef'
           @effect_reference = StyleMatrixReference.new(parent: self).parse(node_child)
         when 'fillRef'
