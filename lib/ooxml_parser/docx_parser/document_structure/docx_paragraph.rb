@@ -12,7 +12,6 @@ require_relative 'docx_paragraph/inserted'
 require_relative 'docx_paragraph/structured_document_tag'
 require_relative 'docx_paragraph/frame_properties'
 require_relative 'docx_paragraph/docx_formula'
-require_relative 'docx_paragraph/style_parametres'
 module OoxmlParser
   # Class for data of DocxParagraph
   class DocxParagraph < OOXMLDocumentObject
@@ -234,13 +233,13 @@ module OoxmlParser
     # @param character_style [DocxParagraphRun] style to parse
     # @return [void]
     def parse_paragraph_style_xml(id, character_style)
+      @style = root_object.document_style_by_id(id)
       doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}word/styles.xml")
       doc.search('//w:style').each do |style|
         next unless style.attribute('styleId').value == id
 
         style.xpath('w:pPr').each do |p_pr|
           parse_paragraph_style(p_pr, character_style)
-          @style = StyleParametres.new(parent: self).parse(style)
         end
         style.xpath('w:rPr').each do |r_pr|
           character_style.parse_properties(r_pr)
