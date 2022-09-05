@@ -12,7 +12,6 @@ require_relative 'docx_paragraph/inserted'
 require_relative 'docx_paragraph/structured_document_tag'
 require_relative 'docx_paragraph/frame_properties'
 require_relative 'docx_paragraph/docx_formula'
-require_relative 'docx_paragraph/style_parametres'
 module OoxmlParser
   # Class for data of DocxParagraph
   class DocxParagraph < OOXMLDocumentObject
@@ -202,7 +201,8 @@ module OoxmlParser
         when 'contextualSpacing'
           @contextual_spacing = true
         when 'pStyle'
-          parse_paragraph_style_xml(node_child.attribute('val').value, default_char_style)
+          @paragraph_style_ref = ParagraphStyleRef.new(parent: self).parse(node_child)
+          fill_style_data(default_char_style)
         when 'ind'
           @ind = DocumentStructure.default_paragraph_style.ind.dup.parse(node_child)
         when 'numPr'
@@ -229,24 +229,13 @@ module OoxmlParser
       self
     end
 
-    # Parse style xml
-    # @param id [String] id of style to parse
+    # Fill data from styles
     # @param character_style [DocxParagraphRun] style to parse
     # @return [void]
-    def parse_paragraph_style_xml(id, character_style)
-      doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}word/styles.xml")
-      doc.search('//w:style').each do |style|
-        next unless style.attribute('styleId').value == id
-
-        style.xpath('w:pPr').each do |p_pr|
-          parse_paragraph_style(p_pr, character_style)
-          @style = StyleParametres.new(parent: self).parse(style)
-        end
-        style.xpath('w:rPr').each do |r_pr|
-          character_style.parse_properties(r_pr)
-        end
-        break
-      end
+    def fill_style_data(character_style)
+      @style = root_object.document_style_by_id(@paragraph_style_ref.value)
+      parse_paragraph_style(@style.paragraph_properties_node, character_style) if @style.paragraph_properties_node
+      character_style.parse_properties(@style.run_properties_node) if @style.run_properties_node
     end
 
     extend Gem::Deprecate
