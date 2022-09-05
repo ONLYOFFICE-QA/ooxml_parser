@@ -21,8 +21,12 @@ module OoxmlParser
     attr_accessor :next_style
     # @return [DocxParagraphRun] run properties
     attr_accessor :run_properties
+    # @return [Nokogiri::XML:Node] run properties node
+    attr_accessor :run_properties_node
     # @return [DocxParagraph] run properties
     attr_accessor :paragraph_properties
+    # @return [Nokogiri::XML:Node] paragraph properties node
+    attr_accessor :paragraph_properties_node
     # @return [TableProperties] properties of table
     attr_accessor :table_properties
     # @return [Array, TableStyleProperties] list of table style properties
@@ -76,9 +80,11 @@ module OoxmlParser
         when 'next'
           @next_style = subnode.attribute('val').value
         when 'rPr'
-          @run_properties = DocxParagraphRun.new(parent: self).parse_properties(subnode)
+          @run_properties_node = subnode
+          @run_properties = DocxParagraphRun.new(parent: self).parse_properties(@run_properties_node)
         when 'pPr'
-          @paragraph_properties = ParagraphProperties.new(parent: self).parse(subnode)
+          @paragraph_properties_node = subnode
+          @paragraph_properties = ParagraphProperties.new(parent: self).parse(@paragraph_properties_node)
         when 'tblPr'
           @table_properties = TableProperties.new(parent: self).parse(subnode)
         when 'trPr'

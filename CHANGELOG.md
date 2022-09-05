@@ -5,6 +5,7 @@
 ### Changes
 
 * Replace usage of `StyleParameter` to `DocumentStyle`
+* Optimize parsing Style data for paragraph
 
 ## 0.28.0 (2022-09-05)
 
