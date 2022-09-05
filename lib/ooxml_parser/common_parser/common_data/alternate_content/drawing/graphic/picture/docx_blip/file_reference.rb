@@ -36,7 +36,7 @@ module OoxmlParser
       full_path_to_file = OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.root_subfolder + @path.gsub('..', '')
       if File.exist?(full_path_to_file)
         @content = if File.extname(@path) == '.xlsx'
-                     OoxmlParser::Parser.parse(full_path_to_file)
+                     parse_ole_xlsx(full_path_to_file)
                    else
                      File.binread(full_path_to_file)
                    end
@@ -44,6 +44,22 @@ module OoxmlParser
         warn "Couldn't find #{full_path_to_file} file on filesystem. Possible problem in original document"
       end
       self
+    end
+
+    private
+
+    # Parse ole xlsx file
+    # @param [String] full_path to file
+    # @return [XLSXWorkbook]
+    def parse_ole_xlsx(full_path)
+      # TODO: Fix this ugly hack with global vars
+      #   by replacing all global variables
+      stack = OOXMLDocumentObject.xmls_stack
+      dir = OOXMLDocumentObject.path_to_folder
+      result = OoxmlParser::Parser.parse(full_path)
+      OOXMLDocumentObject.xmls_stack = stack
+      OOXMLDocumentObject.path_to_folder = dir
+      result
     end
   end
 end
