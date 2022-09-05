@@ -11,7 +11,7 @@ module OoxmlParser
     # @return [DocumentStructure] result of parse
     def self.parse_docx(path_to_file)
       Parser.parse_format(path_to_file) do
-        DocumentStructure.parse
+        DocumentStructure.new.parse
       end
     end
   end

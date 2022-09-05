@@ -156,61 +156,60 @@ module OoxmlParser
 
     # Parse docx file
     # @return [DocumentStructure] parsed structure
-    def self.parse
-      doc_structure = DocumentStructure.new
-      doc_structure.content_types = ContentTypes.new(parent: doc_structure).parse
+    def parse
+      @content_types = ContentTypes.new(parent: self).parse
       OOXMLDocumentObject.root_subfolder = 'word/'
       OOXMLDocumentObject.xmls_stack = []
       @comments = []
       DocumentStructure.default_paragraph_style = DocxParagraph.new
-      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: doc_structure)
-      doc_structure.theme = PresentationTheme.parse('word/theme/theme1.xml')
-      doc_structure.relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}word/_rels/document.xml.rels")
-      doc_structure.parse_styles
+      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
+      @theme = PresentationTheme.parse('word/theme/theme1.xml')
+      @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}word/_rels/document.xml.rels")
+      parse_styles
       number = 0
       OOXMLDocumentObject.add_to_xmls_stack('word/document.xml')
-      doc = doc_structure.parse_xml(OOXMLDocumentObject.current_xml)
+      doc = parse_xml(OOXMLDocumentObject.current_xml)
       doc.search('//w:document').each do |document|
         document.xpath('w:background').each do |background|
-          doc_structure.background = DocumentBackground.new(parent: doc_structure).parse(background)
+          @background = DocumentBackground.new(parent: self).parse(background)
         end
         document.xpath('w:body').each do |body|
           body.xpath('*').each do |element|
             case element.name
             when 'p'
               child = element.child
-              unless child.nil? && doc_structure.elements.last.instance_of?(Table)
-                paragraph_style = DocumentStructure.default_paragraph_style.dup.parse(element, number, DocumentStructure.default_run_style, parent: doc_structure)
+              unless child.nil? && @elements.last.instance_of?(Table)
+                paragraph_style = DocumentStructure.default_paragraph_style.dup.parse(element, number, DocumentStructure.default_run_style, parent: self)
                 number += 1
-                doc_structure.elements << paragraph_style.dup
+                @elements << paragraph_style.dup
               end
             when 'tbl'
-              table = Table.new(parent: doc_structure).parse(element,
-                                                             number,
-                                                             TableProperties.new)
+              table = Table.new(parent: self).parse(element,
+                                                    number,
+                                                    TableProperties.new)
               number += 1
-              doc_structure.elements << table
+              @elements << table
             when 'sdt'
-              doc_structure.elements << StructuredDocumentTag.new(parent: doc_structure).parse(element)
+              @elements << StructuredDocumentTag.new(parent: self).parse(element)
             end
           end
           body.xpath('w:sectPr').each do |sect_pr|
-            doc_structure.page_properties = PageProperties.new(parent: doc_structure).parse(sect_pr,
-                                                                                            DocumentStructure.default_paragraph_style,
-                                                                                            DocumentStructure.default_run_style)
-            doc_structure.notes = doc_structure.page_properties.notes # keep copy of notes to compatibility with previous docx models
+            @page_properties = PageProperties.new(parent: self).parse(sect_pr,
+                                                                      DocumentStructure.default_paragraph_style,
+                                                                      DocumentStructure.default_run_style)
+            @notes = page_properties.notes # keep copy of notes to compatibility with previous docx models
           end
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
-      doc_structure.document_properties = DocumentProperties.new(parent: doc_structure).parse
-      doc_structure.comments = Comments.new(parent: doc_structure).parse
-      doc_structure.comments_extended = CommentsExtended.new(parent: doc_structure).parse
-      doc_structure.comments_document = Comments.new(parent: doc_structure,
-                                                     file: "#{OOXMLDocumentObject.path_to_folder}word/#{doc_structure.relationships.target_by_type('commentsDocument').first}")
-                                                .parse
-      doc_structure.settings = DocumentSettings.new(parent: doc_structure).parse
-      doc_structure
+      @document_properties = DocumentProperties.new(parent: self).parse
+      @comments = Comments.new(parent: self).parse
+      @comments_extended = CommentsExtended.new(parent: self).parse
+      @comments_document = Comments.new(parent: self,
+                                        file: "#{OOXMLDocumentObject.path_to_folder}word/#{relationships.target_by_type('commentsDocument').first}")
+                                   .parse
+      @settings = DocumentSettings.new(parent: self).parse
+      self
     end
 
     # Parse default style

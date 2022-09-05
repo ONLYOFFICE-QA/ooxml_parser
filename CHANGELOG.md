@@ -6,6 +6,7 @@
 
 * Replace usage of `StyleParameter` to `DocumentStyle`
 * Optimize parsing Style data for paragraph
+* `DocumentStructure#parse` now is an instance method
 
 ### Fixes
 

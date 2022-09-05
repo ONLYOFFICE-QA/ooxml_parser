@@ -29,7 +29,7 @@ module OoxmlParser
         format = Parser.recognize_folder_format
         case format
         when :docx
-          DocumentStructure.parse
+          DocumentStructure.new.parse
         when :xlsx
           XLSXWorkbook.new.parse
         when :pptx
