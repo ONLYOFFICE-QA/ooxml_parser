@@ -7,6 +7,10 @@
 * Replace usage of `StyleParameter` to `DocumentStyle`
 * Optimize parsing Style data for paragraph
 
+### Fixes
+
+* Fix parsing links in files with OLE spreadsheets
+
 ## 0.28.0 (2022-09-05)
 
 ### New Features
