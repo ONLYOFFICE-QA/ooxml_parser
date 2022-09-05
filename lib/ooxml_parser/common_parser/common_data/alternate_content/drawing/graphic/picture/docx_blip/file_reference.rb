@@ -35,7 +35,11 @@ module OoxmlParser
 
       full_path_to_file = OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.root_subfolder + @path.gsub('..', '')
       if File.exist?(full_path_to_file)
-        @content = File.binread(full_path_to_file)
+        @content = if File.extname(@path) == '.xlsx'
+                     OoxmlParser::Parser.parse(full_path_to_file)
+                   else
+                     File.binread(full_path_to_file)
+                   end
       else
         warn "Couldn't find #{full_path_to_file} file on filesystem. Possible problem in original document"
       end
