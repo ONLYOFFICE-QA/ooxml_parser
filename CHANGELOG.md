@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.29.0 (2022-09-05)
+
 ### Changes
 
 * Replace usage of `StyleParameter` to `DocumentStyle`
