@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add parsing of xlsx contained in `OleObject`
+
 ## 0.27.0 (2022-08-31)
 
 ### New Features
