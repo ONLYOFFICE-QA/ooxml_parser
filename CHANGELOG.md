@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* New class `OoxmlFile` for base operation with file
+
 ### Changes
 
 * `PresentationTheme#parse` now an instance method

@@ -9,8 +9,8 @@ module OoxmlParser
     # @param path_to_file [String] file path
     # @return [Presentation] result of parse
     def self.parse_pptx(path_to_file)
-      Parser.parse_format(path_to_file) do |path_to_folder|
-        Presentation.new(unpacked_folder: path_to_folder).parse
+      Parser.parse_format(path_to_file) do |file|
+        Presentation.new(unpacked_folder: file.path_to_folder).parse
       end
     end
   end
