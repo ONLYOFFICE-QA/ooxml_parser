@@ -8,7 +8,7 @@ module OoxmlParser
     # Parse Document properties
     # @return [DocumentProperties]
     def parse
-      properties_file = "#{OOXMLDocumentObject.path_to_folder}docProps/app.xml"
+      properties_file = "#{root_object.unpacked_folder}docProps/app.xml"
       unless File.exist?(properties_file)
         warn "There is no 'docProps/app.xml' in docx. It may be some problem with it"
         return self

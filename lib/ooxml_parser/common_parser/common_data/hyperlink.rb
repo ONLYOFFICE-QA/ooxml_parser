@@ -46,7 +46,7 @@ module OoxmlParser
           @url = Coordinates.new.parse_string(value.value)
         when 'id'
           @id = value.value
-          @url = OOXMLDocumentObject.get_link_from_rels(@id) unless @id.empty?
+          @url = root_object.get_link_from_rels(@id) unless @id.empty?
         when 'tooltip'
           @tooltip = value.value
         when 'ref'
@@ -80,7 +80,7 @@ module OoxmlParser
       else
         if meaningful_id?
           @action = :external_link
-          @url = OOXMLDocumentObject.get_link_from_rels(@id)
+          @url = root_object.get_link_from_rels(@id)
         end
       end
       self
@@ -98,7 +98,7 @@ module OoxmlParser
     def parse_url_for_slide_link
       return unless meaningful_id?
 
-      @url = OOXMLDocumentObject.get_link_from_rels(@id).scan(/\d+/).join.to_i
+      @url = root_object.get_link_from_rels(@id).scan(/\d+/).join.to_i
     end
   end
 end

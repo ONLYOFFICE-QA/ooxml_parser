@@ -9,8 +9,8 @@ module OoxmlParser
 
     def initialize(params = {})
       @comments_array = []
-      @file = params.fetch(:file, "#{OOXMLDocumentObject.path_to_folder}word/comments.xml")
       super(parent: params[:parent])
+      @file = params.fetch(:file, "#{root_object.unpacked_folder}word/comments.xml")
     end
 
     # @return [Comment] accessor

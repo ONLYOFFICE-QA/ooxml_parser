@@ -21,7 +21,7 @@ module OoxmlParser
     # Parse ContentTypes object
     # @return [ContentTypes] result of parsing
     def parse
-      doc = Nokogiri::XML.parse(File.open("#{OOXMLDocumentObject.path_to_folder}/[Content_Types].xml"))
+      doc = Nokogiri::XML.parse(File.open("#{root_object.unpacked_folder}/[Content_Types].xml"))
       node = doc.xpath('*').first
 
       node.xpath('*').each do |node_child|

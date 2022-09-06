@@ -82,7 +82,7 @@ module OoxmlParser
     # Parse Chart data
     # @return [Chart] result of parsing
     def parse
-      chart_xml = parse_xml(OOXMLDocumentObject.current_xml)
+      chart_xml = parse_xml(root_object.current_xml)
       chart_xml.xpath('*').each do |chart_node|
         case chart_node.name
         when 'chartSpace'
@@ -180,8 +180,8 @@ module OoxmlParser
 
     # Parse relationship of chart
     def parse_relationships
-      file_name = File.basename(OOXMLDocumentObject.current_xml)
-      relationship_file = "#{OOXMLDocumentObject.path_to_folder}" \
+      file_name = File.basename(root_object.current_xml)
+      relationship_file = "#{root_object.unpacked_folder}" \
                           '/word/charts/' \
                           "_rels/#{file_name}.rels"
 
@@ -198,7 +198,7 @@ module OoxmlParser
       return if chart_relationship.empty?
 
       chart_style_file = chart_relationship.first
-      style_file = "#{OOXMLDocumentObject.path_to_folder}" \
+      style_file = "#{root_object.unpacked_folder}" \
                    "/word/charts/#{chart_style_file}"
 
       @style = ChartStyleFile.new(parent: self).parse(style_file)

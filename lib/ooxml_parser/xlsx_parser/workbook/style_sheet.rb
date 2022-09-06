@@ -32,7 +32,7 @@ module OoxmlParser
     # Parse StyleSheet object
     # @return [StyleSheet] result of parsing
     def parse
-      doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/styles.xml")
+      doc = parse_xml("#{root_object.unpacked_folder}/#{root_object.root_subfolder}/styles.xml")
       doc.root.xpath('*').each do |node_child|
         case node_child.name
         when 'numFmts'

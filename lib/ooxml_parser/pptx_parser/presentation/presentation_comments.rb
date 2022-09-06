@@ -15,7 +15,7 @@ module OoxmlParser
     # Parse PresentationComments object
     # @param file [Nokogiri::XML:Element] node to parse
     # @return [PresentationComments] result of parsing
-    def parse(file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/comments/comment1.xml")
+    def parse(file = "#{root_object.unpacked_folder}/#{root_object.root_subfolder}/comments/comment1.xml")
       return nil unless File.exist?(file)
 
       document = parse_xml(File.open(file))

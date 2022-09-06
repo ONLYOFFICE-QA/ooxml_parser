@@ -25,7 +25,7 @@ module OoxmlParser
       return self unless @resource_id
       return self if @resource_id.empty?
 
-      @path = OOXMLDocumentObject.get_link_from_rels(@resource_id)
+      @path = root_object.get_link_from_rels(@resource_id)
       if !@path || @path.empty?
         warn "Cant find path to media file by id: #{@resource_id}"
         return self
@@ -33,7 +33,7 @@ module OoxmlParser
       return self if @path == 'NULL'
       return self if @path.match?(URI::DEFAULT_PARSER.make_regexp)
 
-      full_path_to_file = OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.root_subfolder + @path.gsub('..', '')
+      full_path_to_file = root_object.unpacked_folder + root_object.root_subfolder + @path.gsub('..', '')
       if File.exist?(full_path_to_file)
         @content = if File.extname(@path) == '.xlsx'
                      parse_ole_xlsx(full_path_to_file)
@@ -52,14 +52,7 @@ module OoxmlParser
     # @param [String] full_path to file
     # @return [XLSXWorkbook]
     def parse_ole_xlsx(full_path)
-      # TODO: Fix this ugly hack with global vars
-      #   by replacing all global variables
-      stack = OOXMLDocumentObject.xmls_stack
-      dir = OOXMLDocumentObject.path_to_folder
-      result = OoxmlParser::Parser.parse(full_path)
-      OOXMLDocumentObject.xmls_stack = stack
-      OOXMLDocumentObject.path_to_folder = dir
-      result
+      OoxmlParser::XlsxParser.parse_xlsx(full_path)
     end
   end
 end

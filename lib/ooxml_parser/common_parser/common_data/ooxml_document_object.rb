@@ -49,13 +49,6 @@ module OoxmlParser
     end
 
     class << self
-      # @return [String] path to root subfolder
-      attr_accessor :root_subfolder
-      # @return [Array<String>] stack of xmls
-      attr_accessor :xmls_stack
-      # @return [String] path to root folder
-      attr_accessor :path_to_folder
-
       # Copy this file and rename to zip
       # @param path [String] path to file
       # @return [String] path to result zip
@@ -100,40 +93,6 @@ module OoxmlParser
             zip_file.extract(file, file_path) unless File.exist?(file_path)
           end
         end
-      end
-
-      # @return [String] dir to base of file
-      def dir
-        "#{OOXMLDocumentObject.path_to_folder}#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/"
-      end
-
-      # @return [String] path to current xml file
-      def current_xml
-        OOXMLDocumentObject.path_to_folder + OOXMLDocumentObject.xmls_stack.last
-      end
-
-      # Add file to parsing stack
-      # @param path [String] path of file to add to stack
-      # @return [void]
-      def add_to_xmls_stack(path)
-        OOXMLDocumentObject.xmls_stack << if path.include?('..')
-                                            "#{File.dirname(OOXMLDocumentObject.xmls_stack.last)}/#{path}"
-                                          elsif path.start_with?(OOXMLDocumentObject.root_subfolder)
-                                            path
-                                          else
-                                            OOXMLDocumentObject.root_subfolder + path
-                                          end
-      end
-
-      # Get link to file from rels file
-      # @param id [String] file to get
-      # @return [String] result
-      def get_link_from_rels(id)
-        rels_path = dir + "_rels/#{File.basename(OOXMLDocumentObject.xmls_stack.last)}.rels"
-        raise LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)
-
-        relationships = Relationships.new.parse_file(rels_path)
-        relationships.target_by_id(id)
       end
     end
   end

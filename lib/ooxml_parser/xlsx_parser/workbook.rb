@@ -109,7 +109,7 @@ module OoxmlParser
       shared_strings_target = relationships.target_by_type('sharedString')
       return if shared_strings_target.empty?
 
-      shared_string_file = "#{OOXMLDocumentObject.path_to_folder}/xl/#{shared_strings_target.first}"
+      shared_string_file = "#{root_object.unpacked_folder}/xl/#{shared_strings_target.first}"
       @shared_strings_table = SharedStringTable.new(parent: self).parse(shared_string_file)
     end
 
@@ -117,13 +117,12 @@ module OoxmlParser
     # @return [XLSXWorkbook]
     def parse
       @content_types = ContentTypes.new(parent: self).parse
-      @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}xl/_rels/workbook.xml.rels")
+      @relationships = Relationships.new(parent: self).parse_file("#{root_object.unpacked_folder}xl/_rels/workbook.xml.rels")
       parse_shared_strings
-      OOXMLDocumentObject.xmls_stack = []
-      OOXMLDocumentObject.root_subfolder = 'xl/'
-      OOXMLDocumentObject.add_to_xmls_stack('xl/workbook.xml')
-      @doc = Nokogiri::XML.parse(File.open(OOXMLDocumentObject.current_xml))
-      @theme = PresentationTheme.new.parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
+      @root_subfolder = 'xl/'
+      root_object.add_to_xmls_stack('xl/workbook.xml')
+      @doc = Nokogiri::XML.parse(File.open(root_object.current_xml))
+      @theme = PresentationTheme.new(parent: self).parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
       @style_sheet = StyleSheet.new(parent: self).parse
       @doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
         @sheets << Sheet.new(parent: self).parse(sheet)
@@ -139,7 +138,7 @@ module OoxmlParser
       parse_pivot_table
       parse_defined_names
       parse_workbook_protection
-      OOXMLDocumentObject.xmls_stack.pop
+      root_object.xmls_stack.pop
       self
     end
 

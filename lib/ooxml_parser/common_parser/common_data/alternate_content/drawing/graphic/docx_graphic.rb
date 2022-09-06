@@ -23,9 +23,9 @@ module OoxmlParser
           @data = DocxPicture.new(parent: self).parse(node_child)
         when 'chart'
           @type = :chart
-          OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(node_child.attribute('id').value)}")
+          root_object.add_to_xmls_stack("#{root_object.root_subfolder}/#{root_object.get_link_from_rels(node_child.attribute('id').value)}")
           @data = Chart.new(parent: self).parse
-          OOXMLDocumentObject.xmls_stack.pop
+          root_object.xmls_stack.pop
         when 'wgp'
           @type = :group
           @data = ShapesGrouping.new(parent: self).parse(node_child)

@@ -63,8 +63,8 @@ module OoxmlParser
         when 'cols'
           @columns = Columns.new.parse(pg_size_subnode)
         when 'headerReference', 'footerReference'
-          target = OOXMLDocumentObject.get_link_from_rels(pg_size_subnode.attribute('id').value)
-          OOXMLDocumentObject.add_to_xmls_stack("word/#{target}")
+          target = root_object.get_link_from_rels(pg_size_subnode.attribute('id').value)
+          root_object.add_to_xmls_stack("word/#{target}")
           note = Note.parse(default_paragraph: default_paragraph,
                             default_character: default_character,
                             target: target,
@@ -72,7 +72,7 @@ module OoxmlParser
                             type: File.basename(target).sub('.xml', ''),
                             parent: self)
           @notes << note
-          OOXMLDocumentObject.xmls_stack.pop
+          root_object.xmls_stack.pop
         when 'footnotePr'
           @footnote_properties = FootnoteProperties.new(parent: self).parse(pg_size_subnode)
         end
