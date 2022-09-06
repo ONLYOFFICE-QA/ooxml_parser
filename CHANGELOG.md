@@ -2,10 +2,14 @@
 
 ## master (unreleased)
 
+### New Features
+
+* New class `OoxmlFile` for base operation with file
+
 ### Changes
 
 * `PresentationTheme#parse` now an instance method
-* Remove most of class vars from `OOXMLDocumentObject`
+* Remove all class variables from `OOXMLDocumentObject`
 
 ## 0.29.0 (2022-09-05)
 

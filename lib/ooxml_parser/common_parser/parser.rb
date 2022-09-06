@@ -1,52 +1,46 @@
 # frozen_string_literal: true
 
 require_relative 'parser/encryption_checker'
+require_relative 'parser/ooxml_file'
 
 module OoxmlParser
   # Basic class for OoxmlParser
   class Parser
-    # Base method to yield parse document of any type
-    # @param path_to_file [String] file
-    # @return [CommonDocumentStructure] structure of doc
-    def self.parse_format(path_to_file)
-      return nil if EncryptionChecker.new(path_to_file).encrypted?
+    class << self
+      # Base method to yield parse document of any type
+      # @param [OoxmlFile] file with data
+      # @return [CommonDocumentStructure] structure of doc
+      def parse_format(file)
+        return nil if EncryptionChecker.new(file.path).encrypted?
 
-      path_to_zip_file = OOXMLDocumentObject.copy_file_and_rename_to_zip(path_to_file)
-      path_to_folder = path_to_zip_file.sub(File.basename(path_to_zip_file), '')
-      OOXMLDocumentObject.unzip_file(path_to_zip_file, path_to_folder)
-      model = yield(path_to_folder)
-      model.file_path = path_to_file if model
-      FileUtils.rm_rf(path_to_folder)
-      model
-    end
+        file.copy_file_and_rename_to_zip
+        file.unzip
+        model = yield(file)
+        model.file_path = file.path if model
+        FileUtils.rm_rf(file.path_to_folder)
+        model
+      end
 
-    # Base method to parse document of any type
-    # @param path_to_file [String] file
-    # @return [CommonDocumentStructure] structure of doc
-    def self.parse(path_to_file, password: nil)
-      path_to_file = OOXMLDocumentObject.decrypt_file(path_to_file, password) if password
-      Parser.parse_format(path_to_file) do |path_to_folder|
-        format = Parser.recognize_folder_format(path_to_folder)
-        case format
-        when :docx
-          DocumentStructure.new(unpacked_folder: path_to_folder).parse
-        when :xlsx
-          XLSXWorkbook.new(unpacked_folder: path_to_folder).parse
-        when :pptx
-          Presentation.new(unpacked_folder: path_to_folder).parse
-        else
-          warn "#{path_to_file} is a simple zip file without OOXML content"
+      # Base method to parse document of any type
+      # @param path_to_file [String] file
+      # @return [CommonDocumentStructure] structure of doc
+      def parse(path_to_file, password: nil)
+        file = OoxmlFile.new(path_to_file)
+        file = file.decrypt(password) if password
+        Parser.parse_format(file) do |yielded_file|
+          format = yielded_file.format_by_folders
+          case format
+          when :docx
+            DocumentStructure.new(unpacked_folder: yielded_file.path_to_folder).parse
+          when :xlsx
+            XLSXWorkbook.new(unpacked_folder: yielded_file.path_to_folder).parse
+          when :pptx
+            Presentation.new(unpacked_folder: yielded_file.path_to_folder).parse
+          else
+            warn "#{path_to_file} is a simple zip file without OOXML content"
+          end
         end
       end
-    end
-
-    # Recognize folder format
-    # @param directory [String] path to dirctory
-    # @return [Symbol] type of document
-    def self.recognize_folder_format(directory)
-      return :docx if Dir.exist?("#{directory}/word")
-      return :xlsx if Dir.exist?("#{directory}/xl")
-      return :pptx if Dir.exist?("#{directory}/ppt")
     end
   end
 end
