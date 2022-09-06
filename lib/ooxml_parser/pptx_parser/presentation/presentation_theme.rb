@@ -18,37 +18,36 @@ module OoxmlParser
     # Parse PresentationTheme
     # @param file [String] path to file to parse
     # @return [PresentationTheme] result of parsing
-    def self.parse(file)
-      OOXMLDocumentObject.theme = PresentationTheme.new
+    def parse(file)
       OOXMLDocumentObject.add_to_xmls_stack(file)
       unless File.exist?(OOXMLDocumentObject.current_xml)
         OOXMLDocumentObject.xmls_stack.pop
         return
       end
-      doc = OOXMLDocumentObject.theme.parse_xml(OOXMLDocumentObject.current_xml)
+      doc = parse_xml(OOXMLDocumentObject.current_xml)
       doc.xpath('a:theme').each do |theme_node|
-        OOXMLDocumentObject.theme.name = theme_node.attribute('name').value if theme_node.attribute('name')
+        @name = theme_node.attribute('name').value if theme_node.attribute('name')
         theme_node.xpath('a:themeElements/*').each do |theme_element_node|
           case theme_element_node.name
           when 'clrScheme'
             theme_element_node.xpath('*').each do |color_scheme_element|
-              OOXMLDocumentObject.theme.color_scheme[color_scheme_element.name.to_sym] = ThemeColor.new.parse(color_scheme_element)
+              @color_scheme[color_scheme_element.name.to_sym] = ThemeColor.new.parse(color_scheme_element)
             end
-            OOXMLDocumentObject.theme.color_scheme[:background1] = OOXMLDocumentObject.theme.color_scheme[:lt1]
-            OOXMLDocumentObject.theme.color_scheme[:background2] = OOXMLDocumentObject.theme.color_scheme[:lt2]
-            OOXMLDocumentObject.theme.color_scheme[:bg1] = OOXMLDocumentObject.theme.color_scheme[:lt1]
-            OOXMLDocumentObject.theme.color_scheme[:bg2] = OOXMLDocumentObject.theme.color_scheme[:lt2]
-            OOXMLDocumentObject.theme.color_scheme[:text1] = OOXMLDocumentObject.theme.color_scheme[:dk1]
-            OOXMLDocumentObject.theme.color_scheme[:text2] = OOXMLDocumentObject.theme.color_scheme[:dk2]
-            OOXMLDocumentObject.theme.color_scheme[:tx1] = OOXMLDocumentObject.theme.color_scheme[:dk1]
-            OOXMLDocumentObject.theme.color_scheme[:tx2] = OOXMLDocumentObject.theme.color_scheme[:dk2]
+            @color_scheme[:background1] = @color_scheme[:lt1]
+            @color_scheme[:background2] = @color_scheme[:lt2]
+            @color_scheme[:bg1] = @color_scheme[:lt1]
+            @color_scheme[:bg2] = @color_scheme[:lt2]
+            @color_scheme[:text1] = @color_scheme[:dk1]
+            @color_scheme[:text2] = @color_scheme[:dk2]
+            @color_scheme[:tx1] = @color_scheme[:dk1]
+            @color_scheme[:tx2] = @color_scheme[:dk2]
           when 'fontScheme'
-            OOXMLDocumentObject.theme.font_scheme = FontScheme.new(parent: self).parse(theme_element_node)
+            @font_scheme = FontScheme.new(parent: self).parse(theme_element_node)
           end
         end
       end
       OOXMLDocumentObject.xmls_stack.pop
-      OOXMLDocumentObject.theme
+      self
     end
   end
 end

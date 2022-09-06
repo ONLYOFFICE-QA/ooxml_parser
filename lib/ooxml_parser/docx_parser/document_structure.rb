@@ -163,7 +163,7 @@ module OoxmlParser
       @comments = []
       DocumentStructure.default_paragraph_style = DocxParagraph.new
       DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
-      @theme = PresentationTheme.parse('word/theme/theme1.xml')
+      @theme = PresentationTheme.new.parse('word/theme/theme1.xml')
       @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}word/_rels/document.xml.rels")
       parse_styles
       number = 0
