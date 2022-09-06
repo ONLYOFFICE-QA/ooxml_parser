@@ -43,11 +43,10 @@ module OoxmlParser
     # @return [Presentation] parsed presentation
     def parse
       @content_types = ContentTypes.new(parent: self).parse
-      OOXMLDocumentObject.root_subfolder = 'ppt/'
-      OOXMLDocumentObject.xmls_stack = []
-      OOXMLDocumentObject.add_to_xmls_stack('ppt/presentation.xml')
-      doc = parse_xml(OOXMLDocumentObject.current_xml)
-      @theme = PresentationTheme.new.parse('ppt/theme/theme1.xml')
+      @root_subfolder = 'ppt/'
+      root_object.add_to_xmls_stack('ppt/presentation.xml')
+      doc = parse_xml(root_object.current_xml)
+      @theme = PresentationTheme.new(parent: self).parse('ppt/theme/theme1.xml')
       @table_styles = TableStyles.new(parent: self).parse
       @comment_authors = CommentAuthors.new(parent: self).parse
       @comments = PresentationComments.new(parent: self).parse
@@ -60,13 +59,13 @@ module OoxmlParser
           presentation_node_child.xpath('p:sldId').each do |silde_id_node|
             slide_id = silde_id_node.attr('r:id')
             @slides << Slide.new(parent: self,
-                                 xml_path: "#{OOXMLDocumentObject.root_subfolder}/#{OOXMLDocumentObject.get_link_from_rels(slide_id)}")
+                                 xml_path: "#{root_object.root_subfolder}/#{root_object.get_link_from_rels(slide_id)}")
                             .parse
           end
         end
       end
-      OOXMLDocumentObject.xmls_stack.pop
-      @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}/ppt/_rels/presentation.xml.rels")
+      root_object.xmls_stack.pop
+      @relationships = Relationships.new(parent: self).parse_file("#{root_object.unpacked_folder}/ppt/_rels/presentation.xml.rels")
       parse_slide_layouts
       parse_slide_masters
       self

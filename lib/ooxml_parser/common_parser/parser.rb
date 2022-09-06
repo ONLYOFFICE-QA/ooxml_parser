@@ -12,11 +12,11 @@ module OoxmlParser
       return nil if EncryptionChecker.new(path_to_file).encrypted?
 
       path_to_zip_file = OOXMLDocumentObject.copy_file_and_rename_to_zip(path_to_file)
-      OOXMLDocumentObject.path_to_folder = path_to_zip_file.sub(File.basename(path_to_zip_file), '')
-      OOXMLDocumentObject.unzip_file(path_to_zip_file, OOXMLDocumentObject.path_to_folder)
-      model = yield
+      path_to_folder = path_to_zip_file.sub(File.basename(path_to_zip_file), '')
+      OOXMLDocumentObject.unzip_file(path_to_zip_file, path_to_folder)
+      model = yield(path_to_folder)
       model.file_path = path_to_file if model
-      FileUtils.rm_rf(OOXMLDocumentObject.path_to_folder)
+      FileUtils.rm_rf(path_to_folder)
       model
     end
 
@@ -25,15 +25,15 @@ module OoxmlParser
     # @return [CommonDocumentStructure] structure of doc
     def self.parse(path_to_file, password: nil)
       path_to_file = OOXMLDocumentObject.decrypt_file(path_to_file, password) if password
-      Parser.parse_format(path_to_file) do
-        format = Parser.recognize_folder_format
+      Parser.parse_format(path_to_file) do |path_to_folder|
+        format = Parser.recognize_folder_format(path_to_folder)
         case format
         when :docx
-          DocumentStructure.new.parse
+          DocumentStructure.new(unpacked_folder: path_to_folder).parse
         when :xlsx
-          XLSXWorkbook.new.parse
+          XLSXWorkbook.new(unpacked_folder: path_to_folder).parse
         when :pptx
-          Presentation.new.parse
+          Presentation.new(unpacked_folder: path_to_folder).parse
         else
           warn "#{path_to_file} is a simple zip file without OOXML content"
         end
@@ -43,7 +43,7 @@ module OoxmlParser
     # Recognize folder format
     # @param directory [String] path to dirctory
     # @return [Symbol] type of document
-    def self.recognize_folder_format(directory = OOXMLDocumentObject.path_to_folder)
+    def self.recognize_folder_format(directory)
       return :docx if Dir.exist?("#{directory}/word")
       return :xlsx if Dir.exist?("#{directory}/xl")
       return :pptx if Dir.exist?("#{directory}/ppt")

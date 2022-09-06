@@ -5,7 +5,7 @@ module OoxmlParser
   module SlideLayoutsHelper
     # @return [Array<String>] list of slide layouts files
     def slide_layouts_files
-      Dir["#{OOXMLDocumentObject.path_to_folder}ppt/slideLayouts/*.xml"]
+      Dir["#{root_object.unpacked_folder}ppt/slideLayouts/*.xml"]
     end
 
     private

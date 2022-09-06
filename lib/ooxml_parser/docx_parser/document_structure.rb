@@ -44,7 +44,7 @@ module OoxmlParser
     # @return [CommentsExtended] extended comments
     attr_accessor :comments_extended
 
-    def initialize
+    def initialize(params = {})
       @elements = []
       @notes = []
       @document_properties = DocumentProperties.new
@@ -158,17 +158,16 @@ module OoxmlParser
     # @return [DocumentStructure] parsed structure
     def parse
       @content_types = ContentTypes.new(parent: self).parse
-      OOXMLDocumentObject.root_subfolder = 'word/'
-      OOXMLDocumentObject.xmls_stack = []
+      @root_subfolder = 'word/'
       @comments = []
       DocumentStructure.default_paragraph_style = DocxParagraph.new
       DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
-      @theme = PresentationTheme.new.parse('word/theme/theme1.xml')
-      @relationships = Relationships.new(parent: self).parse_file("#{OOXMLDocumentObject.path_to_folder}word/_rels/document.xml.rels")
+      @theme = PresentationTheme.new(parent: self).parse('word/theme/theme1.xml')
+      @relationships = Relationships.new(parent: self).parse_file("#{root_object.unpacked_folder}word/_rels/document.xml.rels")
       parse_styles
       number = 0
-      OOXMLDocumentObject.add_to_xmls_stack('word/document.xml')
-      doc = parse_xml(OOXMLDocumentObject.current_xml)
+      root_object.add_to_xmls_stack('word/document.xml')
+      doc = parse_xml(root_object.current_xml)
       doc.search('//w:document').each do |document|
         document.xpath('w:background').each do |background|
           @background = DocumentBackground.new(parent: self).parse(background)
@@ -201,12 +200,12 @@ module OoxmlParser
           end
         end
       end
-      OOXMLDocumentObject.xmls_stack.pop
+      root_object.xmls_stack.pop
       @document_properties = DocumentProperties.new(parent: self).parse
       @comments = Comments.new(parent: self).parse
       @comments_extended = CommentsExtended.new(parent: self).parse
       @comments_document = Comments.new(parent: self,
-                                        file: "#{OOXMLDocumentObject.path_to_folder}word/#{relationships.target_by_type('commentsDocument').first}")
+                                        file: "#{root_object.unpacked_folder}word/#{relationships.target_by_type('commentsDocument').first}")
                                    .parse
       @settings = DocumentSettings.new(parent: self).parse
       self
@@ -215,7 +214,7 @@ module OoxmlParser
     # Parse default style
     # @return [void]
     def parse_default_style
-      doc = parse_xml("#{OOXMLDocumentObject.path_to_folder}word/styles.xml")
+      doc = parse_xml("#{root_object.unpacked_folder}word/styles.xml")
       doc.search('//w:style').each do |style|
         next if style.attribute('default').nil?
 
@@ -256,7 +255,7 @@ module OoxmlParser
 
     # Perform parsing styles.xml
     def parse_styles
-      file = "#{OOXMLDocumentObject.path_to_folder}/word/styles.xml"
+      file = "#{root_object.unpacked_folder}/word/styles.xml"
       DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self)
       DocumentStructure.default_table_paragraph_style = DocxParagraph.new(parent: self)
       DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)

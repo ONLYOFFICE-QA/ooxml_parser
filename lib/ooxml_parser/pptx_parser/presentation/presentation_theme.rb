@@ -9,22 +9,23 @@ module OoxmlParser
     # @return [FontScheme] font scheme
     attr_accessor :font_scheme
 
-    def initialize(name = '', color_scheme = {})
-      @name = name
-      @color_scheme = color_scheme
-      super(parent: nil)
+    def initialize(parent: nil)
+      @name = ''
+      @color_scheme = {}
+      super
     end
 
     # Parse PresentationTheme
     # @param file [String] path to file to parse
     # @return [PresentationTheme] result of parsing
     def parse(file)
-      OOXMLDocumentObject.add_to_xmls_stack(file)
-      unless File.exist?(OOXMLDocumentObject.current_xml)
-        OOXMLDocumentObject.xmls_stack.pop
+      root_object.add_to_xmls_stack(file)
+      unless File.exist?(root_object.current_xml)
+        root_object.xmls_stack.pop
         return
       end
-      doc = parse_xml(OOXMLDocumentObject.current_xml)
+      doc = parse_xml(root_object.current_xml)
+
       doc.xpath('a:theme').each do |theme_node|
         @name = theme_node.attribute('name').value if theme_node.attribute('name')
         theme_node.xpath('a:themeElements/*').each do |theme_element_node|
@@ -46,7 +47,7 @@ module OoxmlParser
           end
         end
       end
-      OOXMLDocumentObject.xmls_stack.pop
+      root_object.xmls_stack.pop
       self
     end
   end

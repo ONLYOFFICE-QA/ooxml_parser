@@ -10,7 +10,7 @@ module OoxmlParser
     # @param file [String] path to file to parse
     # @return [SlideMasterFile] result of parsing
     def parse(file)
-      OOXMLDocumentObject.add_to_xmls_stack(file.gsub(OOXMLDocumentObject.path_to_folder, ''))
+      root_object.add_to_xmls_stack(file.gsub(root_object.unpacked_folder, ''))
       doc = parse_xml(file)
       doc.xpath('p:sldMaster/*').each do |node_child|
         case node_child.name
@@ -18,7 +18,7 @@ module OoxmlParser
           @common_slide_data = CommonSlideData.new(parent: self).parse(node_child)
         end
       end
-      OOXMLDocumentObject.xmls_stack.pop
+      root_object.xmls_stack.pop
       self
     end
   end

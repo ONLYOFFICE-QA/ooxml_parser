@@ -9,7 +9,7 @@ module OoxmlParser
     # Parse Settings object
     # @return [DocumentSettings] result of parsing
     def parse
-      settings_path = "#{OOXMLDocumentObject.path_to_folder}word/settings.xml"
+      settings_path = "#{root_object.unpacked_folder}word/settings.xml"
       return nil unless File.exist?(settings_path)
 
       doc = parse_xml(settings_path)

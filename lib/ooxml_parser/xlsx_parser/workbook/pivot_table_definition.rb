@@ -55,7 +55,7 @@ module OoxmlParser
     # @param [String] file path
     # @return [PivotTableDefinition] result of parsing
     def parse(file)
-      doc = Nokogiri::XML.parse(File.open("#{OOXMLDocumentObject.path_to_folder}/#{file}"))
+      doc = Nokogiri::XML.parse(File.open("#{root_object.unpacked_folder}/#{file}"))
       node = doc.xpath('//xmlns:pivotTableDefinition').first
       node.attributes.each do |key, value|
         case key

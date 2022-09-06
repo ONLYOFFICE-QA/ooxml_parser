@@ -33,7 +33,7 @@ module OoxmlParser
     # @return [PivotCacheDefinition] pivot cache definition for current pivot cache
     def parse_pivot_cache_definition
       definition_file = root_object.relationships.target_by_id(id)
-      full_file_path = "#{OOXMLDocumentObject.path_to_folder}/xl/#{definition_file}"
+      full_file_path = "#{root_object.unpacked_folder}/xl/#{definition_file}"
       @pivot_cache_definition = PivotCacheDefinition.new(parent: root_object)
                                                     .parse(full_file_path)
     end

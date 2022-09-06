@@ -9,8 +9,8 @@ module OoxmlParser
     # @param path_to_file [String] file path
     # @return [XLSXWorkbook] result of parse
     def self.parse_xlsx(path_to_file)
-      Parser.parse_format(path_to_file) do
-        XLSXWorkbook.new.parse
+      Parser.parse_format(path_to_file) do |path_to_folder|
+        XLSXWorkbook.new(unpacked_folder: path_to_folder).parse
       end
     end
   end

@@ -43,10 +43,10 @@ module OoxmlParser
     # @param target [String] name of target
     # @return [String] path to note xml file
     def file_path(target)
-      file = "#{OOXMLDocumentObject.path_to_folder}word/#{target}"
+      file = "#{root_object.unpacked_folder}word/#{target}"
       return file if File.exist?(file)
 
-      "#{OOXMLDocumentObject.path_to_folder}#{target}" unless File.exist?(file)
+      "#{root_object.unpacked_folder}#{target}" unless File.exist?(file)
     end
   end
 end

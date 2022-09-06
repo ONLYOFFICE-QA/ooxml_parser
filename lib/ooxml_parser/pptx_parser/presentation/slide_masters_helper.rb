@@ -5,7 +5,7 @@ module OoxmlParser
   module SlideMastersHelper
     # @return [Array<String>] list of slide masters files
     def slide_masters_files
-      Dir["#{OOXMLDocumentObject.path_to_folder}ppt/slideMasters/*.xml"]
+      Dir["#{root_object.unpacked_folder}ppt/slideMasters/*.xml"]
     end
 
     private

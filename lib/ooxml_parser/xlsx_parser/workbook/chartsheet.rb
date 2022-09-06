@@ -15,8 +15,8 @@ module OoxmlParser
     # @param file [String] file to parse
     # @return [Chartsheet] result of parsing
     def parse(file)
-      OOXMLDocumentObject.add_to_xmls_stack(OOXMLDocumentObject.root_subfolder + file)
-      doc = parse_xml(OOXMLDocumentObject.current_xml)
+      root_object.add_to_xmls_stack(root_object.root_subfolder + file)
+      doc = parse_xml(root_object.current_xml)
       node = doc.xpath('//xmlns:chartsheet').first
       node.xpath('*').each do |node_child|
         case node_child.name
@@ -26,7 +26,7 @@ module OoxmlParser
           end
         end
       end
-      OOXMLDocumentObject.xmls_stack.pop
+      root_object.xmls_stack.pop
       self
     end
   end

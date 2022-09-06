@@ -61,9 +61,9 @@ module OoxmlParser
     # Perform parsing of relationships
     # @return [nil]
     def parse_relationships
-      OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/_rels/#{@xml_name}.rels")
-      @relationships = Relationships.new(parent: self).parse_file(OOXMLDocumentObject.current_xml) if File.exist?(OOXMLDocumentObject.current_xml)
-      OOXMLDocumentObject.xmls_stack.pop
+      root_object.add_to_xmls_stack("#{root_object.root_subfolder}/worksheets/_rels/#{@xml_name}.rels")
+      @relationships = Relationships.new(parent: self).parse_file(root_object.current_xml) if File.exist?(root_object.current_xml)
+      root_object.xmls_stack.pop
     end
 
     # @return [True, false] if structure contain any user data
@@ -79,7 +79,7 @@ module OoxmlParser
 
     # Parse list of drawings in file
     def parse_drawing
-      drawing_node = parse_xml(OOXMLDocumentObject.current_xml)
+      drawing_node = parse_xml(root_object.current_xml)
       drawing_node.xpath('xdr:wsDr/*').each do |drawing_node_child|
         @drawings << XlsxDrawing.new(parent: self).parse(drawing_node_child)
       end
@@ -91,8 +91,8 @@ module OoxmlParser
     def parse(path_to_xml_file)
       @xml_name = File.basename path_to_xml_file
       parse_relationships
-      OOXMLDocumentObject.add_to_xmls_stack("#{OOXMLDocumentObject.root_subfolder}/worksheets/#{File.basename(path_to_xml_file)}")
-      doc = parse_xml(OOXMLDocumentObject.current_xml)
+      root_object.add_to_xmls_stack("#{root_object.root_subfolder}/worksheets/#{File.basename(path_to_xml_file)}")
+      doc = parse_xml(root_object.current_xml)
       sheet = doc.search('//xmlns:worksheet').first
       sheet.xpath('*').each do |worksheet_node_child|
         case worksheet_node_child.name
@@ -107,11 +107,11 @@ module OoxmlParser
             @merge << merge_node.attribute('ref').value.to_s
           end
         when 'drawing'
-          path_to_drawing = OOXMLDocumentObject.get_link_from_rels(worksheet_node_child.attribute('id').value)
+          path_to_drawing = root_object.get_link_from_rels(worksheet_node_child.attribute('id').value)
           unless path_to_drawing.nil?
-            OOXMLDocumentObject.add_to_xmls_stack(path_to_drawing)
+            root_object.add_to_xmls_stack(path_to_drawing)
             parse_drawing
-            OOXMLDocumentObject.xmls_stack.pop
+            root_object.xmls_stack.pop
           end
         when 'hyperlinks'
           worksheet_node_child.xpath('xmlns:hyperlink').each do |hyperlink_node|
@@ -150,7 +150,7 @@ module OoxmlParser
         end
       end
       parse_comments
-      OOXMLDocumentObject.xmls_stack.pop
+      root_object.xmls_stack.pop
       self
     end
 
@@ -175,7 +175,7 @@ module OoxmlParser
       comments_target = relationships.target_by_type('comment')
       return if comments_target.empty?
 
-      comments_file = "#{OOXMLDocumentObject.path_to_folder}/#{OOXMLDocumentObject.root_subfolder}/#{comments_target.first.gsub('..', '')}"
+      comments_file = "#{root_object.unpacked_folder}/#{root_object.root_subfolder}/#{comments_target.first.gsub('..', '')}"
       @comments = ExcelComments.new(parent: self).parse(comments_file)
     end
   end
