@@ -47,7 +47,7 @@ module OoxmlParser
       OOXMLDocumentObject.xmls_stack = []
       OOXMLDocumentObject.add_to_xmls_stack('ppt/presentation.xml')
       doc = parse_xml(OOXMLDocumentObject.current_xml)
-      @theme = PresentationTheme.parse('ppt/theme/theme1.xml')
+      @theme = PresentationTheme.new.parse('ppt/theme/theme1.xml')
       @table_styles = TableStyles.new(parent: self).parse
       @comment_authors = CommentAuthors.new(parent: self).parse
       @comments = PresentationComments.new(parent: self).parse

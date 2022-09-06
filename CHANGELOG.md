@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* `PresentationTheme#parse` now an instance method
+
 ## 0.29.0 (2022-09-05)
 
 ### Changes
