@@ -62,7 +62,7 @@ module OoxmlParser
       binary_password = password.encode('utf-16le').bytes.pack('c*').encode('binary')
       OoxmlDecrypt::EncryptedFile.decrypt_to_file(@path, binary_password, decrypted_path)
 
-      new(decrypted_path)
+      OoxmlFile.new(decrypted_path)
     end
   end
 end
