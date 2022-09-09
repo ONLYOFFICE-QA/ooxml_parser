@@ -11,6 +11,10 @@
 * `PresentationTheme#parse` now an instance method
 * Remove all class variables from `OOXMLDocumentObject`
 
+### Fixes
+
+* Fix comparing `OOXMLDocumentObject` if element has `Nokogiri::XML::Element` attribute
+
 ## 0.29.0 (2022-09-05)
 
 ### Changes
