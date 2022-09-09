@@ -39,6 +39,12 @@ describe 'document style' do
     expect(docx.document_style_by_name('Table Grid').table_properties).to be_a(OoxmlParser::TableProperties)
   end
 
+  it 'parsing same doc two times result same docs' do
+    docx1 = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/file_to_compare_to_himself.docx')
+    docx2 = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/file_to_compare_to_himself.docx')
+    expect(docx1).to eq(docx2)
+  end
+
   it 'table_style_properties_document_style' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/table_style_properties_document_style.docx')
     expect(docx.document_style_by_name('Lined').table_style_properties_list.first).to be_a(OoxmlParser::TableStyleProperties)
