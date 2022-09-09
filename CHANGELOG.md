@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.30.0 (2022-09-09)
+
 ### New Features
 
 * New class `OoxmlFile` for base operation with file
