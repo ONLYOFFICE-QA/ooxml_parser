@@ -18,7 +18,7 @@ module OoxmlParser
     def parse(file = "#{root_object.unpacked_folder}/#{root_object.root_subfolder}/commentAuthors.xml")
       return nil unless File.exist?(file)
 
-      document = parse_xml(File.open(file))
+      document = parse_xml(file)
       node = document.xpath('*').first
 
       node.xpath('*').each do |node_child|
