@@ -121,7 +121,7 @@ module OoxmlParser
       parse_shared_strings
       @root_subfolder = 'xl/'
       root_object.add_to_xmls_stack('xl/workbook.xml')
-      @doc = Nokogiri::XML.parse(File.open(root_object.current_xml))
+      @doc = parse_xml(root_object.current_xml)
       @theme = PresentationTheme.new(parent: self).parse("xl/#{link_to_theme_xml}") if link_to_theme_xml
       @style_sheet = StyleSheet.new(parent: self).parse
       @doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|

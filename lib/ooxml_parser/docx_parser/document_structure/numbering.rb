@@ -41,7 +41,7 @@ module OoxmlParser
       numbering_xml = "#{root_object.unpacked_folder}word/numbering.xml"
       return nil unless File.exist?(numbering_xml)
 
-      node = parse_xml(File.open(numbering_xml))
+      node = parse_xml(numbering_xml)
       node.xpath('w:numbering/*').each do |numbering_child_node|
         case numbering_child_node.name
         when 'abstractNum'

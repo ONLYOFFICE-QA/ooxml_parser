@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Use `OOXMLDocumentObject#parse_xml` in all cases
+
 ## 0.30.0 (2022-09-09)
 
 ### New Features
