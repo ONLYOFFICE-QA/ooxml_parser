@@ -8,6 +8,10 @@ describe OoxmlParser::Coordinates, '.parser_coordinates_range' do
     expect(coordinates.first).to eq(described_class.new(1, 'B'))
   end
 
+  it 'Coordinates.parser_coordinates_range fail with [' do
+    expect(described_class.parser_coordinates_range('Sheet1!$[$1')[0].column).not_to eq('[')
+  end
+
   it 'Coordinates.parser_coordinates_range can handle several ranges' do
     coordinates = described_class.parser_coordinates_range('Donut!A7:A7,Donut!A16:A16')
     expect(coordinates.first.first).to eq(described_class.new(7, 'A'))

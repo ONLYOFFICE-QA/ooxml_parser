@@ -3,6 +3,11 @@
 module OoxmlParser
   # Class for working with coordinates
   class Coordinates
+    # @return [Regexp] regexp for row name
+    ROW_REGEXP = /[a-z]/i.freeze
+    # @return [Regexp] regexp for column name
+    COLUMN_REGEXP = /\d/.freeze
+
     attr_accessor :row, :column, :list
 
     def initialize(row = nil, column = nil, list = nil)
@@ -30,10 +35,10 @@ module OoxmlParser
         range = arguments_string.split(':')
 
         difference = []
-        symbols_from = range.first.scan(/[a-zA-z]/).join
-        symbols_to = range.last.scan(/[a-zA-z]/).join
-        digits_from = range.first.scan(/[0-9]/).join
-        digits_to = range.last.scan(/[0-9]/).join
+        symbols_from = range.first.scan(ROW_REGEXP).join
+        symbols_to = range.last.scan(ROW_REGEXP).join
+        digits_from = range.first.scan(COLUMN_REGEXP).join
+        digits_to = range.last.scan(COLUMN_REGEXP).join
 
         difference[0] = [symbols_from, symbols_to] unless symbols_from == symbols_to
         difference[1] = [digits_from, digits_to] unless digits_from == digits_to
