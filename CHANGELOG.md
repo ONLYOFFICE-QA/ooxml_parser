@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Fixes
+
+* Fix regexp for parsing `Coordinates#parser_coordinates_range`
+
 ### Changes
 
 * Use `OOXMLDocumentObject#parse_xml` in all cases
