@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add parsing `RunProperties#ligatures`
+
 ### Fixes
 
 * Fix regexp for parsing `Coordinates#parser_coordinates_range`
