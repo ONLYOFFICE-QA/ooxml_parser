@@ -47,7 +47,7 @@ module OoxmlParser
     attr_accessor :shade
     # @return [RunStyle] run style
     attr_accessor :run_style
-    # @return [Symbol] ligatures type
+    # @return [ValuedChild] ligatures type
     attr_reader :ligatures
 
     def initialize(params = {})
@@ -127,7 +127,7 @@ module OoxmlParser
         when 'rStyle'
           @run_style = RunStyle.new(parent: self).parse(node_child)
         when 'ligatures'
-          @ligatures = node_child.attribute('val').value.to_sym
+          @ligatures = ValuedChild.new(:symbol, parent: self).parse(node_child)
         end
       end
       @font_color = DocxColorScheme.new(parent: self).parse(node)
