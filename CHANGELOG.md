@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.31.0 (2022-09-27)
+
 ### New Features
 
 * Add parsing `RunProperties#ligatures`
