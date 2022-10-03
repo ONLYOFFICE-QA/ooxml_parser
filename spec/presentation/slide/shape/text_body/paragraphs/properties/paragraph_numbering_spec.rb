@@ -14,4 +14,10 @@ describe 'My behaviour' do
     expect(pptx.slides.first.nonempty_elements.first.text_body.paragraphs[0]
                .properties.numbering.symbol).to eq('•')
   end
+
+  it 'image.pptx' do
+    pptx = OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide/shape/text_body/paragraphs/properties/numbering/image.pptx')
+    expect(pptx.slides.first.nonempty_elements.first.text_body.paragraphs[0]
+               .properties.numbering.image.file_reference.resource_id).to eq('rId2')
+  end
 end

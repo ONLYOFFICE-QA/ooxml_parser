@@ -4,6 +4,7 @@ require_relative 'workbook/chartsheet'
 require_relative 'workbook/pivot_cache'
 require_relative 'workbook/pivot_table_definition'
 require_relative 'workbook/defined_name'
+require_relative 'workbook/workbook_properties'
 require_relative 'workbook/workbook_protection'
 require_relative 'workbook/shared_string_table'
 require_relative 'workbook/style_sheet'
@@ -31,6 +32,8 @@ module OoxmlParser
     attr_accessor :pivot_table_definitions
     # @return [Array<DefinedName>] list of defined names
     attr_reader :defined_names
+    # @return [WorkbookProperties] workbook properties
+    attr_reader :workbook_properties
     # @return [WorkbookProtection] protection of workbook structure
     attr_reader :workbook_protection
 
@@ -137,6 +140,7 @@ module OoxmlParser
       parse_pivot_cache
       parse_pivot_table
       parse_defined_names
+      parse_workbook_properties
       parse_workbook_protection
       root_object.xmls_stack.pop
       self
@@ -168,6 +172,14 @@ module OoxmlParser
       @doc.xpath('xmlns:workbook/xmlns:definedNames/xmlns:definedName').each do |defined_name|
         @defined_names << DefinedName.new(parent: self).parse(defined_name)
       end
+    end
+
+    # Perform parsing of workbook properties
+    def parse_workbook_properties
+      workbook_properties = @doc.search('//xmlns:workbookPr').first
+      return nil unless workbook_properties
+
+      @workbook_properties = WorkbookProperties.new(parent: self).parse(workbook_properties)
     end
 
     # Perform parsing of workbook protection
