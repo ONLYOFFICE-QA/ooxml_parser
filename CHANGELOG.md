@@ -2,6 +2,11 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add parsing `WorkbookProperties`
+* Add parsing `NumberingProperties#image`
+
 ## 0.31.0 (2022-09-27)
 
 ### New Features

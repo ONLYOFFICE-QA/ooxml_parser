@@ -3,7 +3,7 @@
 module OoxmlParser
   # Class for parsing `numPr` tags
   class NumberingProperties < OOXMLDocumentObject
-    attr_accessor :size, :font, :symbol, :start_at, :type, :ilvl, :numbering_properties
+    attr_accessor :size, :font, :symbol, :start_at, :type, :image, :ilvl, :numbering_properties
 
     def initialize(ilvl = 0, parent: nil)
       @ilvl = ilvl

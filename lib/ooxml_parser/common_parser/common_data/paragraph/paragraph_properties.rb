@@ -6,6 +6,7 @@ require_relative 'paragrpah_properties/paragraph_spacing'
 require_relative 'paragrpah_properties/paragraph_stlye_ref'
 require_relative 'paragrpah_properties/spacing'
 require_relative 'paragrpah_properties/tabs'
+require_relative 'paragrpah_properties/bullet_image'
 module OoxmlParser
   # Class for data for ParagraphProperties
   class ParagraphProperties < OOXMLDocumentObject
@@ -74,6 +75,8 @@ module OoxmlParser
           @numbering.font = node_child.attribute('typeface').value
         when 'buChar'
           @numbering.symbol = node_child.attribute('char').value
+        when 'buBlip'
+          @numbering.image = BulletImage.new(parent: self).parse(node_child)
         when 'buAutoNum'
           @numbering.type = node_child.attribute('type').value.to_sym
           @numbering.start_at = node_child.attribute('startAt').value if node_child.attribute('startAt')
