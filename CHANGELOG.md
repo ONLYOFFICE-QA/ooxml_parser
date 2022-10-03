@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.32.0 (2022-10-03)
+
 ### New Features
 
 * Add parsing `WorkbookProperties`
