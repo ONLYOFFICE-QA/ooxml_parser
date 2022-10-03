@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'paragrpah_properties/numbering_properties'
-require_relative 'paragrpah_properties/paragraph_borders'
-require_relative 'paragrpah_properties/paragraph_spacing'
-require_relative 'paragrpah_properties/paragraph_stlye_ref'
-require_relative 'paragrpah_properties/spacing'
-require_relative 'paragrpah_properties/tabs'
-require_relative 'paragrpah_properties/bullet_image'
+require_relative 'paragraph_properties/numbering_properties'
+require_relative 'paragraph_properties/paragraph_borders'
+require_relative 'paragraph_properties/paragraph_spacing'
+require_relative 'paragraph_properties/paragraph_style_ref'
+require_relative 'paragraph_properties/spacing'
+require_relative 'paragraph_properties/tabs'
+require_relative 'paragraph_properties/bullet_image'
 module OoxmlParser
   # Class for data for ParagraphProperties
   class ParagraphProperties < OOXMLDocumentObject
