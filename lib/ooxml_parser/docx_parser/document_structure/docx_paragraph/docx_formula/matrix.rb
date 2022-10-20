@@ -22,7 +22,7 @@ module OoxmlParser
           mcs.xpath('m:mc').each do |mc|
             mc.xpath('m:mcPr').each do |mc_pr|
               mc_pr.xpath('m:count').each do |count|
-                columns_count = count.attribute('val').value.to_i
+                columns_count = count.attribute('m:val').value.to_i
               end
             end
           end

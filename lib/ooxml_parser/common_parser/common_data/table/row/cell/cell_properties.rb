@@ -38,15 +38,15 @@ module OoxmlParser
         when 'vMerge'
           @vertical_merge = ValuedChild.new(:symbol, parent: self).parse(node_child)
         when 'vAlign'
-          @vertical_align = node_child.attribute('val').value.to_sym
+          @vertical_align = node_child.attribute('w:val').value.to_sym
         when 'gridSpan'
           @grid_span = GridSpan.new(parent: self).parse(node_child)
         when 'tcW'
-          @table_cell_width = OoxmlSize.new(node_child.attribute('w').value.to_f)
+          @table_cell_width = OoxmlSize.new(node_child.attribute('w:w').value.to_f)
         when 'tcMar'
           @table_cell_margin = TableMargins.new(parent: self).parse(node_child)
         when 'textDirection'
-          @text_direction = value_to_symbol(node_child.attribute('val'))
+          @text_direction = value_to_symbol(node_child.attribute('w:val'))
         when 'noWrap'
           @no_wrap = option_enabled?(node_child)
         when 'shd'

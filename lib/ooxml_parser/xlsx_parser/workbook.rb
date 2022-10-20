@@ -129,7 +129,7 @@ module OoxmlParser
       @style_sheet = StyleSheet.new(parent: self).parse
       @doc.xpath('xmlns:workbook/xmlns:sheets/xmlns:sheet').each do |sheet|
         @sheets << Sheet.new(parent: self).parse(sheet)
-        file = @relationships.target_by_id(sheet.attribute('id').value)
+        file = @relationships.target_by_id(sheet.attribute('r:id').value)
         if file.start_with?('worksheets')
           @worksheets << Worksheet.new(parent: self).parse(file)
           @worksheets.last.name = @sheets.last.name

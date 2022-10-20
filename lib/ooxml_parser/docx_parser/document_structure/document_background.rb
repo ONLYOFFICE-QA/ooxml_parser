@@ -19,7 +19,7 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [DocumentBackground] result of parsing
     def parse(node)
-      @color1 = Color.new(parent: self).parse_hex_string(node.attribute('color').value)
+      @color1 = Color.new(parent: self).parse_hex_string(node.attribute('w:color').value)
       node.xpath('v:background').each do |second_color|
         @size = second_color.attribute('targetscreensize').value.sub(',', 'x') unless second_color.attribute('targetscreensize').nil?
         second_color.xpath('*').each do |node_child|

@@ -101,7 +101,7 @@ module OoxmlParser
         when 'spacing'
           @spacing = ParagraphSpacing.new(parent: self).parse(node_child)
         when 'jc'
-          @justification = value_to_symbol(node_child.attribute('val'))
+          @justification = value_to_symbol(node_child.attribute('w:val'))
         when 'contextualSpacing'
           @contextual_spacing = option_enabled?(node_child)
         end

@@ -23,7 +23,7 @@ module OoxmlParser
           @data = DocxPicture.new(parent: self).parse(node_child)
         when 'chart'
           @type = :chart
-          root_object.add_to_xmls_stack("#{root_object.root_subfolder}/#{root_object.get_link_from_rels(node_child.attribute('id').value)}")
+          root_object.add_to_xmls_stack("#{root_object.root_subfolder}/#{root_object.get_link_from_rels(node_child.attribute('r:id').value)}")
           @data = Chart.new(parent: self).parse
           root_object.xmls_stack.pop
         when 'wgp'

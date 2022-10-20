@@ -20,7 +20,7 @@ module OoxmlParser
           node_child.xpath('*').each do |node_child_child|
             case node_child_child.name
             when 'pos'
-              @position = node_child_child.attribute('val').value.to_sym
+              @position = node_child_child.attribute('m:val').value.to_sym
             end
           end
         end

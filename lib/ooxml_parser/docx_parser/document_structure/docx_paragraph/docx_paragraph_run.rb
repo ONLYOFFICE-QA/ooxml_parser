@@ -103,7 +103,7 @@ module OoxmlParser
             @text = '*PAGE NUMBER*'
           end
         when 'fldChar'
-          @fld_char = node_child.attribute('fldCharType').value.to_sym
+          @fld_char = node_child.attribute('w:fldCharType').value.to_sym
         when 't'
           @text += node_child.text
         when 'noBreakHyphen'

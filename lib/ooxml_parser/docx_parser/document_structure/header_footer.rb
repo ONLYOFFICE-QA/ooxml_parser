@@ -45,11 +45,11 @@ module OoxmlParser
     # @param [Nokogiri::XML:Node] node with HeaderFooter
     # @return [HeaderFooter] result of parsing
     def parse(node)
-      @id = node.attribute('id').value.to_i
+      @id = node.attribute('w:id').value.to_i
       parse_type(node)
       doc = parse_xml(root_object.unpacked_folder + xml_path)
       doc.search(xpath_for_search).each do |footnote|
-        next unless footnote.attribute('id').value.to_i == @id
+        next unless footnote.attribute('w:id').value.to_i == @id
 
         paragraph_number = 0
         footnote.xpath('w:p').each do |paragraph|

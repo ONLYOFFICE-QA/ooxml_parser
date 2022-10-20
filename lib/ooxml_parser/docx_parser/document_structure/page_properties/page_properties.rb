@@ -47,15 +47,15 @@ module OoxmlParser
           end
           @page_borders = page_borders
         when 'type'
-          @type = pg_size_subnode.attribute('val').value
+          @type = pg_size_subnode.attribute('w:val').value
         when 'pgMar'
           @margins = PageMargins.new(parent: self).parse(pg_size_subnode)
         when 'pgNumType'
           @num_type = pg_size_subnode.attribute('fmt').value unless pg_size_subnode.attribute('fmt').nil?
         when 'formProt'
-          @form_prot = pg_size_subnode.attribute('val').value
+          @form_prot = pg_size_subnode.attribute('w:val').value
         when 'textDirection'
-          @text_direction = pg_size_subnode.attribute('val').value
+          @text_direction = pg_size_subnode.attribute('w:val').value
         when 'docGrid'
           @document_grid = DocumentGrid.new(parent: self).parse(pg_size_subnode)
         when 'titlePg'
@@ -63,12 +63,12 @@ module OoxmlParser
         when 'cols'
           @columns = Columns.new.parse(pg_size_subnode)
         when 'headerReference', 'footerReference'
-          target = root_object.get_link_from_rels(pg_size_subnode.attribute('id').value)
+          target = root_object.get_link_from_rels(pg_size_subnode.attribute('r:id').value)
           root_object.add_to_xmls_stack("word/#{target}")
           note = Note.parse(default_paragraph: default_paragraph,
                             default_character: default_character,
                             target: target,
-                            assigned_to: pg_size_subnode.attribute('type').value,
+                            assigned_to: pg_size_subnode.attribute('w:type').value,
                             type: File.basename(target).sub('.xml', ''),
                             parent: self)
           @notes << note
