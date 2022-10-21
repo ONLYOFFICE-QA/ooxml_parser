@@ -16,7 +16,7 @@ module OoxmlParser
 
     # @return [AbstractNumbering] AbstractNumbering of current properties
     def abstruct_numbering
-      root_object.numbering.properties_by_num_id(@numbering_properties)
+      root_object.numbering.properties_by_num_id(numbering_properties)
     end
 
     # Parse NumberingProperties
@@ -36,7 +36,7 @@ module OoxmlParser
 
     # @return [Integer] numbering properties
     def numbering_properties
-      @num_id_object.value
+      @num_id.value
     end
 
     # @return [Integer] i-level value
