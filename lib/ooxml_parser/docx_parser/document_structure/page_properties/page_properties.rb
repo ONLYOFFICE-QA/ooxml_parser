@@ -68,7 +68,7 @@ module OoxmlParser
           note = Note.parse(default_paragraph: default_paragraph,
                             default_character: default_character,
                             target: target,
-                            assigned_to: pg_size_subnode.attribute('w:type').value,
+                            assigned_to: pg_size_subnode.attribute('type').value,
                             type: File.basename(target).sub('.xml', ''),
                             parent: self)
           @notes << note
