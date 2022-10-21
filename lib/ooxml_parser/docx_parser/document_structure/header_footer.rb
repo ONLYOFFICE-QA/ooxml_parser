@@ -48,7 +48,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'id'
-          @id = value.to_s
+          @id = value.value.to_i
         end
       end
       parse_type(node)
