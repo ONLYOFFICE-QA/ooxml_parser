@@ -3,7 +3,9 @@
 module OoxmlParser
   # Class for parsing `numPr` tags
   class NumberingProperties < OOXMLDocumentObject
-    attr_accessor :size, :font, :symbol, :start_at, :type, :image, :ilvl, :numbering_properties
+    attr_accessor :size, :font, :symbol, :start_at, :type, :image, :ilvl
+    # @return [ValuedChild] numbering id
+    attr_reader :num_id
 
     def initialize(ilvl = 0, parent: nil)
       @ilvl = ilvl
@@ -24,10 +26,15 @@ module OoxmlParser
         when 'ilvl'
           @ilvl = node_child.attribute('val').value.to_i
         when 'numId'
-          @numbering_properties = node_child.attribute('val').value.to_i
+          @num_id = ValuedChild.new(:integer, parent: self).parse(node_child)
         end
       end
       self
+    end
+
+    # @return [Integer] numbering properties
+    def numbering_properties
+      @num_id_object.value
     end
 
     # @return [AbstractNumbering] level list of current numbering
