@@ -46,7 +46,8 @@ module OoxmlParser
         when 'tcMar'
           @table_cell_margin = TableMargins.new(parent: self).parse(node_child)
         when 'textDirection'
-          @text_direction = value_to_symbol(node_child.attribute('val'))
+          @text_direction_object = ValuedChild.new(:string, parent: self).parse(node_child)
+          @text_direction = value_to_symbol(@text_direction_object)
         when 'noWrap'
           @no_wrap = option_enabled?(node_child)
         when 'shd'

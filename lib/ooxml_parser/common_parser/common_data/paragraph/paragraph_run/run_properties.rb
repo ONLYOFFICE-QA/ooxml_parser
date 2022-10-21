@@ -111,7 +111,8 @@ module OoxmlParser
         when 'u'
           @font_style.underlined = Underline.new(:single)
         when 'vertAlign'
-          @vertical_align = node_child.attribute('val').value.to_sym
+          @vertical_align_object = ValuedChild.new(:symbol, parent: self).parse(node_child)
+          @vertical_align = @vertical_align_object.value
         when 'rFont'
           @font_name = node_child.attribute('val').value
         when 'rFonts'
