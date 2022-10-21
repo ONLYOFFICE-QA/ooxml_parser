@@ -15,11 +15,11 @@ module OoxmlParser
           node_child.xpath('*').each do |node_child_child|
             case node_child_child.name
             when 'chr'
-              @symbol = node_child_child.attribute('m:val').value
+              @symbol = node_child_child.attribute('val').value
             when 'pos'
-              @position = node_child_child.attribute('m:val').value
+              @position = node_child_child.attribute('val').value
             when 'vertJc'
-              @vertical_align = node_child_child.attribute('m:val').value
+              @vertical_align = node_child_child.attribute('val').value
             end
           end
         end
