@@ -4,7 +4,7 @@ require_relative 'grid_span'
 module OoxmlParser
   # Class for parsing 'w:tcPr' element
   class CellProperties < OOXMLDocumentObject
-    attr_accessor :fill, :color, :borders, :text_direction, :anchor, :table_cell_width, :borders_properties, :vertical_align
+    attr_accessor :fill, :color, :borders, :text_direction, :anchor, :table_cell_width, :borders_properties
     # @return [GridSpan] data about grid span
     attr_accessor :grid_span
     # @return [TableMargins] margins
@@ -22,6 +22,8 @@ module OoxmlParser
     # width is set to auto or pct, then the content of the cell will not wrap.
     # > ECMA-376, 3rd Edition (June, 2011), Fundamentals and Markup Language Reference 17.4.30.
     attr_accessor :no_wrap
+    # @return [ValuedChild] vertical align type
+    attr_reader :vertical_align_object
 
     alias table_cell_borders borders_properties
 
@@ -38,7 +40,7 @@ module OoxmlParser
         when 'vMerge'
           @vertical_merge = ValuedChild.new(:symbol, parent: self).parse(node_child)
         when 'vAlign'
-          @vertical_align = node_child.attribute('val').value.to_sym
+          @vertical_align_object = ValuedChild.new(:symbol, parent: self).parse(node_child)
         when 'gridSpan'
           @grid_span = GridSpan.new(parent: self).parse(node_child)
         when 'tcW'
@@ -85,6 +87,11 @@ module OoxmlParser
         end
       end
       self
+    end
+
+    # @return [Symbol] vertical align of cell
+    def vertical_align
+      @vertical_align_object.value
     end
   end
 end
