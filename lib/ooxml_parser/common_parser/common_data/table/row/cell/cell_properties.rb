@@ -42,7 +42,7 @@ module OoxmlParser
         when 'gridSpan'
           @grid_span = GridSpan.new(parent: self).parse(node_child)
         when 'tcW'
-          @table_cell_width = OoxmlSize.new(node_child.attribute('w').value.to_f)
+          @table_cell_width = OoxmlSize.new.parse(node_child)
         when 'tcMar'
           @table_cell_margin = TableMargins.new(parent: self).parse(node_child)
         when 'textDirection'

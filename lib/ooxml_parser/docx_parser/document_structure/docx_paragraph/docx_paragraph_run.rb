@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'docx_paragraph_run/docx_paragraph_run_helpers'
+require_relative 'docx_paragraph_run/field_char'
 require_relative 'docx_paragraph_run/instruction_text'
 require_relative 'docx_paragraph_run/object'
 require_relative 'docx_paragraph_run/text_outline'
@@ -103,7 +104,8 @@ module OoxmlParser
             @text = '*PAGE NUMBER*'
           end
         when 'fldChar'
-          @fld_char = node_child.attribute('fldCharType').value.to_sym
+          @field_char_object = FieldChar.new(parent: self).parse(node_child)
+          @fld_char = @field_char_object.type
         when 't'
           @text += node_child.text
         when 'noBreakHyphen'
