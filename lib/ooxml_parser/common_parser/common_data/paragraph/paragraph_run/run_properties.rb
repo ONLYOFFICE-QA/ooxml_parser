@@ -145,8 +145,8 @@ module OoxmlParser
 
     # @return [String] name of font
     def font_name
-      return @font_name if @font_name
-      return @run_fonts.ascii unless @run_fonts.ascii.empty?
+      return @font_name unless @font_name.empty?
+      return @run_fonts.ascii if @run_fonts
 
       root_object.default_font_typeface
     end
