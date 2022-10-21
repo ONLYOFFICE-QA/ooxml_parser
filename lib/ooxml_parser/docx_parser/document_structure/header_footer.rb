@@ -45,7 +45,12 @@ module OoxmlParser
     # @param [Nokogiri::XML:Node] node with HeaderFooter
     # @return [HeaderFooter] result of parsing
     def parse(node)
-      @id = node.attribute('id').value.to_i
+      node.attributes.each do |key, value|
+        case key
+        when 'id'
+          @id = value.to_s
+        end
+      end
       parse_type(node)
       doc = parse_xml(root_object.unpacked_folder + xml_path)
       doc.search(xpath_for_search).each do |footnote|
