@@ -56,6 +56,7 @@ module OoxmlParser
     # @param password [String] password to file
     # @return [OoxmlFile] path to decrypted file
     def decrypt(password)
+      check_decryption_support
       file_name = File.basename(@path)
       tmp_folder = Dir.mktmpdir('ruby-ooxml-parser')
       decrypted_path = "#{tmp_folder}/#{file_name}"
@@ -63,6 +64,15 @@ module OoxmlParser
       OoxmlDecrypt::EncryptedFile.decrypt_to_file(@path, binary_password, decrypted_path)
 
       OoxmlFile.new(decrypted_path)
+    end
+
+    private
+
+    # Check if file can be decrypted
+    # @return [Boolean] is file encrypted
+    def check_decryption_support
+      # Because of https://github.com/woodbusy/ooxml_decrypt/issues/6
+      raise NotImplementedError, 'Cannot decrypt file on `jruby` platform' if RUBY_PLATFORM == 'java'
     end
   end
 end
