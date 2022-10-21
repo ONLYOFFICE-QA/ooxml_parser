@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'graphic_frame/chart_reference'
+
 module OoxmlParser
   # Class for parsing `graphicFrame`
   class GraphicFrame < OOXMLDocumentObject
@@ -30,7 +32,8 @@ module OoxmlParser
                 when 'tbl'
                   graphic_data << Table.new(parent: self).parse(graphic_node_child)
                 when 'chart'
-                  root_object.add_to_xmls_stack(root_object.get_link_from_rels(graphic_node_child.attribute('id').value))
+                  @chart_reference = ChartReference.new(parent: self).parse(graphic_node_child)
+                  root_object.add_to_xmls_stack(root_object.get_link_from_rels(@chart_reference.id))
                   graphic_data << Chart.new(parent: self).parse
                   root_object.xmls_stack.pop
                 when 'oleObj'
