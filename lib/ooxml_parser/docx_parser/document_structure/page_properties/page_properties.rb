@@ -63,7 +63,7 @@ module OoxmlParser
         when 'cols'
           @columns = Columns.new.parse(pg_size_subnode)
         when 'headerReference', 'footerReference'
-          target = root_object.get_link_from_rels(pg_size_subnode.attribute('r:id').value)
+          target = root_object.get_link_from_rels(pg_size_subnode.attribute('id').value)
           root_object.add_to_xmls_stack("word/#{target}")
           note = Note.parse(default_paragraph: default_paragraph,
                             default_character: default_character,

@@ -107,7 +107,7 @@ module OoxmlParser
             @merge << merge_node.attribute('ref').value.to_s
           end
         when 'drawing'
-          path_to_drawing = root_object.get_link_from_rels(worksheet_node_child.attribute('r:id').value)
+          path_to_drawing = root_object.get_link_from_rels(worksheet_node_child.attribute('id').value)
           unless path_to_drawing.nil?
             root_object.add_to_xmls_stack(path_to_drawing)
             parse_drawing

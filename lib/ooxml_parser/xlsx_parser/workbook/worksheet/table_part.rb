@@ -19,7 +19,7 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [TablePart] result of parsing
     def parse(node)
-      link_to_table_part_xml = root_object.get_link_from_rels(node.attribute('r:id').value)
+      link_to_table_part_xml = root_object.get_link_from_rels(node.attribute('id').value)
       doc = parse_xml(root_object.unpacked_folder + link_to_table_part_xml.gsub('..', 'xl'))
       table_node = doc.xpath('xmlns:table').first
       table_node.attributes.each do |key, value|
