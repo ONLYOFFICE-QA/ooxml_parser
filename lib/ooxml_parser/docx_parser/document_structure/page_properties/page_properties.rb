@@ -47,15 +47,15 @@ module OoxmlParser
           end
           @page_borders = page_borders
         when 'type'
-          @type = pg_size_subnode.attribute('w:val').value
+          @type = pg_size_subnode.attribute('val').value
         when 'pgMar'
           @margins = PageMargins.new(parent: self).parse(pg_size_subnode)
         when 'pgNumType'
           @num_type = pg_size_subnode.attribute('fmt').value unless pg_size_subnode.attribute('fmt').nil?
         when 'formProt'
-          @form_prot = pg_size_subnode.attribute('w:val').value
+          @form_prot = pg_size_subnode.attribute('val').value
         when 'textDirection'
-          @text_direction = pg_size_subnode.attribute('w:val').value
+          @text_direction = pg_size_subnode.attribute('val').value
         when 'docGrid'
           @document_grid = DocumentGrid.new(parent: self).parse(pg_size_subnode)
         when 'titlePg'

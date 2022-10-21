@@ -39,13 +39,13 @@ module OoxmlParser
       margin_node.xpath('*').each do |cell_margin_node|
         case cell_margin_node.name
         when 'left'
-          @left = OoxmlSize.new(cell_margin_node.attribute('w:w').value.to_f)
+          @left = OoxmlSize.new(cell_margin_node.attribute('w').value.to_f)
         when 'top'
-          @top = OoxmlSize.new(cell_margin_node.attribute('w:w').value.to_f)
+          @top = OoxmlSize.new(cell_margin_node.attribute('w').value.to_f)
         when 'right'
-          @right = OoxmlSize.new(cell_margin_node.attribute('w:w').value.to_f)
+          @right = OoxmlSize.new(cell_margin_node.attribute('w').value.to_f)
         when 'bottom'
-          @bottom = OoxmlSize.new(cell_margin_node.attribute('w:w').value.to_f)
+          @bottom = OoxmlSize.new(cell_margin_node.attribute('w').value.to_f)
         end
       end
       self

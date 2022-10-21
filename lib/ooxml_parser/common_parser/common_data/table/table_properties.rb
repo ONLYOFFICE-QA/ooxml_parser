@@ -59,7 +59,7 @@ module OoxmlParser
         when 'tblW'
           @table_width = OoxmlSize.new.parse(node_child)
         when 'jc'
-          @jc = node_child.attribute('w:val').text.to_sym
+          @jc = node_child.attribute('val').text.to_sym
         when 'shd'
           @shade = Shade.new(parent: self).parse(node_child)
         when 'solidFill'
@@ -67,7 +67,7 @@ module OoxmlParser
         when 'tblLook'
           @table_look = TableLook.new(parent: self).parse(node_child)
         when 'tblInd'
-          @table_indent = OoxmlSize.new(node_child.attribute('w:w').text.to_f)
+          @table_indent = OoxmlSize.new(node_child.attribute('w').text.to_f)
         when 'tblpPr'
           @table_positon = TablePosition.new(parent: self).parse(node_child)
         when 'tblCellMar'

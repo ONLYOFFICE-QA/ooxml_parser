@@ -74,11 +74,11 @@ module OoxmlParser
       node.xpath('*').each do |subnode|
         case subnode.name
         when 'name'
-          @name = subnode.attribute('w:val').value
+          @name = subnode.attribute('val').value
         when 'basedOn'
-          @based_on = subnode.attribute('w:val').value
+          @based_on = subnode.attribute('val').value
         when 'next'
-          @next_style = subnode.attribute('w:val').value
+          @next_style = subnode.attribute('val').value
         when 'rPr'
           @run_properties_node = subnode
           @run_properties = DocxParagraphRun.new(parent: self).parse_properties(@run_properties_node)

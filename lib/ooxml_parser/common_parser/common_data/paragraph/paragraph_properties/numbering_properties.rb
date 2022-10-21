@@ -22,9 +22,9 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'ilvl'
-          @ilvl = node_child.attribute('w:val').value.to_i
+          @ilvl = node_child.attribute('val').value.to_i
         when 'numId'
-          @numbering_properties = node_child.attribute('w:val').value.to_i
+          @numbering_properties = node_child.attribute('val').value.to_i
         end
       end
       self
