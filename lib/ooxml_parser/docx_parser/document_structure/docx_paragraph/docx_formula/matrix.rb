@@ -22,7 +22,8 @@ module OoxmlParser
           mcs.xpath('m:mc').each do |mc|
             mc.xpath('m:mcPr').each do |mc_pr|
               mc_pr.xpath('m:count').each do |count|
-                columns_count = count.attribute('val').value.to_i
+                count_object = ValuedChild.new(:integer, parent: self).parse(count)
+                columns_count = count_object.value
               end
             end
           end
