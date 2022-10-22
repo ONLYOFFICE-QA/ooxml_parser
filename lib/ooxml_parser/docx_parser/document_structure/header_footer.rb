@@ -54,7 +54,14 @@ module OoxmlParser
       parse_type(node)
       doc = parse_xml(root_object.unpacked_folder + xml_path)
       doc.search(xpath_for_search).each do |footnote|
-        next unless footnote.attribute('id').value.to_i == @id
+        footnote_id = nil
+        footnote.attributes.each do |key, value|
+          case key
+          when 'id'
+            footnote_id = value.value.to_i
+          end
+        end
+        next unless footnote_id == @id
 
         paragraph_number = 0
         footnote.xpath('w:p').each do |paragraph|
