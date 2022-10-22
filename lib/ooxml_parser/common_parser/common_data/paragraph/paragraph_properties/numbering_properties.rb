@@ -41,9 +41,7 @@ module OoxmlParser
 
     # @return [Integer] i-level value
     def ilvl
-      return @i_level.value if @i_level
-
-      @ilvl
+      @i_level.value
     end
 
     # @return [AbstractNumbering] level list of current numbering
