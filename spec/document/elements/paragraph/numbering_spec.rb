@@ -58,4 +58,9 @@ describe OoxmlParser::Numbering do
     docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_suffix.docx')
     expect(docx.element_by_description.first.numbering.ilvl).to eq(0)
   end
+
+  it 'numbering ilvl is an integer non-default' do
+    docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_font_name.docx')
+    expect(docx.elements[1].numbering.ilvl).to eq(1)
+  end
 end
