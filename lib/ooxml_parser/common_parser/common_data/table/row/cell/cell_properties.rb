@@ -89,8 +89,10 @@ module OoxmlParser
       self
     end
 
-    # @return [Symbol] vertical align of cell
+    # @return [nil, Symbol] vertical align of cell
     def vertical_align
+      return nil unless @vertical_align_object
+
       @vertical_align_object.value
     end
   end
