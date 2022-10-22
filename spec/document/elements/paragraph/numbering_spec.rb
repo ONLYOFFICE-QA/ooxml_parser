@@ -3,6 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::Numbering do
+  let(:numbering_font) { OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_font_name.docx') }
+
   it 'numbering.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering.docx')
     expect(docx.elements.first.numbering).to be_an_instance_of OoxmlParser::NumberingProperties
@@ -17,8 +19,7 @@ describe OoxmlParser::Numbering do
   end
 
   it 'numbering_font_name.docx' do
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering_font_name.docx')
-    expect(docx.elements[0].numbering.abstruct_numbering
+    expect(numbering_font.elements[0].numbering.abstruct_numbering
                .level_list.first.run_properties.font_name).to eq('Symbol')
   end
 
@@ -60,7 +61,6 @@ describe OoxmlParser::Numbering do
   end
 
   it 'numbering ilvl is an integer non-default' do
-    docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_font_name.docx')
-    expect(docx.elements[1].numbering.ilvl).to eq(1)
+    expect(numbering_font.elements[1].numbering.ilvl).to eq(1)
   end
 end
