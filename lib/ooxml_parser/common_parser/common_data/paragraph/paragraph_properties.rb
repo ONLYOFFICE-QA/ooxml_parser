@@ -104,7 +104,8 @@ module OoxmlParser
           @justification_object = ValuedChild.new(:string, parent: self).parse(node_child)
           @justification = value_to_symbol(@justification_object)
         when 'contextualSpacing'
-          @contextual_spacing = option_enabled?(node_child)
+          contextual_spacing_object = ValuedChild.new(:boolean, parent: self).parse(node_child)
+          @contextual_spacing = contextual_spacing_object.value
         end
       end
       self
