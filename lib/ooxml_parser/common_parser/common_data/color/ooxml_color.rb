@@ -11,6 +11,8 @@ module OoxmlParser
     attr_reader :theme_shade
     # @return [Integer] theme index
     attr_reader :theme
+    # @return [Float] theme tint
+    attr_reader :theme_tint
     # @return [Float] tint
     attr_reader :tint
     # @return [Float] Indexed id
@@ -58,6 +60,8 @@ module OoxmlParser
           @indexed = value.value.to_i
         when 'rgb'
           @rgb = Color.new.parse_hex_string(value.value)
+        when 'themeTint'
+          @theme_tint = value.value.hex.to_f
         end
       end
       self

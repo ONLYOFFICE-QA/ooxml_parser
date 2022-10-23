@@ -78,6 +78,7 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [nil]
     def parse_color_tag(node)
+      color = OoxmlColor.new(parent: self).parse(node)
       node.attributes.sort.to_h.each do |key, value|
         case key
         when 'val'
@@ -85,6 +86,7 @@ module OoxmlParser
         when 'themeColor'
           self.font_color = root_object.theme.color_scheme[value.value.to_sym].color.dup if root_object.theme && root_object.theme.color_scheme[value.value.to_sym]
         when 'themeShade'
+          self.font_color = color.value if font_color.none?
           font_color.calculate_with_shade!(value.value.hex.to_f / 255.0)
         when 'themeTint'
           font_color.calculate_with_tint!(1.0 - (value.value.hex.to_f / 255.0))

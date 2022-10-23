@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add `OoxmlColor#theme_tint`
+
 ### Changes
 
 * Refactor parsing Run color (remove strange line)
