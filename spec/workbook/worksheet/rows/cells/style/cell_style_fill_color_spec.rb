@@ -35,6 +35,6 @@ describe 'My behaviour' do
 
   it 'fill_color_nil' do
     xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/rows/cells/style/fill_color/fill_color_nil.xlsx')
-    expect(xlsx.worksheets.first.rows[10].cells[4].style.fill_color).to be_nil
+    expect(xlsx.worksheets.first.rows[10].cells[3].style.fill_color).to be_nil
   end
 end

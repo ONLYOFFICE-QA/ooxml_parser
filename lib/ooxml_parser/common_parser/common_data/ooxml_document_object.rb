@@ -40,6 +40,15 @@ module OoxmlParser
       true
     end
 
+    # @param [String] value to check
+    # @return [True, False] value of attribute
+    def boolean_attribute_value(value)
+      return true if value == '1'
+      return true if value == 'true'
+
+      false
+    end
+
     # @return [Nokogiri::XML::Document] result of parsing xml via nokogiri
     def parse_xml(xml_path)
       xml = Nokogiri::XML(File.open(xml_path), &:strict)

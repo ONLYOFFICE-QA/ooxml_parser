@@ -93,15 +93,15 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'applyFont'
-          @apply_font = attribute_enabled?(value)
+          @apply_font = boolean_attribute_value(value.value)
         when 'applyBorder'
-          @apply_border = attribute_enabled?(value)
+          @apply_border = boolean_attribute_value(value.value)
         when 'applyFill'
-          @apply_fill = attribute_enabled?(value)
+          @apply_fill = boolean_attribute_value(value.value)
         when 'applyNumberFormat'
-          @apply_number_format = attribute_enabled?(value)
+          @apply_number_format = boolean_attribute_value(value.value)
         when 'applyAlignment'
-          @apply_alignment = attribute_enabled?(value)
+          @apply_alignment = boolean_attribute_value(value.value)
         when 'fontId'
           @font_id = value.value.to_i
         when 'borderId'
