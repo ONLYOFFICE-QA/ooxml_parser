@@ -40,13 +40,13 @@ module OoxmlParser
       true
     end
 
-    # @param [String] value to check
+    # @param [String, Nokogiri::XML:Attribute] value to check
     # @return [True, False] value of attribute
     def boolean_attribute_value(value)
-      return true if value == '1'
-      return true if value == 'true'
-      return false if value == '0'
-      return false if value == 'false'
+      return true if value.to_s == '1'
+      return true if value.to_s == 'true'
+      return false if value.to_s == '0'
+      return false if value.to_s == 'false'
 
       false
     end
