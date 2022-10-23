@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* Refactor parsing Run color (remove strange line)
+
 ## 0.32.0 (2022-10-03)
 
 ### New Features

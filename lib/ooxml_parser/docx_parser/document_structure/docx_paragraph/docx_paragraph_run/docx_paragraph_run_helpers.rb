@@ -78,16 +78,12 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [nil]
     def parse_color_tag(node)
-      node.attributes.each do |key, value|
+      node.attributes.sort.to_h.each do |key, value|
         case key
         when 'val'
           self.font_color = Color.new(parent: self).parse_hex_string(value.value)
         when 'themeColor'
-          if root_object.theme && root_object.theme.color_scheme[value.value.to_sym]
-            break if value.value == 'text2' || value.value == 'background2' || value.value.include?('accent') # Don't know why. Just works
-
-            self.font_color = root_object.theme.color_scheme[value.value.to_sym].color.dup
-          end
+          self.font_color = root_object.theme.color_scheme[value.value.to_sym].color.dup if root_object.theme && root_object.theme.color_scheme[value.value.to_sym]
         when 'themeShade'
           font_color.calculate_with_shade!(value.value.hex.to_f / 255.0)
         when 'themeTint'
