@@ -36,7 +36,8 @@ module OoxmlParser
         when 'num'
           @count = value.value.to_i
         when 'sep'
-          @separator = option_enabled?(node, 'sep')
+          separator_value = value.value.to_s
+          @separator = (separator_value == 'true') || (separator_value == '1')
         when 'equalWidth'
           @equal_width = option_enabled?(node, 'equalWidth')
         when 'space'
