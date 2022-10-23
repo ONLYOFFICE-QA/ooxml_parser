@@ -105,13 +105,13 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [nil]
     def parse_underline(node)
-      underline_object = ValuedChild.new(:string, parent: self).parse(node)
+      underline_object = Underline.new.parse(node)
       font_style.underlined = Underline.new
 
-      return unless option_enabled?(node)
+      return unless underline_object.value
 
       font_style.underlined.style = underline_object.value
-      font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(node.attribute('color').value) unless node.attribute('color').nil?
+      font_style.underlined.color = underline_object.color if underline_object.color
     end
   end
 end
