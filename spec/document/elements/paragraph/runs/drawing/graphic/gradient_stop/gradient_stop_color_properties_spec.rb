@@ -24,4 +24,11 @@ describe 'Gradient Stop color properties' do
                .data.properties.fill_color.value
                .gradient_stops[0].color.properties.tint).to eq(0.2)
   end
+
+  it 'color properties have alpha' do
+    docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/runs/alternate_content/office2010_content/graphic/series/chart_series_no_values.docx')
+    expect(docx.elements[3].character_style_array[18].drawings[0]
+               .graphic.data.shape_properties.fill_color.value
+               .gradient_stops[0].color.properties.alpha).to eq(100)
+  end
 end
