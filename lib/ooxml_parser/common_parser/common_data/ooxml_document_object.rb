@@ -47,8 +47,6 @@ module OoxmlParser
       return true if value.to_s == 'true'
       return false if value.to_s == '0'
       return false if value.to_s == 'false'
-
-      false
     end
 
     # @return [Nokogiri::XML::Document] result of parsing xml via nokogiri
