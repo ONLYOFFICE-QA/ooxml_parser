@@ -8,7 +8,6 @@ module OoxmlParser
     attr_accessor :element
 
     def initialize(parent: nil)
-      @default_position = :bottom
       super
     end
 
@@ -33,9 +32,7 @@ module OoxmlParser
 
     # @return [Symbol] position of bar
     def position
-      return @position_object.value if @position_object
-
-      @default_position
+      @position_object.value
     end
   end
 end
