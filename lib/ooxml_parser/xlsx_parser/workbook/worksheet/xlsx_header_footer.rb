@@ -32,13 +32,13 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'alignWithMargins'
-          @align_with_margins = attribute_enabled?(value)
+          @align_with_margins = boolean_attribute_value(value)
         when 'differentFirst'
-          @different_first = attribute_enabled?(value)
+          @different_first = boolean_attribute_value(value)
         when 'differentOddEven'
-          @different_odd_even = attribute_enabled?(value)
+          @different_odd_even = boolean_attribute_value(value)
         when 'scaleWithDoc'
-          @scale_with_document = attribute_enabled?(value)
+          @scale_with_document = boolean_attribute_value(value)
         end
 
         node.xpath('*').each do |node_child|

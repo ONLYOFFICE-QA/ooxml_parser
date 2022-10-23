@@ -39,9 +39,9 @@ module OoxmlParser
         when 'customWidth'
           @custom_width = option_enabled?(node, 'customWidth')
         when 'bestFit'
-          @best_fit = attribute_enabled?(value)
+          @best_fit = boolean_attribute_value(value)
         when 'hidden'
-          @hidden = attribute_enabled?(value)
+          @hidden = boolean_attribute_value(value)
         end
       end
       self
