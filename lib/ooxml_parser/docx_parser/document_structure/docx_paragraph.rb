@@ -209,7 +209,7 @@ module OoxmlParser
           @numbering = NumberingProperties.new(parent: self).parse(node_child)
         when 'jc'
           @justification_object = ValuedChild.new(:string, parent: self).parse(node_child)
-          @align = @justification_object.value.to_sym unless node_child.attribute('val').nil?
+          @align = @justification_object.value.to_sym unless @justification_object.value.nil?
           @align = :justify if @justification_object.value == 'both'
         when 'spacing'
           @valued_spacing = ParagraphSpacing.new(parent: self).parse(node_child)
