@@ -21,9 +21,9 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'locked'
-          @locked = boolean_attribute_value(value.value)
+          @locked = boolean_attribute_value(value)
         when 'hidden'
-          @hidden = boolean_attribute_value(value.value)
+          @hidden = boolean_attribute_value(value)
         end
       end
       self

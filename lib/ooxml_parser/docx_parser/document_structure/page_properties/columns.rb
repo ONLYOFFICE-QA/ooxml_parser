@@ -36,9 +36,9 @@ module OoxmlParser
         when 'num'
           @count = value.value.to_i
         when 'sep'
-          @separator = boolean_attribute_value(value.value)
+          @separator = boolean_attribute_value(value)
         when 'equalWidth'
-          @equal_width = boolean_attribute_value(value.value)
+          @equal_width = boolean_attribute_value(value)
         when 'space'
           @space = OoxmlSize.new(value.value.to_f)
         end
