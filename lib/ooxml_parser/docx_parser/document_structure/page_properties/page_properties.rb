@@ -56,9 +56,11 @@ module OoxmlParser
         when 'pgNumType'
           @num_type = pg_size_subnode.attribute('fmt').value unless pg_size_subnode.attribute('fmt').nil?
         when 'formProt'
-          @form_prot = pg_size_subnode.attribute('val').value
+          form_prot_object = ValuedChild.new(:string, parent: self).parse(pg_size_subnode)
+          @form_prot = form_prot_object.value
         when 'textDirection'
-          @text_direction = pg_size_subnode.attribute('val').value
+          text_directon_object = ValuedChild.new(:string, parent: self).parse(pg_size_subnode)
+          @text_direction = text_directon_object.value
         when 'docGrid'
           @document_grid = DocumentGrid.new(parent: self).parse(pg_size_subnode)
         when 'titlePg'
