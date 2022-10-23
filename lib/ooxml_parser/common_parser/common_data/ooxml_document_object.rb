@@ -45,9 +45,21 @@ module OoxmlParser
       xml = Nokogiri::XML(File.open(xml_path), &:strict)
       unless xml.errors.empty?
         raise NokogiriParsingException,
-              "Nokogiri found errors in file: #{xml_path}. Errors: #{xml.errors}"
+              parse_error_message(xml_path, xml.errors)
       end
       xml
+    rescue  Nokogiri::XML::SyntaxError => e
+      raise NokogiriParsingException,
+            parse_error_message(xml_path, e)
+    end
+
+    private
+
+    # @param [String] xml_path path to xml
+    # @param [String] errors errors
+    # @return [String] error string
+    def parse_error_message(xml_path, errors)
+      "Nokogiri found errors in file: #{xml_path}. Errors: #{errors}"
     end
   end
 end
