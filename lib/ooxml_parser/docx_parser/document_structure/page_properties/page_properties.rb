@@ -7,6 +7,7 @@ require_relative 'page_margins'
 require_relative 'columns'
 require_relative 'note'
 require_relative 'page_properties/header_footer_reference'
+require_relative 'page_properties/page_borders'
 
 module OoxmlParser
   # Class for data of PageProperties
@@ -32,9 +33,10 @@ module OoxmlParser
         when 'pgSz'
           @size = PageSize.new.parse(pg_size_subnode)
         when 'pgBorders'
+          page_borders_object = PageBorders.new(parent: self).parse(pg_size_subnode)
           page_borders = Borders.new
-          page_borders.display = pg_size_subnode.attribute('display').value.to_sym unless pg_size_subnode.attribute('display').nil?
-          page_borders.offset_from = pg_size_subnode.attribute('offsetFrom').value.to_sym unless pg_size_subnode.attribute('offsetFrom').nil?
+          page_borders.display = page_borders_object.display if page_borders_object.display
+          page_borders.offset_from = page_borders_object.offset_from if page_borders_object.offset_from
           pg_size_subnode.xpath('w:bottom').each do |bottom|
             page_borders.bottom = BordersProperties.new(parent: page_borders).parse(bottom)
           end
