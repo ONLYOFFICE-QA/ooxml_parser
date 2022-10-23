@@ -19,11 +19,18 @@ describe 'font_color' do
     expect(docx.elements.last.character_style_array.first.font_color).to eq(OoxmlParser::Color.new(197, 216, 240))
   end
 
-  it 'copied_paragrph_with_color_2' do
-    pending('Color problems. I cannot solve it')
-    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/font_color/copied_paragrph_with_color_2.docx')
-    expect(docx.elements.first.character_style_array.first.font_color).to eq(OoxmlParser::Color.new(191, 191, 191))
-    expect(docx.elements.last.character_style_array.first.font_color).to eq(OoxmlParser::Color.new(95, 73, 122))
+  describe 'copied_paragraph' do
+    let(:docx) { OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/font_color/copied_paragrph_with_color_2.docx') }
+
+    it 'copied paragraph with color 2 first paragraph' do
+      pending('Color problems. I cannot solve it')
+      expect(docx.elements.first.character_style_array.first.font_color).to eq(OoxmlParser::Color.new(191, 191, 191))
+    end
+
+    it 'copied paragraph with color 2 last paragraph' do
+      pending('Color problems. I cannot solve it')
+      expect(docx.elements.last.character_style_array.first.font_color).to eq(OoxmlParser::Color.new(95, 73, 122))
+    end
   end
 
   it 'Font color 1' do

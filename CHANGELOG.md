@@ -2,6 +2,14 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add `OoxmlColor#theme_tint`
+
+### Changes
+
+* Refactor parsing Run color (remove strange line)
+
 ## 0.32.0 (2022-10-03)
 
 ### New Features
