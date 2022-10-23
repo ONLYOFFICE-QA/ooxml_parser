@@ -76,7 +76,6 @@ describe 'formula' do
       expect(docx.elements.first.nonempty_runs.first).to be_a(OoxmlParser::DocxFormula)
     end
 
-
     it 'matrix.docx' do
       docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/formula/types/matrix.docx')
       expect(docx.elements.first.nonempty_runs.first).to be_a(OoxmlParser::DocxFormula)
