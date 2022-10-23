@@ -39,7 +39,8 @@ module OoxmlParser
           separator_value = value.value.to_s
           @separator = (separator_value == 'true') || (separator_value == '1')
         when 'equalWidth'
-          @equal_width = option_enabled?(node, 'equalWidth')
+          equal_width_value = value.value.to_s
+          @equal_width = (equal_width_value == 'true') || (equal_width_value == '1')
         when 'space'
           @space = OoxmlSize.new(value.value.to_f)
         end
