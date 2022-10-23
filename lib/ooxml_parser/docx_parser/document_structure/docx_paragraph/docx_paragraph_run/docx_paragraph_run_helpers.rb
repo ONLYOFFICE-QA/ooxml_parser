@@ -11,14 +11,14 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'rFonts'
+          run_fonts = RunFonts.new(parent: self).parse(node_child)
           node_child.attributes.each do |font_attribute, value|
             case font_attribute
             when 'asciiTheme'
-              theme = node_child.attribute('asciiTheme').value
               next unless root_object.theme
 
-              self.font = root_object.theme.font_scheme.major_font.latin.typeface if theme.include?('major')
-              self.font = root_object.theme.font_scheme.minor_font.latin.typeface if theme.include?('minor')
+              self.font = root_object.theme.font_scheme.major_font.latin.typeface if run_fonts.ascii_theme.include?('major')
+              self.font = root_object.theme.font_scheme.minor_font.latin.typeface if run_fonts.ascii_theme.include?('minor')
             when 'ascii'
               self.font = value.value
               break
