@@ -11,6 +11,6 @@ describe 'Formula Accent' do
   end
 
   it 'accent formula have correct symbol' do
-    expect(accent.symbol).to eq("̇")
+    expect(accent.symbol).to eq('̇')
   end
 end
