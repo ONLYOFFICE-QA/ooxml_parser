@@ -16,4 +16,12 @@ describe 'Gradient Stop color properties' do
   it 'color properties have luminance_offset' do
     expect(color_properties.luminance_offset).to eq(0.4)
   end
+
+  it 'color properties have tint' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/drawing/properties/colors/shape_gradient_color.docx')
+    expect(docx.elements.first.character_style_array[0]
+               .alternate_content.office2010_content.graphic
+               .data.properties.fill_color.value
+               .gradient_stops[0].color.properties.tint).to eq(0.2)
+  end
 end
