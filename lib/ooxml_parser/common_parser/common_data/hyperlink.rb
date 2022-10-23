@@ -3,6 +3,8 @@
 module OoxmlParser
   # Class for parsing `hlinkClick`, `hyperlink` tags
   class Hyperlink < OOXMLDocumentObject
+    # @return [String] anchor value
+    attr_reader :anchor
     # @return [OOXMLDocumentObject] url of hyperlink
     attr_accessor :url
     # @return [String] tooltip value
@@ -42,6 +44,8 @@ module OoxmlParser
     def parse(node)
       node.attributes.each do |key, value|
         case key
+        when 'anchor'
+          @anchor = value.value
         when 'location'
           @url = Coordinates.new.parse_string(value.value)
         when 'id'

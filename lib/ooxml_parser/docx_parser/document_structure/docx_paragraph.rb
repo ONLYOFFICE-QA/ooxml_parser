@@ -147,10 +147,10 @@ module OoxmlParser
           @hyperlink = Hyperlink.new(parent: self).parse(node_child)
           character_style = default_character_style.dup
           character_style.parent = self
-          if node_child.attribute('id')
+          if @hyperlink.id
             character_style.link = Hyperlink.new(parent: character_style).parse(node_child)
-          elsif node_child.attribute('anchor')
-            character_style.link = node_child.attribute('anchor').value
+          elsif @hyperlink.anchor
+            character_style.link = @hyperlink.anchor
           end
           node_child.xpath('w:r').each do |r_tag|
             character_style.parse(r_tag, char_number, parent: self)
