@@ -21,6 +21,7 @@
 
 * Refactor parsing Run color (remove strange line)
 * Remove `spec` folder from coverage reports
+* Fix inccorect attributes type for `Location`
 
 ## 0.32.0 (2022-10-03)
 

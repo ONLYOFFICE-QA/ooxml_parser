@@ -5,11 +5,11 @@ module OoxmlParser
   class Location < OOXMLDocumentObject
     # @return [String] ref of location
     attr_reader :ref
-    # @return [True, False] first header row
+    # @return [Integer] first header row
     attr_reader :first_header_row
-    # @return [True, False] first data row
+    # @return [Integer] first data row
     attr_reader :first_data_row
-    # @return [True, False] first data column
+    # @return [Integer] first data column
     attr_reader :first_data_column
 
     # Parse `<location>` tag
@@ -21,11 +21,11 @@ module OoxmlParser
         when 'ref'
           @ref = value.value.to_s
         when 'firstHeaderRow'
-          @first_header_row = attribute_enabled?(value)
+          @first_header_row = value.value.to_i
         when 'firstDataRow'
-          @first_data_row = attribute_enabled?(value)
+          @first_data_row = value.value.to_i
         when 'firstDataCol'
-          @first_data_column = attribute_enabled?(value)
+          @first_data_column = value.value.to_i
         end
       end
       self
