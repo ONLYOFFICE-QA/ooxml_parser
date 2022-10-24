@@ -9,6 +9,7 @@
 ### Changes
 
 * Refactor parsing Run color (remove strange line)
+* Remove `spec` folder from coverage reports
 
 ## 0.32.0 (2022-10-03)
 
