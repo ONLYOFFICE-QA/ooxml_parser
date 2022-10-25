@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.33.0 (2022-10-25)
+
 ### New Features
 
 * Add parsing `ComboBox`
