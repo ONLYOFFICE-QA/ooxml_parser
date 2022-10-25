@@ -9,7 +9,7 @@ describe OoxmlParser::FormTextFormat do
     expect(docxf.elements.first.sdt.properties.form_text_properties.format.type).to eq(:mask)
   end
 
-  it 'Has width_rule' do
+  it 'Has value' do
     expect(docxf.elements.first.sdt.properties.form_text_properties.format.value).to eq('(999)999-9999')
   end
 
