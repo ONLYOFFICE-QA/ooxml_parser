@@ -4,6 +4,11 @@
 
 ### New Features
 
+* Add parsing `ComboBox`
+* Add parsing `DropdownList`
+* Add parsing `CheckBox`
+* Add parsing `FormProperties`
+* Add parsing `FormTextProperties`
 * Add `OoxmlColor#theme_tint`
 
 ### Changes
