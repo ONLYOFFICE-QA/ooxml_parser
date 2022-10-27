@@ -47,7 +47,8 @@ module OoxmlParser
           end
           @page_borders = page_borders
         when 'type'
-          @type = pg_size_subnode.attribute('val').value
+          @type_object = ValuedChild.new(:string, parent: self).parse(pg_size_subnode)
+          @type = @type_object.value
         when 'pgMar'
           @margins = PageMargins.new(parent: self).parse(pg_size_subnode)
         when 'pgNumType'

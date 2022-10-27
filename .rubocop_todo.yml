@@ -9,9 +9,9 @@
 # Offense count: 128
 # Configuration parameters: AllowedMethods, AllowedPatterns, IgnoredMethods, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 99
+  Max: 100
 
-# Offense count: 27
+# Offense count: 28
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods, inherit_mode.
 # AllowedMethods: refine
 Metrics/BlockLength:

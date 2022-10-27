@@ -8,6 +8,8 @@ require_relative 'graphic/docx_graphic'
 module OoxmlParser
   # Class for parsing `graphic` tags
   class DocxDrawing < OOXMLDocumentObject
+    # @return [String] id of drawing
+    attr_reader :id
     attr_accessor :type, :properties, :graphic
     # @return [DocProperties] doc properties
     attr_accessor :doc_properties
@@ -23,6 +25,13 @@ module OoxmlParser
     # @param [Nokogiri::XML:Node] node with NumberingProperties
     # @return [DocxDrawing] result of parsing
     def parse(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'id'
+          @id = value.value.to_s
+        end
+      end
+
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'anchor'

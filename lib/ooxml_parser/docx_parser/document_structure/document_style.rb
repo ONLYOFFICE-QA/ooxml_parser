@@ -74,11 +74,14 @@ module OoxmlParser
       node.xpath('*').each do |subnode|
         case subnode.name
         when 'name'
-          @name = subnode.attribute('val').value
+          @name_object = ValuedChild.new(:string, parent: self).parse(subnode)
+          @name = @name_object.value
         when 'basedOn'
-          @based_on = subnode.attribute('val').value
+          @based_on_object = ValuedChild.new(:string, parent: self).parse(subnode)
+          @based_on = @based_on_object.value
         when 'next'
-          @next_style = subnode.attribute('val').value
+          @next_style_object = ValuedChild.new(:string, parent: self).parse(subnode)
+          @next_style = @next_style_object.value
         when 'rPr'
           @run_properties_node = subnode
           @run_properties = DocxParagraphRun.new(parent: self).parse_properties(@run_properties_node)

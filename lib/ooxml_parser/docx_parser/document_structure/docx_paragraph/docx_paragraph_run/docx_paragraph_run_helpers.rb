@@ -25,7 +25,8 @@ module OoxmlParser
             end
           end
         when 'sz'
-          self.size = node_child.attribute('val').value.to_i / 2.0
+          @size_object = ValuedChild.new(:integer, parent: self).parse(node_child)
+          self.size = @size_object.value.to_i / 2.0
         when 'highlight'
           self.highlight = node_child.attribute('val').value
         when 'vertAlign'
@@ -33,11 +34,13 @@ module OoxmlParser
         when 'effect'
           self.effect = node_child.attribute('val').value
         when 'position'
-          self.position = (node_child.attribute('val').value.to_f / (28.0 + (1.0 / 3.0)) / 2.0).round(1)
+          @position_object = ValuedChild.new(:integer, parent: self).parse(node_child)
+          self.position = (@position_object.value.to_f / (28.0 + (1.0 / 3.0)) / 2.0).round(1)
         when 'em'
           self.em = node_child.attribute('val').value
         when 'spacing'
-          self.spacing = (node_child.attribute('val').value.to_f / 566.9).round(1)
+          @spacing_object = RunSpacing.new(parent: self).parse(node_child)
+          self.spacing = (@spacing_object.value.value.to_f / 566.9).round(1)
         when 'textFill'
           self.text_fill = TextFill.new(parent: self).parse(node_child)
         when 'textOutline'
