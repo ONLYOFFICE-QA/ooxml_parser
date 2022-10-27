@@ -11,6 +11,7 @@ module OoxmlParser
       # @param [OoxmlFile] file with data
       # @return [CommonDocumentStructure] structure of doc
       def parse_format(file)
+        puts "Start parsing #{file}"
         return nil if EncryptionChecker.new(file.path).encrypted?
 
         file.copy_file_and_rename_to_zip
