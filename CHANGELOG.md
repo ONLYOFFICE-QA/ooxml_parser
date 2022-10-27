@@ -6,6 +6,10 @@
 
 * Add support of `jruby-9.3`
 
+### Changes
+
+* Fix incorrect attributes type for `Location`
+
 ## 0.33.0 (2022-10-25)
 
 ### New Features
@@ -21,7 +25,6 @@
 
 * Refactor parsing Run color (remove strange line)
 * Remove `spec` folder from coverage reports
-* Fix inccorect attributes type for `Location`
 
 ## 0.32.0 (2022-10-03)
 
