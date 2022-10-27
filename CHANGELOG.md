@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* Add support of `jruby-9.3`
+
 ## 0.33.0 (2022-10-25)
 
 ### New Features
