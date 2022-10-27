@@ -203,7 +203,8 @@ module OoxmlParser
         end
         case color_model_node.name
         when 'srgbClr'
-          color = Color.new.parse_hex_string(color_model_node.attribute('val').value)
+          valued_child = ValuedChild.new(:string, parent: self).parse(color_model_node)
+          color = Color.new.parse_hex_string(valued_child.value)
           color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
         when 'schemeClr'
           color = Color.new(parent: self).parse_scheme_color(color_model_node)

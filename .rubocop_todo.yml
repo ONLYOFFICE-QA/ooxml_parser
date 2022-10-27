@@ -25,7 +25,7 @@ Metrics/BlockNesting:
 # Offense count: 11
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
-  Max: 218
+  Max: 219
 
 # Offense count: 102
 # Configuration parameters: AllowedMethods, AllowedPatterns, IgnoredMethods.
@@ -81,7 +81,7 @@ Style/OptionalBooleanParameter:
     - 'lib/ooxml_parser/common_parser/common_data/font_style.rb'
     - 'lib/ooxml_parser/common_parser/common_data/table/margins/table_margins.rb'
 
-# Offense count: 529
+# Offense count: 533
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns, IgnoredPatterns.
 # URISchemes: http, https

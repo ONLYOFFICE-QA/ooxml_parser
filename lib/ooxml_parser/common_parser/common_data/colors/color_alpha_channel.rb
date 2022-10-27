@@ -11,7 +11,7 @@ module OoxmlParser
       alpha_channel_node = node.xpath('w14:alpha', 'xmlns:w14' => 'http://schemas.microsoft.com/office/word/2010/wordml').first if alpha_channel_node.nil?
       return 100.0 if alpha_channel_node.nil?
 
-      node.attributes.each do |key, value|
+      alpha_channel_node.attributes.each do |key, value|
         case key
         when 'val'
           return (value.value.to_f / 1_000.0).round(0)
