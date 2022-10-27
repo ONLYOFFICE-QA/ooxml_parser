@@ -30,7 +30,7 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
       - name: Test with Rake
-        run: bundle exec parallel_rspec spec
+        run: bundle exec rspec spec
       - if: ${{ matrix.check-coverage }}
         name: Check `simplecov` line coverage
         run: cat coverage/.last_run.json | jq '.result.line' | grep -q '100'
