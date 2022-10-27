@@ -50,8 +50,6 @@ module OoxmlParser
     # @param [Nokogiri::XML:Element] node with BordersProperties
     # @return [BordersProperties] value of BordersProperties
     def parse(node)
-      return nil if node.attribute('val').value == 'nil'
-
       node.attributes.each do |key, value|
         case key
         when 'val'
@@ -67,6 +65,8 @@ module OoxmlParser
           @shadow = value.value
         end
       end
+      return nil if @val == :nil
+
       self
     end
   end

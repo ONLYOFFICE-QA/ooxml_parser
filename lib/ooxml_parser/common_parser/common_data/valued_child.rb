@@ -23,9 +23,23 @@ module OoxmlParser
           @value = value.value.to_s if type == :string
           @value = value_to_symbol(value) if type == :symbol
           @value = value.value.to_i if type == :integer
+          @value = value.value.to_f if type == :float
+          @value = parse_boolean(value.value.to_s) if type == :boolean
         end
       end
       self
+    end
+
+    private
+
+    # Handle boolean value
+    # @param [String] value to parse
+    # @return [Boolean] result
+    def parse_boolean(value)
+      return true if value == '1'
+      return true if value == 'true'
+      return false if value == '0'
+      return false if value == 'false'
     end
   end
 end

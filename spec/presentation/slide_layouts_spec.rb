@@ -19,6 +19,6 @@ describe 'My behaviour' do
 
   it 'check that excpetion is raised if slide layout file is broken' do
     expect { OoxmlParser::PptxParser.parse_pptx('spec/presentation/slide_layouts/broken_slide_layout_file.pptx') }
-      .to raise_error(OoxmlParser::NokogiriParsingException, /scene3d/)
+      .to raise_error(OoxmlParser::NokogiriParsingException, /scene3d|normAutofit/)
   end
 end

@@ -107,7 +107,8 @@ module OoxmlParser
             @merge << merge_node.attribute('ref').value.to_s
           end
         when 'drawing'
-          path_to_drawing = root_object.get_link_from_rels(worksheet_node_child.attribute('id').value)
+          @drawing = DocxDrawing.new(parent: self).parse(worksheet_node_child)
+          path_to_drawing = root_object.get_link_from_rels(@drawing.id)
           unless path_to_drawing.nil?
             root_object.add_to_xmls_stack(path_to_drawing)
             parse_drawing

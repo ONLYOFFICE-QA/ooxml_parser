@@ -40,14 +40,35 @@ module OoxmlParser
       true
     end
 
+    # @param [String, Nokogiri::XML:Attribute] value to check
+    # @return [True, False] value of attribute
+    def boolean_attribute_value(value)
+      return true if value.to_s == '1'
+      return true if value.to_s == 'true'
+      return false if value.to_s == '0'
+      return false if value.to_s == 'false'
+    end
+
     # @return [Nokogiri::XML::Document] result of parsing xml via nokogiri
     def parse_xml(xml_path)
       xml = Nokogiri::XML(File.open(xml_path), &:strict)
       unless xml.errors.empty?
         raise NokogiriParsingException,
-              "Nokogiri found errors in file: #{xml_path}. Errors: #{xml.errors}"
+              parse_error_message(xml_path, xml.errors)
       end
       xml
+    rescue  Nokogiri::XML::SyntaxError => e
+      raise NokogiriParsingException,
+            parse_error_message(xml_path, e)
+    end
+
+    private
+
+    # @param [String] xml_path path to xml
+    # @param [String] errors errors
+    # @return [String] error string
+    def parse_error_message(xml_path, errors)
+      "Nokogiri found errors in file: #{xml_path}. Errors: #{errors}"
     end
   end
 end

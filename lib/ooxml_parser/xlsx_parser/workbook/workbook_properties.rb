@@ -18,7 +18,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'date1904'
-          @date1904 = attribute_enabled?(value)
+          @date1904 = boolean_attribute_value(value)
         end
       end
       self

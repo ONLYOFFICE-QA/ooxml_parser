@@ -10,7 +10,7 @@ describe OoxmlParser::CellProperties do
 
   it 'shade_nil' do
     expect { OoxmlParser::DocxParser.parse_docx('spec/document/elements/table/cell/properties/shade_nil.docx') }
-      .to raise_error(Nokogiri::XML::SyntaxError)
+      .to raise_error(OoxmlParser::NokogiriParsingException)
   end
 
   it 'table_custom_cell_margin.docx' do

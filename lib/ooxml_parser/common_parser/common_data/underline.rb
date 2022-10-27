@@ -3,7 +3,11 @@
 module OoxmlParser
   # Class for parsing `u` tags
   class Underline < OOXMLDocumentObject
-    attr_accessor :style, :color
+    attr_accessor :style
+    # @return [Color] color of underline
+    attr_accessor :color
+    # @return [Symbol] value of underline
+    attr_reader :value
 
     def initialize(style = :none, color = nil, parent: nil)
       @style = style == 'single' ? :single : style
@@ -38,6 +42,8 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [Underline] result of parsing
     def parse(node)
+      parse_attributes(node) if node.is_a?(Nokogiri::XML::Element)
+
       case node
       when 'sng'
         @style = :single
@@ -45,6 +51,21 @@ module OoxmlParser
         @style = :none
       end
       self
+    end
+
+    private
+
+    # Parse attributes
+    # @param node [Nokogiri::XML:Element] node to parse
+    def parse_attributes(node)
+      node.attributes.each do |key, value|
+        case key
+        when 'color'
+          @color = Color.new(parent: self).parse_hex_string(value.value)
+        when 'val'
+          @value = value.value.to_sym
+        end
+      end
     end
   end
 end

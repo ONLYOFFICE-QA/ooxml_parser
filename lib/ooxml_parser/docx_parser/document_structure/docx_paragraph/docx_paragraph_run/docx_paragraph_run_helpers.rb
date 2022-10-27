@@ -11,33 +11,40 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'rFonts'
+          run_fonts = RunFonts.new(parent: self).parse(node_child)
           node_child.attributes.each do |font_attribute, value|
             case font_attribute
             when 'asciiTheme'
-              theme = node_child.attribute('asciiTheme').value
               next unless root_object.theme
 
-              self.font = root_object.theme.font_scheme.major_font.latin.typeface if theme.include?('major')
-              self.font = root_object.theme.font_scheme.minor_font.latin.typeface if theme.include?('minor')
+              self.font = root_object.theme.font_scheme.major_font.latin.typeface if run_fonts.ascii_theme.include?('major')
+              self.font = root_object.theme.font_scheme.minor_font.latin.typeface if run_fonts.ascii_theme.include?('minor')
             when 'ascii'
               self.font = value.value
               break
             end
           end
         when 'sz'
-          self.size = node_child.attribute('val').value.to_i / 2.0
+          @size_object = ValuedChild.new(:integer, parent: self).parse(node_child)
+          self.size = @size_object.value.to_i / 2.0
         when 'highlight'
-          self.highlight = node_child.attribute('val').value
+          @highlight_object = ValuedChild.new(:string, parent: self).parse(node_child)
+          self.highlight = @highlight_object.value
         when 'vertAlign'
-          self.vertical_align = node_child.attribute('val').value.to_sym
+          @vertical_align_object = ValuedChild.new(:symbol, parent: self).parse(node_child)
+          self.vertical_align = @vertical_align_object.value
         when 'effect'
-          self.effect = node_child.attribute('val').value
+          @effect_object = ValuedChild.new(:string, parent: self).parse(node_child)
+          self.effect = @effect_object.value
         when 'position'
-          self.position = (node_child.attribute('val').value.to_f / (28.0 + (1.0 / 3.0)) / 2.0).round(1)
+          @position_object = ValuedChild.new(:integer, parent: self).parse(node_child)
+          self.position = (@position_object.value.to_f / (28.0 + (1.0 / 3.0)) / 2.0).round(1)
         when 'em'
-          self.em = node_child.attribute('val').value
+          @em_object = ValuedChild.new(:string, parent: self).parse(node_child)
+          self.em = @em_object.value
         when 'spacing'
-          self.spacing = (node_child.attribute('val').value.to_f / 566.9).round(1)
+          @spacing_object = RunSpacing.new(parent: self).parse(node_child)
+          self.spacing = (@spacing_object.value.value.to_f / 566.9).round(1)
         when 'textFill'
           self.text_fill = TextFill.new(parent: self).parse(node_child)
         when 'textOutline'
@@ -98,12 +105,13 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [nil]
     def parse_underline(node)
+      underline_object = Underline.new.parse(node)
       font_style.underlined = Underline.new
 
-      return unless option_enabled?(node)
+      return unless underline_object.value
 
-      font_style.underlined.style = node.attribute('val').value
-      font_style.underlined.color = Color.new(parent: font_style.underlined).parse_hex_string(node.attribute('color').value) unless node.attribute('color').nil?
+      font_style.underlined.style = underline_object.value
+      font_style.underlined.color = underline_object.color if underline_object.color
     end
   end
 end

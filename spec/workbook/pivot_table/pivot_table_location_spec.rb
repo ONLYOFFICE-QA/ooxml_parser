@@ -15,14 +15,14 @@ describe OoxmlParser::PivotTableDefinition do
   end
 
   it 'location first_header_row is correct' do
-    expect(location.first_header_row).to be(true)
+    expect(location.first_header_row).to eq(1)
   end
 
   it 'location first_data_row is correct' do
-    expect(location.first_data_row).to be(true)
+    expect(location.first_data_row).to eq(1)
   end
 
   it 'location first_data_column is correct' do
-    expect(location.first_data_column).to be(false)
+    expect(location.first_data_column).to eq(0)
   end
 end

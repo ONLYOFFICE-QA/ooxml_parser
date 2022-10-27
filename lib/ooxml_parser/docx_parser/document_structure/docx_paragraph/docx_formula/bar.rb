@@ -3,10 +3,11 @@
 module OoxmlParser
   # Class for `bar` data
   class Bar < OOXMLDocumentObject
-    attr_accessor :position, :element
+    # @return [ValuedChild] position object
+    attr_reader :position_object
+    attr_accessor :element
 
     def initialize(parent: nil)
-      @position = :bottom
       super
     end
 
@@ -20,13 +21,18 @@ module OoxmlParser
           node_child.xpath('*').each do |node_child_child|
             case node_child_child.name
             when 'pos'
-              @position = node_child_child.attribute('val').value.to_sym
+              @position_object = ValuedChild.new(:symbol, parent: self).parse(node_child_child)
             end
           end
         end
       end
       @element = DocxFormula.new(parent: self).parse(node)
       self
+    end
+
+    # @return [Symbol] position of bar
+    def position
+      @position_object.value
     end
   end
 end

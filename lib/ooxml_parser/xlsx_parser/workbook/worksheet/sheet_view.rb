@@ -32,9 +32,9 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'showGridLines'
-          @show_gridlines = attribute_enabled?(value)
+          @show_gridlines = boolean_attribute_value(value)
         when 'showRowColHeaders'
-          @show_row_column_headers = attribute_enabled?(value)
+          @show_row_column_headers = boolean_attribute_value(value)
         when 'topLeftCell'
           @top_left_cell = Coordinates.new.parse_string(value.value)
         when 'workbookViewId'

@@ -156,7 +156,8 @@ module OoxmlParser
     # @param scheme_color_node [Nokogiri::XML:Element] node to parse
     # @return [Color] result of parsing
     def parse_scheme_color(scheme_color_node)
-      color_scheme_color = root_object.theme.color_scheme[scheme_color_node.attribute('val').value.to_sym]
+      scheme_clr_object = ValuedChild.new(:symbol, parent: self).parse(scheme_color_node)
+      color_scheme_color = root_object.theme.color_scheme[scheme_clr_object.value]
       return unless color_scheme_color
 
       color = color_scheme_color.color
@@ -165,9 +166,11 @@ module OoxmlParser
       scheme_color_node.xpath('*').each do |scheme_color_node_child|
         case scheme_color_node_child.name
         when 'lumMod'
-          hls.l = hls.l * (scheme_color_node_child.attribute('val').value.to_f / 100_000.0)
+          luminance_modulation = ValuedChild.new(:float, parent: self).parse(scheme_color_node_child)
+          hls.l = hls.l * (luminance_modulation.value / 100_000.0)
         when 'lumOff'
-          hls.l = hls.l + (scheme_color_node_child.attribute('val').value.to_f / 100_000.0)
+          luminance_offset = ValuedChild.new(:float, parent: self).parse(scheme_color_node_child)
+          hls.l = hls.l + (luminance_offset.value / 100_000.0)
         end
       end
       scheme_color_node.attributes.each do |key, value|
@@ -200,7 +203,8 @@ module OoxmlParser
         end
         case color_model_node.name
         when 'srgbClr'
-          color = Color.new.parse_hex_string(color_model_node.attribute('val').value)
+          valued_child = ValuedChild.new(:string, parent: self).parse(color_model_node)
+          color = Color.new.parse_hex_string(valued_child.value)
           color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
         when 'schemeClr'
           color = Color.new(parent: self).parse_scheme_color(color_model_node)
@@ -230,7 +234,8 @@ module OoxmlParser
         color = SchemeColor.new(parent: parent)
         return ValuedChild.new(:string, parent: parent).parse(color_node) unless root_object.theme
 
-        color.value = root_object.theme.color_scheme[color_node.attribute('val').value.to_sym].color
+        scheme_clr_object = ValuedChild.new(:symbol, parent: self).parse(color_node)
+        color.value = root_object.theme.color_scheme[scheme_clr_object.value].color
         color.properties = ColorProperties.new(parent: color).parse(color_node)
         color.converted_color = Color.new(parent: self).parse_scheme_color(color_node)
         color.value.calculate_with_tint!(1.0 - color.properties.tint) if color.properties.tint

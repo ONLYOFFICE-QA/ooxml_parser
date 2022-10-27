@@ -7,6 +7,8 @@ require_relative 'table_part/table_columns'
 module OoxmlParser
   # Class for `tablePart` data
   class TablePart < OOXMLDocumentObject
+    # @return [String] id of table part
+    attr_reader :id
     attr_accessor :name, :display_name, :reference, :autofilter, :columns
     # @return [ExtensionList] list of extensions
     attr_accessor :extension_list
@@ -19,7 +21,13 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [TablePart] result of parsing
     def parse(node)
-      link_to_table_part_xml = root_object.get_link_from_rels(node.attribute('id').value)
+      node.attributes.each do |key, value|
+        case key
+        when 'id'
+          @id = value.value.to_s
+        end
+      end
+      link_to_table_part_xml = root_object.get_link_from_rels(@id)
       doc = parse_xml(root_object.unpacked_folder + link_to_table_part_xml.gsub('..', 'xl'))
       table_node = doc.xpath('xmlns:table').first
       table_node.attributes.each do |key, value|

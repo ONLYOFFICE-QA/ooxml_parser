@@ -6,6 +6,9 @@ require_relative 'page_size'
 require_relative 'page_margins'
 require_relative 'columns'
 require_relative 'note'
+require_relative 'page_properties/header_footer_reference'
+require_relative 'page_properties/page_borders'
+
 module OoxmlParser
   # Class for data of PageProperties
   class PageProperties < OOXMLDocumentObject
@@ -30,9 +33,10 @@ module OoxmlParser
         when 'pgSz'
           @size = PageSize.new.parse(pg_size_subnode)
         when 'pgBorders'
+          page_borders_object = PageBorders.new(parent: self).parse(pg_size_subnode)
           page_borders = Borders.new
-          page_borders.display = pg_size_subnode.attribute('display').value.to_sym unless pg_size_subnode.attribute('display').nil?
-          page_borders.offset_from = pg_size_subnode.attribute('offsetFrom').value.to_sym unless pg_size_subnode.attribute('offsetFrom').nil?
+          page_borders.display = page_borders_object.display if page_borders_object.display
+          page_borders.offset_from = page_borders_object.offset_from if page_borders_object.offset_from
           pg_size_subnode.xpath('w:bottom').each do |bottom|
             page_borders.bottom = BordersProperties.new(parent: page_borders).parse(bottom)
           end
@@ -47,15 +51,18 @@ module OoxmlParser
           end
           @page_borders = page_borders
         when 'type'
-          @type = pg_size_subnode.attribute('val').value
+          @type_object = ValuedChild.new(:string, parent: self).parse(pg_size_subnode)
+          @type = @type_object.value
         when 'pgMar'
           @margins = PageMargins.new(parent: self).parse(pg_size_subnode)
         when 'pgNumType'
           @num_type = pg_size_subnode.attribute('fmt').value unless pg_size_subnode.attribute('fmt').nil?
         when 'formProt'
-          @form_prot = pg_size_subnode.attribute('val').value
+          form_prot_object = ValuedChild.new(:string, parent: self).parse(pg_size_subnode)
+          @form_prot = form_prot_object.value
         when 'textDirection'
-          @text_direction = pg_size_subnode.attribute('val').value
+          text_directon_object = ValuedChild.new(:string, parent: self).parse(pg_size_subnode)
+          @text_direction = text_directon_object.value
         when 'docGrid'
           @document_grid = DocumentGrid.new(parent: self).parse(pg_size_subnode)
         when 'titlePg'
@@ -63,12 +70,13 @@ module OoxmlParser
         when 'cols'
           @columns = Columns.new.parse(pg_size_subnode)
         when 'headerReference', 'footerReference'
-          target = root_object.get_link_from_rels(pg_size_subnode.attribute('id').value)
+          reference = HeaderFooterReference.new(parent: self).parse(pg_size_subnode)
+          target = root_object.get_link_from_rels(reference.id)
           root_object.add_to_xmls_stack("word/#{target}")
           note = Note.parse(default_paragraph: default_paragraph,
                             default_character: default_character,
                             target: target,
-                            assigned_to: pg_size_subnode.attribute('type').value,
+                            assigned_to: reference.type,
                             type: File.basename(target).sub('.xml', ''),
                             parent: self)
           @notes << note

@@ -2,10 +2,12 @@
 
 require_relative 'run_properties/outline'
 require_relative 'run_properties/position'
-require_relative 'run_properties/size'
+require_relative 'run_properties/run_fonts'
 require_relative 'run_properties/run_spacing'
 require_relative 'run_properties/run_style'
 require_relative 'run_properties/shade'
+require_relative 'run_properties/size'
+
 module OoxmlParser
   # Data about `rPr` object
   class RunProperties < OOXMLDocumentObject
@@ -49,6 +51,8 @@ module OoxmlParser
     attr_accessor :run_style
     # @return [ValuedChild] ligatures type
     attr_reader :ligatures
+    # @return [RunFonts] value of RunFonts
+    attr_reader :run_fonts
 
     def initialize(params = {})
       @font_name = params.fetch(:font_name, '')
@@ -107,11 +111,12 @@ module OoxmlParser
         when 'u'
           @font_style.underlined = Underline.new(:single)
         when 'vertAlign'
-          @vertical_align = node_child.attribute('val').value.to_sym
+          @vertical_align_object = ValuedChild.new(:symbol, parent: self).parse(node_child)
+          @vertical_align = @vertical_align_object.value
         when 'rFont'
           @font_name = node_child.attribute('val').value
         when 'rFonts'
-          @font_name = node_child.attribute('ascii').value if node_child.attribute('ascii')
+          @run_fonts = RunFonts.new(parent: self).parse(node_child)
         when 'strike'
           @font_style.strike = option_enabled?(node_child)
         when 'hlinkClick'
@@ -142,6 +147,7 @@ module OoxmlParser
     # @return [String] name of font
     def font_name
       return @font_name unless @font_name.empty?
+      return @run_fonts.ascii if @run_fonts
 
       root_object.default_font_typeface
     end
