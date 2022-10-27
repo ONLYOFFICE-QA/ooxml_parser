@@ -94,6 +94,7 @@
 ### New Features
 
 * Add support of `jruby-9.3`
+* Add support of `truffleruby`
 
 ### Changes
 
