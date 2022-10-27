@@ -23,6 +23,7 @@ module OoxmlParser
           @value = value.value.to_s if type == :string
           @value = value_to_symbol(value) if type == :symbol
           @value = value.value.to_i if type == :integer
+          @value = value.value.to_f if type == :float
         end
       end
       self

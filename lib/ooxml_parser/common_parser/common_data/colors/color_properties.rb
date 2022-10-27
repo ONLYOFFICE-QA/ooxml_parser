@@ -3,14 +3,14 @@
 module OoxmlParser
   # Class for color transformations
   class ColorProperties < OOXMLDocumentObject
-    # @return [Integer] alpha value of color
-    attr_reader :alpha
-    # @return [Float] luminance modulation value
-    attr_reader :luminance_modulation
-    # @return [Float] luminance offset value
-    attr_reader :luminance_offset
-    # @return [Float] tint value
-    attr_reader :tint
+    # @return [ValuedChild] alpha value of color object
+    attr_reader :alpha_object
+    # @return [ValuedChild] luminance modulation value object
+    attr_reader :luminance_modulation_object
+    # @return [ValuedChild] luminance offset value object
+    attr_reader :luminance_offset_object
+    # @return [ValuedChild] tint value object
+    attr_reader :tint_object
 
     # Parse ColorProperties object
     # @param node [Nokogiri::XML:Element] node to parse
@@ -19,16 +19,38 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'alpha'
-          @alpha = (node_child.attribute('val').value.to_f / 1_000.0).round
+          @alpha_object = ValuedChild.new(:float, parent: self).parse(node_child)
         when 'lumMod'
-          @luminance_modulation = node_child.attribute('val').value.to_f / 100_000.0
+          @luminance_modulation_object = ValuedChild.new(:float, parent: self).parse(node_child)
         when 'lumOff'
-          @luminance_offset = node_child.attribute('val').value.to_f / 100_000.0
+          @luminance_offset_object = ValuedChild.new(:float, parent: self).parse(node_child)
         when 'tint'
-          @tint = node_child.attribute('val').value.to_f / 100_000.0
+          @tint_object = ValuedChild.new(:float, parent: self).parse(node_child)
         end
       end
       self
+    end
+
+    # @return [Integer] alpha value
+    def alpha
+      (@alpha_object.value / 1_000.0).round
+    end
+
+    # @return [Float] luminance modulation value
+    def luminance_modulation
+      @luminance_modulation_object.value / 100_000.0
+    end
+
+    # @return [Float] luminance offset value
+    def luminance_offset
+      @luminance_offset_object.value / 100_000.0
+    end
+
+    # @return [nil, Float] tint value
+    def tint
+      return nil unless @tint_object
+
+      @tint_object.value / 100_000.0
     end
   end
 end
