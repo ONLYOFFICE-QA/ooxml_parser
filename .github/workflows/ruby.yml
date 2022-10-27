@@ -8,9 +8,14 @@ jobs:
       matrix:
         ruby: ['2.6', '2.7', '3.0', '3.1', 'jruby-9.3']
         allow-failures: [false]
+        check-coverage: [true]
         include:
           - ruby: head
             allow-failures: true
+            check-coverage: true
+          - ruby: 'jruby-9.3'
+            allow-failures: false
+            check-coverage: false
     steps:
       - uses: actions/checkout@v2
       - name: Set up Ruby ${{ matrix.ruby }}
@@ -25,5 +30,6 @@ jobs:
         run: rubocop
       - name: Test with Rake
         run: bundle exec parallel_rspec spec
-      - name: Check `simplecov` line coverage
+      - if: ${{ matrix.check_coverage }}
+        name: Check `simplecov` line coverage
         run: cat coverage/.last_run.json | jq '.result.line' | grep -q '100'
