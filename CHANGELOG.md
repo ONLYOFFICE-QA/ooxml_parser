@@ -9,6 +9,7 @@
 ### Changes
 
 * Fix incorrect attributes type for `Location`
+* Move `rubocop` check in CI to `linting` config
 
 ## 0.33.0 (2022-10-25)
 
