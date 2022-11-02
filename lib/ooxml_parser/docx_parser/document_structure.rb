@@ -59,6 +59,10 @@ module OoxmlParser
       @notes = []
       @document_properties = DocumentProperties.new
       @comments = []
+      DocumentStructure.default_run_style = nil
+      DocumentStructure.default_paragraph_style = nil
+      DocumentStructure.default_table_paragraph_style = nil
+      DocumentStructure.default_table_run_style = nil
       super
     end
 
