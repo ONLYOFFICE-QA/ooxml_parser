@@ -214,43 +214,15 @@ module OoxmlParser
     # Parse default style
     # @return [void]
     def parse_default_style
-      parsed_styles_xml = parse_xml("#{root_object.unpacked_folder}/word/styles.xml")
-      parsed_styles_xml.search('//w:style').each do |style|
-        next if style.attribute('default').nil?
-
-        if (style.attribute('default').value == '1' ||
-            style.attribute('default').value == 'on' ||
-            style.attribute('default').value == 'true') &&
-           style.attribute('type').value == 'paragraph'
-          style.xpath('w:pPr').each do |paragraph_pr_tag|
-            DocumentStructure.default_paragraph_style = DocxParagraph.new.parse_paragraph_style(paragraph_pr_tag, DocumentStructure.default_run_style)
-          end
-          style.xpath('w:rPr').each do |character_pr_tag|
-            DocumentStructure.default_run_style.parse_properties(character_pr_tag)
-          end
-        elsif (style.attribute('default').value == '1' ||
-               style.attribute('default').value == 'on' ||
-               style.attribute('default').value == 'true') &&
-              style.attribute('type').value == 'character'
-          style.xpath('w:rPr').each do |character_pr_tag|
-            DocumentStructure.default_run_style.parse_properties(character_pr_tag)
-          end
-        end
+      if @styles&.default_style(:paragraph)&.paragraph_properties_node
+        DocxParagraph.new.parse_paragraph_style(@styles.default_style(:paragraph).paragraph_properties_node, DocumentStructure.default_run_style)
       end
+      DocumentStructure.default_run_style.parse_properties(@styles.default_style(:paragraph).run_properties_node) if @styles&.default_style(:paragraph)&.run_properties_node
+      DocumentStructure.default_run_style.parse_properties(@styles.default_style(:character).run_properties_node) if @styles&.default_style(:character)&.run_properties_node
       DocumentStructure.default_table_paragraph_style = DocumentStructure.default_paragraph_style.dup
       DocumentStructure.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
       DocumentStructure.default_table_run_style = DocumentStructure.default_run_style.dup
-      parsed_styles_xml.search('//w:style').each do |style|
-        next if style.attribute('default').nil?
-        next unless (style.attribute('default').value == '1' ||
-                     style.attribute('default').value == 'on' ||
-                     style.attribute('default').value == 'true') &&
-                    style.attribute('type').value == 'table'
-
-        style.xpath('w:rPr').each do |table_character_pr_tag|
-          DocumentStructure.default_table_run_style.parse_properties(table_character_pr_tag)
-        end
-      end
+      DocumentStructure.default_table_run_style.parse_properties(@styles.default_style(:table).run_properties_node) if @styles&.default_style(:table)&.run_properties_node
     end
 
     # Perform parsing styles.xml

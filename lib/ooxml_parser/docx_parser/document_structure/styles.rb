@@ -28,5 +28,11 @@ module OoxmlParser
       end
       self
     end
+
+    # @param [Symbol] type of style to get
+    # @return [DocumentStyle] default document style
+    def default_style(type)
+      styles.find { |style| style.type == type && style.default }
+    end
   end
 end
