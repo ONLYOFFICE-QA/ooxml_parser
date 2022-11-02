@@ -2,6 +2,7 @@
 
 require_relative 'document_structure/comments'
 require_relative 'document_structure/comments_extended'
+require_relative 'document_structure/default_style_helper'
 require_relative 'document_structure/docx_paragraph'
 require_relative 'document_structure/document_background'
 require_relative 'document_structure/document_properties'
@@ -15,6 +16,7 @@ require_relative 'document_structure/styles'
 module OoxmlParser
   # Basic class for DocumentStructure
   class DocumentStructure < CommonDocumentStructure
+    include DefaultStyleHelper
     include DocumentStyleHelper
     include DocumentStructureHelpers
     # @return [Array<OOXMLDocumentObject>] list of elements
@@ -209,75 +211,6 @@ module OoxmlParser
                                    .parse
       @settings = DocumentSettings.new(parent: self).parse
       self
-    end
-
-    # Parse default style
-    # @return [void]
-    def parse_default_style
-      doc = parse_xml("#{root_object.unpacked_folder}word/styles.xml")
-      doc.search('//w:style').each do |style|
-        next if style.attribute('default').nil?
-
-        if (style.attribute('default').value == '1' ||
-            style.attribute('default').value == 'on' ||
-            style.attribute('default').value == 'true') &&
-           style.attribute('type').value == 'paragraph'
-          style.xpath('w:pPr').each do |paragraph_pr_tag|
-            DocumentStructure.default_paragraph_style = DocxParagraph.new.parse_paragraph_style(paragraph_pr_tag, DocumentStructure.default_run_style)
-          end
-          style.xpath('w:rPr').each do |character_pr_tag|
-            DocumentStructure.default_run_style.parse_properties(character_pr_tag)
-          end
-        elsif (style.attribute('default').value == '1' ||
-               style.attribute('default').value == 'on' ||
-               style.attribute('default').value == 'true') &&
-              style.attribute('type').value == 'character'
-          style.xpath('w:rPr').each do |character_pr_tag|
-            DocumentStructure.default_run_style.parse_properties(character_pr_tag)
-          end
-        end
-      end
-      DocumentStructure.default_table_paragraph_style = DocumentStructure.default_paragraph_style.dup
-      DocumentStructure.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
-      DocumentStructure.default_table_run_style = DocumentStructure.default_run_style.dup
-      doc.search('//w:style').each do |style|
-        next if style.attribute('default').nil?
-        next unless (style.attribute('default').value == '1' ||
-                     style.attribute('default').value == 'on' ||
-                     style.attribute('default').value == 'true') &&
-                    style.attribute('type').value == 'table'
-
-        style.xpath('w:rPr').each do |table_character_pr_tag|
-          DocumentStructure.default_table_run_style.parse_properties(table_character_pr_tag)
-        end
-      end
-    end
-
-    # Perform parsing styles.xml
-    def parse_styles
-      file = "#{root_object.unpacked_folder}/word/styles.xml"
-      DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self)
-      DocumentStructure.default_table_paragraph_style = DocxParagraph.new(parent: self)
-      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
-      DocumentStructure.default_table_run_style = DocxParagraphRun.new(parent: self)
-
-      return unless File.exist?(file)
-
-      doc = parse_xml(file)
-      # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
-      doc.search('//w:docDefaults').each do |doc_defaults|
-        doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
-          DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self).parse(p_pr_defaults, 0)
-        end
-        doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
-          r_pr_defaults.xpath('w:rPr').each do |r_pr|
-            DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self).parse_properties(r_pr)
-          end
-        end
-      end
-      parse_default_style
-      @numbering = Numbering.new(parent: self).parse
-      @styles = Styles.new(parent: self).parse
     end
 
     class << self
