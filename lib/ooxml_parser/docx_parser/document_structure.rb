@@ -212,9 +212,9 @@ module OoxmlParser
     end
 
     # Parse default style
-    # @param parsed_styles_xml [Nokogiri::XML::Document] parsed styles.xml
     # @return [void]
-    def parse_default_style(parsed_styles_xml)
+    def parse_default_style
+      parsed_styles_xml = parse_xml("#{root_object.unpacked_folder}/word/styles.xml")
       parsed_styles_xml.search('//w:style').each do |style|
         next if style.attribute('default').nil?
 
@@ -263,21 +263,13 @@ module OoxmlParser
 
       return unless File.exist?(file)
 
-      doc = parse_xml(file)
-      # TODO: Remove this old way parsing in favor of doc_structure.styles.document_defaults
-      doc.xpath('//w:docDefaults').each do |doc_defaults|
-        doc_defaults.xpath('w:pPrDefault').each do |p_pr_defaults|
-          DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self).parse(p_pr_defaults, 0)
-        end
-        doc_defaults.xpath('w:rPrDefault').each do |r_pr_defaults|
-          r_pr_defaults.xpath('w:rPr').each do |r_pr|
-            DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self).parse_properties(r_pr)
-          end
-        end
-      end
-      parse_default_style(doc)
-      @numbering = Numbering.new(parent: self).parse
       @styles = Styles.new(parent: self).parse
+      DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self).parse(@styles.document_defaults.paragraph_properties_default.raw_node, 0)
+      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self).parse_properties(@styles.document_defaults
+                                                                                                       .run_properties_default.run_properties
+                                                                                                       .raw_node)
+      parse_default_style
+      @numbering = Numbering.new(parent: self).parse
     end
 
     class << self

@@ -53,6 +53,8 @@ module OoxmlParser
     attr_reader :ligatures
     # @return [RunFonts] value of RunFonts
     attr_reader :run_fonts
+    # @return [Nokogiri::XML:Element] raw node value
+    attr_reader :raw_node
 
     def initialize(params = {})
       @font_name = params.fetch(:font_name, '')
@@ -65,6 +67,7 @@ module OoxmlParser
     # @param node [Nokogiri::XML:Element] node to parse
     # @return [RunProperties] result of parsing
     def parse(node)
+      @raw_node = node
       @font_style = root_object.default_font_style.dup
       node.attributes.each do |key, value|
         case key
