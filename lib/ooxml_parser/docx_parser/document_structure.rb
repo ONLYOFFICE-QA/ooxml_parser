@@ -264,19 +264,17 @@ module OoxmlParser
       return unless File.exist?(file)
 
       @styles = Styles.new(parent: self).parse
-      return unless @styles.document_defaults
+      @numbering = Numbering.new(parent: self).parse
 
-      if @styles.document_defaults.paragraph_properties_default
+      if @styles&.document_defaults&.paragraph_properties_default
         DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self).parse(@styles.document_defaults.paragraph_properties_default.raw_node, 0)
       end
-      if @styles.document_defaults
-                .run_properties_default
+      if @styles&.document_defaults&.run_properties_default
         DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self).parse_properties(@styles.document_defaults
                                                                                                          .run_properties_default.run_properties
                                                                                                          .raw_node)
       end
       parse_default_style
-      @numbering = Numbering.new(parent: self).parse
     end
 
     class << self
