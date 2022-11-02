@@ -212,10 +212,10 @@ module OoxmlParser
     end
 
     # Parse default style
+    # @param parsed_styles_xml [Nokogiri::XML::Document] parsed styles.xml
     # @return [void]
-    def parse_default_style
-      doc = parse_xml("#{root_object.unpacked_folder}word/styles.xml")
-      doc.search('//w:style').each do |style|
+    def parse_default_style(parsed_styles_xml)
+      parsed_styles_xml.search('//w:style').each do |style|
         next if style.attribute('default').nil?
 
         if (style.attribute('default').value == '1' ||
@@ -240,7 +240,7 @@ module OoxmlParser
       DocumentStructure.default_table_paragraph_style = DocumentStructure.default_paragraph_style.dup
       DocumentStructure.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
       DocumentStructure.default_table_run_style = DocumentStructure.default_run_style.dup
-      doc.search('//w:style').each do |style|
+      parsed_styles_xml.search('//w:style').each do |style|
         next if style.attribute('default').nil?
         next unless (style.attribute('default').value == '1' ||
                      style.attribute('default').value == 'on' ||
@@ -275,7 +275,7 @@ module OoxmlParser
           end
         end
       end
-      parse_default_style
+      parse_default_style(doc)
       @numbering = Numbering.new(parent: self).parse
       @styles = Styles.new(parent: self).parse
     end

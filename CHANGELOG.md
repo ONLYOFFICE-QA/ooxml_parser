@@ -26,6 +26,7 @@
 
 * Refactor parsing Run color (remove strange line)
 * Remove `spec` folder from coverage reports
+* Several minor improvements to reduce memory usage
 
 ## 0.32.0 (2022-10-03)
 
