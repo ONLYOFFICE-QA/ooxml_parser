@@ -183,7 +183,7 @@ module OoxmlParser
       @red = color.red
       @green = color.green
       @blue = color.blue
-      @alpha_channel = ColorAlphaChannel.parse(scheme_color_node)
+      @alpha_channel = ColorAlphaChannel.new(parent: self).parse(scheme_color_node).value
       @scheme = scheme_name
       self
     end
