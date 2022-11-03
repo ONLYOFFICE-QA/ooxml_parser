@@ -30,7 +30,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'pt'
-          @points << OOXMLCoordinates.parse(node_child)
+          @points << OOXMLCoordinates.new(parent: self).parse(node_child)
         end
       end
       self

@@ -37,13 +37,13 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'off'
-          @offset = OOXMLCoordinates.parse(node_child, unit: :emu)
+          @offset = OOXMLCoordinates.new(parent: self).parse(node_child, unit: :emu)
         when 'ext'
-          @extent = OOXMLCoordinates.parse(node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
+          @extent = OOXMLCoordinates.new(parent: self).parse(node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
         when 'chOff'
-          @child_offset = OOXMLCoordinates.parse(node_child, unit: :emu)
+          @child_offset = OOXMLCoordinates.new(parent: self).parse(node_child, unit: :emu)
         when 'chExt'
-          @child_extent = OOXMLCoordinates.parse(node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
+          @child_extent = OOXMLCoordinates.new(parent: self).parse(node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
         end
       end
       self

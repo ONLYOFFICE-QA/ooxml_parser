@@ -73,12 +73,12 @@ module OoxmlParser
           reference = HeaderFooterReference.new(parent: self).parse(pg_size_subnode)
           target = root_object.get_link_from_rels(reference.id)
           root_object.add_to_xmls_stack("word/#{target}")
-          note = Note.parse(default_paragraph: default_paragraph,
-                            default_character: default_character,
-                            target: target,
-                            assigned_to: reference.type,
-                            type: File.basename(target).sub('.xml', ''),
-                            parent: self)
+          note = Note.new.parse(default_paragraph: default_paragraph,
+                                default_character: default_character,
+                                target: target,
+                                assigned_to: reference.type,
+                                type: File.basename(target).sub('.xml', ''),
+                                parent: self)
           @notes << note
           root_object.xmls_stack.pop
         when 'footnotePr'
