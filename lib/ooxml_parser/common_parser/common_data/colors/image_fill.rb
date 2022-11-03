@@ -22,8 +22,8 @@ module OoxmlParser
         when 'blip'
           @file_reference = FileReference.new(parent: self).parse(node_child)
         when 'tile'
-          @tile = Tile.new(OOXMLCoordinates.parse(node_child, x_attr: 'tx', y_attr: 'ty'),
-                           OOXMLCoordinates.parse(node_child, x_attr: 'sx', y_attr: 'sy'),
+          @tile = Tile.new(OOXMLCoordinates.new(parent: self).parse(node_child, x_attr: 'tx', y_attr: 'ty'),
+                           OOXMLCoordinates.new(parent: self).parse(node_child, x_attr: 'sx', y_attr: 'sy'),
                            parent: self).parse(node_child)
         end
       end

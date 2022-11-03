@@ -28,7 +28,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'pos'
-          @position = OOXMLCoordinates.parse(node_child, x_attr: 'x', y_attr: 'y')
+          @position = OOXMLCoordinates.new(parent: self).parse(node_child)
         when 'text'
           @text = node_child.text.to_s
         end

@@ -2,10 +2,10 @@
 
 module OoxmlParser
   # Docx Coordinates
-  class OOXMLCoordinates
+  class OOXMLCoordinates < OOXMLDocumentObject
     attr_accessor :x, :y
 
-    def initialize(x_value, y_value)
+    def initialize(x_value = nil, y_value = nil, parent: nil)
       @x = if x_value.is_a?(OoxmlSize)
              x_value
            else
@@ -16,6 +16,7 @@ module OoxmlParser
            else
              OoxmlSize.new(y_value)
            end
+      super(parent: parent)
     end
 
     # @return [String] result of convert of object to string
@@ -25,22 +26,27 @@ module OoxmlParser
 
     # Compare two OOXMLCoordinates objects
     # @param other [OOXMLCoordinates] other object
-    # @return [True, False] result of comparasion
+    # @return [True, False] result of comparison
     def ==(other)
       x == other.x && y == other.y
     end
 
     # Parse OOXMLCoordinates object
-    # @param position_node [Nokogiri::XML:Element] node to parse
+    # @param node [Nokogiri::XML:Element] node to parse
     # @param x_attr [String] name of x attribute
     # @param y_attr [String] name of y attribute
     # @param unit [Symbol] unit in which data is stored
     # @return [OOXMLCoordinates] result of parsing
-    def self.parse(position_node, x_attr: 'x', y_attr: 'y', unit: :dxa)
-      return if position_node.attribute(x_attr).nil? || position_node.attribute(y_attr).nil?
-
-      OOXMLCoordinates.new(OoxmlSize.new(position_node.attribute(x_attr).value.to_f, unit),
-                           OoxmlSize.new(position_node.attribute(y_attr).value.to_f, unit))
+    def parse(node, x_attr: 'x', y_attr: 'y', unit: :dxa)
+      node.attributes.each do |key, value|
+        case key
+        when x_attr
+          @x = OoxmlSize.new(value.value.to_f, unit)
+        when y_attr
+          @y = OoxmlSize.new(value.value.to_f, unit)
+        end
+      end
+      self
     end
   end
 end

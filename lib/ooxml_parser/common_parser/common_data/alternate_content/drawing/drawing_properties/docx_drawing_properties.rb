@@ -44,9 +44,13 @@ module OoxmlParser
       node.xpath('*').each do |content_node_child|
         case content_node_child.name
         when 'simplePos'
-          @simple_position = OOXMLCoordinates.parse(content_node_child)
+          @simple_position = OOXMLCoordinates.new(parent: self).parse(content_node_child)
         when 'extent'
-          @object_size = OOXMLCoordinates.parse(content_node_child, x_attr: 'cx', y_attr: 'cy', unit: :emu)
+          @object_size = OOXMLCoordinates.new(parent: self)
+                                         .parse(content_node_child,
+                                                x_attr: 'cx',
+                                                y_attr: 'cy',
+                                                unit: :emu)
         when 'positionV'
           @vertical_position = DocxDrawingPosition.new(parent: self).parse(content_node_child)
         when 'positionH'
