@@ -8,6 +8,11 @@ describe OoxmlParser::Color, '#parse_hex_string' do
       .to eq(described_class.new)
   end
 
+  it 'parsing hex string with 3 symbols' do
+    expect(described_class.new.parse_hex_string('f30').to_s)
+      .to eq('RGB (15, 3, 0)')
+  end
+
   it 'parsing hex string with 6 symbols' do
     expect(described_class.new.parse_hex_string('ABCDEF').to_s)
       .to eq('RGB (171, 205, 239)')

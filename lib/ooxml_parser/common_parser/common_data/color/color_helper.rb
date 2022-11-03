@@ -5,6 +5,8 @@ module OoxmlParser
   module ColorHelper
     # @return [String] value for auto string
     AUTO_STRING_VALUE = 'auto'
+    # @return [Regexp] regexp for hex string with 3 digits
+    REGEXP_THREE_DIGITS = /(.)(.)(.)/.freeze
     # @return [Regexp] regexp for hex string with 6 digits
     REGEXP_SIX_DIGITS = /(..)(..)(..)/.freeze
     # @return [Regexp] regexp for hex string with 8 digits
@@ -16,6 +18,8 @@ module OoxmlParser
       return self if AUTO_STRING_VALUE == hex_string
 
       case hex_string.length
+      when 3
+        @red, @green, @blue = hex_string.match(REGEXP_THREE_DIGITS).captures.map(&:hex)
       when 6
         @red, @green, @blue = hex_string.match(REGEXP_SIX_DIGITS).captures.map(&:hex)
       when 8
