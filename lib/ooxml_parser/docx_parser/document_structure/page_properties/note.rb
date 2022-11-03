@@ -13,15 +13,14 @@ module OoxmlParser
     # Parse note data
     # @param params [Hash] data to parse
     # @return [Note] result of parsing
-    def self.parse(params)
-      note = Note.new
-      note.type = params[:type]
-      note.assigned_to = params[:assigned_to]
-      note.parent = params[:parent]
-      doc = note.parse_xml(note.file_path(params[:target]))
-      if note.type.include?('footer')
+    def parse(params)
+      @type = params[:type]
+      @assigned_to = params[:assigned_to]
+      @parent = params[:parent]
+      doc = parse_xml(file_path(params[:target]))
+      if @type.include?('footer')
         xpath_note = '//w:ftr'
-      elsif note.type.include?('header')
+      elsif @type.include?('header')
         xpath_note = '//w:hdr'
       end
       doc.search(xpath_note).each do |ftr|
@@ -29,15 +28,15 @@ module OoxmlParser
         ftr.xpath('*').each do |sub_element|
           case sub_element.name
           when 'p'
-            note.elements << params[:default_paragraph].dup.parse(sub_element, number, params[:default_character], parent: note)
+            @elements << params[:default_paragraph].dup.parse(sub_element, number, params[:default_character], parent: self)
             number += 1
           when 'tbl'
-            note.elements << Table.new(parent: note).parse(sub_element, number)
+            @elements << Table.new(parent: self).parse(sub_element, number)
             number += 1
           end
         end
       end
-      note
+      self
     end
 
     # @param target [String] name of target
