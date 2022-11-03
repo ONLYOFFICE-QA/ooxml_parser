@@ -101,7 +101,7 @@ module OoxmlParser
 
     # Compare this object to other
     # @param other [Object] any other object
-    # @return [True, False] result of comparision
+    # @return [True, False] result of comparison
     def ==(other)
       if other.is_a?(Color)
         ((@red == other.red) && (@green == other.green) && (@blue == other.blue)) ||
@@ -117,7 +117,7 @@ module OoxmlParser
     # @param [Integer] delta max delta for each of specters
     def looks_like?(color_to_check = nil, delta = 8)
       color_to_check = color_to_check.converted_color if color_to_check.is_a?(SchemeColor)
-      color_to_check = color_to_check.pattern_fill.foreground_folor if color_to_check.is_a?(Fill)
+      color_to_check = color_to_check.pattern_fill.foreground_color if color_to_check.is_a?(Fill)
       color_to_check = color_to_check.color.converted_color if color_to_check.is_a?(PresentationFill)
       color_to_check = Color.parse(color_to_check) if color_to_check.is_a?(String)
       color_to_check = Color.parse(color_to_check.to_s) if color_to_check.is_a?(Symbol)
@@ -128,10 +128,9 @@ module OoxmlParser
       return false if !none? && color_to_check.none?
       return true if self == color_to_check
 
-      red = color_to_check.red
-      green = color_to_check.green
-      blue = color_to_check.blue
-      (self.red - red).abs < delta && (self.green - green).abs < delta && (self.blue - blue).abs < delta
+      (red - color_to_check.red).abs < delta &&
+        (green - color_to_check.green).abs < delta &&
+        (blue - color_to_check.blue).abs < delta
     end
 
     # Apply tint to color
@@ -205,7 +204,7 @@ module OoxmlParser
         when 'srgbClr'
           valued_child = ValuedChild.new(:string, parent: self).parse(color_model_node)
           color = Color.new.parse_hex_string(valued_child.value)
-          color.alpha_channel = ColorAlphaChannel.parse(color_model_node)
+          color.alpha_channel = ColorAlphaChannel.new(parent: self).parse(color_model_node).value
         when 'schemeClr'
           color = Color.new(parent: self).parse_scheme_color(color_model_node)
         end
