@@ -3,26 +3,23 @@
 module OoxmlParser
   # Helper methods for color
   module ColorHelper
+    # @return [String] value for auto string
+    AUTO_STRING_VALUE = 'auto'
+    # @return [Regexp] regexp for hex string with 6 digits
+    REGEXP_SIX_DIGITS = /(..)(..)(..)/.freeze
+    # @return [Regexp] regexp for hex string with 8 digits
+    REGEXP_EIGHT_DIGITS = /(..)(..)(..)(..)/.freeze
+
     # Parse string in hex
     # @param [String] hex_string with or without alpha-channel
     def parse_hex_string(hex_string)
-      return self if %w[auto null].include?(hex_string)
+      return self if AUTO_STRING_VALUE == hex_string
 
-      char_array = hex_string.chars
-      case char_array.length
-      when 3
-        @red = char_array[0].hex
-        @green = char_array[1].hex
-        @blue = char_array[2].hex
+      case hex_string.length
       when 6
-        @red = (char_array[0] + char_array[1]).hex
-        @green = (char_array[2] + char_array[3]).hex
-        @blue = (char_array[4] + char_array[5]).hex
+        @red, @green, @blue = hex_string.match(REGEXP_SIX_DIGITS).captures.map(&:hex)
       when 8
-        @alpha_channel = (char_array[0] + char_array[1]).hex
-        @red = (char_array[2] + char_array[3]).hex
-        @green = (char_array[4] + char_array[5]).hex
-        @blue = (char_array[6] + char_array[7]).hex
+        @alpha_channel, @red, @green, @blue = hex_string.match(REGEXP_EIGHT_DIGITS).captures.map(&:hex)
       end
       self
     end
