@@ -6,3 +6,9 @@ SimpleCov.start do
 end
 
 require 'ooxml_parser'
+
+RSpec.configure do |config|
+  config.after do |_example|
+    GC.start
+  end
+end
