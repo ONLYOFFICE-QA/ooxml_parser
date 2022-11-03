@@ -10,6 +10,7 @@
 
 * Fix incorrect attributes type for `Location`
 * Move `rubocop` check in CI to `linting` config
+* Refactor `Colo#parse_hex_string` for better performance
 
 ### Fixes
 
