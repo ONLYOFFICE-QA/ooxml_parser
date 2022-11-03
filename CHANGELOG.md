@@ -11,6 +11,10 @@
 * Fix incorrect attributes type for `Location`
 * Move `rubocop` check in CI to `linting` config
 
+### Fixes
+
+* Fix file parsing outside of `it` in `rspec`
+
 ## 0.33.0 (2022-10-25)
 
 ### New Features

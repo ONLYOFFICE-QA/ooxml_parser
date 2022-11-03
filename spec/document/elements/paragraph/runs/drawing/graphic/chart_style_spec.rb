@@ -5,8 +5,8 @@ require 'spec_helper'
 describe 'chart', '#style' do
   file = 'spec/document/elements/paragraph/runs/' \
          'drawing/graphic/chart/chart_with_style.docx'
-  docx = OoxmlParser::Parser.parse(file)
-  style = docx.elements[0].nonempty_runs.first.drawing.graphic.data.style
+  let(:docx) { OoxmlParser::Parser.parse(file) }
+  let(:style) { docx.elements[0].nonempty_runs.first.drawing.graphic.data.style }
 
   it 'Chart has axis title' do
     expect(style.axis_title).to be_a(OoxmlParser::ChartStyleEntry)
