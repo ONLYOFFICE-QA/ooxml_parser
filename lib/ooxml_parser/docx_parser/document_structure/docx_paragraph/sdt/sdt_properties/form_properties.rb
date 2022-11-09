@@ -30,7 +30,7 @@ module OoxmlParser
         when 'helpText'
           @help_text = value.value
         when 'required'
-          @required = attribute_enabled?(value)
+          @required = boolean_attribute_value(value)
         end
       end
 
