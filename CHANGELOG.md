@@ -15,6 +15,8 @@
 ### Fixes
 
 * Fix file parsing outside of `it` in `rspec`
+* Fix parsing `FormProperties`
+* Fix parsing `FormTextProperties`
 
 ## 0.33.0 (2022-10-25)
 
