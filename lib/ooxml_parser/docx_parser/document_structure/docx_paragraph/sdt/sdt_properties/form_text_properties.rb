@@ -23,9 +23,9 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'multiLine'
-          @multiline = option_enabled?(value)
+          @multiline = attribute_enabled?(value)
         when 'autoFit'
-          @autofit = option_enabled?(value)
+          @autofit = attribute_enabled?(value)
         end
       end
 
