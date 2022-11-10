@@ -10,7 +10,7 @@ module OoxmlParser
     attr_reader :num_id
 
     def initialize(ilvl = 0, parent: nil)
-      @ilvl = ilvl
+      @default_i_level = ilvl
       super(parent: parent)
     end
 
@@ -41,13 +41,15 @@ module OoxmlParser
 
     # @return [Integer] i-level value
     def ilvl
+      return @default_i_level unless @i_level
+
       @i_level.value
     end
 
     # @return [AbstractNumbering] level list of current numbering
     def numbering_level_current
       abstruct_numbering.level_list.each do |current_ilvl|
-        return current_ilvl if current_ilvl.ilvl == @ilvl
+        return current_ilvl if current_ilvl.ilvl == ilvl
       end
       nil
     end
