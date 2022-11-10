@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Changes
+
+* **Breaking** `Underline#style` now is always symbol
+
 ### Fixes
 
 * Do not crash if default paragraph style have no run properties
