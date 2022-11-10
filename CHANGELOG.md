@@ -8,6 +8,7 @@
 * Fix parsing boolean `ValuedChild` if there is no `val` attribute
 * Fix early exit from parsing default run style
 * Fix `NumberingProperties#ilvl` default value
+* Fix problem with parsing default spacing
 
 ## 0.34.0 (2022-11-09)
 

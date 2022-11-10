@@ -49,6 +49,11 @@ describe OoxmlParser::Spacing do
     expect(docx.elements.first.spacing.line_rule).to eq(:auto)
   end
 
+  it 'ApiStyle | GetParaPr method' do
+    docx = OoxmlParser::DocxParser.parse_docx("#{files_dir}/spacing_is_2.docx")
+    expect(docx.elements.first.spacing.line).to eq(2)
+  end
+
   describe 'contextual spacing' do
     it 'contextual_spacing false' do
       docx = OoxmlParser::DocxParser.parse_docx("#{files_dir}/contextual_spacing_false.docx")
