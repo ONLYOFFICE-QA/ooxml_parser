@@ -6,6 +6,7 @@
 
 * Do not crash if default paragraph style have no run properties
 * Fix parsing boolean `ValuedChild` if there is no `val` attribute
+* Fix early exit from parsing default run style
 
 ## 0.34.0 (2022-11-09)
 

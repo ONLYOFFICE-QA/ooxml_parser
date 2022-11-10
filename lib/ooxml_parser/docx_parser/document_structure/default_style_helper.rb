@@ -6,7 +6,8 @@ module OoxmlParser
     # Parse default style
     # @return [void]
     def parse_default_style
-      parse_default_paragraph_style
+      parse_default_style_paragraph_properties
+      parse_default_style_run_properties
       parse_default_character_style
       DocumentStructure.default_table_paragraph_style = DocumentStructure.default_paragraph_style.dup
       DocumentStructure.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
@@ -46,13 +47,15 @@ module OoxmlParser
 
     private
 
-    # Parse default paragraph style
-    def parse_default_paragraph_style
+    def parse_default_style_paragraph_properties
       return unless @styles&.default_style(:paragraph)&.paragraph_properties_node
 
       DocxParagraph.new.parse_paragraph_style(@styles.default_style(:paragraph)
-                                                     .paragraph_properties_node,
+                                                       .paragraph_properties_node,
                                               DocumentStructure.default_run_style)
+    end
+
+    def parse_default_style_run_properties
       return unless @styles&.default_style(:paragraph)&.run_properties_node
 
       DocumentStructure.default_run_style
