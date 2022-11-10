@@ -16,4 +16,9 @@ describe OoxmlParser::Indents do
                                                                             OoxmlParser::OoxmlSize.new(0, :centimeter),
                                                                             OoxmlParser::OoxmlSize.new(0, :centimeter)))
   end
+
+  it 'indent from style' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/spacing_is_2.docx')
+    expect(docx.elements.first.ind.first_line_indent).to eq(OoxmlParser::OoxmlSize.new(720, :twip))
+  end
 end

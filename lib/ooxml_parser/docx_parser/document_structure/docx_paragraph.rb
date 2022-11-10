@@ -16,7 +16,7 @@ module OoxmlParser
   # Class for data of DocxParagraph
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
-    attr_accessor :number, :align, :ind, :numbering,
+    attr_accessor :number, :align, :numbering,
                   :character_style_array, :page_break, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control
@@ -206,7 +206,7 @@ module OoxmlParser
           @paragraph_style_ref = ParagraphStyleRef.new(parent: self).parse(node_child)
           fill_style_data(default_char_style)
         when 'ind'
-          @ind = DocumentStructure.default_paragraph_style.ind.dup.parse(node_child)
+          @ind = DocumentStructure.default_paragraph_style.instance_variable_get(:@ind).dup.parse(node_child)
         when 'numPr'
           @numbering = NumberingProperties.new(parent: self).parse(node_child)
         when 'jc'
@@ -237,6 +237,12 @@ module OoxmlParser
       return Spacing.new.fetch_from_valued_spacing(style_spacing) if style_spacing
 
       @spacing
+    end
+
+    def ind
+      return @ind if @ind != Indents.new
+
+      root_object.styles&.default_style(:paragraph)&.paragraph_properties&.indent
     end
 
     # Fill data from styles
