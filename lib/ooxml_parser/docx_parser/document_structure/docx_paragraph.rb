@@ -239,6 +239,7 @@ module OoxmlParser
       @spacing
     end
 
+    # @return [Indents] value of indents
     def ind
       return @ind if @ind != Indents.new
 
