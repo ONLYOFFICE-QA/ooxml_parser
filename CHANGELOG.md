@@ -2,10 +2,6 @@
 
 ## master (unreleased)
 
-### Changes
-
-* **Breaking** `Underline#style` now is always symbol
-
 ### Fixes
 
 * Do not crash if default paragraph style have no run properties
@@ -21,6 +17,7 @@
 * Fix incorrect attributes type for `Location`
 * Move `rubocop` check in CI to `linting` config
 * Refactor `Colo#parse_hex_string` for better performance
+* **Breaking** `Underline#style` now is always symbol
 
 ### Fixes
 
