@@ -51,7 +51,7 @@ module OoxmlParser
       return unless @styles&.default_style(:paragraph)&.paragraph_properties_node
 
       DocxParagraph.new.parse_paragraph_style(@styles.default_style(:paragraph)
-                                                       .paragraph_properties_node,
+                                                     .paragraph_properties_node,
                                               DocumentStructure.default_run_style)
     end
 
