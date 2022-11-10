@@ -16,7 +16,7 @@ module OoxmlParser
   # Class for data of DocxParagraph
   class DocxParagraph < OOXMLDocumentObject
     include DocxParagraphHelper
-    attr_accessor :number, :align, :spacing, :ind, :numbering,
+    attr_accessor :number, :align, :ind, :numbering,
                   :character_style_array, :page_break, :borders, :keep_lines,
                   :contextual_spacing, :sector_properties, :page_numbering, :section_break, :style, :keep_next,
                   :orphan_control
@@ -32,6 +32,8 @@ module OoxmlParser
     attr_accessor :paragraph_id
     # @return [MathParagraph] math paragraph
     attr_reader :math_paragraph
+    # Set spacing value
+    attr_writer :spacing
     # @return [Integer] id of text (for comment)
     attr_accessor :text_id
 
@@ -59,7 +61,7 @@ module OoxmlParser
     def initialize_copy(source)
       super
       @character_style_array = source.character_style_array.clone
-      @spacing = source.spacing.clone
+      @spacing = source.instance_variable_get(:@spacing).clone
     end
 
     # @return [Array<OOXMLDocumentObject>] array of child objects that contains data
@@ -228,6 +230,13 @@ module OoxmlParser
       end
       @parent = parent
       self
+    end
+
+    def spacing
+      style_spacing = root_object.styles&.default_style(:paragraph)&.paragraph_properties&.spacing
+      return Spacing.new.fetch_from_valued_spacing(style_spacing) if style_spacing
+
+      @spacing
     end
 
     # Fill data from styles
