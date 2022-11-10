@@ -63,4 +63,9 @@ describe OoxmlParser::Numbering do
   it 'numbering ilvl is an integer non-default' do
     expect(numbering_font.elements[1].numbering.ilvl).to eq(1)
   end
+
+  it 'numbering ilvl is not empty' do
+    docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/nonempty_numbering.docx')
+    expect(docx.elements.last.numbering.ilvl).to eq(0)
+  end
 end
