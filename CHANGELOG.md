@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.34.1 (2022-11-10)
+
 ### Fixes
 
 * Do not crash if default paragraph style have no run properties
