@@ -5,6 +5,7 @@
 ### Fixes
 
 * Do not crash if default paragraph style have no run properties
+* Fix parsing boolean `ValuedChild` if there is no `val` attribute
 
 ## 0.34.0 (2022-11-09)
 

@@ -3,8 +3,6 @@
 module OoxmlParser
   # Class for working with any tag contained only value
   class ValuedChild < OOXMLDocumentObject
-    # @return [String] value of tag
-    attr_accessor :value
     # @return [String] type of value
     attr_reader :type
 
@@ -28,6 +26,13 @@ module OoxmlParser
         end
       end
       self
+    end
+
+    # @return [Object] value of parameter
+    def value
+      return true if type == :boolean && @value.nil?
+
+      @value
     end
 
     private
