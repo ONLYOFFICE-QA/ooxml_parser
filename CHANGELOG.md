@@ -9,6 +9,7 @@
 * Fix early exit from parsing default run style
 * Fix `NumberingProperties#ilvl` default value
 * Fix problem with parsing default spacing
+* Fix problem with parsing default indent
 
 ## 0.34.0 (2022-11-09)
 
