@@ -21,4 +21,9 @@ describe OoxmlParser::Indents do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/spacing/spacing_is_2.docx')
     expect(docx.elements.first.ind.first_line_indent).to eq(OoxmlParser::OoxmlSize.new(720, :twip))
   end
+
+  it 'no indents in default style' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/indents/no_indents_default_style.docx')
+    expect(docx.elements.first.ind.first_line_indent).to eq(OoxmlParser::OoxmlSize.new(0))
+  end
 end
