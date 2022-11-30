@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.34.2 (2022-11-30)
+
 ### Fixes
 
 * Fix parsing default_run_style
