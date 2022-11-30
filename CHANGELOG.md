@@ -2,6 +2,11 @@
 
 ## master (unreleased)
 
+### Fixes
+
+* Fix parsing default_run_style
+* Fix parsing indents
+
 ## 0.34.1 (2022-11-10)
 
 ### Fixes

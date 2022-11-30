@@ -34,7 +34,7 @@ module OoxmlParser
                                                                                .paragraph_properties_default
                                                                                .raw_node, 0)
       end
-      if @styles&.document_defaults&.run_properties_default
+      if @styles&.document_defaults&.run_properties_default&.run_properties
         DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
                                                               .parse_properties(@styles
                                                                                   .document_defaults

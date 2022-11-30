@@ -243,7 +243,10 @@ module OoxmlParser
     def ind
       return @ind if @ind != Indents.new
 
-      root_object.styles&.default_style(:paragraph)&.paragraph_properties&.indent
+      indents_from_styles = root_object.styles&.default_style(:paragraph)&.paragraph_properties&.indent
+      return indents_from_styles if indents_from_styles
+
+      Indents.new
     end
 
     # Fill data from styles
