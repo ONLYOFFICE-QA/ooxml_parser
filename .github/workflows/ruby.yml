@@ -13,7 +13,7 @@ jobs:
           - ruby: head
             allow-failures: true
             check-coverage: true
-          - ruby: 'jruby-9.3'
+          - ruby: 'jruby-9.4'
             allow-failures: false
             check-coverage: false
     steps:
