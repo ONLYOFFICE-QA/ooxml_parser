@@ -15,7 +15,7 @@ module OoxmlParser
     # Parse string in hex
     # @param [String] hex_string with or without alpha-channel
     def parse_hex_string(hex_string)
-      return self if AUTO_STRING_VALUE == hex_string
+      return self if hex_string == AUTO_STRING_VALUE
 
       case hex_string.length
       when 3
