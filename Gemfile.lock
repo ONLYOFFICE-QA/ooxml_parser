@@ -22,7 +22,7 @@ GEM
     ooxml_decrypt (1.0.0)
       nokogiri (~> 1.10)
       ruby-ole (~> 1.2)
-    overcommit (0.59.1)
+    overcommit (0.60.0)
       childprocess (>= 0.6.3, < 5)
       iniparse (~> 1.4)
       rexml (~> 3.2)
