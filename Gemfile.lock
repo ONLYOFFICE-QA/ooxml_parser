@@ -69,7 +69,7 @@ GEM
     rubocop-rspec (2.15.0)
       rubocop (~> 1.33)
     ruby-ole (1.2.12.2)
-    ruby-progressbar (1.11.0)
+    ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     simplecov (0.22.0)
       docile (~> 1.1)
