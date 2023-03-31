@@ -27,7 +27,7 @@ GEM
       iniparse (~> 1.4)
       rexml (~> 3.2)
     parallel (1.22.1)
-    parallel_tests (3.13.0)
+    parallel_tests (4.2.0)
       parallel
     parser (3.2.0.0)
       ast (~> 2.4.1)
@@ -88,7 +88,7 @@ PLATFORMS
 DEPENDENCIES
   ooxml_parser!
   overcommit (~> 0)
-  parallel_tests (~> 3)
+  parallel_tests (~> 4)
   rake (~> 13)
   rspec (~> 3)
   rubocop (~> 1)
