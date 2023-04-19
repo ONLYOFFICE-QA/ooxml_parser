@@ -4,6 +4,7 @@
 
 ### Changes
 
+* Fix parsing borders with `none` style
 * Drop support of `ruby-2.6` since it's EOLed
 * Add jruby-9.4 support
 
