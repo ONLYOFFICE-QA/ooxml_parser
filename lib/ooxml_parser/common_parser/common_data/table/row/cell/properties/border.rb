@@ -13,7 +13,7 @@ module OoxmlParser
       node.attributes.each do |key, value|
         case key
         when 'style'
-          @style = value_to_symbol(value)
+          @style = value_to_symbol(value) unless value.value == 'none'
         end
       end
 
