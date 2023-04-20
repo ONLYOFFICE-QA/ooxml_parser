@@ -7,7 +7,7 @@
 * Drop support of `ruby-2.6` since it's EOLed
 * Add jruby-9.4 support
 * Fix parsing borders with `none` style
-* Add parsing`SeriesText` with number reference
+* Add parsing `SeriesText` with number reference
 
 ## 0.34.2 (2022-11-30)
 
