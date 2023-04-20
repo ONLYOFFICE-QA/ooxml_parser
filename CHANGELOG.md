@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.35.0 (2023-04-20)
+
 ### Changes
 
 * Drop support of `ruby-2.6` since it's EOLed
