@@ -5,7 +5,7 @@ module OoxmlParser
   class Note < OOXMLDocumentObject
     attr_accessor :type, :elements, :assigned_to
 
-    def initialize(type: 'unknown ')
+    def initialize(type: 'unknown')
       @elements = []
       @type = type
       super(parent: nil)
