@@ -5,9 +5,21 @@ module OoxmlParser
   class Note < OOXMLDocumentObject
     attr_accessor :type, :elements, :assigned_to
 
-    def initialize
+    def initialize(type: 'unknown ')
       @elements = []
+      @type = type
       super(parent: nil)
+    end
+
+    # @return [String] xpath for note in xml object
+    def note_base_xpath
+      @note_base_xpath ||= if @type.include?('footer')
+                             '//w:ftr'
+                           elsif @type.include?('header')
+                             '//w:hdr'
+                           else
+                             raise NameError, "Unknown note type: #{@type}"
+                           end
     end
 
     # Parse note data
@@ -18,12 +30,7 @@ module OoxmlParser
       @assigned_to = params[:assigned_to]
       @parent = params[:parent]
       doc = parse_xml(file_path(params[:target]))
-      if @type.include?('footer')
-        xpath_note = '//w:ftr'
-      elsif @type.include?('header')
-        xpath_note = '//w:hdr'
-      end
-      doc.search(xpath_note).each do |ftr|
+      doc.search(note_base_xpath).each do |ftr|
         number = 0
         ftr.xpath('*').each do |sub_element|
           case sub_element.name
