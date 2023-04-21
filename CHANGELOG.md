@@ -6,6 +6,7 @@
 
 * `OOXMLDocumentObject#boolean_attribute_value` will raise `ArgumentError` if
   attribute value is not boolean/1/0
+* `Note#note_base_xpath` will raise `NameError` for unknown note type
 
 ## 0.35.0 (2023-04-20)
 
