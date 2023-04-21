@@ -19,9 +19,10 @@ module OoxmlParser
     # @return [True, False] Specifies whether the section should have a different header and footer for its first page
     attr_reader :title_page
 
-    def initialize(parent: nil)
+    def initialize(parent: nil, type: nil)
       @notes = []
-      super
+      @type = type
+      super(parent: parent)
     end
 
     # Parse PageProperties data
@@ -86,6 +87,18 @@ module OoxmlParser
         end
       end
       self
+    end
+
+    # @return [String] type of section break
+    def section_break
+      @section_break ||= case type
+                         when 'oddPage'
+                           'Odd page'
+                         when 'continuous'
+                           'Current Page'
+                         else
+                           'Next Page'
+                         end
     end
   end
 end
