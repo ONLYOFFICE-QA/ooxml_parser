@@ -2,6 +2,11 @@
 
 ## master (unreleased)
 
+### Changes
+
+* `OOXMLDocumentObject#boolean_attribute_value` will raise `ArgumentError` if
+  attribute value is not boolean/1/0
+
 ## 0.35.0 (2023-04-20)
 
 ### Changes
