@@ -50,3 +50,8 @@ Default is 2 digits in fraction part
 OoxmlParser.configure do |config|
   config.accuracy = 3
 end
+```
+
+## Changes
+
+Renamed `SeriesText#string` to `SeriesText#reference`
