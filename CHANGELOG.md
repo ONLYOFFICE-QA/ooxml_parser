@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### New Features
+
+* New `Color#within_delta?` method for comparing colors
+
 ### Changes
 
 * `OOXMLDocumentObject#boolean_attribute_value` will raise `ArgumentError` if

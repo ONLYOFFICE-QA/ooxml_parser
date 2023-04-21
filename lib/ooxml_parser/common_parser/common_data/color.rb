@@ -112,6 +112,16 @@ module OoxmlParser
       end
     end
 
+    # Check if other color is within delta with current color
+    # @param other [Color] color to compare
+    # @param delta [Integer] max delta for each of specters
+    # @return [True, False] result of comparison
+    def within_delta?(other, delta)
+      (red - other.red).abs < delta &&
+        (green - other.green).abs < delta &&
+        (blue - other.blue).abs < delta
+    end
+
     # To compare color, which look alike
     # @param [String or Color] color_to_check color to compare
     # @param [Integer] delta max delta for each of specters
@@ -128,9 +138,7 @@ module OoxmlParser
       return false if !none? && color_to_check.none?
       return true if self == color_to_check
 
-      (red - color_to_check.red).abs < delta &&
-        (green - color_to_check.green).abs < delta &&
-        (blue - color_to_check.blue).abs < delta
+      within_delta?(color_to_check, delta)
     end
 
     # Apply tint to color
