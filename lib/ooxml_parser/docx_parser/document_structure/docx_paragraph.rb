@@ -218,14 +218,7 @@ module OoxmlParser
           @spacing = @spacing.fetch_from_valued_spacing(@valued_spacing)
         when 'sectPr'
           @sector_properties = PageProperties.new(parent: self).parse(node_child, self, default_char_style)
-          @section_break = case @sector_properties.type
-                           when 'oddPage'
-                             'Odd page'
-                           when 'continuous'
-                             'Current Page'
-                           else
-                             'Next Page'
-                           end
+          @section_break ||= @sector_properties.section_break
         end
       end
       @parent = parent
