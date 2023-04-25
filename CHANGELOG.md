@@ -17,6 +17,7 @@
 ### Fixes
 
 * Fix `CommonTiming` was not an instance of `OOXMLDocumentObject
+* Simplify parsing of `Chart`
 
 ## 0.35.0 (2023-04-20)
 
