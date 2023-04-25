@@ -104,44 +104,32 @@ module OoxmlParser
                       @type = :bar
                       bar_dir_node = plot_area_node_child.xpath('c:barDir')
                       @type = :column if bar_dir_node.first.attribute('val').value == 'col'
-                      parse_properties(plot_area_node_child)
                     when 'lineChart'
                       @type = :line
-                      parse_properties(plot_area_node_child)
                     when 'areaChart'
                       @type = :area
-                      parse_properties(plot_area_node_child)
                     when 'bubbleChart'
                       @type = :bubble
-                      parse_properties(plot_area_node_child)
                     when 'doughnutChart'
                       @type = :doughnut
-                      parse_properties(plot_area_node_child)
                     when 'pieChart'
                       @type = :pie
-                      parse_properties(plot_area_node_child)
                     when 'scatterChart'
                       @type = :point
-                      parse_properties(plot_area_node_child)
                     when 'radarChart'
                       @type = :radar
-                      parse_properties(plot_area_node_child)
                     when 'stockChart'
                       @type = :stock
-                      parse_properties(plot_area_node_child)
                     when 'surface3DChart'
                       @type = :surface_3d
-                      parse_properties(plot_area_node_child)
                     when 'line3DChart'
                       @type = :line_3d
-                      parse_properties(plot_area_node_child)
                     when 'bar3DChart'
                       @type = :bar_3d
-                      parse_properties(plot_area_node_child)
                     when 'pie3DChart'
                       @type = :pie_3d
-                      parse_properties(plot_area_node_child)
                     end
+                    parse_properties(plot_area_node_child)
                   end
                   parse_axis(chart_node_child)
                   @plot_area = PlotArea.new(parent: self).parse(chart_node_child)
