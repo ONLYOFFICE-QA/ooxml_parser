@@ -3,14 +3,14 @@
 require_relative 'common_timing/condition_list'
 module OoxmlParser
   # Class for data of CommonTiming
-  class CommonTiming
+  class CommonTiming < OOXMLDocumentObject
     attr_accessor :id, :duration, :restart, :children, :start_conditions, :end_conditions
 
     def initialize(parent: nil)
       @children = []
       @start_conditions = []
       @end_conditions = []
-      @parent = parent
+      super(parent: parent)
     end
 
     # Parse CommonTiming object

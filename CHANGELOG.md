@@ -14,6 +14,10 @@
 * `Note#note_base_xpath` will raise `NameError` for unknown note type
 * Minor changes to `spec` folder structure
 
+### Fixes
+
+* Fix `CommonTiming` was not an instance of `OOXMLDocumentObject
+
 ## 0.35.0 (2023-04-20)
 
 ### Changes
