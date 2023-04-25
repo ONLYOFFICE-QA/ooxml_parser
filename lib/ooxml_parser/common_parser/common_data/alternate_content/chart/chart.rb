@@ -86,77 +86,7 @@ module OoxmlParser
       chart_xml.xpath('*').each do |chart_node|
         case chart_node.name
         when 'chartSpace'
-          chart_node.xpath('*').each do |chart_space_node_child|
-            case chart_space_node_child.name
-            when 'AlternateContent'
-              @alternate_content = AlternateContent.new(parent: self).parse(chart_space_node_child)
-            when 'spPr'
-              @shape_properties = DocxShapeProperties.new(parent: self).parse(chart_space_node_child)
-            when 'chart'
-              chart_space_node_child.xpath('*').each do |chart_node_child|
-                case chart_node_child.name
-                when 'plotArea'
-                  chart_node_child.xpath('*').each do |plot_area_node_child|
-                    next unless type.empty?
-
-                    case plot_area_node_child.name
-                    when 'barChart'
-                      @type = :bar
-                      bar_dir_node = plot_area_node_child.xpath('c:barDir')
-                      @type = :column if bar_dir_node.first.attribute('val').value == 'col'
-                      parse_properties(plot_area_node_child)
-                    when 'lineChart'
-                      @type = :line
-                      parse_properties(plot_area_node_child)
-                    when 'areaChart'
-                      @type = :area
-                      parse_properties(plot_area_node_child)
-                    when 'bubbleChart'
-                      @type = :bubble
-                      parse_properties(plot_area_node_child)
-                    when 'doughnutChart'
-                      @type = :doughnut
-                      parse_properties(plot_area_node_child)
-                    when 'pieChart'
-                      @type = :pie
-                      parse_properties(plot_area_node_child)
-                    when 'scatterChart'
-                      @type = :point
-                      parse_properties(plot_area_node_child)
-                    when 'radarChart'
-                      @type = :radar
-                      parse_properties(plot_area_node_child)
-                    when 'stockChart'
-                      @type = :stock
-                      parse_properties(plot_area_node_child)
-                    when 'surface3DChart'
-                      @type = :surface_3d
-                      parse_properties(plot_area_node_child)
-                    when 'line3DChart'
-                      @type = :line_3d
-                      parse_properties(plot_area_node_child)
-                    when 'bar3DChart'
-                      @type = :bar_3d
-                      parse_properties(plot_area_node_child)
-                    when 'pie3DChart'
-                      @type = :pie_3d
-                      parse_properties(plot_area_node_child)
-                    end
-                  end
-                  parse_axis(chart_node_child)
-                  @plot_area = PlotArea.new(parent: self).parse(chart_node_child)
-                when 'title'
-                  @title = ChartAxisTitle.new(parent: self).parse(chart_node_child)
-                when 'legend'
-                  @legend = ChartLegend.new(parent: self).parse(chart_node_child)
-                when 'view3D'
-                  @view_3d = View3D.new(parent: self).parse(chart_node_child)
-                when 'pivotFmts'
-                  @pivot_formats = PivotFormats.new(parent: self).parse(chart_node_child)
-                end
-              end
-            end
-          end
+          parse_chart_space(chart_node)
         end
       end
       parse_relationships
@@ -165,6 +95,76 @@ module OoxmlParser
     end
 
     private
+
+    # Parse 'chartSpace' node
+    # @return [nil]
+    def parse_chart_space(chart_space_node)
+      chart_space_node.xpath('*').each do |chart_space_node_child|
+        case chart_space_node_child.name
+        when 'AlternateContent'
+          @alternate_content = AlternateContent.new(parent: self).parse(chart_space_node_child)
+        when 'spPr'
+          @shape_properties = DocxShapeProperties.new(parent: self).parse(chart_space_node_child)
+        when 'chart'
+          chart_space_node_child.xpath('*').each do |chart_node_child|
+            case chart_node_child.name
+            when 'plotArea'
+              chart_node_child.xpath('*').each do |plot_area_node_child|
+                next unless type.empty?
+
+                parse_chart_type(plot_area_node_child)
+                parse_properties(plot_area_node_child)
+              end
+              parse_axis(chart_node_child)
+              @plot_area = PlotArea.new(parent: self).parse(chart_node_child)
+            when 'title'
+              @title = ChartAxisTitle.new(parent: self).parse(chart_node_child)
+            when 'legend'
+              @legend = ChartLegend.new(parent: self).parse(chart_node_child)
+            when 'view3D'
+              @view_3d = View3D.new(parent: self).parse(chart_node_child)
+            when 'pivotFmts'
+              @pivot_formats = PivotFormats.new(parent: self).parse(chart_node_child)
+            end
+          end
+        end
+      end
+    end
+
+    # Parse chart type and properties
+    # @return [nil]
+    def parse_chart_type(plot_area_node_child)
+      case plot_area_node_child.name
+      when 'barChart'
+        @type = :bar
+        bar_dir_node = plot_area_node_child.xpath('c:barDir')
+        @type = :column if bar_dir_node.first.attribute('val').value == 'col'
+      when 'lineChart'
+        @type = :line
+      when 'areaChart'
+        @type = :area
+      when 'bubbleChart'
+        @type = :bubble
+      when 'doughnutChart'
+        @type = :doughnut
+      when 'pieChart'
+        @type = :pie
+      when 'scatterChart'
+        @type = :point
+      when 'radarChart'
+        @type = :radar
+      when 'stockChart'
+        @type = :stock
+      when 'surface3DChart'
+        @type = :surface_3d
+      when 'line3DChart'
+        @type = :line_3d
+      when 'bar3DChart'
+        @type = :bar_3d
+      when 'pie3DChart'
+        @type = :pie_3d
+      end
+    end
 
     # Perform parsing of axis info
     # @param node [Nokogiri::XML:Element] node to parse
