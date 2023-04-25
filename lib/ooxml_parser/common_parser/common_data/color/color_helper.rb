@@ -18,8 +18,6 @@ module OoxmlParser
         @red, @green, @blue = hex_string.unpack('A2A2A2').map(&:hex)
       when 8
         @alpha_channel, @red, @green, @blue = hex_string.unpack('A2A2A2A2').map(&:hex)
-      else
-        raise ArgumentError, "Unknown color format: #{hex_string}"
       end
       self
     end
