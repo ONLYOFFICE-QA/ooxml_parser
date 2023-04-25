@@ -5,12 +5,6 @@ module OoxmlParser
   module ColorHelper
     # @return [String] value for auto string
     AUTO_STRING_VALUE = 'auto'
-    # @return [Regexp] regexp for hex string with 3 digits
-    REGEXP_THREE_DIGITS = /(.)(.)(.)/.freeze
-    # @return [Regexp] regexp for hex string with 6 digits
-    REGEXP_SIX_DIGITS = /(..)(..)(..)/.freeze
-    # @return [Regexp] regexp for hex string with 8 digits
-    REGEXP_EIGHT_DIGITS = /(..)(..)(..)(..)/.freeze
 
     # Parse string in hex
     # @param [String] hex_string with or without alpha-channel
@@ -19,11 +13,11 @@ module OoxmlParser
 
       case hex_string.length
       when 3
-        @red, @green, @blue = hex_string.match(REGEXP_THREE_DIGITS).captures.map(&:hex)
+        @red, @green, @blue = hex_string.chars.map(&:hex)
       when 6
-        @red, @green, @blue = hex_string.match(REGEXP_SIX_DIGITS).captures.map(&:hex)
+        @red, @green, @blue = hex_string.unpack('A2A2A2').map(&:hex)
       when 8
-        @alpha_channel, @red, @green, @blue = hex_string.match(REGEXP_EIGHT_DIGITS).captures.map(&:hex)
+        @alpha_channel, @red, @green, @blue = hex_string.unpack('A2A2A2A2').map(&:hex)
       end
       self
     end

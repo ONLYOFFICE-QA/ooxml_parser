@@ -18,6 +18,7 @@
 
 * Fix `CommonTiming` was not an instance of `OOXMLDocumentObject
 * Simplify parsing of `Chart`
+* Speedup `Color#parse_hex_string` by not using regexp
 
 ## 0.35.0 (2023-04-20)
 
