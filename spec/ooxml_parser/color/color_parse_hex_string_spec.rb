@@ -18,6 +18,12 @@ describe OoxmlParser::Color, '#parse_hex_string' do
       .to eq('RGB (171, 205, 239)')
   end
 
+  it 'hex string with 5 symbols not supported' do
+    incorrect_string = 'ABCDE'
+    expect { described_class.new.parse_hex_string(incorrect_string) }
+      .to raise_error(ArgumentError, /Unknown color format: #{incorrect_string}/)
+  end
+
   describe 'with 8 symbols' do
     let(:with_alpha) { described_class.new.parse_hex_string('12ABCDEF') }
 
