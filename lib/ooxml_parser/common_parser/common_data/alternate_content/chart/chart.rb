@@ -132,7 +132,7 @@ module OoxmlParser
     end
 
     # Parse chart type and properties
-    # @retrun [nil]
+    # @return [nil]
     def parse_chart_type(plot_area_node_child)
       case plot_area_node_child.name
       when 'barChart'
