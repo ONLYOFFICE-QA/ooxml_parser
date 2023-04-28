@@ -67,7 +67,7 @@ module OoxmlParser
           next unless val
           next if val.xpath('c:numRef').empty?
 
-          @data << ChartCellsRange.new(parent: self).parse(val.xpath('c:numRef').first).dup
+          @data << ChartCellsRange.new(parent: self).parse(val.xpath('c:numRef').first)
         when 'dLbls'
           @display_labels = DisplayLabelsProperties.new(parent: self).parse(chart_props_node_child)
         when 'varyColors'
