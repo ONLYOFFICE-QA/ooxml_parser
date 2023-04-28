@@ -136,13 +136,13 @@ module OoxmlParser
           @page_numbering = true if field_simple.page_numbering?
           character_styles_array += field_simple.runs
         when 'r'
-          character_style = custom_character_style.dup
+          run = custom_character_style.dup
           node_child.xpath('w:instrText').each do |insrt_text|
             @page_numbering = true if insrt_text.text.include?('PAGE')
           end
-          character_style.parse(node_child, char_number, parent: self)
-          character_style.comments = comments.dup
-          character_styles_array << character_style.dup
+          run.parse(node_child, char_number, parent: self)
+          run.comments = comments.dup
+          character_styles_array << run
           char_number += 1
         when 'hyperlink'
           @hyperlink = Hyperlink.new(parent: self).parse(node_child)
