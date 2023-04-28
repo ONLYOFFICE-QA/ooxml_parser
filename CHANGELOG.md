@@ -6,6 +6,7 @@
 
 * New `Color#within_delta?` method for comparing colors
 * New `PageProperties#section_break` method
+* Cache file `Relationships` to reduce memory usage
 
 ### Changes
 

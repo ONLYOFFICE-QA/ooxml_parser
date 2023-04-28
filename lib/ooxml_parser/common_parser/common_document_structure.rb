@@ -27,6 +27,7 @@ module OoxmlParser
       @default_font_style = FontStyle.new
       @unpacked_folder = params.fetch(:unpacked_folder, nil)
       @xmls_stack = []
+      @relationships_cache = {}
       super(parent: nil)
     end
 
@@ -56,8 +57,17 @@ module OoxmlParser
       rels_path = dir + "_rels/#{File.basename(@xmls_stack.last)}.rels"
       raise LoadError, "Cannot find .rels file by path: #{rels_path}" unless File.exist?(rels_path)
 
-      relationships = Relationships.new.parse_file(rels_path)
-      relationships.target_by_id(id)
+      cache_relationships(rels_path)
+      @relationships_cache[rels_path].target_by_id(id)
+    end
+
+    private
+
+    # Store relationships to cache
+    def cache_relationships(rels_path)
+      return if @relationships_cache.key?(rels_path)
+
+      @relationships_cache[rels_path] = Relationships.new.parse_file(rels_path)
     end
   end
 end
