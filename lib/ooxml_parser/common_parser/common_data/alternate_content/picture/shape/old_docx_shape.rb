@@ -16,7 +16,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'textbox'
-          @text_box = TextBox.parse_list(node_child, parent: self)
+          @text_box = TextBox.new(parent: parent).parse_list(node_child)
         when 'imagedata'
           @file_reference = FileReference.new(parent: self).parse(node_child)
         when 'fill'
