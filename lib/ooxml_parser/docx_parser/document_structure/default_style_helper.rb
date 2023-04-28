@@ -11,7 +11,7 @@ module OoxmlParser
       parse_default_character_style
       root_object.default_table_paragraph_style = root_object.default_paragraph_style.dup
       root_object.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
-      DocumentStructure.default_table_run_style = root_object.default_run_style.dup
+      root_object.default_table_run_style = root_object.default_run_style.dup
       parse_default_table_style
     end
 
@@ -21,7 +21,7 @@ module OoxmlParser
       root_object.default_paragraph_style = DocxParagraph.new(parent: self)
       root_object.default_table_paragraph_style = DocxParagraph.new(parent: self)
       root_object.default_run_style = DocxParagraphRun.new(parent: self)
-      DocumentStructure.default_table_run_style = DocxParagraphRun.new(parent: self)
+      root_object.default_table_run_style = DocxParagraphRun.new(parent: self)
 
       return unless File.exist?(file)
 
@@ -76,9 +76,9 @@ module OoxmlParser
     def parse_default_table_style
       return unless @styles&.default_style(:table)&.run_properties_node
 
-      DocumentStructure.default_table_run_style
-                       .parse_properties(@styles.default_style(:table)
-                                                .run_properties_node)
+      root_object.default_table_run_style
+                 .parse_properties(@styles.default_style(:table)
+                                          .run_properties_node)
     end
   end
 end

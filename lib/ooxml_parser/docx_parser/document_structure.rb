@@ -51,6 +51,8 @@ module OoxmlParser
     attr_accessor :default_run_style
     # @return [DocxParagraph] default table paragraph style
     attr_accessor :default_table_paragraph_style
+    # @return [DocxParagraphRun] default table run style
+    attr_accessor :default_table_run_style
 
     def initialize(params = {})
       @elements = []
@@ -217,10 +219,6 @@ module OoxmlParser
                                    .parse
       @settings = DocumentSettings.new(parent: self).parse
       self
-    end
-
-    class << self
-      attr_accessor :default_table_run_style
     end
   end
 end
