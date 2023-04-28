@@ -206,7 +206,7 @@ module OoxmlParser
           @paragraph_style_ref = ParagraphStyleRef.new(parent: self).parse(node_child)
           fill_style_data(default_char_style)
         when 'ind'
-          @ind = DocumentStructure.default_paragraph_style.instance_variable_get(:@ind).dup.parse(node_child)
+          @ind = root_object.default_paragraph_style.instance_variable_get(:@ind).dup.parse(node_child)
         when 'numPr'
           @numbering = NumberingProperties.new(parent: self).parse(node_child)
         when 'jc'
