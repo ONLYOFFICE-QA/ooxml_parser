@@ -2,11 +2,11 @@
 
 module OoxmlParser
   # Class for working with TextBox (w:txbxContent)
-  class TextBox
+  class TextBox < OOXMLDocumentObject
     # Parse TextBox List
     # @param [Nokogiri::XML:Node] node with TextBox
     # @return [Array] array of elements
-    def self.parse_list(node, parent: nil)
+    def parse_list(node)
       elements = []
       text_box_content_node = node.xpath('w:txbxContent').first
 

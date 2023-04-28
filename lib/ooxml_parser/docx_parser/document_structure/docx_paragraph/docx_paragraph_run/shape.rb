@@ -38,7 +38,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'textbox'
-          @elements = TextBox.parse_list(node_child, parent: self)
+          @elements = TextBox.new(parent: parent).parse_list(node_child)
         end
       end
       self
