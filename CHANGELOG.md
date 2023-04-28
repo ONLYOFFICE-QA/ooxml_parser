@@ -15,6 +15,7 @@
 * `Note#note_base_xpath` will raise `NameError` for unknown note type
 * Minor changes to `spec` folder structure
 * `TextBox` now is instance of `OOXMLDocumentObject`
+* Cleanup `Runs`-related code in `DocxParagraph`
 
 ### Fixes
 
