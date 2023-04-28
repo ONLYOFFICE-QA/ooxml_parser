@@ -36,10 +36,10 @@ module OoxmlParser
         when 'tcPr'
           @properties = CellProperties.new(parent: self).parse(node_child)
         when 'p'
-          @elements << DocumentStructure.default_table_paragraph_style.dup.parse(node_child,
-                                                                                 0,
-                                                                                 DocumentStructure.default_table_run_style,
-                                                                                 parent: self)
+          @elements << root_object.default_table_paragraph_style.dup.parse(node_child,
+                                                                           0,
+                                                                           root_object.default_table_run_style,
+                                                                           parent: self)
         when 'sdt'
           @elements << StructuredDocumentTag.new(parent: self).parse(node_child)
         when 'tbl'

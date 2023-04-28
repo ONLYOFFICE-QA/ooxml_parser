@@ -45,6 +45,14 @@ module OoxmlParser
     attr_accessor :comments_document
     # @return [CommentsExtended] extended comments
     attr_accessor :comments_extended
+    # @return [DocxParagraph] default paragraph style
+    attr_accessor :default_paragraph_style
+    # @return [DocxParagraphRun] default run style
+    attr_accessor :default_run_style
+    # @return [DocxParagraph] default table paragraph style
+    attr_accessor :default_table_paragraph_style
+    # @return [DocxParagraphRun] default table run style
+    attr_accessor :default_table_run_style
 
     def initialize(params = {})
       @elements = []
@@ -162,8 +170,8 @@ module OoxmlParser
       @content_types = ContentTypes.new(parent: self).parse
       @root_subfolder = 'word/'
       @comments = []
-      DocumentStructure.default_paragraph_style = DocxParagraph.new
-      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
+      @default_paragraph_style = DocxParagraph.new
+      @default_run_style = DocxParagraphRun.new(parent: self)
       @theme = PresentationTheme.new(parent: self).parse('word/theme/theme1.xml')
       @relationships = Relationships.new(parent: self).parse_file("#{root_object.unpacked_folder}word/_rels/document.xml.rels")
       parse_styles
@@ -180,7 +188,7 @@ module OoxmlParser
             when 'p'
               child = element.child
               unless child.nil? && @elements.last.instance_of?(Table)
-                paragraph_style = DocumentStructure.default_paragraph_style.dup.parse(element, number, DocumentStructure.default_run_style, parent: self)
+                paragraph_style = default_paragraph_style.dup.parse(element, number, default_run_style, parent: self)
                 number += 1
                 @elements << paragraph_style.dup
               end
@@ -196,8 +204,8 @@ module OoxmlParser
           end
           body.xpath('w:sectPr').each do |sect_pr|
             @page_properties = PageProperties.new(parent: self).parse(sect_pr,
-                                                                      DocumentStructure.default_paragraph_style,
-                                                                      DocumentStructure.default_run_style)
+                                                                      default_paragraph_style,
+                                                                      default_run_style)
             @notes = page_properties.notes # keep copy of notes to compatibility with previous docx models
           end
         end
@@ -211,10 +219,6 @@ module OoxmlParser
                                    .parse
       @settings = DocumentSettings.new(parent: self).parse
       self
-    end
-
-    class << self
-      attr_accessor :default_table_run_style, :default_table_paragraph_style, :default_paragraph_style, :default_run_style
     end
   end
 end
