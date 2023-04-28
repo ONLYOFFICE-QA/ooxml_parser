@@ -45,6 +45,8 @@ module OoxmlParser
     attr_accessor :comments_document
     # @return [CommentsExtended] extended comments
     attr_accessor :comments_extended
+    # @return [DocxParagraph] default table paragraph style
+    attr_accessor :default_table_paragraph_style
 
     def initialize(params = {})
       @elements = []
@@ -214,7 +216,7 @@ module OoxmlParser
     end
 
     class << self
-      attr_accessor :default_table_run_style, :default_table_paragraph_style, :default_paragraph_style, :default_run_style
+      attr_accessor :default_table_run_style, :default_paragraph_style, :default_run_style
     end
   end
 end

@@ -9,8 +9,8 @@ module OoxmlParser
       parse_default_style_paragraph_properties
       parse_default_style_run_properties
       parse_default_character_style
-      DocumentStructure.default_table_paragraph_style = DocumentStructure.default_paragraph_style.dup
-      DocumentStructure.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
+      root_object.default_table_paragraph_style = DocumentStructure.default_paragraph_style.dup
+      root_object.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
       DocumentStructure.default_table_run_style = DocumentStructure.default_run_style.dup
       parse_default_table_style
     end
@@ -19,7 +19,7 @@ module OoxmlParser
     def parse_styles
       file = "#{root_object.unpacked_folder}/word/styles.xml"
       DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self)
-      DocumentStructure.default_table_paragraph_style = DocxParagraph.new(parent: self)
+      root_object.default_table_paragraph_style = DocxParagraph.new(parent: self)
       DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
       DocumentStructure.default_table_run_style = DocxParagraphRun.new(parent: self)
 
