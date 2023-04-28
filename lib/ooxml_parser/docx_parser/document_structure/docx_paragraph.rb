@@ -109,7 +109,6 @@ module OoxmlParser
       custom_character_style = default_character_style.dup
       custom_character_style.parent = self
       char_number = 0
-      comments = []
       node.attributes.each do |key, value|
         case key
         when 'paraId'
@@ -141,7 +140,6 @@ module OoxmlParser
             @page_numbering = true if insrt_text.text.include?('PAGE')
           end
           run.parse(node_child, char_number, parent: self)
-          run.comments = comments.dup
           character_styles_array << run
           char_number += 1
         when 'hyperlink'
