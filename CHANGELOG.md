@@ -23,6 +23,7 @@
 * Simplify parsing of `Chart`
 * Speedup `Color#parse_hex_string` by not using regexp
 * Remove all `DocumentStructure` class variables
+* Add `SeriesText#string` alias to `SeriesText#reference`
 
 ## 0.35.0 (2023-04-20)
 

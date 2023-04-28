@@ -19,5 +19,10 @@ module OoxmlParser
       end
       self
     end
+
+    alias string reference
+
+    extend Gem::Deprecate
+    deprecate :string, 'reference', 2069, 1
   end
 end
