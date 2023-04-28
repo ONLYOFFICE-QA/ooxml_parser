@@ -143,7 +143,6 @@ module OoxmlParser
           character_style.parse(node_child, char_number, parent: self)
           character_style.comments = comments.dup
           character_styles_array << character_style.dup
-          character_styles_array.last.shape = character_style.shape if character_style.shape
           char_number += 1
         when 'hyperlink'
           @hyperlink = Hyperlink.new(parent: self).parse(node_child)
