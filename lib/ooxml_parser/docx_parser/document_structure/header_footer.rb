@@ -65,7 +65,7 @@ module OoxmlParser
 
         paragraph_number = 0
         footnote.xpath('w:p').each do |paragraph|
-          @elements << DocumentStructure.default_paragraph_style.dup.parse(paragraph, paragraph_number, DocumentStructure.default_run_style, parent: self)
+          @elements << DocumentStructure.default_paragraph_style.dup.parse(paragraph, paragraph_number, root_object.default_run_style, parent: self)
           paragraph_number += 1
         end
       end

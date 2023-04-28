@@ -11,7 +11,7 @@ module OoxmlParser
       parse_default_character_style
       root_object.default_table_paragraph_style = DocumentStructure.default_paragraph_style.dup
       root_object.default_table_paragraph_style.spacing = Spacing.new(0, 0, 1, :auto)
-      DocumentStructure.default_table_run_style = DocumentStructure.default_run_style.dup
+      DocumentStructure.default_table_run_style = root_object.default_run_style.dup
       parse_default_table_style
     end
 
@@ -20,7 +20,7 @@ module OoxmlParser
       file = "#{root_object.unpacked_folder}/word/styles.xml"
       DocumentStructure.default_paragraph_style = DocxParagraph.new(parent: self)
       root_object.default_table_paragraph_style = DocxParagraph.new(parent: self)
-      DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
+      root_object.default_run_style = DocxParagraphRun.new(parent: self)
       DocumentStructure.default_table_run_style = DocxParagraphRun.new(parent: self)
 
       return unless File.exist?(file)
@@ -35,12 +35,12 @@ module OoxmlParser
                                                                                .raw_node, 0)
       end
       if @styles&.document_defaults&.run_properties_default&.run_properties
-        DocumentStructure.default_run_style = DocxParagraphRun.new(parent: self)
-                                                              .parse_properties(@styles
-                                                                                  .document_defaults
-                                                                                  .run_properties_default
-                                                                                  .run_properties
-                                                                                  .raw_node)
+        root_object.default_run_style = DocxParagraphRun.new(parent: self)
+                                                        .parse_properties(@styles
+                                                                            .document_defaults
+                                                                            .run_properties_default
+                                                                            .run_properties
+                                                                            .raw_node)
       end
       parse_default_style
     end
@@ -52,14 +52,14 @@ module OoxmlParser
 
       DocxParagraph.new.parse_paragraph_style(@styles.default_style(:paragraph)
                                                      .paragraph_properties_node,
-                                              DocumentStructure.default_run_style)
+                                              root_object.default_run_style)
     end
 
     def parse_default_style_run_properties
       return unless @styles&.default_style(:paragraph)&.run_properties_node
 
-      DocumentStructure.default_run_style
-                       .parse_properties(@styles.default_style(:paragraph)
+      root_object.default_run_style
+                 .parse_properties(@styles.default_style(:paragraph)
                                                 .run_properties_node)
     end
 
@@ -67,8 +67,8 @@ module OoxmlParser
     def parse_default_character_style
       return unless @styles&.default_style(:character)&.run_properties_node
 
-      DocumentStructure.default_run_style
-                       .parse_properties(@styles.default_style(:character)
+      root_object.default_run_style
+                 .parse_properties(@styles.default_style(:character)
                                                 .run_properties_node)
     end
 
