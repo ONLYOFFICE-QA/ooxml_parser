@@ -13,9 +13,9 @@ module OoxmlParser
       text_box_content_node&.xpath('*')&.each_with_index do |textbox_element, i|
         case textbox_element.name
         when 'p'
-          root_object.default_paragraph_style = DocxParagraph.new
-          root_object.default_paragraph_style.spacing = Spacing.new(0, 0.35, 1.15, :multiple)
-          elements << root_object.default_paragraph_style.dup.parse(textbox_element, i, parent: parent)
+          textbox_paragraph = DocxParagraph.new
+          textbox_paragraph.spacing = Spacing.new(0, 0.35, 1.15, :multiple)
+          elements << textbox_paragraph.parse(textbox_element, i, parent: parent)
         when 'tbl'
           elements << Table.new(parent: parent).parse(textbox_element, i)
         end
