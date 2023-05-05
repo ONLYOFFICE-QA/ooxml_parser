@@ -25,7 +25,10 @@ module OoxmlParser
           # Cannot just use return in block
           # because of TruffleRuby bug (cause LocalJumpError)
           # https://github.com/oracle/truffleruby/issues/2438
-          found = table_style if table_style.type == value
+          if table_style.type == value
+            found = table_style
+            break
+          end
         end
         found
       end
