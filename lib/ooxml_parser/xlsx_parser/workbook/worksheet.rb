@@ -7,7 +7,7 @@ require_relative 'worksheet/sheet_format_properties'
 require_relative 'worksheet/sheet_view'
 require_relative 'worksheet/table_part'
 require_relative 'worksheet/worksheet_helper'
-require_relative 'worksheet/xlsx_column_properties'
+require_relative 'worksheet/xlsx_columns'
 require_relative 'worksheet/xlsx_drawing'
 require_relative 'worksheet/xlsx_row'
 require_relative 'worksheet/xlsx_header_footer'
@@ -119,7 +119,7 @@ module OoxmlParser
             @hyperlinks << Hyperlink.new(parent: self).parse(hyperlink_node).dup
           end
         when 'cols'
-          @columns = XlsxColumnProperties.parse_list(worksheet_node_child, parent: self)
+          @columns = XlsxColumns.new(parent: self).parse(worksheet_node_child).elements
         when 'autoFilter'
           @autofilter = Autofilter.new(parent: self).parse(worksheet_node_child)
         when 'tableParts'

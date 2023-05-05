@@ -18,6 +18,7 @@
 * Cleanup `Runs`-related code in `DocxParagraph`
 * Simplify `Spacing` parsing
 * Add `TimeNodeList` class for parsing nodes
+* Add `XlsxColumns` class for parsing nodes
 
 ### Fixes
 

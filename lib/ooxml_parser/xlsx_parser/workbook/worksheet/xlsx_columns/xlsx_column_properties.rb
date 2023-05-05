@@ -54,19 +54,6 @@ module OoxmlParser
     deprecate :from, 'min', 2099, 1
     deprecate :to, 'max', 2099, 1
 
-    # Parse list of XlsxColumnProperties
-    # @param columns_width_node [Nokogiri::XML:Element] node to parse
-    # @param parent [OOXMLDocumentObject] parent of result objects
-    # @return [Array<XlsxColumnProperties>] list of XlsxColumnProperties
-    def self.parse_list(columns_width_node, parent: nil)
-      columns = []
-      columns_width_node.xpath('xmlns:col').each do |col_node|
-        col = XlsxColumnProperties.new(parent: parent).parse(col_node)
-        columns << col
-      end
-      columns
-    end
-
     private
 
     # TODO: Currently width calculation use some magick number from old time ago
