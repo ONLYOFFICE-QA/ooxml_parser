@@ -3,11 +3,9 @@
 require 'spec_helper'
 
 describe OoxmlParser::DifferentialFormattingRecord do
-  let(:xlsx) do
-    OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
-                              '/conditional_formattings/conditional_formatting_value_is.xlsx')
-  end
-  let(:rule) { xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0] }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
+                                   '/conditional_formattings/conditional_formatting_value_is.xlsx')
+  rule = xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0]
 
   it 'Font' do
     expect(rule.format.font.color).to eq(OoxmlParser::Color.new(156, 0, 6))

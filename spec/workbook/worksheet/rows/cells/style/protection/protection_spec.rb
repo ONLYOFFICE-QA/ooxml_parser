@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::Protection do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/worksheet/rows/cells/style/protection/protection.xlsx') }
-  let(:protection) { xlsx.worksheets[0].rows[0].cells[0].style.protection }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/rows/cells/style/protection/protection.xlsx')
+  protection = xlsx.worksheets[0].rows[0].cells[0].style.protection
 
   it 'Has locked' do
     expect(protection.locked).to be_falsey

@@ -3,11 +3,9 @@
 require 'spec_helper'
 
 describe OoxmlParser::X14Table do
-  let(:xlsx) do
-    OoxmlParser::Parser.parse('spec/workbook/tables/' \
-                              'extensions/x14_table/' \
-                              'x14_table_alternative_text.xlsx')
-  end
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/tables/' \
+                                   'extensions/x14_table/' \
+                                   'x14_table_alternative_text.xlsx')
 
   it 'alt text' do
     expect(xlsx.worksheets.first.table_parts.first.extension_list[0].table.alt_text).to eq('ONLYOFFICE Title Support')

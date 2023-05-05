@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::FormTextProperties do
-  let(:docxf) { OoxmlParser::Parser.parse('spec/document/elements/paragraph/std/sdt_form_properties/form.docxf') }
+  docxf = OoxmlParser::Parser.parse('spec/document/elements/paragraph/std/sdt_form_properties/form.docxf')
 
   it 'Has multiline' do
     expect(docxf.elements.first.sdt.properties.form_text_properties.multiline).to be_truthy

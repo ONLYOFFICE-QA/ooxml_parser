@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::ProtectedRange do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/worksheet/protected_range/protected_range.xlsx') }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/protected_range/protected_range.xlsx')
 
   it 'Has algorithm_name' do
     expect(xlsx.worksheets[0].protected_ranges[0].algorithm_name).to eq('SHA-512')

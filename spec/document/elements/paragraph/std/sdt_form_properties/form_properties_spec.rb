@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::FormProperties do
-  let(:docxf) { OoxmlParser::Parser.parse('spec/document/elements/paragraph/std/sdt_form_properties/form.docxf') }
+  docxf = OoxmlParser::Parser.parse('spec/document/elements/paragraph/std/sdt_form_properties/form.docxf')
 
   it 'Has key' do
     expect(docxf.elements.first.sdt.properties.form_properties.key).to eq('123')

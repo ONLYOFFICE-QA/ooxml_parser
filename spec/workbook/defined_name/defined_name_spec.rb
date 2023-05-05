@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::DefinedName do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/defined_name/defined_name.xlsx') }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/defined_name/defined_name.xlsx')
 
   it 'Has name' do
     expect(xlsx.defined_names[0].name).to eq('Print_Titles')

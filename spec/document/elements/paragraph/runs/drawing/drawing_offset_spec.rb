@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'Drawing Offset' do
-  let(:folder) { 'spec/document/elements/paragraph/runs/drawing/drawing_offset' }
+  folder = 'spec/document/elements/paragraph/runs/drawing/drawing_offset'
 
   it 'chart_offset_w14' do
     docx = OoxmlParser::DocxParser.parse_docx("#{folder}/chart_offset_w14.docx")

@@ -3,11 +3,9 @@
 require 'spec_helper'
 
 describe OoxmlParser::ConditionalFormattingRule do
-  let(:xlsx) do
-    OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
-                              '/conditional_formattings/conditional_formatting_value_is.xlsx')
-  end
-  let(:conditional_formatting) { xlsx.worksheets.first.extension_list[0].conditional_formattings[0] }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
+                                   '/conditional_formattings/conditional_formatting_value_is.xlsx')
+  conditional_formatting = xlsx.worksheets.first.extension_list[0].conditional_formattings[0]
 
   it 'Has type' do
     expect(conditional_formatting.rules[0].type).to eq(:cellIs)

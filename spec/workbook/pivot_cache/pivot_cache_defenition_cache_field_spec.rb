@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::PivotCacheDefinition do
-  let(:pivot_cache_parsed) { OoxmlParser::Parser.parse('spec/workbook/pivot_cache/pivot_cache.xlsx') }
-  let(:cache_field) { pivot_cache_parsed.pivot_caches[0].pivot_cache_definition.cache_fields[0] }
+  pivot_cache_parsed = OoxmlParser::Parser.parse('spec/workbook/pivot_cache/pivot_cache.xlsx')
+  cache_field = pivot_cache_parsed.pivot_caches[0].pivot_cache_definition.cache_fields[0]
 
   it 'CacheField contains name' do
     expect(cache_field.name).to eq('Column 1')

@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::PivotTableStyleInfo do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_table.xlsx') }
-  let(:style) { xlsx.pivot_table_definitions[0].style_info }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_table.xlsx')
+  style = xlsx.pivot_table_definitions[0].style_info
 
   it 'style info is correct class' do
     expect(style).to be_a(described_class)

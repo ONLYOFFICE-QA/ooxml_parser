@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'Sdt in document' do
-  let(:sdt_with_table) { OoxmlParser::Parser.parse('spec/document/sdt/sdt_with_table.docx') }
+  sdt_with_table = OoxmlParser::Parser.parse('spec/document/sdt/sdt_with_table.docx')
 
   it 'sdt_in_document.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/sdt/sdt_in_document.docx')

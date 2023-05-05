@@ -3,10 +3,10 @@
 require 'spec_helper'
 
 describe OoxmlParser::ColumnRowItem do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_fields.xlsx') }
-  let(:first_table) { xlsx.pivot_table_definitions[0] }
-  let(:row_items) { first_table.row_items }
-  let(:column_items) { first_table.column_items }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_fields.xlsx')
+  first_table = xlsx.pivot_table_definitions[0]
+  row_items = first_table.row_items
+  column_items = first_table.column_items
 
   it 'row items count is 1' do
     expect(row_items.count).to eq(1)

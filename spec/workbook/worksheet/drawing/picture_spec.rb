@@ -24,11 +24,9 @@ describe 'My behaviour' do
   end
 
   describe 'file_reference_to_url' do
-    let(:xlsx) { OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/file_reference_to_url.xlsx') }
-    let(:file_reference) do
-      xlsx.worksheets.first.drawings.first
-          .picture.path_to_image.file_reference
-    end
+    xlsx = OoxmlParser::XlsxParser.parse_xlsx('spec/workbook/worksheet/drawing/picture/file_reference_to_url.xlsx')
+    file_reference = xlsx.worksheets.first.drawings.first
+                         .picture.path_to_image.file_reference
 
     it 'content of file reference is nil' do
       expect(file_reference.content).to be_nil

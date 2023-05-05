@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::PivotTableDefinition do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_table.xlsx') }
-  let(:location) { xlsx.pivot_table_definitions[0].location }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_table.xlsx')
+  location = xlsx.pivot_table_definitions[0].location
 
   it 'location is correct class' do
     expect(location).to be_a(OoxmlParser::Location)

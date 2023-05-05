@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::SheetProtection do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/worksheet/sheet_protection/sheet_protection.xlsx') }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/sheet_protection/sheet_protection.xlsx')
 
   it 'Has algorithm_name' do
     expect(xlsx.worksheets[0].sheet_protection.algorithm_name).to eq('SHA-512')

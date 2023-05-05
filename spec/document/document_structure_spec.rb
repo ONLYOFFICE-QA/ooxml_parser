@@ -3,10 +3,10 @@
 require 'spec_helper'
 
 describe OoxmlParser::DocumentStructure do
-  let(:numbering) { OoxmlParser::Parser.parse('spec/document/document_structure/numbering.docx') }
-  let(:table_header_footer) { OoxmlParser::Parser.parse('spec/document/document_structure/table_header_footer.docx') }
-  let(:shape_header_footer) { OoxmlParser::Parser.parse('spec/document/document_structure/shape_header_footer.docx') }
-  let(:text_header_footer) { OoxmlParser::Parser.parse('spec/document/document_structure/text_header_footer.docx') }
+  numbering = OoxmlParser::Parser.parse('spec/document/document_structure/numbering.docx')
+  table_header_footer = OoxmlParser::Parser.parse('spec/document/document_structure/table_header_footer.docx')
+  shape_header_footer = OoxmlParser::Parser.parse('spec/document/document_structure/shape_header_footer.docx')
+  text_header_footer = OoxmlParser::Parser.parse('spec/document/document_structure/text_header_footer.docx')
 
   describe 'DocumentStructure#element_by_description' do
     it 'element_by_description for incorrect location' do

@@ -3,11 +3,9 @@
 require 'spec_helper'
 
 describe 'My behaviour' do
-  let(:docxf) { OoxmlParser::Parser.parse('spec/document/elements/paragraph/std/sdt_form_properties/form_no_autofit.docxf') }
-  let(:sdt_properties) do
-    docxf.elements[0].nonempty_runs[0].alternate_content.office2010_content
-         .graphic.data.text_body.elements[0].nonempty_runs[0].properties
-  end
+  docxf = OoxmlParser::Parser.parse('spec/document/elements/paragraph/std/sdt_form_properties/form_no_autofit.docxf')
+  sdt_properties = docxf.elements[0].nonempty_runs[0].alternate_content.office2010_content
+                        .graphic.data.text_body.elements[0].nonempty_runs[0].properties
 
   it 'required' do
     expect(sdt_properties.form_properties.required).to be_falsey
