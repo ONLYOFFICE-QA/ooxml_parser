@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe 'Formula Bar' do
-  let(:first_docx) { OoxmlParser::DocxParser.parse_docx('spec/document/elements/formula/types/formula_bar_1.docx') }
-  let(:second_docx) { OoxmlParser::DocxParser.parse_docx('spec/document/elements/formula/types/formula_bar_2.docx') }
+  first_docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/formula/types/formula_bar_1.docx')
+  second_docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/formula/types/formula_bar_2.docx')
 
   it 'formula_bar_1.docx' do
     expect(first_docx.elements.first.nonempty_runs.first).to be_a(OoxmlParser::DocxFormula)

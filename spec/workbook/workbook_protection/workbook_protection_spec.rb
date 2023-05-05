@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::WorkbookProtection do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/workbook_protection/workbook_protection.xlsx') }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/workbook_protection/workbook_protection.xlsx')
 
   it 'Has lock_structure' do
     expect(xlsx.workbook_protection.lock_structure).to be_truthy

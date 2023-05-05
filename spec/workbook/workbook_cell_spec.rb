@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'Workbook#cell' do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/cell/workbook_cell.xlsx') }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/cell/workbook_cell.xlsx')
 
   it 'cell by sheet number' do
     expect(xlsx.cell(2, 2, 0).text).to eq('Sheet1')

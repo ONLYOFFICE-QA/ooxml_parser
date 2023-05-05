@@ -3,11 +3,9 @@
 require 'spec_helper'
 
 describe OoxmlParser::DataBar do
-  let(:xlsx) do
-    OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
-                              '/conditional_formattings/conditional_formatting_rule/data_bar/data_bar.xlsx')
-  end
-  let(:data_bar) { xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].data_bar }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
+                                   '/conditional_formattings/conditional_formatting_rule/data_bar/data_bar.xlsx')
+  data_bar = xlsx.worksheets.first.extension_list[0].conditional_formattings[0].rules[0].data_bar
 
   it 'Has min_length' do
     expect(data_bar.min_length).to eq(0)

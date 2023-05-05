@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::Items do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_fields.xlsx') }
-  let(:items) { xlsx.pivot_table_definitions[0].pivot_fields[0].items }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_fields.xlsx')
+  items = xlsx.pivot_table_definitions[0].pivot_fields[0].items
 
   it 'there is two item' do
     expect(items.items.length).to eq(2)

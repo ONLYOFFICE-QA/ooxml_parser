@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::Sheet do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/sheet/sheet.xlsx') }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/sheet/sheet.xlsx')
 
   it 'Has name' do
     expect(xlsx.sheets[0].name).to eq('Sheet1')

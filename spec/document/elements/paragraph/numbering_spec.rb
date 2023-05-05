@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::Numbering do
-  let(:numbering_font) { OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_font_name.docx') }
+  numbering_font = OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_font_name.docx')
 
   it 'numbering.docx' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/numbering/numbering.docx')

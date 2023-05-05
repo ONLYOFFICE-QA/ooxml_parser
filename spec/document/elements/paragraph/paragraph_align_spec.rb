@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::Paragraph, '#align' do
-  let(:docx) { OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/align/all_four_alignes.docx') }
+  docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/align/all_four_alignes.docx')
 
   it 'Default align is symbol :left' do
     expect(docx.elements[0].align).to eq(:left)

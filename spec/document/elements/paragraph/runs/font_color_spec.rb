@@ -20,7 +20,7 @@ describe 'font_color' do
   end
 
   describe 'copied_paragraph' do
-    let(:docx) { OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/font_color/copied_paragrph_with_color_2.docx') }
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/paragraph/runs/font_color/copied_paragrph_with_color_2.docx')
 
     it 'copied paragraph with color 2 first paragraph' do
       pending('Color problems. I cannot solve it')

@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::DataValidations do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/data_validations/data_validation.xlsx') }
-  let(:validations) { xlsx.worksheets.first.extension_list[0].data_validations }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions/data_validations/data_validation.xlsx')
+  validations = xlsx.worksheets.first.extension_list[0].data_validations
 
   it 'Got count property' do
     expect(validations.count).to eq(1)

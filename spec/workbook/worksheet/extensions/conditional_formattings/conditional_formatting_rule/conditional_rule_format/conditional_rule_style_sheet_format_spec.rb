@@ -3,11 +3,9 @@
 require 'spec_helper'
 
 describe 'Conditional rule format in style sheet' do
-  let(:xlsx) do
-    OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
-                              '/conditional_formattings/conditional_formatting_stop_if_true.xlsx')
-  end
-  let(:rule) { xlsx.worksheets.first.conditional_formattings[0].rules[0] }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/extensions' \
+                                   '/conditional_formattings/conditional_formatting_stop_if_true.xlsx')
+  rule = xlsx.worksheets.first.conditional_formattings[0].rules[0]
 
   it 'Rule contains format_index' do
     expect(rule.format_index).to eq(1)

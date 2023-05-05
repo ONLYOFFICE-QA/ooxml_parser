@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe 'Document#content_type' do
-  let(:docx) { OoxmlParser::Parser.parse('spec/document/with_data/no_data.docx') }
+  docx = OoxmlParser::Parser.parse('spec/document/with_data/no_data.docx')
 
   it 'content_type has default type' do
     expect(docx.content_types[0]).to be_a(OoxmlParser::ContentTypeDefault)

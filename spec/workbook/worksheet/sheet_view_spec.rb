@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::SheetView do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/worksheet/sheet_view/sheet_view.xlsx') }
-  let(:sheet_view) { xlsx.worksheets.first.sheet_views.first }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/sheet_view/sheet_view.xlsx')
+  sheet_view = xlsx.worksheets.first.sheet_views.first
 
   it 'Has top_left_cell' do
     expect(sheet_view.top_left_cell).to eq(OoxmlParser::Coordinates.new(1, 'C'))

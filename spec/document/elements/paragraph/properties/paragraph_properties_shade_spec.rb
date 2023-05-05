@@ -3,12 +3,10 @@
 require 'spec_helper'
 
 describe 'ParagraphProperties#shade' do
-  let(:docx) do
-    OoxmlParser::Parser.parse('spec/document/elements/paragraph' \
-                              '/properties/shade/simple_shade.docx')
-  end
+  docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph' \
+                                   '/properties/shade/simple_shade.docx')
 
-  let(:shade) { docx.elements.first.paragraph_properties.shade }
+  shade = docx.elements.first.paragraph_properties.shade
 
   it 'shade is correct class by default' do
     expect(shade).to be_a(OoxmlParser::Shade)

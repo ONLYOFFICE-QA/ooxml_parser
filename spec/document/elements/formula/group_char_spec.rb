@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe 'Group Char' do
-  let(:docx) { OoxmlParser::DocxParser.parse_docx('spec/document/elements/formula/types/formula_group_char.docx') }
-  let(:group_char) { docx.elements.first.nonempty_runs.first.formula_run[1] }
+  docx = OoxmlParser::DocxParser.parse_docx('spec/document/elements/formula/types/formula_group_char.docx')
+  group_char = docx.elements.first.nonempty_runs.first.formula_run[1]
 
   it 'symbol value' do
     expect(group_char.symbol).to eq('⏞')

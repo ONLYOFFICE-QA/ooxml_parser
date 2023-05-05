@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 describe OoxmlParser::PivotCacheDefinition do
-  let(:pivot_cache_parsed) { OoxmlParser::Parser.parse('spec/workbook/pivot_cache/pivot_cache.xlsx') }
-  let(:cache_source) { pivot_cache_parsed.pivot_caches[0].pivot_cache_definition.cache_source }
-  let(:worksheet_source) { cache_source.worksheet_source }
+  pivot_cache_parsed = OoxmlParser::Parser.parse('spec/workbook/pivot_cache/pivot_cache.xlsx')
+  cache_source = pivot_cache_parsed.pivot_caches[0].pivot_cache_definition.cache_source
+  worksheet_source = cache_source.worksheet_source
 
   it 'Pivot cache definition can be found for pivot cache' do
     expect(pivot_cache_parsed.pivot_caches[0].pivot_cache_definition)

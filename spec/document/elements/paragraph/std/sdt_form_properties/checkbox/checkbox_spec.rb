@@ -3,10 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::CheckBox do
-  let(:docxf) do
-    OoxmlParser::Parser.parse('spec/document/elements/paragraph/std/sdt_form_properties' \
-                              '/checkbox/checkbox.docxf')
-  end
+  docxf = OoxmlParser::Parser.parse('spec/document/elements/paragraph/std/sdt_form_properties' \
+                                    '/checkbox/checkbox.docxf')
 
   it 'Has checked' do
     expect(docxf.elements.first.sdt.properties.checkbox.checked).to be_falsey

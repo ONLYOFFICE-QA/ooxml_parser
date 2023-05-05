@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::PivotTableDefinition do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_table.xlsx') }
-  let(:first_table) { xlsx.pivot_table_definitions[0] }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/pivot_table/pivot_table.xlsx')
+  first_table = xlsx.pivot_table_definitions[0]
 
   it 'pivot table lenght is two' do
     expect(xlsx.pivot_table_definitions.length).to eq(2)

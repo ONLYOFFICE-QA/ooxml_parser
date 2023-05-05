@@ -3,12 +3,10 @@
 require 'spec_helper'
 
 describe 'ParagraphProperties#paragraph_style_ref' do
-  let(:docx) do
-    OoxmlParser::Parser.parse('spec/document/elements/paragraph/properties' \
-                              '/paragraph_style_ref/paragraph_style_ref.docx')
-  end
+  docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/properties' \
+                                   '/paragraph_style_ref/paragraph_style_ref.docx')
 
-  let(:style_ref) { docx.elements.first.paragraph_properties.paragraph_style_ref }
+  style_ref = docx.elements.first.paragraph_properties.paragraph_style_ref
 
   it 'paragraph_style_ref is correct class' do
     expect(style_ref).to be_a(OoxmlParser::ParagraphStyleRef)

@@ -3,8 +3,8 @@
 require 'spec_helper'
 
 describe OoxmlParser::XlsxHeaderFooter do
-  let(:xlsx) { OoxmlParser::Parser.parse('spec/workbook/worksheet/header_footer/header_footer.xlsx') }
-  let(:header_footer) { xlsx.worksheets.first.header_footer }
+  xlsx = OoxmlParser::Parser.parse('spec/workbook/worksheet/header_footer/header_footer.xlsx')
+  header_footer = xlsx.worksheets.first.header_footer
 
   it 'Has align_with_margins' do
     expect(header_footer.align_with_margins).to be_falsey
