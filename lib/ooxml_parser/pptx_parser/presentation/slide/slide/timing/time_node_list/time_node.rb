@@ -29,31 +29,5 @@ module OoxmlParser
       end
       self
     end
-
-    # Parse list of timing nodes
-    # @param timing_list_node [Nokogiri::XML::Element] node to parse
-    # @return [Array<TimeNode>] list of nodes
-    def self.parse_list(timing_list_node)
-      timings = []
-      timing_list_node.xpath('*').each do |time_node|
-        case time_node.name
-        when 'par'
-          timings << TimeNode.new(:parallel, parent: timings).parse(time_node)
-        when 'seq'
-          timings << TimeNode.new(:sequence, parent: timings).parse(time_node)
-        when 'anim'
-          timings << TimeNode.new(:animate, parent: timings).parse(time_node)
-        when 'set'
-          timings << SetTimeNode.new(parent: timings).parse(time_node)
-        when 'animEffect'
-          timings << AnimationEffect.new(parent: timings).parse(time_node)
-        when 'video'
-          timings << :video
-        when 'audio'
-          timings << TimeNode.new(:audio, parent: timings).parse(time_node)
-        end
-      end
-      timings
-    end
   end
 end

@@ -35,7 +35,7 @@ module OoxmlParser
         when 'endCondLst'
           @end_conditions = ConditionList.new(parent: self).parse(node_child)
         when 'childTnLst'
-          @children = TimeNode.parse_list(node_child)
+          @children = TimeNodeList.new(parent: self).parse(node_child).elements
         end
       end
       self
