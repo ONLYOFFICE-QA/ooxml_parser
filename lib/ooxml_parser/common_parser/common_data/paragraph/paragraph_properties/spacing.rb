@@ -2,7 +2,7 @@
 
 # @author Pavel.Lobashov
 
-require_relative 'spacing/line_spacing'
+require_relative 'spacing/spacing_valued_child'
 module OoxmlParser
   # Class to describe spacing
   class Spacing
@@ -69,30 +69,18 @@ module OoxmlParser
     # @param [Nokogiri::XML:Element] node with Spacing
     # @return [Nothing]
     def parse(node)
-      node.xpath('*').each do |spacing_node_child|
-        case spacing_node_child.name
+      node.xpath('*').each do |node_child|
+        case node_child.name
         when 'lnSpc'
-          self.line = Spacing.parse_spacing_value(spacing_node_child)
-          @line_spacing = LineSpacing.new(parent: self).parse(spacing_node_child)
+          @line_spacing = SpacingValuedChild.new(parent: self).parse(node_child)
+          self.line = @line_spacing.to_ooxml_size
           self.line_rule = @line_spacing.rule
         when 'spcBef'
-          self.before = Spacing.parse_spacing_value(spacing_node_child)
+          @spacing_before = SpacingValuedChild.new(parent: self).parse(node_child)
+          self.before = @spacing_before.to_ooxml_size
         when 'spcAft'
-          self.after = Spacing.parse_spacing_value(spacing_node_child)
-        end
-      end
-    end
-
-    # Parse values of spacing number
-    # @param [Nokogiri::XML:Element] node with Spacing
-    # @return [Float] value of spacing number
-    def self.parse_spacing_value(node)
-      node.xpath('*').each do |spacing_node_child|
-        case spacing_node_child.name
-        when 'spcPct'
-          return OoxmlSize.new(spacing_node_child.attribute('val').value.to_f, :one_1000th_percent)
-        when 'spcPts'
-          return OoxmlSize.new(spacing_node_child.attribute('val').value.to_f, :spacing_point)
+          @spacing_after = SpacingValuedChild.new(parent: self).parse(node_child)
+          self.after = @spacing_after.to_ooxml_size
         end
       end
     end
