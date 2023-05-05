@@ -16,6 +16,7 @@
 * Minor changes to `spec` folder structure
 * `TextBox` now is instance of `OOXMLDocumentObject`
 * Cleanup `Runs`-related code in `DocxParagraph`
+* Simplify `Spacing` parsing
 
 ### Fixes
 
