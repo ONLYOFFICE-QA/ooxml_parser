@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'timing/time_node'
+require_relative 'timing/time_node_list'
 module OoxmlParser
   # Class for parsing `timing`
   class Timing < OOXMLDocumentObject
@@ -20,7 +20,7 @@ module OoxmlParser
       node.xpath('*').each do |node_child|
         case node_child.name
         when 'tnLst'
-          @time_node_list = TimeNode.parse_list(node_child)
+          @time_node_list = TimeNodeList.new(parent: self).parse(node_child).elements
         end
       end
       self

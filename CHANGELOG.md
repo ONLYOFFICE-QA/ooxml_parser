@@ -17,6 +17,7 @@
 * `TextBox` now is instance of `OOXMLDocumentObject`
 * Cleanup `Runs`-related code in `DocxParagraph`
 * Simplify `Spacing` parsing
+* Add `TimeNodeList` class for parsing nodes
 
 ### Fixes
 
