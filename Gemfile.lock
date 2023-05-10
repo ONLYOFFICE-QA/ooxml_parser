@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ooxml_parser (0.35.0)
+    ooxml_parser (0.36.0)
       nokogiri (~> 1)
       ooxml_decrypt (~> 1)
       rubyzip (~> 2)
@@ -100,4 +100,4 @@ DEPENDENCIES
   yard (>= 0.9.20)
 
 BUNDLED WITH
-   2.4.12
+   2.4.13

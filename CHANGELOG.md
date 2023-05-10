@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.36.0 (2023-05-10)
+
 ### New Features
 
 * New `Color#within_delta?` method for comparing colors
