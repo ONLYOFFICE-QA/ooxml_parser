@@ -6,6 +6,11 @@
 
 * Fix merging hyperlink runs for `DocxParagraph`
 
+### Changes
+
+* Store all development dependencies in Gemfile
+  (According to rubocop `Gemspec/DevelopmentDependencies`)
+
 ## 0.36.0 (2023-05-10)
 
 ### New Features
