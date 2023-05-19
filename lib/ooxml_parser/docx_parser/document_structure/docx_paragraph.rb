@@ -144,15 +144,15 @@ module OoxmlParser
           char_number += 1
         when 'hyperlink'
           @hyperlink = Hyperlink.new(parent: self).parse(node_child)
-          hyperlink_run = default_character_style.dup
-          hyperlink_run.parent = self
-          if @hyperlink.id
-            @hyperlink.parent = hyperlink_run
-            hyperlink_run.link = @hyperlink
-          elsif @hyperlink.anchor
-            hyperlink_run.link = @hyperlink.anchor
-          end
           node_child.xpath('w:r').each do |r_tag|
+            hyperlink_run = default_character_style.dup
+            hyperlink_run.parent = self
+            if @hyperlink.id
+              @hyperlink.parent = hyperlink_run
+              hyperlink_run.link = @hyperlink
+            elsif @hyperlink.anchor
+              hyperlink_run.link = @hyperlink.anchor
+            end
             hyperlink_run.parse(r_tag, char_number, parent: self)
             character_styles_array << hyperlink_run
             char_number += 1
