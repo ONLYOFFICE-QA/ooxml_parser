@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.36.1 (2023-05-22)
+
 ### Fixes
 
 * Fix merging hyperlink runs for `DocxParagraph`
