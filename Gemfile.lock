@@ -31,7 +31,7 @@ GEM
       parallel
     parser (3.2.2.1)
       ast (~> 2.4.1)
-    racc (1.6.2)
+    racc (1.7.0)
     rainbow (3.1.1)
     rake (13.0.6)
     regexp_parser (2.8.0)
