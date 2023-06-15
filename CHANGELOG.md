@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+* Add parsing `PivotTableDefinition#data_fields`
+
 ## 0.36.1 (2023-05-22)
 
 ### Fixes
