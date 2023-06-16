@@ -29,8 +29,9 @@ GEM
     parallel (1.23.0)
     parallel_tests (4.2.1)
       parallel
-    parser (3.2.2.1)
+    parser (3.2.2.3)
       ast (~> 2.4.1)
+      racc
     racc (1.6.2)
     rainbow (3.1.1)
     rake (13.0.6)
