@@ -3,6 +3,7 @@
 ## master (unreleased)
 
 * Add parsing `PivotTableDefinition#data_fields`
+* Add parsing `PivotTableDefinition#page_fields`
 
 ## 0.36.1 (2023-05-22)
 

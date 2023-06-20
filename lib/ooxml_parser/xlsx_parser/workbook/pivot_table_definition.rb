@@ -5,6 +5,7 @@ require_relative 'pivot_table_definition/location'
 require_relative 'pivot_table_definition/pivot_fields'
 require_relative 'pivot_table_definition/pivot_table_style_info'
 require_relative 'pivot_table_definition/data_fields'
+require_relative 'pivot_table_definition/page_fields'
 
 module OoxmlParser
   # Class for parsing <PivotTableDefinition> tag
@@ -53,6 +54,8 @@ module OoxmlParser
     attr_reader :style_info
     # @return [DataFields] data fields
     attr_reader :data_fields
+    # @return [PageFields] page fields
+    attr_reader :page_fields
 
     # Parse PivotTableDefinition object
     # @param [String] file path
@@ -111,6 +114,8 @@ module OoxmlParser
           @style_info = PivotTableStyleInfo.new(parent: self).parse(node_child)
         when 'dataFields'
           @data_fields = DataFields.new(parent: self).parse(node_child)
+        when 'pageFields'
+          @page_fields = PageFields.new(parent: self).parse(node_child)
         end
       end
       self
