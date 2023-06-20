@@ -59,6 +59,8 @@ module OoxmlParser
     attr_reader :page_fields
     # @return [RowFields] row fields
     attr_reader :row_fields
+    # @return [RowFields] column fields
+    attr_reader :column_fields
 
     # Parse PivotTableDefinition object
     # @param [String] file path
@@ -121,6 +123,8 @@ module OoxmlParser
           @page_fields = PageFields.new(parent: self).parse(node_child)
         when 'rowFields'
           @row_fields = RowFields.new(parent: self).parse(node_child)
+        when 'colFields'
+          @column_fields = RowFields.new(parent: self).parse(node_child)
         end
       end
       self
