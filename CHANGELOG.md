@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+* Add parsing `PivotField#name`
+
 ## 0.37.0 (2023-06-20)
 
 * Add parsing `PivotTableDefinition#data_fields`
