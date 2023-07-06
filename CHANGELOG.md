@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.37.1 (2023-07-06)
+
 * Add parsing `PivotField#name`
 
 ## 0.37.0 (2023-06-20)
