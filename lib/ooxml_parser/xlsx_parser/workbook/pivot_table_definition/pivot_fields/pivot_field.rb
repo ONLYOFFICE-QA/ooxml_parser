@@ -5,6 +5,8 @@ require_relative 'pivot_field/items'
 module OoxmlParser
   # Class for parsing <pivotField> tag
   class PivotField < OOXMLDocumentObject
+    # @return [String] field name
+    attr_reader :name
     # @return [String] axis value
     attr_reader :axis
     # @return [True, False] should show all
@@ -18,6 +20,8 @@ module OoxmlParser
     def parse(node)
       node.attributes.each do |key, value|
         case key
+        when 'name'
+          @name = value.value.to_s
         when 'axis'
           @axis = value.value.to_s
         when 'showAll'
