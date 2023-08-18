@@ -44,7 +44,8 @@ module OoxmlParser
       return true if value == '1'
       return true if value == 'true'
       return false if value == '0'
-      return false if value == 'false'
+
+      false if value == 'false'
     end
   end
 end
