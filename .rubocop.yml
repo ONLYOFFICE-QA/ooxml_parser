@@ -21,7 +21,7 @@ RSpec/DescribeClass:
 # So they have a complicated structure
 # All unit test are stored in spec/ooxml_parser
 # So there should be no problems with that folder
-RSpec/FilePath:
+RSpec/SpecFilePathFormat:
   Exclude:
     - 'spec/document/**/*'
     - 'spec/workbook/**/*'
