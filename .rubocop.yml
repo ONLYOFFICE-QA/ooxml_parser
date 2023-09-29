@@ -26,3 +26,10 @@ RSpec/SpecFilePathFormat:
     - 'spec/document/**/*'
     - 'spec/workbook/**/*'
     - 'spec/presentation/**/*'
+
+# Since we've already moved to
+# `RSpec/SpecFilePathFormat` and `RSpec/SpecFilePathSuffix`
+# manually disable the cop until
+# https://github.com/rubocop/rubocop-rspec/issues/1723
+RSpec/FilePath:
+  Enabled: false
