@@ -15,7 +15,7 @@ module OoxmlParser
 
         if attribute_value.is_a?(Array)
           attribute_value.each_with_index do |object_element, index|
-            result_hash["#{current_attribute}_#{index}".to_sym] = object_element.to_hash
+            result_hash[:"#{current_attribute}_#{index}"] = object_element.to_hash
           end
         else
           result_hash[current_attribute.to_sym] = if attribute_value.respond_to?(:to_hash)
