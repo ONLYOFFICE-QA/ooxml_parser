@@ -8,7 +8,7 @@ inherit_from:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 3.0
 
 # Most of code in this project to not use Unit test
 # But uses end-user tests, so only small margin
