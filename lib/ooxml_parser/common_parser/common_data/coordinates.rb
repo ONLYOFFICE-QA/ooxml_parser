@@ -4,9 +4,9 @@ module OoxmlParser
   # Class for working with coordinates
   class Coordinates
     # @return [Regexp] regexp for row name
-    ROW_REGEXP = /[a-z]/i.freeze
+    ROW_REGEXP = /[a-z]/i
     # @return [Regexp] regexp for column name
-    COLUMN_REGEXP = /\d/.freeze
+    COLUMN_REGEXP = /\d/
 
     attr_accessor :row, :column, :list
 

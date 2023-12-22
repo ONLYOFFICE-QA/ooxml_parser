@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+## Changes
+
+* **BREAKING** Drop `ruby-2.7` support, since it's EOLed
+
 ## 0.37.1 (2023-07-06)
 
 * Add parsing `PivotField#name`
@@ -488,7 +492,7 @@
 * Add missing documentation
 * Add GitHub action task to check 100% documented code
 * Add `yard` gem as development dependency
-  
+
 ### Fixes
 
 * Do not raise waring if `FileReference#path` is correct url
@@ -626,7 +630,7 @@
 * `DocxShapeSize#rotation` now use OoxmlSize
 * `OoxmlSize` support `one_60000th_degree` and `degree`
 * `Columns#separator` is boolean
-  
+
 ### Fixes
 
 * Fix crash on empty coordinates list of chart
