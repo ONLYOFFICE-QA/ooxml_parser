@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+## New Features
+
+* Add `ruby-3.3` to CI
+
 ## Changes
 
 * **BREAKING** Drop `ruby-2.7` support, since it's EOLed
