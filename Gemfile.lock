@@ -10,7 +10,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
-    childprocess (4.1.0)
+    childprocess (5.0.0)
     diff-lcs (1.5.0)
     docile (1.4.0)
     iniparse (1.5.0)
@@ -23,8 +23,8 @@ GEM
     ooxml_decrypt (1.0.0)
       nokogiri (~> 1.10)
       ruby-ole (~> 1.2)
-    overcommit (0.61.0)
-      childprocess (>= 0.6.3, < 5)
+    overcommit (0.62.0)
+      childprocess (>= 0.6.3, < 6)
       iniparse (~> 1.4)
       rexml (~> 3.2)
     parallel (1.24.0)
