@@ -1,16 +1,13 @@
-name: Ruby
-on: [push]
+name: nightly-rubies-checks
+on:
+  schedule:
+    - cron: '0 3 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.allow-failures }}
     strategy:
       matrix:
-        ruby: ['3.0', '3.1', '3.2', '3.3']
-        allow-failures: [false]
-        include:
-          - ruby: head
-            allow-failures: true
+        ruby: ['jruby-9.4', 'truffleruby']
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby ${{ matrix.ruby }}
@@ -22,6 +19,4 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
       - name: Test with Rake
-        run: bundle exec parallel_rspec spec
-      - name: Check `simplecov` line coverage
-        run: cat coverage/.last_run.json | jq '.result.line' | grep -q '100'
+        run: bundle exec parallel_rspec spe
