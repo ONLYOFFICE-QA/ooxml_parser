@@ -16,6 +16,9 @@ jobs:
           - ruby: 'jruby-9.4'
             allow-failures: false
             check-coverage: false
+          - ruby: 'truffleruby'
+            allow-failures: false
+            check-coverage: false
     steps:
       - uses: actions/checkout@v4
       - name: Set up Ruby ${{ matrix.ruby }}

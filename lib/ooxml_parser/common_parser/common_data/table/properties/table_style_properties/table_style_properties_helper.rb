@@ -20,9 +20,17 @@ module OoxmlParser
 
     TABLE_STYLES_NAMES_HASH.each do |key, value|
       define_method(key) do
+        found = nil
         @table_style_properties_list.each do |table_style|
-          return table_style if table_style.type == value
+          # Cannot just use return in block
+          # because of TruffleRuby bug (cause LocalJumpError)
+          # https://github.com/oracle/truffleruby/issues/2438
+          if table_style.type == value
+            found = table_style
+            break
+          end
         end
+        found
       end
     end
 
