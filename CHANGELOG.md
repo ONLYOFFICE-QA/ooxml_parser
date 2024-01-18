@@ -6,6 +6,7 @@
 
 * Add `ruby-3.3` to CI
 * Add `dependabot` check for `GitHub Actions`
+* Add support of `truffleruby`
 
 ## Changes
 
@@ -94,7 +95,6 @@
 ### New Features
 
 * Add support of `jruby-9.3`
-* Add support of `truffleruby`
 
 ### Changes
 
