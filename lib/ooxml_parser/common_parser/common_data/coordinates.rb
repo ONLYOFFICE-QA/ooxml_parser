@@ -28,8 +28,9 @@ module OoxmlParser
         sheet_name = 'Sheet1'
 
         if arguments_string.include?('!')
-          sheet_name = arguments_string.match(/.*!/).to_s
-          arguments_string = arguments_string.sub(sheet_name, '')
+          split_by_exclamation = arguments_string.split('!', 2)
+          sheet_name = "#{split_by_exclamation[0]}!"
+          arguments_string = split_by_exclamation[1]
         end
 
         range = arguments_string.split(':')
