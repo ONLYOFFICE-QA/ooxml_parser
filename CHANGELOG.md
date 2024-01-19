@@ -12,6 +12,7 @@
 
 * **BREAKING** Drop `ruby-2.7` support, since it's EOLed
 * Move long running rubies CI to nightly runs
+* Ability to run nightly CI by trigger button
 
 ## 0.37.1 (2023-07-06)
 
