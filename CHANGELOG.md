@@ -2,13 +2,14 @@
 
 ## master (unreleased)
 
-## New Features
+### New Features
 
 * Add `ruby-3.3` to CI
 * Add `dependabot` check for `GitHub Actions`
 * Add support of `truffleruby`
+* Add `example` folder with example how to verify some files
 
-## Changes
+### Changes
 
 * **BREAKING** Drop `ruby-2.7` support, since it's EOLed
 * Move long running rubies CI to nightly runs
