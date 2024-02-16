@@ -39,6 +39,8 @@ docx = OoxmlParser::Parser.parse('spec/document/document_properties/page_count.d
 p docx.document_properties.pages # 2
 ```
 
+Also check the `example` directory for more examples.
+
 ## Configuration
 
 ### Accuracy
