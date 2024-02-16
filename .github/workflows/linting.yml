@@ -24,7 +24,7 @@ jobs:
       - name: Check markdown files using `markdownlint`
         run: |
           npm install -g markdownlint-cli
-          markdownlint *.md
+          find . -type f -name '*.md' -print0 | xargs -0 markdownlint
   rubocop:
     runs-on: ubuntu-latest
     steps:
