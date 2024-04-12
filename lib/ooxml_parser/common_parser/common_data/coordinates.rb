@@ -72,12 +72,10 @@ module OoxmlParser
       # @param arguments_string [String] string
       # @return [Array] result
       def parse_coordinates_array(arguments_string)
-        result = []
         coord_array = arguments_string.split(',')
-        coord_array.each do |current_coord|
-          result << parser_coordinates_range(current_coord)
+        coord_array.map do |current_coord|
+          parser_coordinates_range(current_coord)
         end
-        result
       end
 
       # This method check is argument contains coordinate
