@@ -15,6 +15,7 @@
 * Move long running rubies CI to nightly runs
 * Ability to run nightly CI by trigger button
 * Optimize performance for parsing sheet name coordinates
+* Code changes after update to `rubocop-1.63.1`
 
 ## 0.37.1 (2023-07-06)
 
