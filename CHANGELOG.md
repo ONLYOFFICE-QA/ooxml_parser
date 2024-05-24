@@ -16,6 +16,7 @@
 * Ability to run nightly CI by trigger button
 * Optimize performance for parsing sheet name coordinates
 * Code changes after update to `rubocop-1.63.1`
+* Fix `rubocop-1.64` cop `Style/SuperArguments` warnings.
 
 ## 0.37.1 (2023-07-06)
 
