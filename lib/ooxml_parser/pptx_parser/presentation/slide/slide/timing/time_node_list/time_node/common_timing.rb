@@ -10,7 +10,7 @@ module OoxmlParser
       @children = []
       @start_conditions = []
       @end_conditions = []
-      super(parent: parent)
+      super
     end
 
     # Parse CommonTiming object
