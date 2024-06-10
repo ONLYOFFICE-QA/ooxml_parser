@@ -27,7 +27,7 @@ GEM
       childprocess (>= 0.6.3, < 6)
       iniparse (~> 1.4)
       rexml (~> 3.2)
-    parallel (1.24.0)
+    parallel (1.25.1)
     parallel_tests (4.7.1)
       parallel
     parser (3.3.2.0)
@@ -37,8 +37,8 @@ GEM
     rainbow (3.1.1)
     rake (13.2.1)
     regexp_parser (2.9.2)
-    rexml (3.2.8)
-      strscan (>= 3.0.9)
+    rexml (3.2.9)
+      strscan
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -67,7 +67,7 @@ GEM
       parser (>= 3.3.1.0)
     rubocop-capybara (2.20.0)
       rubocop (~> 1.41)
-    rubocop-factory_bot (2.25.1)
+    rubocop-factory_bot (2.26.0)
       rubocop (~> 1.41)
     rubocop-performance (1.21.0)
       rubocop (>= 1.48.1, < 2.0)
