@@ -17,7 +17,6 @@ RSpec/DescribeClass:
   Include:
     - 'spec/common/classes/**/*'
 
-
 # In those 3 folder we store E2E tests
 # So they have a complicated structure
 # All unit test are stored in spec/ooxml_parser
@@ -27,4 +26,3 @@ RSpec/SpecFilePathFormat:
     - 'spec/document/**/*'
     - 'spec/workbook/**/*'
     - 'spec/presentation/**/*'
-
