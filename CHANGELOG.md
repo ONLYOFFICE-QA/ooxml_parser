@@ -17,6 +17,7 @@
 * Optimize performance for parsing sheet name coordinates
 * Code changes after update to `rubocop-1.63.1`
 * Fix `rubocop-1.64` cop `Style/SuperArguments` warnings.
+* Fix rubocop configuration to be compatible with v3 of `rubocop-rspec`
 
 ## 0.37.1 (2023-07-06)
 
