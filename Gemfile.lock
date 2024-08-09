@@ -10,12 +10,14 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
-    childprocess (5.0.0)
+    childprocess (5.1.0)
+      logger (~> 1.5)
     diff-lcs (1.5.1)
     docile (1.4.1)
     iniparse (1.5.0)
     json (2.7.2)
     language_server-protocol (3.17.0.3)
+    logger (1.6.0)
     mini_portile2 (2.8.7)
     nokogiri (1.16.7)
       mini_portile2 (~> 2.8.2)
