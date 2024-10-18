@@ -46,7 +46,7 @@ module OoxmlParser
       @i_level.value
     end
 
-    # @param [Integer] i-level to find, current one by default
+    # @param [Integer] i_level to find, current one by default
     # @return [AbstractNumbering] level list of current numbering
     def numbering_level_current(i_level = ilvl)
       abstruct_numbering.level_list.each do |current_ilvl|
