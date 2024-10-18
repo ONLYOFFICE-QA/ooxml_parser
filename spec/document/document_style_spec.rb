@@ -15,7 +15,7 @@ describe 'document style' do
 
   it 'document_style_by_id for fake name return nil' do
     docx = OoxmlParser::DocxParser.parse_docx('spec/document/document_style/new_paragraph_style.docx')
-    expect(docx.document_style_by_id(-1000)).to be_nil
+    expect(docx.document_style_by_id(-1)).to be_nil
   end
 
   it 'Paragraph Document Visible Style' do
