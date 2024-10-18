@@ -55,6 +55,11 @@ describe OoxmlParser::Numbering do
     expect(docx.element_by_description.first.numbering.numbering_level_current).to be_a(OoxmlParser::NumberingLevel)
   end
 
+  it 'NumberingProperties#numbering_level_current return nil for unknown level' do
+    docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_suffix.docx')
+    expect(docx.element_by_description.first.numbering.numbering_level_current(-1)).to be_nil
+  end
+
   it 'numbering ilvl is an integer' do
     docx = OoxmlParser::Parser.parse('spec/document/elements/paragraph/numbering/numbering_suffix.docx')
     expect(docx.element_by_description.first.numbering.ilvl).to eq(0)
