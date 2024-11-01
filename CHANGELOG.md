@@ -21,6 +21,7 @@
 * Fix `rubocop-1.65.0` cop `Gemspec/AddRuntimeDependency`
 * Increase coverage for some edge cases for future `ruby-3.4`
 * New optional param for `NumberingProperties#numbering_level_current`
+* Code changes after update to `rubocop-1.68.0`
 
 ## 0.37.1 (2023-07-06)
 
