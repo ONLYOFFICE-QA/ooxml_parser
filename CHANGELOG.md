@@ -23,6 +23,10 @@
 * New optional param for `NumberingProperties#numbering_level_current`
 * Code changes after update to `rubocop-1.68.0`
 
+### Fixes
+
+* Monkey-patch `File::SHARE_DELETE` to be compatible with `truffleruby-24.1.1`
+
 ## 0.37.1 (2023-07-06)
 
 * Add parsing `PivotField#name`

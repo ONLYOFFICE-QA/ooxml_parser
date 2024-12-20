@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative 'truffleruby_patch'
 require_relative 'ooxml_parser/common_parser'
 require_relative 'ooxml_parser/configuration'
 require_relative 'ooxml_parser/helpers/string_helper'
