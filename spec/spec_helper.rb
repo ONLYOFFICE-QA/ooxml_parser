@@ -6,7 +6,7 @@ SimpleCov.start do
   # Remove as soon as
   # https://github.com/oracle/truffleruby/commit/cc76155bf509587e1b2954e9de77c558c7c857f4
   # is released
-  add_filter('/lib/ooxml_parser.rb')
+  add_filter('lib/truffleruby_patch.rb')
 end
 
 require 'ooxml_parser'
