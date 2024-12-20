@@ -7,7 +7,7 @@ if defined?(Truffle)
   # MonkeyPatch File stdlib class
   class File < IO
     # Monkey patch constant missing on TruffleRuby
-    SHARE_DELETE   = 0
+    SHARE_DELETE = 0
   end
 end
 
