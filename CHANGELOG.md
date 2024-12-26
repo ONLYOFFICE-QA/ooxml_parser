@@ -12,6 +12,7 @@
 ### Changes
 
 * **BREAKING** Drop `ruby-2.7` support, since it's EOLed
+* **BREAKING** Drop `ruby-3.0` support, since it's EOLed
 * Move long running rubies CI to nightly runs
 * Ability to run nightly CI by trigger button
 * Optimize performance for parsing sheet name coordinates
