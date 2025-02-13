@@ -12,7 +12,7 @@ GEM
     ast (2.4.2)
     childprocess (5.1.0)
       logger (~> 1.5)
-    diff-lcs (1.5.1)
+    diff-lcs (1.6.0)
     docile (1.4.1)
     iniparse (1.5.0)
     json (2.10.1)
