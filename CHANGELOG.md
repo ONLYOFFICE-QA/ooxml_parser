@@ -9,6 +9,7 @@
 * Add `dependabot` check for `GitHub Actions`
 * Add support of `truffleruby`
 * Add `example` folder with example how to verify some files
+* Add parsing `Comment` parameters `author`, `date`, `initials`
 
 ### Changes
 

@@ -3,8 +3,14 @@
 module OoxmlParser
   # Comment Data
   class Comment < OOXMLDocumentObject
+    # @return [String] name of the author
+    attr_reader :author
+    # @return [String] date of the comment, in string, not parsed
+    attr_reader :date_string
     # @return [Integer] id of comment
     attr_reader :id
+    # @return [String] initials of the author
+    attr_reader :initials
     # @return [Array<DocxParagraph>] array of paragraphs
     attr_reader :paragraphs
 
@@ -20,8 +26,14 @@ module OoxmlParser
     def parse(node)
       node.attributes.each do |key, value|
         case key
+        when 'author'
+          @author = value.value.to_s
+        when 'date'
+          @date_string = value.value.to_s
         when 'id'
           @id = value.value.to_i
+        when 'initials'
+          @initials = value.value.to_s
         end
       end
 
