@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe OoxmlParser::Comment do
-  let(:docx) { OoxmlParser::DocxParser.parse_docx('/home/serov/sources/ooxml_parser/spec/document/comments/comment_object.docx') }
+  let(:docx) { OoxmlParser::DocxParser.parse_docx('spec/document/comments/comment_object.docx') }
 
   it 'comment_object.docx' do
     expect(docx.element_by_description(location: :comment, type: :paragraph)[0].character_style_array[0].text).to eq('Is it true?')
