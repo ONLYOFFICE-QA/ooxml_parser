@@ -31,4 +31,10 @@ describe OoxmlParser::Coordinates do
       expect(described_class.new.parse_string('A1').column).to eq('A')
     end
   end
+
+  describe '#column_number' do
+    it 'correctly parses big column number' do
+      expect(described_class.new(1, 'EE').column_number).to eq(135)
+    end
+  end
 end

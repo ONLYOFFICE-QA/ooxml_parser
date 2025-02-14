@@ -28,6 +28,7 @@
 ### Fixes
 
 * Monkey-patch `File::SHARE_DELETE` to be compatible with `truffleruby-24.1.1`
+* Fix `Coordinates#column_number` for multi-chart strings
 
 ## 0.37.1 (2023-07-06)
 
