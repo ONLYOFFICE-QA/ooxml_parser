@@ -5,6 +5,7 @@ require_relative 'extension/sparkline_groups'
 require_relative 'extension/x14_table'
 require_relative 'extension/conditional_formattings'
 require_relative 'extension/x14_data_field'
+require_relative 'extension/user_protected_ranges'
 module OoxmlParser
   # Class for `ext` data
   class Extension < OOXMLDocumentObject
@@ -18,6 +19,8 @@ module OoxmlParser
     attr_reader :sparkline_groups
     # @return [X14DataField] pivot data field in x14 namespace
     attr_accessor :data_field
+    # @return [UserProtectedRanges] list of user protected ranges
+    attr_reader :user_protected_ranges
 
     # Parse Extension data
     # @param [Nokogiri::XML:Element] node with Extension data
@@ -35,6 +38,8 @@ module OoxmlParser
           @sparkline_groups = SparklineGroups.new(parent: self).parse(column_node)
         when 'dataField'
           @data_field = X14DataField.new(parent: self).parse(column_node)
+        when 'userProtectedRanges'
+          @user_protected_ranges = UserProtectedRanges.new(parent: self).parse(column_node)
         end
       end
       self

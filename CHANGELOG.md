@@ -11,6 +11,7 @@
 * Add `example` folder with example how to verify some files
 * Add parsing `Comment` parameters `author`, `date_string`, `initials`
 * Add parsing `CommentExtended#parent_paragraph_id`
+* Add parsing `UserProtectedRanges`
 
 ### Changes
 
