@@ -5,6 +5,8 @@ module OoxmlParser
   class CommentExtended < OOXMLDocumentObject
     # @return [Integer] id of paragraph
     attr_accessor :paragraph_id
+    # @return [Integer] id of parent paragraph
+    attr_reader :parent_paragraph_id
     # @return [True, False] is done?
     attr_accessor :done
 
@@ -16,6 +18,8 @@ module OoxmlParser
         case key
         when 'paraId'
           @paragraph_id = value.value.to_i
+        when 'paraIdParent'
+          @parent_paragraph_id = value.value.to_i
         when 'done'
           @done = attribute_enabled?(value.value)
         end

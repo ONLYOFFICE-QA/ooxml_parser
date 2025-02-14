@@ -10,6 +10,7 @@
 * Add support of `truffleruby`
 * Add `example` folder with example how to verify some files
 * Add parsing `Comment` parameters `author`, `date_string`, `initials`
+* Add parsing `CommentExtended#parent_paragraph_id`
 
 ### Changes
 

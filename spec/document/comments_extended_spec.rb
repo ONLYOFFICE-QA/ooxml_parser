@@ -10,6 +10,11 @@ describe OoxmlParser::CommentExtended do
     expect(docx.comments_extended[1].paragraph_id).to eq(2)
   end
 
+  it 'comments_extended parent_paragraph_id' do
+    docx = OoxmlParser::DocxParser.parse_docx('spec/document/comments_extended/comment_with_parent_id.docx')
+    expect(docx.comments_extended[1].parent_paragraph_id).to eq(1)
+  end
+
   it 'comments_extended done' do
     expect(docx.comments_extended[0].done).to be_truthy
     expect(docx.comments_extended[1].done).to be_falsey
