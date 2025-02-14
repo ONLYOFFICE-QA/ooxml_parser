@@ -17,7 +17,7 @@ GEM
     iniparse (1.5.0)
     json (2.10.1)
     language_server-protocol (3.17.0.4)
-    logger (1.6.5)
+    logger (1.6.6)
     mini_portile2 (2.8.8)
     nokogiri (1.18.2)
       mini_portile2 (~> 2.8.2)
