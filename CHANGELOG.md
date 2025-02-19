@@ -2,6 +2,10 @@
 
 ## master (unreleased)
 
+### Fixes
+
+* Fix `rubocop-1.72.2` cop `Lint/UselessConstantScoping`
+
 ## 0.38.0 (2025-02-17)
 
 ### New Features
