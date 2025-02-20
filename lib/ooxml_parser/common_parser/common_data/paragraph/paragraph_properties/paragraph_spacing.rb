@@ -44,8 +44,7 @@ module OoxmlParser
     # @return [Hash] hash with sorted values
     # TODO: Totally redone parsing of spacing to remove this workaround
     def sorted_attributes(node)
-      attributes = node.attributes.sort
-      attributes.reverse!.to_h
+      node.attributes.sort.reverse!.to_h
     end
   end
 end
