@@ -38,4 +38,4 @@ jobs:
           bundle config set with 'development'
           bundle install
       - name: Run Rubocop
-        run: rubocop
+        run: bundle exec rubocop
