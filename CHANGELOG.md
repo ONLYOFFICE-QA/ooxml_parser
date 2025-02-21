@@ -6,6 +6,7 @@
 
 * Fix `rubocop-1.72.2` cop `Lint/UselessConstantScoping`
 * Fix `rubocop-performance-1.24.0` cop `Performance/ChainArrayAllocation`
+* Run `rubocop` in CI through `bundle exec`
 
 ## 0.38.0 (2025-02-17)
 
