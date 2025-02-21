@@ -31,7 +31,7 @@ GEM
       iniparse (~> 1.4)
       rexml (>= 3.3.9)
     parallel (1.26.3)
-    parallel_tests (4.9.0)
+    parallel_tests (4.9.1)
       parallel
     parser (3.3.7.1)
       ast (~> 2.4.1)
