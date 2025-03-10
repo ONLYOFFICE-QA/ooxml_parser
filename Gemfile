@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
-  gem 'parallel_tests', '~> 4'
+  gem 'parallel_tests', '~> 5'
   gem 'rspec', '~> 3'
   gem 'simplecov', '~> 0', require: false
 end
