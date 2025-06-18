@@ -37,7 +37,7 @@ module OoxmlParser
       transform = transform_of_object(object)
       return :left if transform.offset.x.zero?
       return :center if OoxmlSize.new((slide_size.width.value / 2) - (transform.extents.x.value / 2)) == OoxmlSize.new(transform.offset.x.value)
-      return :right if OoxmlSize.new((slide_size.width.value - transform.extents.x.value)) == OoxmlSize.new(transform.offset.x.value)
+      return :right if OoxmlSize.new(slide_size.width.value - transform.extents.x.value) == OoxmlSize.new(transform.offset.x.value)
 
       :unknown
     end
