@@ -133,7 +133,7 @@ module OoxmlParser
 
     # @return [String] result of convert of object to string
     def to_s
-      "#{@column}#{@row} #{@list ? "list: #{@list}" : ''}"
+      "#{@column}#{@row} #{"list: #{@list}" if @list}"
     end
 
     def nil?
