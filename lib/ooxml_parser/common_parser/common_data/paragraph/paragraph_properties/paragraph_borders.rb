@@ -19,11 +19,11 @@ module OoxmlParser
     # @return [Symbol] type of border in visual editor
     def border_visual_type
       result = []
-      result << :left if @left.val == :single
-      result << :right if @right.val == :single
-      result << :top if @top.val == :single
-      result << :bottom if @bottom.val == :single
-      result << :inner if @between.val == :single
+      result << :left if @left && @left.val == :single
+      result << :right if @right && @right.val == :single
+      result << :top if @top && @top.val == :single
+      result << :bottom if @bottom && @bottom.val == :single
+      result << :inner if @between && @between.val == :single
       return :none if result == []
       return :all if result == %i[left right top bottom inner]
       return :outer if result == %i[left right top bottom]
