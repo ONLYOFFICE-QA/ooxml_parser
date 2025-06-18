@@ -2,6 +2,8 @@
 
 ## master (unreleased)
 
+## 0.39.0 (2025-06-18)
+
 ### Fixes
 
 * Fix `ParagraphBorders#border_visual_type`
