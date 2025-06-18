@@ -4,6 +4,8 @@
 
 ### Fixes
 
+* Fix `ParagraphBorders#border_visual_type`
+  for cases when document contains empty `pBdr` tag
 * Fix `rubocop-1.75.8` cop `Style/RedundantParentheses`
 * Fix `rubocop-1.75.8` cop `Style/EmptyStringInsideInterpolation`
 * Fix `rubocop-1.72.2` cop `Lint/UselessConstantScoping`
